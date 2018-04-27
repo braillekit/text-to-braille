@@ -10,7 +10,7 @@ namespace Test.BrailleToolkit
     ///to contain all BrailleToolkit.BrailleProcesser Unit Tests
     ///</summary>
     [TestFixture]
-    public class BrailleProcesserTest
+    public class BrailleProcessorTest
     {
         [SetUp]
         public void SetUp()
@@ -18,7 +18,7 @@ namespace Test.BrailleToolkit
             Shared.SetupLogger();
         }
 
-        public BrailleProcesserTest()
+        public BrailleProcessorTest()
         {
         }
 
@@ -229,7 +229,7 @@ namespace Test.BrailleToolkit
         [TestCase(
             "小明說：（今天）下雨。",
             "(15 246 4)(134 13456 2)(24 25 3)(25 25)(246)(13 1456 3)(124 2345 3)(135)()(15 23456 5)(1256 4)(36)")]
-        public void Should_ConvertString_Succeed(string inputText, string expectedDotNumbers)
+        public void Should_ConvertString_Succeed(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
                 BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
@@ -237,7 +237,7 @@ namespace Test.BrailleToolkit
             BrailleLine brLine = processor.ConvertLine(inputText);
 
             var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(result, expectedDotNumbers);
+            Assert.AreEqual(expectedPositionNumbers, result);
         }
 
 
@@ -256,7 +256,7 @@ namespace Test.BrailleToolkit
             BrailleLine brLine = processor.ConvertLine(inputText);
 
             var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(result, expectedPositionNumbers);
+            Assert.AreEqual(expectedPositionNumbers, result);
         }
 
 
@@ -276,7 +276,7 @@ namespace Test.BrailleToolkit
             BrailleLine brLine = processor.ConvertLine(inputText);
 
             var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(result, expectedPositionNumbers);
+            Assert.AreEqual(expectedPositionNumbers, result);
         }
 
 
@@ -292,7 +292,7 @@ namespace Test.BrailleToolkit
             var lines = processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var result = lines[0].ToPositionNumberString();
-            Assert.AreEqual(result, expectedPositionNumbers);
+            Assert.AreEqual(expectedPositionNumbers, result);
         }
 
         [TestCase("<分數>1/2</分數>。", "(1456 2)(34)(23 3456)(36)")]
@@ -304,7 +304,24 @@ namespace Test.BrailleToolkit
             BrailleLine brLine = processor.ConvertLine(inputText);
 
             var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(result, expectedPositionNumbers);
+            Assert.AreEqual(expectedPositionNumbers, result);
+        }
+
+        [TestCase("<點譯者註>台北</點譯者註>。", "(246 6 3)(124 2456 2)(135 356 4)(135)(36)")]
+        [TestCase("<點譯者註>abc</點譯者註>", "(246 6 3)(1)(12)(14)(135)")]
+        [TestCase("<點譯者註>123</點譯者註>", "(246 6 3)(3456 2)(23)(25)(135)")]
+        [TestCase("<點譯者註>：測試？</點譯者註>", "(246 6 3)(25 25)(245 2346 5)(24 156 5)(135)(135)")]
+        public void Should_NoExtraSpace_InsideBrailleTranslatorNote(string inputText, string expectedPositionNumbers)
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            BrailleLine brLine = processor.ConvertLine(inputText);
+
+            processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+
+            var result = brLine.ToPositionNumberString();
+            Assert.AreEqual(expectedPositionNumbers, result);
         }
     }
 

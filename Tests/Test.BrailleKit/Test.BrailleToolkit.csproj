@@ -65,7 +65,7 @@
   <ItemGroup>
     <Compile Include="BrailleCellTest.cs" />
     <Compile Include="BrailleDocumentTest.cs" />
-    <Compile Include="BrailleProcesserTest.cs" />
+    <Compile Include="BrailleProcessorTest.cs" />
     <Compile Include="ChineseWordConverterTest.cs" />
     <Compile Include="EnglishWordConverterTest.cs" />
     <Compile Include="Shared.cs" />

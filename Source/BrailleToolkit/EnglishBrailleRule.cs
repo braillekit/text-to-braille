@@ -356,25 +356,34 @@ namespace BrailleToolkit
             if (String.IsNullOrEmpty(lastWord.Text) || String.IsNullOrEmpty(currWord.Text))
                 return false;
 
-			if (ContextTag.StartsWithContextTag(lastWord.Text))	// 如果前一個字是情境標籤，就不加空方
-			{
-				return false;
-			}
-			if (ContextTag.StartsWithContextTag(currWord.Text))	// 如果目前的字是情境標籤，就不加空方
-			{
-				return false;
-			}
+			//if (ContextTag.StartsWithContextTag(lastWord.Text))	// 如果前一個字是情境標籤，就不加空方
+			//{
+			//	return false;
+			//}
+			//if (ContextTag.StartsWithContextTag(currWord.Text))	// 如果目前的字是情境標籤，就不加空方
+			//{
+			//	return false;
+			//}
 
-            char lastChar = lastWord.Text[0];
-            char currChar = currWord.Text[0];
-
-            // 若前一個字元已經是空白，就不用處理。
-            if (Char.IsWhiteSpace(lastChar))
+            if (lastWord.IsContextBeginTag || lastWord.IsContextEndTag) // 如果前一個字是情境標籤，就不加空方
+            {
+                return false;
+            }
+            if (currWord.IsContextBeginTag || currWord.IsContextEndTag) // 如果目前的字是情境標籤，就不加空方
             {
                 return false;
             }
 
-            if (lastChar == '★')  // 「點譯者註」的後面不加空方。
+            if (lastWord.Text == BrailleConst.DisplayText.BrailleTranslatorNotePrefix) // 文字跟<點譯者註>的起始符號之間不加空方
+            {
+                return false;
+            }
+
+            char lastChar = lastWord.Text[lastWord.Text.Length-1];
+            char currChar = currWord.Text[0];
+
+            // 若前一個字元已經是空白，就不用處理。
+            if (Char.IsWhiteSpace(lastChar))
             {
                 return false;
             }

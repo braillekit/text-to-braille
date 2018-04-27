@@ -10,6 +10,8 @@
 
             public const string SpecificName = "╴╴";
             public const string BookName = "﹏﹏";
+            public const string BrailleTranslatorNotePrefix = "（★";
+            public const string BrailleTranslatorNotePostfix = "）";
         }
     }
 }

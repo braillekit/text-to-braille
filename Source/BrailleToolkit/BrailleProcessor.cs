@@ -66,7 +66,7 @@ namespace BrailleToolkit
 
 	public delegate void TextConvertedEventHandler(object sender, TextConvertedEventArgs e);
 
-    internal class TextTag
+    internal class SimpleTextTag
     {
         public const string Name = "<私名號>";
         public const string BookName = "<書名號>";
@@ -75,8 +75,7 @@ namespace BrailleToolkit
         public const string DocTitle = "<標題>";    // 文件標題
         public const string Unit1End = "<大單元結束>";
         public const string Unit2End = "<小單元結束>";
-        public const string Unit3End = "<小題結束>";
-        public const string BrailleComment = "<點譯者註>";
+        public const string Unit3End = "<小題結束>";        
 		public const string DeleteBegin = "<刪>";
 		public const string DeleteEnd = "</刪>";
     }
@@ -125,12 +124,11 @@ namespace BrailleToolkit
 			m_PhoneticConverter = new PhoneticConverter();
 
 			m_ReplacaebleTags = new Hashtable();
-			m_ReplacaebleTags.Add(TextTag.NumericItem, "#");
-            m_ReplacaebleTags.Add(TextTag.OrgPageNumber, s_DashesForOrgPageNumber);   // 原書頁碼
-            m_ReplacaebleTags.Add(TextTag.Unit1End, new string('ˍ', 20)); // 大單元結束
-            m_ReplacaebleTags.Add(TextTag.Unit2End, new string('﹍', 20)); // 小單元結束
-            m_ReplacaebleTags.Add(TextTag.Unit3End, new string('﹋', 20)); // 小題結束
-            m_ReplacaebleTags.Add(TextTag.BrailleComment, "★");   // 點譯者註
+			m_ReplacaebleTags.Add(SimpleTextTag.NumericItem, "#");
+            m_ReplacaebleTags.Add(SimpleTextTag.OrgPageNumber, s_DashesForOrgPageNumber);   // 原書頁碼
+            m_ReplacaebleTags.Add(SimpleTextTag.Unit1End, new string('ˍ', 20)); // 大單元結束
+            m_ReplacaebleTags.Add(SimpleTextTag.Unit2End, new string('﹍', 20)); // 小單元結束
+            m_ReplacaebleTags.Add(SimpleTextTag.Unit3End, new string('﹋', 20)); // 小題結束
 
             ContextManager = new ContextTagManager();
 
@@ -373,7 +371,7 @@ namespace BrailleToolkit
         /// <param name="lineNumber">字串的行號。此參數只是用來當轉換失敗時，傳給轉換失敗事件處理常式的資訊。</param>
         /// <param name="isTitle">輸出參數，是否為標題。</param>
         /// <returns>點字串列。若則傳回 null，表示該列不需要轉成點字。</returns>
-        public BrailleLine ConvertLine(string line, int lineNumber)
+        public BrailleLine ConvertLine(string line, int lineNumber = 1)
         {
             if (line == null)
                 return null;
@@ -678,18 +676,26 @@ namespace BrailleToolkit
 
                 if (XmlTagHelper.IsBeginTag(brWord.Text))
                 {
+                    brWord.IsContextBeginTag = true;
+
                     // 處理起始標籤的對應文字轉換
                     if (!String.IsNullOrEmpty(ctag.ConvertablePrefix))
                     {
                         brWord.Text = ctag.ConvertablePrefix;
                         brWord.IsContextTag = false;    // 轉換成文字之後就不是語境標籤了。
                         brWord.ContextTag = null;
-                        string brCode = ChineseBrailleTable.GetInstance().GetPunctuationCode(ctag.ConvertablePrefix);
+                        string brCode = ChineseBrailleTable.GetInstance().Find(ctag.ConvertablePrefix);
                         if (brCode == null)
                         {
                             throw new Exception($"無法轉換語境標籤 '{ctag.TagName}' 的對應文字: {ctag.ConvertablePrefix}");
                         }
                         brWord.AddCell(brCode);
+
+                        /*
+                         * 註：目前的 ContextTag 設計，起始標籤和結束標籤一律只能轉換成一個 BrailleWord，亦即當成然一個不可分割的符號來處理。
+                         *    此設計無法讓語境標籤擴展成多個 BraillWord 物件。萬一將來碰到這種需求，可以改進 ContextTag 的設計：在初始化每個
+                         *    ContextTag 物件的時候就預先建立好對應的 BrailleWord 串列。
+                         */
                     }
                     else
                     {
@@ -697,17 +703,21 @@ namespace BrailleToolkit
                         brWord.Clear();
                         brLine.RemoveAt(index);
                         continue;
+
+                        // 註：也許可以不用急著刪除，而讓它活到轉換程序的最後階段，也就是由清除全部 context tag 的步驟來刪除。
                     }
                 }
                 else if (XmlTagHelper.IsEndTag(brWord.Text))
                 {
+                    brWord.IsContextEndTag = true;
+
                     // 處理結束標籤的對應文字轉換
                     if (!String.IsNullOrEmpty(ctag.ConvertablePostfix))
                     {
                         brWord.Text = ctag.ConvertablePostfix;
                         brWord.IsContextTag = false;    // 轉換成文字之後就不是語境標籤了。
                         brWord.ContextTag = null;
-                        string brCode = ChineseBrailleTable.GetInstance().GetPunctuationCode(ctag.ConvertablePostfix);
+                        string brCode = ChineseBrailleTable.GetInstance().Find(ctag.ConvertablePostfix);
                         if (brCode == null)
                         {
                             throw new Exception($"無法轉換語境標籤 '{ctag.TagName}' 的對應文字: {ctag.ConvertablePostfix}");

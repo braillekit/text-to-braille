@@ -27,8 +27,9 @@ namespace BrailleToolkit
 		public const string Phonetic = "<音標>";
         public const string SpecificName = "<私名號>";
         public const string BookName = "<書名號>";
+        public const string BrailleTranslatorNote = "<點譯者註>";
 
-		// NOTE: 每當有變動時，必須同步修改 AllTagNames 的內容。
+        // NOTE: 每當有變動時，必須同步修改 AllTagNames 的內容。
     }
 
     /// <summary>
@@ -58,7 +59,8 @@ namespace BrailleToolkit
                 ContextTagNames.Delete,
                 ContextTagNames.Phonetic,
                 ContextTagNames.SpecificName,
-                ContextTagNames.BookName
+                ContextTagNames.BookName,
+                ContextTagNames.BrailleTranslatorNote
 
             };
         }
@@ -87,6 +89,12 @@ namespace BrailleToolkit
                     return new GenericContextTag(tagName, ContextLifetime.BeforeFormatDoc)
                     {
                         ConvertablePrefix = BrailleConst.DisplayText.BookName
+                    };
+                case ContextTagNames.BrailleTranslatorNote:
+                    return new GenericContextTag(tagName, ContextLifetime.BeforeFormatDoc)
+                    {
+                        ConvertablePrefix = BrailleConst.DisplayText.BrailleTranslatorNotePrefix,
+                        ConvertablePostfix = BrailleConst.DisplayText.BrailleTranslatorNotePostfix
                     };
                 default:
                     return new GenericContextTag(tagName, ContextLifetime.BeforeFormatDoc);

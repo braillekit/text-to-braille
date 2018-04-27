@@ -53,6 +53,8 @@ namespace BrailleToolkit
         public BrailleWord()
         {
             Text = String.Empty;
+            TextBeforeConvert = String.Empty;
+
             Language = BrailleLanguage.Neutral;
             CellList = new BrailleCellList();
 
@@ -172,6 +174,14 @@ namespace BrailleToolkit
         /// </summary>
         [DataMember]
         public string Text { get; set; }
+
+        /// <summary>
+        /// 執行轉換程序之前的原始文字。
+        /// 此屬性可用來判斷當前的 BrailleWord 是否為 context tag 的起始或結束標籤。
+        /// 甚至將來可囊利用此屬性將已經轉換好的點字文件還原成純文字。
+        /// </summary>
+        [DataMember]
+        public string TextBeforeConvert { get; set; }
 
         public int CellCount
         {
@@ -299,6 +309,18 @@ namespace BrailleToolkit
         /// </summary>
         public ContextTag ContextTag { get; set; }
 
+
+        /// <summary>
+        /// 在轉點字過程中可能需要得知當前的 BrailleWord 物件是不是從 context tag 的起始標籤轉換過來的。
+        /// 是否要序列化：否。
+        /// </summary>
+        public bool IsContextBeginTag { get; set; }
+
+        /// <summary>
+        /// 在轉點字過程中可能需要得知當前的 BrailleWord 物件是不是從 context tag 的結束標籤轉換過來的。
+        /// 是否要序列化：否。
+        /// </summary>
+        public bool IsContextEndTag { get; set; }
 
         /// <summary>
         /// 此 word 是否在指定的語境中？
