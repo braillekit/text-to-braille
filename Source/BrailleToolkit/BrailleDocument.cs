@@ -127,7 +127,7 @@ namespace BrailleToolkit
 
             Clear();
 
-            m_Processor.InitializeForConvertion();
+            m_Processor.InitializeForConversion();
 
             while (true)
             {

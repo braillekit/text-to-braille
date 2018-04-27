@@ -48,13 +48,13 @@ namespace BrailleToolkit.Converters
             {
                 // 控制字（語境字）
 
-                // var brWord = ctag.ToBrailleWord(isBeginTag);
-                var brWord = new BrailleWord();
-
-                brWord.Text = isBeginTag ? ctag.TagName : ctag.EndTagName;
-                brWord.ContextTag = ctag;
-                brWord.IsContextTag = true;
-                brWord.ContextNames = context.ContextNames;
+                string text = isBeginTag ? ctag.TagName : ctag.EndTagName;
+                var brWord = new BrailleWord(text)
+                {
+                    ContextTag = ctag,
+                    IsContextTag = true,
+                    ContextNames = context.ContextNames
+                };
 
                 brWordList = new List<BrailleWord>();
                 brWordList.Add(brWord);

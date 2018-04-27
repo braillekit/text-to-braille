@@ -207,8 +207,7 @@ namespace BrailleToolkit.Converters
 			if (String.IsNullOrEmpty(text))
 				return null;
 
-			BrailleWord brWord = new BrailleWord();
-			brWord.Text = text;
+			var brWord = new BrailleWord(text);
 
 			string brCode = null;
 

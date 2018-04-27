@@ -24,7 +24,8 @@ namespace BrailleToolkit
     [DataContract]
     public class BrailleWord
     {
-        private static BrailleWord m_Blank;
+        public static BrailleWord BlankWord { get; } = NewBlank();
+
         private List<string> m_PhoneticCodes;   // 所有注音組字字根（以支援破音字）。
         private int m_ActivePhoneticIndex;      // 目前使用的注音組字字根索引。
 
@@ -45,15 +46,10 @@ namespace BrailleToolkit
 
         //private bool m_QuotationResolved;	// 是否已經識別出左右引號（英文的單引號和雙引號都是同一個符號，但點字不同）
 
-        static BrailleWord()
+        public BrailleWord(string text)
         {
-            m_Blank = BrailleWord.NewBlank();
-        }
-
-        public BrailleWord()
-        {
-            Text = String.Empty;
-            TextBeforeConvert = String.Empty;
+            Text = text;
+            OriginalText = text;
 
             Language = BrailleLanguage.Neutral;
             CellList = new BrailleCellList();
@@ -69,26 +65,22 @@ namespace BrailleToolkit
             m_IsEngPhonetic = false;
         }
 
-        public BrailleWord(string aWord, BrailleCellCode brCode)
-            : this()
+        public BrailleWord(string text, BrailleCellCode brCode) : this(text)
         {
-            Text = aWord;
             CellList.Add(BrailleCell.GetInstance(brCode));
         }
 
-        public BrailleWord(string aWord, string brCode) : this()
+        public BrailleWord(string text, string brCode) : this(text)
         {
-            Text = aWord;
             AddCell(brCode);
         }
 
-        public BrailleWord(string aWord, byte brCode) : this()
+        public BrailleWord(string text, byte brCode) : this(text)
         {
-            Text = aWord;
             CellList.Add(BrailleCell.GetInstance(brCode));
         }
 
-        public BrailleWord(string aWord, string phCode, string brCode) : this(aWord, brCode)
+        public BrailleWord(string text, string phCode, string brCode) : this(text, brCode)
         {
             Language = BrailleLanguage.Chinese;
             m_PhoneticCodes.Add(phCode);
@@ -176,12 +168,12 @@ namespace BrailleToolkit
         public string Text { get; set; }
 
         /// <summary>
-        /// 執行轉換程序之前的原始文字。
-        /// 此屬性可用來判斷當前的 BrailleWord 是否為 context tag 的起始或結束標籤。
-        /// 甚至將來可囊利用此屬性將已經轉換好的點字文件還原成純文字。
+        /// 保留最初的文字。
+        /// 此屬性可用來判斷當前的 BrailleWord 是不是從 context tag 的起始或結束標籤轉換而成。
+        /// 甚至將來可能利用此屬性將已經轉換好的點字文件還原成純文字。
         /// </summary>
         [DataMember]
-        public string TextBeforeConvert { get; set; }
+        public string OriginalText { get; private set; }
 
         public int CellCount
         {
@@ -366,22 +358,20 @@ namespace BrailleToolkit
         /// <returns></returns>
         public BrailleWord Copy()
         {
-            BrailleWord newBrWord = new BrailleWord();
-            newBrWord.Text = Text;
+            BrailleWord newBrWord = new BrailleWord(Text);
             newBrWord.Language = Language;
             newBrWord.DontBreakLineHere = DontBreakLineHere;
             newBrWord.NoDigitCell = m_NoDigitCell;
-
-            foreach (BrailleCell brCell in CellList.Items)
-            {
-                newBrWord.Cells.Add(brCell);
-            }
-
             newBrWord.PhoneticCode = PhoneticCode;
             newBrWord.IsPolyphonic = IsPolyphonic;
             newBrWord.IsContextTag = IsContextTag;
             newBrWord.ContextTag = ContextTag;
             newBrWord.ContextNames = ContextNames;
+
+            foreach (BrailleCell brCell in CellList.Items)
+            {
+                newBrWord.Cells.Add(brCell);
+            }
 
             return newBrWord;
         }
@@ -540,7 +530,7 @@ namespace BrailleToolkit
         /// <returns></returns>
         public static bool IsBlank(BrailleWord brWord)
         {
-            if (brWord.Equals(BrailleWord.m_Blank))
+            if (brWord.Equals(BlankWord))
                 return true;
             return false;
         }

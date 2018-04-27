@@ -253,10 +253,7 @@ namespace BrailleToolkit.Converters
         /// <returns>若指定的字串是中文字且轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
         private BrailleWord InternalConvert(string text)
         {
-            BrailleWord brWord = new BrailleWord
-            {
-                Text = text
-            };
+            BrailleWord brWord = new BrailleWord(text);
 
             string brCode;
 

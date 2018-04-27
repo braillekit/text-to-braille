@@ -355,7 +355,7 @@ namespace BrailleToolkit
         /// <summary>
         /// 在開始轉換文件之前，先呼叫此函式以進行初始化。
         /// </summary>
-        public void InitializeForConvertion()
+        public void InitializeForConversion()
         {
 			m_ErrorMsg.Length = 0;
             InvalidChars.Clear();
@@ -371,7 +371,7 @@ namespace BrailleToolkit
         /// <param name="lineNumber">字串的行號。此參數只是用來當轉換失敗時，傳給轉換失敗事件處理常式的資訊。</param>
         /// <param name="isTitle">輸出參數，是否為標題。</param>
         /// <returns>點字串列。若則傳回 null，表示該列不需要轉成點字。</returns>
-        public BrailleLine ConvertLine(string line, int lineNumber = 1)
+        public BrailleLine ConvertLine(string line, int lineNumber)
         {
             if (line == null)
                 return null;

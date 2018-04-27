@@ -32,7 +32,7 @@ namespace EasyBrailleEdit
 
             Mode = EditCellMode.Edit;
 
-            m_BrWord = new BrailleWord();
+            m_BrWord = new BrailleWord(String.Empty);
 
             // 以下動作不可移到 Form_Load 做，因為某些用到以下變數的事件會比它更早觸發。
             m_BrProcessor = BrailleProcessor.GetInstance();

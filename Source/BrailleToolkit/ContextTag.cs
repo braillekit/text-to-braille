@@ -159,45 +159,6 @@ namespace BrailleToolkit
             Count = 0;
         }
 
-        public virtual BrailleWord ToBrailleWord(bool isBeginTag)
-        {
-            var brWord = new BrailleWord();
-            brWord.Text = TagName;
-            brWord.IsContextTag = true;
-            brWord.ContextTag = this;
-
-            if (isBeginTag)
-            {
-                if (String.IsNullOrEmpty(ConvertablePrefix))
-                {
-                    brWord.Text = TagName;
-                }
-                else
-                {
-                    brWord.Text = ConvertablePrefix;
-                    brWord.IsContextTag = false;    // 替代成文字之後就不是語境標籤了。
-                    brWord.AddCell(
-                        ChineseBrailleTable.GetInstance().GetPunctuationCode(ConvertablePrefix));
-                }
-            }
-            else
-            {
-                if (String.IsNullOrEmpty(ConvertablePostfix))
-                {
-                    brWord.Text = EndTagName;
-                }
-                else
-                {
-                    brWord.Text = ConvertablePostfix;
-                    brWord.IsContextTag = false;    // 替代成文字之後就不是語境標籤了。
-                    brWord.AddCell(
-                        ChineseBrailleTable.GetInstance().GetPunctuationCode(ConvertablePostfix));
-                }
-            }
-
-            return brWord;
-        }
-
         #region 屬性
 
         public string TagName { get; protected set; }
