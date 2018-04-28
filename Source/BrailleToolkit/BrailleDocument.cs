@@ -202,7 +202,7 @@ namespace BrailleToolkit
         /// <param name="filename">檔名</param>
         public void SaveBrailleFile(string filename)
         {
-            this.UpdateTitlesLineIndex();
+            UpdateTitlesLineIndex();
 
             // 舊版的 .btx 序列化.
             if (Path.GetExtension(filename).Equals(".btx", StringComparison.CurrentCultureIgnoreCase))
@@ -240,6 +240,17 @@ namespace BrailleToolkit
 
             string jsonStr = JsonHelper.Serialize<BrailleDocument>(this);
             File.WriteAllText(filename, jsonStr);
+        }
+
+        public void SaveTextFile(string filename)
+        {
+            using (var writer = new StreamWriter(filename, false, Encoding.UTF8))
+            {
+                foreach (var brLine in Lines)
+                {
+                    writer.WriteLine(brLine.ToOriginalTextString());
+                }
+            }
         }
 
         private void ProcessLine(string line, int lineNumber)

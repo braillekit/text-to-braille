@@ -68,16 +68,11 @@ namespace BrailleToolkit
 
     internal class SimpleTextTag
     {
-        public const string Name = "<私名號>";
-        public const string BookName = "<書名號>";
         public const string NumericItem = "<編號>";
         public const string OrgPageNumber = "<P>";  // 原書頁碼
-        public const string DocTitle = "<標題>";    // 文件標題
         public const string Unit1End = "<大單元結束>";
         public const string Unit2End = "<小單元結束>";
         public const string Unit3End = "<小題結束>";        
-		public const string DeleteBegin = "<刪>";
-		public const string DeleteEnd = "</刪>";
     }
 
 	/// <summary>
@@ -124,7 +119,7 @@ namespace BrailleToolkit
 			m_PhoneticConverter = new PhoneticConverter();
 
 			m_ReplacaebleTags = new Hashtable();
-			m_ReplacaebleTags.Add(SimpleTextTag.NumericItem, "#");
+			m_ReplacaebleTags.Add(SimpleTextTag.NumericItem, "#");  // 編號
             m_ReplacaebleTags.Add(SimpleTextTag.OrgPageNumber, s_DashesForOrgPageNumber);   // 原書頁碼
             m_ReplacaebleTags.Add(SimpleTextTag.Unit1End, new string('ˍ', 20)); // 大單元結束
             m_ReplacaebleTags.Add(SimpleTextTag.Unit2End, new string('﹍', 20)); // 小單元結束

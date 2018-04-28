@@ -80,6 +80,12 @@ namespace BrailleToolkit
                     return new IndentContextTag();
                 case ContextTagNames.Title:
                     return new TitleContextTag();
+                case ContextTagNames.Delete:
+                    return new GenericContextTag(tagName, ContextLifetime.BeforeFormatDoc)
+                    {
+                        ConvertablePrefix = BrailleConst.DisplayText.DeleteBegin,
+                        ConvertablePostfix = BrailleConst.DisplayText.DeleteEnd
+                    };
                 case ContextTagNames.SpecificName:
                     return new GenericContextTag(tagName, ContextLifetime.BeforeFormatDoc)
                     {

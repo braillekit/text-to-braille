@@ -12,6 +12,8 @@
             public const string BookName = "﹏﹏";
             public const string BrailleTranslatorNotePrefix = "（★";
             public const string BrailleTranslatorNotePostfix = "）";
+            public const string DeleteBegin = "▲";
+            public const string DeleteEnd = "▼";
         }
     }
 }

@@ -22,6 +22,13 @@ namespace BrailleToolkit.Helpers
             return (s.StartsWith("</") && s.EndsWith(">"));
         }
 
+        public static bool IsEmptyTag(string s)
+        {
+            if (String.IsNullOrEmpty(s))
+                return false;
+            return (s.StartsWith("<") && s.EndsWith("/>"));
+        }
+
         /// <summary>
         /// 比對傳入的字串是否為特定的標籤。
         /// </summary>
@@ -62,6 +69,5 @@ namespace BrailleToolkit.Helpers
             }
             return tagName.Replace("</", String.Empty).Replace("<", String.Empty).Replace(">", String.Empty);
         }
-
     }
 }

@@ -1234,7 +1234,7 @@ namespace EasyBrailleEdit
 		{
 			e.Cancel = false;
 
-            if (this.IsDirty)   //  || this.IsNoName()  沒取檔名時不用問
+            if (IsDirty)   //  || this.IsNoName()  沒取檔名時不用問
 			{
 				string s = "點字資料尚未儲存，是否儲存？" + Environment.NewLine + Environment.NewLine +
 					"[是]　 = 儲存並關閉此視窗。" + Environment.NewLine +
@@ -1256,10 +1256,15 @@ namespace EasyBrailleEdit
 				}
 			}
 		}
-	}
+
+        private void miFileExportTxt_Click(object sender, EventArgs e)
+        {
+            DoExportTextFile();
+        }
+    }
 
 
-	public class CellClickEvent : SourceGrid.Cells.Controllers.ControllerBase
+    public class CellClickEvent : SourceGrid.Cells.Controllers.ControllerBase
 	{
 		private DualEditForm m_Form;
 

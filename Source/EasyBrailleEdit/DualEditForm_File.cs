@@ -122,6 +122,21 @@ namespace EasyBrailleEdit
             return false;
         }
 
+        public bool DoExportTextFile()
+        {
+            var dlg = new SaveFileDialog();
+            dlg.DefaultExt = ".txt";
+            dlg.Filter = "文字檔（*.txt）|(*.txt)";
+            dlg.FilterIndex = Constant.Files.SaveAsFileNameFilterIndex;
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                m_BrDoc.SaveTextFile(dlg.FileName);
+                return true;
+            }
+            return false;
+        }
+
         private void InternalSaveFile(string filename)
         {
             m_BrDoc.SaveBrailleFile(filename);

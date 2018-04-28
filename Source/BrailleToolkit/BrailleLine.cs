@@ -242,6 +242,15 @@ namespace BrailleToolkit
             return sb.ToString();
         }
 
+        public string ToOriginalTextString()
+        {
+            var sb = new StringBuilder();
+            foreach (var brWord in Words)
+            {
+                sb.Append(brWord.OriginalText);
+            }
+            return sb.ToString();
+        }
 
         /// <summary>
         /// 是否包含標題情境標籤。
