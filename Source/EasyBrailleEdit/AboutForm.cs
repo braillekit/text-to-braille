@@ -17,10 +17,8 @@ namespace EasyBrailleEdit
         {
             string filename = Assembly.GetExecutingAssembly().Location;
             string fileVer = " v" + FileVersionInfo.GetVersionInfo(filename).FileVersion;
-            lblVesion.Text = "易點雙視 " + fileVer;
-
-            lblLicense.Text = AppGlobals.GetProductLicense();
-            picTaipeiForBlind.Visible = AppGlobals.IsLicensedFor_TaipeiForBlind();
+            lblVesion.Text = "版本號碼： " + fileVer;
+            linkLabel1.Text = Constant.FacebookPageUrl;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -33,7 +31,7 @@ namespace EasyBrailleEdit
             {
                 Process process = new Process();
                 process.StartInfo.FileName = "iexplore.exe";
-                process.StartInfo.Arguments = Constant.FacebookGroup;
+                process.StartInfo.Arguments = linkLabel1.Text;
                 process.StartInfo.UseShellExecute = true;
                 process.Start();
             }

@@ -72,21 +72,9 @@ namespace EasyBrailleEdit.Common
 			return path;
 		}
 
-        public static string GetProductLicense()
-        {
-            if (!String.IsNullOrWhiteSpace(Config.AutoUpdateFilesUrl))
-            {
-                if (IsLicensedFor_TaipeiForBlind())
-                {
-                    return "專用授權版，僅供「台北市視障者家長協會」使用。";
-                }
-            }
-            return "社群版";
-        }
-
         public static bool IsLicensedFor_TaipeiForBlind()
         {
-            return (Config.AutoUpdateFilesUrl.ToLower().Contains(Constant.ProductBranches.TaipeiForBlind.ToLower()));
+            return Config.AutoUpdateFilesUrl.IndexOf(Constant.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase) >= 0;
         }
     }
 }

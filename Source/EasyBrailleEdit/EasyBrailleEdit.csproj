@@ -17,14 +17,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\Taipei-ForBlind.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Images\Taipei-ForBlind.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Config.Net" Version="4.9.1" />
     <PackageReference Include="Huanlin.Common" Version="4.5.4" />
     <PackageReference Include="Huanlin.Windows" Version="4.5.4" />

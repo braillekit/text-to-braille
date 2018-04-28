@@ -89,15 +89,5 @@ namespace EasyBrailleEdit.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Taipei_ForBlind {
-            get {
-                object obj = ResourceManager.GetObject("Taipei-ForBlind", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

@@ -3,7 +3,7 @@
     public static class Constant
     {
         public const string AppName = "EasyBrailleEdit";
-        public const string FacebookGroup = "https://www.facebook.com/groups/204319040172163/";
+        public const string FacebookPageUrl = "https://www.facebook.com/easybraille/";
 
         public static class ProductBranches
         {
