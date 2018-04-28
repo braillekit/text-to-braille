@@ -1,0 +1,6 @@
+參考軟體清單
+
+BrailleBlaster  http://brailleblaster.org/  個人可免費使用）
+
+  - 明眼字和點字同時顯示，可即時預覽轉換點字的結果。
+  - 可將點字存檔，並列印至點字印表機。

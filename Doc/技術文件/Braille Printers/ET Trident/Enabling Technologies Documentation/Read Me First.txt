@@ -1,0 +1,33 @@
+Cyclone, Trident and Phoenix (gold) CD-ROM Version 2.0 dated April 2015.
+
+Thank you for your purchase of an Enabling Technologies Braille Embosser. 
+
+Please be sure to review the User's Manual and return the completed Product Registration Form.
+
+This Read Me file will provide you with some additional information about installing your system.
+
+INSTALLING THE APPLICATIONS. Put the CD-Rom that came with your unit into the cd reader of your computer. After a few moments the program to allow installation will begin to run. You will see the Enabling Technologies licence agreement first. Click agree and the program to install your applications and documentation will then appear. Select what you wish to install and then click the Install button. When it is finished a pop up window will open saying Installation Complete. Click the OK button to close the program. Your new applications will now be in your start menu and the documentation in your documents folder.
+
+FIREBIRD SOFTWARE SUITE. The Help files found under Help in the Firebird Graphic Editor will continuously evolve. 
+We will notify you as new Help files become available. In order for us to provide you with updated information it is important that you complete 
+and return the Product Registration Form. In the meantime, if you have a question that is not covered in the Help files then please feel free to 
+contact our Customer Support Group by phone at 800-777-3687 Ext. 218 or via email at support@brailler.com.
+
+SAMPLE GRAPHICS FILES. On your CD is a folder named "Firebird Graphics Editor Samples" that contain sample files you can work with in order to gain experience with the 
+Firebird Graphics Editor.
+
+ETHERNET. When starting the Enabling Technologies Ethernet Discoverer, you may be asked by Windows to allow the program to run. Please click the "Allow" 
+button if this occurs.
+
+ETHERNET. In the Discovery tool, there is a button that says "Change Hostname". This allows you to change the name of your embosser on your network. 
+You may install your embosser directly from this program or alternately use the "Add New Printer" process form the Devices and Printers folder.
+If using "Add New Printer, it is recommended that you name the embosser with the same name as you named it when you changed the hostname.
+
+ETHERNET. If you have a 1 gigabit network and you are having difficulty sending your files to the Phoenix, you may try changing how the files are sent to
+the Phoenix by opening the properties of your printer driver, clicking on the "Advanced" tab, then clicking on "Print directly to printer".
+
+REGISTER YOUR EMBOSSER: Included on the CD-ROM is a Product Registration Form that you can print, complete and return to us by fax or email. You may also complete our online Product Registration form found on our website at http://www.brailler.com/productregistration.php. 
+
+Windows XP users: When embossing a document, you may have a "Document failed to print" bubble pop up. In our testing it was found that this could be ignored as the documents would complete. Due to Microsoft stopping support for XP there appears to be no fix for this, at this time.
+
+

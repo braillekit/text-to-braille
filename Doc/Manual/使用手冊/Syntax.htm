@@ -1,0 +1,137 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-tw">
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<title>EasyBrailleEdit 語法參考手冊</title>
+<style>
+<!--
+li           { margin-top: 6 }
+h2           { color: #800000 }
+pre          { font-family: Courier New }
+-->
+</style>
+</head>
+
+<body style="font-family: Verdana">
+
+<h1>EasyBrailleEdit 語法參考手冊</h1>
+<p>作者：蔡煥麟<br>
+日期：2007-11-01</p>
+<p>　</p>
+<h2>原書頁碼</h2>
+<h4>用途</h4>
+<blockquote>
+	<p>標示原書頁碼。</p>
+</blockquote>
+<h4>語法</h4>
+<blockquote>
+	<p>&lt;P&gt;n&lt;/P&gt;</p>
+	<p>其中 n 為數字。</p>
+</blockquote>
+<h4>說明</h4>
+<blockquote>
+	<p>一旦有標示原書頁碼，就必須完整標示。例如，您的文件一共有五頁，如果您的原書頁碼只標示到第 2 頁，那麼後面三頁的原書頁碼都會是第 3 頁。</p>
+</blockquote>
+<hr>
+<h2>頁標題</h2>
+<h4>用途</h4>
+<blockquote>
+	<p>標示原書頁碼。</p>
+</blockquote>
+<h4>語法</h4>
+<blockquote>
+	<p>&lt;標題&gt;這裡放標題文字&lt;/標題&gt;</p>
+</blockquote>
+<h4>說明</h4>
+<blockquote>
+	<p>一份文件可以指定多個頁標題，因此您可以將整本書編輯成一個檔案，並且在各章開頭的地方加上&lt;標題&gt;。頁標題會印在頁尾的行首。</p>
+</blockquote>
+<h4>範例</h4>
+<blockquote>
+	<p>&lt;標題&gt;第六課：自然的奧秘&lt;/標題&gt;</p>
+</blockquote>
+<hr>
+<h2>縮排</h2>
+<h4>用途</h4>
+<blockquote>
+	<p>將內文整段縮排。</p>
+</blockquote>
+<h4>語法</h4>
+<blockquote>
+	<p>&lt;縮排&gt;abc&lt;/縮排&gt;</p>
+</blockquote>
+<h4>說明</h4>
+<blockquote>
+	<p>被縮排標籤包住的文字將會內縮一個空方。您可以使用巢狀縮排標籤，例如：</p>
+	<pre>&lt;縮排&gt;
+1 Hello!
+&lt;縮排&gt;
+1.1 這裡會內縮兩個空方。
+&lt;/縮排&gt;
+&lt;/縮排&gt;</pre>
+	<p>&quot;1.1&quot; 開頭的那一列，由於是包在第二個縮排區塊裡面，因此會內縮兩個空方。</p>
+</blockquote>
+<hr>
+<h2>座標</h2>
+<h4>用途</h4>
+<blockquote>
+	<p>表示座標。</p>
+</blockquote>
+<h4>語法</h4>
+<blockquote>
+	<p>&lt;座標&gt;(x,y)&lt;/座標&gt;</p>
+</blockquote>
+<h4>說明</h4>
+<blockquote>
+	<p>括號裡的數字都不用加數符。</p>
+</blockquote>
+<hr>
+<h2>座標</h2>
+<h4>用途</h4>
+<blockquote>
+	<p>表示座標。</p>
+</blockquote>
+<h4>語法</h4>
+<blockquote>
+	<p>&lt;座標&gt;(x,y)&lt;/座標&gt;</p>
+</blockquote>
+<h4>說明</h4>
+<blockquote>
+	<p>括號裡的數字都不用加數符。</p>
+</blockquote>
+<hr>
+<h2>次方</h2>
+<h4>用途</h4>
+<blockquote>
+	<p>表示數學的次方。</p>
+</blockquote>
+<h4>語法</h4>
+<blockquote>
+	<p>x^y 表示 x 的 y 次方。次方符號 '^' 的按鍵輸入方式為 Shift+6。</p>
+	<p>其中代表次方的數字 y 無需加數符。</p>
+</blockquote>
+<h4>範例</h4>
+<blockquote>
+	<p>54m^2</p>
+</blockquote>
+<hr>
+<h2>座標</h2>
+<h4>用途</h4>
+<blockquote>
+	<p>表示座標。</p>
+</blockquote>
+<h4>語法</h4>
+<blockquote>
+	<p>&lt;座標&gt;(x,y)&lt;/座標&gt;</p>
+</blockquote>
+<h4>說明</h4>
+<blockquote>
+	<p>括號裡的數字都不用加數符。</p>
+</blockquote>
+<p>　</p>
+<p>　</p>
+
+</body>
+
+</html>
