@@ -22,8 +22,8 @@ namespace EasyBrailleEdit
 
         private BrailleDocument m_BrDoc;
         private PrintOptions m_PrintOptions;
-        private int m_BeginOrgPageNumber;		// 起始原書頁碼
-        private int m_EndOrgPageNumber;			// 終止原書頁碼
+        private string m_BeginOrgPageNumber;		// 起始原書頁碼
+        private string m_EndOrgPageNumber;			// 終止原書頁碼
 
         private bool m_PreviewOnly;				// 是否只預覽，不列印
 
@@ -95,8 +95,8 @@ namespace EasyBrailleEdit
                 m_DisplayedPageNum = m_PageNum + 1;
             }
 
-            m_BeginOrgPageNumber = -1;   // -1 表示沒有指定原書頁碼。
-            m_EndOrgPageNumber = -1;   // -1 表示沒有指定原書頁碼。
+            m_BeginOrgPageNumber = null;   // 表示沒有指定原書頁碼。
+            m_EndOrgPageNumber = null;   // 表示沒有指定原書頁碼。
 
             m_PrintedPageCount = 0;
         }
@@ -314,7 +314,7 @@ namespace EasyBrailleEdit
         private void SetBeginOrgPageNumberForNewPage()
         {
             // 每一頁開始列印時，都要把上一頁的終止原書頁碼指定給本頁的起始原書頁碼。
-            if (m_EndOrgPageNumber >= 0)
+            if (!String.IsNullOrEmpty(m_EndOrgPageNumber))
             {
                 m_BeginOrgPageNumber = m_EndOrgPageNumber;
             }
@@ -482,13 +482,13 @@ namespace EasyBrailleEdit
         {
             string line = brLine.ToString();
 
-            int orgPageNum = BrailleProcessor.GetOrgPageNumber(line);
-            if (orgPageNum < 0)
+            string orgPageNum = BrailleProcessor.GetOrgPageNumber(line);
+            if (String.IsNullOrEmpty(orgPageNum))
             {
                 return;
             }
 
-            if (m_BeginOrgPageNumber < 0)
+            if (String.IsNullOrEmpty(m_BeginOrgPageNumber))
             {
                 m_BeginOrgPageNumber = orgPageNum;
             }
@@ -509,7 +509,7 @@ namespace EasyBrailleEdit
         /// <param name="graphics"></param>
         /// <param name="marginLeft"></param>
         /// <param name="marginTop"></param>
-        private void PrintPageFoot(BrailleLine title, int pageNum, int beginOrgPageNum, int endOrgPageNum,
+        private void PrintPageFoot(BrailleLine title, int pageNum, string beginOrgPageNum, string endOrgPageNum,
             Graphics graphics, double marginLeft, double marginTop)
         {
             int cellCnt;
@@ -529,22 +529,22 @@ namespace EasyBrailleEdit
             graphics.DrawString(pageNum.ToString(), m_TextFont, m_TextBrush, (float)x, (float)y);
 
             // 原書頁碼
-            if (beginOrgPageNum >= 0)
+            if (!String.IsNullOrEmpty(beginOrgPageNum))
             {
                 string orgPageNum = "";
-                if (endOrgPageNum < 0)
+                if (String.IsNullOrEmpty(endOrgPageNum))
                 {
-                    orgPageNum = beginOrgPageNum.ToString();
+                    orgPageNum = beginOrgPageNum;
                 }
                 else
                 {
                     if (beginOrgPageNum == endOrgPageNum)
                     {
-                        orgPageNum = beginOrgPageNum.ToString();
+                        orgPageNum = beginOrgPageNum;
                     }
                     else
                     {
-                        orgPageNum = String.Format("{0}-{1}", beginOrgPageNum, endOrgPageNum);
+                        orgPageNum = $"{beginOrgPageNum}-{endOrgPageNum}";
                     }
                 }
 
@@ -554,7 +554,7 @@ namespace EasyBrailleEdit
                 {
                     x = x - BrailleCellWidth; // textWidth - 1.6;	// 2008-8-26: 修正個位數頁碼位置太靠右邊的問題
                 }
-                graphics.DrawString(orgPageNum.ToString(), m_TextFont, m_TextBrush, (float)x, (float)y);
+                graphics.DrawString(orgPageNum, m_TextFont, m_TextBrush, (float)x, (float)y);
             }
 
             // 文件標題

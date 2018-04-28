@@ -20,6 +20,7 @@ namespace EasyBrailleEdit.Common.Config
         [Option(Alias = "General.PreferIFELanguage", DefaultValue = false)]
         bool PreferIFELanguage { get; set; }
 
+        /// <summary>
         /// 詞庫檔。
         /// </summary>
         [Option(Alias = "General.PhraseFiles", DefaultValue = "")]

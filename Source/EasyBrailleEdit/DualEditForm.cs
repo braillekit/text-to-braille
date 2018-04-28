@@ -78,7 +78,7 @@ namespace EasyBrailleEdit
 			set
 			{
 				// 如果是暫存的輸出檔名，則視為尚未存檔。
-				if (value.ToLower().IndexOf(Constant.Files.CvtOutputTempFileName.ToLower()) >= 0)
+				if (value.IndexOf(Constant.Files.CvtOutputTempFileName, StringComparison.CurrentCultureIgnoreCase) >= 0)
 				{
 					m_IsDirty = true;
 				}

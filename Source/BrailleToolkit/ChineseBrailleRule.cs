@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BrailleToolkit.Tags;
 using BrailleToolkit.Extensions;
 using BrailleToolkit.Helpers;
 

@@ -41,8 +41,9 @@ namespace EasyBrailleEdit.Common.Config
                     File.WriteAllText(filename, sb.ToString(), Encoding.UTF8);
                 }
             }
+            // note: parseInlineComments 必須為 true，否則無法讀出正確的設定值，因為 .ini 裡面有用到行內註解。
             var config = new ConfigurationBuilder<IAppConfig>()
-                .UseIniFile(filename)
+                .UseIniFile(filename, parseInlineComments: true) 
                 .Build();
             return config;
         }

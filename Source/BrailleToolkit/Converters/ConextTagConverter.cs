@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 using BrailleToolkit.Data;
+using BrailleToolkit.Tags;
 
 namespace BrailleToolkit.Converters
 {
@@ -42,7 +43,7 @@ namespace BrailleToolkit.Converters
             bool isBeginTag;
 
 			// 剖析字串是否為情境標籤，是則"進入"該情境標籤。
-            ContextTag ctag = context.Parse(s, out isBeginTag);	
+            IContextTag ctag = context.Parse(s, out isBeginTag);	
 
             if (ctag != null)
             {

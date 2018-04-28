@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using BrailleToolkit.Tags;
 using BrailleToolkit.Data;
 using BrailleToolkit.Helpers;
 using Huanlin.Common.Helpers;
@@ -299,7 +300,7 @@ namespace BrailleToolkit
         /// 這些語境標籤在整個轉點字程序完成時都會被移除（或轉換成對應的點字）。
         /// 是否可序列化：否。
         /// </summary>
-        public ContextTag ContextTag { get; set; }
+        public IContextTag ContextTag { get; set; }
 
 
         /// <summary>

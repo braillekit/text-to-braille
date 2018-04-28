@@ -4,6 +4,8 @@ using System.Text;
 using System.IO;
 using Huanlin.Common.Helpers;
 using BrailleToolkit.Data;
+using BrailleToolkit.Tags;
+using EasyBrailleEdit.Common;
 
 namespace BrailleToolkit.Converters
 {
@@ -71,7 +73,7 @@ namespace BrailleToolkit.Converters
                 {
                     char[] charBuf = charStack.ToArray();
                     string s = new string(charBuf);
-                    if (ContextTag.StartsWithContextTag(s))
+                    if (ContextTagNames.StartsWithContextTag(s))
                     {
                         break;  // 情境標籤必須交給 ContextTagConverter 處理。
                     }
@@ -110,7 +112,7 @@ namespace BrailleToolkit.Converters
                     }
                 }
 
-                brWord = InternalConvert(text);
+                brWord = InternalConvert(text, context);
                 if (brWord == null)
                      break;
 
@@ -202,7 +204,7 @@ namespace BrailleToolkit.Converters
 		/// </summary>
 		/// <param name="text">一個英數字或英文標點符號。</param>
 		/// <returns>若指定的字串是中文字且轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
-		private BrailleWord InternalConvert(string text)
+		private BrailleWord InternalConvert(string text, ContextTagManager context)
 		{
 			if (String.IsNullOrEmpty(text))
 				return null;
@@ -236,7 +238,15 @@ namespace BrailleToolkit.Converters
 				}
 				if (CharHelper.IsAsciiDigit(ch))
 				{
-					brCode = m_Table.FindDigit(text, false);	// 一般數字取下位點。
+                    bool useUpperPositionDots = false;  // 一般數字取下位點。
+                    if (AppGlobals.Config.Braille.UseUpperPositionForOrgPageNumber && context.IsOrgPageNumberActive())
+                    {
+                        // 原書頁碼使用上位點，且不加數符。
+                        useUpperPositionDots = true;
+                        brWord.NoDigitCell = true;
+                    }                        
+
+					brCode = m_Table.FindDigit(text, useUpperPositionDots);	
 					if (!String.IsNullOrEmpty(brCode))
 					{
 						brWord.AddCell(brCode);

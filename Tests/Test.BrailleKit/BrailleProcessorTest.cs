@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using BrailleToolkit;
+using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
 using NUnit.Framework;
 
@@ -221,7 +223,7 @@ namespace Test.BrailleToolkit
 
             string line = "<編號>1</編號>";
             string expected = "#1 ";
-            string actual = target.ReplaceTagsWithConvertableText(line);
+            string actual = target.ReplaceSimpleTagsWithConvertableText(line);
 
             Assert.AreEqual(expected, actual);
         }
@@ -323,6 +325,39 @@ namespace Test.BrailleToolkit
             var result = brLine.ToPositionNumberString();
             Assert.AreEqual(expectedPositionNumbers, result);
         }
+
+        [Test]
+        public void Should_OrgPageNumber_UseUpperPosition_And_NoDigitSymbol()
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            string inputText = "<P>14</P>";
+            string expectedPositionNumbers = new StringBuilder().Insert(0, "(36)", 36) + "(1)(145)"; // 36 個底線，後面跟著 "14" 的點字（沒有數符）。
+            BrailleLine brLine = processor.ConvertLine(inputText);
+
+            processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+
+            var result = brLine.ToPositionNumberString();
+            Assert.AreEqual(expectedPositionNumbers, result);
+        }
+
+        [Test]
+        public void Should_OrgPageNumber_Accept_RomanNumber()
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            string inputText = "<P>xiv</P>"; // page 14
+            string expectedPositionNumbers = new StringBuilder().Insert(0, "(36)", 36) + "(1346)(24)(1236)"; // 36 個底線，後面跟著 "xiv" 的點字。
+            BrailleLine brLine = processor.ConvertLine(inputText);
+
+            processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+
+            var result = brLine.ToPositionNumberString();
+            Assert.AreEqual(expectedPositionNumbers, result);
+        }
+
     }
 
 

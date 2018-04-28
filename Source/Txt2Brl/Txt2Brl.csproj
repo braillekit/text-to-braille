@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.2.1" />
-    <PackageReference Include="Config.Net" Version="4.8.0" />
+    <PackageReference Include="Config.Net" Version="4.9.1" />
     <PackageReference Include="Huanlin.Common" Version="4.5.4" />
     <PackageReference Include="NChinese" Version="0.3.6" />
     <PackageReference Include="NChinese.Imm" Version="0.3.6" />

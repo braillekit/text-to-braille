@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using BrailleToolkit.Tags;
 using BrailleToolkit.Converters;
 using BrailleToolkit.Data;
 using BrailleToolkit.Helpers;
@@ -66,14 +67,6 @@ namespace BrailleToolkit
 
 	public delegate void TextConvertedEventHandler(object sender, TextConvertedEventArgs e);
 
-    internal class SimpleTextTag
-    {
-        public const string NumericItem = "<編號>";
-        public const string OrgPageNumber = "<P>";  // 原書頁碼
-        public const string Unit1End = "<大單元結束>";
-        public const string Unit2End = "<小單元結束>";
-        public const string Unit3End = "<小題結束>";        
-    }
 
 	/// <summary>
 	/// 此類別可用來將明眼字轉換成點字。可處理一個字、一行、或者多行。
@@ -84,7 +77,7 @@ namespace BrailleToolkit
 	public class BrailleProcessor
 	{
 		private static BrailleProcessor s_Processor = null;
-        private static string s_DashesForOrgPageNumber;
+
         private CoordinateConverter m_CoordConverter;
 		private TableConverter m_TableConverter;
 		private PhoneticConverter m_PhoneticConverter;
@@ -92,7 +85,6 @@ namespace BrailleToolkit
         // Extended converters
         private List<WordConverter> m_Converters;
 
-		private Hashtable m_ReplacaebleTags;
         private StringBuilder m_ErrorMsg;           // 轉換過程中發生的錯誤訊息。
 
         private event ConvertionFailedEventHandler m_ConvertionFailedEvent;
@@ -100,11 +92,6 @@ namespace BrailleToolkit
        
 
         #region 建構函式
-
-        static BrailleProcessor()
-        {
-            s_DashesForOrgPageNumber = GetDashForOrgPageNumber();
-        }
 
         private BrailleProcessor(ZhuyinReverseConverter zhuyinConverter)
 		{
@@ -117,13 +104,6 @@ namespace BrailleToolkit
             m_CoordConverter = new CoordinateConverter();
 			m_TableConverter = new TableConverter();
 			m_PhoneticConverter = new PhoneticConverter();
-
-			m_ReplacaebleTags = new Hashtable();
-			m_ReplacaebleTags.Add(SimpleTextTag.NumericItem, "#");  // 編號
-            m_ReplacaebleTags.Add(SimpleTextTag.OrgPageNumber, s_DashesForOrgPageNumber);   // 原書頁碼
-            m_ReplacaebleTags.Add(SimpleTextTag.Unit1End, new string('ˍ', 20)); // 大單元結束
-            m_ReplacaebleTags.Add(SimpleTextTag.Unit2End, new string('﹍', 20)); // 小單元結束
-            m_ReplacaebleTags.Add(SimpleTextTag.Unit3End, new string('﹋', 20)); // 小題結束
 
             ContextManager = new ContextTagManager();
 
@@ -390,22 +370,23 @@ namespace BrailleToolkit
             }
 
 			// 預先處理特殊標籤的字元替換。
-			line = ReplaceTagsWithConvertableText(line);
+			line = ReplaceSimpleTagsWithConvertableText(line);
             if (line == null)
                 return null;
 
+            // 原書頁碼可能會輸入羅馬數字，所以把底下檢查數字格式的程式碼註解掉。
 			// 如果是原書頁碼，先檢查格式是否正確。
-			try
-			{
-				GetOrgPageNumber(line);
-			}
-			catch (Exception ex)
-			{
-				m_ErrorMsg.Append(String.Format("第 {0} 列 : ", lineNumber));
-				m_ErrorMsg.Append(ex.Message);
-				m_ErrorMsg.Append("\r\n");
-				return null;
-			}
+			//try
+			//{
+			//	GetOrgPageNumber(line);
+			//}
+			//catch (Exception ex)
+			//{
+			//	m_ErrorMsg.Append(String.Format("第 {0} 列 : ", lineNumber));
+			//	m_ErrorMsg.Append(ex.Message);
+			//	m_ErrorMsg.Append("\r\n");
+			//	return null;
+			//}
 
 			line = StrHelper.Reverse(line);
             Stack<char> charStack = new Stack<char>(line);
@@ -494,7 +475,7 @@ namespace BrailleToolkit
             }
 
             EnglishBrailleRule.ApplyCapitalRule(brLine);    // 套用大寫規則。
-			EnglishBrailleRule.ApplyDigitRule(brLine);		// 套用數字規則。
+			EnglishBrailleRule.ApplyDigitRule(brLine);		// 套用數字規則（加數字符號）。
             EnglishBrailleRule.AddSpaces(brLine);           // 補加必要的空白。
 
 			ChineseBrailleRule.ApplyBracketRule(brLine);	// 套用括弧規則。
@@ -671,9 +652,19 @@ namespace BrailleToolkit
 
                 if (XmlTagHelper.IsBeginTag(brWord.Text))
                 {
+                    // 處理起始標籤。
                     brWord.IsContextBeginTag = true;
 
-                    // 處理起始標籤的對應文字轉換
+                    // 優先使用預先建立好的點字串列。
+                    if (ctag.PrefixBrailleWords.Count > 0)
+                    {
+                        brWord.Clear();
+                        brLine.RemoveAt(index);
+                        brLine.Words.InsertRange(index, ctag.PrefixBrailleWords);
+                        index += ctag.PrefixBrailleWords.Count;
+                        continue;
+                    }
+                    // 沒有點字串列的時候才去轉換文字。
                     if (!String.IsNullOrEmpty(ctag.ConvertablePrefix))
                     {
                         brWord.Text = ctag.ConvertablePrefix;
@@ -685,12 +676,6 @@ namespace BrailleToolkit
                             throw new Exception($"無法轉換語境標籤 '{ctag.TagName}' 的對應文字: {ctag.ConvertablePrefix}");
                         }
                         brWord.AddCell(brCode);
-
-                        /*
-                         * 註：目前的 ContextTag 設計，起始標籤和結束標籤一律只能轉換成一個 BrailleWord，亦即當成然一個不可分割的符號來處理。
-                         *    此設計無法讓語境標籤擴展成多個 BraillWord 物件。萬一將來碰到這種需求，可以改進 ContextTag 的設計：在初始化每個
-                         *    ContextTag 物件的時候就預先建立好對應的 BrailleWord 串列。
-                         */
                     }
                     else
                     {
@@ -704,9 +689,19 @@ namespace BrailleToolkit
                 }
                 else if (XmlTagHelper.IsEndTag(brWord.Text))
                 {
+                    // 處理結束標籤。
                     brWord.IsContextEndTag = true;
 
-                    // 處理結束標籤的對應文字轉換
+                    // 優先使用預先建立好的點字串列。
+                    if (ctag.PostfixBrailleWords.Count > 0)
+                    {
+                        brWord.Clear();
+                        brLine.RemoveAt(index);
+                        brLine.Words.InsertRange(index, ctag.PostfixBrailleWords);
+                        index += ctag.PostfixBrailleWords.Count;
+                        continue;
+                    }
+                    // 沒有點字串列的時候才去轉換文字。
                     if (!String.IsNullOrEmpty(ctag.ConvertablePostfix))
                     {
                         brWord.Text = ctag.ConvertablePostfix;
@@ -862,7 +857,7 @@ namespace BrailleToolkit
 		/// </summary>
 		/// <param name="line"></param>
 		/// <returns>傳回置換過的字串。若傳回 null，表示這行不要轉換成點字。</returns>
-		public string ReplaceTagsWithConvertableText(string line)
+		public string ReplaceSimpleTagsWithConvertableText(string line)
 		{
             // 處理標題標籤 (這是舊的程式碼，保留供參考，若未來有需要類似的前置標籤處理，可依樣畫葫蘆)
             //isTitle = false;
@@ -888,20 +883,20 @@ namespace BrailleToolkit
 		/// <returns>傳回用來把這次找到的 token 置換掉的字串。</returns>
 		private string OnMatchedTagFound(Match token)
 		{
-			if (m_ReplacaebleTags.ContainsKey(token.Value)) 
+			if (SimpleTag.IsSimpleTag(token.Value)) 
 			{
-				return m_ReplacaebleTags[token.Value].ToString();
+				return SimpleTag.GetTextValue(token.Value);
 			}
 
 			// 結束標籤
 			if (token.Value.StartsWith("</")) 
 			{
                 string key = token.Value.Remove(1, 1);  // 把 '/' 字元去掉，即得到起始標籤名稱。
-                if (m_ReplacaebleTags.ContainsKey(key))
+                if (SimpleTag.IsSimpleTag(key))
                 {
                     return " ";
                 }
-			}            
+			}
 
 			return token.Value;
 		}
@@ -938,7 +933,7 @@ namespace BrailleToolkit
         {
             BrailleLine brLine = brDoc.Lines[lineIndex];
             int wordIdx = 0;
-            ContextTag ctag;
+            IContextTag ctag;
 
             while (brLine.WordCount > 0) 
             {
@@ -1026,7 +1021,7 @@ namespace BrailleToolkit
             for (int i = brLine.WordCount - 1; i >= 0; i--)
             {
                 brWord = brLine.Words[i];
-                if (brWord.IsContextTag && !ContextTag.IsTitleTag(brWord.Text))
+                if (brWord.IsContextTag && !ContextTagNames.IsTitleTag(brWord.Text))
                 {
                     brLine.Words.RemoveAt(i);
                 }
@@ -1306,51 +1301,31 @@ namespace BrailleToolkit
         #region Misc. methods.
 
         /// <summary>
-        /// 傳回表示原書頁次的底線字串。
-        /// </summary>
-        /// <returns></returns>
-        private static string GetDashForOrgPageNumber()
-        {
-			return new string('_', 36); // 36 個底線符號。
-        }
-
-        /// <summary>
-        /// 檢查傳入的字串是否為原書頁次。
-        /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
-        public static bool IsOrgPageNumber(string line)
-        {
-            // 至少要有 36 個底線符號，加上至少一個數字
-            if (String.IsNullOrEmpty(line) || line.Length < 37) 
-                return false;
-            if (line.StartsWith(s_DashesForOrgPageNumber) && Char.IsDigit(line[36]))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
         /// 從傳入的字串中取出原書頁碼。
         /// </summary>
         /// <param name="line"></param>
-        /// <returns>若傳入的字串不是原書頁碼，則傳回 -1，否則傳回原書頁碼。</returns>
-        public static int GetOrgPageNumber(string line)
+        /// <returns>若傳入的字串不是原書頁碼，則傳回空字串。否則傳回原書頁碼的文字（必須是字串，因為頁碼可能是羅馬數字）。</returns>
+        public static string GetOrgPageNumber(string line)
         {
-            if (IsOrgPageNumber(line))
+            if (String.IsNullOrEmpty(line)) return String.Empty;
+
+            var pageNumberText = String.Empty;
+
+            var endTagName = XmlTagHelper.GetEndTagName(ContextTagNames.OrgPageNumber);
+            if (line.IndexOf(ContextTagNames.OrgPageNumber) >= 0 && line.IndexOf(endTagName) > 0)
             {
-                line = line.Remove(0, 36);
-				try
-				{
-					return Convert.ToInt32(line);
-				}
-				catch
-				{
-					throw new Exception("原書頁碼包含無效的數字: " + line);
-				}
+                pageNumberText = 
+                    line.Replace(ContextTagNames.OrgPageNumber, String.Empty)
+                        .Replace(endTagName, String.Empty)
+                        .Trim();
+
             }
-            return -1;
+            else if (line.StartsWith(OrgPageNumberContextTag.LeadingUnderlines))
+            {
+                pageNumberText = line.Remove(0, OrgPageNumberContextTag.LeadingUnderlines.Length);
+            }
+
+            return pageNumberText;
         }
 
         #endregion

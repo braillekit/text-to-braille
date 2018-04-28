@@ -13,7 +13,7 @@ namespace BrailleToolkit.Converters
     /// </summary>
     public sealed class BrailleCharConverter
     {
-        private static Hashtable m_CharTable;
+        private static Dictionary<string, string> m_CharTable;
 
         private BrailleCharConverter()
         {            
@@ -21,8 +21,8 @@ namespace BrailleToolkit.Converters
 
         static BrailleCharConverter()
         {
-            m_CharTable = new Hashtable();
-            BrailleCharConverter.LoadFromResource();
+            m_CharTable = new Dictionary<string, string>();
+            LoadFromResource();
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace BrailleToolkit.Converters
         /// <returns></returns>
         public static string ToString(BrailleWord brWord)
         {
-            return BrailleCharConverter.ToString(brWord.CellList);
+            return ToString(brWord.CellList);
         }
 
         /// <summary>
@@ -140,13 +140,13 @@ namespace BrailleToolkit.Converters
         /// </summary>
         /// <param name="brCode">點字碼，兩位數16進位字串，例如：4E。</param>
         /// <returns></returns>
-        public static char ToChar(string internalBrCode)
+        public static char ToChar(string brailleHexCode)
         {
-            string brCode = ToBrailleCode(internalBrCode);
-            if (String.IsNullOrEmpty(brCode))
-                throw new Exception("找不到對應的點字字型碼: " + internalBrCode);
+            string charCode = ToBrailleCharCode(brailleHexCode);
+            if (String.IsNullOrEmpty(charCode))
+                throw new Exception("找不到對應的點字字型碼: " + brailleHexCode);
            
-            byte charValue = Byte.Parse(brCode, NumberStyles.HexNumber);
+            byte charValue = Byte.Parse(charCode, NumberStyles.HexNumber);
             char ch = Convert.ToChar(charValue);
             return ch;
         }
@@ -156,11 +156,11 @@ namespace BrailleToolkit.Converters
         /// </summary>
         /// <param name="brCode">內部點字碼，兩位數16進位字串，例如：4E。</param>
         /// <returns>點字字型碼，兩位數16進位字串。</returns>
-        public static string ToBrailleCode(string internalBrCode)
+        public static string ToBrailleCharCode(string brailleHexCode)
         {
-            if (m_CharTable.Contains(internalBrCode))
+            if (m_CharTable.ContainsKey(brailleHexCode))
             {
-                return m_CharTable[internalBrCode].ToString();
+                return m_CharTable[brailleHexCode];
             }
             return null;
         }
@@ -170,12 +170,12 @@ namespace BrailleToolkit.Converters
         /// </summary>
         /// <param name="fontCode">點字碼，兩位數16進位字串，例如：3F。</param>
         /// <returns>點字碼，兩位數16進位字串。</returns>
-        public static string ToInternalBrailleCode(string brailleCode)
+        public static string ToBrailleHexCode(string brailleCharCode)
         {
-            foreach (DictionaryEntry de in m_CharTable)
+            foreach (var item in m_CharTable)
             {
-                if (de.Value.Equals(brailleCode))
-                    return de.Key.ToString();
+                if (item.Value.Equals(brailleCharCode))
+                    return item.Key;
             }
             return null;
         }
