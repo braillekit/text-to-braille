@@ -108,6 +108,10 @@
       <Project>{34a66b1a-70f1-4be9-ae58-885e6c27e58e}</Project>
       <Name>BrailleToolkit</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Source\EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj">
+      <Project>{aa5cb6bc-ce6c-4132-b932-32b646584921}</Project>
+      <Name>EasyBrailleEdit.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

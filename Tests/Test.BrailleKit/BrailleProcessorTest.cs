@@ -20,10 +20,6 @@ namespace Test.BrailleToolkit
             Shared.SetupLogger();
         }
 
-        public BrailleProcessorTest()
-        {
-        }
-
         /// <summary>
         ///A test for ConvertLine (string)
         ///</summary>
@@ -135,81 +131,32 @@ namespace Test.BrailleToolkit
         /// <summary>
         ///A test for BreakLine (BrailleLine, int)
         ///</summary>
-        [Test]
-        public void Should_BreakLine_Succeed()
+        [TestCase(12, "一二三四：我", 2, "一二三四：", "我")] // 測試斷行：冒號+我。在冒號後面的空方之後斷行。
+        [TestCase(10, "一二三四。", 2, "一二三", "四。")] // 測試斷行：斷在句點時，應把前一個字連同句號斷至下一行。
+        [TestCase(12, "this is a loooooong word.", 3, "this is a", "loooooong")] // 測試斷行：斷在英文字中間要加上連字號。應該把最後一個字連同句號斷至下一行。
+        [TestCase(8, "12345 6789", 2, "12345", "6789")]  // 測試斷行：連續的數字不可斷開。
+        [TestCase(8, "abc 123,456", 2, "abc", "123,456")] // 測試斷行：斷在數字中間的逗號。故意斷在逗號處。
+        public void Should_BreakLine_Succeed(int cellsPerLine, string input, 
+            int expectedLineCount, string expectedLine1, string expectedLine2)
         {
-            string msg = "BrailleProcesser.BreakLine 測試失敗!";
-
             BrailleProcessor target = BrailleProcessor.GetInstance();
 
             ContextTagManager context = new ContextTagManager();
 
-            // 測試斷行：冒號+我。
-            string line = "一二三四：我";
-            BrailleLine brLine = target.ConvertLine(line);	// 冒號後面會加一個空方
+            BrailleLine brLine = target.ConvertLine(input);	// 冒號後面會加一個空方
 
-            int cellsPerLine = 12;	// 故意在空方之後斷行。
+            var brLines = target.BreakLine(brLine, cellsPerLine, context);
 
-            string expected = "一二三四：";
-            List<BrailleLine> brLines = target.BreakLine(brLine, cellsPerLine, context);
+            Assert.AreEqual(expectedLineCount, brLines.Count);
+
             string actual = brLines[0].ToString();
-            Assert.AreEqual(expected, actual, msg);
-            brLines.Clear();
+            Assert.AreEqual(expectedLine1, actual);
 
-            // 測試斷行：斷在句點。
-            line = "一二三四。";
-            brLine = target.ConvertLine(line);
-
-            cellsPerLine = 10;	// 故意斷在句號處。
-
-            string expected1 = "一二三";	// 應該把最後一個字連同句號斷至下一行。
-            string expected2 = "四。";
-            brLines = target.BreakLine(brLine, cellsPerLine, context);
-            bool isOk = (brLines.Count == 2 &&
-                brLines[0].ToString() == expected1 && brLines[1].ToString() == expected2);
-            Assert.IsTrue(isOk, msg);
-
-            // 測試斷行：斷在英文字中間要加上連字號。
-            line = "this is a loooooong word.";
-            brLine = target.ConvertLine(line);
-
-            cellsPerLine = 12;	// 故意斷在句號處。
-
-            expected1 = "this is a";		// 應該把最後一個字連同句號斷至下一行。
-            expected2 = "loooooong";
-            brLines = target.BreakLine(brLine, cellsPerLine, context);
-            isOk = (brLines.Count == 3 &&
-                brLines[0].ToString() == expected1 && brLines[1].ToString() == expected2);
-            Assert.IsTrue(isOk, msg);
-
-            // 測試斷行：連續的數字不可斷開。
-            line = "12345 6789";
-            brLine = target.ConvertLine(line);
-
-            cellsPerLine = 8;
-
-            brLines = target.BreakLine(brLine, cellsPerLine, context);
-            isOk = (brLines.Count == 2 && 
-                brLines[0].ToString() == "12345" &&
-                brLines[1].ToString() == "6789" &&
-                brLines[0][0].Cells[0].Value == (byte)BrailleCellCode.Digit &&
-                brLines[1][0].Cells[0].Value == (byte)BrailleCellCode.Digit);
-            Assert.IsTrue(isOk, msg);
-
-            // 測試斷行：斷在數字中間的逗號。
-            line = "abc 123,456";
-            brLine = target.ConvertLine(line);
-
-            cellsPerLine = 8;	// 故意斷在逗號處。
-
-            expected1 = "abc";
-            expected2 = "123,456";
-            brLines = target.BreakLine(brLine, cellsPerLine, context);
-            isOk = (brLines.Count == 2 &&
-                brLines[0].ToString() == expected1 && 
-                brLines[1].ToString() == expected2 &&
-                brLines[1][0].Cells[0].Value == (byte)BrailleCellCode.Digit);
-            Assert.IsTrue(isOk, msg);
+            if (expectedLineCount > 1)
+            {
+                string actual2 = brLines[1].ToString();
+                Assert.AreEqual(expectedLine2, actual2);
+            }
         }
 
 
@@ -221,8 +168,8 @@ namespace Test.BrailleToolkit
         {
             BrailleProcessor target = BrailleProcessor.GetInstance();
 
-            string line = "<編號>1</編號>";
-            string expected = "#1 ";
+            string line = "<大單元結束>測試</大單元結束>";
+            string expected = new string('ˍ', 20) + "測試" + ' ';
             string actual = target.ReplaceSimpleTagsWithConvertableText(line);
 
             Assert.AreEqual(expected, actual);

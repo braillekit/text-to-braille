@@ -126,7 +126,7 @@ namespace EasyBrailleEdit
         {
             var dlg = new SaveFileDialog();
             dlg.DefaultExt = ".txt";
-            dlg.Filter = "文字檔（*.txt）|(*.txt)";
+            dlg.Filter = "文字檔 (*.txt)|*.txt";
             dlg.FilterIndex = Constant.Files.SaveAsFileNameFilterIndex;
 
             if (dlg.ShowDialog() == DialogResult.OK)

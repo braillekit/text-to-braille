@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -10,63 +9,48 @@ using BrailleToolkit.Helpers;
 using EasyBrailleEdit.Common;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
+using Huanlin.Extensions;
 
 namespace BrailleToolkit
 {
     public struct CharPosition
 	{
-		public char CharValue;		// 字元
-		public int LineNumber;		// 第幾列
-		public int CharIndex;		// 第幾個字元
-	}
+		public char CharValue { get; set; }		// 字元
+		public int LineNumber { get; set; }		// 第幾列
+		public int CharIndex { get; set; }      // 第幾個字元
+    }
 
 	public class ConvertionFailedEventArgs : EventArgs
 	{
-		private CharPosition m_InvalidChar;
-
         public string OriginalText { get; private set; }
 
-        public CharPosition InvalidChar
-        {
-            get { return m_InvalidChar; }
-        }
+        public CharPosition InvalidChar { get; private set; }
 
         public bool Stop { get; set; }
 
         internal void SetArgs(int lineNumber, int charIndex, string line, char ch)
 		{
-			m_InvalidChar.LineNumber = lineNumber;
-			m_InvalidChar.CharIndex = charIndex;
-			m_InvalidChar.CharValue = ch;
+            InvalidChar = new CharPosition
+            {
+                LineNumber = lineNumber,
+                CharIndex = charIndex,
+                CharValue = ch
+            };
 			OriginalText = line;
 		}
 	}
 
 	public class TextConvertedEventArgs : EventArgs 
 	{
-		private string m_Text;
-		private int m_LineNumber;
-
-		internal void SetArgValues(int lineNum, string text)
+        internal void SetArgValues(int lineNum, string text)
 		{
-			m_Text = text;
-			m_LineNumber = lineNum;
-		}	
-
-		public string Text
-		{
-			get { return m_Text; }
+			Text = text;
+			LineNumber = lineNum;
 		}
-		public int LineNumber
-		{
-			get { return m_LineNumber; }
-		}
-	}
 
-	public delegate void ConvertionFailedEventHandler(object sender, ConvertionFailedEventArgs e);
-
-	public delegate void TextConvertedEventHandler(object sender, TextConvertedEventArgs e);
-
+        public string Text { get; private set; }
+        public int LineNumber { get; private set; }
+    }
 
 	/// <summary>
 	/// 此類別可用來將明眼字轉換成點字。可處理一個字、一行、或者多行。
@@ -76,7 +60,7 @@ namespace BrailleToolkit
 	/// </summary>
 	public class BrailleProcessor
 	{
-		private static BrailleProcessor s_Processor = null;
+		private static BrailleProcessor s_Processor;
 
         private CoordinateConverter m_CoordConverter;
 		private TableConverter m_TableConverter;
@@ -87,9 +71,10 @@ namespace BrailleToolkit
 
         private StringBuilder m_ErrorMsg;           // 轉換過程中發生的錯誤訊息。
 
-        private event ConvertionFailedEventHandler m_ConvertionFailedEvent;
-		private event TextConvertedEventHandler m_TextConvertedEvent;
-       
+        private event EventHandler<ConvertionFailedEventArgs> m_ConvertionFailedEvent;
+		private event EventHandler<TextConvertedEventArgs> m_TextConvertedEvent;
+
+        private Dictionary<string, string> _autoReplacedText;
 
         #region 建構函式
 
@@ -110,6 +95,10 @@ namespace BrailleToolkit
             InvalidChars = new List<CharPosition>();
 			m_ErrorMsg = new StringBuilder();
             SuppressEvents = false;
+
+            // 轉點字之前，預先替換的文字
+            var replacedText = AppGlobals.Config.AutoReplacedText.EnsureNotEnclosedWith("{", "}");
+            _autoReplacedText = StrHelper.SplitToDictionary(replacedText, ' ', '=');
 		}
 
 		/// <summary>
@@ -185,7 +174,7 @@ namespace BrailleToolkit
 
         #region 事件
 
-        public event ConvertionFailedEventHandler ConvertionFailed
+        public event EventHandler<ConvertionFailedEventArgs> ConvertionFailed
 		{
 			add
 			{
@@ -197,7 +186,7 @@ namespace BrailleToolkit
 			}
 		}
 
-		public event TextConvertedEventHandler TextConverted
+		public event EventHandler<TextConvertedEventArgs> TextConverted
 		{
 			add
 			{
@@ -368,6 +357,9 @@ namespace BrailleToolkit
                 brLine.Words.Add(BrailleWord.NewBlank());
                 return brLine;
             }
+
+            // 替換組態檔中指定的字串
+            line = ReplaceTextDefinedInAppConfig(line);
 
 			// 預先處理特殊標籤的字元替換。
 			line = ReplaceSimpleTagsWithConvertableText(line);
@@ -852,6 +844,16 @@ namespace BrailleToolkit
 			return brWordListFraction;
 		}
 
+        public string ReplaceTextDefinedInAppConfig(string line)
+        {
+            var sb = new StringBuilder(line);
+            foreach (var item in _autoReplacedText)
+            {
+                sb.Replace(item.Key, item.Value);
+            }
+            return sb.ToString();
+        }
+
 		/// <summary>
 		/// 在進行轉換之前預先處理一列中的所有特殊標籤，將這些標籤替換成特定字元。
 		/// </summary>
@@ -872,8 +874,7 @@ namespace BrailleToolkit
             //    return title;
             //}
 
-			string result = Regex.Replace(line, RegExpPatterns.Tags, new MatchEvaluator(OnMatchedTagFound));
-			return result;
+			return Regex.Replace(line, RegExpPatterns.Tags, new MatchEvaluator(OnMatchedTagFound));
 		}
 
 		/// <summary>
@@ -961,7 +962,7 @@ namespace BrailleToolkit
 
             var formattedLines = FormatLine(brLine, brDoc.CellsPerLine, context);
 
-            if (formattedLines.Count < 1 || brLine.IsEmpty())
+            if (formattedLines.Count < 1)
             {
                 brDoc.RemoveLine(lineIndex);
                 return 0;
@@ -1050,7 +1051,7 @@ namespace BrailleToolkit
                 // 補縮排的空方。
                 if (context != null && context.IndentCount > 0) // 若目前位於縮排區塊中
                 {
-                    this.Indent(brLine, context.IndentCount);
+                    Indent(brLine, context.IndentCount);
                 }
                 return null;
             }
@@ -1065,11 +1066,11 @@ namespace BrailleToolkit
             int maxCells = cellsPerLine;;
 
             // 計算折行之後的縮排格數。
-            indents = BrailleProcessor.CalcNewLineIndents(brLine);            
+            indents = CalcNewLineIndents(brLine);            
 
             while (wordIndex < brLine.WordCount)
 			{
-				breakIndex = BrailleProcessor.CalcBreakPoint(brLine, maxCells, out needHyphen);
+				breakIndex = CalcBreakPoint(brLine, maxCells, out needHyphen);
 
 				newLine = brLine.Copy(wordIndex, breakIndex);	// 複製到新行。
 				if (needHyphen)	// 是否要附加連字號?
@@ -1110,7 +1111,7 @@ namespace BrailleToolkit
                 indents = context.IndentCount;
                 foreach (BrailleLine aLine in lines)
                 {
-                    this.Indent(aLine, indents);
+                    Indent(aLine, indents);
                 }
             }
 

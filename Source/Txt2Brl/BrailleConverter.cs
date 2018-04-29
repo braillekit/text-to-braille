@@ -13,7 +13,6 @@ namespace Txt2Brl
     public class BrailleConverter 
 	{
 		BrailleDocument _doc;
-		BrailleProcessor _processor;
         ZhuyinReverseConverter _zhuyinConverter;
 
 		string m_OutFileName;
@@ -42,11 +41,11 @@ namespace Txt2Brl
         public BrailleConverter()
 		{
             _zhuyinConverter = CreateZhuyinConverter(AppGlobals.Config.PreferIFELanguage);
-            _processor = BrailleProcessor.GetInstance(_zhuyinConverter);
-			_doc = new BrailleDocument(_processor);
+            Processor = BrailleProcessor.GetInstance(_zhuyinConverter);
+			_doc = new BrailleDocument(Processor);
 
-			_processor.ConvertionFailed += new ConvertionFailedEventHandler(BrailleProcessor_ConvertionFailed);
-			_processor.TextConverted += new TextConvertedEventHandler(BrailleProcessor_TextConverted);
+			Processor.ConvertionFailed += BrailleProcessor_ConvertionFailed;
+			Processor.TextConverted += BrailleProcessor_TextConverted;
 
 			//m_Processor.ChineseConverter = null;	// 保護
 
@@ -100,7 +99,7 @@ namespace Txt2Brl
 
                 _doc.Convert(inputText);
 
-                if (!_processor.HasError)   // 轉換過程都沒錯誤才輸出點字檔
+                if (!Processor.HasError)   // 轉換過程都沒錯誤才輸出點字檔
                 {
                     _doc.SaveBrailleFile(outputFile);
                 }
@@ -138,7 +137,7 @@ namespace Txt2Brl
 
 				_doc.LoadAndConvert(inFileName);
 
-				if (!_processor.HasError)	// 轉換過程都沒錯誤才輸出點字檔
+				if (!Processor.HasError)	// 轉換過程都沒錯誤才輸出點字檔
 				{
 					_doc.SaveBrailleFile(outFileName);
 				}
@@ -164,7 +163,7 @@ namespace Txt2Brl
 		{	
 			using (StreamWriter sw = new StreamWriter(m_CvtErrorCharFileName, false, Encoding.Default))
 			{
-				foreach (CharPosition ch in _processor.InvalidChars)
+				foreach (CharPosition ch in Processor.InvalidChars)
 				{
 					sw.Write(ch.LineNumber.ToString());	// 列號
 					sw.Write(' ');
@@ -186,10 +185,10 @@ namespace Txt2Brl
 		{
 			using (StreamWriter sw = new StreamWriter(m_CvtResultFileName, false, Encoding.Default))
 			{
-				if (_processor.HasError)
+				if (Processor.HasError)
 				{
 					sw.WriteLine("1");
-					sw.WriteLine(_processor.ErrorMessage);
+					sw.WriteLine(Processor.ErrorMessage);
 				}
 				else
 				{
@@ -222,17 +221,14 @@ namespace Txt2Brl
 		{
 		}
 
-		public BrailleProcessor Processor
-		{
-			get { return _processor; }
-		}
+        public BrailleProcessor Processor { get; }
 
-		/// <summary>
-		/// 碰到無法轉換的字元時觸發此事件。
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="args"></param>
-		private void BrailleProcessor_ConvertionFailed(object sender, ConvertionFailedEventArgs args)
+        /// <summary>
+        /// 碰到無法轉換的字元時觸發此事件。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void BrailleProcessor_ConvertionFailed(object sender, ConvertionFailedEventArgs args)
 		{
 			Console.Write(System.Environment.NewLine);
 			Console.WriteLine("無法轉換: " + args.InvalidChar.CharValue);

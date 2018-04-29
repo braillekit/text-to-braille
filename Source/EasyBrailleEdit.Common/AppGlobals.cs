@@ -7,8 +7,8 @@ namespace EasyBrailleEdit.Common
 {
     public static class AppGlobals
     {
-        public static IAppConfig Config { get; private set; } = ConfigHelper.CreateConfig();
-        public static string TempPath { get; private set; } = GetTempPath();
+        public static IAppConfig Config { get; } = ConfigHelper.CreateConfig();
+        public static string TempPath { get; } = GetTempPath();
 
         // Class constructor.
         static AppGlobals()

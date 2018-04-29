@@ -14,7 +14,6 @@ namespace BrailleToolkit.Tags
     {
         internal static class Names
         {
-            public const string NumericItem = "<編號>";
             public const string Unit1End = "<大單元結束>";
             public const string Unit2End = "<小單元結束>";
             public const string Unit3End = "<小題結束>";
@@ -22,7 +21,6 @@ namespace BrailleToolkit.Tags
 
         public static Dictionary<string, string> Tags = new Dictionary<string, string>
         {
-            { Names.NumericItem, "#" },  // 編號
             { Names.Unit1End, new string ('ˍ', 20) },   // 大單元結束
             { Names.Unit2End, new string ('﹍', 20) },  // 小單元結束
             { Names.Unit3End, new string ('﹋', 20) }   // 小題結束

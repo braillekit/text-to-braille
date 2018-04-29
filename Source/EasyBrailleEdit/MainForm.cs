@@ -86,7 +86,7 @@ namespace EasyBrailleEdit
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 Modified = false;
-                if (dlg.FileName.ToLower().EndsWith(".btx"))
+                if (dlg.FileName.EndsWith(".btx", StringComparison.CurrentCultureIgnoreCase))
                 {
                     string s = dlg.FileName.Replace(".btx", ".txt");
                     if (File.Exists(s))

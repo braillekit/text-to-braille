@@ -26,6 +26,12 @@ namespace EasyBrailleEdit.Common.Config
         [Option(Alias = "General.PhraseFiles", DefaultValue = "")]
         string PhraseFiles { get; set; }
 
+        /// <summary>
+        /// 轉點字之前，先依此屬性的內容來自動替換文字。
+        /// </summary>
+        [Option(Alias = "General.AutoReplacedText", DefaultValue = "")]
+        string AutoReplacedText { get; set; }
+
         IBrailleConfig Braille { get; set; }  // 會自動視為區段 [Braille] 的設定
 
         IPrintingConfig Printing { get; set; } // 會自動視為區段 [Printing] 的設定

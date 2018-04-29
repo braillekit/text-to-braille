@@ -27,7 +27,7 @@ namespace EasyBrailleEdit
             numLinesPerPage.Value = AppGlobals.Config.Braille.LinesPerPage;
             numCellsPerLine.Value = AppGlobals.Config.Braille.CellsPerLine;
 
-            List<KeyValuePair<string, string>> fileUsages = StrHelper.SplitKeyValuePairs(
+            List<KeyValuePair<string, string>> fileUsages = StrHelper.SplitToKeyValuePairs(
                 AppGlobals.Config.PhraseFiles, PhraseFileNameSeparator, '=');
 
             clbPhraseTbl.Items.Clear();
