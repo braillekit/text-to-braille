@@ -244,11 +244,13 @@ namespace BrailleToolkit
 
         public void SaveTextFile(string filename)
         {
+            var context = new ContextTagManager();
+
             using (var writer = new StreamWriter(filename, false, Encoding.UTF8))
             {
                 foreach (var brLine in Lines)
                 {
-                    writer.WriteLine(brLine.ToOriginalTextString());
+                    writer.WriteLine(brLine.ToOriginalTextString(context));
                 }
             }
         }

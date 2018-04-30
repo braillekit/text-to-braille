@@ -15,13 +15,15 @@ namespace BrailleToolkit.Tags
         public const string Coordinate = "<座標>";
         public const string Fraction = "<分數>";
         public const string Table = "<表格>";
+        public const string TableTopLine = "<上表格線>";
+        public const string TableBottomLine = "<下表格線>";
         public const string Time = "<時間>";
         public const string Delete = "<刪>";
         public const string Phonetic = "<音標>";
         public const string SpecificName = "<私名號>";
         public const string BookName = "<書名號>";
         public const string BrailleTranslatorNote = "<點譯者註>";
-        public const string OrgPageNumber = "<P>";
+        public const string OrgPageNumber = "<P>";                
 
         // NOTE: 每當有變動時，必須同步修改 AllTagNames 的內容。
 

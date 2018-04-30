@@ -16,39 +16,39 @@ namespace EasyBrailleEdit
         /// 由於每個點字在顯示時佔三列（點字、明眼字、注音碼），此方法可從 grid 的列索引推算點字列的列索引。
         /// 註：grid 的第 0 列是標題列。
         /// </summary>
-        /// <param name="row"></param>
+        /// <param name="gridRowIndex"></param>
         /// <returns></returns>
-        internal int GetBrailleRowIndex(int row)
+        internal int GetBrailleRowIndex(int gridRowIndex)
         {
-            if (row % 3 == 0)
+            if (gridRowIndex % 3 == 0)
             {
-                row = row - 2;
+                gridRowIndex = gridRowIndex - 2;
             }
-            else if (row % 3 == 2)
+            else if (gridRowIndex % 3 == 2)
             {
-                row--;
+                gridRowIndex--;
             }
-            return row;
+            return gridRowIndex;
         }
 
         /// <summary>
         /// 根據 grid 列索引計算出該列屬於點字文件的哪一列，即 BrailleDocument 的 Lines 集合索引。
         /// 註：grid 的第 0 列是標題列。
         /// </summary>
-        /// <param name="row">Grid 列索引。</param>
+        /// <param name="gridRowIndex">Grid 列索引。</param>
         /// <returns></returns>
-        internal int GetBrailleLineIndex(int row)
+        internal int GetBrailleLineIndex(int gridRowIndex)
         {
-            return (row - brGrid.FixedRows) / 3;
+            return (gridRowIndex - brGrid.FixedRows) / 3;
         }
 
         /// <summary>
         /// 根據 grid 行索引計算出該行屬於點字列的哪一個字，即 BrailleLine 的 Words 集合索引。
         /// </summary>
-        /// <param name="row">Grid 列索引。</param>
-        /// <param name="col">Grid 行索引。</param>
+        /// <param name="gridRowIndex">Grid 列索引。</param>
+        /// <param name="gridColumnIndex">Grid 行索引。</param>
         /// <returns></returns>
-        internal int GetBrailleWordIndex(int row, int col)
+        internal int GetBrailleWordIndex(int gridRowIndex, int gridColumnIndex)
         {
             int wordIdx = 0;
             int i = brGrid.FixedColumns;
@@ -56,8 +56,8 @@ namespace EasyBrailleEdit
             // 由於每個點字可能有多方，即在 grid 中可能合併多行，因此必須考慮合併的情形。
             while (true)
             {
-                i += brGrid[row, i].ColumnSpan;
-                if (i > col)
+                i += brGrid[gridRowIndex, i].ColumnSpan;
+                if (i > gridColumnIndex)
                     break;
                 wordIdx++;
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Huanlin.Common;
 
 namespace BrailleToolkit.Helpers
 {
@@ -47,6 +48,22 @@ namespace BrailleToolkit.Helpers
             return false;
         }
 
+        public static string GetBeginTagName(string tagName)
+        {
+            if (String.IsNullOrWhiteSpace(tagName))
+                throw new ArgumentException($"{nameof(tagName)} 不可為空字串!");
+
+            if (IsBeginTag(tagName))
+            {
+                return tagName;
+            }
+            if (IsEndTag(tagName))
+            {
+                return tagName.Remove(1, 1);
+            }
+            return $"<{tagName}>";
+        }
+
         /// <summary>
         /// 傳回結束標籤字串。
         /// </summary>
@@ -54,11 +71,17 @@ namespace BrailleToolkit.Helpers
         /// <returns></returns>
         public static string GetEndTagName(string tagName)
         {
-            if (tagName[1] == '/')
+            if (String.IsNullOrWhiteSpace(tagName))
+                throw new ArgumentException($"{nameof(tagName)} 不可為空字串!");
+            if (IsEndTag(tagName))
             {
                 return tagName;
             }
-            return tagName.Insert(1, "/");
+            if (IsBeginTag(tagName))
+            {
+                return tagName.Insert(1, "/");
+            }
+            return $"</{tagName}>";          
         }
 
         public static string RemoveBracket(string tagName)
@@ -69,5 +92,6 @@ namespace BrailleToolkit.Helpers
             }
             return tagName.Replace("</", String.Empty).Replace("<", String.Empty).Replace(">", String.Empty);
         }
+        
     }
 }

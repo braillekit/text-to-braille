@@ -568,7 +568,7 @@ namespace EasyBrailleEdit
 			brGrid.SuspendLayout();
 			try
 			{
-				int row = DualEditForm.FixedRows;
+				int row = FixedRows;
 				foreach (BrailleLine brLine in brDoc.Lines)
 				{
 					FillRow(brLine, row, false);    // 填一列，先不要調整列高。

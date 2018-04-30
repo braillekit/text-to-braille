@@ -228,7 +228,7 @@ namespace Txt2Brl
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void BrailleProcessor_ConvertionFailed(object sender, ConvertionFailedEventArgs args)
+        private void BrailleProcessor_ConvertionFailed(object sender, ConversionFailedEventArgs args)
 		{
 			Console.Write(System.Environment.NewLine);
 			Console.WriteLine("無法轉換: " + args.InvalidChar.CharValue);

@@ -11,15 +11,15 @@ namespace BrailleToolkit
     /// </summary>
     public class ContextTagManager
     {
-        private Dictionary<string, IContextTag> m_Tags;
+        private Dictionary<string, IContextTag> _tags;
 
         public ContextTagManager()
         {
-            m_Tags = new Dictionary<string, IContextTag>();
+            _tags = new Dictionary<string, IContextTag>();
 
             foreach (string tagName in ContextTagNames.Collection) 
             {
-                m_Tags.Add(tagName, ContextTagFactory.CreateInstance(tagName));
+                _tags.Add(tagName, ContextTagFactory.CreateInstance(tagName));
             }
 
             ContextNames = String.Empty;
@@ -30,7 +30,7 @@ namespace BrailleToolkit
         public void UpdateContextNames()
         {
             var sb = new StringBuilder();
-            foreach (var tag in m_Tags.Values)
+            foreach (var tag in _tags.Values)
             {
                 if (tag.IsActive)
                 {
@@ -45,7 +45,7 @@ namespace BrailleToolkit
         /// </summary>
         public void Reset()
         {
-            foreach (var tag in m_Tags.Values)
+            foreach (var tag in _tags.Values)
             {
                 tag.Reset();
             }
@@ -80,7 +80,7 @@ namespace BrailleToolkit
 
             isBeginTag = false;
 
-            foreach (var tag in m_Tags.Values)
+            foreach (var tag in _tags.Values)
             {
                 beginTag = tag.TagName;
                 endTag = beginTag.Insert(1, "/");
@@ -118,10 +118,10 @@ namespace BrailleToolkit
         {
             IContextTag result = null;
 
-            if (!m_Tags.ContainsKey(tagName))
+            if (!_tags.ContainsKey(tagName))
                 return null;
 
-            var tag = m_Tags[tagName];
+            var tag = _tags[tagName];
 
             string beginTag = tag.TagName;
             string endTag = tag.EndTagName;
@@ -147,11 +147,12 @@ namespace BrailleToolkit
         /// <returns></returns>
         public bool IsActive(string tagName)
         {
-            if (!m_Tags.ContainsKey(tagName))
+            tagName = XmlTagHelper.GetBeginTagName(tagName);
+            if (!_tags.ContainsKey(tagName))
             {
                 return false;
             }
-            return m_Tags[tagName].IsActive;
+            return _tags[tagName].IsActive;
         }
 
         public bool IsOrgPageNumberActive()
@@ -166,10 +167,12 @@ namespace BrailleToolkit
         {
             get
             {
-                if (!m_Tags.ContainsKey(ContextTagNames.Indent))
+                if (!_tags.ContainsKey(ContextTagNames.Indent))
                     return 0;
-                return m_Tags[ContextTagNames.Indent].Count;
+                return _tags[ContextTagNames.Indent].Count;
             }
         }
+
+        public Dictionary<string, IContextTag> Tags { get; }
     }
 }

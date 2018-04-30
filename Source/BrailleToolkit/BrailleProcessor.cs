@@ -20,7 +20,7 @@ namespace BrailleToolkit
 		public int CharIndex { get; set; }      // 第幾個字元
     }
 
-	public class ConvertionFailedEventArgs : EventArgs
+	public class ConversionFailedEventArgs : EventArgs
 	{
         public string OriginalText { get; private set; }
 
@@ -62,17 +62,17 @@ namespace BrailleToolkit
 	{
 		private static BrailleProcessor s_Processor;
 
-        private CoordinateConverter m_CoordConverter;
-		private TableConverter m_TableConverter;
-		private PhoneticConverter m_PhoneticConverter;
+        private CoordinateConverter _coordConverter;
+		private TableConverter _tableConverter;
+		private PhoneticConverter _phoneticConverter;
 
         // Extended converters
-        private List<WordConverter> m_Converters;
+        private List<WordConverter> _converters;
 
-        private StringBuilder m_ErrorMsg;           // 轉換過程中發生的錯誤訊息。
+        private StringBuilder _errorMsg;           // 轉換過程中發生的錯誤訊息。
 
-        private event EventHandler<ConvertionFailedEventArgs> m_ConvertionFailedEvent;
-		private event EventHandler<TextConvertedEventArgs> m_TextConvertedEvent;
+        private event EventHandler<ConversionFailedEventArgs> _conversionFailedEvent;
+		private event EventHandler<TextConvertedEventArgs> _textConvertedEvent;
 
         private Dictionary<string, string> _autoReplacedText;
 
@@ -80,20 +80,20 @@ namespace BrailleToolkit
 
         private BrailleProcessor(ZhuyinReverseConverter zhuyinConverter)
 		{
-            m_Converters = new List<WordConverter>();
+            _converters = new List<WordConverter>();
 
             ControlTagConverter = new ContextTagConverter();
             ChineseConverter = new ChineseWordConverter(zhuyinConverter);
             EnglishConverter = new EnglishWordConverter();
             MathConverter = new MathConverter();
-            m_CoordConverter = new CoordinateConverter();
-			m_TableConverter = new TableConverter();
-			m_PhoneticConverter = new PhoneticConverter();
+            _coordConverter = new CoordinateConverter();
+			_tableConverter = new TableConverter();
+			_phoneticConverter = new PhoneticConverter();
 
             ContextManager = new ContextTagManager();
 
             InvalidChars = new List<CharPosition>();
-			m_ErrorMsg = new StringBuilder();
+			_errorMsg = new StringBuilder();
             SuppressEvents = false;
 
             // 轉點字之前，預先替換的文字
@@ -155,7 +155,7 @@ namespace BrailleToolkit
 		{
 			get
 			{
-				if (m_ErrorMsg.Length > 0 || InvalidChars.Count > 0)
+				if (_errorMsg.Length > 0 || InvalidChars.Count > 0)
 				{
 					return true;
 				}
@@ -165,7 +165,7 @@ namespace BrailleToolkit
 
 		public string ErrorMessage
 		{
-			get { return m_ErrorMsg.ToString(); }
+			get { return _errorMsg.ToString(); }
 		}
 
         public ContextTagManager ContextManager { get; private set; }
@@ -174,15 +174,15 @@ namespace BrailleToolkit
 
         #region 事件
 
-        public event EventHandler<ConvertionFailedEventArgs> ConvertionFailed
+        public event EventHandler<ConversionFailedEventArgs> ConvertionFailed
 		{
 			add
 			{
-				m_ConvertionFailedEvent += value;
+				_conversionFailedEvent += value;
 			}
 			remove
 			{
-				m_ConvertionFailedEvent -= value;
+				_conversionFailedEvent -= value;
 			}
 		}
 
@@ -190,11 +190,11 @@ namespace BrailleToolkit
 		{
 			add
 			{
-				m_TextConvertedEvent += value;
+				_textConvertedEvent += value;
 			}
 			remove
 			{
-				m_TextConvertedEvent -= value;
+				_textConvertedEvent -= value;
 			}
 		}
 
@@ -202,7 +202,7 @@ namespace BrailleToolkit
 
 		#region 事件方法
 
-		protected virtual void OnConvertionFailed(ConvertionFailedEventArgs args)
+		protected virtual void OnConvertionFailed(ConversionFailedEventArgs args)
 		{
             // 將無效字元記錄於內部變數。
 
@@ -211,9 +211,9 @@ namespace BrailleToolkit
             if (SuppressEvents)
                 return;
 
-			if (m_ConvertionFailedEvent != null)
+			if (_conversionFailedEvent != null)
 			{
-				m_ConvertionFailedEvent(this, args);
+				_conversionFailedEvent(this, args);
 			}
 		}
 
@@ -222,9 +222,9 @@ namespace BrailleToolkit
             if (SuppressEvents)
                 return;
 
-			if (m_TextConvertedEvent != null)
+			if (_textConvertedEvent != null)
 			{
-				m_TextConvertedEvent(this, args);
+				_textConvertedEvent(this, args);
 			}
 		}
 
@@ -256,13 +256,13 @@ namespace BrailleToolkit
             }
 			if (cvt is PhoneticConverter)	// 音標轉換器.
 			{
-				m_PhoneticConverter = (PhoneticConverter)cvt;
+				_phoneticConverter = (PhoneticConverter)cvt;
 				return;
 			}
 
             // 加入其他未知的轉換器。
-            if (m_Converters.IndexOf(cvt) < 0)
-                m_Converters.Add(cvt);
+            if (_converters.IndexOf(cvt) < 0)
+                _converters.Add(cvt);
         }
 
         public void RemoveConverter(WordConverter cvt)
@@ -291,11 +291,11 @@ namespace BrailleToolkit
             }
 			if (cvt is PhoneticConverter)	// 音標轉換器.
 			{
-				m_PhoneticConverter = null;
+				_phoneticConverter = null;
 				return;
 			}
             
-            m_Converters.Remove(cvt);
+            _converters.Remove(cvt);
         }
 
         /// <summary>
@@ -306,7 +306,7 @@ namespace BrailleToolkit
         /// <returns></returns>
         public WordConverter GetConverter(string className)
         {            
-            foreach (WordConverter cvt in m_Converters)
+            foreach (WordConverter cvt in _converters)
             {
                 if (cvt.GetType().Name.Equals(className, StringComparison.CurrentCultureIgnoreCase))
                     return cvt;
@@ -321,7 +321,7 @@ namespace BrailleToolkit
         /// </summary>
         public void InitializeForConversion()
         {
-			m_ErrorMsg.Length = 0;
+			_errorMsg.Length = 0;
             InvalidChars.Clear();
             ContextManager.Reset();
         }
@@ -387,7 +387,7 @@ namespace BrailleToolkit
 			List<BrailleWord> brWordList;
 			StringBuilder text = new StringBuilder();
 
-			ConvertionFailedEventArgs cvtFailedArgs = new ConvertionFailedEventArgs();
+			ConversionFailedEventArgs cvtFailedArgs = new ConversionFailedEventArgs();
 			TextConvertedEventArgs textCvtArgs = new TextConvertedEventArgs();
 
 			while (charStack.Count > 0)
@@ -437,9 +437,9 @@ namespace BrailleToolkit
 					}
 					catch (Exception ex)
 					{
-						m_ErrorMsg.Append(String.Format("第 {0} 列 : ", lineNumber));
-						m_ErrorMsg.Append(ex.Message);
-						m_ErrorMsg.Append("\r\n");
+						_errorMsg.Append(String.Format("第 {0} 列 : ", lineNumber));
+						_errorMsg.Append(ex.Message);
+						_errorMsg.Append("\r\n");
 					}
 				}
 			}
@@ -516,9 +516,9 @@ namespace BrailleToolkit
                 }
 
                 // 2. 轉換座標符號
-				if (chars.Count > 0 && m_CoordConverter != null && ContextManager.IsActive(ContextTagNames.Coordinate))
+				if (chars.Count > 0 && _coordConverter != null && ContextManager.IsActive(ContextTagNames.Coordinate))
                 {
-                    brWordList = m_CoordConverter.Convert(chars, ContextManager);
+                    brWordList = _coordConverter.Convert(chars, ContextManager);
                     if (brWordList != null && brWordList.Count > 0)
                         return brWordList;
                 }                
@@ -532,17 +532,17 @@ namespace BrailleToolkit
                 }
 
 				// 4. 轉換表格符號。
-				if (chars.Count > 0 && ContextManager.IsActive(ContextTagNames.Table) && m_TableConverter != null)
+				if (chars.Count > 0 && ContextManager.IsActive(ContextTagNames.Table) && _tableConverter != null)
 				{
-					brWordList = m_TableConverter.Convert(chars, ContextManager);
+					brWordList = _tableConverter.Convert(chars, ContextManager);
 					if (brWordList != null && brWordList.Count > 0)
 						return brWordList;
 				}
 
 				// 5. 轉換音標符號.
-				if (chars.Count > 0 && ContextManager.IsActive(ContextTagNames.Phonetic) && m_PhoneticConverter != null)
+				if (chars.Count > 0 && ContextManager.IsActive(ContextTagNames.Phonetic) && _phoneticConverter != null)
 				{
-					brWordList = m_PhoneticConverter.Convert(chars, ContextManager);
+					brWordList = _phoneticConverter.Convert(chars, ContextManager);
 					if (brWordList != null && brWordList.Count > 0)
 						return brWordList;
 				}				
@@ -569,7 +569,7 @@ namespace BrailleToolkit
 			if (chars.Count > 0)
 			{
 				// 其它註冊的轉換器。
-				foreach (WordConverter cvt in m_Converters)
+				foreach (WordConverter cvt in _converters)
 				{
 					// 若其中一個轉換器成功轉換成點字，就不再 pass 給其它轉換器。
 					brWordList = cvt.Convert(chars, ContextManager);

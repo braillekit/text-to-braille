@@ -128,7 +128,7 @@ namespace EasyBrailleEdit
             };
             m_BusyForm.Show();
             m_BusyForm.UseWaitCursor = true;
-            this.Enabled = false;
+            Enabled = false;
 
             DualEditForm frm = null;
             try
@@ -138,22 +138,22 @@ namespace EasyBrailleEdit
             }
             finally
             {
-                this.Enabled = true;
+                Enabled = true;
                 m_BusyForm.Hide();
                 m_BusyForm.Close();
             }
 
-            this.ShowInTaskbar = false;
+            ShowInTaskbar = false;
             try
             {
                 frm.ShowDialog();
             }
             finally
             {
-                this.ShowInTaskbar = true;
-                this.Show();
-                this.BringToFront();
-                this.Activate();
+                ShowInTaskbar = true;
+                Show();
+                BringToFront();
+                Activate();
             }
         }
 
@@ -178,7 +178,7 @@ namespace EasyBrailleEdit
             };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                this.FileName = dlg.FileName;
+                FileName = dlg.FileName;
                 SaveFile();
             }
             return false;
@@ -311,7 +311,7 @@ namespace EasyBrailleEdit
                             }
                             return;
                         default:
-                            this.Enabled = true;
+                            Enabled = true;
                             return;
                     }
                 }
@@ -321,13 +321,13 @@ namespace EasyBrailleEdit
                 }
             }
 
-            this.Enabled = false;
+            Enabled = false;
             txtErrors.Visible = true;
 
             // 執行轉換
             string outFileName = DoConvert(content);
 
-            this.Enabled = true;
+            Enabled = true;
 
             if (!HandleConvertionError())
             {

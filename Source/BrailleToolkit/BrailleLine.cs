@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using BrailleToolkit.Tags;
+using BrailleToolkit.Helpers;
 
 namespace BrailleToolkit
 {
@@ -243,12 +244,28 @@ namespace BrailleToolkit
             return sb.ToString();
         }
 
-        public string ToOriginalTextString()
+        public string ToOriginalTextString(ContextTagManager context)
         {
             var sb = new StringBuilder();
             foreach (var brWord in Words)
             {
                 sb.Append(brWord.OriginalText);
+                //if (String.IsNullOrEmpty(brWord.ContextNames))
+                //{
+                //    sb.Append(brWord.OriginalText);
+                //    continue;
+                //}
+                //var contextNames = brWord.ContextNames.Split(' ');
+                //for (int i = 0; i < contextNames.Length; i++)
+                //{
+                //    var tagName = XmlTagHelper.GetBeginTagName(contextNames[i]);
+                //    var tag = context.Tags[tagName];
+                //    if (!tag.IsActive)
+                //    {                     
+                //        sb.Append(tagName);
+                //        tag.Enter();
+                //    }
+                //}
             }
             return sb.ToString();
         }
