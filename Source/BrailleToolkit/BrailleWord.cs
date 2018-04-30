@@ -37,7 +37,7 @@ namespace BrailleToolkit
         private bool m_IsPolyphonic;            // 是否為多音字。
 
         [NonSerialized]
-        private bool m_IsContextTag;            
+        private bool m_IsContextTag;
 
         [NonSerialized]
         private bool m_NoDigitCell;             // 是否不加數符。
@@ -304,16 +304,20 @@ namespace BrailleToolkit
 
 
         /// <summary>
-        /// 在轉點字過程中可能需要得知當前的 BrailleWord 物件是不是從 context tag 的起始標籤轉換過來的。
-        /// 是否要序列化：否。
+        /// 在轉點字過程中可能需要得知當前的 BrailleWord 物件是不是某 context tag 的起始標籤。
         /// </summary>
-        public bool IsContextBeginTag { get; set; }
+        public bool IsContextBeginTag()
+        {
+            return IsContextTag && XmlTagHelper.IsBeginTag(Text);
+        }
 
         /// <summary>
-        /// 在轉點字過程中可能需要得知當前的 BrailleWord 物件是不是從 context tag 的結束標籤轉換過來的。
-        /// 是否要序列化：否。
+        /// 在轉點字過程中可能需要得知當前的 BrailleWord 物件是不是某 context tag 的結束標籤。
         /// </summary>
-        public bool IsContextEndTag { get; set; }
+        public bool IsContextEndTag()
+        {
+            return IsContextTag && XmlTagHelper.IsEndTag(Text);
+        }
 
         /// <summary>
         /// 此 word 是否在指定的語境中？
@@ -556,6 +560,7 @@ namespace BrailleToolkit
         /// 若為 true，代表此 BraillWord 在原始文件中是一個語境標籤，而且目前還沒有轉換成對應的點字。
         /// 若為 false，代表此 BraillWord 不是語境標籤，或者已經被轉換成對應的點字。
         /// </summary>
+        [DataMember]
         public bool IsContextTag
         {
             get { return m_IsContextTag; }
@@ -572,6 +577,12 @@ namespace BrailleToolkit
                 }
             }
         }
+
+        /// <summary>
+        ///  此物件是否由 context tag 所衍生（不是 context tag，但是因為 context tag 而額外增加的文字）。
+        /// </summary>
+        [DataMember]
+        public bool IsConvertedFromTag { get; set; }
 
         public bool NoDigitCell
         {

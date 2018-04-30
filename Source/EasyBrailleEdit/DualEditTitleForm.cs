@@ -8,12 +8,7 @@ namespace EasyBrailleEdit
     public partial class DualEditTitleForm : Form
     {
         private BrailleDocument m_OrgBrDoc;	// 標題列所屬的 BrailleDocument 物件
-        private BrailleDocument m_TmpBrDoc;	// 把所有標題列都丟到這個暫時的 railleDocument 物件
-        private List<BraillePageTitle> m_Titles;
-        private int m_CellsPerLine;
-        private bool m_IsDirty;   // 文件內容是否被修改過
-
-        private DualEditController m_DualEditController;
+        private BrailleDocument m_TmpBrDoc; // 把所有標題列都丟到這個暫時的 railleDocument 物件
 
         private DualEditTitleForm()
         {
@@ -27,23 +22,23 @@ namespace EasyBrailleEdit
 
             m_TmpBrDoc = new BrailleDocument(brDoc.Processor, brDoc.CellsPerLine);
 
-            m_Titles = new List<BraillePageTitle>();
+            Titles = new List<BraillePageTitle>();
 
             // 複製所有標題列，並將標題列塞進暫存文件。
             BraillePageTitle newTitle = null;
             foreach (BraillePageTitle t in brDoc.PageTitles)
             {
                 newTitle = t.Clone() as BraillePageTitle;
-                m_Titles.Add(newTitle);
+                Titles.Add(newTitle);
 
                 m_TmpBrDoc.Lines.Add(newTitle.TitleLine);		// 塞進暫存文件。
             }
 
-            m_DualEditController = new DualEditController(m_TmpBrDoc, brGrid);
+            DualEditController = new DualEditController(m_TmpBrDoc, brGrid);
 
-            m_DualEditController.DataChanged += new EventHandler(DualEditControler_DataChanged);
+            DualEditController.DataChanged += DualEditControler_DataChanged;
 
-            m_IsDirty = false;
+            IsDirty = false;
         }
 
         void DualEditControler_DataChanged(object sender, EventArgs e)
@@ -53,27 +48,13 @@ namespace EasyBrailleEdit
 
         #region 屬性
 
-        public List<BraillePageTitle> Titles
-        {
-            get { return m_Titles; }
-        }
+        public List<BraillePageTitle> Titles { get; }
 
-        public int CellsPerLine
-        {
-            get { return m_CellsPerLine; }
-            set { m_CellsPerLine = value; }
-        }
+        public int CellsPerLine { get; set; }
 
-        public bool IsDirty
-        {
-            get { return m_IsDirty; }
-            set	{ m_IsDirty = value; }
-        }
+        public bool IsDirty { get; set; }
 
-        private DualEditController DualEditController
-        {
-            get { return m_DualEditController; }
-        }
+        private DualEditController DualEditController { get; }
 
         #endregion
 

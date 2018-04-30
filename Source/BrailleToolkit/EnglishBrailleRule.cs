@@ -14,15 +14,22 @@ namespace BrailleToolkit
         /// <param name="brLine">點字串列。</param>
         public static void ApplyCapitalRule(BrailleLine brLine)
         {
-            int i = 0;
             char ch;
             int capitalCount = 0;   // 連續出現的大寫字母數量
             int firstCapitalIndex = -1;
+            int wordIdx = 0;
             BrailleWord brWord;
 
-            while (i < brLine.WordCount)
+            while (wordIdx < brLine.WordCount)
             {
-                brWord = brLine[i];
+                brWord = brLine[wordIdx];
+
+
+                if (brWord.IsContextTag)
+                {
+                    wordIdx++;
+                    continue;
+                }
                 if (brWord.Language == BrailleLanguage.English)
                 {
                     ch = brWord.Text[0];
@@ -33,9 +40,9 @@ namespace BrailleToolkit
                         // 記住第一個大寫字母在串列中的位置，以便稍後插入點字大寫記號。
                         if (firstCapitalIndex < 0) 
                         {
-                            firstCapitalIndex = i;
+                            firstCapitalIndex = wordIdx;
                         }
-                        i++;
+                        wordIdx++;
                         continue;
                     }
                 }
@@ -56,7 +63,7 @@ namespace BrailleToolkit
                 firstCapitalIndex = -1;
                 capitalCount = 0;
 
-                i++;
+                wordIdx++;
             }
 
             // 處理最後一次連續大寫字母。
@@ -212,7 +219,9 @@ namespace BrailleToolkit
 				if (brWord.Text == "#")
 				{
 					isNumberMode = true;
-					brLine.Words.RemoveAt(index);
+
+                    brWord.IsContextTag = true; // 讓這個 word 不在雙視編輯視窗中顯示出來。
+                    index++;
 					continue;
 				}
 				if (Char.IsDigit(brWord.Text[0]))
@@ -300,6 +309,13 @@ namespace BrailleToolkit
             while (wordIdx < brLine.WordCount)
             {
                 brWord = brLine[wordIdx];
+
+                if (brWord.IsContextTag)
+                {
+                    wordIdx++;
+                    continue;
+                }
+
                 if (brWord.Text.Length < 1) 
                 {
                     wordIdx++;
@@ -335,6 +351,7 @@ namespace BrailleToolkit
             }
         }
 
+
         /// <summary>
         /// 根據前後鄰近的字元判斷中間是否需要加一個空方。
         /// </summary>
@@ -356,20 +373,11 @@ namespace BrailleToolkit
             if (String.IsNullOrEmpty(lastWord.Text) || String.IsNullOrEmpty(currWord.Text))
                 return false;
 
-			//if (ContextTag.StartsWithContextTag(lastWord.Text))	// 如果前一個字是情境標籤，就不加空方
-			//{
-			//	return false;
-			//}
-			//if (ContextTag.StartsWithContextTag(currWord.Text))	// 如果目前的字是情境標籤，就不加空方
-			//{
-			//	return false;
-			//}
-
-            if (lastWord.IsContextBeginTag || lastWord.IsContextEndTag) // 如果前一個字是情境標籤，就不加空方
+            if (lastWord.IsContextTag || lastWord.IsConvertedFromTag) // 如果前一個字是情境標籤，就不加空方
             {
                 return false;
             }
-            if (currWord.IsContextBeginTag || currWord.IsContextEndTag) // 如果目前的字是情境標籤，就不加空方
+            if (currWord.IsContextTag || currWord.IsConvertedFromTag) // 如果目前的字是情境標籤，就不加空方
             {
                 return false;
             }

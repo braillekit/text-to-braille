@@ -1,6 +1,7 @@
 ﻿using BrailleToolkit;
 using NChinese.Phonetic;
 using NUnit.Framework;
+using System.IO;
 using System.Text;
 
 namespace Test.BrailleToolkit
@@ -36,11 +37,40 @@ namespace Test.BrailleToolkit
             BrailleProcessor processor =
                 BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
 
-            BrailleDocument brDoc = new BrailleDocument(processor, 32);
+            var brDoc = new BrailleDocument(processor, 32);
 
             brDoc.Convert("<分數>1/2</分數>");
         }
 
+        [Test]
+        public void Should_ConvertTable_Succeed()
+        {
+            string lines =
+                "<表格>\n" +
+                "┌──┬──┐\n" +
+                "│　　∣　　∣\n" +
+                "├──┼──┤\n" +
+                "│　　∣　　∣\n" +
+                "└──┴──┘\n" +
+                "</表格>\n";
+            
+
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+
+            var brDoc = new BrailleDocument(processor, 32);
+            using (var reader = new StringReader(lines))
+            {
+                brDoc.LoadAndConvert(reader);
+            }
+
+            Assert.IsTrue(brDoc.LineCount == 7);
+            Assert.IsTrue(brDoc.Lines[0].Words[0].IsContextTag);
+            Assert.IsTrue(brDoc.Lines[6].Words[0].IsContextTag);
+
+            processor.FormatDocument(brDoc);   // 斷行
+        }
     }
 
 }

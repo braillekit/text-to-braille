@@ -463,6 +463,10 @@ namespace EasyBrailleEdit
             for (int wordIdx = 0; wordIdx < brLine.WordCount; wordIdx++)
             {
                 brWord = brLine.Words[wordIdx];
+                if (brWord.IsContextTag || brWord.CellCount < 1)
+                {
+                    continue;
+                }
                 if (cellCnt + brWord.CellCount > maxCells)  // 如果目前要印的字將會超過最大方數
                     break;  // 則中止
 

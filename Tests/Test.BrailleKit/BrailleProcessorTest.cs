@@ -103,22 +103,6 @@ namespace Test.BrailleToolkit
                 (brLine[12].Cells[0].Value != (byte)BrailleCellCode.Capital);	// 連字號視為數字的延續，不用額外加數字記號。
             Assert.IsTrue(isOk, msg + line);
 
-            // 測試編號。
-            line = "#1-2. 1";
-            expected = "1-2. 1";
-            brLine = target.ConvertLine(line);
-            actual = brLine.ToString();
-            isOk = (actual == expected) &&
-                (brLine[0].Cells[0].Value == (byte)BrailleCellCode.Digit) &&
-                (brLine[0].Cells[1].Value == 0x01) &&	// 數字 1 的上位點。
-                (brLine[1].Cells[0].Value == 0x24) &&	// '-'
-                (brLine[2].Cells[0].Value == 0x03) &&	// '2'
-                (brLine[3].Cells[0].Value == 0x32) &&	// '.'
-                (brLine[4].Cells[0].Value == 0x00) &&	// ' '
-                (brLine[5].Cells[0].Value == (byte)BrailleCellCode.Digit) &&
-                (brLine[5].Cells[1].Value == 0x02); 	// 數字 1 的下位點。
-            Assert.IsTrue(isOk, msg + line);
-
             // 測試連續多個空白：保留空白。
             line = "a   b   ";
             expected = "a   b   ";
@@ -127,6 +111,20 @@ namespace Test.BrailleToolkit
             Assert.AreEqual(expected, actual, msg + line);
         }
 
+
+        [TestCase("#1-2. 1", "#1-2. 1", "(3456 1)(36)(12)(256)()(3456 2)")] // 編號的數字使用上位點；非編號的數字使用下位點。
+        public void Should_DigitNumbers_UseUpperPosition(string input, string expected, string expectedDots)
+        {
+            var processor = BrailleProcessor.GetInstance();
+
+            var brLine = processor.ConvertLine(input);
+            var actual = brLine.ToString();
+
+            Assert.AreEqual(input, expected);
+
+            var actualDots = brLine.ToPositionNumberString();
+            Assert.AreEqual(expectedDots, actualDots);
+        }
 
         /// <summary>
         ///A test for BreakLine (BrailleLine, int)
@@ -244,6 +242,22 @@ namespace Test.BrailleToolkit
             Assert.AreEqual(expectedPositionNumbers, result);
         }
 
+        //[TestCase("<私名號>台北</私名號>我", "(56 56)(124 2456 2)(135 356 4)()(25 4)")]
+        [TestCase("<書名號>魔戒</書名號>我", "(6 36)(134 126 2)(13 346 5)()(25 4)")]
+
+        public void Should_HaveSpace_BetweenSpecificNameAndAlphabet(string inputText, string expectedPositionNumbers)
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            BrailleLine brLine = processor.ConvertLine(inputText);
+
+            var lines = processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+
+            var result = lines[0].ToPositionNumberString();
+            Assert.AreEqual(expectedPositionNumbers, result);
+        }
+
         [TestCase("<分數>1/2</分數>。", "(1456 2)(34)(23 3456)(36)")]
         public void Should_ConvertFraction_Succeed(string inputText, string expectedPositionNumbers)
         {
@@ -256,10 +270,10 @@ namespace Test.BrailleToolkit
             Assert.AreEqual(expectedPositionNumbers, result);
         }
 
-        [TestCase("<點譯者註>台北</點譯者註>。", "(246 6 3)(124 2456 2)(135 356 4)(135)(36)")]
-        [TestCase("<點譯者註>abc</點譯者註>", "(246 6 3)(1)(12)(14)(135)")]
-        [TestCase("<點譯者註>123</點譯者註>", "(246 6 3)(3456 2)(23)(25)(135)")]
-        [TestCase("<點譯者註>：測試？</點譯者註>", "(246 6 3)(25 25)(245 2346 5)(24 156 5)(135)(135)")]
+        [TestCase("<點譯者註>台北</點譯者註>。", "(246)(6 3)(124 2456 2)(135 356 4)(135)(36)")]
+        [TestCase("<點譯者註>abc</點譯者註>", "(246)(6 3)(1)(12)(14)(135)")]
+        [TestCase("<點譯者註>123</點譯者註>", "(246)(6 3)(3456 2)(23)(25)(135)")]
+        [TestCase("<點譯者註>：測試？</點譯者註>", "(246)(6 3)(25 25)(245 2346 5)(24 156 5)(135)(135)")]
         public void Should_NoExtraSpace_InsideBrailleTranslatorNote(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
@@ -306,6 +320,4 @@ namespace Test.BrailleToolkit
         }
 
     }
-
-
 }

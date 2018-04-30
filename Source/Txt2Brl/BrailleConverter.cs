@@ -195,7 +195,6 @@ namespace Txt2Brl
 					sw.WriteLine("0");
 				}
 				sw.Flush();
-				sw.Close();
 			}
 		}
 

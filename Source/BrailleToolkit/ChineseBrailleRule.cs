@@ -13,26 +13,33 @@ namespace BrailleToolkit
     
 
         private static void AddOneSpaceAfterContext_UnlessNextWordIsPunctuation(
-            string contextName, BrailleLine brLine, ref int wordIdx)
+            string contextTagName, BrailleLine brLine)
         {
-            if (wordIdx >= brLine.WordCount)
-                return;
-
-            var brWord = brLine[wordIdx];
-            if (brWord.IsInContext(contextName))
+            var endTagName = XmlTagHelper.GetEndTagName(contextTagName);
+            int wordIdx = 0;
+            while (wordIdx < brLine.WordCount)
             {
-                // 持續往下移動，直到碰到非此 context 的字。
-                BrailleWord nonContextNeighbor = null;
+                var brWord = brLine[wordIdx];
                 wordIdx++;
+                if (!brWord.IsContextTag || brWord.Text != contextTagName)
+                {
+                    continue; // 不是指定的起始標籤
+                }
+
+                // 持續往下移動，直到碰到此 context name 的結束標籤，然後取出下一個字。                
+                BrailleWord nonContextNeighbor = null;
                 while (wordIdx < brLine.WordCount)
                 {
                     brWord = brLine[wordIdx];
-                    if (!brWord.IsInContext(contextName))
+                    wordIdx++;
+                    if (wordIdx >= brLine.WordCount)
+                        return;
+                    if (brWord.IsContextTag && brWord.Text == endTagName)
                     {
-                        nonContextNeighbor = brWord;
+                        nonContextNeighbor = brLine[wordIdx];
+                        wordIdx++;
                         break;
                     }
-                    wordIdx++;
                 }
                 if (nonContextNeighbor != null)
                 {
@@ -44,24 +51,14 @@ namespace BrailleToolkit
                             brLine.Insert(insertPosition, BrailleWord.NewBlank());
                         }
                     }
-                    return;
                 }
-                return;
             }
-            wordIdx++;
         }
 
         public static void ApplySpecificNameAndBookNameRules(BrailleLine brLine)
         {
-            var specificName = XmlTagHelper.RemoveBracket(ContextTagNames.SpecificName);
-            var bookName = XmlTagHelper.RemoveBracket(ContextTagNames.BookName);
-
-            int wordIdx = 0;
-            while (wordIdx < brLine.WordCount)
-            {
-                AddOneSpaceAfterContext_UnlessNextWordIsPunctuation(specificName, brLine, ref wordIdx);
-                AddOneSpaceAfterContext_UnlessNextWordIsPunctuation(bookName, brLine, ref wordIdx);
-            }
+            AddOneSpaceAfterContext_UnlessNextWordIsPunctuation(ContextTagNames.SpecificName, brLine);
+            AddOneSpaceAfterContext_UnlessNextWordIsPunctuation(ContextTagNames.BookName, brLine);
         }
 
         /// <summary>
@@ -77,6 +74,12 @@ namespace BrailleToolkit
             while (wordIdx < brLine.WordCount)
             {
                 brWord = brLine[wordIdx];
+
+                if (brWord.IsContextTag || brWord.IsConvertedFromTag)
+                {
+                    wordIdx++;
+                    continue;
+                }
                 if (brWord.Language != BrailleLanguage.Chinese)
                 {
                     wordIdx++;
@@ -429,6 +432,13 @@ namespace BrailleToolkit
             while (wordIdx < brLine.WordCount)
             {
                 brWord = brLine[wordIdx];
+
+                if (brWord.IsContextTag)
+                {
+                    wordIdx++;
+                    continue;
+                }
+
                 text = brWord.Text;
 
                 // 判斷是否為'【'

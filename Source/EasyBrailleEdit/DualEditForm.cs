@@ -319,7 +319,7 @@ namespace EasyBrailleEdit
 
 			// 設定 grid 列數與行數。
 			int maxCol = m_BrDoc.CellsPerLine;  // brDoc.LongestLine.Words.Count;
-			brGrid.Redim(m_BrDoc.Lines.Count * 3 + FixedRows, maxCol + FixedColumns);
+			brGrid.Redim(m_BrDoc.GetVisibleLineCount() * 3 + FixedRows, maxCol + FixedColumns);
 
 			// 設定欄寬最小限制，以免呼叫 AutoSizeView 時，欄寬被縮得太小。
 			for (int i = 1; i < brGrid.ColumnsCount; i++)
@@ -571,6 +571,10 @@ namespace EasyBrailleEdit
 				int row = FixedRows;
 				foreach (BrailleLine brLine in brDoc.Lines)
 				{
+                    if (brLine.CellCount < 1)
+                    {
+                        continue; // 有可能是空的列，例如 <表格> 起始標籤就單獨佔據一列。
+                    }
 					FillRow(brLine, row, false);    // 填一列，先不要調整列高。
 
 					// 把沒有資料的儲存格填入空白字元。
@@ -627,7 +631,7 @@ namespace EasyBrailleEdit
 					{
 						if (brWord.IsContextTag)
 						{
-							brFontText = " ";
+                            continue; // 略過 context tags.
 						}
 						else
 						{
@@ -640,6 +644,11 @@ namespace EasyBrailleEdit
 							"列:" + row.ToString() + ", 行: " + col.ToString());
 						brFontText = "";
 					}
+
+                    if (String.IsNullOrEmpty(brFontText))
+                    {
+                        throw new Exception($"無法轉換成對應的點字字型: {brWord.Text}。CellList 元素數量為 {brWord.CellCount}。");
+                    }
 
 					brGrid[row, col] = new SourceGrid.Cells.Cell(brFontText);
 					brGrid[row, col].ColumnSpan = brFontText.Length;

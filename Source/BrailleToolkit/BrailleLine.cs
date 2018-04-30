@@ -247,25 +247,28 @@ namespace BrailleToolkit
         public string ToOriginalTextString(ContextTagManager context)
         {
             var sb = new StringBuilder();
-            foreach (var brWord in Words)
+            int index = 0;
+            while (index < Words.Count)
             {
-                sb.Append(brWord.OriginalText);
-                //if (String.IsNullOrEmpty(brWord.ContextNames))
-                //{
-                //    sb.Append(brWord.OriginalText);
-                //    continue;
-                //}
-                //var contextNames = brWord.ContextNames.Split(' ');
-                //for (int i = 0; i < contextNames.Length; i++)
-                //{
-                //    var tagName = XmlTagHelper.GetBeginTagName(contextNames[i]);
-                //    var tag = context.Tags[tagName];
-                //    if (!tag.IsActive)
-                //    {                     
-                //        sb.Append(tagName);
-                //        tag.Enter();
-                //    }
-                //}
+                var brWord = Words[index];
+                if (brWord.IsContextTag)
+                {
+                    sb.Append(brWord.Text); // 輸出標籤名稱（可能為起始標籤或結束標籤）。
+                    index++;
+                    continue;
+                }
+                if (brWord.IsConvertedFromTag) // 只要是由 context tag 所衍生的文字都不儲存。
+                {
+                    index++;
+                    continue;
+                }
+
+                // 一般文字，或曾被替換過的文字。
+                if (!String.IsNullOrEmpty(brWord.OriginalText))
+                    sb.Append(brWord.OriginalText);
+                else
+                    sb.Append(brWord.Text);
+                index++;
             }
             return sb.ToString();
         }
@@ -290,12 +293,12 @@ namespace BrailleToolkit
         {
             BrailleWord brWord;
 
-            for (int i = this.WordCount - 1; i >= 0; i--)
+            for (int i = WordCount - 1; i >= 0; i--)
             {
-                brWord = this.Words[i];
+                brWord = Words[i];
                 if (brWord.IsContextTag)
                 {
-                    this.Words.RemoveAt(i);
+                    Words.RemoveAt(i);
                 }
             }
         }

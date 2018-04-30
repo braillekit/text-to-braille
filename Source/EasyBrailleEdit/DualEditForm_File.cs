@@ -57,17 +57,6 @@ namespace EasyBrailleEdit
                 FileName = filename;
                 IsDirty = false;
 
-                // 2009-6-23: 防錯處理，有的檔案因為程式的 bug 而存入空的 BrailleLine，在此處自動濾掉.
-                for (int i = m_BrDoc.LineCount - 1; i >= 0; i--)
-                {
-                    // 把空的 BrailleLine 移除.
-                    if (m_BrDoc.Lines[i].CellCount < 1)
-                    {
-                        m_BrDoc.RemoveLine(i);
-                        IsDirty = true;
-                    }
-                }
-
                 StatusText = "正在準備顯示資料...";
                 brGrid.Rows.Clear();
                 brGrid.Columns.Clear();

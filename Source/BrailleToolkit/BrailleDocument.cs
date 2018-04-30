@@ -498,6 +498,21 @@ namespace BrailleToolkit
         }
 
         /// <summary>
+        ///  取得可顯示在畫面上的列的總數。有的列是空的，例如某些 context tag 會單獨占據一列。
+        /// </summary>
+        /// <returns></returns>
+        public int GetVisibleLineCount()
+        {
+            int count = 0;
+            foreach (var line in Lines)
+            {
+                if (line.CellCount > 0)
+                    count++;
+            }
+            return count;
+        }
+
+        /// <summary>
         /// 取得字數最長的 line。
         /// </summary>
         public BrailleLine LongestLine

@@ -95,7 +95,9 @@ namespace BrailleToolkit.Converters
 
             foreach (BrailleWord brWord in brLine.Words)
             {
-                sb.Append(BrailleCharConverter.ToString(brWord));
+                if (brWord.CellCount < 1)
+                    continue;
+                sb.Append(ToString(brWord));
             }
             return sb.ToString();
         }
@@ -105,7 +107,7 @@ namespace BrailleToolkit.Converters
         /// Note: 如果你需要轉換破音字的其他注音字根的點字，請呼叫另一個 ToString 版本：
         /// public string ToString(BrailleCellList cellList)
         /// </summary>
-        /// <param name="brCell"></param>
+        /// <param name="brWord"></param>
         /// <returns></returns>
         public static string ToString(BrailleWord brWord)
         {
