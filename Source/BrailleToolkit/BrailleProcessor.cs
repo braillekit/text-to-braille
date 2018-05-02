@@ -565,6 +565,9 @@ namespace BrailleToolkit
                 if (chars.Count < 1)
                     break;
 
+
+                // TODO: 檢查 ContextnTag 物件的 IsSingleLine 屬性，若為 true，則不允許標籤以外的其餘文字。
+
                 // 1. 轉換語境標籤。NOTE: 語境標籤一定要先處理!
                 if (chars.Count > 0 && ControlTagConverter != null)
                 {

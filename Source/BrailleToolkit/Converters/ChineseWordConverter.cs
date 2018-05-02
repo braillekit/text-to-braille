@@ -267,7 +267,7 @@ namespace BrailleToolkit.Converters
                     // 注意: 不要指定 brWord.PhoneticCode，因為注音符號本身只是個中文符號，
                     //       它並不是中文字，沒有合法的注音組字字根，因此不可指定注音碼。
                     brCode = _brailleTable.GetPhoneticCode(text);
-                    brWord.AddCell(brCode);
+                    brWord.AddCells(brCode);
                     return brWord;
                 }
                 // 如果輸入的明眼字是注音符號的音調記號，就直接傳回對應的點字碼。
@@ -276,7 +276,7 @@ namespace BrailleToolkit.Converters
                     // 注意: 不要指定 brWord.PhoneticCode，因為音調記號本身只是個中文符號，
                     //       它並不是中文字，沒有合法的注音組字字根，因此不可指定注音碼。
                     brCode = _brailleTable.GetPhoneticToneCode(text);
-                    brWord.AddCell(brCode);
+                    brWord.AddCells(brCode);
 
                     return brWord;
                 }
@@ -335,7 +335,7 @@ namespace BrailleToolkit.Converters
             string puncBrCode = _brailleTable.GetPunctuationCode(text);
             if (!String.IsNullOrEmpty(puncBrCode))
             {
-                brWord.AddCell(puncBrCode);
+                brWord.AddCells(puncBrCode);
                 return brWord;
             }
 
@@ -343,7 +343,7 @@ namespace BrailleToolkit.Converters
             brCode = _brailleTable.Find(text);
             if (!String.IsNullOrEmpty(brCode))
             {
-                brWord.AddCell(brCode);
+                brWord.AddCells(brCode);
                 return brWord;
             }
 

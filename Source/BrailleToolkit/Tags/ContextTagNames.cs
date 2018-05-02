@@ -23,7 +23,7 @@ namespace BrailleToolkit.Tags
         public const string SpecificName = "<私名號>";
         public const string BookName = "<書名號>";
         public const string BrailleTranslatorNote = "<點譯者註>";
-        public const string OrgPageNumber = "<P>";                
+        public const string OrgPageNumber = "<P>";
 
         // NOTE: 每當有變動時，必須同步修改 AllTagNames 的內容。
 
@@ -37,6 +37,8 @@ namespace BrailleToolkit.Tags
                 Coordinate,
                 Fraction,
                 Table,
+                TableTopLine,
+                TableBottomLine,
                 Time,
                 Delete,
                 Phonetic,

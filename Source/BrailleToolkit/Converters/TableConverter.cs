@@ -22,7 +22,7 @@ namespace BrailleToolkit.Converters
         }
 
 		/// <summary>
-		/// 
+		/// 轉換表格字元。
 		/// </summary>
 		/// <param name="charStack"></param>
 		/// <param name="context"></param>

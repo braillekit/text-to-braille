@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Globalization;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 using Huanlin.Common.Helpers;
@@ -12,11 +13,11 @@ namespace BrailleToolkit
     /// </summary>
     public enum BrailleCellCode
     {
-        Blank       = 0x00,	// 空方的點字碼的十六進位字串。
-        Capital     = 0x20,	// 大寫
-        Digit       = 0x3C,	// 數字
-        Italic      = 0x28,	// 斜體
-        Hyphen      = 0x24	// 連字號 '-'        
+        Blank = 0x00,	// 空方的點字碼的十六進位字串。
+        Capital = 0x20,	// 大寫
+        Digit = 0x3C,	// 數字
+        Italic = 0x28,	// 斜體
+        Hyphen = 0x24	// 連字號 '-'        
     }
 
     /// <summary>
@@ -43,7 +44,7 @@ namespace BrailleToolkit
             m_AllCells = new BrailleCell[256];
             for (int i = 0; i < m_AllCells.Length; i++)
             {
-                m_AllCells[i] = new BrailleCell((byte) i);
+                m_AllCells[i] = new BrailleCell((byte)i);
             }
         }
 
@@ -69,27 +70,52 @@ namespace BrailleToolkit
         /// <summary>
         /// 以指定點位的方式傳回 BrailleCell 物件。
         /// </summary>
-        /// <param name="dots">點位陣列，例如：3、6 點則為 new int[] {3, 6}。</param>
+        /// <param name="positionNumbers">點位陣列，例如：3、6 點則為 new int[] {3, 6}。</param>
         /// <returns></returns>
-        public static BrailleCell GetInstance(int[] dots)
+        public static BrailleCell GetInstance(int[] positionNumbers)
         {
-            return GetInstance(DotsToByte(dots));
+            return GetInstance(PositionNumbersToByte(positionNumbers));
+        }
+
+        public static BrailleCell GetInstanceFromPositionNumberString(string positionNumberString)
+        {
+            return GetInstance(PositionNumberStringToByte(positionNumberString));
         }
 
         /// <summary>
         /// 將點位轉換成 byte 值。
         /// </summary>
-        /// <param name="dots">點位</param>
+        /// <param name="posNumbers">點位</param>
         /// <returns></returns>
-        public static byte DotsToByte(params int[] dots)
+        public static byte PositionNumbersToByte(params int[] posNumbers)
         {
             BitArray bits = new BitArray(8, false);
 
-            foreach (int dotNum in dots)
+            foreach (int posNum in posNumbers)
             {
-                if (dotNum < 1 || dotNum > 6)
-                    throw new ArgumentException("參數錯誤：點位必須為 1～6 點!");
-                bits[dotNum - 1] = true;
+                if (posNum < 1 || posNum > 6)
+                    throw new ArgumentException("參數錯誤：{posNum}。點位必須為 1～6 點!");
+                bits[posNum - 1] = true;
+            }
+
+            return ConvertHelper.BitsToByte(bits);
+        }
+
+        /// <summary>
+        /// 將點位轉換成 byte 值。
+        /// </summary>
+        /// <param name="posNumbers">點位</param>
+        /// <returns></returns>
+        public static byte PositionNumberStringToByte(string posNumberString)
+        {
+            BitArray bits = new BitArray(8, false);
+
+            for (int i = 0; i < posNumberString.Length; i++)
+            {
+                int posNum = StrHelper.ToInteger(posNumberString[i].ToString(), 0);
+                if (posNum < 1 || posNum > 6)
+                    throw new ArgumentException($"參數錯誤：'{posNumberString}'。點位必須為 1～6 點!");
+                bits[posNum - 1] = true;
             }
 
             return ConvertHelper.BitsToByte(bits);
@@ -142,10 +168,10 @@ namespace BrailleToolkit
 
         public static BrailleCell Blank
         {
-            get 
+            get
             {
                 return GetInstance(BrailleCellCode.Blank);
-            }			
+            }
         }
 
         public static BrailleCell Capital

@@ -34,7 +34,7 @@ namespace BrailleToolkit.Converters
             brCode = BrailleTable.Find(text);
             if (!String.IsNullOrEmpty(brCode))
             {
-                brWord.AddCell(brCode);
+                brWord.AddCells(brCode);
                 return brWord;
             }
 

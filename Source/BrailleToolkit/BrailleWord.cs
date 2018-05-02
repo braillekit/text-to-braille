@@ -7,6 +7,7 @@ using BrailleToolkit.Data;
 using BrailleToolkit.Helpers;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
+using Huanlin.Extensions;
 
 namespace BrailleToolkit
 {
@@ -73,7 +74,7 @@ namespace BrailleToolkit
 
         public BrailleWord(string text, string brCode) : this(text)
         {
-            AddCell(brCode);
+            AddCells(brCode);
         }
 
         public BrailleWord(string text, byte brCode) : this(text)
@@ -135,13 +136,17 @@ namespace BrailleToolkit
             }
 
             var sb = new StringBuilder();
-            sb.Append("(");
+            if (useParenthesis)
+                sb.Append("(");
             foreach (var cell in Cells)
             {
                 sb.Append(cell.ToPositionNumberString());
                 sb.Append(" ");
             }
-            return sb.ToString().TrimEnd() + ")";
+            var result = sb.ToString().TrimEnd();
+            if (useParenthesis)
+                result += ")";
+            return result;
         }
 
         public string ToHexSting()
@@ -370,6 +375,7 @@ namespace BrailleToolkit
             newBrWord.PhoneticCode = PhoneticCode;
             newBrWord.IsPolyphonic = IsPolyphonic;
             newBrWord.IsContextTag = IsContextTag;
+            newBrWord.IsConvertedFromTag = IsConvertedFromTag;
             newBrWord.ContextTag = ContextTag;
             newBrWord.ContextNames = ContextNames;
 
@@ -404,6 +410,7 @@ namespace BrailleToolkit
             PhoneticCode = brWord.PhoneticCode;
             IsPolyphonic = brWord.IsPolyphonic;
             IsContextTag = brWord.IsContextTag;
+            IsConvertedFromTag = brWord.IsConvertedFromTag;
             ContextTag = brWord.ContextTag;
             ContextNames = brWord.ContextNames;
 /*
@@ -420,19 +427,31 @@ namespace BrailleToolkit
         /// <summary>
         /// 把指定的點字字串（16進位）轉成 BrailleCell 物件，並加入點字串列中。
         /// </summary>
-        /// <param name="brCode">欲加入串列的點字碼 16 進位字串。</param>
-        public void AddCell(string brCode)
+        /// <param name="brCodes">欲加入串列的點字碼 16 進位字串。</param>
+        public void AddCells(string brCodes)
         {
-            if (String.IsNullOrEmpty(brCode))
+            if (String.IsNullOrEmpty(brCodes))
             {
                 return;
             }
 
-            for (int i = 0; i < brCode.Length; i += 2)
+            for (int i = 0; i < brCodes.Length; i += 2)
             {
-                string s = brCode.Substring(i, 2);
+                string s = brCodes.Substring(i, 2);
                 byte aByte = StrHelper.HexStrToByte(s);
                 BrailleCell cell = BrailleCell.GetInstance(aByte);
+                CellList.Add(cell);
+            }
+        }
+
+        public void AddCellsFromPositionNumbers(string positionNumberString)
+        {
+            if (String.IsNullOrEmpty(positionNumberString))
+                return;
+            var numbers = positionNumberString.Split(' ');
+            foreach (string num in numbers)
+            {
+                var cell = BrailleCell.GetInstanceFromPositionNumberString(num);
                 CellList.Add(cell);
             }
         }

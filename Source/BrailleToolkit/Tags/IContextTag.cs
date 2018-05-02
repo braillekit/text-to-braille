@@ -29,7 +29,7 @@ namespace BrailleToolkit.Tags
         /// <summary>
         /// 是否為單列標籤（整列只能有此標籤，不能包含其他標籤）
         /// </summary>
-        bool SingleLine { get; }
+        bool IsSingleLine { get; }
 
         /// <summary>
         /// // 出現的次數

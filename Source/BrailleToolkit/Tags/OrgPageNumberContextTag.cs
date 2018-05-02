@@ -29,6 +29,8 @@ namespace BrailleToolkit.Tags
 
                 PrefixBrailleWords.Add(brWord);
             }
+
+            IsSingleLine = true;
         }
     }
 }

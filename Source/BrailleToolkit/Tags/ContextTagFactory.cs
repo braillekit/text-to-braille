@@ -69,7 +69,14 @@ namespace BrailleToolkit.Tags
                     {
                         return new OrgPageNumberContextTag();
                     }
-
+                case ContextTagNames.TableTopLine:
+                    {
+                        return new TableTopLineContextTag();
+                    }
+                case ContextTagNames.TableBottomLine:
+                    {
+                        return new TableBottomLineContextTag();
+                    }
                 default:
                     {
                         return new GenericContextTag(tagName);

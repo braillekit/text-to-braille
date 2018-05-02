@@ -27,7 +27,8 @@ namespace BrailleToolkit.Tags
         /// <summary>
         /// 是否為單列標籤（整列只能有此標籤，不能包含其他標籤）
         /// </summary>
-        public bool SingleLine { get; protected set; }
+        public bool IsSingleLine { get; protected set; }
+
 
         /// <summary>
         /// // 出現的次數
@@ -74,7 +75,7 @@ namespace BrailleToolkit.Tags
         {
             TagName = tagName;
             Lifetime = lifeTime;
-            SingleLine = singleLine;
+            IsSingleLine = singleLine;
             Count = 0;
 
             ConvertablePrefix = String.Empty;

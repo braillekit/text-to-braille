@@ -217,7 +217,7 @@ namespace BrailleToolkit.Converters
 			if (text == "...")
 			{
 				brCode = m_Table.Find(text);
-				brWord.AddCell(brCode);
+				brWord.AddCells(brCode);
 				return brWord;
 			}
 
@@ -230,7 +230,7 @@ namespace BrailleToolkit.Converters
 					brCode = m_Table.FindLetter(text);
 					if (!String.IsNullOrEmpty(brCode))
 					{
-						brWord.AddCell(brCode);
+						brWord.AddCells(brCode);
 						return brWord;
 						// 註：大寫記號和連續大寫記號在完成一行之後才處理。
 					}
@@ -249,7 +249,7 @@ namespace BrailleToolkit.Converters
 					brCode = m_Table.FindDigit(text, useUpperPositionDots);	
 					if (!String.IsNullOrEmpty(brCode))
 					{
-						brWord.AddCell(brCode);
+						brWord.AddCells(brCode);
 						return brWord;
 					}
 					throw new Exception("找不到對應的點字: " + text);
@@ -267,7 +267,7 @@ namespace BrailleToolkit.Converters
 			brCode = m_Table.Find(text);
 			if (!String.IsNullOrEmpty(brCode))
 			{
-				brWord.AddCell(brCode);
+				brWord.AddCells(brCode);
 				return brWord;
 			}
 

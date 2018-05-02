@@ -235,7 +235,7 @@ namespace EasyBrailleEdit
                     }
                     else
                     {
-                        var hyphen = BrailleCharConverter.ToChar(BrailleCell.DotsToByte(3, 6).ToString("X2"));
+                        var hyphen = BrailleCharConverter.ToChar(BrailleCell.PositionNumbersToByte(3, 6).ToString("X2"));
                         int endNumber = -1;
                         Int32.TryParse(endOrgPageNum, out endNumber);
 
