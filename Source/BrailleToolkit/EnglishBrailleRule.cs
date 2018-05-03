@@ -1,6 +1,7 @@
 ﻿using System;
 using BrailleToolkit.Data;
 using Huanlin.Common.Helpers;
+using NChinese;
 
 namespace BrailleToolkit
 {
@@ -419,6 +420,12 @@ namespace BrailleToolkit
                             return false;
                     }
                 }
+                // 注音符號後面接小數點時不加空方
+                if (currChar == '.' && lastChar.ToString().IsZhuyinSymbol())
+                {
+                    return false;
+                }
+
                 return true;
             }
 
