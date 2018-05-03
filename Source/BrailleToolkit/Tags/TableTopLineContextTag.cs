@@ -11,7 +11,7 @@ namespace BrailleToolkit.Tags
     {
         const string TopLine = "▔";
 
-        public TableTopLineContextTag() : base(ContextTagNames.TableTopLine)
+        public TableTopLineContextTag() : base(ContextTagNames.TableTopLine2)
         {
             BrailleWord brWord = null;
 
@@ -32,7 +32,7 @@ namespace BrailleToolkit.Tags
                 {
                     brWord.CellList.Add(cell1);
                 }
-                brWord.ContextNames = XmlTagHelper.RemoveBracket(ContextTagNames.TableTopLine);
+                brWord.ContextNames = XmlTagHelper.RemoveBracket(ContextTagNames.TableTopLine2);
 
                 PrefixBrailleWords.Add(brWord);
             }

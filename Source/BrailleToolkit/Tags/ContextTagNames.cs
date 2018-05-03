@@ -15,8 +15,10 @@ namespace BrailleToolkit.Tags
         public const string Coordinate = "<座標>";
         public const string Fraction = "<分數>";
         public const string Table = "<表格>";
-        public const string TableTopLine = "<上表格線>";
-        public const string TableBottomLine = "<下表格線>";
+        public const string TableTopLine1 = "<上表格線1>";
+        public const string TableBottomLine1 = "<下表格線1>";
+        public const string TableTopLine2 = "<上表格線2>";
+        public const string TableBottomLine2 = "<下表格線2>";
         public const string Time = "<時間>";
         public const string Delete = "<刪>";
         public const string Phonetic = "<音標>";
@@ -37,8 +39,10 @@ namespace BrailleToolkit.Tags
                 Coordinate,
                 Fraction,
                 Table,
-                TableTopLine,
-                TableBottomLine,
+                TableTopLine1,
+                TableBottomLine1,
+                TableTopLine2,
+                TableBottomLine2,
                 Time,
                 Delete,
                 Phonetic,
