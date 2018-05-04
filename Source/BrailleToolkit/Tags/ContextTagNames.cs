@@ -50,7 +50,6 @@ namespace BrailleToolkit.Tags
                 BookName,
                 BrailleTranslatorNote,
                 OrgPageNumber          // 原書頁碼
-
             };
 
 

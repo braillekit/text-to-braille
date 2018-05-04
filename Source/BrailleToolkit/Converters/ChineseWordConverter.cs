@@ -121,33 +121,6 @@ namespace BrailleToolkit.Converters
                     }
                 }
 
-                /* 特殊數字編號【1】已經改成直接定義在 xml 檔案 (2009-6-22).
-                                else if (ch == '【')
-                                {   // 特殊數字編號，用於選擇題的答案編號，例如: 【1】，見 ChineseBrailleTable.xml。
-                                    if (charStack.Count >= 3)
-                                    {
-                                        charStack.Pop();
-                                        char ch2 = charStack.Pop();
-                                        char ch3 = charStack.Pop();
-                                        if (Char.IsDigit(ch2) && ch3 == '】')   // 無論是半形或全形數字，Char.IsDigit 都會傳回 true。
-                                        {
-                                            isExtracted = true;
-                                            if (CharHelper.IsFullShapeDigit(ch2))
-                                            {
-                                                ch2 = CharHelper.FullShapeToAsciiDigit(ch2); 
-                                            }
-                                            text = ch.ToString() + ch2.ToString() + ch3.ToString();
-                                        }
-                                        else
-                                        {
-                                            charStack.Push(ch3);
-                                            charStack.Push(ch2);
-                                            charStack.Push(ch);
-                                            isExtracted = false;
-                                        }
-                                    }
-                                }
-                */
                 brWord = InternalConvert(text);
                 if (brWord == null)
                     break;

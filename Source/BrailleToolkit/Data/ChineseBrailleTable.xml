@@ -144,6 +144,7 @@
   <symbol text="□"     code="3F"     type="Misc" description="滿點，可用於輔助幼兒辨識點字。" />
   <symbol text="▲"     code="2A"     type="Misc" description="刪除起始" />
   <symbol text="▼"     code="3B"     type="Misc" description="刪除結束" />
+  <symbol text="﹒"    code="10"      type="Misc" description="目錄虛線的點" />
 
   <!-- 用中括號包住的特殊符號（因為原本的符號已有定義，故用 [] 包住以便區別。需在 Converter 類別中額外判斷） -->
   <symbol text="[↗]"   code="2012"   type="Misc" description="上升語調" />

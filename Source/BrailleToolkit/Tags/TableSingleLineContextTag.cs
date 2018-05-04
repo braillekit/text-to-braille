@@ -15,7 +15,6 @@ namespace BrailleToolkit.Tags
         public TableSingleLineContextTag(string tagName) : base(tagName)
         {
 
-
             BrailleWord brWord = null;
 
             string text = TopLine;
