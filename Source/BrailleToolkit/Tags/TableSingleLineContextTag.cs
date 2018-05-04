@@ -18,10 +18,10 @@ namespace BrailleToolkit.Tags
             BrailleWord brWord = null;
 
             string text = TopLine;
-            var cell = BrailleCell.GetInstanceFromPositionNumberString("1245");
+            var cell = BrailleCell.GetInstanceFromPositionNumberString("2356");
             if (tagName.IndexOf("下") >= 0)
             {
-                cell = BrailleCell.GetInstanceFromPositionNumberString("2356");
+                cell = BrailleCell.GetInstanceFromPositionNumberString("1245");
                 text = BottomLine;
             }
 
