@@ -26,6 +26,7 @@ namespace BrailleToolkit.Tags
         public const string BookName = "<書名號>";
         public const string BrailleTranslatorNote = "<點譯者註>";
         public const string OrgPageNumber = "<P>";
+        public const string Choice = "<選項>"; // 選項裡面的 "ㄅ." 之間不空方，且小數點的點字為 6。
 
         // NOTE: 每當有變動時，必須同步修改 AllTagNames 的內容。
 
@@ -49,7 +50,8 @@ namespace BrailleToolkit.Tags
                 SpecificName,
                 BookName,
                 BrailleTranslatorNote,
-                OrgPageNumber          // 原書頁碼
+                OrgPageNumber,          // 原書頁碼
+                Choice
             };
 
 

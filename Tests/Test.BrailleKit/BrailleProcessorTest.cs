@@ -319,5 +319,18 @@ namespace Test.BrailleToolkit
             Assert.AreEqual(expectedPositionNumbers, result);
         }
 
+        [TestCase("<選項>ㄅ.</選項>", "(135)(6)")]
+        public void Should_BopomofoAndDotInChoiceTag_NoSpaceAndUse6ForDot(string inputText, string expectedPositionNumbers)
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            BrailleLine brLine = processor.ConvertLine(inputText);
+
+            processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+
+            var result = brLine.ToPositionNumberString();
+            Assert.AreEqual(expectedPositionNumbers, result);
+        }
     }
 }

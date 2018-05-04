@@ -264,6 +264,13 @@ namespace BrailleToolkit.Converters
 				return brWord;
 			}
 
+            // 小數點在 <選項>ㄅ.</選項> 裡面要特別處理
+            if (text == "." && context.IsActive(ContextTagNames.Choice))
+            {
+                brWord.AddCellsFromPositionNumbers("6");
+                return brWord;
+            }
+
 			brCode = m_Table.Find(text);
 			if (!String.IsNullOrEmpty(brCode))
 			{
