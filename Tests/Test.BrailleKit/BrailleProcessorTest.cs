@@ -279,7 +279,7 @@ namespace Test.BrailleToolkit
                 BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
 
             string inputText = "<P>14</P>";
-            string expectedPositionNumbers = new StringBuilder().Insert(0, "(36)", 36) + "(1)(145)"; // 36 個底線，後面跟著 "14" 的點字（沒有數符）。
+            string expectedPositionNumbers = new StringBuilder().Insert(0, "(36)", 36) + "(3456 1)(145)"; // 36 個底線，後面跟著 "14" 的點字（有數符）。
             BrailleLine brLine = processor.ConvertLine(inputText);
 
             processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
