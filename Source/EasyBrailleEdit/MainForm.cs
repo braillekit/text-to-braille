@@ -81,14 +81,14 @@ namespace EasyBrailleEdit
 
             var dlg = new OpenFileDialog
             {
-                Filter = "文字檔(*.txt)|*.txt|雙視檔案(*.btx)|*.btx|所有檔案|*.*"
+                Filter = $"文字檔(*.txt)|*.txt|雙視檔案(*{Constant.Files.DefaultMainBrailleFileExt})|*{Constant.Files.DefaultMainBrailleFileExt}|所有檔案|*.*"
             };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 Modified = false;
-                if (dlg.FileName.EndsWith(".btx", StringComparison.CurrentCultureIgnoreCase))
+                if (dlg.FileName.EndsWith(Constant.Files.DefaultMainBrailleFileExt, StringComparison.CurrentCultureIgnoreCase))
                 {
-                    string s = dlg.FileName.Replace(".btx", ".txt");
+                    string s = dlg.FileName.Replace(Constant.Files.DefaultMainBrailleFileExt, ".txt");
                     if (File.Exists(s))
                     {
                         this.FileName = s;
@@ -290,9 +290,9 @@ namespace EasyBrailleEdit
             else
             {
                 // 若已存在雙視檔案，則詢問是否直接載入。
+                string brxFileName = FileName.Replace(".txt", Constant.Files.DefaultMainBrailleFileExt);
                 string brljFileName = FileName.Replace(".txt", ".brlj");
-                string btxFileName = FileName.Replace(".txt", ".btx");
-                if (File.Exists(brljFileName) || File.Exists(btxFileName))
+                if (File.Exists(brxFileName) || File.Exists(brljFileName))
                 {
                     string s = "雙視檔案已經存在，是否重新轉點字?\n[是]: 執行點字轉換\n[否]: 直接載入既有的雙視資料";
                     switch (MsgBoxHelper.ShowYesNoCancel(s))
@@ -307,7 +307,7 @@ namespace EasyBrailleEdit
                             }
                             else
                             {
-                                OpenBrailleFileInEditor(btxFileName);
+                                OpenBrailleFileInEditor(brxFileName);
                             }
                             return;
                         default:
@@ -340,7 +340,7 @@ namespace EasyBrailleEdit
         private bool SetDefaultPreviewPrinter()
         {
             var form = new ConfigTextPrinterForm();
-            return form.ShowDialog() == System.Windows.Forms.DialogResult.OK;
+            return form.ShowDialog() == DialogResult.OK;
         }
 
         private bool HasDefaultTextPrinter()

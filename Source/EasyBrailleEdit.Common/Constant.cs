@@ -17,7 +17,8 @@
 
         public static class Files
         {
-            public const string DefaultBrailleFileExt = ".brlj";    // 預設的點字檔副檔名 (舊版為 .btx)
+            public const string DefaultMainBrailleFileExt = ".brx";    // 預設的點字檔副檔名 (v1為 .btx；v2 為 .brlj)
+            public const string DefaultBrailleFileExt = ".brl";
 
             // 暫存檔案
             public const string CvtInputTempFileName = "cvt_in.tmp";            // 輸入的明眼字檔
@@ -26,10 +27,10 @@
             public const string CvtErrorCharFileName = "cvt_errchar.tmp";       // 儲存轉換失敗的字元資訊
             public const string CvtResultFileName = "cvt_result.tmp";   // 儲存成功或失敗的旗號以及錯誤訊息
 
-            public const string FileNameFilter = "雙視檔案 1.x 版 (*.btx)|*.btx|雙視檔案 2.x 版 (*.brlj)|*.brlj";
-            public const int FileNameFilterIndex = 2;
-            public const string SaveAsFileNameFilter = "雙視檔案 2.x 版 (*.brlj)|*.brlj";
-            public const int SaveAsFileNameFilterIndex = 1;
+            public static string MainFileNameFilter = $"雙視檔案 3.x 版 (*{DefaultMainBrailleFileExt})|*{DefaultMainBrailleFileExt}|雙視檔案 2.x 版 (*.brlj)|*.brlj|所有檔案|*.*";
+            public static string SaveAsFileNameFilter = $"雙視檔案 (*{DefaultMainBrailleFileExt})|*{DefaultMainBrailleFileExt}";
+
+            public static string SaveBrailleFileNameFilter = $"點字檔案(*{DefaultBrailleFileExt})|*{DefaultBrailleFileExt}";
         }
 
         // 預設明眼字列印邊界

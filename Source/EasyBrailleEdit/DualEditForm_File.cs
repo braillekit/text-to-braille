@@ -30,8 +30,8 @@ namespace EasyBrailleEdit
 
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = false;
-            dlg.Filter = Constant.Files.FileNameFilter;
-            dlg.FilterIndex = Constant.Files.FileNameFilterIndex;
+            dlg.Filter = Constant.Files.MainFileNameFilter;
+            dlg.FilterIndex = 1;
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
@@ -99,9 +99,9 @@ namespace EasyBrailleEdit
         private bool DoSaveFileAs()
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.DefaultExt = Constant.Files.DefaultBrailleFileExt;
+            dlg.DefaultExt = Constant.Files.DefaultMainBrailleFileExt;
             dlg.Filter = Constant.Files.SaveAsFileNameFilter;
-            dlg.FilterIndex = Constant.Files.SaveAsFileNameFilterIndex;
+            dlg.FilterIndex = 1;
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
@@ -113,10 +113,12 @@ namespace EasyBrailleEdit
 
         public bool DoExportTextFile()
         {
-            var dlg = new SaveFileDialog();
-            dlg.DefaultExt = ".txt";
-            dlg.Filter = "文字檔 (*.txt)|*.txt";
-            dlg.FilterIndex = Constant.Files.SaveAsFileNameFilterIndex;
+            var dlg = new SaveFileDialog
+            {
+                DefaultExt = ".txt",
+                Filter = "文字檔 (*.txt)|*.txt",
+                FilterIndex = 1
+            };
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {

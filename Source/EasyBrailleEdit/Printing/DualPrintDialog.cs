@@ -116,12 +116,12 @@ namespace EasyBrailleEdit
         {
             OpenFileDialog dlg = new OpenFileDialog
             {
-                DefaultExt = ".BRP",
+                DefaultExt = Constant.Files.DefaultBrailleFileExt,
                 CheckFileExists = false,
                 CheckPathExists = true,
                 FileName = txtBrailleFileName.TextBox.Text,
                 Title = "指定要輸出的檔案名稱",
-                Filter = "*.BRP|*BRP"  // Braille for Print.
+                Filter = Constant.Files.SaveBrailleFileNameFilter  // Braille for Print.
             };
             if (dlg.ShowDialog() == DialogResult.OK)
             {

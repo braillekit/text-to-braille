@@ -7,7 +7,7 @@ using Serilog;
 
 namespace Txt2Brl
 {
-    class Program
+    static class Program
     {
         const int DefaultCellsPerLine = 40;
 
@@ -19,7 +19,7 @@ namespace Txt2Brl
                 .WriteTo.RollingFile(@"Logs\log-txt2brl-{Date}.txt")
                 .CreateLogger();
 
-            Console.WriteLine("Txt2Brl version 3.2 Copyright(c) 2007-2018 Michael Tsai.\n");
+            Console.WriteLine("Txt2Brl version 3.7 Copyright(c) 2007-2018 Michael Tsai.\n");
 
             CommandLine.Parser.Default.ParseArguments<Options>(args)
                .WithParsed<Options>(opts => RunOptionsAndReturnExitCode(opts));
@@ -64,7 +64,7 @@ namespace Txt2Brl
                 }
                 if (String.IsNullOrEmpty(opts.OutputFileName))
                 {
-                    opts.OutputFileName = Path.ChangeExtension(opts.InputFileName, Constant.Files.DefaultBrailleFileExt);
+                    opts.OutputFileName = Path.ChangeExtension(opts.InputFileName, Constant.Files.DefaultMainBrailleFileExt);
                 }
                 Console.WriteLine("輸入檔案: " + opts.InputFileName);
             }
