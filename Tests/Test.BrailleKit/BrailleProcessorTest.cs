@@ -111,21 +111,6 @@ namespace Test.BrailleToolkit
             Assert.AreEqual(expected, actual, msg + line);
         }
 
-
-        [TestCase("#1-2. 1", "#1-2. 1", "(3456 1)(36)(12)(256)()(3456 2)")] // 編號的數字使用上位點；非編號的數字使用下位點。
-        public void Should_DigitNumbers_UseUpperPosition(string input, string expected, string expectedDots)
-        {
-            var processor = BrailleProcessor.GetInstance();
-
-            var brLine = processor.ConvertLine(input);
-            var actual = brLine.ToString();
-
-            Assert.AreEqual(input, expected);
-
-            var actualDots = brLine.ToPositionNumberString();
-            Assert.AreEqual(expectedDots, actualDots);
-        }
-
         /// <summary>
         ///A test for BreakLine (BrailleLine, int)
         ///</summary>
@@ -321,6 +306,50 @@ namespace Test.BrailleToolkit
 
         [TestCase("<選項>ㄅ.</選項>", "(135)(6)")]
         public void Should_BopomofoAndDotInChoiceTag_NoSpaceAndUse6ForDot(string inputText, string expectedPositionNumbers)
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            BrailleLine brLine = processor.ConvertLine(inputText);
+
+            processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+
+            var result = brLine.ToPositionNumberString();
+            Assert.AreEqual(expectedPositionNumbers, result);
+        }
+
+        [TestCase("#1-2. 1", "#1-2. 1", "(3456 1)(36)(12)(256)()(3456 2)")] // 編號的數字使用上位點；非編號的數字使用下位點。
+        public void Should_DigitNumbers_UseUpperPosition(string input, string expected, string expectedDots)
+        {
+            var processor = BrailleProcessor.GetInstance();
+
+            var brLine = processor.ConvertLine(input);
+            var actual = brLine.ToString();
+
+            Assert.AreEqual(input, expected);
+
+            var actualDots = brLine.ToPositionNumberString();
+            Assert.AreEqual(expectedDots, actualDots);
+        }
+
+        [TestCase("#2012/#06/#12", "(3456 12)(245)(1)(12)(34)(3456 245)(124)(34)(3456 1)(12)")]
+        [TestCase("#2012-#06-#12", "(3456 12)(245)(1)(12)(36)(3456 245)(124)(36)(3456 1)(12)")]
+        public void Should_AddDigitSymbolAndUpperPosition_ForAnyDigitParts(string inputText, string expectedPositionNumbers)
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            BrailleLine brLine = processor.ConvertLine(inputText);
+
+            processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+
+            var result = brLine.ToPositionNumberString();
+            Assert.AreEqual(expectedPositionNumbers, result);
+        }
+
+        [TestCase("<上位點>2012/06/12</上位點>", "(3456 12)(245)(1)(12)(34)(245)(124)(34)(1)(12)")]
+        [TestCase("<上位點>2012-06-12</上位點>", "(3456 12)(245)(1)(12)(36)(245)(124)(36)(1)(12)")]
+        public void Should_UseUpperPosition_WhileInContext(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
                 BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));

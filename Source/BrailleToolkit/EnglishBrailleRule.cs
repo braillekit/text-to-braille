@@ -1,5 +1,6 @@
 ﻿using System;
 using BrailleToolkit.Data;
+using BrailleToolkit.Tags;
 using Huanlin.Common.Helpers;
 using NChinese;
 
@@ -123,7 +124,11 @@ namespace BrailleToolkit
 
                 if (brWord.IsContextTag) // 如果是情境標籤
                 {
-                    //context.Parse(brWord.Text); // 剖析情境標籤
+                    // 明確指定數符的時候自然也要加上數符。
+                    if (brWord.Text == "#" && (i+1 < brLine.WordCount))
+                    {
+                        AddDigitSymbol(brLine, i+1);
+                    }
                     continue;
                 }
                 if (brWord.NoDigitCell) // 如果預先指定不加數符（例如: 表示座標、次方時）
@@ -143,9 +148,9 @@ namespace BrailleToolkit
                     }
                     continue;
                 }
-
                 // 目前的字元不是數字
-                if (digitCount > 0)     // 但之前的字元是數字?
+
+                if (digitCount > 0)   // 之前的字元是數字？
                 {
                     // 如果數字之後接著連字號 '-'、逗號 ',' 或 '+'
                     if (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == ',' 
@@ -169,7 +174,7 @@ namespace BrailleToolkit
 			if (firstDigitIndex >= 0)
 			{
                 AddDigitSymbol(brLine, firstDigitIndex);
-            }			
+            }
 		}
 
         /// <summary>

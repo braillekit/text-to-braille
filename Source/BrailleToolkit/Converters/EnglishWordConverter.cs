@@ -239,12 +239,17 @@ namespace BrailleToolkit.Converters
 				if (CharHelper.IsAsciiDigit(ch))
 				{
                     bool useUpperPositionDots = false;  // 一般數字取下位點。
+                    if (context.IsActive(ContextTagNames.UpperPosition))
+                    {
+                        useUpperPositionDots = true;
+                    }
+
                     if (AppGlobals.Config.Braille.UseUpperPositionForOrgPageNumber && context.IsOrgPageNumberActive())
                     {
                         // 原書頁碼使用上位點，且不加數符。
                         useUpperPositionDots = true;
                         brWord.NoDigitCell = true;
-                    }                        
+                    }
 
 					brCode = m_Table.FindDigit(text, useUpperPositionDots);	
 					if (!String.IsNullOrEmpty(brCode))
@@ -259,8 +264,9 @@ namespace BrailleToolkit.Converters
 			// 處理編號。
 			if (text == "#")
 			{
-				// # 沒有對應的點字碼，只是用它來代表編號數字的開始，
-				// 以便後續處理編號用（將編號數字轉成上位點）。
+                // # 沒有對應的點字碼，只是用它來代表編號數字的開始，
+                // 以便後續處理編號用（將編號數字轉成上位點）。
+                brWord.IsContextTag = true;
 				return brWord;
 			}
 

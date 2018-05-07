@@ -327,10 +327,11 @@ namespace BrailleToolkit
         /// <summary>
         /// 此 word 是否在指定的語境中？
         /// </summary>
-        /// <param name="contextName">去除左右角括號的語境名稱。</param>
+        /// <param name="contextName">語境標籤名稱。若有帶左右角括號，會自動去除括號。</param>
         /// <returns></returns>
         public bool IsInContext(string contextName)
         {
+            contextName = XmlTagHelper.RemoveBracket(contextName);
             return (ContextNames.IndexOf(contextName) >= 0);
         }
 
