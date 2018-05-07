@@ -1087,15 +1087,16 @@ namespace BrailleToolkit
         /// <returns>斷行之後的多行串列。若為 null 表示無需斷行（指定的點字串列未超過每行最大方數）。</returns>
         public List<BrailleLine> BreakLine(BrailleLine brLine, int cellsPerLine, ContextTagManager context)
         {
+            int maxCellsInLine = cellsPerLine;
             if (context != null && context.IndentCount > 0) // 若目前位於縮排區塊中
             {
                 // 每列最大方數要扣掉縮排數量，並於事後補縮排的空方。
                 // NOTE: 必須在斷行之後才補縮排的空方!
-                cellsPerLine -= context.IndentCount;
+                maxCellsInLine -= context.IndentCount;
             }
 
-            // 若指定的點字串列未超過每行最大方數，則無須斷行，傳回 null。
-            if (brLine.CellCount <= cellsPerLine)
+            // 若指定的點字串列未超過最大方數，則無須斷行，傳回 null。
+            if (brLine.CellCount <= maxCellsInLine)
             {
                 // 補縮排的空方。
                 if (context != null && context.IndentCount > 0) // 若目前位於縮排區塊中
@@ -1112,14 +1113,13 @@ namespace BrailleToolkit
             bool needHyphen = false;
             bool isBroken = false;      // 是否已經斷行了？
             int indents = 0;    // 第一次斷行時，不會有系統自斷加上的縮排，因此初始為 0。
-            int maxCells = cellsPerLine; ;
 
             // 計算折行之後的縮排格數。
             indents = CalcNewLineIndents(brLine);
 
             while (wordIndex < brLine.WordCount)
             {
-                breakIndex = CalcBreakPoint(brLine, maxCells, out needHyphen);
+                breakIndex = CalcBreakPoint(brLine, maxCellsInLine, out needHyphen);
 
                 newLine = brLine.Copy(wordIndex, breakIndex);   // 複製到新行。
                 if (needHyphen) // 是否要附加連字號?
@@ -1144,14 +1144,14 @@ namespace BrailleToolkit
                 // 防錯：檢驗每個斷行後的 line 的方數是否超過每列最大方數。
                 // 若超過，即表示之前的斷行處理有問題，須立即停止執行，否則錯誤會
                 // 直到在雙視編輯的 Grid 顯示時才出現 index out of range，不易抓錯!
-                System.Diagnostics.Debug.Assert(newLine.CellCount <= cellsPerLine, "斷行錯誤! 超過每列最大方數!");
+                System.Diagnostics.Debug.Assert(newLine.CellCount <= maxCellsInLine, "斷行錯誤! 超過每列最大方數!");
 
                 // 被折行之後的第一個字需要再根據規則調整。
                 EnglishBrailleRule.ApplyCapitalRule(brLine);    // 套用大寫規則。
                 EnglishBrailleRule.ApplyDigitRule(brLine);		// 套用數字規則。
 
                 isBroken = true;    // 已經至少折了一行
-                maxCells = cellsPerLine - indents;  // 下一行開始就要自動縮排，共縮 indents 格。
+                maxCellsInLine = cellsPerLine - indents;  // 下一行開始就要自動縮排，共縮 indents 格。
             }
 
             // 補縮排的空方。
@@ -1255,7 +1255,7 @@ namespace BrailleToolkit
                 {
                     breakIndex--;
                     continue;
-                }
+                }            
 
                 if (breakWord.Text.IndexOfAny(joinLeftChars) >= 0)
                 {
@@ -1320,6 +1320,30 @@ namespace BrailleToolkit
 
                 //Trace.WriteLine("無法找到適當的斷行位置，使用每列最大方數斷行!");
                 breakIndex = fixedBreakIndex;
+            }
+
+            // 私名號和書名號不可位於行尾。
+            if (breakIndex > 2)
+            {
+                int newBreakIndex = breakIndex - 1;
+                var lastWord = brLine[newBreakIndex];
+                if (lastWord.IsConvertedFromTag
+                    && (lastWord.Text == BrailleConst.DisplayText.SpecificName
+                        || lastWord.Text == BrailleConst.DisplayText.BookName))
+                {
+                    while (newBreakIndex > 0)
+                    {
+                        var brWord = brLine[newBreakIndex];
+                        if (brWord.IsContextTag
+                            && (brWord.Text == ContextTagNames.SpecificName
+                                || brWord.Text == ContextTagNames.BookName))
+                        {
+                            breakIndex = newBreakIndex;
+                            break;
+                        }                            
+                        newBreakIndex--;
+                    }
+                }
             }
 
             // 注意!! 若 breakIndex 傳回 0 會導致呼叫的函式進入無窮迴圈!!

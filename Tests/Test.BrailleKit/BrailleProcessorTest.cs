@@ -356,10 +356,27 @@ namespace Test.BrailleToolkit
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
-            processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
-
             var result = brLine.ToPositionNumberString();
             Assert.AreEqual(expectedPositionNumbers, result);
+        }
+
+        [TestCase("0123456789012345678901234567890123456<書名號>哈利波特</書名號>。")]
+        public void Should_SpecificName_NotStayAtEndOfLine(string inputText)
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            BrailleLine brLine = processor.ConvertLine(inputText);
+
+            int cellsPerLine = 40;
+            var formattedLines = processor.FormatLine(brLine, cellsPerLine, new ContextTagManager());
+
+            Assert.IsTrue(formattedLines.Count == 2 && formattedLines[0].CellCount == 38 && formattedLines[1].CellCount == 15);
+
+            // 第二行應該會以書名號開始，因為書名號單獨出現在行尾時必須折到下一行。
+            Assert.AreEqual("<書名號>", formattedLines[1].Words[0].Text);
+            string expectedBeginCellsOfSecondLine = "(6 36)";
+            Assert.AreEqual(expectedBeginCellsOfSecondLine, formattedLines[1].Words[1].ToPositionNumberString(true));
         }
     }
 }

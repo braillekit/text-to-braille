@@ -18,9 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0DA263
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{CECA7BC5-3A2D-474F-9478-D37863ADD2ED}"
 	ProjectSection(SolutionItems) = preProject
-		ReadMe\AutoUpdater.md = ReadMe\AutoUpdater.md
-		ReadMe\ChangeLog.txt = ReadMe\ChangeLog.txt
-		ReadMe\ReleaseNote.txt = ReadMe\ReleaseNote.txt
+		..\Doc\ChangeLog.txt = ..\Doc\ChangeLog.txt
+		..\Doc\ReleaseNote.txt = ..\Doc\ReleaseNote.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{564D6238-5E27-47A8-82F8-5E924565757A}"
