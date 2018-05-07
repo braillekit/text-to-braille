@@ -246,9 +246,8 @@ namespace BrailleToolkit.Converters
 
                     if (AppGlobals.Config.Braille.UseUpperPositionForOrgPageNumber && context.IsOrgPageNumberActive())
                     {
-                        // 原書頁碼使用上位點，且不加數符。
+                        // 原書頁碼一律使用上位點。
                         useUpperPositionDots = true;
-                        brWord.NoDigitCell = true;
                     }
 
 					brCode = m_Table.FindDigit(text, useUpperPositionDots);	
