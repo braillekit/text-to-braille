@@ -419,7 +419,7 @@ namespace EasyBrailleEdit
 			if (m_MenuController == null)
 			{
 				m_MenuController = new PopupMenuController();
-				m_MenuController.PopupMenuClick += new SourceGrid.CellContextEventHandler(GridMenu_Click);
+				m_MenuController.PopupMenuClick += GridMenu_Click;
 			}
 
 			if (m_ClickController == null)

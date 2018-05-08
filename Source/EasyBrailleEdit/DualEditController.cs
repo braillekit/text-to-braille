@@ -5,6 +5,7 @@ using BrailleToolkit;
 using BrailleToolkit.Converters;
 using EasyBrailleEdit.Common;
 using Huanlin.Windows.Forms;
+using DevAge.Drawing.VisualElements;
 
 namespace EasyBrailleEdit
 {
@@ -110,14 +111,15 @@ namespace EasyBrailleEdit
 
 			if (m_HeaderView2 == null)
 			{
-				m_HeaderView2 = new SourceGrid.Cells.Views.RowHeader();
-                DevAge.Drawing.VisualElements.RowHeader backHeader = new DevAge.Drawing.VisualElements.RowHeader
+                m_HeaderView2 = new SourceGrid.Cells.Views.RowHeader
                 {
-                    BackColor = Color.Blue
+                    Background = new RowHeader
+                    {
+                        BackColor = Color.Blue
+                    },
+                    Font = m_HeaderView.Font
                 };
-                m_HeaderView2.Background = backHeader;
-				m_HeaderView2.Font = m_HeaderView.Font;
-			}
+            }
 
 			CreateFixedArea();
 
@@ -633,8 +635,8 @@ namespace EasyBrailleEdit
 	{
 		private ContextMenu m_Menu = new ContextMenu();
 		private SourceGrid.CellContext m_CellContext;
-		private string m_Command;   // 用來識別點了哪個選單項目。
-		private event SourceGrid.CellContextEventHandler m_PopupMenuClick = null;
+
+        private event SourceGrid.CellContextEventHandler m_PopupMenuClick = null;
 
 		public PopupMenuController()
 		{
@@ -649,7 +651,8 @@ namespace EasyBrailleEdit
                 "-;",
                 "刪除(&D);Delete;" + ((int)Shortcut.CtrlDel).ToString(),
                 "倒退刪除(&K);Backspace",
-                "刪除整列(&R);DeleteLine;" + ((int)Shortcut.CtrlE).ToString()
+                "刪除整列(&R);DeleteLine;" + ((int)Shortcut.CtrlE).ToString(),
+                "段落重整(&F);FormatParagraph;" + ((int)Shortcut.CtrlShiftF).ToString()
             };
 
 			MenuItem mi;
@@ -706,7 +709,7 @@ namespace EasyBrailleEdit
 			if (mi != null)
 			{
 				SourceGrid.CellContextEventArgs args = new SourceGrid.CellContextEventArgs(m_CellContext);
-				this.m_Command = mi.Tag.ToString();
+				Command = mi.Tag.ToString();
 				OnPopupMenuClick(args);
 			}
 		}
@@ -731,10 +734,7 @@ namespace EasyBrailleEdit
 			}
 		}
 
-		public string Command
-		{
-			get { return m_Command; }
-		}
-	}
+        public string Command { get; private set; }
+    }
 
 }
