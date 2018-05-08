@@ -80,6 +80,7 @@
   <symbol text="﹗"   code="07"     type="Punctuation" description="另一種驚嘆號" />
   <symbol text="："   code="1212"   type="Punctuation" description="冒號" />
   <symbol text="︰"   code="1212"   type="Punctuation" description="冒號（與上一個看似相同，但內碼不同）" />
+  <symbol text="～"   code="2424"   type="Punctuation" description="水波符號（跟半形水波符號的點位相同）" />
   <symbol text="－"   code="1002"   type="Punctuation" description="破折號1" />
   <symbol text="－－" code="1002"   type="Punctuation" description="破折號1" />
   <symbol text="─"   code="1002"   type="Punctuation" description="破折號2" />
