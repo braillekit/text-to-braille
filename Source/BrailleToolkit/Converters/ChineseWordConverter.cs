@@ -77,7 +77,7 @@ namespace BrailleToolkit.Converters
                 text = ch.ToString();
 
                 // 處理雙字元的標點符號。
-                if (ch == '…' || ch == '－' || ch == '─' || ch == '╴' || ch == '﹏')
+                if (ch == '…' || ch == '－' || ch == '─' || ch == '╴' || ch == '—' || ch == '﹏')
                 {
                     // 讀下一個字元，若是相同符號，則可略過；若不同，則下次迴圈仍需處理。
                     if (charStack.Count >= 2)

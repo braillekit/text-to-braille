@@ -1119,7 +1119,7 @@ namespace BrailleToolkit
 
             while (wordIndex < brLine.WordCount)
             {
-                breakIndex = CalcBreakPoint(brLine, maxCellsInLine, out needHyphen);
+                breakIndex = FindBreakPoint(brLine, maxCellsInLine, out needHyphen);
 
                 newLine = brLine.Copy(wordIndex, breakIndex);   // 複製到新行。
                 if (needHyphen) // 是否要附加連字號?
@@ -1212,13 +1212,13 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// 計算斷行位置。
+        /// 尋找合適的斷行位置。
         /// </summary>
         /// <param name="brLine">點字串列。</param>
         /// <param name="cellsPerLine">每行最大允許幾方。</param>
         /// <param name="needHyphen">是否在斷行處附加一個連字號 '-'。</param>
         /// <returns>傳回可斷行的點字索引。</returns>
-        private static int CalcBreakPoint(BrailleLine brLine, int cellsPerLine,
+        private static int FindBreakPoint(BrailleLine brLine, int cellsPerLine,
             out bool needHyphen)
         {
             needHyphen = false;
@@ -1322,9 +1322,10 @@ namespace BrailleToolkit
                 breakIndex = fixedBreakIndex;
             }
 
-            // 私名號和書名號不可位於行尾。
-            if (breakIndex > 2)
+            // 行首和行尾規則。
+            if (breakIndex > 1)
             {
+                // 私名號和書名號不可位於行尾。
                 int newBreakIndex = breakIndex - 1;
                 var lastWord = brLine[newBreakIndex];
                 if (lastWord.IsConvertedFromTag

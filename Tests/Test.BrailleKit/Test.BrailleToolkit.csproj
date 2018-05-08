@@ -66,6 +66,7 @@
     <Compile Include="BrailleCellTest.cs" />
     <Compile Include="BrailleDocumentTest.cs" />
     <Compile Include="BrailleProcessorTest.cs" />
+    <Compile Include="BrailleProcessorTest_Format.cs" />
     <Compile Include="ChineseWordConverterTest.cs" />
     <Compile Include="EnglishWordConverterTest.cs" />
     <Compile Include="Shared.cs" />

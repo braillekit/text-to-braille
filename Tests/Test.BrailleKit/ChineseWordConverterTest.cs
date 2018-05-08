@@ -16,7 +16,7 @@ namespace Test.BrailleToolkit
     ///to contain all BrailleToolkit.ChineseWordConverter Unit Tests
     ///</summary>
     [TestFixture()]
-	public class ChineseWordConverterTest
+    public class ChineseWordConverterTest
 	{
         [SetUp]
         public void SetUp()
@@ -115,6 +115,24 @@ namespace Test.BrailleToolkit
             System.Diagnostics.Debug.WriteLine(BrailleWordHelper.ToString(actual));
 
             CollectionAssert.AreEqual(expected, actual);
+        }
+
+
+        [TestCase("─")]     // 0x2500
+        [TestCase("──")]    // 兩個 0x2500
+        [TestCase("－－")]   // 兩個 0xff0d
+        [TestCase("——")]    // 兩個 0x2014
+        public void Should_ConvertAllKindsOfEmdashes(string inputText)
+        {
+            var target = new ChineseWordConverter(new ZhuyinReverseConverter(null));
+
+            ContextTagManager context = new ContextTagManager();
+
+            var charStack = new Stack<char>(inputText);
+            List<BrailleWord> actual = target.Convert(charStack, context);
+            Assert.IsTrue(actual != null && actual.Count == 1);
+
+            Assert.AreEqual("(5 2)", actual[0].ToPositionNumberString(true));
         }
 
     }
