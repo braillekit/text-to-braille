@@ -30,6 +30,18 @@ namespace BrailleToolkit
             return WordCount < 1;
         }
 
+        public bool IsBeginOfParagraph()
+        {
+            if (WordCount >= 2)
+            {
+                if (Words[0].IsWhiteSpace && Words[1].IsWhiteSpace)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         [DataMember]
         public List<BrailleWord> Words { get; private set; }
 

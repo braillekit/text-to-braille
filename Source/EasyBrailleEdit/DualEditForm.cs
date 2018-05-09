@@ -471,10 +471,11 @@ namespace EasyBrailleEdit
 		}
 
 		/// <summary>
-		///  更新 grid 中的某一列。此方法會自動視需要斷行，讓指定的列拆成兩列。
+		///  重新編排 grid 中的某一列。此方法會自動視需要斷行，讓指定的列拆成兩列。
 		/// </summary>
 		/// <param name="row">Grid 列索引。</param>
-		private void ReformatRow(int row)
+        /// <returns>傳回重新編排後的列數。如果大於 1，則代表此列經過重新編排之後有發生斷行。</returns>
+		private int ReformatRow(int row)
 		{
 			row = GetBrailleRowIndex(row);  // 修正列索引為點字列所在的索引。
 
@@ -499,6 +500,7 @@ namespace EasyBrailleEdit
 				RecreateRow(row);
 				FillRow(BrailleDoc[lineIndex], row, true);
 			}
+            return lineCnt;
 		}
 
 		/// <summary>
@@ -731,8 +733,9 @@ namespace EasyBrailleEdit
 				case "DeleteLine":
 					DeleteLine(grid, row, col, true);
 					break;
-				default:
-					break;
+                case "FormatParagraph":
+                    FormatParagraph(grid, row, col);
+                    break;
 			}
 		}
 
@@ -1097,6 +1100,24 @@ namespace EasyBrailleEdit
 						break;
 				}
 			}
+            else if (e.Modifiers == (Keys.Control | Keys.Shift))
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.F:    // 段落重整
+                        FormatParagraph(brGrid, row, col);
+                        break;
+                }
+            }
+            else {
+                switch (e.KeyCode)
+                {
+                    case Keys.Back:     // 倒退刪除
+                        BackspaceCell(brGrid, row, col);
+                        e.Handled = true;
+                        break;
+                }
+            }
 		}
 
 

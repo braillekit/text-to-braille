@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using BrailleToolkit;
 using Huanlin.Windows.Forms;
 using SourceGrid;
@@ -23,7 +24,7 @@ namespace EasyBrailleEdit
         {
             if (gridRowIndex % 3 == 0)
             {
-                gridRowIndex = gridRowIndex - 2;
+                gridRowIndex -= 2;
             }
             else if (gridRowIndex % 3 == 2)
             {
@@ -295,7 +296,7 @@ namespace EasyBrailleEdit
             FillRow(brLine, row, true);
 
             // 將焦點移至新插入的那一列的第一個儲存格。
-            GridFocusCell(new SourceGrid.Position(row, brGrid.FixedColumns), true);
+            GridFocusCell(new SourceGrid.Position(row, grid.FixedColumns), true);
         }
 
         /// <summary>
@@ -339,9 +340,18 @@ namespace EasyBrailleEdit
 
             row = GetBrailleRowIndex(row);  // 確保列索引為點字列。
 
-            if (col <= brGrid.FixedColumns) // 在列首執行此動作?
+            if (col <= grid.FixedColumns) // 在列首執行此動作?
             {
-                JoinToPreviousRow(row);
+                // 若有發生斷行，則需要繼續把下一列接上來。
+                while (JoinToPreviousRow(row) > 1)
+                {
+                    int lineIdx = GetBrailleLineIndex(row) + 1;
+                    if (lineIdx >= BrailleDoc.LineCount)
+                    {
+                        break;
+                    }
+                    row = GetGridRowIndex(lineIdx);
+                }
             }
             else
             {
@@ -349,19 +359,49 @@ namespace EasyBrailleEdit
             }
         }
 
+        private void FormatParagraph(SourceGrid.Grid grid, int row, int col)
+        {
+            // 防錯：如果不是有效的儲存格位置就直接返回。
+            if (!CheckCellPosition(row, col))
+                return;
+
+            if (MsgBoxHelper.ShowOkCancel("段落重整會將目前所在的段落重新編排，確定要執行此操作嗎？") != DialogResult.OK)
+            {
+                return;
+            }
+
+                row = GetBrailleRowIndex(row);  // 確保列索引為點字列。
+            int lineIdx = GetBrailleLineIndex(row) + 1; // 從下一列開始處理（把下一列接上去）
+
+            while (lineIdx < BrailleDoc.LineCount)
+            {
+                var currLine = BrailleDoc[lineIdx];
+                if (currLine.IsEmpty() || currLine.IsBeginOfParagraph())
+                {
+                    break;
+                }
+                // 把下一列接上來。
+                row = GetGridRowIndex(lineIdx);
+                JoinToPreviousRow(row);
+
+                lineIdx++;
+            }
+        }
+
         /// <summary>
         /// 將指定的列附加至上一列。
         /// </summary>
         /// <param name="row"></param>
-        private void JoinToPreviousRow(int row)
+        /// <returns>傳回新的列數。如果大於 1，代表有發生斷行。</returns>
+        private int JoinToPreviousRow(int row)
         {
-            if (row < 0)    // 防錯
-                return;
+            if (row < 0 || row > brGrid.RowsCount)
+                throw new ArgumentOutOfRangeException($"參數 {nameof(row)} 的數值超出合法範圍: {row}");
 
             row = GetBrailleRowIndex(row);  // 確保列索引為點字列。
 
             if (row <= brGrid.FixedRows)    // 第一列的列首，無需處理。
-                return;
+                return 1;
 
             int lineIdx = GetBrailleLineIndex(row);
             BrailleLine prevBrLine = BrailleDoc.Lines[lineIdx - 1];
@@ -372,7 +412,7 @@ namespace EasyBrailleEdit
             if (avail < currBrLine.Words[0].Cells.Count)
             {
                 // 上一列的空間不夠，就算接上去，還是會在斷行時再度折下來，因此不處理。
-                return;
+                return 1;
             }
 
             // 執行附加至上一列的動作。
@@ -390,7 +430,9 @@ namespace EasyBrailleEdit
             brGrid.Rows.RemoveRange(row, 3);
 
             // 更新上一列
-            ReformatRow(row - 1);
+            int formattedLineCount = ReformatRow(row - 1);
+
+            return formattedLineCount;
         }
 
         /// <summary>
