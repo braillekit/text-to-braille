@@ -21,8 +21,7 @@ namespace EasyBrailleEdit
 		private const float DefaultPhoneticFontSize = 8.0f;
 
 		private bool m_IsInitialized = false;
-		private BrailleDocument m_BrDoc;
-		private string m_FileName;
+        private string m_FileName;
 		private bool m_IsDirty;   // 檔案內容是否被修改過
 
 		private ViewMode m_ViewMode = ViewMode.All;
@@ -45,14 +44,12 @@ namespace EasyBrailleEdit
 		private PopupMenuController m_MenuController;
 		private CellClickEvent m_ClickController;
 
-		#endregion
-
-		private bool m_DebugMode = true;   // 除錯模式
+#endregion
 
 		public DualEditForm(BrailleDocument brDoc)
 			: base()
 		{
-			m_BrDoc = brDoc;
+			BrailleDoc = brDoc;
 
 			InitializeComponent();
 		}
@@ -65,14 +62,11 @@ namespace EasyBrailleEdit
 			InternalLoadFile(brlFileName);
 		}
 
-		#region 屬性
+        #region 屬性
 
-		public BrailleDocument BrailleDoc
-		{
-			get { return m_BrDoc; }
-		}
+        public BrailleDocument BrailleDoc { get; private set; }
 
-		public string FileName
+        public string FileName
 		{
 			get { return m_FileName; }
 			set
@@ -87,13 +81,9 @@ namespace EasyBrailleEdit
 			}
 		}
 
-		public bool DebugMode
-		{
-			get { return m_DebugMode; }
-			set { m_DebugMode = value; }
-		}
+        public bool DebugMode { get; set; } = true;
 
-		public StatusStrip StatusBar
+        public StatusStrip StatusBar
 		{
 			get { return this.statusStrip1; }
 		}
@@ -176,9 +166,11 @@ namespace EasyBrailleEdit
 
 			string fname = StrHelper.ExtractFileName(m_FileName);
 			if (fname.Equals(Constant.Files.CvtOutputTempFileName, StringComparison.CurrentCultureIgnoreCase))
-				return true;
+            {
+                return true;
+            }
 
-			return false;
+            return false;
 		}
 
 		private void UpdateWindowCaption()
@@ -270,7 +262,7 @@ namespace EasyBrailleEdit
 			if (String.IsNullOrEmpty(m_FileName))
 			{
 				InitializeGrid();
-				FillGrid(m_BrDoc);
+				FillGrid(BrailleDoc);
 			}
 
 			m_FindForm = new DualEditFindForm();
@@ -318,8 +310,8 @@ namespace EasyBrailleEdit
 			brGrid.DefaultHeight = 20;
 
 			// 設定 grid 列數與行數。
-			int maxCol = m_BrDoc.CellsPerLine;  // brDoc.LongestLine.Words.Count;
-			brGrid.Redim(m_BrDoc.GetVisibleLineCount() * 3 + FixedRows, maxCol + FixedColumns);
+			int maxCol = BrailleDoc.CellsPerLine;  // brDoc.LongestLine.Words.Count;
+			brGrid.Redim(BrailleDoc.GetVisibleLineCount() * 3 + FixedRows, maxCol + FixedColumns);
 
 			// 設定欄寬最小限制，以免呼叫 AutoSizeView 時，欄寬被縮得太小。
 			for (int i = 1; i < brGrid.ColumnsCount; i++)
@@ -419,7 +411,7 @@ namespace EasyBrailleEdit
 			if (m_MenuController == null)
 			{
 				m_MenuController = new PopupMenuController();
-				m_MenuController.PopupMenuClick += GridMenu_Click;
+				m_MenuController.PopupMenuClick += new SourceGrid.CellContextEventHandler(GridMenu_Click);
 			}
 
 			if (m_ClickController == null)
@@ -487,16 +479,16 @@ namespace EasyBrailleEdit
 			row = GetBrailleRowIndex(row);  // 修正列索引為點字列所在的索引。
 
 			int lineIndex = GetBrailleLineIndex(row);
-			int lineCnt = BrailleProcessor.GetInstance().FormatLine(m_BrDoc, lineIndex, null);
+			int lineCnt = BrailleProcessor.GetInstance().FormatLine(BrailleDoc, lineIndex, null);
 			if (lineCnt > 1)    // 有斷行?
 			{
 				// 換上新列
 				RecreateRow(row);
-				FillRow(m_BrDoc[lineIndex], row, true);
+				FillRow(BrailleDoc[lineIndex], row, true);
 
 				// 插入新列
 				GridInsertRowAt(row + 3);
-				FillRow(m_BrDoc[lineIndex + 1], row + 3, true);
+				FillRow(BrailleDoc[lineIndex + 1], row + 3, true);
 
 				// 重新填列號
 				RefreshRowNumbers();
@@ -505,7 +497,7 @@ namespace EasyBrailleEdit
 			{
 				// 換上新列
 				RecreateRow(row);
-				FillRow(m_BrDoc[lineIndex], row, true);
+				FillRow(BrailleDoc[lineIndex], row, true);
 			}
 		}
 
@@ -1110,18 +1102,18 @@ namespace EasyBrailleEdit
 
 		private void EditPageTitles()
 		{
-			DualEditTitleForm fm = new DualEditTitleForm(m_BrDoc);
-			fm.CellsPerLine = m_BrDoc.CellsPerLine;
+			DualEditTitleForm fm = new DualEditTitleForm(BrailleDoc);
+			fm.CellsPerLine = BrailleDoc.CellsPerLine;
 			if (fm.ShowDialog() == DialogResult.OK)
 			{
-				m_BrDoc.PageTitles.Clear();
-				m_BrDoc.PageTitles = fm.Titles;
+				BrailleDoc.PageTitles.Clear();
+				BrailleDoc.PageTitles = fm.Titles;
 			}
 		}
 
 		private void FetchPageTitles()
 		{
-			m_BrDoc.FetchPageTitles();
+			BrailleDoc.FetchPageTitles();
 		}
 
 		/// <summary>
@@ -1130,9 +1122,9 @@ namespace EasyBrailleEdit
 		/// </summary>
 		private void GotoLine(int lineNum)
 		{
-			if (lineNum > m_BrDoc.LineCount)
+			if (lineNum > BrailleDoc.LineCount)
 			{
-				lineNum = m_BrDoc.LineCount;
+				lineNum = BrailleDoc.LineCount;
 			}
 			SourceGrid.Position pos = new SourceGrid.Position((lineNum - 1) * 3 + 1, 1);
 			brGrid.ShowCell(pos, false);
@@ -1171,7 +1163,7 @@ namespace EasyBrailleEdit
 
 		private void Find()
 		{
-			m_FindForm.Document = m_BrDoc;
+			m_FindForm.Document = BrailleDoc;
 
 			if (m_FindForm.Visible)
 			{

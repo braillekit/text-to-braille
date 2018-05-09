@@ -48,11 +48,11 @@ namespace EasyBrailleEdit
 
                 BrailleDocument newBrDoc = BrailleDocument.LoadBrailleFile(filename);
 
-                if (m_BrDoc != null)
+                if (BrailleDoc != null)
                 {
-                    m_BrDoc.Clear();
+                    BrailleDoc.Clear();
                 }
-                m_BrDoc = newBrDoc;
+                BrailleDoc = newBrDoc;
 
                 FileName = filename;
                 IsDirty = false;
@@ -64,7 +64,7 @@ namespace EasyBrailleEdit
 
                 InitializeGrid();
 
-                FillGrid(m_BrDoc);
+                FillGrid(BrailleDoc);
 
                 // 焦點移至第一列的第一個儲存格。
                 SourceGrid.Position pos = new SourceGrid.Position(brGrid.FixedRows, brGrid.FixedColumns);
@@ -122,7 +122,7 @@ namespace EasyBrailleEdit
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                m_BrDoc.SaveTextFile(dlg.FileName);
+                BrailleDoc.SaveTextFile(dlg.FileName);
                 return true;
             }
             return false;
@@ -130,7 +130,7 @@ namespace EasyBrailleEdit
 
         private void InternalSaveFile(string filename)
         {
-            m_BrDoc.SaveBrailleFile(filename);
+            BrailleDoc.SaveBrailleFile(filename);
 
             FileName = filename;
             IsDirty = false;
@@ -139,15 +139,15 @@ namespace EasyBrailleEdit
 
         private void DoPrint()
         {
-            if (m_BrDoc.LineCount < 1)
+            if (BrailleDoc.LineCount < 1)
             {
                 MsgBoxHelper.ShowInfo("沒有資料可供列印!");
                 return;
             }
 
-            m_BrDoc.UpdateTitlesLineIndex();
+            BrailleDoc.UpdateTitlesLineIndex();
 
-            DualPrintDialog prnDlg = new DualPrintDialog(m_BrDoc);
+            DualPrintDialog prnDlg = new DualPrintDialog(BrailleDoc);
             prnDlg.ShowDialog();
         }
 

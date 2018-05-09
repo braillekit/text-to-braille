@@ -108,7 +108,8 @@ namespace EasyBrailleEdit
                 case "DeleteLine":
                     DualEditController.DeleteLine(row, col, true);
                     break;
-                default:
+                case "FormatParagraph":
+                    DualEditController.FormatParagraph(row, col);
                     break;
             }
         }

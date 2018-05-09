@@ -45,34 +45,17 @@ namespace BrailleToolkit
             m_PageTitles = new List<BraillePageTitle>();
         }
 
-        public BrailleDocument(string filename) 
-            : this()
-        {
-            m_FileName = filename;
-        }
-
-        public BrailleDocument(BrailleProcessor processor)
-            : this()
+        public BrailleDocument(BrailleProcessor processor, int cellsPerLine=BrailleConst.DefaultCellsPerLine) : this()
         {
             m_Processor = processor;
-        }
-
-
-        public BrailleDocument(string filename, BrailleProcessor processor)
-            : this(filename)
-        {
-            m_Processor = processor;
-        }
-
-        public BrailleDocument(BrailleProcessor processer, int cellsPerLine)
-            : this(processer)
-        {
             m_CellsPerLine = cellsPerLine;
         }
 
         public BrailleDocument(string filename, BrailleProcessor processor, int cellsPerLine)
-            : this(filename, processor)
+            : this()
         {
+            m_FileName = filename;
+            m_Processor = processor;
             m_CellsPerLine = cellsPerLine;
         }
 

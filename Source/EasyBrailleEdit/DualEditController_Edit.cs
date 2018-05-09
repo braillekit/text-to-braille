@@ -393,6 +393,18 @@ namespace EasyBrailleEdit
         }
 
 
+        /// <summary>
+        /// 重新編排目前所在的（或選取的）段落。即段落重整。<br />
+        /// 處理方式：<br />
+        /// 把
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        internal void FormatParagraph(int row, int col)
+        {
+
+        }
+
         #endregion
 
     }

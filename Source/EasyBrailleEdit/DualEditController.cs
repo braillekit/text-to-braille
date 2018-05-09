@@ -215,7 +215,7 @@ namespace EasyBrailleEdit
 			for (int col = FixedColumns; col < brGrid.ColumnsCount; col++)
 			{
 				cnt++;
-				SourceGrid.Cells.ColumnHeader hdr = new SourceGrid.Cells.ColumnHeader(cnt.ToString());
+				var hdr = new SourceGrid.Cells.ColumnHeader(cnt.ToString());
 				//hdr.EnableResize = false;               
 				brGrid[0, col] = hdr;
 				brGrid[0, col].View = m_HeaderView;
@@ -225,7 +225,7 @@ namespace EasyBrailleEdit
 			cnt = 1;
 			for (int row = FixedRows; row < brGrid.RowsCount; row += 3)
 			{
-				SourceGrid.Cells.RowHeader hdr = new SourceGrid.Cells.RowHeader(cnt.ToString());
+				var hdr = new SourceGrid.Cells.RowHeader(cnt.ToString());
 				brGrid[row, 0] = hdr;
 				brGrid[row, 0].View = m_HeaderView;
 				hdr.RowSpan = 3;	// 不可以在指定 hdr 物件之前設定 RowSpan, 否則會出錯!
@@ -716,21 +716,18 @@ namespace EasyBrailleEdit
 
 		protected void OnPopupMenuClick(SourceGrid.CellContextEventArgs args)
 		{
-			if (m_PopupMenuClick != null)
-			{
-				m_PopupMenuClick(this, args);
-			}
-		}
+            m_PopupMenuClick?.Invoke(this, args);
+        }
 
 		public event SourceGrid.CellContextEventHandler PopupMenuClick
 		{
 			add
 			{
-				this.m_PopupMenuClick += value;
+                m_PopupMenuClick += value;
 			}
 			remove
 			{
-				this.m_PopupMenuClick -= value;
+                m_PopupMenuClick -= value;
 			}
 		}
 

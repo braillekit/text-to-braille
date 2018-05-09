@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using BrailleToolkit;
 using Huanlin.Windows.Forms;
+using SourceGrid;
 
 namespace EasyBrailleEdit
 {
@@ -204,7 +205,7 @@ namespace EasyBrailleEdit
             {
                 int wordIdx = GetBrailleWordIndex(row, col);
                 int lineIdx = GetBrailleLineIndex(row);
-                BrailleLine brLine = m_BrDoc.Lines[lineIdx];
+                BrailleLine brLine = BrailleDoc.Lines[lineIdx];
 
                 // 在第 wordIdx 個字之前插入新點字。
                 brLine.Words.Insert(wordIdx, form.BrailleWord);
@@ -230,7 +231,7 @@ namespace EasyBrailleEdit
             if (form.ShowDialog() == DialogResult.OK)
             {
                 int lineIdx = GetBrailleLineIndex(row);
-                BrailleLine brLine = m_BrDoc.Lines[lineIdx];
+                BrailleLine brLine = BrailleDoc.Lines[lineIdx];
 
                 // 在第 wordIdx 個字之前插入新點字。
                 brLine.Words.Add(form.BrailleWord);
@@ -256,7 +257,7 @@ namespace EasyBrailleEdit
 
             int wordIdx = GetBrailleWordIndex(row, col);
             int lineIdx = GetBrailleLineIndex(row);
-            BrailleLine brLine = m_BrDoc.Lines[lineIdx];
+            BrailleLine brLine = BrailleDoc.Lines[lineIdx];
             while (count > 0)
             {
                 brLine.Words.Insert(wordIdx, BrailleWord.NewBlank());
@@ -285,7 +286,7 @@ namespace EasyBrailleEdit
 
             row = GetBrailleRowIndex(row);
             int lineIdx = GetBrailleLineIndex(row);
-            m_BrDoc.Lines.Insert(lineIdx, brLine);
+            BrailleDoc.Lines.Insert(lineIdx, brLine);
             IsDirty = true;
 
             // 更新 UI。
@@ -309,7 +310,7 @@ namespace EasyBrailleEdit
             row = GetBrailleRowIndex(row);
             int lineIdx = GetBrailleLineIndex(row);
             int wordIdx = GetBrailleWordIndex(row, col);
-            BrailleLine brLine = m_BrDoc.Lines[lineIdx];
+            BrailleLine brLine = BrailleDoc.Lines[lineIdx];
 
             if (brLine.Words.Count == 1)    // 如果要刪除該列的最後一個字，就整列刪除。
             {
@@ -363,11 +364,11 @@ namespace EasyBrailleEdit
                 return;
 
             int lineIdx = GetBrailleLineIndex(row);
-            BrailleLine prevBrLine = m_BrDoc.Lines[lineIdx - 1];
-            BrailleLine currBrLine = m_BrDoc.Lines[lineIdx];
+            BrailleLine prevBrLine = BrailleDoc.Lines[lineIdx - 1];
+            BrailleLine currBrLine = BrailleDoc.Lines[lineIdx];
 
-            // 檢查上一列是否還有空間可以容納新點字
-            int avail = m_BrDoc.CellsPerLine - prevBrLine.CellCount;
+            // 檢查上一列是否還有空間可以容納當前列的第一個字
+            int avail = BrailleDoc.CellsPerLine - prevBrLine.CellCount;
             if (avail < currBrLine.Words[0].Cells.Count)
             {
                 // 上一列的空間不夠，就算接上去，還是會在斷行時再度折下來，因此不處理。
@@ -378,10 +379,10 @@ namespace EasyBrailleEdit
             prevBrLine.Append(currBrLine);
 
             // 清除本列
-            BrailleLine brLine = m_BrDoc.Lines[lineIdx];
+            BrailleLine brLine = BrailleDoc.Lines[lineIdx];
             brLine.Clear();
             brLine = null;
-            m_BrDoc.Lines.RemoveAt(lineIdx);
+            BrailleDoc.Lines.RemoveAt(lineIdx);
 
             IsDirty = true;
 
@@ -390,10 +391,6 @@ namespace EasyBrailleEdit
 
             // 更新上一列
             ReformatRow(row - 1);
-
-            RefreshRowNumbers();
-
-            return;
         }
 
         /// <summary>
@@ -412,11 +409,11 @@ namespace EasyBrailleEdit
             }
 
             int lineIdx = GetBrailleLineIndex(row);
-            BrailleLine brLine = m_BrDoc.Lines[lineIdx];
+            BrailleLine brLine = BrailleDoc.Lines[lineIdx];
 
             BrailleLine newLine = brLine.Copy(wordIdx, 255);	// 複製到新行。
             newLine.TrimEnd();	// 去尾空白。 
-            m_BrDoc.Lines.Insert(lineIdx + 1, newLine);
+            BrailleDoc.Lines.Insert(lineIdx + 1, newLine);
             brLine.RemoveRange(wordIdx, 255);	// 從原始串列中刪除掉已經複製到新行的點字。
 
             IsDirty = true;
@@ -425,11 +422,11 @@ namespace EasyBrailleEdit
 
             // 換上新列
             RecreateRow(row);
-            FillRow(m_BrDoc[lineIdx], row, true);
+            FillRow(BrailleDoc[lineIdx], row, true);
 
             // 插入新列
             GridInsertRowAt(row + 3);
-            FillRow(m_BrDoc[lineIdx + 1], row + 3, true);
+            FillRow(BrailleDoc[lineIdx + 1], row + 3, true);
 
             // 重新填列號
             RefreshRowNumbers();
@@ -438,7 +435,7 @@ namespace EasyBrailleEdit
             grid.Selection.Focus(pos, true);    // 修正選取的儲存格範圍。
         }
 
-        private void DeleteLine(SourceGrid.Grid grid, int row, int col, bool needConfirm)
+        private void DeleteLine(Grid grid, int row, int col, bool needConfirm)
         {
             // 防錯：如果不是有效的儲存格位置就直接返回。
             if (!CheckCellPosition(row, col))
@@ -458,10 +455,10 @@ namespace EasyBrailleEdit
             row = GetBrailleRowIndex(row);  // 確保列索引為點字列。
 
             int lineIdx = GetBrailleLineIndex(row);
-            BrailleLine brLine = m_BrDoc.Lines[lineIdx];
+            BrailleLine brLine = BrailleDoc.Lines[lineIdx];
             brLine.Clear();
             brLine = null;
-            m_BrDoc.Lines.RemoveAt(lineIdx);
+            BrailleDoc.Lines.RemoveAt(lineIdx);
             IsDirty = true;
 
             // 更新 UI。
