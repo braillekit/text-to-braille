@@ -365,7 +365,10 @@ namespace EasyBrailleEdit
             }
             else
             {
-                DeleteCell(grid, row, col - 1);
+                int lineIdx = GetBrailleLineIndex(row);
+                int wordIdx = GetBrailleWordIndex(row, col);
+                int colToDelete = GetGridColumnIndex(lineIdx, wordIdx - 1);
+                DeleteCell(grid, row, colToDelete);
             }
         }
 
