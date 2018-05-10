@@ -370,7 +370,7 @@ namespace EasyBrailleEdit
                 return;
             }
 
-                row = GetBrailleRowIndex(row);  // 確保列索引為點字列。
+            row = GetBrailleRowIndex(row);  // 確保列索引為點字列。
             int lineIdx = GetBrailleLineIndex(row) + 1; // 從下一列開始處理（把下一列接上去）
 
             while (lineIdx < BrailleDoc.LineCount)
@@ -511,6 +511,5 @@ namespace EasyBrailleEdit
             GridSelectRow(row, false);
             GridFocusCell(activePos, true);
         }
-
     }
 }

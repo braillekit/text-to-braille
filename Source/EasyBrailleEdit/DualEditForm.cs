@@ -816,6 +816,20 @@ namespace EasyBrailleEdit
 			return brGrid.Selection.Focus(pos, resetSelection);
 		}
 
+        private void GridFocusCell(int row, int col)
+        {
+            var position = new SourceGrid.Position(row, col);
+            GridFocusCell(position, true);
+        }
+
+        private void GridSelectLeftWord(int row, int col)
+        {
+            int lineIdx = GetBrailleLineIndex(row);
+            int wordIdx = GetBrailleWordIndex(row, col);
+            int newCol = GetGridColumnIndex(lineIdx, wordIdx - 1);
+            GridFocusCell(row, newCol);
+        }
+
 		/// <summary>
 		/// 更新指定的點字方格。
 		/// </summary>
@@ -1114,6 +1128,10 @@ namespace EasyBrailleEdit
                 {
                     case Keys.Back:     // 倒退刪除
                         BackspaceCell(brGrid, row, col);
+                        e.Handled = true;
+                        break;
+                    case Keys.Left:
+                        GridSelectLeftWord(row, col);
                         e.Handled = true;
                         break;
                 }
