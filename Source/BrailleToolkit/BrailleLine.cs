@@ -30,6 +30,19 @@ namespace BrailleToolkit
             return WordCount < 1;
         }
 
+        public bool IsEmptyOrWhiteSpace()
+        {
+            foreach (var word in Words)
+            {
+                if (!BrailleWord.IsBlank(word) && !BrailleWord.IsEmpty(word))
+                {
+                    return false;
+                }
+
+            }
+            return true;
+        }
+
         public bool IsBeginOfParagraph()
         {
             if (WordCount >= 2)
