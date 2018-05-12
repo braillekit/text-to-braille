@@ -18,13 +18,13 @@ namespace EasyBrailleEdit
     /// </summary>
     public partial class EditCellForm : Form
     {
-        private BrailleProcessor m_BrProcessor;
-        private ChineseWordConverter m_ChtWordCvt;
+        private BrailleProcessor _brProcessor;
+        private ChineseWordConverter _chineseConverter;
 
-        private EditCellMode m_Mode;
-        private BrailleWord m_BrWord;
+        private EditCellMode _editMode;
+        private BrailleWord _brWord;
 
-        private bool m_IsUpdatingUI;
+        private bool _isUpdatingUI;
 
         public EditCellForm()
         {
@@ -32,24 +32,24 @@ namespace EasyBrailleEdit
 
             Mode = EditCellMode.Edit;
 
-            m_BrWord = new BrailleWord(String.Empty);
+            _brWord = new BrailleWord(String.Empty);
 
             // 以下動作不可移到 Form_Load 做，因為某些用到以下變數的事件會比它更早觸發。
-            m_BrProcessor = BrailleProcessor.GetInstance();
+            _brProcessor = BrailleProcessor.GetInstance();
 
-            m_ChtWordCvt = m_BrProcessor.ChineseConverter;
-            Debug.Assert(m_ChtWordCvt != null);
+            _chineseConverter = _brProcessor.ChineseConverter;
+            Debug.Assert(_chineseConverter != null);
         }
 
         public EditCellMode Mode
         {
             get
             {
-                return m_Mode;
+                return _editMode;
             }
             set 
             {
-                m_Mode = value;
+                _editMode = value;
                 switch (value)
                 {
                     case EditCellMode.Edit:
@@ -67,12 +67,12 @@ namespace EasyBrailleEdit
 
         public BrailleWord BrailleWord
         {
-            get { return m_BrWord; }
+            get { return _brWord; }
             set
             {
                 if (value != null)
                 {
-                    m_BrWord.Copy(value);
+                    _brWord.Copy(value);
                     UpdateUI();
                 }
             }
@@ -80,24 +80,24 @@ namespace EasyBrailleEdit
 
         private void UpdateUI()
         {
-            m_IsUpdatingUI = true;
+            _isUpdatingUI = true;
             try
             {
-                txtChar.Text = m_BrWord.Text;
+                txtChar.Text = _brWord.Text;
                 cboPhCode.Items.Clear();
 
-                if (m_BrWord.IsPolyphonic)
+                if (_brWord.IsPolyphonic)
                 {
                     string[] zhuyinCodes = ZhuyinQueryHelper.GetZhuyinSymbols(txtChar.Text, true);
                     cboPhCode.Items.AddRange(zhuyinCodes);
                 }
                 
-                cboPhCode.SelectedIndex = cboPhCode.Items.IndexOf(m_BrWord.PhoneticCode);
-                txtBraille.Text = BrailleFontConverter.ToString(m_BrWord);
+                cboPhCode.SelectedIndex = cboPhCode.Items.IndexOf(_brWord.PhoneticCode);
+                txtBraille.Text = BrailleFontConverter.ToString(_brWord);
             }
             finally
             {
-                m_IsUpdatingUI = false;
+                _isUpdatingUI = false;
             }
         }
 
@@ -117,15 +117,15 @@ namespace EasyBrailleEdit
 
             string fontStr = StrHelper.ToHexString(txtBraille.Text);
 
-            if (!m_BrWord.CellList.ToString().Equals(fontStr))  // 有更動?
+            if (!_brWord.CellList.ToString().Equals(fontStr))  // 有更動?
             {                
-                m_BrWord.CellList.Clear();                
+                _brWord.CellList.Clear();                
 
                 string brCode;
                 for (int i = 0; i < fontStr.Length; i += 2)
                 {
                     brCode = BrailleFontConverter.ToBrailleCode(fontStr.Substring(i, 2));
-                    m_BrWord.CellList.Add(brCode);
+                    _brWord.CellList.Add(brCode);
                 }
             }
 
@@ -141,7 +141,7 @@ namespace EasyBrailleEdit
         // 當明眼字有變動
         private void txtChar_TextChanged(object sender, EventArgs e)
         {
-            if (m_IsUpdatingUI)
+            if (_isUpdatingUI)
                 return;
 
             if (String.IsNullOrEmpty(txtChar.Text))
@@ -154,12 +154,12 @@ namespace EasyBrailleEdit
 
             string word = txtChar.Text;
             Stack<char> charStack = new Stack<char>(word);
-            List<BrailleWord> brWordList = m_BrProcessor.ConvertWord(charStack);
+            List<BrailleWord> brWordList = _brProcessor.ConvertWord(charStack);
             if (brWordList != null && brWordList.Count > 0)
             {
                 // 成功轉換成點字，字元會從串流中取出
-                m_BrWord.Clear();
-                m_BrWord = brWordList[0];
+                _brWord.Clear();
+                _brWord = brWordList[0];
                 UpdateUI();
             }
             else
@@ -174,20 +174,20 @@ namespace EasyBrailleEdit
         // 當注音符號有變動
         private void cboPhCode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (m_IsUpdatingUI || m_BrWord == null)
+            if (_isUpdatingUI || _brWord == null)
                 return;
             if (cboPhCode.SelectedIndex < 0)
                 return;
 
-            m_BrWord.PhoneticCode = cboPhCode.Text;
-            BrailleCellList cellList = m_ChtWordCvt.CreatePhoneticCellList(m_BrWord.PhoneticCode);
-            m_BrWord.CellList.Assign(cellList);
+            _brWord.PhoneticCode = cboPhCode.Text;
+            BrailleCellList cellList = _chineseConverter.CreatePhoneticCellList(_brWord.PhoneticCode);
+            _brWord.CellList.Assign(cellList);
             txtBraille.Text = BrailleFontConverter.ToString(cellList);
         }
 
         private void txtBraille_TextChanged(object sender, EventArgs e)
         {
-            if (m_IsUpdatingUI)
+            if (_isUpdatingUI)
                 return;          
             // 這裡不即時轉換成點字碼，等到使用者按 OK 鈕時才轉，
             // 以減少因為一直修改而反覆釋放及配置記憶體的動作。

@@ -7,7 +7,6 @@ using BrailleToolkit.Data;
 using BrailleToolkit.Helpers;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
-using Huanlin.Extensions;
 
 namespace BrailleToolkit
 {

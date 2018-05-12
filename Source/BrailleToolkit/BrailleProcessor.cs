@@ -9,7 +9,7 @@ using BrailleToolkit.Helpers;
 using EasyBrailleEdit.Common;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
-using Huanlin.Extensions;
+using Huanlin.Common.Extensions;
 
 namespace BrailleToolkit
 {
@@ -97,7 +97,7 @@ namespace BrailleToolkit
             SuppressEvents = false;
 
             // 轉點字之前，預先替換的文字
-            var replacedText = AppGlobals.Config.AutoReplacedText.EnsureNotEnclosedWith("{", "}");
+            var replacedText = AppGlobals.Config.AutoReplacedText.EnsureNotEncloseWith("{", "}");
             _autoReplacedText = StrHelper.SplitToDictionary(replacedText, ' ', '=');
         }
 

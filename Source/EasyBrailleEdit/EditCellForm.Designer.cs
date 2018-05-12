@@ -142,7 +142,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(303, 239);
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(303, 253);
             this.Controls.Add(this.btnPickBraille);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
