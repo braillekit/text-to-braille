@@ -16,5 +16,22 @@ namespace EasyBrailleEdit
         {
             InitializeComponent();
         }
+
+        private void InsertTextForm_Load(object sender, EventArgs e)
+        {
+            lblErrorCount.Text = "";
+            lblErrorCount.ForeColor = label1.ForeColor;
+        }
+
+        private void txtInput_TextChanged(object sender, EventArgs e)
+        {
+            DoConvert();
+        }
+
+
+        private void DoConvert()
+        {
+
+        }
     }
 }

@@ -47,8 +47,6 @@ namespace Txt2Brl
 			Processor.ConvertionFailed += BrailleProcessor_ConvertionFailed;
 			Processor.TextConverted += BrailleProcessor_TextConverted;
 
-			//m_Processor.ChineseConverter = null;	// 保護
-
 			m_CvtResultFileName = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtResultFileName);
             m_CvtErrorCharFileName = Path.Combine(AppGlobals.TempPath + Constant.Files.CvtErrorCharFileName);
 
