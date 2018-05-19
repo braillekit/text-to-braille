@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbols>
+  <!-- 空白 -->
+  <symbol text=" " code="00" />  
+  
+  <!-- 英文字母 http://www.brl.org/ebae/rule01.html -->
+  <symbol text="A" code="01" type="Letter" />
+  <symbol text="B" code="03" type="Letter" />
+  <symbol text="C" code="09" type="Letter" />
+  <symbol text="D" code="19" type="Letter" />
+  <symbol text="E" code="11" type="Letter" />
+  <symbol text="F" code="0B" type="Letter" />
+  <symbol text="G" code="1B" type="Letter" />
+  <symbol text="H" code="13" type="Letter" />
+  <symbol text="I" code="0A" type="Letter" />  <!-- 2018/4/25 從 4A 改成 0A -->
+  <symbol text="J" code="1A" type="Letter" />
+  <symbol text="K" code="05" type="Letter" />
+  <symbol text="L" code="07" type="Letter" />
+  <symbol text="M" code="0D" type="Letter" />
+  <symbol text="N" code="1D" type="Letter" />
+  <symbol text="O" code="15" type="Letter" />
+  <symbol text="P" code="0F" type="Letter" />
+  <symbol text="Q" code="1F" type="Letter" />
+  <symbol text="R" code="17" type="Letter" />
+  <symbol text="S" code="0E" type="Letter" />
+  <symbol text="T" code="1E" type="Letter" />  <!-- 2018/4/25 從 4E 改成 1E -->
+  <symbol text="U" code="25" type="Letter" />
+  <symbol text="V" code="27" type="Letter" />
+  <symbol text="W" code="3A" type="Letter" />
+  <symbol text="X" code="2D" type="Letter" />
+  <symbol text="Y" code="3D" type="Letter" />
+  <symbol text="Z" code="35" type="Letter" />
+
+  <!-- 數字 (code 是上位點，code2 是下位點) -->
+  <symbol text="1" code="01" code2="02" type="Digit" />
+  <symbol text="2" code="03" code2="06" type="Digit" />
+  <symbol text="3" code="09" code2="12" type="Digit" />
+  <symbol text="4" code="19" code2="32" type="Digit" />
+  <symbol text="5" code="11" code2="22" type="Digit" />
+  <symbol text="6" code="0B" code2="16" type="Digit" />
+  <symbol text="7" code="1B" code2="36" type="Digit" />
+  <symbol text="8" code="13" code2="26" type="Digit" />
+  <symbol text="9" code="0A" code2="14" type="Digit" />  <!-- 2018/4/25 Code 從 4A 改成 0A -->
+  <symbol text="0" code="1A" code2="34" type="Digit" />
+
+  <!-- 英文標點符號 -->
+  <symbol text=","    code="02"     type="Punctuation" Description="逗號" />
+  <symbol text="."    code="32"     type="Punctuation" Description="句號" />
+  <symbol text="'"    code="04"     type="Punctuation" Description="所有格符號" />
+  <symbol text="-"    code="24"     type="Punctuation" Description="連結號，若連續兩個則為破折號" />
+  <symbol text="_"    code="24"     type="Punctuation" Description="底線" />
+  <symbol text="*"    code="2626"   type="Punctuation" Description="星號" />
+  <symbol text="/"    code="0C"     type="Punctuation" Description="斜線" />
+  <symbol text=";"    code="06"     type="Punctuation" Description="分號" />
+  <symbol text="..."  code="040404" type="Punctuation" Description="刪節號" />
+  <symbol text=":"    code="12"     type="Punctuation" Description="冒號" />
+  <symbol text="?"    code="26"     type="Punctuation" Description="問號" />
+  <symbol text="!"    code="16"     type="Punctuation" Description="驚嘆號" />
+  <symbol text="("    code="36"     type="Punctuation" Description="左括號"/>
+  <symbol text=")"    code="36"     type="Punctuation" Description="右括號"/>
+  <symbol text="["    code="2036"   type="Punctuation" Description="左方括號" />
+  <symbol text="]"    code="3604"   type="Punctuation" Description="右方括號" />
+  <symbol text="‘"   code="2026"   type="Punctuation" Description="左單引號" />
+  <symbol text="’"   code="3404"   type="Punctuation" Description="右單引號" />
+  <symbol text="“"   code="26"     type="Punctuation" Description="左雙引號" />
+  <symbol text="”"   code="34"     type="Punctuation" Description="右雙引號" />
+
+  <!-- 數學符號 -->
+  <symbol text="+"    code="2C"     type="Math" Description="加號" />
+  <symbol text="="    code="2805"   type="Math" Description="等於" />
+  <symbol text="%"    code="0834"   type="Math" Description="百分比" />
+  <!-- 下面的乘號和除號必須用記事本才能正確顯示 -->
+  <symbol text="×"    code="0821"   type="Math" Description="乘號" />
+  <symbol text="÷"    code="280C"   type="Math" Description="除號" />
+  <symbol text="&gt;" code="2802"   type="Math" Description="大於" />
+  <symbol text="&lt;" code="1005"   type="Math" Description="小於" />
+
+  <!-- 其它符號 -->
+  <symbol text="$"    code="32"     type="Misc" deccription="錢字符號" />
+  <symbol text="@"    code="08"     type="Misc" deccription="at" />
+  <symbol text="&amp;" code="2F"    type="Misc" deccription="ampersand" />
+  <symbol text="~"    code="2424"   type="Misc" deccription="水波" />
+
+  <!-- 特殊記號 -->
+  <symbol text="數字" code="3C" type="Mark" />
+  <symbol text="大寫" code="20" type="Mark" />
+  <symbol text="全字大寫" code="2020" type="Mark" />
+  <symbol text="斜體"     code="28"   type="Mark" Description="斜體字" />
+</Symbols>

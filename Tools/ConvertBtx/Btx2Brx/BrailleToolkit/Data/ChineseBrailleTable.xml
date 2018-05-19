@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbols>
+  <!-- 韻母 -->
+  <symbol text="ㄅ" code="15" type="Phonetic" />
+  <symbol text="ㄆ" code="0F" type="Phonetic" />
+  <symbol text="ㄇ" code="0D" type="Phonetic" />
+  <symbol text="ㄈ" code="1F" type="Phonetic" />
+  <symbol text="ㄉ" code="19" type="Phonetic" />
+  <symbol text="ㄊ" code="0B" type="Phonetic" />
+  <symbol text="ㄋ" code="1D" type="Phonetic" />
+  <symbol text="ㄌ" code="09" type="Phonetic" />
+  <symbol text="ㄍ" code="05" type="Phonetic" />
+  <symbol text="ㄎ" code="07" type="Phonetic" />
+  <symbol text="ㄏ" code="17" type="Phonetic" />
+  <symbol text="ㄐ" code="05" type="Phonetic" />
+  <symbol text="ㄑ" code="1A" type="Phonetic" />
+  <symbol text="ㄒ" code="11" type="Phonetic" />
+  <symbol text="ㄓ" code="01" type="Phonetic" mono="true" />
+  <symbol text="ㄔ" code="03" type="Phonetic" mono="true" />
+  <symbol text="ㄕ" code="0A" type="Phonetic" mono="true" />
+  <symbol text="ㄖ" code="1B" type="Phonetic" mono="true" />
+  <symbol text="ㄗ" code="13" type="Phonetic" mono="true" />
+  <symbol text="ㄘ" code="1A" type="Phonetic" mono="true" />
+  <symbol text="ㄙ" code="11" type="Phonetic" mono="true" />
+  <symbol text="ㄚ" code="1C" type="Phonetic" />
+  <symbol text="ㄛ" code="23" type="Phonetic" />
+  <symbol text="ㄜ" code="2E" type="Phonetic" />
+  <symbol text="ㄝ" code="22" type="Phonetic" />
+  <symbol text="ㄞ" code="3A" type="Phonetic" />
+  <symbol text="ㄟ" code="34" type="Phonetic" />
+  <symbol text="ㄠ" code="29" type="Phonetic" />
+  <symbol text="ㄡ" code="37" type="Phonetic" />
+  <symbol text="ㄢ" code="27" type="Phonetic" />
+  <symbol text="ㄣ" code="25" type="Phonetic" />
+  <symbol text="ㄤ" code="2D" type="Phonetic" />
+  <symbol text="ㄥ" code="35" type="Phonetic" />
+  <symbol text="ㄦ" code="31" type="Phonetic" />
+  <symbol text="ㄧ" code="21" type="Phonetic" />
+  <symbol text="ㄨ" code="0C" type="Phonetic" />
+  <symbol text="ㄩ" code="33" type="Phonetic" />
+
+  <!-- 結合韻 -->
+  <symbol text="ㄧㄚ" code="3E" type="Phonetic" joined="true" />
+  <symbol text="ㄧㄛ" code="34" type="Phonetic" joined="true" />
+  <symbol text="ㄧㄝ" code="2C" type="Phonetic" joined="true" />
+  <symbol text="ㄧㄞ" code="22" type="Phonetic" joined="true" />
+  <symbol text="ㄧㄠ" code="2A" type="Phonetic" joined="true" />
+  <symbol text="ㄧㄡ" code="0E" type="Phonetic" joined="true" />
+  <symbol text="ㄧㄢ" code="1E" type="Phonetic" joined="true" />
+  <symbol text="ㄧㄣ" code="39" type="Phonetic" joined="true" />
+  <symbol text="ㄧㄤ" code="28" type="Phonetic" joined="true" />
+  <symbol text="ㄧㄥ" code="3D" type="Phonetic" joined="true" />
+  <symbol text="ㄨㄚ" code="14" type="Phonetic" joined="true" />
+  <symbol text="ㄨㄛ" code="12" type="Phonetic" joined="true" />
+  <symbol text="ㄨㄞ" code="36" type="Phonetic" joined="true" />
+  <symbol text="ㄨㄟ" code="2B" type="Phonetic" joined="true" />
+  <symbol text="ㄨㄢ" code="3B" type="Phonetic" joined="true" />
+  <symbol text="ㄨㄣ" code="3F" type="Phonetic" joined="true" />
+  <symbol text="ㄨㄤ" code="38" type="Phonetic" joined="true" />
+  <symbol text="ㄨㄥ" code="2F" type="Phonetic" joined="true" />
+  <symbol text="ㄩㄝ" code="26" type="Phonetic" joined="true" />
+  <symbol text="ㄩㄢ" code="18" type="Phonetic" joined="true" />
+  <symbol text="ㄩㄣ" code="32" type="Phonetic" joined="true" />
+  <symbol text="ㄩㄥ" code="16" type="Phonetic" joined="true" />
+
+  <!-- 聲調記號 -->
+  <symbol text="ˉ" code="04" type="Tone" description="一聲 (注意:它不是全形空白)" />
+  <symbol text="ˊ" code="02" type="Tone" description="二聲" />
+  <symbol text="ˇ" code="08" type="Tone" description="三聲" />
+  <symbol text="ˋ" code="10" type="Tone" description="四聲" />
+  <symbol text="˙" code="01" type="Tone" description="輕聲" />
+
+  <!-- 標點符號 -->
+  <symbol text="。"   code="24"     type="Punctuation" description="句號" />
+  <symbol text="，"   code="06"     type="Punctuation" description="逗號" />
+  <symbol text="、"   code="20"     type="Punctuation" description="頓號" />
+  <symbol text="；"   code="30"     type="Punctuation" description="分號" />
+  <symbol text="？"   code="15"     type="Punctuation" description="問號" />
+  <symbol text="！"   code="07"     type="Punctuation" description="驚嘆號" />
+  <symbol text="﹗"   code="07"     type="Punctuation" description="另一種驚嘆號" />
+  <symbol text="："   code="1212"   type="Punctuation" description="冒號" />
+  <symbol text="︰"   code="1212"   type="Punctuation" description="冒號（與上一個看似相同，但內碼不同）" />
+  <symbol text="～"   code="2424"   type="Punctuation" description="水波符號（跟半形水波符號的點位相同）" />
+  <symbol text="－"   code="1002"   type="Punctuation" description="破折號" />
+  <symbol text="－－" code="1002"   type="Punctuation" description="破折號" />
+  <symbol text="─"   code="1002"   type="Punctuation" description="破折號" />
+  <symbol text="——"  code="1002"   type="Punctuation" description="破折號，0x2014" />
+  <symbol text="──" code="1002"   type="Punctuation" description="破折號" />
+  <symbol text="…"   code="101010" type="Punctuation" description="刪節號" />
+  <symbol text="……" code="101010" type="Punctuation" description="刪節號" />
+  <symbol text="﹏﹏" code="2024"   type="Punctuation" description="書名號" />
+  <symbol text="╴╴" code="3030"   type="Punctuation" description="私名號" />
+  <symbol text="‧"   code="24"     type="Punctuation" description="音界號" />
+  <symbol text="．"   code="24"     type="Punctuation" description="音界號（視為音界號）" />
+  <symbol text="※"   code="083C"   type="Punctuation" description="星標記號" />
+  <symbol text="◎"   code="2A15"   type="Punctuation" description="精讀記號" />
+  <symbol text="「"   code="3024"   type="Punctuation" description="左單引號" />
+  <symbol text="」"   code="2406"   type="Punctuation" description="右單引號" />
+  <symbol text="『"   code="2626"   type="Punctuation" description="左雙引號" />
+  <symbol text="』"   code="3434"   type="Punctuation" description="右雙引號" />
+  <symbol text="（"   code="2A"     type="Punctuation" description="左圓括號" />
+  <symbol text="）"   code="15"     type="Punctuation" description="右圓括號" />
+  <symbol text="〔"   code="2F"     type="Punctuation" description="左方括號" />
+  <symbol text="〕"   code="3D"     type="Punctuation" description="右方括號" />
+  <symbol text="【"   code="37"     type="Punctuation" description="左方括號(粗)" />
+  <symbol text="】"   code="3E"     type="Punctuation" description="右方括號(粗)" />
+  <symbol text="｛"   code="26"     type="Punctuation" description="左大括號" />
+  <symbol text="｝"   code="34"     type="Punctuation" description="右大括號" />
+
+  <!-- 數學符號 -->
+  <symbol text="←"   code="2A1212"     type="Math" description="箭頭向左" />
+  <symbol text="→"   code="121215"     type="Math" description="箭頭向右" />
+  <symbol text="↑"   code="2B23121215" type="Math" description="箭頭向上" />
+  <symbol text="↓"   code="2B29121215" type="Math" description="箭頭向下" />
+  <symbol text="↖"   code="2B182A1212" type="Math" description="箭頭左上" />
+  <symbol text="↗"   code="2B181215"   type="Math" description="箭頭右上" />
+  <symbol text="↙"   code="2B302A1212" type="Math" description="箭頭左下" />
+  <symbol text="↘"   code="2B30121215" type="Math" description="箭頭右下" />
+  <symbol text="∴"   code="2021"       type="Math" description="所以" />
+  <symbol text="∵"   code="080C"       type="Math" description="因為" />
+  <symbol text="＋"   code="2C"         type="Math" description="加號" />
+  <symbol text="＝"   code="2805"       type="Math" description="等於" />  
+  <symbol text="≠"   code="0C2805"     type="Math" description="不等於" />
+  <symbol text="＜"   code="1005"       type="Math" description="小於" />
+  <symbol text="＞"   code="2802"       type="Math" description="大於" />
+  <symbol text="≦"   code="100531"     type="Math" description="小於等於" />
+  <symbol text="≧"   code="280231"     type="Math" description="大於等於" />  
+  <symbol text="±"    code="2C24"       type="Math" description="正負符號" />
+  <symbol text="∠"   code="2B2A"       type="Math" description="角度符號" />
+  <symbol text="⊥"   code="2B0F"       type="Math" description="垂直符號" />
+  <symbol text="≒"   code="102805292123213B" type="Math" description="近似符號" />
+
+  <!-- 其他符號 -->
+  <symbol text="　"     code="00"     type="Misc" description="全形空白" />
+  <symbol text="○"     code="15"     type="Misc" description="打圈 (原本是 2A15)" />
+  <symbol text="╳"     code="2D"     type="Misc" description="打叉 (原本是 152A)" />
+  <symbol text="√"     code="221C"   type="Misc" description="打勾（注意: 為了避免跟注音符號的第三聲一樣，故改用根號符號）" /> 
+  <symbol text="＄"     code="32"     type="Misc" description="錢字符號" />
+  <symbol text="∘"     code="182821" type="Misc" description="溫度符號" />
+  <symbol text="℃"     code="182821102009" type="Misc" description="溫度符號" />
+  <symbol text="﹋"     code="2214"   type="Misc" description="小題結束" />
+  <symbol text="﹍"     code="1224"   type="Misc" description="小單元結束" />  
+  <symbol text="ˍ"     code="1212"   type="Misc" description="大單元結束" />
+  <symbol text="★"    code="2004"   type="Misc" description="點譯者註" />
+  <symbol text="（★"   code="2A2004"   type="Misc" description="點譯者註，有外加括弧的寫法。" />
+  <symbol text="□"     code="3F"     type="Misc" description="滿點，可用於輔助幼兒辨識點字。" />
+  <symbol text="▲"     code="2A"     type="Misc" description="刪除起始" />
+  <symbol text="▼"     code="3B"     type="Misc" description="刪除結束" />
+  <symbol text="﹒"    code="10"      type="Misc" description="目錄虛線的點" />
+
+  <!-- 用中括號包住的特殊符號（因為原本的符號已有定義，故用 [] 包住以便區別。需在 Converter 類別中額外判斷） -->
+  <symbol text="[↗]"   code="2012"   type="Misc" description="上升語調" />
+  <symbol text="[↘]"   code="1204"   type="Misc" description="下降語調" />
+</Symbols>

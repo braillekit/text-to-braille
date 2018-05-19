@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2E084233-8D51-47A2-9E38-74CEFA38EA32}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Btx2Brx</RootNamespace>
+    <AssemblyName>Btx2Brx</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Huanlin, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HuanlinLib_1.15\Huanlin.dll</HintPath>
+    </Reference>
+    <Reference Include="Huanlin.Braille, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HuanlinLib_1.15\Huanlin.Braille.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BrailleToolkit\BrailleCell.cs" />
+    <Compile Include="BrailleToolkit\BrailleCellList.cs" />
+    <Compile Include="BrailleToolkit\BrailleConst.cs" />
+    <Compile Include="BrailleToolkit\BrailleDocument.cs" />
+    <Compile Include="BrailleToolkit\BrailleLine.cs" />
+    <Compile Include="BrailleToolkit\BraillePageTitle.cs" />
+    <Compile Include="BrailleToolkit\BrailleProcessor.cs" />
+    <Compile Include="BrailleToolkit\BrailleWord.cs" />
+    <Compile Include="BrailleToolkit\Data\BrailleTableBase.cs" />
+    <Compile Include="BrailleToolkit\Data\ChineseBrailleTable.cs" />
+    <Compile Include="BrailleToolkit\Data\CoordinateBrailleTable.cs" />
+    <Compile Include="BrailleToolkit\Data\EnglishBrailleTable.cs" />
+    <Compile Include="BrailleToolkit\Data\MathBrailleTable.cs" />
+    <Compile Include="BrailleToolkit\Data\PhoneticBrailleTable.cs" />
+    <Compile Include="BrailleToolkit\Data\TableBrailleTable.cs" />
+    <Compile Include="BrailleToolkit\Data\XmlBrailleTable.cs" />
+    <Compile Include="BrailleToolkit\Tags\ContextTagNames.cs" />
+    <Compile Include="BrailleToolkit\Tags\IContextTag.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JsonHelper.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Huanlin.Common">
+      <Version>4.5.8</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BrailleToolkit\Data\BrailleCharTbl.txt" />
+    <Content Include="BrailleToolkit\Data\BrailleFontTbl.txt" />
+    <Content Include="BrailleToolkit\Data\ChineseBrailleTable.xml" />
+    <Content Include="BrailleToolkit\Data\CoordinateBrailleTable.xml" />
+    <Content Include="BrailleToolkit\Data\EnglishBrailleTable.xml" />
+    <Content Include="BrailleToolkit\Data\MathBrailleTable.xml" />
+    <Content Include="BrailleToolkit\Data\PhoneticBrailleTable.xml" />
+    <Content Include="BrailleToolkit\Data\TableBrailleTable.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Symbols>
+  <!-- 座標符號 -->
+  <symbol text="("    code="37"     type="座標" Description="左括弧" />
+  <symbol text=")"    code="3E"     type="座標" Description="右括弧" />
+  <symbol text=","    code="20"     type="座標" Description="數學逗號" />
+</Symbols>

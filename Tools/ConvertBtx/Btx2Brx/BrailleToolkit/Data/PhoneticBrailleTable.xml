@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 參考 http://en.wikipedia.org/wiki/Unicode_Phonetic_Symbols -->
+<Symbols>
+  <!-- 音標括號 -->
+  <symbol text="["  code="1212"     type="Misc" />
+  <symbol text="]"  code="1212"     type="Misc" />
+
+  <!-- 母音 -->
+  <symbol text=":"  code="12"       type="Vowel" />
+  <symbol text="i"  code="0A"       type="Vowel" />
+  <symbol text="!"  code="3807"     type="Vowel" description="i 上下顛倒"/>
+  <symbol text="e"  code="11"       type="Vowel" />
+  <symbol text="ɛ"  code="1C"       type="Vowel" />
+  <symbol text="æ"  code="29"       type="Vowel" description="蝴蝶音"/>
+  <symbol text="a"  code="01"       type="Vowel" />
+  <symbol text="ɑ"  code="21"       type="Vowel" />
+  <symbol text="ɒ"  code="1621"     type="Vowel" />
+  <symbol text="ɪ"  code="0C"       type="Vowel" />
+  <symbol text="ɩ"  code="0C"       type="Vowel" />
+  <symbol text="ɐ"  code="1601"     type="Vowel" />
+  <symbol text="ɔ"  code="23"       type="Vowel" />
+  <symbol text="o"  code="15"       type="Vowel" />
+  <symbol text="ʉ"  code="3425"     type="Vowel" />
+  <symbol text="u"  code="25"       type="Vowel" />
+  <symbol text="ʊ"  code="37"       type="Vowel" />
+  <symbol text="ʌ"  code="2C"       type="Vowel" />
+  <symbol text="ə"  code="22"       type="Vowel" />
+  <symbol text="ɜ"  code="161C"     type="Vowel" />
+  <symbol text="ɝ"  code="161C0217" type="Vowel" />
+  <symbol text="ɚ"  code="220217"   type="Vowel" />
+  <symbol text="Y"  code="163D"     type="Vowel" />
+  <symbol text="y"  code="3D"       type="Vowel" />
+  <symbol text="ɶ"  code="2A"       type="Vowel" description="oe"/>
+
+  <!-- 子音 -->
+  <symbol text="p" code="0F" type="Consonant"  />
+  <symbol text="b" code="03" type="Consonant" />
+  <symbol text="t" code="1E" type="Consonant" />
+  <symbol text="d" code="19" type="Consonant" />
+  <symbol text="k" code="05" type="Consonant" />
+  <symbol text="g" code="1B" type="Consonant" />
+  <symbol text="q" code="1F" type="Consonant" />
+  <symbol text="G" code="141B" type="Consonant" />
+  <symbol text="m" code="0D" type="Consonant" />
+  <symbol text="n" code="1D" type="Consonant" />
+  <symbol text="ŋ" code="2B" type="Consonant" />
+  <symbol text="ɳ" code="381D" type="Consonant" description="n 下方有一點" />
+  <symbol text="ɱ" code="380D" type="Consonant" description="m 下方有一點" />
+  <symbol text="w" code="3A" type="Consonant" />
+  <symbol text="l" code="07" type="Consonant" />
+  <symbol text="f" code="0B" type="Consonant" />
+  <symbol text="v" code="27" type="Consonant" />
+  <symbol text="ɵ" code="39" type="Consonant" />
+  <symbol text="ð" code="3B" type="Consonant" description="The"/>
+  <symbol text="s" code="0E" type="Consonant" />
+  <symbol text="z" code="35" type="Consonant" />
+  <symbol text="ɹ" code="3C" type="Consonant" />
+  <symbol text="ɥ" code="3E" type="Consonant" />
+  <symbol text="h" code="13" type="Consonant" />
+  <symbol text="ʃ" code="31" type="Consonant" />
+  <symbol text="ʒ" code="2E" type="Consonant" />
+  <symbol text="r" code="17" type="Consonant" />
+  <symbol text="R" code="1417" type="Consonant" />
+  <symbol text="j" code="1A" type="Consonant" />
+
+
+  <!-- 重音 -->
+  <symbol text="`"  code="18" description="第一重音" />
+  <symbol text="'"  code="18" description="第一重音" />
+  <symbol text=","  code="08" description="第二重音" />
+</Symbols>
