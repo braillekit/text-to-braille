@@ -1,17 +1,18 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using EasyBrailleEdit.Common;
 using Nuke.Common.Git;
 using Nuke.Common.Tools.GitVersion;
-using Nuke.Core;
+using Nuke.Common;
 using static Nuke.Common.Tools.MSBuild.MSBuildTasks;
-using static Nuke.Core.IO.FileSystemTasks;
-using static Nuke.Core.IO.PathConstruction;
+using static Nuke.Common.IO.FileSystemTasks;
+using static Nuke.Common.IO.PathConstruction;
 
 class Build : NukeBuild
 {
     // Console application entry. Also defines the default target.
-    public static int Main () => Execute<Build>(x => x.Compile);
+    public static int Main() => Execute<Build>(x => x.Compile);
 
     // Auto-injection fields:
 
@@ -52,28 +53,62 @@ class Build : NukeBuild
             .Requires(() => GitVersion != null)
             .Executes(() =>
             {
-                //GitVersionTasks.DefaultGitVersion.EnableUpdateAssemblyInfo();
-
                 MSBuild(s => DefaultMSBuildCompile);
 
                 string outputDir = OutputDirectory / "net452";
 
-                if (GitRepository.Branch.Equals(Constant.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase))
+//                if (GitRepository.Branch.Equals(Constant.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase))
+//                {
+                string srcFileName = Path.Combine(outputDir, "AppConfig.ForBlind.ini");
+                string dstFileName = Path.Combine(outputDir, "AppConfig.Default.ini");
+
+                Logger.Info(Environment.NewLine + "**********<<< 額外處理 >>>****************");
+                Logger.Info($"使用特定分支版本的預設應用程式組態檔：'{Constant.ProductBranches.TaipeiForBlind}'");
+                File.Copy(srcFileName, dstFileName, true);
+                File.Delete(srcFileName);
+//                }
+
+                // Removing unnecessary files.
+                var dir = new DirectoryInfo(outputDir);
+                foreach (var file in dir.EnumerateFiles("*.pdb"))
                 {
-                    string srcFileName = Path.Combine(outputDir, "AppConfig.ForBlind.ini");
-                    string dstFileName = Path.Combine(outputDir, "AppConfig.Default.ini");
-
-                    Logger.Info(Environment.NewLine + "**********<<< 額外處理 >>>****************");
-                    Logger.Info($"使用特定分支版本的預設應用程式組態檔：'{Constant.ProductBranches.TaipeiForBlind}'");
-                    File.Copy(srcFileName, dstFileName, true);
-                    File.Delete(srcFileName);
-
-                    // Removing unnecessary files.
-                    var dir = new DirectoryInfo(outputDir);
-                    foreach (var file in dir.EnumerateFiles("*.pdb"))
-                    {
-                        file.Delete();
-                    }
+                    file.Delete();
                 }
             });
+
+    Target Deploy => _ => _
+            .DependsOn(Compile)
+            .Requires(() => GitVersion != null)
+            .Executes(() =>
+            {              
+                var outputDir = OutputDirectory / "net452";
+                var updateDir = RootDirectory / "UpdateFiles";
+
+                Logger.Log($"From: {outputDir}");
+                Logger.Log($"To: {updateDir}");
+
+                var files = Directory.EnumerateFiles(outputDir, "*.*", SearchOption.TopDirectoryOnly)
+                    .Where(s => s.EndsWith(".exe") || s.EndsWith(".dll")
+                        || s.EndsWith(".config") || s.EndsWith(".ini"))
+                    .ToList();
+
+
+                Logger.Log($"Copying {files.Count} files...");
+
+                foreach (var filename in files)
+                {
+                    string fname = Path.GetFileName(filename);
+                    string dstFileName = updateDir / fname;
+                    File.Copy(filename, dstFileName, true);
+
+                    Logger.Log($"Copied {fname}");
+                }
+                
+                string changeLogFile = RootDirectory / "Doc/ChangeLog.txt";
+                File.Copy(changeLogFile, updateDir / Path.GetFileName(changeLogFile), true);
+                Logger.Log($"\r\nCopied {Path.GetFileName(changeLogFile)}");
+
+                // Don't forget to manually modify Update.txt.
+            });
+
 }
