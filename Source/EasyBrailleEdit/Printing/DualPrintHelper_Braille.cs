@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
+using BrailleToolkit.Helpers;
 using EasyBrailleEdit.Common;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
@@ -24,7 +25,7 @@ namespace EasyBrailleEdit
         /// </summary>
         public void PrintBraille(bool toBrailler, bool toFile, string fileName)
         {
-            if (toBrailler == false && toFile == false)
+            if (!toBrailler && !toFile)
                 return;
 
             string msg = "請按「確定」鈕開始列印點字。";
@@ -35,14 +36,8 @@ namespace EasyBrailleEdit
             if (MsgBoxHelper.ShowOkCancel(msg) != DialogResult.OK)
                 return;
 
-            bool cancel = false;
-
             // 起始列印工作
-            BeginPrintBraille(ref cancel);
-            if (cancel)
-            {
-                return;
-            }
+            BeginPrintBraille();
 
             StringBuilder brailleData = GenerateOutputData();
             if (toBrailler)
@@ -58,7 +53,7 @@ namespace EasyBrailleEdit
             EndPrintBraille(toBrailler, toFile);
         }
 
-        private void BeginPrintBraille(ref bool cancel)
+        private void BeginPrintBraille()
         {
             InitializePrintParameters();
         }
@@ -121,7 +116,14 @@ namespace EasyBrailleEdit
             {
                 brLine = m_BrDoc.Lines[lineIdx];
 
-                SetOrgPageNumber(brLine, (lineCnt % realLinesPerPage == 0));	// 設定起始/終止原書頁碼。
+                bool isFirstLineOfCurrentPage = lineCnt % realLinesPerPage == 0;
+
+                // 設定起始/終止原書頁碼。
+                BrailleDocumentHelper.SetBeginEndOrgPageNumber(
+                    brLine,
+                    isFirstLineOfCurrentPage,
+                    ref m_BeginOrgPageNumber,
+                    ref m_EndOrgPageNumber);
 
                 sb.Append(BrailleCharConverter.ToString(brLine));
                 sb.Append(NewLine);     // 每一列後面附加一個換行符號。
@@ -135,7 +137,7 @@ namespace EasyBrailleEdit
                     {
                         pageNum++;
 
-                        sb.Append(GetBraillePageFoot(lineIdx, m_DisplayedPageNum, m_BeginOrgPageNumber, m_EndOrgPageNumber));
+                        sb.Append(BrailleDocumentHelper.GetBraillePageFoot(m_BrDoc, lineIdx, m_DisplayedPageNum, m_BeginOrgPageNumber, m_EndOrgPageNumber));
 
                         AddPageBreak(sb);
                     }
@@ -167,7 +169,7 @@ namespace EasyBrailleEdit
                     for (int i = 0; i < n; i++)
                         sb.Append(NewLine);
 
-                    sb.Append(GetBraillePageFoot(lineIdx, m_DisplayedPageNum, m_BeginOrgPageNumber, m_EndOrgPageNumber));
+                    sb.Append(BrailleDocumentHelper.GetBraillePageFoot(m_BrDoc, lineIdx, m_DisplayedPageNum, m_BeginOrgPageNumber, m_EndOrgPageNumber));
 
                     AddPageBreak(sb);
                 }
@@ -180,102 +182,6 @@ namespace EasyBrailleEdit
             }
 
             return sb;
-        }
-
-        /// <summary>
-        /// 傳回點字頁尾。
-        /// </summary>
-        /// <param name="lineIdx">目前列印的列索引。用來計算頁尾的文件標題。</param>
-        /// <param name="pageNum">頁碼。</param>
-        /// <param name="beginOrgPageNum">起始原書頁碼。</param>
-        /// <param name="endOrgPageNum">終止原書頁碼。</param>
-        /// <returns></returns>
-        /// <remarks>注意：點字頁碼的 # 號要固定印在第 37 方的位置（requested by 秋華）</remarks>
-        private string GetBraillePageFoot(int lineIdx, int pageNum, string beginOrgPageNum, string endOrgPageNum)
-        {
-            StringBuilder sb = new StringBuilder();
-            StringBuilder sbPageNum = new StringBuilder();
-
-            // 標題
-            BrailleLine titleLine = m_BrDoc.GetPageTitle(lineIdx);
-            string title = BrailleCharConverter.ToString(titleLine);
-
-            // 原書頁碼
-            if (!String.IsNullOrEmpty(beginOrgPageNum))
-            {
-                int beginNumber = -1;
-                Int32.TryParse(beginOrgPageNum, out beginNumber);
-
-                string orgPageNum = "";
-                if (String.IsNullOrEmpty(endOrgPageNum))
-                {
-                    if (beginNumber >= 0)
-                    {
-                        orgPageNum = BrailleCharConverter.GetDigitCharCode(beginNumber, true);
-                    }
-                    else
-                    {
-                        // 如果原書頁碼不是阿拉伯數字，就直接使用原始文字（不用轉換）。
-                        orgPageNum = beginOrgPageNum;
-                    }                    
-                }
-                else // 起始原書頁碼和終止原書頁碼都有指定。
-                {                    
-                    if (beginOrgPageNum == endOrgPageNum)
-                    {
-                        if (beginNumber >= 0)
-                        {
-                            orgPageNum = BrailleCharConverter.GetDigitCharCode(beginNumber, true);
-                        }
-                        else
-                        {
-                            // 如果原書頁碼不是阿拉伯數字，就直接使用原始文字（不用轉換）。
-                            orgPageNum = beginOrgPageNum;
-                        }                            
-                    }
-                    else
-                    {
-                        var hyphen = BrailleCharConverter.ToChar(BrailleCell.PositionNumbersToByte(3, 6).ToString("X2"));
-                        int endNumber = -1;
-                        Int32.TryParse(endOrgPageNum, out endNumber);
-
-                        if (endNumber >= 0)
-                        {
-                            orgPageNum = BrailleCharConverter.GetDigitCharCode(beginNumber, true) 
-                                + hyphen + BrailleCharConverter.GetDigitCharCode(endNumber, true);
-                        }
-                        else
-                        {
-                            // 如果原書頁碼不是阿拉伯數字，就直接使用原始文字（不用轉換）。
-                            orgPageNum = beginOrgPageNum + hyphen + endOrgPageNum;
-                        }
-                    }
-                }
-                sbPageNum.Append('#');			// 數字點
-                sbPageNum.Append(orgPageNum);	// 原書頁碼
-                sbPageNum.Append(' ');			// 空方
-            }
-
-            sbPageNum.Append('#');	// 數字點
-            string pageNumStr = BrailleCharConverter.GetDigitCharCode(pageNum, true);
-            sbPageNum.Append(pageNumStr.PadRight(3));	// 點字頁碼的數字部分固定佔三方，亦即 # 固定在第 37 方的位置
-
-            // 計算剩餘可容納標題的空間。
-            int roomForTitle = m_BrDoc.CellsPerLine - sbPageNum.Length - 1;  // 多留一個空白
-
-            if (title.Length > roomForTitle)
-            {
-                title = title.Substring(0, roomForTitle);
-            }
-            else
-            {
-                title = title.PadRight(roomForTitle);
-            }
-            sb.Append(title);		// 標題
-            sb.Append(' ');			// 空方
-            sb.Append(sbPageNum.ToString());	// 原書頁碼、點字頁碼
-
-            return sb.ToString();
         }
 
         private void WriteToBrailler(StringBuilder brailleData)

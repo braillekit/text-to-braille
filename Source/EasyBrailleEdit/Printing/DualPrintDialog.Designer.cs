@@ -373,7 +373,7 @@
             // 
             // txtStartPageNumber
             // 
-            this.txtStartPageNumber.Location = new System.Drawing.Point(200, 63);
+            this.txtStartPageNumber.Location = new System.Drawing.Point(205, 63);
             this.txtStartPageNumber.Name = "txtStartPageNumber";
             this.txtStartPageNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtStartPageNumber.Size = new System.Drawing.Size(40, 29);

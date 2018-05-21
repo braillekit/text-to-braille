@@ -1372,40 +1372,5 @@ namespace BrailleToolkit
 
         #endregion
 
-
-        #region Misc. methods.
-
-        /// <summary>
-        /// 從傳入的字串中取出原書頁碼。
-        /// </summary>
-        /// <param name="line"></param>
-        /// <returns>若傳入的字串不是原書頁碼，則傳回空字串。否則傳回原書頁碼的文字（必須是字串，因為頁碼可能是羅馬數字）。</returns>
-        public static string GetOrgPageNumber(string line)
-        {
-            if (String.IsNullOrEmpty(line)) return String.Empty;
-
-            var pageNumberText = String.Empty;
-
-            var endTagName = XmlTagHelper.GetEndTagName(ContextTagNames.OrgPageNumber);
-            line = line.Trim();
-            if (line.StartsWith(ContextTagNames.OrgPageNumber) && line.EndsWith(endTagName))
-            {
-                pageNumberText =
-                    line.Replace(ContextTagNames.OrgPageNumber, String.Empty)
-                        .Replace(endTagName, String.Empty)
-                        .Trim();
-
-            }
-            else if (line.StartsWith(OrgPageNumberContextTag.LeadingUnderlines))
-            {
-                pageNumberText =
-                    line.Remove(0, OrgPageNumberContextTag.LeadingUnderlines.Length)
-                        .Replace(endTagName, String.Empty);
-            }
-
-            return pageNumberText;
-        }
-
-        #endregion
     }
 }

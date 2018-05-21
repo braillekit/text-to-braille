@@ -111,7 +111,7 @@ namespace EasyBrailleEdit
             return false;
         }
 
-        public bool DoExportTextFile()
+        private bool DoExportTextFile()
         {
             var dlg = new SaveFileDialog
             {
@@ -123,6 +123,24 @@ namespace EasyBrailleEdit
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 BrailleDoc.SaveTextFile(dlg.FileName);
+                return true;
+            }
+            return false;
+        }
+
+        private bool DoExportBrailleFile()
+        {
+            var dlg = new SaveFileDialog
+            {
+                DefaultExt = ".brl",
+                Filter = "適用於超點的點字檔 (*.brl)|*.brl",
+                FilterIndex = 1
+            };
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                var exporter = new BrailleDataExporter(BrailleDoc, AppGlobals.Config.Braille.LinesPerPage);
+                exporter.SaveBrailleFileForWCBE(dlg.FileName);
                 return true;
             }
             return false;

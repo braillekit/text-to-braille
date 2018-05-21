@@ -1301,6 +1301,11 @@ namespace EasyBrailleEdit
         {
             DoExportTextFile();
         }
+
+        private void miFileExportBrl_Click(object sender, EventArgs e)
+        {
+            DoExportBrailleFile();
+        }
     }
 
 

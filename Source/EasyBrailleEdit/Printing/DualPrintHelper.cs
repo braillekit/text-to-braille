@@ -4,6 +4,7 @@ using System.Drawing.Printing;
 using System.Text;
 using System.Windows.Forms;
 using BrailleToolkit;
+using BrailleToolkit.Helpers;
 using EasyBrailleEdit.Common;
 
 namespace EasyBrailleEdit
@@ -52,10 +53,10 @@ namespace EasyBrailleEdit
             m_PrintOptions = prnOpt;
 
             m_PrintDoc = new PrintDocument();
-            m_PrintDoc.BeginPrint += new PrintEventHandler(BrailleText_BeginPrint);
-            m_PrintDoc.QueryPageSettings += new QueryPageSettingsEventHandler(BrailleText_QueryPageSettings);
-            m_PrintDoc.PrintPage += new PrintPageEventHandler(BrailleText_PrintPage);
-            m_PrintDoc.EndPrint += new PrintEventHandler(BrailleText_EndPrint);
+            m_PrintDoc.BeginPrint += BrailleText_BeginPrint;
+            m_PrintDoc.QueryPageSettings += BrailleText_QueryPageSettings;
+            m_PrintDoc.PrintPage += BrailleText_PrintPage;
+            m_PrintDoc.EndPrint += BrailleText_EndPrint;
 
             m_PreviewOnly = false;
         }
@@ -292,7 +293,11 @@ namespace EasyBrailleEdit
 
                 brLine = m_BrDoc.Lines[lineIdx];
 
-                SetOrgPageNumber(brLine, (lineCnt == 0));
+                BrailleDocumentHelper.SetBeginEndOrgPageNumber(
+                    brLine, 
+                    (lineCnt == 0), 
+                    ref m_BeginOrgPageNumber, 
+                    ref m_EndOrgPageNumber);
 
                 lineIdx++;
                 lineCnt++;
@@ -382,7 +387,12 @@ namespace EasyBrailleEdit
 
                 brLine = m_BrDoc.Lines[lineIdx];
 
-                SetOrgPageNumber(brLine, (lineCnt == 0));	// 設定原書頁碼
+                // 設定起始與終止的原書頁碼
+                BrailleDocumentHelper.SetBeginEndOrgPageNumber(
+                    brLine,
+                    (lineCnt == 0),
+                    ref m_BeginOrgPageNumber,
+                    ref m_EndOrgPageNumber);
 
                 y = (lineCnt * m_LineHeight) + marginTop; // 計算目前列的 y 軸位置
 
@@ -475,32 +485,6 @@ namespace EasyBrailleEdit
 
                 cellCnt += brWord.CellCount;
             }
-        }
-
-        /// <summary>
-        /// 判斷傳入的列是否為原書頁碼，如果是，則設定起始或終止原書頁碼。
-        /// </summary>
-        /// <param name="brLine"></param>
-        /// <param name="isFirstLineOfPage">是否為該頁的第一列。</param>
-        private void SetOrgPageNumber(BrailleLine brLine, bool isFirstLineOfPage)
-        {
-            string line = brLine.ToString();
-
-            string orgPageNum = BrailleProcessor.GetOrgPageNumber(line);
-            if (String.IsNullOrEmpty(orgPageNum))
-            {
-                return;
-            }
-
-            if (String.IsNullOrEmpty(m_BeginOrgPageNumber))
-            {
-                m_BeginOrgPageNumber = orgPageNum;
-            }
-            if (isFirstLineOfPage)	// 如果該頁的第一列就是原書頁碼
-            {
-                m_BeginOrgPageNumber = orgPageNum;	// 則起始原書頁碼應該直接使用此頁碼。
-            }
-            m_EndOrgPageNumber = orgPageNum;
         }
 
         /// <summary>

@@ -69,6 +69,7 @@
             this.statProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statDocTitle = new System.Windows.Forms.ToolStripStatusLabel();
             this.statPageInfo = new System.Windows.Forms.ToolStripStatusLabel();
+            this.miFileExportBrl = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -113,6 +114,7 @@
             this.miFileOpen,
             this.miFileSave,
             this.miFileSaveAs,
+            this.miFileExportBrl,
             this.miFileExportTxt,
             this.toolStripMenuItem1,
             this.miFilePrint,
@@ -126,7 +128,7 @@
             // 
             this.miFileOpen.Name = "miFileOpen";
             this.miFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.miFileOpen.Size = new System.Drawing.Size(267, 26);
+            this.miFileOpen.Size = new System.Drawing.Size(232, 26);
             this.miFileOpen.Text = "開啟舊檔(&O)...";
             this.miFileOpen.Click += new System.EventHandler(this.miFileOpen_Click);
             // 
@@ -134,46 +136,46 @@
             // 
             this.miFileSave.Name = "miFileSave";
             this.miFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.miFileSave.Size = new System.Drawing.Size(267, 26);
+            this.miFileSave.Size = new System.Drawing.Size(232, 26);
             this.miFileSave.Text = "儲存檔案";
             this.miFileSave.Click += new System.EventHandler(this.miFileSave_Click);
             // 
             // miFileSaveAs
             // 
             this.miFileSaveAs.Name = "miFileSaveAs";
-            this.miFileSaveAs.Size = new System.Drawing.Size(267, 26);
+            this.miFileSaveAs.Size = new System.Drawing.Size(232, 26);
             this.miFileSaveAs.Text = "另存新檔(&A)";
             this.miFileSaveAs.Click += new System.EventHandler(this.miFileSaveAs_Click);
             // 
             // miFileExportTxt
             // 
             this.miFileExportTxt.Name = "miFileExportTxt";
-            this.miFileExportTxt.Size = new System.Drawing.Size(267, 26);
-            this.miFileExportTxt.Text = "匯出文字檔（實驗功能）(&T)";
+            this.miFileExportTxt.Size = new System.Drawing.Size(232, 26);
+            this.miFileExportTxt.Text = "匯出文字檔(&T)";
             this.miFileExportTxt.Click += new System.EventHandler(this.miFileExportTxt_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(264, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(229, 6);
             // 
             // miFilePrint
             // 
             this.miFilePrint.Name = "miFilePrint";
             this.miFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.miFilePrint.Size = new System.Drawing.Size(267, 26);
+            this.miFilePrint.Size = new System.Drawing.Size(232, 26);
             this.miFilePrint.Text = "列印(&P)";
             this.miFilePrint.Click += new System.EventHandler(this.miFilePrint_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(264, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(229, 6);
             // 
             // 離開XToolStripMenuItem
             // 
             this.離開XToolStripMenuItem.Name = "離開XToolStripMenuItem";
-            this.離開XToolStripMenuItem.Size = new System.Drawing.Size(267, 26);
+            this.離開XToolStripMenuItem.Size = new System.Drawing.Size(232, 26);
             this.離開XToolStripMenuItem.Text = "離開(&X)";
             // 
             // miEdit
@@ -442,6 +444,13 @@
             this.statPageInfo.Name = "statPageInfo";
             this.statPageInfo.Size = new System.Drawing.Size(70, 17);
             // 
+            // miFileExportBrl
+            // 
+            this.miFileExportBrl.Name = "miFileExportBrl";
+            this.miFileExportBrl.Size = new System.Drawing.Size(232, 26);
+            this.miFileExportBrl.Text = "匯出點字檔(&B)";
+            this.miFileExportBrl.Click += new System.EventHandler(this.miFileExportBrl_Click);
+            // 
             // DualEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
@@ -516,5 +525,6 @@
 		private System.Windows.Forms.ToolStripMenuItem miEditFindNext;
 		private System.Windows.Forms.ToolStripMenuItem miEditFetchPageTitles;
         private System.Windows.Forms.ToolStripMenuItem miFileExportTxt;
+        private System.Windows.Forms.ToolStripMenuItem miFileExportBrl;
     }
 }

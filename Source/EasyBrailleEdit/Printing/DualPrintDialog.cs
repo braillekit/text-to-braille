@@ -107,6 +107,7 @@ namespace EasyBrailleEdit
         {
             LoadSettings();		// 載入上次的設定。
 
+            txtBrailleFileName.TextBox.CharacterCasing = CharacterCasing.Lower;
             txtBrailleFileName.Button.Click += SelectBrailleFileNameButton_Click;
             chkPrintBrailleToFile_CheckedChanged(chkPrintBrailleToFile, EventArgs.Empty);
             chkPrintBraille_CheckedChanged(chkPrintBraille, EventArgs.Empty);
@@ -114,17 +115,18 @@ namespace EasyBrailleEdit
 
         void SelectBrailleFileNameButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog
+            var dlg = new SaveFileDialog
             {
-                DefaultExt = Constant.Files.DefaultBrailleFileExt,
+                DefaultExt = Constant.Files.DefaultPrintableBrailleFileExt,
                 CheckFileExists = false,
                 CheckPathExists = true,
                 FileName = txtBrailleFileName.TextBox.Text,
                 Title = "指定要輸出的檔案名稱",
-                Filter = Constant.Files.SaveBrailleFileNameFilter  // Braille for Print.
+                Filter = Constant.Files.SavePrintableBrailleFileNameFilter  // Braille for Print.
             };
+
             if (dlg.ShowDialog() == DialogResult.OK)
-            {
+            {                
                 txtBrailleFileName.TextBox.Text = dlg.FileName;
             }
         }
@@ -148,7 +150,7 @@ namespace EasyBrailleEdit
                 string[] pageRange = txtPageRange.Text.Split(new char[] {'-'});
                 if (pageRange.Length != 2)
                 {
-                    MsgBoxHelper.ShowInfo("列印範圍無效: " + txtPageRange.Text);
+                    MsgBoxHelper.ShowError("列印範圍無效: " + txtPageRange.Text);
                     txtPageRange.Focus();
                     return null;
                 }
@@ -158,14 +160,14 @@ namespace EasyBrailleEdit
 
                 if (prnOpt.FromPage <= 0 || prnOpt.ToPage <= 0 || prnOpt.FromPage > prnOpt.ToPage)
                 {
-                    MsgBoxHelper.ShowInfo("列印範圍無效: " + txtPageRange.Text);
+                    MsgBoxHelper.ShowError("列印範圍無效: " + txtPageRange.Text);
                     txtPageRange.Focus();
                     return null;
                 }
                 int totalPages = AppGlobals.CalcTotalPages(m_BrDoc.Lines.Count, prnOpt.LinesPerPage, prnOpt.PrintPageFoot);
                 if (prnOpt.FromPage > totalPages || prnOpt.ToPage > totalPages)
                 {
-                    MsgBoxHelper.ShowInfo("列印範圍無效! 起始頁或終止頁超出總頁數。");
+                    MsgBoxHelper.ShowError("列印範圍無效! 起始頁或終止頁超出總頁數。");
                     txtPageRange.Focus();
                     return null;
                 }
@@ -180,13 +182,13 @@ namespace EasyBrailleEdit
                     prnOpt.StartPageNumber = Convert.ToInt32(txtStartPageNumber.Text);
                     if (prnOpt.StartPageNumber < 1)
                     {
-                        MsgBoxHelper.ShowInfo("無效的起始頁碼: " + txtStartPageNumber.Text);
+                        MsgBoxHelper.ShowError("無效的起始頁碼: " + txtStartPageNumber.Text);
                         return null;
                     }
                 }
                 catch
                 {
-                    MsgBoxHelper.ShowInfo("無效的起始頁碼: " + txtStartPageNumber.Text);
+                    MsgBoxHelper.ShowError("無效的起始頁碼: " + txtStartPageNumber.Text);
                     return null;
                 }
             }
@@ -227,13 +229,13 @@ namespace EasyBrailleEdit
 
             if (m_BrDoc.Lines.Count < 1)
             {
-                MsgBoxHelper.ShowInfo("沒有資料可供列印!");
+                MsgBoxHelper.ShowError("沒有資料可供列印!");
                 return;
             }
 
             if (cboPrinters.SelectedIndex < 0)
             {
-                MsgBoxHelper.ShowInfo("尚未選擇印表機!");
+                MsgBoxHelper.ShowError("尚未選擇印表機!");
                 return;
             }
 
@@ -253,7 +255,7 @@ namespace EasyBrailleEdit
         {
             if (m_BrDoc.Lines.Count < 1)
             {
-                MsgBoxHelper.ShowInfo("沒有資料可供列印!");
+                MsgBoxHelper.ShowError("沒有資料可供列印!");
                 return;
             }
 
@@ -262,7 +264,7 @@ namespace EasyBrailleEdit
 
             if (isToFile && String.IsNullOrEmpty(fileName)) 
             {
-                MsgBoxHelper.ShowInfo("請指定欲輸出的檔案名稱。");
+                MsgBoxHelper.ShowError("請指定欲輸出的檔案名稱。");
                 txtBrailleFileName.Focus();
                 return;
             }
@@ -271,7 +273,7 @@ namespace EasyBrailleEdit
             {
                 if (String.IsNullOrWhiteSpace(cboPrintersForBraille.Text))
                 {
-                    MessageBox.Show("請指定欲輸出點字的印表機!");
+                    MsgBoxHelper.ShowError("請指定欲輸出點字的印表機!");
                     cboPrintersForBraille.Focus();
                     return;
                 }
@@ -288,13 +290,13 @@ namespace EasyBrailleEdit
         {
             if (m_BrDoc.Lines.Count < 1)
             {
-                MsgBoxHelper.ShowInfo("沒有資料可供列印!");
+                MsgBoxHelper.ShowError("沒有資料可供列印!");
                 return;
             }
 
             if (cboPrinters.SelectedIndex < 0)
             {
-                MsgBoxHelper.ShowInfo("尚未選擇印表機!");
+                MsgBoxHelper.ShowError("尚未選擇印表機!");
                 return;
             }
 
@@ -342,7 +344,7 @@ namespace EasyBrailleEdit
         {
             if (String.IsNullOrWhiteSpace(cboPrinters.Text))
             {
-                MessageBox.Show("請先選擇印表機!");
+                MsgBoxHelper.ShowError("請先選擇印表機!");
                 return;
             }
             TextPageSetupDialog dlg = new TextPageSetupDialog(cboPrinters.Text);
