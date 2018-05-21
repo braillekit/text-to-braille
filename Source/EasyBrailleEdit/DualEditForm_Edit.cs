@@ -214,8 +214,8 @@ namespace EasyBrailleEdit
 
                 // Update UI
                 ReformatRow(row);
-                SourceGrid.Position pos = new SourceGrid.Position(row, col + 1);
-                grid.Selection.Focus(pos, true);    // 修正選取的儲存格範圍。
+                int focusCol = GetGridColumnIndex(lineIdx, wordIdx);
+                GridFocusCell(row, focusCol);
             }
         }
 
