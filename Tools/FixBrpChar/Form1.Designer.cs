@@ -39,10 +39,10 @@
             // 
             // btnAddFiles
             // 
-            this.btnAddFiles.Location = new System.Drawing.Point(170, 34);
+            this.btnAddFiles.Location = new System.Drawing.Point(199, 29);
             this.btnAddFiles.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddFiles.Name = "btnAddFiles";
-            this.btnAddFiles.Size = new System.Drawing.Size(88, 36);
+            this.btnAddFiles.Size = new System.Drawing.Size(114, 36);
             this.btnAddFiles.TabIndex = 0;
             this.btnAddFiles.Text = "加入檔案";
             this.btnAddFiles.UseVisualStyleBackColor = true;
@@ -51,16 +51,16 @@
             // lbxFiles
             // 
             this.lbxFiles.FormattingEnabled = true;
-            this.lbxFiles.ItemHeight = 15;
-            this.lbxFiles.Location = new System.Drawing.Point(13, 74);
+            this.lbxFiles.ItemHeight = 18;
+            this.lbxFiles.Location = new System.Drawing.Point(16, 87);
             this.lbxFiles.Margin = new System.Windows.Forms.Padding(4);
             this.lbxFiles.Name = "lbxFiles";
-            this.lbxFiles.Size = new System.Drawing.Size(583, 214);
+            this.lbxFiles.Size = new System.Drawing.Size(580, 184);
             this.lbxFiles.TabIndex = 1;
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(266, 34);
+            this.btnClear.Location = new System.Drawing.Point(321, 29);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(88, 36);
@@ -72,9 +72,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 55);
+            this.label1.Location = new System.Drawing.Point(12, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(142, 15);
+            this.label1.Size = new System.Drawing.Size(180, 19);
             this.label1.TabIndex = 3;
             this.label1.Text = "欲轉換的檔案清單：";
             // 
@@ -106,7 +106,7 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(611, 421);
             this.Controls.Add(this.label2);
