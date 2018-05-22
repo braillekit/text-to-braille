@@ -642,17 +642,18 @@ namespace EasyBrailleEdit
 		{
 			string[] menuItemDefs = 
             {
-                "修改這個字(&E)...;Edit",
+                "修改這個字(&E)...;Edit;" + ((int)Shortcut.F4).ToString(),
                 "-;",
-                "插入一串文字(&I)...;InsertText;" + ((int)Shortcut.CtrlI).ToString(),
-                "插入一個字(&I)...;InsertWord",
+                "插入一串文字(&I)...;InsertText;" + ((int)Shortcut.CtrlIns).ToString(),
+                "插入一個字(&W)...;InsertWord;" + ((int)Shortcut.CtrlI).ToString(),
                 "插入於行尾(&A)...;Append",
                 "插入空方(&B);InsertBlank",
-                "插入一列(&L);InsertLine;" + ((int)Shortcut.CtrlIns).ToString(),
+                "在上方插入一行(&L);InsertLine;" + ((int)Shortcut.CtrlShiftI).ToString(),
+                "在下方插入一行(&M);AddLine;" + ((int)Shortcut.CtrlShiftA).ToString(),
                 "-;",
                 "刪除(&D);Delete;" + ((int)Shortcut.CtrlDel).ToString(),
                 "倒退刪除(&K);Backspace",
-                "刪除整列(&R);DeleteLine;" + ((int)Shortcut.CtrlE).ToString(),
+                "刪除整行(&R);DeleteLine;" + ((int)Shortcut.CtrlE).ToString(),
                 "段落重整(&F);FormatParagraph;" + ((int)Shortcut.CtrlShiftF).ToString()
             };
 

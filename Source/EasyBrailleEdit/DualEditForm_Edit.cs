@@ -312,7 +312,7 @@ namespace EasyBrailleEdit
                 return;
 
             // 建立一列新的點字列，其中預設包含一個空方。
-            BrailleLine brLine = new BrailleLine();
+            var brLine = new BrailleLine();
             brLine.Words.Add(BrailleWord.NewBlank());
 
             row = GetBrailleRowIndex(row);
@@ -328,6 +328,34 @@ namespace EasyBrailleEdit
             // 將焦點移至新插入的那一列的第一個儲存格。
             GridFocusCell(new SourceGrid.Position(row, grid.FixedColumns), true);
         }
+
+        /// <summary>
+        /// 在指定的列之後加入一列。
+        /// </summary>
+        private void AddLine(SourceGrid.Grid grid, int row, int col)
+        {
+            // 防錯：如果不是有效的儲存格位置就直接返回。
+            if (!CheckCellPosition(row, col))
+                return;
+
+            // 建立一列新的點字列，其中預設包含一個空方。
+            var brLine = new BrailleLine();
+            brLine.Words.Add(BrailleWord.NewBlank());
+
+            int lineIdx = GetBrailleLineIndex(row) + 1;
+            BrailleDoc.Lines.Insert(lineIdx, brLine);
+            IsDirty = true;
+
+            // 更新 UI。
+            row = GetGridRowIndex(lineIdx);
+            GridInsertRowAt(row);
+            RefreshRowNumbers();
+            FillRow(brLine, row, true);
+
+            // 將焦點移至新插入的那一列的第一個儲存格。
+            GridFocusCell(new SourceGrid.Position(row, grid.FixedColumns), true);
+        }
+
 
         /// <summary>
         /// 刪除一個儲存格的點字。

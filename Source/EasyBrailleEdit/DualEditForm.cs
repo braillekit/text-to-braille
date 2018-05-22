@@ -724,6 +724,9 @@ namespace EasyBrailleEdit
                 case "InsertLine":  // 插入一列
 					InsertLine(grid, row, col);
 					break;
+                case "AddLine":     // 在下方插入一列
+                    AddLine(grid, row, col);
+                    break;
                 case "InsertText":
                     InsertText(grid, row, col);
                     break;
@@ -1103,8 +1106,8 @@ namespace EasyBrailleEdit
 						InsertCell(brGrid, row, col);
 						e.Handled = true;
 						break;
-					case Keys.Insert:    // Ctrl+Ins: 新增一列。
-						InsertLine(brGrid, row, col);
+					case Keys.Insert:    // Ctrl+Ins: 新增一串文字。
+                        InsertText(brGrid, row, col);
 						e.Handled = true;
 						break;
 					case Keys.Delete:   // Ctrl+Delete: 刪除一格點字。
@@ -1121,14 +1124,27 @@ namespace EasyBrailleEdit
             {
                 switch (e.KeyCode)
                 {
+                    case Keys.A:
+                        AddLine(brGrid, row, col);
+                        e.Handled = true;
+                        break;
+                    case Keys.I:
+                        InsertLine(brGrid, row, col);
+                        e.Handled = true;
+                        break;
                     case Keys.F:    // 段落重整
                         FormatParagraph(brGrid, row, col);
+                        e.Handled = true;
                         break;
                 }
             }
             else {
                 switch (e.KeyCode)
                 {
+                    case Keys.F4:
+                        EditCell(brGrid, row, col);
+                        e.Handled = true;
+                        break;
                     case Keys.Back:     // 倒退刪除
                         BackspaceCell(brGrid, row, col);
                         e.Handled = true;
