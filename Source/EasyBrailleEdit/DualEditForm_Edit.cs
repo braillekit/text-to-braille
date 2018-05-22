@@ -220,6 +220,36 @@ namespace EasyBrailleEdit
         }
 
         /// <summary>
+        /// 新增一串文字。
+        /// </summary>
+        /// <param name="grid">來源 grid。</param>
+        /// <param name="row">儲存格的列索引。</param>
+        /// <param name="col">儲存格的行索引。</param>
+        private void InsertText(SourceGrid.Grid grid, int row, int col)
+        {
+            if (!CheckCellPosition(row, col))
+                return;
+
+            var form = new InsertTextForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                int wordIdx = GetBrailleWordIndex(row, col);
+                int lineIdx = GetBrailleLineIndex(row);
+                BrailleLine brLine = BrailleDoc.Lines[lineIdx];
+
+                // 在第 wordIdx 個字之前插入新點字。
+                brLine.Words.InsertRange(wordIdx, form.OutputLine.Words);
+                IsDirty = true;
+
+                // Update UI
+                ReformatRow(row);
+                int focusCol = GetGridColumnIndex(lineIdx, wordIdx);
+                GridFocusCell(row, focusCol);
+            }
+        }
+
+
+        /// <summary>
         /// 在行尾附加點字。
         /// </summary>
         private void AppendCell(SourceGrid.Grid grid, int row, int col)

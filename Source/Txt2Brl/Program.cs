@@ -19,7 +19,7 @@ namespace Txt2Brl
                 .WriteTo.RollingFile(@"Logs\log-txt2brl-{Date}.txt")
                 .CreateLogger();
 
-            Console.WriteLine("Txt2Brl version 3.7 Copyright(c) 2007-2018 Michael Tsai.\n");
+            Console.WriteLine("Txt2Brl version 3.8 Copyright(c) 2007-2018 Michael Tsai.\n");
 
             CommandLine.Parser.Default.ParseArguments<Options>(args)
                .WithParsed<Options>(opts => RunOptionsAndReturnExitCode(opts));

@@ -411,7 +411,7 @@ namespace EasyBrailleEdit
 			if (m_MenuController == null)
 			{
 				m_MenuController = new PopupMenuController();
-				m_MenuController.PopupMenuClick += new SourceGrid.CellContextEventHandler(GridMenu_Click);
+				m_MenuController.PopupMenuClick += GridMenu_Click;
 			}
 
 			if (m_ClickController == null)
@@ -712,18 +712,21 @@ namespace EasyBrailleEdit
 				case "Edit":
 					EditCell(grid, row, col);
 					break;
-				case "Insert":
-					InsertCell(grid, row, col);
-					break;
 				case "InsertBlank":  // 插入空方                        
 					InsertBlankCell(grid, row, col, 1);
 					break;
 				case "Append":  // 在列尾插入空方
 					AppendCell(grid, row, col);
 					break;
-				case "InsertLine":  // 插入一列
+                case "InsertWord":
+                    InsertCell(grid, row, col);
+                    break;
+                case "InsertLine":  // 插入一列
 					InsertLine(grid, row, col);
 					break;
+                case "InsertText":
+                    InsertText(grid, row, col);
+                    break;
 				case "Delete":
 					DeleteCell(grid, row, col);
 					break;

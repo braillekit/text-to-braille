@@ -642,9 +642,10 @@ namespace EasyBrailleEdit
 		{
 			string[] menuItemDefs = 
             {
-                "修改(&E)...;Edit",
+                "修改這個字(&E)...;Edit",
                 "-;",
-                "插入(&I)...;Insert;" + ((int)Shortcut.CtrlI).ToString(),
+                "插入一串文字(&I)...;InsertText;" + ((int)Shortcut.CtrlI).ToString(),
+                "插入一個字(&I)...;InsertWord",
                 "插入於行尾(&A)...;Append",
                 "插入空方(&B);InsertBlank",
                 "插入一列(&L);InsertLine;" + ((int)Shortcut.CtrlIns).ToString(),
