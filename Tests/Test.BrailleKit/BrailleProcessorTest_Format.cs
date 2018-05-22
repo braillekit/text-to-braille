@@ -13,11 +13,11 @@ namespace Test.BrailleToolkit
         /// <summary>
         ///A test for BreakLine (BrailleLine, int)
         ///</summary>
-        [TestCase(12, "一二三四：我", 2, "一二三四：", "我")] // 測試斷行：冒號+我。在冒號後面的空方之後斷行。
+        [TestCase(12, "一二三四：我", 2, "一二三四：", " 我")] // 測試斷行：冒號+我。在冒號後面的空方之後斷行。
         [TestCase(10, "一二三四。", 2, "一二三", "四。")] // 測試斷行：斷在句點時，應把前一個字連同句號斷至下一行。
-        [TestCase(12, "this is a loooooong word.", 3, "this is a", "loooooong")] // 測試斷行：斷在英文字中間要加上連字號。應該把最後一個字連同句號斷至下一行。
-        [TestCase(8, "12345 6789", 2, "12345", "6789")]  // 測試斷行：連續的數字不可斷開。
-        [TestCase(8, "abc 123,456", 2, "abc", "123,456")] // 測試斷行：斷在數字中間的逗號。故意斷在逗號處。
+        [TestCase(12, "this is a loooooong word.", 3, "this is a", " loooooong")] // 測試斷行：斷在英文字中間要加上連字號。應該把最後一個字連同句號斷至下一行。
+        [TestCase(8, "12345 6789", 2, "12345", " 6789")]  // 測試斷行：連續的數字不可斷開。
+        [TestCase(8, "abc 123,456", 3, "abc", " 123,45")] // 測試斷行：斷在數字中間的逗號。故意斷在逗號處。
         public void Should_BreakLine_Succeed(int cellsPerLine, string input,
             int expectedLineCount, string expectedLine1, string expectedLine2)
         {
@@ -39,6 +39,17 @@ namespace Test.BrailleToolkit
                 string actual2 = brLines[1].ToString();
                 Assert.AreEqual(expectedLine2, actual2);
             }
+        }
+
+        [Test]
+        public void Should_BreakLine_KeepTrailingSpaces()
+        {
+            string inputText = "<小題結束></小題結束>" + " ";
+
+            var processor = BrailleProcessor.GetInstance();
+            var line = processor.ConvertLine(inputText);
+            var lines = processor.BreakLine(line, 40, null);
+            Assert.IsTrue(lines.Count == 2 && lines[0].CellCount == 40 && lines[1].CellCount == 1);
         }
 
         [TestCase("0123456789012345678901234567890123456<書名號>哈利波特</書名號>。")]

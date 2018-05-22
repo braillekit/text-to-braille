@@ -1126,7 +1126,6 @@ namespace BrailleToolkit
                 {
                     newLine.Words.Add(new BrailleWord("-", BrailleCellCode.Hyphen));
                 }
-                newLine.TrimEnd();	// 去尾空白。 
 
                 // 如果是折下來的新行，就自動補上需要縮排的格數。
                 if (isBroken)
@@ -1266,11 +1265,6 @@ namespace BrailleToolkit
 
                 if (breakWord.IsWhiteSpace) // 找到空白處，可斷開
                 {
-                    if (breakIndex < brLine.WordCount-1)
-                    {
-                        // 右邊還有字，則斷在空白右邊的字元。
-                        breakIndex++;
-                    }                    
                     break;
                 }
 
