@@ -93,6 +93,13 @@
             this.btnQuotes = new System.Windows.Forms.ToolStripDropDownButton();
             this.btnSymbolFullDots = new System.Windows.Forms.ToolStripButton();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtInput = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
+            this.txtBraille = new System.Windows.Forms.TextBox();
+            this.lblErrorTitle = new System.Windows.Forms.Label();
             this.toolBarSymbol3 = new System.Windows.Forms.ToolStrip();
             this.btnTagBrailleComment = new System.Windows.Forms.ToolStripButton();
             this.btnSymbolEndTags = new System.Windows.Forms.ToolStripDropDownButton();
@@ -124,20 +131,13 @@
             this.btnTableBottomLine1 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTableTopLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTableBottomLine2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtInput = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblError = new System.Windows.Forms.Label();
-            this.txtBraille = new System.Windows.Forms.TextBox();
-            this.lblErrorTitle = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolBarSymbol1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolBarSymbol2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.toolBarSymbol3.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.toolBarSymbol3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOk
@@ -771,6 +771,80 @@
             this.panel3.Size = new System.Drawing.Size(1188, 428);
             this.panel3.TabIndex = 19;
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.txtInput);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.lblError);
+            this.panel1.Controls.Add(this.txtBraille);
+            this.panel1.Controls.Add(this.lblErrorTitle);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(100, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1088, 428);
+            this.panel1.TabIndex = 16;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(29, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(105, 24);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "輸入文字：";
+            // 
+            // txtInput
+            // 
+            this.txtInput.Location = new System.Drawing.Point(141, 21);
+            this.txtInput.Name = "txtInput";
+            this.txtInput.Size = new System.Drawing.Size(910, 31);
+            this.txtInput.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.txtInput, "這裡只能輸入單行文字。如需編排段落與修改個別點字，請回到雙視編輯視窗中進行編修。");
+            this.txtInput.TextChanged += new System.EventHandler(this.txtInput_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(29, 71);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(105, 24);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "點字預覽：";
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(193, 357);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(65, 24);
+            this.lblError.TabIndex = 7;
+            this.lblError.Text = "label4";
+            // 
+            // txtBraille
+            // 
+            this.txtBraille.Font = new System.Drawing.Font("SimBraille", 20.25F);
+            this.txtBraille.Location = new System.Drawing.Point(141, 71);
+            this.txtBraille.Multiline = true;
+            this.txtBraille.Name = "txtBraille";
+            this.txtBraille.ReadOnly = true;
+            this.txtBraille.Size = new System.Drawing.Size(910, 250);
+            this.txtBraille.TabIndex = 3;
+            // 
+            // lblErrorTitle
+            // 
+            this.lblErrorTitle.AutoSize = true;
+            this.lblErrorTitle.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblErrorTitle.ForeColor = System.Drawing.Color.Red;
+            this.lblErrorTitle.Location = new System.Drawing.Point(25, 357);
+            this.lblErrorTitle.Name = "lblErrorTitle";
+            this.lblErrorTitle.Size = new System.Drawing.Size(162, 24);
+            this.lblErrorTitle.TabIndex = 6;
+            this.lblErrorTitle.Text = "無法轉換的字元：";
+            // 
             // toolBarSymbol3
             // 
             this.toolBarSymbol3.Dock = System.Windows.Forms.DockStyle.Left;
@@ -830,25 +904,26 @@
             this.btnSymbolEndTags.Tag = "NA";
             this.btnSymbolEndTags.Text = "結束";
             this.btnSymbolEndTags.ToolTipText = "表示段落結束的標籤";
+            this.btnSymbolEndTags.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
             // 
             // btnEndTag1
             // 
             this.btnEndTag1.Name = "btnEndTag1";
-            this.btnEndTag1.Size = new System.Drawing.Size(192, 26);
+            this.btnEndTag1.Size = new System.Drawing.Size(216, 26);
             this.btnEndTag1.Tag = "<小題結束></小題結束>\\n";
             this.btnEndTag1.Text = "&1.小題結束";
             // 
             // btnEndTag2
             // 
             this.btnEndTag2.Name = "btnEndTag2";
-            this.btnEndTag2.Size = new System.Drawing.Size(192, 26);
+            this.btnEndTag2.Size = new System.Drawing.Size(216, 26);
             this.btnEndTag2.Tag = "<小單元結束></小單元結束>\\n";
             this.btnEndTag2.Text = "&2.小單元結束";
             // 
             // btnEndTag3
             // 
             this.btnEndTag3.Name = "btnEndTag3";
-            this.btnEndTag3.Size = new System.Drawing.Size(192, 26);
+            this.btnEndTag3.Size = new System.Drawing.Size(216, 26);
             this.btnEndTag3.Tag = "<大單元結束></大單元結束>\\n";
             this.btnEndTag3.Text = "&3.大單元結束";
             // 
@@ -897,28 +972,28 @@
             // btnChoiceBo
             // 
             this.btnChoiceBo.Name = "btnChoiceBo";
-            this.btnChoiceBo.Size = new System.Drawing.Size(107, 26);
+            this.btnChoiceBo.Size = new System.Drawing.Size(216, 26);
             this.btnChoiceBo.Tag = "<選項>ㄅ.</選項>";
             this.btnChoiceBo.Text = "ㄅ.";
             // 
             // btnChoicePo
             // 
             this.btnChoicePo.Name = "btnChoicePo";
-            this.btnChoicePo.Size = new System.Drawing.Size(107, 26);
+            this.btnChoicePo.Size = new System.Drawing.Size(216, 26);
             this.btnChoicePo.Tag = "<選項>ㄆ.</選項>";
             this.btnChoicePo.Text = "ㄆ.";
             // 
             // btnChoiceMo
             // 
             this.btnChoiceMo.Name = "btnChoiceMo";
-            this.btnChoiceMo.Size = new System.Drawing.Size(107, 26);
+            this.btnChoiceMo.Size = new System.Drawing.Size(216, 26);
             this.btnChoiceMo.Tag = "<選項>ㄇ.</選項>";
             this.btnChoiceMo.Text = "ㄇ.";
             // 
             // btnChoiceFo
             // 
             this.btnChoiceFo.Name = "btnChoiceFo";
-            this.btnChoiceFo.Size = new System.Drawing.Size(107, 26);
+            this.btnChoiceFo.Size = new System.Drawing.Size(216, 26);
             this.btnChoiceFo.Tag = "<選項>ㄈ.</選項>";
             this.btnChoiceFo.Text = "ㄈ.";
             // 
@@ -1072,80 +1147,6 @@
             this.btnTableBottomLine2.Tag = "<下表格線2></下表格線2>\\n";
             this.btnTableBottomLine2.Text = "下表格線2";
             // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.txtInput);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.lblError);
-            this.panel1.Controls.Add(this.txtBraille);
-            this.panel1.Controls.Add(this.lblErrorTitle);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(100, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1088, 428);
-            this.panel1.TabIndex = 16;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 24);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "輸入文字：";
-            // 
-            // txtInput
-            // 
-            this.txtInput.Location = new System.Drawing.Point(141, 21);
-            this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(910, 31);
-            this.txtInput.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.txtInput, "這裡只能輸入單行文字。如需編排段落與修改個別點字，請回到雙視編輯視窗中進行編修。");
-            this.txtInput.TextChanged += new System.EventHandler(this.txtInput_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 71);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 24);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "點字預覽：";
-            // 
-            // lblError
-            // 
-            this.lblError.AutoSize = true;
-            this.lblError.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lblError.ForeColor = System.Drawing.Color.Red;
-            this.lblError.Location = new System.Drawing.Point(193, 357);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(65, 24);
-            this.lblError.TabIndex = 7;
-            this.lblError.Text = "label4";
-            // 
-            // txtBraille
-            // 
-            this.txtBraille.Font = new System.Drawing.Font("SimBraille", 20.25F);
-            this.txtBraille.Location = new System.Drawing.Point(141, 71);
-            this.txtBraille.Multiline = true;
-            this.txtBraille.Name = "txtBraille";
-            this.txtBraille.ReadOnly = true;
-            this.txtBraille.Size = new System.Drawing.Size(910, 250);
-            this.txtBraille.TabIndex = 3;
-            // 
-            // lblErrorTitle
-            // 
-            this.lblErrorTitle.AutoSize = true;
-            this.lblErrorTitle.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lblErrorTitle.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorTitle.Location = new System.Drawing.Point(25, 357);
-            this.lblErrorTitle.Name = "lblErrorTitle";
-            this.lblErrorTitle.Size = new System.Drawing.Size(162, 24);
-            this.lblErrorTitle.TabIndex = 6;
-            this.lblErrorTitle.Text = "無法轉換的字元：";
-            // 
             // InsertTextForm
             // 
             this.AcceptButton = this.btnOk;
@@ -1170,10 +1171,10 @@
             this.toolBarSymbol2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.toolBarSymbol3.ResumeLayout(false);
-            this.toolBarSymbol3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.toolBarSymbol3.ResumeLayout(false);
+            this.toolBarSymbol3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

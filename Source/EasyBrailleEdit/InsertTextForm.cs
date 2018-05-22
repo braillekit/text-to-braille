@@ -16,8 +16,6 @@ namespace EasyBrailleEdit
     public partial class InsertTextForm: Form
     {
         private TextToBrailleConverter _converter = new TextToBrailleConverter();
-        private bool _isUpdatingUI;
-
 
         public BrailleLine OutputLine { get; private set; }
 
@@ -51,7 +49,6 @@ namespace EasyBrailleEdit
 
         private void UpdateUI(BrailleLine brLine)
         {
-            _isUpdatingUI = true;
             try
             {
                 lblError.Text = "";
@@ -64,7 +61,6 @@ namespace EasyBrailleEdit
             }
             finally
             {
-                _isUpdatingUI = false;
             }
         }
 

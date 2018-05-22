@@ -946,7 +946,7 @@ namespace BrailleToolkit
                 string key = token.Value.Remove(1, 1);  // 把 '/' 字元去掉，即得到起始標籤名稱。
                 if (SimpleTag.IsSimpleTag(key))
                 {
-                    return " ";
+                    return String.Empty;
                 }
             }
 
@@ -1266,7 +1266,11 @@ namespace BrailleToolkit
 
                 if (breakWord.IsWhiteSpace) // 找到空白處，可斷開
                 {
-                    breakIndex++;   // 斷在空白右邊的字元。
+                    if (breakIndex < brLine.WordCount-1)
+                    {
+                        // 右邊還有字，則斷在空白右邊的字元。
+                        breakIndex++;
+                    }                    
                     break;
                 }
 

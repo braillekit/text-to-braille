@@ -328,5 +328,15 @@ namespace Test.BrailleToolkit
             Assert.AreEqual(expectedPositionNumbers, result);
         }
 
+        [Test]
+        public void Should_ConvertUnitEndingTags_Succeed()
+        {
+            string inputText = "<小題結束></小題結束>";
+
+            var processor = BrailleProcessor.GetInstance();
+            var actualLine = processor.ConvertLine(inputText);
+            Assert.IsTrue(actualLine.CellCount > 10);
+        }
+
     }
 }
