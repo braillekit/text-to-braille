@@ -20,37 +20,44 @@ namespace BrailleToolkit
 
         private BrailleDocument _brDoc;
 
-        public BrailleDataExporter(BrailleDocument brDoc, int linesPerPage)
+        public BrailleDataExporter(BrailleDocument brDoc, int linesPerPage, int startPageNum = 1, bool needPageFooter = true)
         {
             _brDoc = brDoc ?? throw new ArgumentNullException(nameof(brDoc));
             LinesPerPage = linesPerPage;
-            NeedPageFoot = true;
+            StartPageNumber = startPageNum;
+            NeedPageFooter = needPageFooter;
             AddPageBreakAtEndOfFile = false;
             UseNewLineForPageBreak = true; // 匯出點字檔時，不要使用跳頁字元，因為超點的「中英文點字編輯器」不認得跳頁符號。
         }
 
         public int LinesPerPage { get; }
 
-        public bool NeedPageFoot { get; }
+        public int StartPageNumber { get; } // 起始頁碼
+
+        public bool NeedPageFooter { get; }
 
         public bool AddPageBreakAtEndOfFile { get; }
 
         public bool UseNewLineForPageBreak { get; }
 
         /// <summary>
-        /// 匯出點字檔，用來給超點的 WCBE（中英文點字編輯器）讀取的檔案（副檔名為 .BRL）。
+        /// 匯出點字檔（副檔名為 .BRL）。可供列印或者給超點的 WCBE（中英文點字編輯器）讀取。
         /// </summary>
         /// <param name="fileName"></param>
-        public void SaveBrailleFileForWCBE(string fileName)
+        public int SaveBrailleFile(string fileName)
         {
-            // 1.產生用來列印的點字資料。
-            var brailleData = GetBrailleDataForPrint();
+            int endPageNumber = 0;
 
-            // 2.修正點字資料，以便供超點的 WCBE（中英文點字編輯器）使用。
-            FixBrailleDataForWCBE(ref brailleData);
+            // 1.產生用來列印的點字資料。
+            var brailleData = GetBrailleDataForPrint(out endPageNumber);
+
+            // 2.修正點字資料，以便供列印或者給超點的 WCBE（中英文點字編輯器）使用。
+            FixBrailleDataForPrint(ref brailleData);
 
             Encoding enc = Encoding.GetEncoding("BIG5");
             File.WriteAllText(fileName, brailleData.ToString(), enc);
+
+            return endPageNumber;
         }
 
         /// <summary>
@@ -62,7 +69,7 @@ namespace BrailleToolkit
         ///       6.  \  符號改成 | 符號。 
         /// </summary>
         /// <param name="brailleData">可列印的點字資料。</param>
-        private void FixBrailleDataForWCBE(ref StringBuilder brailleData)
+        private void FixBrailleDataForPrint(ref StringBuilder brailleData)
         {
             string oldChars = @"^@[]\";
             string newChars = @"~`{}|";
@@ -78,8 +85,9 @@ namespace BrailleToolkit
         /// 產生給點字打印機的點字資料。
         /// 此方法是修改自 DualPrintHelper_Braille.cs 中的 GenerateOutputData 方法。
         /// </summary>
+        /// <param name="endPageNumber">輸出終止頁碼。</param>
         /// <returns></returns>
-        private StringBuilder GetBrailleDataForPrint()
+        private StringBuilder GetBrailleDataForPrint(out int endPageNumber)
         {
             int lineCnt = 0;
             int pageNum = 0;			// 程式內部處理的頁碼
@@ -88,7 +96,7 @@ namespace BrailleToolkit
 
             int realLinesPerPage = LinesPerPage;
 
-            if (NeedPageFoot)  // 如需輸出頁碼，每頁可印列數便少一列。
+            if (NeedPageFooter)  // 如需輸出頁碼，每頁可印列數便少一列。
             {
                 realLinesPerPage--;
             }
@@ -97,7 +105,8 @@ namespace BrailleToolkit
             int lineIdx = 0;
             string beginOrgPageNum = null;
             string endOrgPageNum = null;
-            int displayedPageNum = 1;
+            int displayedPageNum = StartPageNumber;
+            endPageNumber = displayedPageNum;
 
             // 準備輸出至點字印表機的資料
             while (lineIdx < _brDoc.LineCount)
@@ -118,12 +127,14 @@ namespace BrailleToolkit
                 // 列印頁尾資訊：文件標題、原書頁碼、點字頁碼。
                 if (lineCnt % realLinesPerPage == 0)    // 已經印滿一頁了？
                 {
-                    if (NeedPageFoot)  // 是否要印頁尾？
+                    if (NeedPageFooter)  // 是否要印頁尾？
                     {
                         pageNum++;
 
                         sb.Append(BrailleDocumentHelper.GetBraillePageFoot(
                             _brDoc, lineIdx, displayedPageNum, beginOrgPageNum, endOrgPageNum));
+
+                        endPageNumber = displayedPageNum;
 
                         AddPageBreak(sb);
                     }
@@ -145,7 +156,7 @@ namespace BrailleToolkit
             {
                 pageNum++;
 
-                if (NeedPageFoot)
+                if (NeedPageFooter)
                 {
                     // 用空白列補滿剩餘的頁面
                     int n = realLinesPerPage - (lineCnt % realLinesPerPage);
@@ -154,6 +165,8 @@ namespace BrailleToolkit
 
                     sb.Append(BrailleDocumentHelper.GetBraillePageFoot(
                         _brDoc, lineIdx, displayedPageNum, beginOrgPageNum, endOrgPageNum));
+
+                    endPageNumber = displayedPageNum;
 
                     AddPageBreak(sb);
                 }
