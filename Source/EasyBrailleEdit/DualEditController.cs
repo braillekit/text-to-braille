@@ -655,7 +655,11 @@ namespace EasyBrailleEdit
                 "刪除(&D);Delete;" + ((int)Shortcut.CtrlDel).ToString(),
                 "倒退刪除(&K);Backspace",
                 "刪除整行(&R);DeleteLine;" + ((int)Shortcut.CtrlE).ToString(),
-                "段落重整(&F);FormatParagraph;" + ((int)Shortcut.CtrlShiftF).ToString()
+                "段落重整(&F);FormatParagraph;" + ((int)Shortcut.CtrlShiftF).ToString(),
+                "-;",
+                "剪下(&X);CutToClipboard;" + ((int)Shortcut.CtrlX).ToString(),
+                "複製(&C);CopyToClipboard;" + ((int)Shortcut.CtrlC).ToString(),
+                "貼上(&P);PasteFromClipboard;" + ((int)Shortcut.CtrlV).ToString()
             };
 
 			MenuItem mi;

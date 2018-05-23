@@ -116,5 +116,10 @@ namespace EasyBrailleEdit
                 txtInput.SelectedText = s;
             }
         }
+
+        private void InsertTextForm_Shown(object sender, EventArgs e)
+        {
+            txtInput.Focus();
+        }
     }
 }

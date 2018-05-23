@@ -254,8 +254,14 @@ namespace EasyBrailleEdit
 			txtGotoPageNum.Width = 50;
 
 			brGrid.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            brGrid.Selection.FocusRowEntered += GridSelection_FocusRowEntered;
+            brGrid.Selection.FocusColumnEntered += GridSelection_FocusColumnEntered;
+            brGrid.Selection.CellGotFocus += GridSelection_CellGotFocus;
 
-			m_ViewMode = ViewMode.All;
+            statusLabelCurrentWord.Text = String.Empty;
+            statusLabelCurrentLine.Text = String.Empty;
+
+            m_ViewMode = ViewMode.All;
 			miViewAll.Checked = true;
 
 			// 若 FileName 不是 null，表示在建構元已經載入過檔案，相關的初始化動作就不要重覆做。
@@ -267,14 +273,33 @@ namespace EasyBrailleEdit
 
 			m_FindForm = new DualEditFindForm();
 			m_FindForm.Owner = this;
-			m_FindForm.DecidingStartPosition += new DualEditFindForm.DecideStartPositionEvent(FindForm_DecidingStartPosition);
-			m_FindForm.TargetFound += new DualEditFindForm.TargetFoundEvent(FindForm_TargetFound);
+			m_FindForm.DecidingStartPosition += FindForm_DecidingStartPosition;
+			m_FindForm.TargetFound += FindForm_TargetFound;
 
 			this.BringToFront();
 			this.Activate();
 		}
 
-		void FindForm_DecidingStartPosition(object sender, DualEditFindForm.DecideStartPositionEventArgs args)
+        private void GridSelection_FocusRowEntered(object sender, SourceGrid.RowEventArgs e)
+        {
+            var lineIdx = GetBrailleLineIndex(brGrid, e.Row);
+            var brLine = BrailleDoc.Lines[lineIdx];
+            statusLabelCurrentLine.Text = brLine.ToOriginalTextString(null);
+        }
+        private void GridSelection_FocusColumnEntered(object sender, SourceGrid.ColumnEventArgs e)
+        {
+            // not used yet.
+        }
+
+        private void GridSelection_CellGotFocus(SourceGrid.Selection.SelectionBase sender, SourceGrid.ChangeActivePositionEventArgs e)
+        {
+            var lineIdx = GetBrailleLineIndex(brGrid, e.NewFocusPosition.Row);
+            var brWord = GetBrailleWordOfGridCell(brGrid, e.NewFocusPosition.Row, e.NewFocusPosition.Column);
+            var brWordIdx = BrailleDoc.Lines[lineIdx].IndexOf(brWord);
+            statusLabelCurrentWord.Text = $"{brWord.Text} (字索引:{brWordIdx}  列索引:{e.NewFocusPosition.Row}  行索引:{e.NewFocusPosition.Column})";
+        }
+
+        void FindForm_DecidingStartPosition(object sender, DualEditFindForm.DecideStartPositionEventArgs args)
 		{
 			// 協助尋找視窗決定要從哪一個位置開始尋找（從目前作用中的儲存格開始）
 			int row = brGrid.Selection.ActivePosition.Row;
@@ -286,8 +311,8 @@ namespace EasyBrailleEdit
 			}
 			else
 			{
-				args.LineIndex = GetBrailleLineIndex(row);
-				args.WordIndex = GetBrailleWordIndex(row, col);
+				args.LineIndex = GetBrailleLineIndex(brGrid, row);
+				args.WordIndex = GetBrailleWordIndex(brGrid, row, col);
 			}
 		}
 
@@ -475,11 +500,11 @@ namespace EasyBrailleEdit
 		/// </summary>
 		/// <param name="row">Grid 列索引。</param>
         /// <returns>傳回重新編排後的列數。如果大於 1，則代表此列經過重新編排之後有發生斷行。</returns>
-		private int ReformatRow(int row)
+		private int ReformatRow(SourceGrid.Grid grid, int row)
 		{
 			row = GetBrailleRowIndex(row);  // 修正列索引為點字列所在的索引。
 
-			int lineIndex = GetBrailleLineIndex(row);
+			int lineIndex = GetBrailleLineIndex(grid, row);
 			int lineCnt = BrailleProcessor.GetInstance().FormatLine(BrailleDoc, lineIndex, null);
 			if (lineCnt > 1)    // 有斷行?
 			{
@@ -734,7 +759,7 @@ namespace EasyBrailleEdit
                     InsertText(grid, row, col);
                     break;
 				case "Delete":
-					DeleteCell(grid, row, col);
+					DeleteWord(grid, row, col);
 					break;
 				case "Backspace":
 					BackspaceCell(grid, row, col);
@@ -745,8 +770,17 @@ namespace EasyBrailleEdit
                 case "FormatParagraph":
                     FormatParagraph(grid, row, col);
                     break;
-			}
-		}
+                case "CutToClipboard":
+                    CutToClipboard(grid);
+                    break;
+                case "CopyToClipboard":
+                    CopyToClipboard(grid);
+                    break;
+                case "PasteFromClipboard":
+                    PasteFromClipboard(grid, row, col);
+                    break;
+            }
+        }
 
 		/// <summary>
 		/// 檢查儲存格位置是否有效。
@@ -833,19 +867,56 @@ namespace EasyBrailleEdit
 
         private void GridSelectLeftWord(int row, int col)
         {
-            int lineIdx = GetBrailleLineIndex(row);
-            int wordIdx = GetBrailleWordIndex(row, col);
-            int newCol = GetGridColumnIndex(lineIdx, wordIdx - 1);
+            var currentWord = GetBrailleWordOfGridCell(brGrid, row, col);
+
+            if (currentWord == null)
+            {
+                throw new Exception($"無法取得儲存格位置 ({row}, {col}) 所對應的點字物件!");
+            }
+
+            col--;
+            while (col >= 0)
+            {
+                var leftWord = GetBrailleWordOfGridCell(brGrid, row, col);
+                if (!ReferenceEquals(currentWord, leftWord))
+                {
+                    GridFocusCell(row, col);
+                    return;
+                }
+
+                col--;
+            }
+
+            /* 另一種方法：
+            int wordIdx = GetBrailleWordIndex(brGrid, row, col);
+
+            if (wordIdx < 1)
+            {
+                return;
+            }
+
+            int lineIdx = GetBrailleLineIndex(brGrid, row);            
+            var brLine = BrailleDoc.Lines[lineIdx];
+
+            // 往左找到第一個非 context tag 的字
+            wordIdx--;
+            while (wordIdx >= 0 && brLine[wordIdx].IsContextTag)
+            {
+                wordIdx--;
+            }
+
+            int newCol = GetGridColumnIndex(lineIdx, wordIdx);
             GridFocusCell(row, newCol);
+            */
         }
 
-		/// <summary>
-		/// 更新指定的點字方格。
-		/// </summary>
-		/// <param name="row"></param>
-		/// <param name="col"></param>
-		/// <param name="brWord"></param>
-		private void UpdateCell(int row, int col, BrailleWord brWord)
+        /// <summary>
+        /// 更新指定的點字方格。
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        /// <param name="brWord"></param>
+        private void UpdateCell(int row, int col, BrailleWord brWord)
 		{
 			// 處理點字
 			string brFontText = null;
@@ -1110,7 +1181,7 @@ namespace EasyBrailleEdit
 						e.Handled = true;
 						break;
 					case Keys.Delete:   // Ctrl+Delete: 刪除一格點字。
-						DeleteCell(brGrid, row, col);
+						DeleteWord(brGrid, row, col);
 						e.Handled = true;
 						break;
 					case Keys.E:        // Ctrl+E: 刪除一列。
@@ -1347,7 +1418,7 @@ namespace EasyBrailleEdit
 			if (row < 1)
 				return;
 
-			int lineIdx = m_Form.GetBrailleLineIndex(row);
+			int lineIdx = m_Form.GetBrailleLineIndex(grid, row);
 			int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
 			bool needPageFoot = AppGlobals.Config.Printing.PrintPageFoot;
 			int currPage = AppGlobals.CalcCurrentPage(lineIdx, linesPerPage, needPageFoot) + 1;

@@ -146,7 +146,7 @@
             this.btnOk.Location = new System.Drawing.Point(961, 14);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(95, 34);
-            this.btnOk.TabIndex = 4;
+            this.btnOk.TabIndex = 5;
             this.btnOk.Text = "確定";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -158,7 +158,7 @@
             this.btnCancel.Location = new System.Drawing.Point(1072, 14);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(95, 34);
-            this.btnCancel.TabIndex = 5;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -491,7 +491,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 480);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1188, 71);
-            this.panel2.TabIndex = 17;
+            this.panel2.TabIndex = 0;
             // 
             // toolBarSymbol2
             // 
@@ -784,7 +784,7 @@
             this.panel1.Location = new System.Drawing.Point(100, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1088, 428);
-            this.panel1.TabIndex = 16;
+            this.panel1.TabIndex = 0;
             // 
             // label1
             // 
@@ -800,7 +800,7 @@
             this.txtInput.Location = new System.Drawing.Point(141, 21);
             this.txtInput.Name = "txtInput";
             this.txtInput.Size = new System.Drawing.Size(910, 31);
-            this.txtInput.TabIndex = 1;
+            this.txtInput.TabIndex = 3;
             this.toolTip1.SetToolTip(this.txtInput, "這裡只能輸入單行文字。如需編排段落與修改個別點字，請回到雙視編輯視窗中進行編修。");
             this.txtInput.TextChanged += new System.EventHandler(this.txtInput_TextChanged);
             // 
@@ -909,21 +909,21 @@
             // btnEndTag1
             // 
             this.btnEndTag1.Name = "btnEndTag1";
-            this.btnEndTag1.Size = new System.Drawing.Size(216, 26);
+            this.btnEndTag1.Size = new System.Drawing.Size(192, 26);
             this.btnEndTag1.Tag = "<小題結束></小題結束>\\n";
             this.btnEndTag1.Text = "&1.小題結束";
             // 
             // btnEndTag2
             // 
             this.btnEndTag2.Name = "btnEndTag2";
-            this.btnEndTag2.Size = new System.Drawing.Size(216, 26);
+            this.btnEndTag2.Size = new System.Drawing.Size(192, 26);
             this.btnEndTag2.Tag = "<小單元結束></小單元結束>\\n";
             this.btnEndTag2.Text = "&2.小單元結束";
             // 
             // btnEndTag3
             // 
             this.btnEndTag3.Name = "btnEndTag3";
-            this.btnEndTag3.Size = new System.Drawing.Size(216, 26);
+            this.btnEndTag3.Size = new System.Drawing.Size(192, 26);
             this.btnEndTag3.Tag = "<大單元結束></大單元結束>\\n";
             this.btnEndTag3.Text = "&3.大單元結束";
             // 
@@ -972,28 +972,28 @@
             // btnChoiceBo
             // 
             this.btnChoiceBo.Name = "btnChoiceBo";
-            this.btnChoiceBo.Size = new System.Drawing.Size(216, 26);
+            this.btnChoiceBo.Size = new System.Drawing.Size(107, 26);
             this.btnChoiceBo.Tag = "<選項>ㄅ.</選項>";
             this.btnChoiceBo.Text = "ㄅ.";
             // 
             // btnChoicePo
             // 
             this.btnChoicePo.Name = "btnChoicePo";
-            this.btnChoicePo.Size = new System.Drawing.Size(216, 26);
+            this.btnChoicePo.Size = new System.Drawing.Size(107, 26);
             this.btnChoicePo.Tag = "<選項>ㄆ.</選項>";
             this.btnChoicePo.Text = "ㄆ.";
             // 
             // btnChoiceMo
             // 
             this.btnChoiceMo.Name = "btnChoiceMo";
-            this.btnChoiceMo.Size = new System.Drawing.Size(216, 26);
+            this.btnChoiceMo.Size = new System.Drawing.Size(107, 26);
             this.btnChoiceMo.Tag = "<選項>ㄇ.</選項>";
             this.btnChoiceMo.Text = "ㄇ.";
             // 
             // btnChoiceFo
             // 
             this.btnChoiceFo.Name = "btnChoiceFo";
-            this.btnChoiceFo.Size = new System.Drawing.Size(216, 26);
+            this.btnChoiceFo.Size = new System.Drawing.Size(107, 26);
             this.btnChoiceFo.Tag = "<選項>ㄈ.</選項>";
             this.btnChoiceFo.Text = "ㄈ.";
             // 
@@ -1164,6 +1164,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "插入文字";
             this.Load += new System.EventHandler(this.InsertTextForm_Load);
+            this.Shown += new System.EventHandler(this.InsertTextForm_Shown);
             this.toolBarSymbol1.ResumeLayout(false);
             this.toolBarSymbol1.PerformLayout();
             this.panel2.ResumeLayout(false);

@@ -328,6 +328,19 @@ namespace BrailleToolkit
             }
         }
 
+        public int IndexOf(BrailleWord brWord)
+        {
+            // 不能用 Words.IndexOf(brWord) 來尋找! 
+            for (int i = 0; i < Words.Count; i++)
+            {
+                if (ReferenceEquals(Words[i], brWord))
+                {
+                    return i;
+                }
+            }
+            return -1;            
+        }
+
         /// <summary>
         /// 在串列中尋找指定的字串，從串列中的第 startIndex 個字開始找起。
         /// </summary>
