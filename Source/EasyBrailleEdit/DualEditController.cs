@@ -642,6 +642,7 @@ namespace EasyBrailleEdit
 		{
 			string[] menuItemDefs = 
             {
+                "從目前位置折行(Enter);BreakLine",
                 "修改這個字(&E)...;Edit;" + ((int)Shortcut.F4).ToString(),
                 "-;",
                 "插入一串文字(&I)...;InsertText;" + ((int)Shortcut.CtrlIns).ToString(),

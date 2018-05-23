@@ -709,7 +709,10 @@ namespace EasyBrailleEdit
 
 			switch (menuCtrl.Command)
 			{
-				case "Edit":
+                case "BreakLine":
+                    BreakLine(brGrid, row, col);
+                    break;
+                case "Edit":
 					EditCell(grid, row, col);
 					break;
 				case "InsertBlank":  // 插入空方                        
@@ -1073,20 +1076,16 @@ namespace EasyBrailleEdit
 
 		private void DualEditForm_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			int row;
-			int col;
+            int row = brGrid.Selection.ActivePosition.Row;
+            int col = brGrid.Selection.ActivePosition.Column;
 
-			switch (e.KeyChar)
+            switch (e.KeyChar)
 			{
 				case ' ':   // 空白鍵：插入一個空方。
-					row = brGrid.Selection.ActivePosition.Row;
-					col = brGrid.Selection.ActivePosition.Column;
 					InsertBlankCell(brGrid, row, col, 1);
 					e.Handled = true;
 					break;
 				case '\r':
-					row = brGrid.Selection.ActivePosition.Row;
-					col = brGrid.Selection.ActivePosition.Column;
 					BreakLine(brGrid, row, col);
 					e.Handled = true;
 					break;
