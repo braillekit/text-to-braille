@@ -244,7 +244,7 @@
             // miEditPageTitle
             // 
             this.miEditPageTitle.Name = "miEditPageTitle";
-            this.miEditPageTitle.Size = new System.Drawing.Size(192, 26);
+            this.miEditPageTitle.Size = new System.Drawing.Size(216, 26);
             this.miEditPageTitle.Tag = "PageTitles";
             this.miEditPageTitle.Text = "頁標題";
             this.miEditPageTitle.Click += new System.EventHandler(this.miEdit_Click);
@@ -252,7 +252,7 @@
             // miEditFetchPageTitles
             // 
             this.miEditFetchPageTitles.Name = "miEditFetchPageTitles";
-            this.miEditFetchPageTitles.Size = new System.Drawing.Size(192, 26);
+            this.miEditFetchPageTitles.Size = new System.Drawing.Size(216, 26);
             this.miEditFetchPageTitles.Tag = "FetchPageTitles";
             this.miEditFetchPageTitles.Text = "重新抓取頁標題";
             this.miEditFetchPageTitles.Click += new System.EventHandler(this.miEdit_Click);
@@ -260,13 +260,13 @@
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(189, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(213, 6);
             // 
             // 尋找FToolStripMenuItem
             // 
             this.尋找FToolStripMenuItem.Name = "尋找FToolStripMenuItem";
             this.尋找FToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.尋找FToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
+            this.尋找FToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.尋找FToolStripMenuItem.Tag = "Find";
             this.尋找FToolStripMenuItem.Text = "尋找(&F)";
             this.尋找FToolStripMenuItem.Click += new System.EventHandler(this.miEdit_Click);
@@ -275,7 +275,7 @@
             // 
             this.miEditFindNext.Name = "miEditFindNext";
             this.miEditFindNext.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.miEditFindNext.Size = new System.Drawing.Size(192, 26);
+            this.miEditFindNext.Size = new System.Drawing.Size(216, 26);
             this.miEditFindNext.Tag = "FindNext";
             this.miEditFindNext.Text = "找下一筆(&N)";
             this.miEditFindNext.Click += new System.EventHandler(this.miEdit_Click);
@@ -284,7 +284,7 @@
             // 
             this.miEditGoto.Name = "miEditGoto";
             this.miEditGoto.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.miEditGoto.Size = new System.Drawing.Size(192, 26);
+            this.miEditGoto.Size = new System.Drawing.Size(216, 26);
             this.miEditGoto.Tag = "Goto";
             this.miEditGoto.Text = "到(&G)";
             this.miEditGoto.Click += new System.EventHandler(this.miEdit_Click);
@@ -305,7 +305,7 @@
             this.miViewBrailleOnly,
             this.miViewTextZhuyin});
             this.miViewMode.Name = "miViewMode";
-            this.miViewMode.Size = new System.Drawing.Size(138, 26);
+            this.miViewMode.Size = new System.Drawing.Size(216, 26);
             this.miViewMode.Text = "模式(&M)";
             this.miViewMode.Visible = false;
             // 
@@ -338,6 +338,7 @@
             this.miTools.Name = "miTools";
             this.miTools.Size = new System.Drawing.Size(69, 23);
             this.miTools.Text = "工具(&T)";
+            this.miTools.Visible = false;
             // 
             // toolStrip1
             // 
