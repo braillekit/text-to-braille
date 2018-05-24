@@ -45,6 +45,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.離開XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.miEditDocProperties = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditPageTitle = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditFetchPageTitles = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
@@ -75,7 +76,6 @@
             this.statProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statDocTitle = new System.Windows.Forms.ToolStripStatusLabel();
             this.statPageInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.miEditDocProperties = new System.Windows.Forms.ToolStripMenuItem();
             this.brGrid.SuspendLayout();
             this.statusCurrentText.SuspendLayout();
             this.mnuMain.SuspendLayout();
@@ -245,10 +245,18 @@
             this.miEdit.Size = new System.Drawing.Size(69, 24);
             this.miEdit.Text = "編輯(&E)";
             // 
+            // miEditDocProperties
+            // 
+            this.miEditDocProperties.Name = "miEditDocProperties";
+            this.miEditDocProperties.Size = new System.Drawing.Size(192, 26);
+            this.miEditDocProperties.Tag = "DocProperties";
+            this.miEditDocProperties.Text = "文件屬性(&P)";
+            this.miEditDocProperties.Click += new System.EventHandler(this.miEdit_Click);
+            // 
             // miEditPageTitle
             // 
             this.miEditPageTitle.Name = "miEditPageTitle";
-            this.miEditPageTitle.Size = new System.Drawing.Size(216, 26);
+            this.miEditPageTitle.Size = new System.Drawing.Size(192, 26);
             this.miEditPageTitle.Tag = "PageTitles";
             this.miEditPageTitle.Text = "頁標題";
             this.miEditPageTitle.Click += new System.EventHandler(this.miEdit_Click);
@@ -256,7 +264,7 @@
             // miEditFetchPageTitles
             // 
             this.miEditFetchPageTitles.Name = "miEditFetchPageTitles";
-            this.miEditFetchPageTitles.Size = new System.Drawing.Size(216, 26);
+            this.miEditFetchPageTitles.Size = new System.Drawing.Size(192, 26);
             this.miEditFetchPageTitles.Tag = "FetchPageTitles";
             this.miEditFetchPageTitles.Text = "重新抓取頁標題";
             this.miEditFetchPageTitles.Click += new System.EventHandler(this.miEdit_Click);
@@ -264,13 +272,13 @@
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(213, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(189, 6);
             // 
             // 尋找FToolStripMenuItem
             // 
             this.尋找FToolStripMenuItem.Name = "尋找FToolStripMenuItem";
             this.尋找FToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.尋找FToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.尋找FToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
             this.尋找FToolStripMenuItem.Tag = "Find";
             this.尋找FToolStripMenuItem.Text = "尋找(&F)";
             this.尋找FToolStripMenuItem.Click += new System.EventHandler(this.miEdit_Click);
@@ -279,7 +287,7 @@
             // 
             this.miEditFindNext.Name = "miEditFindNext";
             this.miEditFindNext.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.miEditFindNext.Size = new System.Drawing.Size(216, 26);
+            this.miEditFindNext.Size = new System.Drawing.Size(192, 26);
             this.miEditFindNext.Tag = "FindNext";
             this.miEditFindNext.Text = "找下一筆(&N)";
             this.miEditFindNext.Click += new System.EventHandler(this.miEdit_Click);
@@ -288,7 +296,7 @@
             // 
             this.miEditGoto.Name = "miEditGoto";
             this.miEditGoto.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.miEditGoto.Size = new System.Drawing.Size(216, 26);
+            this.miEditGoto.Size = new System.Drawing.Size(192, 26);
             this.miEditGoto.Tag = "Goto";
             this.miEditGoto.Text = "到(&G)";
             this.miEditGoto.Click += new System.EventHandler(this.miEdit_Click);
@@ -310,7 +318,7 @@
             this.miViewBrailleOnly,
             this.miViewTextZhuyin});
             this.miViewMode.Name = "miViewMode";
-            this.miViewMode.Size = new System.Drawing.Size(213, 26);
+            this.miViewMode.Size = new System.Drawing.Size(216, 26);
             this.miViewMode.Text = "模式(&M)";
             this.miViewMode.Visible = false;
             // 
@@ -341,15 +349,15 @@
             // miViewBraille
             // 
             this.miViewBraille.Name = "miViewBraille";
-            this.miViewBraille.Size = new System.Drawing.Size(213, 26);
+            this.miViewBraille.Size = new System.Drawing.Size(216, 26);
             this.miViewBraille.Tag = "Braille";
-            this.miViewBraille.Text = "點字(&B)  /即將完成/";
+            this.miViewBraille.Text = "點字(&B)";
             this.miViewBraille.Click += new System.EventHandler(this.miViewClick);
             // 
             // miViewText
             // 
             this.miViewText.Name = "miViewText";
-            this.miViewText.Size = new System.Drawing.Size(213, 26);
+            this.miViewText.Size = new System.Drawing.Size(216, 26);
             this.miViewText.Tag = "Text";
             this.miViewText.Text = "明眼字(&T)";
             this.miViewText.Click += new System.EventHandler(this.miViewClick);
@@ -516,14 +524,6 @@
             this.statPageInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statPageInfo.Name = "statPageInfo";
             this.statPageInfo.Size = new System.Drawing.Size(70, 19);
-            // 
-            // miEditDocProperties
-            // 
-            this.miEditDocProperties.Name = "miEditDocProperties";
-            this.miEditDocProperties.Size = new System.Drawing.Size(216, 26);
-            this.miEditDocProperties.Tag = "DocProperties";
-            this.miEditDocProperties.Text = "文件屬性(&P)";
-            this.miEditDocProperties.Click += new System.EventHandler(this.miEdit_Click);
             // 
             // DualEditForm
             // 

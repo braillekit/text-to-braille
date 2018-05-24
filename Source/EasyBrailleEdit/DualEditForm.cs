@@ -1431,7 +1431,21 @@ namespace EasyBrailleEdit
 
         private void ViewBraille()
         {
-            MsgBoxHelper.ShowInfo("此功能尚未完成。");
+            var exporter = new BrailleDataExporter(
+                BrailleDoc,
+                AppGlobals.Config.Braille.LinesPerPage,
+                BrailleDoc.StartPageNumber,
+                true);
+
+            int endPageNum;
+            
+            string brailleText = exporter.GetAllBrailleText(out endPageNum);
+
+
+            var form = new ViewTextForm();
+            form.Text = $"檢視點字內容（頁碼：{BrailleDoc.StartPageNumber}～{endPageNum}）";
+            form.Content = brailleText;
+            form.ShowDialog();
         }
 
         private void ViewText()

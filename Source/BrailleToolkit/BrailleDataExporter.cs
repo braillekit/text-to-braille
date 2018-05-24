@@ -46,18 +46,25 @@ namespace BrailleToolkit
         /// <param name="fileName"></param>
         public int SaveBrailleFile(string fileName)
         {
-            int endPageNumber = 0;
+            int endPageNumber ;
 
+            string brailleText = GetAllBrailleText(out endPageNumber);
+
+            Encoding enc = Encoding.GetEncoding("BIG5");
+            File.WriteAllText(fileName, brailleText, enc);
+
+            return endPageNumber;
+        }
+
+        public string GetAllBrailleText(out int endPageNumber)
+        {
             // 1.產生用來列印的點字資料。
             var brailleData = GetBrailleDataForPrint(out endPageNumber);
 
             // 2.修正點字資料，以便供列印或者給超點的 WCBE（中英文點字編輯器）使用。
             FixBrailleDataForPrint(ref brailleData);
 
-            Encoding enc = Encoding.GetEncoding("BIG5");
-            File.WriteAllText(fileName, brailleData.ToString(), enc);
-
-            return endPageNumber;
+            return brailleData.Replace("\n", "\r\n").ToString();
         }
 
         /// <summary>
