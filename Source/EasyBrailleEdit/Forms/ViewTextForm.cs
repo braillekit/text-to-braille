@@ -30,6 +30,12 @@ namespace EasyBrailleEdit.Forms
             }
         }
 
+        private void ViewTextForm_Load(object sender, EventArgs e)
+        {
+            textBox1.SelectionStart = 0;
+        }
+
+
         private void ViewTextForm_KeyPress(object sender, KeyPressEventArgs e)
         {
         }
@@ -43,5 +49,6 @@ namespace EasyBrailleEdit.Forms
                     break;
             }
         }
+
     }
 }

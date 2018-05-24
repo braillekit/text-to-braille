@@ -37,12 +37,17 @@ namespace BrailleToolkit
         [NonSerialized]
         private BrailleProcessor m_Processor;	// 點字轉換器。
 
+        [DataMember]
+        public int StartPageNumber { get; set; }    // 起始頁碼
+
         #region 建構函式
 
         public BrailleDocument()
         {
             m_Lines = new List<BrailleLine>();
             m_PageTitles = new List<BraillePageTitle>();
+
+            StartPageNumber = 1;
         }
 
         public BrailleDocument(BrailleProcessor processor, int cellsPerLine=BrailleConst.DefaultCellsPerLine) : this()
@@ -241,6 +246,22 @@ namespace BrailleToolkit
                     writer.WriteLine(Lines[lineIdx].ToOriginalTextString(context));
                 }
             }
+        }
+
+        public string GetAllText()
+        {
+            var result = new StringBuilder();
+            var context = new ContextTagManager();
+            for (int lineIdx = 0; lineIdx < Lines.Count; lineIdx++)
+            {
+                var pageTitle = FindPageTitle(lineIdx);
+                if (pageTitle != null)
+                {
+                    result.AppendLine(pageTitle.ToOriginalTextString());
+                }
+                result.AppendLine(Lines[lineIdx].ToOriginalTextString(context));
+            }
+            return result.ToString();
         }
 
         private BraillePageTitle FindPageTitle(int lineIdx)

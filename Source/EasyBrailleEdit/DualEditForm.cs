@@ -1232,8 +1232,19 @@ namespace EasyBrailleEdit
             }
 		}
 
+        private void EditDocProperties()
+        {
+            var form = new BrailleDocPropertiesForm();
+            form.CellsPerLine = BrailleDoc.CellsPerLine;
+            form.StartPageNumber = BrailleDoc.StartPageNumber;
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                BrailleDoc.StartPageNumber = form.StartPageNumber;
+                IsDirty = true;
+            }
+        }
 
-		private void EditPageTitles()
+        private void EditPageTitles()
 		{
 			DualEditTitleForm fm = new DualEditTitleForm(BrailleDoc);
 			fm.CellsPerLine = BrailleDoc.CellsPerLine;
@@ -1321,6 +1332,9 @@ namespace EasyBrailleEdit
 			string s = (string)(sender as ToolStripMenuItem).Tag;
 			switch (s)
 			{
+                case "DocProperties":
+                    EditDocProperties();
+                    break;
 				case "PageTitles":
 					EditPageTitles();
 					break;
@@ -1417,7 +1431,7 @@ namespace EasyBrailleEdit
 
         private void ViewBraille()
         {
-
+            MsgBoxHelper.ShowInfo("此功能尚未完成。");
         }
 
         private void ViewText()

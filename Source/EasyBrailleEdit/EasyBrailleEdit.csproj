@@ -49,6 +49,12 @@
     <Compile Update="ExportBrailleForm.Designer.cs">
       <DependentUpon>ExportBrailleForm.cs</DependentUpon>
     </Compile>
+    <Compile Update="Forms\BrailleDocPropertiesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\BrailleDocPropertiesForm.Designer.cs">
+      <DependentUpon>BrailleDocPropertiesForm.cs</DependentUpon>
+    </Compile>
     <Compile Update="Forms\ViewTextForm.cs">
       <SubType>Form</SubType>
     </Compile>   
@@ -275,6 +281,14 @@
     <EmbeddedResource Update="ExportBrailleForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ExportBrailleForm.cs</DependentUpon>
+    </EmbeddedResource>   
+    <EmbeddedResource Update="Forms\ViewTextForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ViewTextForm.cs</DependentUpon>
+    </EmbeddedResource>   
+    <EmbeddedResource Update="Forms\BrailleDocPropertiesForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>BrailleDocPropertiesForm.cs</DependentUpon>
     </EmbeddedResource>   
   </ItemGroup>
 

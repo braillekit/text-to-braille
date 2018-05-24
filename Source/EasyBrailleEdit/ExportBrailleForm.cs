@@ -23,6 +23,11 @@ namespace EasyBrailleEdit
             InitializeComponent();
 
             BrailleDoc = brDoc;
+
+            if (BrailleDoc.StartPageNumber < 1) // 舊版的雙視檔案沒有這個屬性，故手動初始化為 1。
+            {
+                BrailleDoc.StartPageNumber = 1;
+            }
         }
 
         private void ExportBrailleForm_Load(object sender, EventArgs e)
@@ -33,7 +38,7 @@ namespace EasyBrailleEdit
             var cfg = AppGlobals.Config.Printing;
             chkPrintPageFoot.Checked = cfg.PrintPageFoot;
             chkChangeStartPageNum.Checked = true;
-            txtStartPageNumber.Text = "1";
+            txtStartPageNumber.Text = BrailleDoc.StartPageNumber.ToString();
 
             txtBrailleFileName.TextBox.CharacterCasing = CharacterCasing.Lower;
             txtBrailleFileName.Button.Click += SelectBrailleFileNameButton_Click;
