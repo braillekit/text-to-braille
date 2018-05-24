@@ -131,17 +131,17 @@ namespace BrailleToolkit
 
         /// <summary>
         /// 從指定的起始位置複製指定個數的點字 (BrailleWord) 到新建立的點字串列。
+        /// 注意：這是 shallow copy，新的串列中包含既有的元素參考，而非建立新元素。
         /// </summary>
         /// <param name="index">起始位置</param>
         /// <param name="count">要複製幾個點字。</param>
         /// <returns>新的點字串列。</returns>
-        public BrailleLine Copy(int index, int count)
+        public BrailleLine ShallowCopy(int index, int count)
         {
             BrailleLine brLine = new BrailleLine();
             BrailleWord newWord = null;
             while (index < Words.Count && count > 0)
             {
-                //newWord = Words[index].Copy();
                 newWord = Words[index]; 
                 brLine.Words.Add(newWord);
 
@@ -151,6 +151,22 @@ namespace BrailleToolkit
             }
             return brLine;
         }
+
+        public BrailleLine DeepCopy(int index, int count)
+        {
+            BrailleLine brLine = new BrailleLine();
+            BrailleWord newWord = null;
+            while (index < Words.Count && count > 0)
+            {
+                newWord = Words[index].Copy();
+                brLine.Words.Add(newWord);
+
+                index++;
+                count--;
+            }
+            return brLine;
+        }
+
 
         public void RemoveAt(int index)
         {

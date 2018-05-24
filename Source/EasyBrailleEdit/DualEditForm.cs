@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
 using EasyBrailleEdit.Common;
+using EasyBrailleEdit.DualEdit;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
 
@@ -41,7 +42,7 @@ namespace EasyBrailleEdit
 		private Font m_MingFont;	// Grid cell 字型 for 一般明眼字
         private Font m_MingFontCJK;	// Grid cell 字型 for 中日韓明眼字
 		private Font m_PhonFont;	// Grid cell 字型 for 注音符號
-		private PopupMenuController m_MenuController;
+		private GridPopupMenuController m_MenuController;
 		private CellClickEvent m_ClickController;
 
 #endregion
@@ -435,7 +436,7 @@ namespace EasyBrailleEdit
 			// 設置 controllers
 			if (m_MenuController == null)
 			{
-				m_MenuController = new PopupMenuController();
+				m_MenuController = new GridPopupMenuController();
 				m_MenuController.PopupMenuClick += GridMenu_Click;
 			}
 
@@ -726,7 +727,7 @@ namespace EasyBrailleEdit
 		/// <param name="e"></param>
 		void GridMenu_Click(object sender, SourceGrid.CellContextEventArgs e)
 		{
-			PopupMenuController menuCtrl = (PopupMenuController)sender;
+			GridPopupMenuController menuCtrl = (GridPopupMenuController)sender;
 			SourceGrid.CellContext cell = e.CellContext;
 			SourceGrid.Grid grid = (SourceGrid.Grid)cell.Grid;
 			int row = cell.Position.Row;
@@ -734,49 +735,46 @@ namespace EasyBrailleEdit
 
 			switch (menuCtrl.Command)
 			{
-                case "BreakLine":
+                case DualEditCommand.Names.BreakLine:
                     BreakLine(brGrid, row, col);
                     break;
-                case "Edit":
-					EditCell(grid, row, col);
+                case DualEditCommand.Names.EditWord:
+					EditWord(grid, row, col);
 					break;
-				case "InsertBlank":  // 插入空方                        
+				case DualEditCommand.Names.InsertBlank:  // 插入空方                        
 					InsertBlankCell(grid, row, col, 1);
 					break;
-				case "Append":  // 在列尾插入空方
-					AppendCell(grid, row, col);
+				case DualEditCommand.Names.AppendWord:  // 在列尾插入空方
+					AppendWord(grid, row, col);
 					break;
-                case "InsertWord":
-                    InsertCell(grid, row, col);
+                case DualEditCommand.Names.InsertWord:
+                    InsertWord(grid, row, col);
                     break;
-                case "InsertLine":  // 插入一列
+                case DualEditCommand.Names.InsertLine:  // 插入一列
 					InsertLine(grid, row, col);
 					break;
-                case "AddLine":     // 在下方插入一列
+                case DualEditCommand.Names.AddLine:     // 在下方插入一列
                     AddLine(grid, row, col);
                     break;
-                case "InsertText":
+                case DualEditCommand.Names.InsertText:
                     InsertText(grid, row, col);
                     break;
-				case "Delete":
+				case DualEditCommand.Names.DeleteWord:
 					DeleteWord(grid, row, col);
 					break;
-				case "Backspace":
+				case DualEditCommand.Names.BackDeleteWord:
 					BackspaceCell(grid, row, col);
 					break;
-				case "DeleteLine":
+				case DualEditCommand.Names.DeleteLine:
 					DeleteLine(grid, row, col, true);
 					break;
-                case "FormatParagraph":
+                case DualEditCommand.Names.FormatParagraph:
                     FormatParagraph(grid, row, col);
                     break;
-                case "CutToClipboard":
-                    CutToClipboard(grid);
-                    break;
-                case "CopyToClipboard":
+                case DualEditCommand.Names.CopyToClipboard:
                     CopyToClipboard(grid);
                     break;
-                case "PasteFromClipboard":
+                case DualEditCommand.Names.PasteFromClipboard:
                     PasteFromClipboard(grid, row, col);
                     break;
             }
@@ -1173,7 +1171,7 @@ namespace EasyBrailleEdit
 				switch (e.KeyCode)
 				{
 					case Keys.I:        // Ctrl+I: 新增點字。
-						InsertCell(brGrid, row, col);
+						InsertWord(brGrid, row, col);
 						e.Handled = true;
 						break;
 					case Keys.Insert:    // Ctrl+Ins: 新增一串文字。
@@ -1188,6 +1186,12 @@ namespace EasyBrailleEdit
 						DeleteLine(brGrid, row, col, true);
 						e.Handled = true;
 						break;
+                    case Keys.C:
+                        CopyToClipboard(brGrid);
+                        break;
+                    case Keys.V:
+                        PasteFromClipboard(brGrid, row, col);
+                        break;
 				}
 			}
             else if (e.Modifiers == (Keys.Control | Keys.Shift))
@@ -1212,7 +1216,7 @@ namespace EasyBrailleEdit
                 switch (e.KeyCode)
                 {
                     case Keys.F4:
-                        EditCell(brGrid, row, col);
+                        EditWord(brGrid, row, col);
                         e.Handled = true;
                         break;
                     case Keys.Back:     // 倒退刪除

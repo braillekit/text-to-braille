@@ -7,7 +7,7 @@ using EasyBrailleEdit.Common;
 using Huanlin.Windows.Forms;
 using DevAge.Drawing.VisualElements;
 
-namespace EasyBrailleEdit
+namespace EasyBrailleEdit.DualEdit
 {
     /// <summary>
     /// 儲存格內容修改的情況。
@@ -50,13 +50,13 @@ namespace EasyBrailleEdit
 		private SourceGrid.Cells.Views.Cell m_PhonView2; // Grid cell view for 破音字的注音符號
 		private SourceGrid.Cells.Views.Cell m_PhonView3; // Grid cell view for 容易判斷錯誤的破音字注音符號
 		private Font m_PhonFont;  // Grid cell view for 注音符號
-		private PopupMenuController m_MenuController;
+		private GridPopupMenuController m_MenuController;
 
 		// 注意這裡拿掉了 ClickController
 
 		#endregion
 
-		public PopupMenuController MenuController
+		public GridPopupMenuController MenuController
 		{
 			get { return m_MenuController; }
 		}
@@ -189,7 +189,7 @@ namespace EasyBrailleEdit
 			// 設置 controllers
 			if (m_MenuController == null && popupMenuClickHandler != null)
 			{
-				m_MenuController = new PopupMenuController();
+				m_MenuController = new GridPopupMenuController();
 				m_MenuController.PopupMenuClick += popupMenuClickHandler;
 			}
 
@@ -625,120 +625,6 @@ namespace EasyBrailleEdit
 		#endregion
 
 
-	} // of DualEditUIHelper
-
-
-	/// <summary>
-	/// 當使用者在 Grid 儲存格上點右鍵時顯示的 popup menu 類別。
-	/// </summary>
-	public class PopupMenuController : SourceGrid.Cells.Controllers.ControllerBase
-	{
-		private ContextMenu m_Menu = new ContextMenu();
-		private SourceGrid.CellContext m_CellContext;
-
-        private event SourceGrid.CellContextEventHandler m_PopupMenuClick = null;
-
-		public PopupMenuController()
-		{
-			string[] menuItemDefs = 
-            {
-                "從目前位置折行(Enter);BreakLine",
-                "修改這個字(&E)...;Edit;" + ((int)Shortcut.F4).ToString(),
-                "-;",
-                "插入一串文字(&I)...;InsertText;" + ((int)Shortcut.CtrlIns).ToString(),
-                "插入一個字(&W)...;InsertWord;" + ((int)Shortcut.CtrlI).ToString(),
-                "插入於行尾(&A)...;Append",
-                "插入空方(&B);InsertBlank",
-                "在上方插入一行(&L);InsertLine;" + ((int)Shortcut.CtrlShiftI).ToString(),
-                "在下方插入一行(&M);AddLine;" + ((int)Shortcut.CtrlShiftA).ToString(),
-                "-;",
-                "刪除(&D);Delete;" + ((int)Shortcut.CtrlDel).ToString(),
-                "倒退刪除(&K);Backspace",
-                "刪除整行(&R);DeleteLine;" + ((int)Shortcut.CtrlE).ToString(),
-                "段落重整(&F);FormatParagraph;" + ((int)Shortcut.CtrlShiftF).ToString(),
-                "-;",
-                "剪下(&X);CutToClipboard;" + ((int)Shortcut.CtrlX).ToString(),
-                "複製(&C);CopyToClipboard;" + ((int)Shortcut.CtrlC).ToString(),
-                "貼上(&P);PasteFromClipboard;" + ((int)Shortcut.CtrlV).ToString()
-            };
-
-			MenuItem mi;
-			char[] sep = { ';' };
-			EventHandler clickHandler = new EventHandler(GridPopupMenuItem_Click);
-
-			foreach (string s in menuItemDefs)
-			{
-				string[] def = s.Split(sep);
-				mi = new MenuItem(def[0]);
-				mi.Tag = def[1];
-				if (!mi.Text.Equals("-"))
-				{
-					mi.Click += clickHandler;
-				}
-				if (def.Length > 2)
-				{
-					mi.Shortcut = (Shortcut)Convert.ToInt32(def[2]);
-				}
-				m_Menu.MenuItems.Add(mi);
-			}
-		}
-
-		/// <summary>
-		/// 根據 tag 字串值尋找對應的選單項目，並令其隱藏或顯示。
-		/// </summary>
-		/// <param name="tag"></param>
-		/// <param name="hide">是否要隱藏</param>
-		public void HideMenuItem(string tag, bool hide)
-		{
-			foreach (MenuItem item in m_Menu.MenuItems)
-			{
-				if (tag.Equals((string)item.Tag, StringComparison.CurrentCultureIgnoreCase))
-				{
-					item.Visible = !hide;
-				}
-			}
-		}
-
-		public override void OnMouseUp(SourceGrid.CellContext sender, MouseEventArgs e)
-		{
-			base.OnMouseUp(sender, e);
-
-			if (e.Button == MouseButtons.Right)
-			{
-				m_CellContext = sender;
-				m_Menu.Show(sender.Grid, new Point(e.X, e.Y));
-			}
-		}
-
-		private void GridPopupMenuItem_Click(object sender, EventArgs e)
-		{
-			MenuItem mi = (MenuItem)sender;
-			if (mi != null)
-			{
-				SourceGrid.CellContextEventArgs args = new SourceGrid.CellContextEventArgs(m_CellContext);
-				Command = mi.Tag.ToString();
-				OnPopupMenuClick(args);
-			}
-		}
-
-		protected void OnPopupMenuClick(SourceGrid.CellContextEventArgs args)
-		{
-            m_PopupMenuClick?.Invoke(this, args);
-        }
-
-		public event SourceGrid.CellContextEventHandler PopupMenuClick
-		{
-			add
-			{
-                m_PopupMenuClick += value;
-			}
-			remove
-			{
-                m_PopupMenuClick -= value;
-			}
-		}
-
-        public string Command { get; private set; }
-    }
+	} 
 
 }

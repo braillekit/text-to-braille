@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.Serialization;
+using BrailleToolkit.Helpers;
+using BrailleToolkit.Tags;
 
 namespace BrailleToolkit
 {
@@ -97,6 +99,17 @@ namespace BrailleToolkit
         public int BeginLineIndex
         {
             get { return m_BeginLineIndex; }
+        }
+
+        public string ToOriginalTextString()
+        {
+            if (TitleLine == null || TitleLine.IsEmpty())
+            {
+                return String.Empty;
+            }
+
+            string text = TitleLine.ToOriginalTextString(null);
+            return XmlTagHelper.EncloseWithTag(text, ContextTagNames.Title);
         }
 
 		#region ICloneable Members

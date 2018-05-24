@@ -231,11 +231,26 @@ namespace BrailleToolkit
 
             using (var writer = new StreamWriter(filename, false, Encoding.UTF8))
             {
-                foreach (var brLine in Lines)
+                for (int lineIdx = 0; lineIdx < Lines.Count; lineIdx++)
                 {
-                    writer.WriteLine(brLine.ToOriginalTextString(context));
+                    var pageTitle = FindPageTitle(lineIdx);
+                    if (pageTitle != null)
+                    {
+                        writer.WriteLine(pageTitle.ToOriginalTextString());
+                    }
+                    writer.WriteLine(Lines[lineIdx].ToOriginalTextString(context));
                 }
             }
+        }
+
+        private BraillePageTitle FindPageTitle(int lineIdx)
+        {
+            foreach (var title in PageTitles)
+            {
+                if (title.BeginLineIndex == lineIdx)
+                    return title;
+            }
+            return null;
         }
 
         private void ProcessLine(string line, int lineNumber)

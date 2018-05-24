@@ -1121,7 +1121,7 @@ namespace BrailleToolkit
             {
                 breakIndex = FindBreakPoint(brLine, maxCellsInLine, out needHyphen);
 
-                newLine = brLine.Copy(wordIndex, breakIndex);   // 複製到新行。
+                newLine = brLine.ShallowCopy(wordIndex, breakIndex);   // 複製到新行。
                 if (needHyphen) // 是否要附加連字號?
                 {
                     newLine.Words.Add(new BrailleWord("-", BrailleCellCode.Hyphen));

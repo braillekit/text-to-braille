@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using BrailleToolkit;
 using Huanlin.Windows.Forms;
 
-namespace EasyBrailleEdit
+namespace EasyBrailleEdit.DualEdit
 {
     internal partial class DualEditController
     {
@@ -47,7 +47,7 @@ namespace EasyBrailleEdit
         /// <param name="row">儲存格的列索引。</param>
         /// <param name="col">儲存格的行索引。</param>
         /// <returns>若有更動儲存格內容，則傳回 true，否則傳回 false。</returns>
-        internal void EditCell(int row, int col)
+        internal void EditWord(int row, int col)
         {
             /* NOTE
              * 每當儲存格內容有變動時，需考慮以下情況： 
@@ -110,7 +110,7 @@ namespace EasyBrailleEdit
         /// </summary>
         /// <param name="row">儲存格的列索引。</param>
         /// <param name="col">儲存格的行索引。</param>
-        internal void InsertCell(int row, int col)
+        internal void InsertWord(int row, int col)
         {
             if (!CheckCellPosition(row, col))
                 return;
@@ -138,7 +138,7 @@ namespace EasyBrailleEdit
         /// <summary>
         /// 在行尾附加點字。
         /// </summary>
-        internal void AppendCell(int row, int col)
+        internal void AppendWord(int row, int col)
         {
             if (!CheckCellPosition(row, col))
                 return;
@@ -332,7 +332,7 @@ namespace EasyBrailleEdit
             int lineIdx = GetBrailleLineIndex(row);
             BrailleLine brLine = m_BrDoc.Lines[lineIdx];
 
-            BrailleLine newLine = brLine.Copy(wordIdx, 255);	// 複製到新行。
+            BrailleLine newLine = brLine.ShallowCopy(wordIdx, 255);	// 複製到新行。
             newLine.TrimEnd();	// 去尾空白。 
             m_BrDoc.Lines.Insert(lineIdx + 1, newLine);
             brLine.RemoveRange(wordIdx, 255);	// 從原始串列中刪除掉已經複製到新行的點字。
