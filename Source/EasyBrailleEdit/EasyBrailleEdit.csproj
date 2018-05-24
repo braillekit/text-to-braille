@@ -48,6 +48,12 @@
     </Compile>
     <Compile Update="ExportBrailleForm.Designer.cs">
       <DependentUpon>ExportBrailleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\ViewTextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>   
+    <Compile Update="Forms\ViewTextForm.Designer.cs">
+      <DependentUpon>ViewTextForm.cs</DependentUpon>
     </Compile>   
     <Compile Update="InsertTextForm.cs">
       <SubType>Form</SubType>

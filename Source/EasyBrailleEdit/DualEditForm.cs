@@ -5,6 +5,7 @@ using BrailleToolkit;
 using BrailleToolkit.Converters;
 using EasyBrailleEdit.Common;
 using EasyBrailleEdit.DualEdit;
+using EasyBrailleEdit.Forms;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
 
@@ -1398,6 +1399,33 @@ namespace EasyBrailleEdit
         private void miFileExportBrl_Click(object sender, EventArgs e)
         {
             DoExportBrailleFile();
+        }
+
+        private void miViewClick(object sender, EventArgs e)
+        {
+            ToolStripMenuItem mi = sender as ToolStripMenuItem;
+            switch (mi.Tag.ToString())
+            {
+                case "Braille":
+                    ViewBraille();
+                    break;
+                case "Text":
+                    ViewText();
+                    break;
+            }
+        }
+
+        private void ViewBraille()
+        {
+
+        }
+
+        private void ViewText()
+        {
+            var form = new ViewTextForm();
+            form.Text = "檢視明眼字";
+            form.Content = BrailleDoc.GetAllText();
+            form.ShowDialog();
         }
     }
 
