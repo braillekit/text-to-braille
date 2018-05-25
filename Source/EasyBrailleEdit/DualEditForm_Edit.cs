@@ -522,6 +522,12 @@ namespace EasyBrailleEdit
             //      然後把 column index 減 1，便得到欲刪除的儲存格位置了。
             int lineIdx = GetBrailleLineIndex(grid, row);
             int wordIdx = GetBrailleWordIndex(grid, row, col);
+
+            if (lineIdx == 0 && wordIdx == 0)
+            {
+                return;     // 只剩下一個字，不用做任何處理。
+            }
+
             int colToDelete = GetGridColumnIndex(lineIdx, wordIdx) - 1;
             bool isFirstColumn = false;
             if (colToDelete < grid.FixedColumns) // // 在列首執行此動作?
