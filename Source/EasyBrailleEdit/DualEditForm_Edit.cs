@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using BrailleToolkit;
+using BrailleToolkit.Helpers;
 using EasyBrailleEdit.DualEdit;
 using Huanlin.Windows.Forms;
 using SourceGrid;
@@ -282,8 +283,37 @@ namespace EasyBrailleEdit
         }
 
 
+        private void InsertBrailleLines(List<BrailleLine> brLines, SourceGrid.Grid grid, int row, int col)
+        {
+            row = GetBrailleRowIndex(row);
+            int lineIdx = GetBrailleLineIndex(grid, row);
+            BrailleLine brLine = BrailleDoc.Lines[lineIdx];
+
+            int curRow = row;
+            for (int i = 0; i < brLines.Count; i++)
+            {
+                BrailleDoc.Lines.Insert(lineIdx, brLines[i]);
+
+                // Update UI
+                GridInsertRowAt(curRow);
+                FillRow(brLines[i], curRow, true);
+
+
+                lineIdx++;
+                curRow += 3;
+            }           
+            IsDirty = true;
+            
+            RefreshRowNumbers();    // 重新填列號
+
+            int endRow = row + brLines.Count * 3 - 1;
+            var range = new Range(row, grid.FixedColumns, endRow, grid.ColumnsCount - grid.FixedColumns);
+            grid.Selection.SelectRange(range, true);
+        }
+
         private void InsertBrailleWords(List<BrailleWord> wordList, SourceGrid.Grid grid, int row, int col)
         {
+            row = GetBrailleRowIndex(row); // 確保列索引是點字所在的列。
             int wordIdx = GetBrailleWordIndex(grid, row, col);
             int lineIdx = GetBrailleLineIndex(grid, row);
             BrailleLine brLine = BrailleDoc.Lines[lineIdx];
@@ -292,16 +322,21 @@ namespace EasyBrailleEdit
             brLine.Words.InsertRange(wordIdx, wordList);
             IsDirty = true;
 
-            // 略過 context tags，直到碰到第一個非 context tag 的字（因為 grid 上面不會有 context tag。
-            while (wordIdx < brLine.WordCount && brLine[wordIdx].IsContextTag)
-            {
-                wordIdx++;
-            }
-
             // Update UI
-            ReformatRow(grid, row);
-            int focusCol = GetGridColumnIndex(lineIdx, wordIdx);
-            GridFocusCell(row, focusCol);
+            int formattedLineCount = ReformatRow(grid, row);
+
+            // 經過上面的 reformat 處理，插入的文字有可能因為斷字或其他編排規則而被切到下一行。
+            // 因此必須判斷插入文字的目標儲存格上面有沒有文字，若沒有，則表示文字被折到下一行了，應清除選取區域，並將游標定位至下一行的第一個字。
+            if (formattedLineCount > 1 && grid[row, col] == null)
+            {
+                grid.Selection.ResetSelection(false);
+                GridFocusCell(row + 3, grid.FixedColumns);
+            }
+            else
+            {
+                var range = new Range(row, col, row + 2, col + wordList.GetCellCount() - 1);
+                grid.Selection.SelectRange(range, true);
+            }
         }
 
         /// <summary>
@@ -711,30 +746,30 @@ namespace EasyBrailleEdit
             GridSelectRow(row, false);
         }
 
-        private bool GetSelectionRange(Grid grid, out int row, out int startCol, out int endCol)
+        private bool GetSelectionRange(Grid grid, 
+            out int startRow, out int startCol, out int endRow, out int endCol)
         {
             var selectedCellsPositions = grid.Selection.GetSelectionRegion().GetCellsPositions();
 
             var sb = new StringBuilder();
 
-            row = -1;
+            startRow = -1;
+            endRow = -1;
             startCol = 0;
             endCol = 0;
             foreach (var pos in selectedCellsPositions)
             {
-                if (row == -1)
+                if (startRow == -1)
                 {
-                    row = GetBrailleRowIndex(pos.Row);
+                    startRow = GetBrailleRowIndex(pos.Row);
+                    endRow = startRow;
                     startCol = pos.Column;
                     endCol = pos.Column;
                 }
                 else
                 {
-                    if (GetBrailleRowIndex(pos.Row) != row)
-                    {
-                        MsgBoxHelper.ShowError("不能複製多行文字! 每次複製時，請複製同一行中的連續文字。");
-                        return false;
-                    }
+                    endRow = GetBrailleRowIndex(pos.Row);
+
                     if (pos.Column - endCol > 1)
                     {
                         MsgBoxHelper.ShowError("不支援分段選取！請複製同一行中的連續文字。");
@@ -743,12 +778,54 @@ namespace EasyBrailleEdit
                     endCol = pos.Column;
                 }
             }
+
+            if (startRow != endRow) // 選取多行？
+            {
+                int totalColumns = grid.ColumnsCount - grid.FixedColumns;
+                if ((endCol - startCol + 1) < totalColumns)
+                {
+                    int startLineIdx = GetBrailleLineIndex(grid, startRow);
+                    int endLineIdx = GetBrailleLineIndex(grid, endRow);
+                    var s = $"複製多行時，必須選取整行。\r\n您是否要複製第 {startLineIdx+1} 至 {endLineIdx+1} 行？";
+                    if (MsgBoxHelper.ShowYesNo(s) != DialogResult.Yes)
+                        return false;
+
+                    // 修改選取範圍
+                    startCol = grid.FixedColumns;
+                    endCol = totalColumns;
+                }
+
+                grid.Selection.ResetSelection(false);
+                grid.Selection.SelectRange(new Range(startRow, startCol, endRow+2, endCol), true);
+            }
             return true;
         }
 
-
-        private List<BrailleWord> GetSelectedBrailleWords(Grid grid, int row, int startCol, int endCol)
+        private List<BrailleLine> CloneSelectedBrailleWords(Grid grid, int startRow, int startCol, int endRow, int endCol)
         {
+            var result = new List<BrailleLine>();
+
+            if (startRow != endRow)
+            {
+                if ((endCol - startCol + 1) < (grid.ColumnsCount - grid.FixedColumns))
+                {
+                    throw new ArgumentException($"參數錯誤! 多行選取時，{nameof(startCol)} 和 {nameof(endCol)} 應為 1 和 40。");
+                }
+                int startLineIdx = GetBrailleLineIndex(grid, startRow);
+                int endLineIdx = GetBrailleLineIndex(grid, endRow);
+
+
+                for (int i = startLineIdx; i <= endLineIdx; i++)
+                {
+                    var aLine = BrailleDoc.Lines[i];
+                    result.Add(aLine.DeepCopy(0, aLine.WordCount));
+                    // TODO: 上面的複製操作，也許該略過 context tags？
+                }
+                return result;
+            }
+
+            // 選取同一列中的字。
+            int row = startRow;
             int startWordIdx = GetBrailleWordIndex(grid, row, startCol);
             int endWordIdx = GetBrailleWordIndex(grid, row, endCol);
 
@@ -756,32 +833,53 @@ namespace EasyBrailleEdit
 
             int lineIdx = GetBrailleLineIndex(grid, row);
             var brLine = BrailleDoc.Lines[lineIdx];
-            var result = new List<BrailleWord>();
+            var newBrLine = new BrailleLine();
             for (int i = startWordIdx; i <= endWordIdx; i++)
             {
                 if (brLine[i].IsContextTag)
                     continue;
                 var newWord = brLine[i].Copy();
-                result.Add(newWord);
+                newBrLine.Words.Add(newWord);
             }
+            result.Add(newBrLine);
             return result;
         }
 
         private void CopyToClipboard(Grid grid)
         {
-            int row, startCol, endCol;
+            int startRow, startCol, endRow, endCol;
 
-            if (!GetSelectionRange(grid, out row, out startCol, out endCol))
+            if (!GetSelectionRange(grid, out startRow, out startCol, out endRow, out endCol))
                 return;
 
-            var brWords = GetSelectedBrailleWords(grid, row, startCol, endCol);
-            ClipboardHelper.SetData(brWords);
+            var brLines = CloneSelectedBrailleWords(grid, startRow, startCol, endRow, endCol);
+            if (startRow == endRow)
+            {
+                ClipboardHelper.SetWords(brLines[0].Words);
+            }
+            else
+            {
+                
+                ClipboardHelper.SetLines(brLines);
+            }
         }
 
         private void PasteFromClipboard(Grid grid, int row, int col)
         {
-            var wordList = ClipboardHelper.GetData();
-            InsertBrailleWords(wordList, grid, row, col);
+            var brWords = ClipboardHelper.GetWords();
+            var brLines = ClipboardHelper.GetLines();
+
+            if (brWords != null)
+            {
+                InsertBrailleWords(brWords, grid, row, col);
+                return;
+            }
+            if (brLines != null)
+            {
+                InsertBrailleLines(brLines, grid, row, col);
+                return;
+            }
+            MsgBoxHelper.ShowInfo("剪貼簿裡面沒有資料！");
         }
 
     }

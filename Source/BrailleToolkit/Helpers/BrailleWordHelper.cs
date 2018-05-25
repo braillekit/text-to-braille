@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BrailleToolkit.Extensions
+namespace BrailleToolkit.Helpers
 {
     public static class BrailleWordHelper
     {
@@ -45,6 +45,16 @@ namespace BrailleToolkit.Extensions
                 sb.Append(brWord.ToPositionNumberString(useParenthesis: true));
             }
             return sb.ToString();
+        }
+
+        public static int GetCellCount(this List<BrailleWord> brWordList)
+        {
+            int count = 0;
+            foreach (var brWord in brWordList)
+            {
+                count += brWord.CellCount;
+            }
+            return count;
         }
     }
 }
