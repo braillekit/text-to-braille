@@ -481,6 +481,12 @@ namespace EasyBrailleEdit
                 return;
             }
 
+            if (BrailleDoc.LineCount == 1 && brLine.CellCount == 1) // 整份文件只剩下最後一個字？
+            {
+                if (brLine[0].IsWhiteSpace) // 保留最後一個空方.
+                    return;
+            }
+
             // 取得目前要刪除的字的第一個 cell 的 column index。此操作必須在刪字之前做。
             col = GetGridColumnIndex(lineIdx, wordIdx);
 
@@ -489,8 +495,18 @@ namespace EasyBrailleEdit
 
             if (brLine.CellCount == 0)    // 如果整列都刪光了，就移除此列。
             {
-                DoDeleteLine(grid, row, lineIdx);
-                GridFocusCell(row, col);
+                if (BrailleDoc.LineCount == 1)
+                {
+                    // 整份文件全刪光時，自動增加一個空方。
+                    brLine.Words.Add(BrailleWord.NewBlank());
+                    UpdateCell(row, col, brLine.Words[0]);
+                    GridFocusCell(row, col);
+                }
+                else
+                {
+                    DoDeleteLine(grid, row, lineIdx);
+                    GridFocusCell(row - 3, col);
+                }
                 return;
             }
 
