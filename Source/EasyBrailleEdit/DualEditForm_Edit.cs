@@ -15,135 +15,6 @@ namespace EasyBrailleEdit
     /// </summary>
     partial class DualEditForm : Form
     {
-        #region 計算點字、列索引的相關函式
-
-        /// <summary>
-        /// 根據指定的 grid 列索引計算出該列的點字列的列索引。
-        /// 由於每個點字在顯示時佔三列（點字、明眼字、注音碼），此方法可從 grid 的列索引推算點字列的列索引。
-        /// 註：grid 的第 0 列是標題列。
-        /// </summary>
-        /// <param name="gridRowIndex"></param>
-        /// <returns></returns>
-        internal int GetBrailleRowIndex(int gridRowIndex)
-        {
-            if (gridRowIndex % 3 == 0)
-            {
-                gridRowIndex -= 2;
-            }
-            else if (gridRowIndex % 3 == 2)
-            {
-                gridRowIndex--;
-            }
-            return gridRowIndex;
-        }
-
-        /// <summary>
-        /// 根據 grid 列索引計算出該列屬於點字文件的哪一列，即 BrailleDocument 的 Lines 集合索引。
-        /// 註：grid 的第 0 列是標題列。
-        /// </summary>
-        /// <param name="gridRowIndex">Grid 列索引。</param>
-        /// <returns></returns>
-        internal int GetBrailleLineIndex(SourceGrid.Grid grid, int gridRowIndex)
-        {
-            return (gridRowIndex - grid.FixedRows) / 3;
-        }
-
-        internal BrailleWord GetBrailleWordOfGridCell(SourceGrid.Grid grid, int row, int col)
-        {
-            if (grid[row, col] == null)
-            {
-                throw new Exception($"無效的行與列索引: 橫列={row}, 直行={col}。");
-            }
-
-            return grid[row, col].Tag as BrailleWord;
-        }
-
-        /// <summary>
-        /// 根據 grid 行索引計算出該行屬於點字列的哪一個字，即 BrailleLine 的 Words 集合索引。
-        /// </summary>
-        /// <param name="gridRowIndex">Grid 列索引。</param>
-        /// <param name="gridColumnIndex">Grid 行索引。</param>
-        /// <returns></returns>
-        internal int GetBrailleWordIndex(SourceGrid.Grid grid, int row, int col)
-        {
-            if (grid[row, col] == null)
-            {
-                throw new Exception($"無效的行與列索引: 橫列={row}, 直行={col}。");
-            }
-
-            var wordInQuestion = GetBrailleWordOfGridCell(grid, row, col);
-            if (wordInQuestion == null)
-            {
-                throw new Exception($"找不到點字物件: 橫列={row}, 直行={col}。");
-            }
-
-            int lineIdx = GetBrailleLineIndex(grid, row);
-            BrailleLine brLine = BrailleDoc.Lines[lineIdx];
-
-            return brLine.IndexOf(wordInQuestion);
-
-/* 舊方法, 有嚴重 bug: 沒有考慮到 IsContextTag==true 的 BrailleWord 物件。
-            int wordIdx = 0;
-            int i = brGrid.FixedColumns;
-
-            // 由於每個點字可能有多方，即在 grid 中可能合併多行，因此必須考慮合併的情形。
-            while (true)
-            {
-                i += brGrid[gridRowIndex, i].ColumnSpan;
-                if (i > gridColumnIndex)
-                    break;
-                wordIdx++;
-            }
-            return wordIdx;
-*/
-        }
-
-        /// <summary>
-        /// 根據傳入的點字文件列索引取得對應的 Grid 點字列索引。
-        /// </summary>
-        /// <param name="lineIdx"></param>
-        /// <returns></returns>
-        internal int GetGridRowIndex(int lineIdx)
-        {
-            return (lineIdx * 3) + brGrid.FixedRows;
-        }
-
-        /// <summary>
-        /// 根據傳入的點字文件列索引取得對應的 Grid 明眼字的列索引。
-        /// </summary>
-        /// <param name="lineIdx"></param>
-        /// <returns></returns>
-        internal int GetGridTextRowIndex(int lineIdx)
-        {
-            return (lineIdx * 3) + brGrid.FixedRows + 1;
-        }
-
-        /// <summary>
-        /// 根據傳入的點字文件列索引和字索引，取得對應的 Grid 欄索引。
-        /// </summary>
-        /// <param name="lineIdx"></param>
-        /// <param name="wordIdx"></param>
-        /// <returns></returns>
-        internal int GetGridColumnIndex(int lineIdx, int wordIdx)
-        {
-            int textRowIdx = GetGridTextRowIndex(lineIdx);	// 明眼字的列索引
-            int col = brGrid.FixedColumns;
-
-            var brWord = BrailleDoc.Lines[lineIdx].Words[wordIdx];
-            while (col < brGrid.ColumnsCount)
-            {
-                var wordInCell = brGrid[textRowIdx, col].Tag as BrailleWord;
-                if (ReferenceEquals(wordInCell, brWord))
-                {
-                    return col;
-                }
-                col++;
-            }
-
-            throw new Exception("GetGridColumnIndex 找不到列索引和字索引。");
-        }
-
-        #endregion
 
         /// <summary>
         /// 修改儲存格。
@@ -219,7 +90,7 @@ namespace EasyBrailleEdit
                 return;
 
             // 由於每個點字在顯示時佔三列（點字、明眼字、注音碼），因此先推算出點字的列索引。
-            row = GetBrailleRowIndex(row);
+            row = _positionMapper.GetBrailleRowIndex(row);
 
             // Note: 不可重新轉點字，只重新斷行。
 
@@ -249,8 +120,8 @@ namespace EasyBrailleEdit
             form.Mode = EditCellMode.Insert;
             if (form.ShowDialog() == DialogResult.OK)
             {
-                int wordIdx = GetBrailleWordIndex(grid, row, col);
-                int lineIdx = GetBrailleLineIndex(grid, row);
+                int wordIdx = _positionMapper.CellPositionToWordIndex(row, col);
+                int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
                 BrailleLine brLine = BrailleDoc.Lines[lineIdx];
 
                 // 在第 wordIdx 個字之前插入新點字。
@@ -259,7 +130,7 @@ namespace EasyBrailleEdit
 
                 // Update UI
                 ReformatRow(grid, row);
-                int focusCol = GetGridColumnIndex(lineIdx, wordIdx);
+                int focusCol = _positionMapper.WordIndexToGridColumn(lineIdx, wordIdx);
                 GridFocusCell(row, focusCol);
             }
         }
@@ -285,8 +156,8 @@ namespace EasyBrailleEdit
 
         private void InsertBrailleLines(List<BrailleLine> brLines, SourceGrid.Grid grid, int row, int col)
         {
-            row = GetBrailleRowIndex(row);
-            int lineIdx = GetBrailleLineIndex(grid, row);
+            row = _positionMapper.GetBrailleRowIndex(row);
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
             BrailleLine brLine = BrailleDoc.Lines[lineIdx];
 
             int curRow = row;
@@ -313,9 +184,9 @@ namespace EasyBrailleEdit
 
         private void InsertBrailleWords(List<BrailleWord> wordList, SourceGrid.Grid grid, int row, int col)
         {
-            row = GetBrailleRowIndex(row); // 確保列索引是點字所在的列。
-            int wordIdx = GetBrailleWordIndex(grid, row, col);
-            int lineIdx = GetBrailleLineIndex(grid, row);
+            row = _positionMapper.GetBrailleRowIndex(row); // 確保列索引是點字所在的列。
+            int wordIdx = _positionMapper.CellPositionToWordIndex(row, col);
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
             BrailleLine brLine = BrailleDoc.Lines[lineIdx];
 
             // 在第 wordIdx 個字之前插入新點字。
@@ -351,7 +222,7 @@ namespace EasyBrailleEdit
             form.Mode = EditCellMode.Insert;
             if (form.ShowDialog() == DialogResult.OK)
             {
-                int lineIdx = GetBrailleLineIndex(grid, row);
+                int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
                 BrailleLine brLine = BrailleDoc.Lines[lineIdx];
 
                 // 在第 wordIdx 個字之前插入新點字。
@@ -376,8 +247,8 @@ namespace EasyBrailleEdit
             if (!CheckCellPosition(row, col))
                 return;
 
-            int wordIdx = GetBrailleWordIndex(grid, row, col);
-            int lineIdx = GetBrailleLineIndex(grid, row);
+            int wordIdx = _positionMapper.CellPositionToWordIndex(row, col);
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
             BrailleLine brLine = BrailleDoc.Lines[lineIdx];
             while (count > 0)
             {
@@ -405,8 +276,8 @@ namespace EasyBrailleEdit
             var brLine = new BrailleLine();
             brLine.Words.Add(BrailleWord.NewBlank());
 
-            row = GetBrailleRowIndex(row);
-            int lineIdx = GetBrailleLineIndex(grid, row);
+            row = _positionMapper.GetBrailleRowIndex(row);
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
             BrailleDoc.Lines.Insert(lineIdx, brLine);
             IsDirty = true;
 
@@ -432,12 +303,12 @@ namespace EasyBrailleEdit
             var brLine = new BrailleLine();
             brLine.Words.Add(BrailleWord.NewBlank());
 
-            int lineIdx = GetBrailleLineIndex(grid, row) + 1;
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row) + 1;
             BrailleDoc.Lines.Insert(lineIdx, brLine);
             IsDirty = true;
 
             // 更新 UI。
-            row = GetGridRowIndex(lineIdx);
+            row = _positionMapper.LineIndexToGridBrailleRow(lineIdx);
             GridInsertRowAt(row);
             RefreshRowNumbers();
             FillRow(brLine, row, true);
@@ -457,9 +328,9 @@ namespace EasyBrailleEdit
                 return;
 
             int orgRow = row;
-            row = GetBrailleRowIndex(row);
+            row = _positionMapper.GetBrailleRowIndex(row);
 
-            int lineIdx = GetBrailleLineIndex(grid, row);
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
             BrailleLine brLine = BrailleDoc.Lines[lineIdx];
 
             if (grid[row, col] == null)
@@ -488,7 +359,7 @@ namespace EasyBrailleEdit
             }
 
             // 取得目前要刪除的字的第一個 cell 的 column index。此操作必須在刪字之前做。
-            col = GetGridColumnIndex(lineIdx, wordIdx);
+            col = _positionMapper.WordIndexToGridColumn(lineIdx, wordIdx);
 
             brLine.Words.RemoveAt(wordIdx);
             IsDirty = true;
@@ -532,19 +403,19 @@ namespace EasyBrailleEdit
                 return;
 
             int orgRow = row;
-            row = GetBrailleRowIndex(row);  // 確保列索引為點字列。
+            row = _positionMapper.GetBrailleRowIndex(row);  // 確保列索引為點字列。
 
             // 算法：找到目前位置所在的字索引，再取得該字的第一個 cell 的 column index，
             //      然後把 column index 減 1，便得到欲刪除的儲存格位置了。
-            int lineIdx = GetBrailleLineIndex(grid, row);
-            int wordIdx = GetBrailleWordIndex(grid, row, col);
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
+            int wordIdx = _positionMapper.CellPositionToWordIndex(row, col);
 
             if (lineIdx == 0 && wordIdx == 0)
             {
                 return;     // 只剩下一個字，不用做任何處理。
             }
 
-            int colToDelete = GetGridColumnIndex(lineIdx, wordIdx) - 1;
+            int colToDelete = _positionMapper.WordIndexToGridColumn(lineIdx, wordIdx) - 1;
             bool isFirstColumn = false;
             if (colToDelete < grid.FixedColumns) // // 在列首執行此動作?
             {
@@ -556,7 +427,7 @@ namespace EasyBrailleEdit
             {
                 // 先計算新的游標位置
                 int focusRow = orgRow - 3;
-                lineIdx = GetBrailleLineIndex(grid, focusRow);
+                lineIdx = _positionMapper.GridRowToBrailleLineIndex(focusRow);
                 var brLine = BrailleDoc.Lines[lineIdx];
                 int focusCol = brLine.CellCount + grid.FixedColumns;
 
@@ -571,12 +442,12 @@ namespace EasyBrailleEdit
                         GridFocusCell(focusRow, focusCol);
                         isFocused = true;
                     }
-                    lineIdx = GetBrailleLineIndex(grid, row) + 1;
+                    lineIdx = _positionMapper.GridRowToBrailleLineIndex(row) + 1;
                     if (lineIdx >= BrailleDoc.LineCount)
                     {
                         break;
                     }
-                    row = GetGridRowIndex(lineIdx);
+                    row = _positionMapper.LineIndexToGridBrailleRow(lineIdx);
                 }
             }
             else
@@ -596,8 +467,8 @@ namespace EasyBrailleEdit
                 return;
             }
 
-            row = GetBrailleRowIndex(row);  // 確保列索引為點字列。
-            int lineIdx = GetBrailleLineIndex(grid, row) + 1; // 從下一列開始處理（把下一列接上去）
+            row = _positionMapper.GetBrailleRowIndex(row);  // 確保列索引為點字列。
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row) + 1; // 從下一列開始處理（把下一列接上去）
 
             while (lineIdx < BrailleDoc.LineCount)
             {
@@ -607,7 +478,7 @@ namespace EasyBrailleEdit
                     break;
                 }
                 // 把下一列接上來。
-                row = GetGridRowIndex(lineIdx);
+                row = _positionMapper.LineIndexToGridBrailleRow(lineIdx);
                 if (JoinToPreviousRow(row, out _, out _))
                 {
                     // 當有發生兩列銜接的情形時，列索引不應遞增。
@@ -630,12 +501,12 @@ namespace EasyBrailleEdit
             if (row < 0 || row > brGrid.RowsCount)
                 throw new ArgumentOutOfRangeException($"參數 {nameof(row)} 的數值超出合法範圍: {row}");
 
-            row = GetBrailleRowIndex(row);  // 確保列索引為點字列。
+            row = _positionMapper.GetBrailleRowIndex(row);  // 確保列索引為點字列。
 
             if (row <= brGrid.FixedRows)    // 第一列的列首，無需處理。
                 return false;
 
-            int lineIdx = GetBrailleLineIndex(brGrid, row);
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
             int prevLineIdx = lineIdx - 1;
 
             BrailleLine currBrLine = BrailleDoc.Lines[lineIdx];
@@ -681,14 +552,14 @@ namespace EasyBrailleEdit
         /// <param name="col"></param>
         private void BreakLine(SourceGrid.Grid grid, int row, int col)
         {
-            int wordIdx = GetBrailleWordIndex(grid, row, col);
+            int wordIdx = _positionMapper.CellPositionToWordIndex(row, col);
             if (wordIdx == 0)   // 若在第一個字元處斷行，其實就等於插入一列。
             {
                 InsertLine(grid, row, col);
                 return;
             }
 
-            int lineIdx = GetBrailleLineIndex(grid, row);
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
             BrailleLine brLine = BrailleDoc.Lines[lineIdx];
 
             BrailleLine newLine = brLine.ShallowCopy(wordIdx, 255);	// 複製到新行。
@@ -732,9 +603,9 @@ namespace EasyBrailleEdit
                 return;
             }
 
-            row = GetBrailleRowIndex(row);  // 確保列索引為點字列。
+            row = _positionMapper.GetBrailleRowIndex(row);  // 確保列索引為點字列。
 
-            int lineIdx = GetBrailleLineIndex(grid, row);
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
             BrailleLine brLine = BrailleDoc.Lines[lineIdx];
             brLine.Clear();
             brLine = null;
@@ -752,7 +623,7 @@ namespace EasyBrailleEdit
 
         private void DoDeleteLine(Grid grid, int row, int lineIdx)
         {
-            row = GetBrailleRowIndex(row);  // 確保列索引為點字列。
+            row = _positionMapper.GetBrailleRowIndex(row);  // 確保列索引為點字列。
 
             var brLine = BrailleDoc.Lines[lineIdx];
             brLine.Clear();
@@ -783,14 +654,14 @@ namespace EasyBrailleEdit
             {
                 if (startRow == -1)
                 {
-                    startRow = GetBrailleRowIndex(pos.Row);
+                    startRow = _positionMapper.GetBrailleRowIndex(pos.Row);
                     endRow = startRow;
                     startCol = pos.Column;
                     endCol = pos.Column;
                 }
                 else
                 {
-                    endRow = GetBrailleRowIndex(pos.Row);
+                    endRow = _positionMapper.GetBrailleRowIndex(pos.Row);
 
                     if (pos.Column - endCol > 1)
                     {
@@ -806,8 +677,8 @@ namespace EasyBrailleEdit
                 int totalColumns = grid.ColumnsCount - grid.FixedColumns;
                 if ((endCol - startCol + 1) < totalColumns)
                 {
-                    int startLineIdx = GetBrailleLineIndex(grid, startRow);
-                    int endLineIdx = GetBrailleLineIndex(grid, endRow);
+                    int startLineIdx = _positionMapper.GridRowToBrailleLineIndex(startRow);
+                    int endLineIdx = _positionMapper.GridRowToBrailleLineIndex(endRow);
                     var s = $"複製多行時，必須選取整行。\r\n您是否要複製第 {startLineIdx+1} 至 {endLineIdx+1} 行？";
                     if (MsgBoxHelper.ShowYesNo(s) != DialogResult.Yes)
                         return false;
@@ -833,8 +704,8 @@ namespace EasyBrailleEdit
                 {
                     throw new ArgumentException($"參數錯誤! 多行選取時，{nameof(startCol)} 和 {nameof(endCol)} 應為 1 和 40。");
                 }
-                int startLineIdx = GetBrailleLineIndex(grid, startRow);
-                int endLineIdx = GetBrailleLineIndex(grid, endRow);
+                int startLineIdx = _positionMapper.GridRowToBrailleLineIndex(startRow);
+                int endLineIdx = _positionMapper.GridRowToBrailleLineIndex(endRow);
 
 
                 for (int i = startLineIdx; i <= endLineIdx; i++)
@@ -848,12 +719,12 @@ namespace EasyBrailleEdit
 
             // 選取同一列中的字。
             int row = startRow;
-            int startWordIdx = GetBrailleWordIndex(grid, row, startCol);
-            int endWordIdx = GetBrailleWordIndex(grid, row, endCol);
+            int startWordIdx = _positionMapper.CellPositionToWordIndex(row, startCol);
+            int endWordIdx = _positionMapper.CellPositionToWordIndex(row, endCol);
 
             // 建立欲複製的點字串列。注意：context tags 都會被忽略。
 
-            int lineIdx = GetBrailleLineIndex(grid, row);
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
             var brLine = BrailleDoc.Lines[lineIdx];
             var newBrLine = new BrailleLine();
             for (int i = startWordIdx; i <= endWordIdx; i++)

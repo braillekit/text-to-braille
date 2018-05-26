@@ -15,7 +15,9 @@ namespace EasyBrailleEdit
 
 	public partial class DualEditForm : Form
 	{
-		private const int FixedColumns = 1;
+        private BrailleGridPositionMapper _positionMapper;
+
+        private const int FixedColumns = 1;
 		private const int FixedRows = 1;
 		private const float DefaultHeaderFontSize = 9.0f;
 		private const float DefaultBrailleFontSize = 19.5f;
@@ -250,6 +252,8 @@ namespace EasyBrailleEdit
 
 		private void DualEditForm_Load(object sender, EventArgs e)
 		{
+            _positionMapper = new BrailleGridPositionMapper(BrailleDoc, brGrid);
+
 			cboZoom.SelectedIndex = 2;  // 100%
 			cboZoom.Width = 60;
 
@@ -284,7 +288,7 @@ namespace EasyBrailleEdit
 
         private void GridSelection_FocusRowEntered(object sender, SourceGrid.RowEventArgs e)
         {
-            var lineIdx = GetBrailleLineIndex(brGrid, e.Row);
+            var lineIdx = _positionMapper.GridRowToBrailleLineIndex(e.Row);
             var brLine = BrailleDoc.Lines[lineIdx];
             statusLabelCurrentLine.Text = brLine.ToOriginalTextString(null);
         }
@@ -295,10 +299,18 @@ namespace EasyBrailleEdit
 
         private void GridSelection_CellGotFocus(SourceGrid.Selection.SelectionBase sender, SourceGrid.ChangeActivePositionEventArgs e)
         {
-            var lineIdx = GetBrailleLineIndex(brGrid, e.NewFocusPosition.Row);
-            var brWord = GetBrailleWordOfGridCell(brGrid, e.NewFocusPosition.Row, e.NewFocusPosition.Column);
+            var lineIdx = _positionMapper.GridRowToBrailleLineIndex(e.NewFocusPosition.Row);
+            var brWord = _positionMapper.GetBrailleWordFromGridCell(e.NewFocusPosition.Row, e.NewFocusPosition.Column);
             var brWordIdx = BrailleDoc.Lines[lineIdx].IndexOf(brWord);
+
             statusLabelCurrentWord.Text = $"{brWord.Text} (字索引:{brWordIdx}  列索引:{e.NewFocusPosition.Row}  行索引:{e.NewFocusPosition.Column})";
+
+            // 顯示目前焦點所在的儲存格屬於第幾頁。
+            int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
+            bool needPageFoot = AppGlobals.Config.Printing.PrintPageFoot;
+            int currPage = AppGlobals.CalcCurrentPage(lineIdx, linesPerPage, needPageFoot) + 1;
+            int totalPages = AppGlobals.CalcTotalPages(BrailleDoc.Lines.Count, linesPerPage, needPageFoot);
+            PageNumberText = currPage.ToString() + "/" + totalPages.ToString();
         }
 
         void FindForm_DecidingStartPosition(object sender, DualEditFindForm.DecideStartPositionEventArgs args)
@@ -313,15 +325,15 @@ namespace EasyBrailleEdit
 			}
 			else
 			{
-				args.LineIndex = GetBrailleLineIndex(brGrid, row);
-				args.WordIndex = GetBrailleWordIndex(brGrid, row, col);
+				args.LineIndex = _positionMapper.GridRowToBrailleLineIndex(row);
+				args.WordIndex = _positionMapper.CellPositionToWordIndex(row, col);
 			}
 		}
 
 		void FindForm_TargetFound(object sender, DualEditFindForm.TargetFoundEventArgs args)
 		{
-			int row = GetGridRowIndex(args.LineIndex) + 1;
-			int col = GetGridColumnIndex(args.LineIndex, args.WordIndex);
+			int row = _positionMapper.LineIndexToGridBrailleRow(args.LineIndex) + 1;
+			int col = _positionMapper.WordIndexToGridColumn(args.LineIndex, args.WordIndex);
 			SourceGrid.Position pos = new SourceGrid.Position(row, col);
 			brGrid.Selection.Focus(pos, true);
 			brGrid.Selection.SelectCell(pos, true);
@@ -504,9 +516,9 @@ namespace EasyBrailleEdit
         /// <returns>傳回重新編排後的列數。如果大於 1，則代表此列經過重新編排之後有發生斷行。</returns>
 		private int ReformatRow(SourceGrid.Grid grid, int row)
 		{
-			row = GetBrailleRowIndex(row);  // 修正列索引為點字列所在的索引。
+			row = _positionMapper.GetBrailleRowIndex(row);  // 修正列索引為點字列所在的索引。
 
-			int lineIndex = GetBrailleLineIndex(grid, row);
+			int lineIndex = _positionMapper.GridRowToBrailleLineIndex(row);
 			int lineCnt = BrailleProcessor.GetInstance().FormatLine(BrailleDoc, lineIndex, null);
 			if (lineCnt > 1)    // 有斷行?
 			{
@@ -536,7 +548,7 @@ namespace EasyBrailleEdit
 		/// <param name="row"></param>
 		private void GridInsertRowAt(int row)
 		{
-			row = GetBrailleRowIndex(row);  // 確保列索引為點字列所在的索引。
+			row = _positionMapper.GetBrailleRowIndex(row);  // 確保列索引為點字列所在的索引。
 			brGrid.Rows.InsertRange(row, 3);
 
 			// 建立列標題儲存格。
@@ -553,7 +565,7 @@ namespace EasyBrailleEdit
 		/// <param name="row">列索引。</param>
 		private void RecreateRow(int row)
 		{
-			row = GetBrailleRowIndex(row);  // 修正列索引為點字列所在的索引。
+			row = _positionMapper.GetBrailleRowIndex(row);  // 修正列索引為點字列所在的索引。
 
 			brGrid.Rows.RemoveRange(row, 3);
 
@@ -640,7 +652,7 @@ namespace EasyBrailleEdit
 			int col = brGrid.FixedColumns;
 
 			// 確保列索引是點字所在的列。
-			row = GetBrailleRowIndex(row);
+			row = _positionMapper.GetBrailleRowIndex(row);
 
 			brGrid.SuspendLayout();
 			try
@@ -794,7 +806,7 @@ namespace EasyBrailleEdit
 				if (brGrid.RowsCount > brGrid.FixedRows && brGrid.ColumnsCount > brGrid.FixedColumns)
 				{
 					// Grid 有資料時，才告訴 user 要點選儲存格。
-					MessageBox.Show("請先點選儲存格!");
+					MsgBoxHelper.ShowInfo("請先點選儲存格!");
 				}
 				return false;
 			}
@@ -837,7 +849,7 @@ namespace EasyBrailleEdit
 		/// <param name="select">是否選取。</param>
 		private void GridSelectRow(int row, bool select)
 		{
-			row = GetBrailleRowIndex(row);
+			row = _positionMapper.GetBrailleRowIndex(row);
 			SourceGrid.Range range = new SourceGrid.Range(row, brGrid.FixedColumns, row + 2, brGrid.ColumnsCount);
 			brGrid.Selection.SelectRange(range, select);
 		}
@@ -866,7 +878,7 @@ namespace EasyBrailleEdit
 
         private void GridSelectLeftWord(int row, int col)
         {
-            var currentWord = GetBrailleWordOfGridCell(brGrid, row, col);
+            var currentWord = _positionMapper.GetBrailleWordFromGridCell(row, col);
 
             if (currentWord == null)
             {
@@ -876,7 +888,7 @@ namespace EasyBrailleEdit
             col--;
             while (col >= 0)
             {
-                var leftWord = GetBrailleWordOfGridCell(brGrid, row, col);
+                var leftWord = _positionMapper.GetBrailleWordFromGridCell(row, col);
                 if (!ReferenceEquals(currentWord, leftWord))
                 {
                     GridFocusCell(row, col);
@@ -887,14 +899,14 @@ namespace EasyBrailleEdit
             }
 
             /* 另一種方法：
-            int wordIdx = GetBrailleWordIndex(brGrid, row, col);
+            int wordIdx = _positionMapper.GetBrailleWordIndex(row, col);
 
             if (wordIdx < 1)
             {
                 return;
             }
 
-            int lineIdx = GetBrailleLineIndex(brGrid, row);            
+            int lineIdx = _positionMapper.GetBrailleLineIndex(row);            
             var brLine = BrailleDoc.Lines[lineIdx];
 
             // 往左找到第一個非 context tag 的字
@@ -937,7 +949,7 @@ namespace EasyBrailleEdit
 				brFontText = "";
 			}
 
-			row = GetBrailleRowIndex(row);  // 確保列索引為點字列。
+			row = _positionMapper.GetBrailleRowIndex(row);  // 確保列索引為點字列。
 
 			//若每個 cell 一方點字，就用以下迴圈填入點字
 			//for (int i = 0; i < brFontText.Length; i++)
@@ -1471,36 +1483,23 @@ namespace EasyBrailleEdit
 		{
 			base.OnClick(sender, e);
 
-			// 顯示目前焦點所在的儲存格屬於第幾頁。
-			SourceGrid.Grid grid = (SourceGrid.Grid)sender.Grid;
-			int row = sender.Position.Row;
+            /* 以下程式碼已經搬移至  GridSelection_CellGotFocus
+             * 
+            // 顯示目前焦點所在的儲存格屬於第幾頁。
+            SourceGrid.Grid grid = (SourceGrid.Grid)sender.Grid;
+            int row = sender.Position.Row;
 
-			if (row < 1)
-				return;
+            if (row < 1)
+                return;
 
-			int lineIdx = m_Form.GetBrailleLineIndex(grid, row);
-			int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
-			bool needPageFoot = AppGlobals.Config.Printing.PrintPageFoot;
-			int currPage = AppGlobals.CalcCurrentPage(lineIdx, linesPerPage, needPageFoot) + 1;
-			int totalPages = AppGlobals.CalcTotalPages(m_Form.BrailleDoc.Lines.Count, linesPerPage, needPageFoot);
-			m_Form.PageNumberText = currPage.ToString() + "/" + totalPages.ToString();
-
-
-			//if (m_Form.DebugMode)
-			//{
-			//    SourceGrid.Grid grid = (SourceGrid.Grid)sender.Grid;
-			//    int row = sender.Position.Row;
-			//    int col = sender.Position.Column;
-
-			//    BrailleWord brWord = (BrailleWord)grid[row, col].Tag;
-			//    string brScreenText = brWord.CellList.ToString();
-			//    string brPrinterText = BrailleGlobals.FontConvert.ToString(brWord);
-
-			//    m_Form.StatusBar.Items[0].Text = brWord.Text +
-			//        "(" + brScreenText + ") " + // 顯示時的點字 16 進位字串
-			//        "[" + brPrinterText + "]";  // 列印時的點字 16 進位字串
-			//}
-		}
-	}
+            int lineIdx = m_Form.GetBrailleLineIndex(grid, row);
+            int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
+            bool needPageFoot = AppGlobals.Config.Printing.PrintPageFoot;
+            int currPage = AppGlobals.CalcCurrentPage(lineIdx, linesPerPage, needPageFoot) + 1;
+            int totalPages = AppGlobals.CalcTotalPages(m_Form.BrailleDoc.Lines.Count, linesPerPage, needPageFoot);
+            m_Form.PageNumberText = currPage.ToString() + "/" + totalPages.ToString();
+            */
+        }
+    }
 
 }
