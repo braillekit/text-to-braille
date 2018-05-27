@@ -93,12 +93,12 @@
             this.brGrid.EnableSort = true;
             this.brGrid.FixedColumns = 1;
             this.brGrid.FixedRows = 1;
-            this.brGrid.Location = new System.Drawing.Point(0, 55);
+            this.brGrid.Location = new System.Drawing.Point(0, 54);
             this.brGrid.Name = "brGrid";
             this.brGrid.OptimizeMode = SourceGrid.CellOptimizeMode.ForRows;
             this.brGrid.RowsCount = 1;
             this.brGrid.SelectionMode = SourceGrid.GridSelectionMode.Cell;
-            this.brGrid.Size = new System.Drawing.Size(753, 446);
+            this.brGrid.Size = new System.Drawing.Size(753, 447);
             this.brGrid.TabIndex = 2;
             this.brGrid.TabStop = true;
             this.brGrid.ToolTipText = "";
@@ -110,7 +110,7 @@
             this.statusCurrentText.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabelCurrentWord,
             this.statusLabelCurrentLine});
-            this.statusCurrentText.Location = new System.Drawing.Point(0, 413);
+            this.statusCurrentText.Location = new System.Drawing.Point(0, 414);
             this.statusCurrentText.Name = "statusCurrentText";
             this.statusCurrentText.Size = new System.Drawing.Size(751, 31);
             this.statusCurrentText.TabIndex = 4;
@@ -124,7 +124,7 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.statusLabelCurrentWord.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusLabelCurrentWord.Name = "statusLabelCurrentWord";
-            this.statusLabelCurrentWord.Size = new System.Drawing.Size(250, 26);
+            this.statusLabelCurrentWord.Size = new System.Drawing.Size(420, 26);
             this.statusLabelCurrentWord.Text = "toolStripStatusLabel1";
             this.statusLabelCurrentWord.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.statusLabelCurrentWord.ToolTipText = "目前選取的字";
@@ -150,7 +150,7 @@
             this.miTools});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(753, 28);
+            this.mnuMain.Size = new System.Drawing.Size(753, 27);
             this.mnuMain.TabIndex = 3;
             this.mnuMain.Text = "menuStrip1";
             // 
@@ -167,7 +167,7 @@
             this.toolStripMenuItem2,
             this.離開XToolStripMenuItem});
             this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(69, 24);
+            this.miFile.Size = new System.Drawing.Size(69, 23);
             this.miFile.Text = "檔案(&F)";
             // 
             // miFileOpen
@@ -242,7 +242,7 @@
             this.miEditFindNext,
             this.miEditGoto});
             this.miEdit.Name = "miEdit";
-            this.miEdit.Size = new System.Drawing.Size(69, 24);
+            this.miEdit.Size = new System.Drawing.Size(69, 23);
             this.miEdit.Text = "編輯(&E)";
             // 
             // miEditDocProperties
@@ -308,7 +308,7 @@
             this.miViewBraille,
             this.miViewText});
             this.miView.Name = "miView";
-            this.miView.Size = new System.Drawing.Size(71, 24);
+            this.miView.Size = new System.Drawing.Size(71, 23);
             this.miView.Text = "檢視(&V)";
             // 
             // miViewMode
@@ -318,7 +318,7 @@
             this.miViewBrailleOnly,
             this.miViewTextZhuyin});
             this.miViewMode.Name = "miViewMode";
-            this.miViewMode.Size = new System.Drawing.Size(216, 26);
+            this.miViewMode.Size = new System.Drawing.Size(147, 26);
             this.miViewMode.Text = "模式(&M)";
             this.miViewMode.Visible = false;
             // 
@@ -349,7 +349,7 @@
             // miViewBraille
             // 
             this.miViewBraille.Name = "miViewBraille";
-            this.miViewBraille.Size = new System.Drawing.Size(216, 26);
+            this.miViewBraille.Size = new System.Drawing.Size(147, 26);
             this.miViewBraille.Tag = "Braille";
             this.miViewBraille.Text = "點字(&B)";
             this.miViewBraille.Click += new System.EventHandler(this.miViewClick);
@@ -357,7 +357,7 @@
             // miViewText
             // 
             this.miViewText.Name = "miViewText";
-            this.miViewText.Size = new System.Drawing.Size(216, 26);
+            this.miViewText.Size = new System.Drawing.Size(147, 26);
             this.miViewText.Tag = "Text";
             this.miViewText.Text = "明眼字(&T)";
             this.miViewText.Click += new System.EventHandler(this.miViewClick);
@@ -365,7 +365,7 @@
             // miTools
             // 
             this.miTools.Name = "miTools";
-            this.miTools.Size = new System.Drawing.Size(69, 24);
+            this.miTools.Size = new System.Drawing.Size(69, 23);
             this.miTools.Text = "工具(&T)";
             this.miTools.Visible = false;
             // 
@@ -383,7 +383,7 @@
             this.toolStripLabel1,
             this.txtGotoPageNum,
             this.btnGotoPage});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 27);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(753, 27);
             this.toolStrip1.TabIndex = 4;

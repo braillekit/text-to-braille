@@ -126,12 +126,6 @@
     <Compile Update="DualEditForm.Designer.cs">
       <DependentUpon>DualEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Update="DualEditForm_Edit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="DualEditForm_File.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="DualEditGotoForm.cs">
       <SubType>Form</SubType>
     </Compile>

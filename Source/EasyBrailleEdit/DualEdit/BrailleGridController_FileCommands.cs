@@ -1,18 +1,22 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using BrailleToolkit;
 using EasyBrailleEdit.Common;
 using Huanlin.Windows.Forms;
 
-namespace EasyBrailleEdit
+namespace EasyBrailleEdit.DualEdit
 {
     /// <summary>
-    /// DualEditForm 局部類別: 檔案處理相關 methods。
+    /// 局部類別: 檔案處理相關 methods。
     /// </summary>
-    partial class DualEditForm: Form
-    {
-        #region 檔案處理函式
 
-        private void DoOpenFile()
+    internal partial class BrailleGridController
+    {
+        public void DoOpenFile()
         {
             if (IsDirty)
             {
@@ -23,8 +27,6 @@ namespace EasyBrailleEdit
                         break;
                     case DialogResult.Cancel:
                         return;
-                    default:
-                        break;
                 }
             }
 
@@ -35,45 +37,47 @@ namespace EasyBrailleEdit
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                InternalLoadFile(dlg.FileName);
+                LoadFile(dlg.FileName);
             }
         }
 
-        private void InternalLoadFile(string filename)
+        public BrailleDocument LoadFile(string filename)
         {
             CursorHelper.ShowWaitCursor();
             try
             {
-                StatusText = "正在載入資料...";
+                _form.StatusText = "正在載入資料...";
 
-                BrailleDocument newBrDoc = BrailleDocument.LoadBrailleFile(filename);
+                var newBrDoc = BrailleDocument.LoadBrailleFile(filename);
 
-                if (BrailleDoc != null)
+                if (_doc != null)
                 {
-                    BrailleDoc.Clear();
+                    _doc.Clear();
                 }
-                BrailleDoc = newBrDoc;
+                _doc = newBrDoc;
 
                 FileName = filename;
                 IsDirty = false;
 
-                StatusText = "正在準備顯示資料...";
-                brGrid.Rows.Clear();
-                brGrid.Columns.Clear();
+                _form.StatusText = "正在準備顯示資料...";
+                _grid.Rows.Clear();
+                _grid.Columns.Clear();
                 m_IsInitialized = false;
 
                 InitializeGrid();
 
-                FillGrid(BrailleDoc);
+                FillGrid(_doc);
 
                 // 焦點移至第一列的第一個儲存格。
-                SourceGrid.Position pos = new SourceGrid.Position(brGrid.FixedRows, brGrid.FixedColumns);
+                SourceGrid.Position pos = new SourceGrid.Position(_grid.FixedRows, _grid.FixedColumns);
                 GridFocusCell(pos, true);
+
+                return _doc;
             }
             finally
             {
                 CursorHelper.RestoreCursor();
-                StatusText = "";
+                _form.StatusText = "";
             }
         }
 
@@ -81,7 +85,7 @@ namespace EasyBrailleEdit
         /// 存檔。
         /// </summary>
         /// <returns>True=儲存成功；False=儲存失敗或取消存檔動作。</returns>
-        private bool DoSaveFile()
+        public bool DoSaveFile()
         {
             if (IsNoName())
             {
@@ -96,7 +100,7 @@ namespace EasyBrailleEdit
         /// 另存新檔。
         /// </summary>
         /// <returns>True=儲存成功；False=儲存失敗或取消存檔動作。</returns>
-        private bool DoSaveFileAs()
+        public bool DoSaveFileAs()
         {
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.DefaultExt = Constant.Files.DefaultMainBrailleFileExt;
@@ -111,7 +115,7 @@ namespace EasyBrailleEdit
             return false;
         }
 
-        private bool DoExportTextFile()
+        public bool DoExportTextFile()
         {
             var dlg = new SaveFileDialog
             {
@@ -128,7 +132,7 @@ namespace EasyBrailleEdit
             return false;
         }
 
-        private void DoExportBrailleFile()
+        public void DoExportBrailleFile()
         {
             var form = new ExportBrailleForm(BrailleDoc);
             form.ShowDialog();
@@ -140,10 +144,11 @@ namespace EasyBrailleEdit
 
             FileName = filename;
             IsDirty = false;
-            StatusText = "檔案儲存成功。";
+
+            _form.StatusText = "檔案儲存成功。";
         }
 
-        private void DoPrint()
+        public void DoPrint()
         {
             if (BrailleDoc.LineCount < 1)
             {
@@ -153,11 +158,8 @@ namespace EasyBrailleEdit
 
             BrailleDoc.UpdateTitlesLineIndex();
 
-            DualPrintDialog prnDlg = new DualPrintDialog(BrailleDoc);
+            var prnDlg = new DualPrintDialog(BrailleDoc);
             prnDlg.ShowDialog();
         }
-
-        #endregion
-
     }
 }

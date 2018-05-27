@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Helpers;
-using EasyBrailleEdit.DualEdit;
 using Huanlin.Windows.Forms;
 using SourceGrid;
 
-namespace EasyBrailleEdit
+namespace EasyBrailleEdit.DualEdit
 {
     /// <summary>
     /// DualEditForm 局部類別: 編輯功能相關 methods。
     /// </summary>
-    partial class DualEditForm : Form
+
+    internal partial class BrailleGridController
     {
 
         /// <summary>
@@ -22,7 +24,7 @@ namespace EasyBrailleEdit
         /// <param name="grid">來源 grid。</param>
         /// <param name="row">儲存格的列索引。</param>
         /// <param name="col">儲存格的行索引。</param>
-        void EditWord(SourceGrid.Grid grid, int row, int col)
+        private void EditWord(SourceGrid.Grid grid, int row, int col)
         {
             /* NOTE
              * 每當儲存格內容有變動時，需考慮以下情況： 
@@ -95,15 +97,16 @@ namespace EasyBrailleEdit
             // Note: 不可重新轉點字，只重新斷行。
 
             // 判斷新設定的點字方數是否不同於儲存格原有的點字方數，若否，則必須重新斷字。
-            if (brGrid[row, col].ColumnSpan == brWord.Cells.Count)
+            if (_grid[row, col].ColumnSpan == brWord.Cells.Count)
             {
                 UpdateCell(row, col, brWord);
             }
             else
             {
-                ReformatRow(brGrid, row);
+                ReformatRow(_grid, row);
             }
         }
+
 
         /// <summary>
         /// 新增點字。
@@ -172,9 +175,9 @@ namespace EasyBrailleEdit
 
                 lineIdx++;
                 curRow += 3;
-            }           
+            }
             IsDirty = true;
-            
+
             RefreshRowNumbers();    // 重新填列號
 
             int endRow = row + brLines.Count * 3 - 1;
@@ -376,7 +379,7 @@ namespace EasyBrailleEdit
                 else
                 {
                     DoDeleteLine(grid, row, lineIdx);
-                    GridFocusCell(row - 3, col);
+                    GridFocusCell(row, col);
                 }
                 return;
             }
@@ -384,9 +387,9 @@ namespace EasyBrailleEdit
             // Update UI
             ReformatRow(grid, row);
             grid.Selection.ResetSelection(false); // 修正選取的儲存格範圍。
-            
+
             // 如果被刪除的是目前所在列的最後一個字，則游標應移動至刪除該字之後的最後一個字的位置。
-            if (col-FixedColumns >= brLine.CellCount)
+            if (col - FixedColumns >= brLine.CellCount)
             {
                 col = brLine.CellCount - 1 + grid.FixedColumns;
             }
@@ -423,7 +426,7 @@ namespace EasyBrailleEdit
                 isFirstColumn = true;
             }
 
-            if (isFirstColumn) 
+            if (isFirstColumn)
             {
                 // 先計算新的游標位置
                 int focusRow = orgRow - 3;
@@ -498,12 +501,12 @@ namespace EasyBrailleEdit
             joinedToLineIndex = -1;
             joinedToWordIdx = -1;
 
-            if (row < 0 || row > brGrid.RowsCount)
+            if (row < 0 || row > _grid.RowsCount)
                 throw new ArgumentOutOfRangeException($"參數 {nameof(row)} 的數值超出合法範圍: {row}");
 
             row = _positionMapper.GetBrailleRowIndex(row);  // 確保列索引為點字列。
 
-            if (row <= brGrid.FixedRows)    // 第一列的列首，無需處理。
+            if (row <= _grid.FixedRows)    // 第一列的列首，無需處理。
                 return false;
 
             int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
@@ -536,10 +539,10 @@ namespace EasyBrailleEdit
             IsDirty = true;
 
             // 更新 UI：移除本列
-            brGrid.Rows.RemoveRange(row, 3);
+            _grid.Rows.RemoveRange(row, 3);
 
             // 更新上一列
-            ReformatRow(brGrid, row - 1);
+            ReformatRow(_grid, row - 1);
 
             return true;
         }
@@ -639,7 +642,7 @@ namespace EasyBrailleEdit
             GridSelectRow(row, false);
         }
 
-        private bool GetSelectionRange(Grid grid, 
+        private bool GetSelectionRange(Grid grid,
             out int startRow, out int startCol, out int endRow, out int endCol)
         {
             var selectedCellsPositions = grid.Selection.GetSelectionRegion().GetCellsPositions();
@@ -679,7 +682,7 @@ namespace EasyBrailleEdit
                 {
                     int startLineIdx = _positionMapper.GridRowToBrailleLineIndex(startRow);
                     int endLineIdx = _positionMapper.GridRowToBrailleLineIndex(endRow);
-                    var s = $"複製多行時，必須選取整行。\r\n您是否要複製第 {startLineIdx+1} 至 {endLineIdx+1} 行？";
+                    var s = $"複製多行時，必須選取整行。\r\n您是否要複製第 {startLineIdx + 1} 至 {endLineIdx + 1} 行？";
                     if (MsgBoxHelper.ShowYesNo(s) != DialogResult.Yes)
                         return false;
 
@@ -689,7 +692,7 @@ namespace EasyBrailleEdit
                 }
 
                 grid.Selection.ResetSelection(false);
-                grid.Selection.SelectRange(new Range(startRow, startCol, endRow+2, endCol), true);
+                grid.Selection.SelectRange(new Range(startRow, startCol, endRow + 2, endCol), true);
             }
             return true;
         }
@@ -752,7 +755,7 @@ namespace EasyBrailleEdit
             }
             else
             {
-                
+
                 ClipboardHelper.SetLines(brLines);
             }
         }
