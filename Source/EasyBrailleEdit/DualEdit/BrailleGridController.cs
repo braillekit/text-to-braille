@@ -34,7 +34,6 @@ namespace EasyBrailleEdit.DualEdit
         private BrailleGridDebugger _debugger;
         private ViewMode m_ViewMode = ViewMode.All;
 
-
         #region 供 Grid 使用的物件
 
         private SourceGrid.Cells.Views.Header m_HeaderView;
@@ -55,7 +54,10 @@ namespace EasyBrailleEdit.DualEdit
 
         #region 屬性
 
-        public BrailleDocument BrailleDoc { get => _doc; }
+        public BrailleDocument BrailleDoc
+        {
+            get => _doc;
+        }
 
         public SourceGrid.Grid Grid { get => _grid; }
 

@@ -20,6 +20,19 @@ namespace EasyBrailleEdit
 
         private DualEditFindForm m_FindForm;
 
+
+        public BrailleDocument BrailleDoc
+        {
+            get
+            {
+                if (_controller != null && _controller.BrailleDoc != null)
+                {
+                    return _controller.BrailleDoc;
+                }
+                return _doc;
+            }
+        }
+
         public string CurrentWordStatusText
         {
             get { return statusLabelCurrentWord.Text; }
@@ -125,7 +138,7 @@ namespace EasyBrailleEdit
             if (String.IsNullOrEmpty(_controller.FileName))
             {
                 _controller.InitializeGrid();
-                _controller.FillGrid(_doc);
+                _controller.FillGrid(BrailleDoc);
             }
 
             m_FindForm = new DualEditFindForm();
@@ -208,9 +221,16 @@ namespace EasyBrailleEdit
 
         }
 
-        private void miFileOpen_Click(object sender, EventArgs e)
+
+        private void OpenFile()
         {
             _controller.DoOpenFile();
+            _doc = _controller.BrailleDoc;
+        }
+
+        private void miFileOpen_Click(object sender, EventArgs e)
+        {
+            OpenFile();
         }
 
         private void miFileSaveAs_Click(object sender, EventArgs e)
@@ -248,7 +268,7 @@ namespace EasyBrailleEdit
             switch (s)
             {
                 case "Open":
-                    _controller.DoOpenFile();
+                    OpenFile();
                     break;
                 case "Save":
                     _controller.DoSaveFile();
@@ -292,29 +312,29 @@ namespace EasyBrailleEdit
         private void EditDocProperties()
         {
             var form = new BrailleDocPropertiesForm();
-            form.CellsPerLine = _doc.CellsPerLine;
-            form.StartPageNumber = _doc.StartPageNumber;
+            form.CellsPerLine = BrailleDoc.CellsPerLine;
+            form.StartPageNumber = BrailleDoc.StartPageNumber;
             if (form.ShowDialog() == DialogResult.OK)
             {
-                _doc.StartPageNumber = form.StartPageNumber;
+                BrailleDoc.StartPageNumber = form.StartPageNumber;
                 _controller.IsDirty = true;
             }
         }
 
         private void EditPageTitles()
         {
-            DualEditTitleForm fm = new DualEditTitleForm(_doc);
-            fm.CellsPerLine = _doc.CellsPerLine;
+            DualEditTitleForm fm = new DualEditTitleForm(BrailleDoc);
+            fm.CellsPerLine = BrailleDoc.CellsPerLine;
             if (fm.ShowDialog() == DialogResult.OK)
             {
-                _doc.PageTitles.Clear();
-                _doc.PageTitles = fm.Titles;
+                BrailleDoc.PageTitles.Clear();
+                BrailleDoc.PageTitles = fm.Titles;
             }
         }
 
         private void FetchPageTitles()
         {
-            _doc.FetchPageTitles();
+            BrailleDoc.FetchPageTitles();
         }
 
         /// <summary>
@@ -323,9 +343,9 @@ namespace EasyBrailleEdit
         /// </summary>
         private void GotoLine(int lineNum)
         {
-            if (lineNum > _doc.LineCount)
+            if (lineNum > BrailleDoc.LineCount)
             {
-                lineNum = _doc.LineCount;
+                lineNum = BrailleDoc.LineCount;
             }
             SourceGrid.Position pos = new SourceGrid.Position((lineNum - 1) * 3 + 1, 1);
             brGrid.ShowCell(pos, false);
@@ -364,7 +384,7 @@ namespace EasyBrailleEdit
 
         private void Find()
         {
-            m_FindForm.Document = _doc;
+            m_FindForm.Document = BrailleDoc;
 
             if (m_FindForm.Visible)
             {
