@@ -196,7 +196,6 @@ namespace BrailleToolkit
                 {
                     doc.Lines[i].Clear();
                     doc.RemoveLine(i);
-                    //doc.Lines[i].Words.Add(BrailleWord.NewBlank());
                 }
             }
         }

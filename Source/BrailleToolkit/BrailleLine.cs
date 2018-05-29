@@ -129,6 +129,18 @@ namespace BrailleToolkit
             return index;
         }
 
+        public int GetFirstVisibleWordIndex()
+        {
+            for (int i = 0; i < Words.Count; i++)
+            {
+                if (Words[i].CellCount > 0)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
         /// <summary>
         /// 從指定的起始位置複製指定個數的點字 (BrailleWord) 到新建立的點字串列。
         /// 注意：這是 shallow copy，新的串列中包含既有的元素參考，而非建立新元素。

@@ -555,15 +555,15 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="col"></param>
         private void BreakLine(SourceGrid.Grid grid, int row, int col)
         {
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
+            BrailleLine brLine = BrailleDoc.Lines[lineIdx];
+
             int wordIdx = _positionMapper.CellPositionToWordIndex(row, col);
-            if (wordIdx == 0)   // 若在第一個字元處斷行，其實就等於插入一列。
+            if (wordIdx == brLine.GetFirstVisibleWordIndex())   // 若在第一個字元處斷行，其實就等於插入一列。
             {
                 InsertLine(grid, row, col);
                 return;
             }
-
-            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
-            BrailleLine brLine = BrailleDoc.Lines[lineIdx];
 
             BrailleLine newLine = brLine.ShallowCopy(wordIdx, 255);	// 複製到新行。
             newLine.TrimEnd();	// 去尾空白。 
