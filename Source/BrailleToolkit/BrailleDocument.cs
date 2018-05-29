@@ -181,7 +181,24 @@ namespace BrailleToolkit
 
             string jsonStr = File.ReadAllText(filename);
             brDoc = JsonHelper.Deserialize<BrailleDocument>(jsonStr);
+            FixInvalidLines(brDoc);
             return brDoc;
+        }
+
+        /// <summary>
+        /// 修正雙視文件：把沒有點字的 lines 替換成一個空方。
+        /// </summary>
+        private static void FixInvalidLines(BrailleDocument doc)
+        {
+            for (int i = doc.Lines.Count-1; i >= 0; i--)
+            {
+                if (doc.Lines[i].CellCount < 1)
+                {
+                    doc.Lines[i].Clear();
+                    doc.RemoveLine(i);
+                    //doc.Lines[i].Words.Add(BrailleWord.NewBlank());
+                }
+            }
         }
 
         /// <summary>
