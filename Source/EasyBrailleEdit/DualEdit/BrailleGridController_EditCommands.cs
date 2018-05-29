@@ -357,7 +357,8 @@ namespace EasyBrailleEdit.DualEdit
 
             if (BrailleDoc.LineCount == 1 && brLine.CellCount == 1) // 整份文件只剩下最後一個字？
             {
-                if (brLine[0].IsWhiteSpace) // 保留最後一個空方.
+                int firstWordIdx = brLine.GetFirstVisibleWordIndex();
+                if (firstWordIdx < 0 || brLine[firstWordIdx].IsWhiteSpace) // 保留最後一個空方.
                     return;
             }
 
@@ -413,7 +414,7 @@ namespace EasyBrailleEdit.DualEdit
             int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
             int wordIdx = _positionMapper.CellPositionToWordIndex(row, col);
 
-            if (lineIdx == 0 && wordIdx == 0)
+            if (lineIdx == 0 && wordIdx == BrailleDoc.Lines[lineIdx].GetFirstVisibleWordIndex())
             {
                 return;     // 只剩下一個字，不用做任何處理。
             }
