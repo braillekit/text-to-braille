@@ -26,7 +26,6 @@ namespace EasyBrailleEdit.DualEdit
         private SourceGrid.Grid _grid;
         private BrailleGridPositionMapper _positionMapper;
 
-        private bool m_IsInitialized = false;
         private string m_FileName;
         private bool m_IsDirty;   // 檔案內容是否被修改過
 
@@ -163,8 +162,9 @@ namespace EasyBrailleEdit.DualEdit
 
         public void InitializeGrid()
         {
-            if (m_IsInitialized)
-                return;
+            // 確保既有的欄和列都被清除
+            _grid.Rows.Clear(); 
+            _grid.Columns.Clear();
 
             // 設定 grid 預設的欄寬與列高
             _grid.DefaultWidth = 30;
@@ -279,8 +279,6 @@ namespace EasyBrailleEdit.DualEdit
             {
                 m_ClickController = new CellClickEvent(_form);
             }
-
-            m_IsInitialized = true;
         }
 
         /// <summary>
@@ -390,9 +388,6 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="ratio"></param>
         public void Zoom(int ratio)
         {
-            if (!m_IsInitialized)
-                return;
-
             if (ratio > 200 || ratio < 30)
             {
                 MsgBoxHelper.ShowInfo("指定的縮放比例太小或太大: " + ratio.ToString() + "%");
@@ -438,6 +433,11 @@ namespace EasyBrailleEdit.DualEdit
                 CursorHelper.RestoreCursor();
                 _form.StatusText = "";
             }
+        }
+
+        public void FillGrid()
+        {
+            FillGrid(BrailleDoc);
         }
 
         /// <summary>
@@ -551,6 +551,14 @@ namespace EasyBrailleEdit.DualEdit
                     }
 
                     _grid[row, col] = new SourceGrid.Cells.Cell(brFontText);
+
+                    // 若需要 column span，則必須先清除欲合併的 cell，否則在設定 ColumnSpan 屬性時會拋錯。
+                    //for (int i = 1; i < brFontText.Length; i++)
+                    //{
+                    //    _grid[row + 0, col + i] = null;
+                    //    _grid[row + 1, col + i] = null;
+                    //    _grid[row + 2, col + i] = null;
+                    //}
                     _grid[row, col].ColumnSpan = brFontText.Length;
                     _grid[row, col].View = m_BrView;
                     _grid[row, col].Tag = brWord;

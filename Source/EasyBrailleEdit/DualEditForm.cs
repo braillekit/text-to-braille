@@ -138,7 +138,7 @@ namespace EasyBrailleEdit
             if (String.IsNullOrEmpty(_controller.FileName))
             {
                 _controller.InitializeGrid();
-                _controller.FillGrid(BrailleDoc);
+                _controller.FillGrid();
             }
 
             m_FindForm = new DualEditFindForm();
@@ -334,7 +334,18 @@ namespace EasyBrailleEdit
 
         private void FetchPageTitles()
         {
-            BrailleDoc.FetchPageTitles();
+            int addedCount = BrailleDoc.FetchPageTitles();
+            if (addedCount > 0)
+            {
+                _controller.InitializeGrid();
+                _controller.FillGrid();
+
+                MsgBoxHelper.ShowInfo($"已加入 {addedCount} 個頁標題。");
+            }
+            else
+            {
+                MsgBoxHelper.ShowInfo("目前的文件中沒有發現任何新的頁標題。");
+            }
         }
 
         /// <summary>

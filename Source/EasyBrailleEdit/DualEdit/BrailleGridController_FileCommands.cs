@@ -60,9 +60,6 @@ namespace EasyBrailleEdit.DualEdit
                 IsDirty = false;
 
                 _form.StatusText = "正在準備顯示資料...";
-                _grid.Rows.Clear();
-                _grid.Columns.Clear();
-                m_IsInitialized = false;
 
                 InitializeGrid();
 

@@ -128,9 +128,9 @@ namespace BrailleToolkit
 
             m_Processor.FormatDocument(this);   // 斷行
 
-            FetchPageTitles();      // 提取標題列
+            int titleCount = FetchPageTitles();      // 提取標題列
 
-            Log.Debug("BrailleDocument.LoadAndConvert() 執行完畢。");
+            Log.Debug($"BrailleDocument.LoadAndConvert() 執行完畢。頁標題數量為 {titleCount}。");
         }
 
         /// <summary>
@@ -348,9 +348,9 @@ namespace BrailleToolkit
         /// <summary>
         /// 從 Lines 集合中取出頁標題，並將標題列自文件中移除。
         /// </summary>
-        public void FetchPageTitles()
+        public int FetchPageTitles()
         {
-            m_PageTitles.Clear();
+            var newPageTitles = new List<BraillePageTitle>();
 
             BrailleLine brLine;
             int idx = 0;
@@ -360,7 +360,7 @@ namespace BrailleToolkit
                 if (brLine.ContainsTitleTag())
                 {
                     BraillePageTitle title = new BraillePageTitle(this, idx);
-                    m_PageTitles.Add(title);
+                    newPageTitles.Add(title);
                     m_Lines.RemoveAt(idx);
                 }
                 else 
@@ -368,6 +368,12 @@ namespace BrailleToolkit
                     idx++;
                 }
             }
+
+            if (newPageTitles.Count > 0)
+            {
+                m_PageTitles.AddRange(newPageTitles);
+            }
+            return newPageTitles.Count;
         }
 
         /// <summary>

@@ -93,12 +93,12 @@
             this.brGrid.EnableSort = true;
             this.brGrid.FixedColumns = 1;
             this.brGrid.FixedRows = 1;
-            this.brGrid.Location = new System.Drawing.Point(0, 54);
+            this.brGrid.Location = new System.Drawing.Point(0, 55);
             this.brGrid.Name = "brGrid";
             this.brGrid.OptimizeMode = SourceGrid.CellOptimizeMode.ForRows;
             this.brGrid.RowsCount = 1;
             this.brGrid.SelectionMode = SourceGrid.GridSelectionMode.Cell;
-            this.brGrid.Size = new System.Drawing.Size(753, 447);
+            this.brGrid.Size = new System.Drawing.Size(753, 446);
             this.brGrid.TabIndex = 2;
             this.brGrid.TabStop = true;
             this.brGrid.ToolTipText = "";
@@ -110,7 +110,7 @@
             this.statusCurrentText.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabelCurrentWord,
             this.statusLabelCurrentLine});
-            this.statusCurrentText.Location = new System.Drawing.Point(0, 414);
+            this.statusCurrentText.Location = new System.Drawing.Point(0, 413);
             this.statusCurrentText.Name = "statusCurrentText";
             this.statusCurrentText.Size = new System.Drawing.Size(751, 31);
             this.statusCurrentText.TabIndex = 4;
@@ -150,7 +150,7 @@
             this.miTools});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(753, 27);
+            this.mnuMain.Size = new System.Drawing.Size(753, 28);
             this.mnuMain.TabIndex = 3;
             this.mnuMain.Text = "menuStrip1";
             // 
@@ -167,7 +167,7 @@
             this.toolStripMenuItem2,
             this.離開XToolStripMenuItem});
             this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(69, 23);
+            this.miFile.Size = new System.Drawing.Size(69, 24);
             this.miFile.Text = "檔案(&F)";
             // 
             // miFileOpen
@@ -242,13 +242,13 @@
             this.miEditFindNext,
             this.miEditGoto});
             this.miEdit.Name = "miEdit";
-            this.miEdit.Size = new System.Drawing.Size(69, 23);
+            this.miEdit.Size = new System.Drawing.Size(69, 24);
             this.miEdit.Text = "編輯(&E)";
             // 
             // miEditDocProperties
             // 
             this.miEditDocProperties.Name = "miEditDocProperties";
-            this.miEditDocProperties.Size = new System.Drawing.Size(192, 26);
+            this.miEditDocProperties.Size = new System.Drawing.Size(216, 26);
             this.miEditDocProperties.Tag = "DocProperties";
             this.miEditDocProperties.Text = "文件屬性(&P)";
             this.miEditDocProperties.Click += new System.EventHandler(this.miEdit_Click);
@@ -256,7 +256,7 @@
             // miEditPageTitle
             // 
             this.miEditPageTitle.Name = "miEditPageTitle";
-            this.miEditPageTitle.Size = new System.Drawing.Size(192, 26);
+            this.miEditPageTitle.Size = new System.Drawing.Size(216, 26);
             this.miEditPageTitle.Tag = "PageTitles";
             this.miEditPageTitle.Text = "頁標題";
             this.miEditPageTitle.Click += new System.EventHandler(this.miEdit_Click);
@@ -264,7 +264,7 @@
             // miEditFetchPageTitles
             // 
             this.miEditFetchPageTitles.Name = "miEditFetchPageTitles";
-            this.miEditFetchPageTitles.Size = new System.Drawing.Size(192, 26);
+            this.miEditFetchPageTitles.Size = new System.Drawing.Size(216, 26);
             this.miEditFetchPageTitles.Tag = "FetchPageTitles";
             this.miEditFetchPageTitles.Text = "重新抓取頁標題";
             this.miEditFetchPageTitles.Click += new System.EventHandler(this.miEdit_Click);
@@ -272,13 +272,13 @@
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(189, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(213, 6);
             // 
             // 尋找FToolStripMenuItem
             // 
             this.尋找FToolStripMenuItem.Name = "尋找FToolStripMenuItem";
             this.尋找FToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.尋找FToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
+            this.尋找FToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.尋找FToolStripMenuItem.Tag = "Find";
             this.尋找FToolStripMenuItem.Text = "尋找(&F)";
             this.尋找FToolStripMenuItem.Click += new System.EventHandler(this.miEdit_Click);
@@ -287,7 +287,7 @@
             // 
             this.miEditFindNext.Name = "miEditFindNext";
             this.miEditFindNext.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.miEditFindNext.Size = new System.Drawing.Size(192, 26);
+            this.miEditFindNext.Size = new System.Drawing.Size(216, 26);
             this.miEditFindNext.Tag = "FindNext";
             this.miEditFindNext.Text = "找下一筆(&N)";
             this.miEditFindNext.Click += new System.EventHandler(this.miEdit_Click);
@@ -296,7 +296,7 @@
             // 
             this.miEditGoto.Name = "miEditGoto";
             this.miEditGoto.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.miEditGoto.Size = new System.Drawing.Size(192, 26);
+            this.miEditGoto.Size = new System.Drawing.Size(216, 26);
             this.miEditGoto.Tag = "Goto";
             this.miEditGoto.Text = "到(&G)";
             this.miEditGoto.Click += new System.EventHandler(this.miEdit_Click);
@@ -308,7 +308,7 @@
             this.miViewBraille,
             this.miViewText});
             this.miView.Name = "miView";
-            this.miView.Size = new System.Drawing.Size(71, 23);
+            this.miView.Size = new System.Drawing.Size(71, 24);
             this.miView.Text = "檢視(&V)";
             // 
             // miViewMode
@@ -365,7 +365,7 @@
             // miTools
             // 
             this.miTools.Name = "miTools";
-            this.miTools.Size = new System.Drawing.Size(69, 23);
+            this.miTools.Size = new System.Drawing.Size(69, 24);
             this.miTools.Text = "工具(&T)";
             this.miTools.Visible = false;
             // 
@@ -383,7 +383,7 @@
             this.toolStripLabel1,
             this.txtGotoPageNum,
             this.btnGotoPage});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 27);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(753, 27);
             this.toolStrip1.TabIndex = 4;
