@@ -326,17 +326,9 @@ namespace BrailleToolkit
             return sb.ToString();
         }
 
-        /// <summary>
-        /// 是否包含標題情境標籤。
-        /// </summary>
-        /// <returns></returns>
         public bool ContainsTitleTag()
         {
-            if (Words.Count > 0 && Words[0].Text.Equals(ContextTagNames.Title))
-            {
-                return true;
-            }
-            return false;
+            return BrailleWordHelper.ContainsTitleTag(Words);
         }
 
         /// <summary>

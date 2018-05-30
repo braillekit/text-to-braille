@@ -33,6 +33,13 @@ namespace BrailleToolkit
             m_BeginLine = null;
         }
 
+        public BraillePageTitle(List<BrailleWord> words, int beginLineIndex)
+        {
+            TitleLine = new BrailleLine();
+            TitleLine.Words.AddRange(words);
+            BeginLineIndex = beginLineIndex;
+        }
+
         public BraillePageTitle(BrailleDocument brDoc, int index) : this()
         {
             SetTitleLine(brDoc, index);
@@ -41,7 +48,6 @@ namespace BrailleToolkit
         public void SetTitleLine(BrailleDocument brDoc, int index)
         {
             m_TitleLine = brDoc.Lines[index];
-            m_TitleLine.RemoveContextTags();    // 移除所有情境標籤（這裡主要是把標題標籤拿掉）。
 
 			m_BeginLineIndex = index + 1;   // 從下一列開始就是使用此標題。
 
@@ -99,6 +105,7 @@ namespace BrailleToolkit
         public int BeginLineIndex
         {
             get { return m_BeginLineIndex; }
+            private set { m_BeginLineIndex = value; }
         }
 
         public string ToOriginalTextString()
@@ -108,8 +115,7 @@ namespace BrailleToolkit
                 return String.Empty;
             }
 
-            string text = TitleLine.ToOriginalTextString(null);
-            return XmlTagHelper.EncloseWithTag(text, ContextTagNames.Title);
+            return TitleLine.ToOriginalTextString(null);
         }
 
 		#region ICloneable Members

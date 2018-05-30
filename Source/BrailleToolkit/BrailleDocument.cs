@@ -133,6 +133,12 @@ namespace BrailleToolkit
             Log.Debug($"BrailleDocument.LoadAndConvert() 執行完畢。頁標題數量為 {titleCount}。");
         }
 
+        public int AddPageTitle(BraillePageTitle title)
+        {
+            PageTitles.Add(title);
+            return 1;
+        }
+
         /// <summary>
         /// 從現存的雙視點字檔案載入（反序列化）成新的 BailleDocument 物件。
         /// </summary>
@@ -353,19 +359,19 @@ namespace BrailleToolkit
             var newPageTitles = new List<BraillePageTitle>();
 
             BrailleLine brLine;
-            int idx = 0;
-            while (idx < m_Lines.Count)
+            int lineIdx = 0;
+            while (lineIdx < m_Lines.Count)
             {
-                brLine = m_Lines[idx];
+                brLine = m_Lines[lineIdx];
                 if (brLine.ContainsTitleTag())
                 {
-                    BraillePageTitle title = new BraillePageTitle(this, idx);
+                    BraillePageTitle title = new BraillePageTitle(this, lineIdx);
                     newPageTitles.Add(title);
-                    m_Lines.RemoveAt(idx);
+                    m_Lines.RemoveAt(lineIdx);
                 }
                 else 
                 {
-                    idx++;
+                    lineIdx++;
                 }
             }
 

@@ -192,6 +192,16 @@ namespace EasyBrailleEdit.DualEdit
             int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
             BrailleLine brLine = BrailleDoc.Lines[lineIdx];
 
+            // 如果插入的是頁標題，則直接加到頁標題集合裡。
+            if (BrailleWordHelper.ContainsTitleTag(wordList))
+            {
+                var title = new BraillePageTitle(wordList, lineIdx);
+                BrailleDoc.AddPageTitle(title);
+
+                MsgBoxHelper.ShowInfo("已成功加入頁標題。");
+                return;
+            }
+
             // 在第 wordIdx 個字之前插入新點字。
             brLine.Words.InsertRange(wordIdx, wordList);
             IsDirty = true;

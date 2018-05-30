@@ -1,4 +1,5 @@
-﻿using Huanlin.Common.Helpers;
+﻿using BrailleToolkit.Tags;
+using Huanlin.Common.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,19 @@ namespace BrailleToolkit.Helpers
                 count += brWord.CellCount;
             }
             return count;
+        }
+
+        /// <summary>
+        /// 是否包含標題情境標籤。
+        /// </summary>
+        /// <returns></returns>
+        public static bool ContainsTitleTag(List<BrailleWord> brWordList)
+        {
+            if (brWordList.Count > 0 && brWordList[0].Text.Equals(ContextTagNames.Title))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
