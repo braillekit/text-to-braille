@@ -31,20 +31,20 @@ namespace EasyBrailleEdit
             }
         }
 
-        public string CurrentWordStatusText
+        string IBrailleGridForm.CurrentWordStatusText
         {
             get { return statusLabelCurrentWord.Text; }
             set { statusLabelCurrentWord.Text = value; }
         }
 
-        public string CurrentLineStatusText
+        string IBrailleGridForm.CurrentLineStatusText
         {
             get { return statusLabelCurrentLine.Text; }
             set { statusLabelCurrentLine.Text = value; }
         }
 
 
-        public string StatusText
+        string IBrailleGridForm.StatusText
         {
             get { return statMessage.Text; }
             set
@@ -53,7 +53,7 @@ namespace EasyBrailleEdit
                 statusStrip1.Refresh();
             }
         }
-        public string PageNumberText
+        string IBrailleGridForm.PageNumberText
         {
             get { return statPageInfo.Text; }
             set { statPageInfo.Text = value; }
@@ -324,12 +324,12 @@ namespace EasyBrailleEdit
 
         private void EditPageTitles()
         {
-            DualEditTitleForm fm = new DualEditTitleForm(BrailleDoc);
-            fm.CellsPerLine = BrailleDoc.CellsPerLine;
-            if (fm.ShowDialog() == DialogResult.OK)
+            var form = new DualEditTitleForm(BrailleDoc);
+
+            if (form.ShowDialog() == DialogResult.OK)
             {
                 BrailleDoc.PageTitles.Clear();
-                BrailleDoc.PageTitles = fm.Titles;
+                BrailleDoc.PageTitles = form.Titles;
             }
         }
 

@@ -35,51 +35,39 @@ namespace EasyBrailleEdit
                 m_TmpBrDoc.Lines.Add(newTitle.TitleLine);		// 塞進暫存文件。
             }
 
-            EditController = new BrailleGridController(this, brGrid, m_TmpBrDoc);
-
-            //EditController.DataChanged += DualEditControler_DataChanged;
-
-            IsDirty = false;
-        }
-
-        void DualEditControler_DataChanged(object sender, EventArgs e)
-        {
-            IsDirty = true;
+            Controller = new BrailleGridController(this, brGrid, m_TmpBrDoc);
         }
 
         #region 屬性
 
         public List<BraillePageTitle> Titles { get; }
 
-        public int CellsPerLine { get; set; }
+        private BrailleGridController Controller { get; }
 
-        public bool IsDirty { get; set; }
-
-        private BrailleGridController EditController { get; }
-        public string StatusText
+        string IBrailleGridForm.StatusText
         {
             get => String.Empty;
             set { }
         }
-        public int StatusProgress
+        int IBrailleGridForm.StatusProgress
         {
             get => 0;
             set { }
         }
 
-        public string CurrentWordStatusText
+        string IBrailleGridForm.CurrentWordStatusText
         {
             get => String.Empty;
             set { }
         }
 
-        public string CurrentLineStatusText
+        string IBrailleGridForm.CurrentLineStatusText
         {
             get => String.Empty;
             set { }
         }
 
-        public string PageNumberText
+        string IBrailleGridForm.PageNumberText
         {
             get => String.Empty;
             set { }
@@ -89,7 +77,7 @@ namespace EasyBrailleEdit
 
         private void DualEditTitleForm_Load(object sender, EventArgs e)
         {
-            EditController.InitializeGrid();
+            Controller.InitializeGrid();
 
             // 隱藏禁止使用的功能。
             string[] disabledCommands =
@@ -105,10 +93,10 @@ namespace EasyBrailleEdit
 
             foreach (string cmd in disabledCommands)
             {
-                EditController.MenuController.HideMenuItem(cmd);
+                Controller.MenuController.HideMenuItem(cmd);
             }
            
-            EditController.FillGrid();
+            Controller.FillGrid();
         }
 
         /// <summary>
