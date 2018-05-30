@@ -132,6 +132,7 @@
             this.btnTableTopLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTableBottomLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnSymbolDocTitle = new System.Windows.Forms.ToolStripButton();
             this.toolBarSymbol1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolBarSymbol2.SuspendLayout();
@@ -488,7 +489,7 @@
             this.panel2.Controls.Add(this.btnOk);
             this.panel2.Controls.Add(this.btnCancel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 480);
+            this.panel2.Location = new System.Drawing.Point(0, 501);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1188, 71);
             this.panel2.TabIndex = 0;
@@ -768,7 +769,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 52);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1188, 428);
+            this.panel3.Size = new System.Drawing.Size(1188, 449);
             this.panel3.TabIndex = 19;
             // 
             // panel1
@@ -783,7 +784,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(100, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1088, 428);
+            this.panel1.Size = new System.Drawing.Size(1088, 449);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -852,6 +853,7 @@
             this.toolBarSymbol3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolBarSymbol3.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolBarSymbol3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSymbolDocTitle,
             this.btnTagBrailleComment,
             this.btnSymbolEndTags,
             this.toolStripSeparator17,
@@ -874,7 +876,7 @@
             this.toolBarSymbol3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.toolBarSymbol3.Location = new System.Drawing.Point(0, 0);
             this.toolBarSymbol3.Name = "toolBarSymbol3";
-            this.toolBarSymbol3.Size = new System.Drawing.Size(100, 428);
+            this.toolBarSymbol3.Size = new System.Drawing.Size(100, 449);
             this.toolBarSymbol3.TabIndex = 15;
             this.toolBarSymbol3.Text = "toolStrip4";
             this.toolBarSymbol3.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
@@ -1122,30 +1124,40 @@
             // 
             this.btnTableTopLine1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnTableTopLine1.Name = "btnTableTopLine1";
-            this.btnTableTopLine1.Size = new System.Drawing.Size(169, 26);
+            this.btnTableTopLine1.Size = new System.Drawing.Size(216, 26);
             this.btnTableTopLine1.Tag = "<上表格線1></上表格線1>\\n";
             this.btnTableTopLine1.Text = "上表格線1";
             // 
             // btnTableBottomLine1
             // 
             this.btnTableBottomLine1.Name = "btnTableBottomLine1";
-            this.btnTableBottomLine1.Size = new System.Drawing.Size(169, 26);
+            this.btnTableBottomLine1.Size = new System.Drawing.Size(216, 26);
             this.btnTableBottomLine1.Tag = "<下表格線1></下表格線1>\\n";
             this.btnTableBottomLine1.Text = "下表格線1";
             // 
             // btnTableTopLine2
             // 
             this.btnTableTopLine2.Name = "btnTableTopLine2";
-            this.btnTableTopLine2.Size = new System.Drawing.Size(169, 26);
+            this.btnTableTopLine2.Size = new System.Drawing.Size(216, 26);
             this.btnTableTopLine2.Tag = "<上表格線2></上表格線2>\\n";
             this.btnTableTopLine2.Text = "上表格線2";
             // 
             // btnTableBottomLine2
             // 
             this.btnTableBottomLine2.Name = "btnTableBottomLine2";
-            this.btnTableBottomLine2.Size = new System.Drawing.Size(169, 26);
+            this.btnTableBottomLine2.Size = new System.Drawing.Size(216, 26);
             this.btnTableBottomLine2.Tag = "<下表格線2></下表格線2>\\n";
             this.btnTableBottomLine2.Text = "下表格線2";
+            // 
+            // btnSymbolDocTitle
+            // 
+            this.btnSymbolDocTitle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSymbolDocTitle.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDocTitle.Image")));
+            this.btnSymbolDocTitle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSymbolDocTitle.Name = "btnSymbolDocTitle";
+            this.btnSymbolDocTitle.Size = new System.Drawing.Size(97, 23);
+            this.btnSymbolDocTitle.Tag = "<標題>|</標題>";
+            this.btnSymbolDocTitle.Text = "頁標題";
             // 
             // InsertTextForm
             // 
@@ -1153,7 +1165,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1188, 551);
+            this.ClientSize = new System.Drawing.Size(1188, 572);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.toolBarSymbol2);
             this.Controls.Add(this.panel2);
@@ -1284,5 +1296,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnTableTopLine2;
         private System.Windows.Forms.ToolStripMenuItem btnTableBottomLine2;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripButton btnSymbolDocTitle;
     }
 }

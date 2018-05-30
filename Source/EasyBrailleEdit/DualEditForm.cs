@@ -11,9 +11,7 @@ using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
 {
-    public enum ViewMode { All, BrailleOnly, TextAndZhuyin };
-
-    public partial class DualEditForm : Form
+    public partial class DualEditForm : Form, IBrailleGridForm
     {
         private BrailleDocument _doc;
         private BrailleGridController _controller;
@@ -83,7 +81,10 @@ namespace EasyBrailleEdit
                         miViewBrailleOnly.Checked = false;
                         miViewTextZhuyin.Checked = true;
                         break;
+                    default:
+                        throw new Exception($"無效的 ViewMode: {value}");
                 }
+                _controller.ViewMode = value;
             }
         }
 

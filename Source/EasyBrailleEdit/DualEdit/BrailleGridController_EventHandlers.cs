@@ -193,13 +193,6 @@ namespace EasyBrailleEdit.DualEdit
 
     public class CellClickEvent : SourceGrid.Cells.Controllers.ControllerBase
     {
-        private DualEditForm m_Form;
-
-        public CellClickEvent(DualEditForm form)
-        {
-            m_Form = form;
-        }
-
         public override void OnClick(SourceGrid.CellContext sender, EventArgs e)
         {
             base.OnClick(sender, e);

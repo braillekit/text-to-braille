@@ -115,7 +115,12 @@ namespace BrailleToolkit
                 return String.Empty;
             }
 
-            return TitleLine.ToOriginalTextString(null);
+            string text = TitleLine.ToOriginalTextString(null);
+            if (!text.StartsWith(XmlTagHelper.GetBeginTagName(ContextTagNames.Title)))
+            {
+                text = XmlTagHelper.EncloseWithTag(text, ContextTagNames.Title);
+            }
+            return text;
         }
 
 		#region ICloneable Members

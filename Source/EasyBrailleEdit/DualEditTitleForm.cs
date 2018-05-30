@@ -6,7 +6,7 @@ using EasyBrailleEdit.DualEdit;
 
 namespace EasyBrailleEdit
 {
-    public partial class DualEditTitleForm : Form
+    public partial class DualEditTitleForm : Form, IBrailleGridForm
     {
         private BrailleDocument m_OrgBrDoc;	// 標題列所屬的 BrailleDocument 物件
         private BrailleDocument m_TmpBrDoc; // 把所有標題列都丟到這個暫時的 railleDocument 物件
@@ -35,9 +35,9 @@ namespace EasyBrailleEdit
                 m_TmpBrDoc.Lines.Add(newTitle.TitleLine);		// 塞進暫存文件。
             }
 
-            EditController = new DualEditController(m_TmpBrDoc, brGrid);
+            EditController = new BrailleGridController(this, brGrid, m_TmpBrDoc);
 
-            EditController.DataChanged += DualEditControler_DataChanged;
+            //EditController.DataChanged += DualEditControler_DataChanged;
 
             IsDirty = false;
         }
@@ -55,19 +55,46 @@ namespace EasyBrailleEdit
 
         public bool IsDirty { get; set; }
 
-        private DualEditController EditController { get; }
+        private BrailleGridController EditController { get; }
+        public string StatusText
+        {
+            get => String.Empty;
+            set { }
+        }
+        public int StatusProgress
+        {
+            get => 0;
+            set { }
+        }
+
+        public string CurrentWordStatusText
+        {
+            get => String.Empty;
+            set { }
+        }
+
+        public string CurrentLineStatusText
+        {
+            get => String.Empty;
+            set { }
+        }
+
+        public string PageNumberText
+        {
+            get => String.Empty;
+            set { }
+        }
 
         #endregion
 
         private void DualEditTitleForm_Load(object sender, EventArgs e)
         {
-            EditController.InitializeGrid(new SourceGrid.CellContextEventHandler(GridMenu_Click));
+            EditController.InitializeGrid();
 
             // 隱藏禁止使用的功能。
             string[] disabledCommands =
             {
                 DualEditCommand.Names.InsertLine,
-                DualEditCommand.Names.InsertText,   // 尚未加入，暫且隱藏。
                 DualEditCommand.Names.DeleteLine,
                 DualEditCommand.Names.BreakLine,
                 DualEditCommand.Names.FormatParagraph,
@@ -91,6 +118,7 @@ namespace EasyBrailleEdit
         /// <param name="e"></param>
         void GridMenu_Click(object sender, SourceGrid.CellContextEventArgs e)
         {
+/*
             GridPopupMenuController menuCtrl = (GridPopupMenuController)sender;
             SourceGrid.CellContext cell = e.CellContext;
             SourceGrid.Grid grid = (SourceGrid.Grid)cell.Grid;
@@ -121,6 +149,7 @@ namespace EasyBrailleEdit
                     EditController.BackspaceCell(row, col);
                     break;
             }
+*/
         }
 
         private void btnSave_Click(object sender, EventArgs e)

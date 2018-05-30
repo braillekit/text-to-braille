@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
 using EasyBrailleEdit.Common;
@@ -21,7 +22,7 @@ namespace EasyBrailleEdit.DualEdit
         private const float DefaultTextFontSize = 11.25f;
         private const float DefaultPhoneticFontSize = 8.0f;
 
-        private DualEditForm _form;
+        private IBrailleGridForm _form;
         private BrailleDocument _doc;
         private SourceGrid.Grid _grid;
         private BrailleGridPositionMapper _positionMapper;
@@ -100,6 +101,12 @@ namespace EasyBrailleEdit.DualEdit
             }
         }
 
+        public GridPopupMenuController MenuController
+        {
+            get { return m_MenuController; }
+        }
+
+
         public BrailleGridDebugger Debugger
         {
             get
@@ -132,7 +139,6 @@ namespace EasyBrailleEdit.DualEdit
                     {
                         ViewAll();
                     }
-                    _form.GridViewMode = m_ViewMode;
                 }
             }
         }
@@ -144,7 +150,7 @@ namespace EasyBrailleEdit.DualEdit
         {
         }
 
-        public BrailleGridController(DualEditForm form, SourceGrid.Grid grid, BrailleDocument doc) 
+        public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, BrailleDocument doc) 
             : this()
         {
             _form = form;
@@ -152,7 +158,7 @@ namespace EasyBrailleEdit.DualEdit
             _grid = grid;
         }
 
-        public BrailleGridController(DualEditForm form, SourceGrid.Grid grid, string brxFileName)
+        public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, string brxFileName)
             :this()
         {
             _form = form;
@@ -277,7 +283,7 @@ namespace EasyBrailleEdit.DualEdit
 
             if (m_ClickController == null)
             {
-                m_ClickController = new CellClickEvent(_form);
+                m_ClickController = new CellClickEvent();
             }
         }
 
@@ -350,18 +356,19 @@ namespace EasyBrailleEdit.DualEdit
 
         private void UpdateWindowCaption()
         {
+            var aForm = _form as Form;
             if (IsNoName())
             {
-                _form.Text = "雙視編輯 - 未命名 (" + StrHelper.ExtractFileName(m_FileName) + ")";
+                aForm.Text = "雙視編輯 - 未命名 (" + StrHelper.ExtractFileName(m_FileName) + ")";
             }
             else
             {
-                _form.Text = "雙視編輯 - " + StrHelper.ExtractFileName(m_FileName);
+                aForm.Text = "雙視編輯 - " + StrHelper.ExtractFileName(m_FileName);
             }
 
             if (IsDirty)
             {
-                _form.Text = _form.Text + "*";
+                aForm.Text += "*";
             }
         }
 
