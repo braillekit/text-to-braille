@@ -30,17 +30,22 @@
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DualEditForm));
             this.brGrid = new SourceGrid.Grid();
+            this.statusCurrentText = new System.Windows.Forms.StatusStrip();
+            this.statusLabelCurrentWord = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLabelCurrentLine = new System.Windows.Forms.ToolStripStatusLabel();
             this.mnuMain = new System.Windows.Forms.MenuStrip();
             this.miFile = new System.Windows.Forms.ToolStripMenuItem();
             this.miFileOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.miFileSave = new System.Windows.Forms.ToolStripMenuItem();
             this.miFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFileExportBrl = new System.Windows.Forms.ToolStripMenuItem();
             this.miFileExportTxt = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.miFilePrint = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.離開XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.miEditDocProperties = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditPageTitle = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditFetchPageTitles = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
@@ -52,6 +57,8 @@
             this.miViewAll = new System.Windows.Forms.ToolStripMenuItem();
             this.miViewBrailleOnly = new System.Windows.Forms.ToolStripMenuItem();
             this.miViewTextZhuyin = new System.Windows.Forms.ToolStripMenuItem();
+            this.miViewBraille = new System.Windows.Forms.ToolStripMenuItem();
+            this.miViewText = new System.Windows.Forms.ToolStripMenuItem();
             this.miTools = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -69,7 +76,8 @@
             this.statProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statDocTitle = new System.Windows.Forms.ToolStripStatusLabel();
             this.statPageInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.miFileExportBrl = new System.Windows.Forms.ToolStripMenuItem();
+            this.brGrid.SuspendLayout();
+            this.statusCurrentText.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -79,6 +87,7 @@
             // 
             this.brGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.brGrid.ColumnsCount = 1;
+            this.brGrid.Controls.Add(this.statusCurrentText);
             this.brGrid.CustomSort = true;
             this.brGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.brGrid.EnableSort = true;
@@ -89,10 +98,47 @@
             this.brGrid.OptimizeMode = SourceGrid.CellOptimizeMode.ForRows;
             this.brGrid.RowsCount = 1;
             this.brGrid.SelectionMode = SourceGrid.GridSelectionMode.Cell;
-            this.brGrid.Size = new System.Drawing.Size(753, 448);
+            this.brGrid.Size = new System.Drawing.Size(753, 446);
             this.brGrid.TabIndex = 2;
             this.brGrid.TabStop = true;
             this.brGrid.ToolTipText = "";
+            // 
+            // statusCurrentText
+            // 
+            this.statusCurrentText.Font = new System.Drawing.Font("Microsoft JhengHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.statusCurrentText.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusCurrentText.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabelCurrentWord,
+            this.statusLabelCurrentLine});
+            this.statusCurrentText.Location = new System.Drawing.Point(0, 413);
+            this.statusCurrentText.Name = "statusCurrentText";
+            this.statusCurrentText.Size = new System.Drawing.Size(751, 31);
+            this.statusCurrentText.TabIndex = 4;
+            this.statusCurrentText.Text = "statusStrip2";
+            // 
+            // statusLabelCurrentWord
+            // 
+            this.statusLabelCurrentWord.AutoSize = false;
+            this.statusLabelCurrentWord.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.statusLabelCurrentWord.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusLabelCurrentWord.Name = "statusLabelCurrentWord";
+            this.statusLabelCurrentWord.Size = new System.Drawing.Size(420, 26);
+            this.statusLabelCurrentWord.Text = "toolStripStatusLabel1";
+            this.statusLabelCurrentWord.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.statusLabelCurrentWord.ToolTipText = "目前選取的字";
+            // 
+            // statusLabelCurrentLine
+            // 
+            this.statusLabelCurrentLine.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.statusLabelCurrentLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusLabelCurrentLine.Name = "statusLabelCurrentLine";
+            this.statusLabelCurrentLine.Size = new System.Drawing.Size(196, 26);
+            this.statusLabelCurrentLine.Text = "statusLabelCurrentLine";
+            this.statusLabelCurrentLine.ToolTipText = "游標所在的那一行的明眼字";
             // 
             // mnuMain
             // 
@@ -147,6 +193,13 @@
             this.miFileSaveAs.Text = "另存新檔(&A)";
             this.miFileSaveAs.Click += new System.EventHandler(this.miFileSaveAs_Click);
             // 
+            // miFileExportBrl
+            // 
+            this.miFileExportBrl.Name = "miFileExportBrl";
+            this.miFileExportBrl.Size = new System.Drawing.Size(232, 26);
+            this.miFileExportBrl.Text = "匯出點字檔(&B)";
+            this.miFileExportBrl.Click += new System.EventHandler(this.miFileExportBrl_Click);
+            // 
             // miFileExportTxt
             // 
             this.miFileExportTxt.Name = "miFileExportTxt";
@@ -181,6 +234,7 @@
             // miEdit
             // 
             this.miEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miEditDocProperties,
             this.miEditPageTitle,
             this.miEditFetchPageTitles,
             this.toolStripMenuItem3,
@@ -191,10 +245,18 @@
             this.miEdit.Size = new System.Drawing.Size(69, 24);
             this.miEdit.Text = "編輯(&E)";
             // 
+            // miEditDocProperties
+            // 
+            this.miEditDocProperties.Name = "miEditDocProperties";
+            this.miEditDocProperties.Size = new System.Drawing.Size(216, 26);
+            this.miEditDocProperties.Tag = "DocProperties";
+            this.miEditDocProperties.Text = "文件屬性(&P)";
+            this.miEditDocProperties.Click += new System.EventHandler(this.miEdit_Click);
+            // 
             // miEditPageTitle
             // 
             this.miEditPageTitle.Name = "miEditPageTitle";
-            this.miEditPageTitle.Size = new System.Drawing.Size(192, 26);
+            this.miEditPageTitle.Size = new System.Drawing.Size(216, 26);
             this.miEditPageTitle.Tag = "PageTitles";
             this.miEditPageTitle.Text = "頁標題";
             this.miEditPageTitle.Click += new System.EventHandler(this.miEdit_Click);
@@ -202,7 +264,7 @@
             // miEditFetchPageTitles
             // 
             this.miEditFetchPageTitles.Name = "miEditFetchPageTitles";
-            this.miEditFetchPageTitles.Size = new System.Drawing.Size(192, 26);
+            this.miEditFetchPageTitles.Size = new System.Drawing.Size(216, 26);
             this.miEditFetchPageTitles.Tag = "FetchPageTitles";
             this.miEditFetchPageTitles.Text = "重新抓取頁標題";
             this.miEditFetchPageTitles.Click += new System.EventHandler(this.miEdit_Click);
@@ -210,13 +272,13 @@
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(189, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(213, 6);
             // 
             // 尋找FToolStripMenuItem
             // 
             this.尋找FToolStripMenuItem.Name = "尋找FToolStripMenuItem";
             this.尋找FToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.尋找FToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
+            this.尋找FToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.尋找FToolStripMenuItem.Tag = "Find";
             this.尋找FToolStripMenuItem.Text = "尋找(&F)";
             this.尋找FToolStripMenuItem.Click += new System.EventHandler(this.miEdit_Click);
@@ -225,7 +287,7 @@
             // 
             this.miEditFindNext.Name = "miEditFindNext";
             this.miEditFindNext.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.miEditFindNext.Size = new System.Drawing.Size(192, 26);
+            this.miEditFindNext.Size = new System.Drawing.Size(216, 26);
             this.miEditFindNext.Tag = "FindNext";
             this.miEditFindNext.Text = "找下一筆(&N)";
             this.miEditFindNext.Click += new System.EventHandler(this.miEdit_Click);
@@ -234,7 +296,7 @@
             // 
             this.miEditGoto.Name = "miEditGoto";
             this.miEditGoto.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.miEditGoto.Size = new System.Drawing.Size(192, 26);
+            this.miEditGoto.Size = new System.Drawing.Size(216, 26);
             this.miEditGoto.Tag = "Goto";
             this.miEditGoto.Text = "到(&G)";
             this.miEditGoto.Click += new System.EventHandler(this.miEdit_Click);
@@ -242,11 +304,12 @@
             // miView
             // 
             this.miView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miViewMode});
+            this.miViewMode,
+            this.miViewBraille,
+            this.miViewText});
             this.miView.Name = "miView";
             this.miView.Size = new System.Drawing.Size(71, 24);
             this.miView.Text = "檢視(&V)";
-            this.miView.Visible = false;
             // 
             // miViewMode
             // 
@@ -255,7 +318,7 @@
             this.miViewBrailleOnly,
             this.miViewTextZhuyin});
             this.miViewMode.Name = "miViewMode";
-            this.miViewMode.Size = new System.Drawing.Size(138, 26);
+            this.miViewMode.Size = new System.Drawing.Size(147, 26);
             this.miViewMode.Text = "模式(&M)";
             this.miViewMode.Visible = false;
             // 
@@ -283,11 +346,28 @@
             this.miViewTextZhuyin.Text = "僅顯示明眼字與注音(&C)";
             this.miViewTextZhuyin.Click += new System.EventHandler(this.miViewMode_Click);
             // 
+            // miViewBraille
+            // 
+            this.miViewBraille.Name = "miViewBraille";
+            this.miViewBraille.Size = new System.Drawing.Size(147, 26);
+            this.miViewBraille.Tag = "Braille";
+            this.miViewBraille.Text = "點字(&B)";
+            this.miViewBraille.Click += new System.EventHandler(this.miViewClick);
+            // 
+            // miViewText
+            // 
+            this.miViewText.Name = "miViewText";
+            this.miViewText.Size = new System.Drawing.Size(147, 26);
+            this.miViewText.Tag = "Text";
+            this.miViewText.Text = "明眼字(&T)";
+            this.miViewText.Click += new System.EventHandler(this.miViewClick);
+            // 
             // miTools
             // 
             this.miTools.Name = "miTools";
             this.miTools.Size = new System.Drawing.Size(69, 24);
             this.miTools.Text = "工具(&T)";
+            this.miTools.Visible = false;
             // 
             // toolStrip1
             // 
@@ -401,15 +481,16 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statMessage,
             this.statProgressBar,
             this.statDocTitle,
             this.statPageInfo});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 503);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 501);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(753, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(753, 24);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -417,13 +498,13 @@
             // 
             this.statMessage.AutoSize = false;
             this.statMessage.Name = "statMessage";
-            this.statMessage.Size = new System.Drawing.Size(350, 17);
+            this.statMessage.Size = new System.Drawing.Size(350, 19);
             this.statMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // statProgressBar
             // 
             this.statProgressBar.Name = "statProgressBar";
-            this.statProgressBar.Size = new System.Drawing.Size(100, 16);
+            this.statProgressBar.Size = new System.Drawing.Size(100, 18);
             // 
             // statDocTitle
             // 
@@ -432,7 +513,7 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.statDocTitle.Name = "statDocTitle";
-            this.statDocTitle.Size = new System.Drawing.Size(150, 17);
+            this.statDocTitle.Size = new System.Drawing.Size(150, 19);
             // 
             // statPageInfo
             // 
@@ -442,14 +523,7 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.statPageInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statPageInfo.Name = "statPageInfo";
-            this.statPageInfo.Size = new System.Drawing.Size(70, 17);
-            // 
-            // miFileExportBrl
-            // 
-            this.miFileExportBrl.Name = "miFileExportBrl";
-            this.miFileExportBrl.Size = new System.Drawing.Size(232, 26);
-            this.miFileExportBrl.Text = "匯出點字檔(&B)";
-            this.miFileExportBrl.Click += new System.EventHandler(this.miFileExportBrl_Click);
+            this.statPageInfo.Size = new System.Drawing.Size(70, 19);
             // 
             // DualEditForm
             // 
@@ -472,6 +546,10 @@
             this.Load += new System.EventHandler(this.DualEditForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DualEditForm_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DualEditForm_KeyPress);
+            this.brGrid.ResumeLayout(false);
+            this.brGrid.PerformLayout();
+            this.statusCurrentText.ResumeLayout(false);
+            this.statusCurrentText.PerformLayout();
             this.mnuMain.ResumeLayout(false);
             this.mnuMain.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -526,5 +604,11 @@
 		private System.Windows.Forms.ToolStripMenuItem miEditFetchPageTitles;
         private System.Windows.Forms.ToolStripMenuItem miFileExportTxt;
         private System.Windows.Forms.ToolStripMenuItem miFileExportBrl;
+        private System.Windows.Forms.StatusStrip statusCurrentText;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabelCurrentWord;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabelCurrentLine;
+        private System.Windows.Forms.ToolStripMenuItem miViewBraille;
+        private System.Windows.Forms.ToolStripMenuItem miViewText;
+        private System.Windows.Forms.ToolStripMenuItem miEditDocProperties;
     }
 }

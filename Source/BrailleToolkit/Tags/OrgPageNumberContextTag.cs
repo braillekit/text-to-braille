@@ -9,8 +9,8 @@ namespace BrailleToolkit.Tags
 {
     internal class OrgPageNumberContextTag : GenericContextTag
     {
-        const string LeadingUnderline = "_";
-        const int NumberOfUnderline = 36;   // 用於表示原書頁次的底線字元數量
+        public const string LeadingUnderline = "_";
+        public const int NumberOfUnderline = 36;   // 用於表示原書頁次的底線字元數量
 
         public static string LeadingUnderlines = new StringBuilder().Insert(0, LeadingUnderline, NumberOfUnderline).ToString();
 

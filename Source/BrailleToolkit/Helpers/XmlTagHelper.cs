@@ -93,5 +93,10 @@ namespace BrailleToolkit.Helpers
             return tagName.Replace("</", String.Empty).Replace("<", String.Empty).Replace(">", String.Empty);
         }
         
+        public static string EncloseWithTag(string text, string tagName)
+        {
+            return GetBeginTagName(tagName) + text + GetEndTagName(tagName);
+        }
+
     }
 }

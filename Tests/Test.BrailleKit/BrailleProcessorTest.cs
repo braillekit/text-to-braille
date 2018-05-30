@@ -120,7 +120,7 @@ namespace Test.BrailleToolkit
             BrailleProcessor target = BrailleProcessor.GetInstance();
 
             string line = "<大單元結束>測試</大單元結束>";
-            string expected = new string('ˍ', 20) + "測試" + ' ';
+            string expected = new string('ˍ', 20) + "測試";
             string actual = target.ReplaceSimpleTagsWithConvertableText(line);
 
             Assert.AreEqual(expected, actual);
@@ -327,6 +327,5 @@ namespace Test.BrailleToolkit
             var result = brLine.ToPositionNumberString();
             Assert.AreEqual(expectedPositionNumbers, result);
         }
-
     }
 }

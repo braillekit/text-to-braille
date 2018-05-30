@@ -53,10 +53,10 @@ namespace EasyBrailleEdit
                 switch (value)
                 {
                     case EditCellMode.Edit:
-                        Text = "修改點字";
+                        Text = "修改目前儲存格的點字";
                         break;
                     case EditCellMode.Insert:
-                        Text = "插入點字";
+                        Text = "插入一個字";
                         break;
                     case EditCellMode.Display:
                         Text = "點字內容";

@@ -37,12 +37,17 @@ namespace BrailleToolkit
         [NonSerialized]
         private BrailleProcessor m_Processor;	// 點字轉換器。
 
+        [DataMember]
+        public int StartPageNumber { get; set; }    // 起始頁碼
+
         #region 建構函式
 
         public BrailleDocument()
         {
             m_Lines = new List<BrailleLine>();
             m_PageTitles = new List<BraillePageTitle>();
+
+            StartPageNumber = 1;
         }
 
         public BrailleDocument(BrailleProcessor processor, int cellsPerLine=BrailleConst.DefaultCellsPerLine) : this()
@@ -123,9 +128,15 @@ namespace BrailleToolkit
 
             m_Processor.FormatDocument(this);   // 斷行
 
-            FetchPageTitles();      // 提取標題列
+            int titleCount = FetchPageTitles();      // 提取標題列
 
-            Log.Debug("BrailleDocument.LoadAndConvert() 執行完畢。");
+            Log.Debug($"BrailleDocument.LoadAndConvert() 執行完畢。頁標題數量為 {titleCount}。");
+        }
+
+        public int AddPageTitle(BraillePageTitle title)
+        {
+            PageTitles.Add(title);
+            return 1;
         }
 
         /// <summary>
@@ -176,7 +187,23 @@ namespace BrailleToolkit
 
             string jsonStr = File.ReadAllText(filename);
             brDoc = JsonHelper.Deserialize<BrailleDocument>(jsonStr);
+            FixInvalidLines(brDoc);
             return brDoc;
+        }
+
+        /// <summary>
+        /// 修正雙視文件：把沒有點字的 lines 替換成一個空方。
+        /// </summary>
+        private static void FixInvalidLines(BrailleDocument doc)
+        {
+            for (int i = doc.Lines.Count-1; i >= 0; i--)
+            {
+                if (doc.Lines[i].CellCount < 1)
+                {
+                    doc.Lines[i].Clear();
+                    doc.RemoveLine(i);
+                }
+            }
         }
 
         /// <summary>
@@ -231,11 +258,42 @@ namespace BrailleToolkit
 
             using (var writer = new StreamWriter(filename, false, Encoding.UTF8))
             {
-                foreach (var brLine in Lines)
+                for (int lineIdx = 0; lineIdx < Lines.Count; lineIdx++)
                 {
-                    writer.WriteLine(brLine.ToOriginalTextString(context));
+                    var pageTitle = FindPageTitle(lineIdx);
+                    if (pageTitle != null)
+                    {
+                        writer.WriteLine(pageTitle.ToOriginalTextString());
+                    }
+                    writer.WriteLine(Lines[lineIdx].ToOriginalTextString(context));
                 }
             }
+        }
+
+        public string GetAllText()
+        {
+            var result = new StringBuilder();
+            var context = new ContextTagManager();
+            for (int lineIdx = 0; lineIdx < Lines.Count; lineIdx++)
+            {
+                var pageTitle = FindPageTitle(lineIdx);
+                if (pageTitle != null)
+                {
+                    result.AppendLine(pageTitle.ToOriginalTextString());
+                }
+                result.AppendLine(Lines[lineIdx].ToOriginalTextString(context));
+            }
+            return result.ToString();
+        }
+
+        private BraillePageTitle FindPageTitle(int lineIdx)
+        {
+            foreach (var title in PageTitles)
+            {
+                if (title.BeginLineIndex == lineIdx)
+                    return title;
+            }
+            return null;
         }
 
         private void ProcessLine(string line, int lineNumber)
@@ -296,26 +354,32 @@ namespace BrailleToolkit
         /// <summary>
         /// 從 Lines 集合中取出頁標題，並將標題列自文件中移除。
         /// </summary>
-        public void FetchPageTitles()
+        public int FetchPageTitles()
         {
-            m_PageTitles.Clear();
+            var newPageTitles = new List<BraillePageTitle>();
 
             BrailleLine brLine;
-            int idx = 0;
-            while (idx < m_Lines.Count)
+            int lineIdx = 0;
+            while (lineIdx < m_Lines.Count)
             {
-                brLine = m_Lines[idx];
+                brLine = m_Lines[lineIdx];
                 if (brLine.ContainsTitleTag())
                 {
-                    BraillePageTitle title = new BraillePageTitle(this, idx);
-                    m_PageTitles.Add(title);
-                    m_Lines.RemoveAt(idx);
+                    BraillePageTitle title = new BraillePageTitle(this, lineIdx);
+                    newPageTitles.Add(title);
+                    m_Lines.RemoveAt(lineIdx);
                 }
                 else 
                 {
-                    idx++;
+                    lineIdx++;
                 }
             }
+
+            if (newPageTitles.Count > 0)
+            {
+                m_PageTitles.AddRange(newPageTitles);
+            }
+            return newPageTitles.Count;
         }
 
         /// <summary>

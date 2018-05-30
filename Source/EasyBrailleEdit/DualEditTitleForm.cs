@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using BrailleToolkit;
+using EasyBrailleEdit.DualEdit;
 
 namespace EasyBrailleEdit
 {
-    public partial class DualEditTitleForm : Form
+    public partial class DualEditTitleForm : Form, IBrailleGridForm
     {
         private BrailleDocument m_OrgBrDoc;	// 標題列所屬的 BrailleDocument 物件
         private BrailleDocument m_TmpBrDoc; // 把所有標題列都丟到這個暫時的 railleDocument 物件
@@ -34,9 +35,9 @@ namespace EasyBrailleEdit
                 m_TmpBrDoc.Lines.Add(newTitle.TitleLine);		// 塞進暫存文件。
             }
 
-            DualEditController = new DualEditController(m_TmpBrDoc, brGrid);
+            EditController = new BrailleGridController(this, brGrid, m_TmpBrDoc);
 
-            DualEditController.DataChanged += DualEditControler_DataChanged;
+            //EditController.DataChanged += DualEditControler_DataChanged;
 
             IsDirty = false;
         }
@@ -54,19 +55,60 @@ namespace EasyBrailleEdit
 
         public bool IsDirty { get; set; }
 
-        private DualEditController DualEditController { get; }
+        private BrailleGridController EditController { get; }
+        public string StatusText
+        {
+            get => String.Empty;
+            set { }
+        }
+        public int StatusProgress
+        {
+            get => 0;
+            set { }
+        }
+
+        public string CurrentWordStatusText
+        {
+            get => String.Empty;
+            set { }
+        }
+
+        public string CurrentLineStatusText
+        {
+            get => String.Empty;
+            set { }
+        }
+
+        public string PageNumberText
+        {
+            get => String.Empty;
+            set { }
+        }
 
         #endregion
 
         private void DualEditTitleForm_Load(object sender, EventArgs e)
         {
-            DualEditController.InitializeGrid(new SourceGrid.CellContextEventHandler(GridMenu_Click));
+            EditController.InitializeGrid();
 
             // 隱藏禁止使用的功能。
-            DualEditController.MenuController.HideMenuItem("InsertLine", true);
-            DualEditController.MenuController.HideMenuItem("DeleteLine", true);
-            
-            DualEditController.FillGrid();
+            string[] disabledCommands =
+            {
+                DualEditCommand.Names.InsertLine,
+                DualEditCommand.Names.DeleteLine,
+                DualEditCommand.Names.BreakLine,
+                DualEditCommand.Names.FormatParagraph,
+                DualEditCommand.Names.AddLine,
+                DualEditCommand.Names.CopyToClipboard,   // 尚未加入，暫且隱藏。
+                DualEditCommand.Names.PasteFromClipboard // 尚未加入，暫且隱藏。
+            };
+
+            foreach (string cmd in disabledCommands)
+            {
+                EditController.MenuController.HideMenuItem(cmd);
+            }
+           
+            EditController.FillGrid();
         }
 
         /// <summary>
@@ -76,7 +118,8 @@ namespace EasyBrailleEdit
         /// <param name="e"></param>
         void GridMenu_Click(object sender, SourceGrid.CellContextEventArgs e)
         {
-            PopupMenuController menuCtrl = (PopupMenuController)sender;
+/*
+            GridPopupMenuController menuCtrl = (GridPopupMenuController)sender;
             SourceGrid.CellContext cell = e.CellContext;
             SourceGrid.Grid grid = (SourceGrid.Grid)cell.Grid;
             int row = cell.Position.Row;
@@ -84,34 +127,29 @@ namespace EasyBrailleEdit
 
             switch (menuCtrl.Command)
             {
-                case "Edit":
-                    DualEditController.EditCell(row, col);
+                case DualEditCommand.Names.EditWord:
+                    EditController.EditWord(row, col);
                     break;
-                case "Insert":
-                    DualEditController.InsertCell(row, col);
+                case DualEditCommand.Names.InsertWord:
+                    EditController.InsertWord(row, col);
                     break;
-                case "InsertBlank":  // 插入空方                        
-                    DualEditController.InsertBlankCell(row, col, 1);
+                case DualEditCommand.Names.InsertText:
+//                    EditController.InsertText(row, col);
                     break;
-                case "Append":  // 在列尾插入空方
-                    DualEditController.AppendCell(row, col);
+                case DualEditCommand.Names.InsertBlank:  // 插入空方                        
+                    EditController.InsertBlankCell(row, col, 1);
                     break;
-                case "InsertLine":  // 插入一列
-                    DualEditController.InsertLine(row, col);
+                case DualEditCommand.Names.AppendWord:  // 在列尾插入空方
+                    EditController.AppendWord(row, col);
                     break;
-                case "Delete":
-                    DualEditController.DeleteCell(row, col);
+                case DualEditCommand.Names.DeleteWord:
+                    EditController.DeleteCell(row, col);
                     break;
-                case "Backspace":
-                    DualEditController.BackspaceCell(row, col);
-                    break;
-                case "DeleteLine":
-                    DualEditController.DeleteLine(row, col, true);
-                    break;
-                case "FormatParagraph":
-                    DualEditController.FormatParagraph(row, col);
+                case DualEditCommand.Names.BackDeleteWord:
+                    EditController.BackspaceCell(row, col);
                     break;
             }
+*/
         }
 
         private void btnSave_Click(object sender, EventArgs e)

@@ -127,6 +127,7 @@ namespace BrailleToolkit.Helpers
                 pageNumberText =
                     line.Replace(ContextTagNames.OrgPageNumber, String.Empty)
                         .Replace(endTagName, String.Empty)
+                        .Replace(OrgPageNumberContextTag.LeadingUnderline, String.Empty)
                         .Trim();
 
             }
@@ -157,7 +158,7 @@ namespace BrailleToolkit.Helpers
         {
             string line = brLine.ToString();
 
-            string orgPageNum = BrailleDocumentHelper.GetOrgPageNumber(line);
+            string orgPageNum = GetOrgPageNumber(line);
             if (String.IsNullOrEmpty(orgPageNum))
             {
                 return;

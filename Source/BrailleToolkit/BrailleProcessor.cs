@@ -946,7 +946,7 @@ namespace BrailleToolkit
                 string key = token.Value.Remove(1, 1);  // 把 '/' 字元去掉，即得到起始標籤名稱。
                 if (SimpleTag.IsSimpleTag(key))
                 {
-                    return " ";
+                    return String.Empty;
                 }
             }
 
@@ -1121,12 +1121,11 @@ namespace BrailleToolkit
             {
                 breakIndex = FindBreakPoint(brLine, maxCellsInLine, out needHyphen);
 
-                newLine = brLine.Copy(wordIndex, breakIndex);   // 複製到新行。
+                newLine = brLine.ShallowCopy(wordIndex, breakIndex);   // 複製到新行。
                 if (needHyphen) // 是否要附加連字號?
                 {
                     newLine.Words.Add(new BrailleWord("-", BrailleCellCode.Hyphen));
                 }
-                newLine.TrimEnd();	// 去尾空白。 
 
                 // 如果是折下來的新行，就自動補上需要縮排的格數。
                 if (isBroken)
@@ -1266,7 +1265,6 @@ namespace BrailleToolkit
 
                 if (breakWord.IsWhiteSpace) // 找到空白處，可斷開
                 {
-                    breakIndex++;   // 斷在空白右邊的字元。
                     break;
                 }
 

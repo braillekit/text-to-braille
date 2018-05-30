@@ -1,11 +1,12 @@
-﻿using Huanlin.Common.Helpers;
+﻿using BrailleToolkit.Tags;
+using Huanlin.Common.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BrailleToolkit.Extensions
+namespace BrailleToolkit.Helpers
 {
     public static class BrailleWordHelper
     {
@@ -45,6 +46,29 @@ namespace BrailleToolkit.Extensions
                 sb.Append(brWord.ToPositionNumberString(useParenthesis: true));
             }
             return sb.ToString();
+        }
+
+        public static int GetCellCount(this List<BrailleWord> brWordList)
+        {
+            int count = 0;
+            foreach (var brWord in brWordList)
+            {
+                count += brWord.CellCount;
+            }
+            return count;
+        }
+
+        /// <summary>
+        /// 是否包含標題情境標籤。
+        /// </summary>
+        /// <returns></returns>
+        public static bool ContainsTitleTag(List<BrailleWord> brWordList)
+        {
+            if (brWordList.Count > 0 && brWordList[0].Text.Equals(ContextTagNames.Title))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
