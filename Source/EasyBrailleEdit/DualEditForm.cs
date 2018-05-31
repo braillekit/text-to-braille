@@ -497,6 +497,9 @@ namespace EasyBrailleEdit
             ToolStripMenuItem mi = sender as ToolStripMenuItem;
             switch (mi.Tag.ToString())
             {
+                case "Refresh":
+                    _controller.RefreshView();
+                    break;
                 case "Braille":
                     _controller.ViewBraille();
                     break;

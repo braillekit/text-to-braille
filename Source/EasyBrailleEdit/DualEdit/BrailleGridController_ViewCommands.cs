@@ -13,6 +13,11 @@ namespace EasyBrailleEdit.DualEdit
     internal partial class BrailleGridController
     {
 
+        public void RefreshView()
+        {
+            FillGrid();
+        }
+
         public void ViewBraille()
         {
             var exporter = new BrailleDataExporter(
