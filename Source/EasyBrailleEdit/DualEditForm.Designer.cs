@@ -79,7 +79,7 @@
             this.statPageInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.miViewRefresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.移除所有多餘的空標籤ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miToolsRemoveUselessWords = new System.Windows.Forms.ToolStripMenuItem();
             this.brGrid.SuspendLayout();
             this.statusCurrentText.SuspendLayout();
             this.mnuMain.SuspendLayout();
@@ -97,12 +97,12 @@
             this.brGrid.EnableSort = true;
             this.brGrid.FixedColumns = 1;
             this.brGrid.FixedRows = 1;
-            this.brGrid.Location = new System.Drawing.Point(0, 54);
+            this.brGrid.Location = new System.Drawing.Point(0, 55);
             this.brGrid.Name = "brGrid";
             this.brGrid.OptimizeMode = SourceGrid.CellOptimizeMode.ForRows;
             this.brGrid.RowsCount = 1;
             this.brGrid.SelectionMode = SourceGrid.GridSelectionMode.Cell;
-            this.brGrid.Size = new System.Drawing.Size(753, 447);
+            this.brGrid.Size = new System.Drawing.Size(753, 446);
             this.brGrid.TabIndex = 2;
             this.brGrid.TabStop = true;
             this.brGrid.ToolTipText = "";
@@ -114,7 +114,7 @@
             this.statusCurrentText.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabelCurrentWord,
             this.statusLabelCurrentLine});
-            this.statusCurrentText.Location = new System.Drawing.Point(0, 414);
+            this.statusCurrentText.Location = new System.Drawing.Point(0, 413);
             this.statusCurrentText.Name = "statusCurrentText";
             this.statusCurrentText.Size = new System.Drawing.Size(751, 31);
             this.statusCurrentText.TabIndex = 4;
@@ -154,7 +154,7 @@
             this.miTools});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(753, 27);
+            this.mnuMain.Size = new System.Drawing.Size(753, 28);
             this.mnuMain.TabIndex = 3;
             this.mnuMain.Text = "menuStrip1";
             // 
@@ -171,7 +171,7 @@
             this.toolStripMenuItem2,
             this.離開XToolStripMenuItem});
             this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(69, 23);
+            this.miFile.Size = new System.Drawing.Size(69, 24);
             this.miFile.Text = "檔案(&F)";
             // 
             // miFileOpen
@@ -246,7 +246,7 @@
             this.miEditFindNext,
             this.miEditGoto});
             this.miEdit.Name = "miEdit";
-            this.miEdit.Size = new System.Drawing.Size(69, 23);
+            this.miEdit.Size = new System.Drawing.Size(69, 24);
             this.miEdit.Text = "編輯(&E)";
             // 
             // miEditDocProperties
@@ -314,7 +314,7 @@
             this.toolStripMenuItem4,
             this.miViewRefresh});
             this.miView.Name = "miView";
-            this.miView.Size = new System.Drawing.Size(71, 23);
+            this.miView.Size = new System.Drawing.Size(71, 24);
             this.miView.Text = "檢視(&V)";
             // 
             // miViewMode
@@ -372,9 +372,9 @@
             // 
             this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miToolsRemoveSharpSymbolFromPageNumbers,
-            this.移除所有多餘的空標籤ToolStripMenuItem});
+            this.miToolsRemoveUselessWords});
             this.miTools.Name = "miTools";
-            this.miTools.Size = new System.Drawing.Size(69, 23);
+            this.miTools.Size = new System.Drawing.Size(69, 24);
             this.miTools.Text = "工具(&T)";
             // 
             // miToolsRemoveSharpSymbolFromPageNumbers
@@ -399,7 +399,7 @@
             this.toolStripLabel1,
             this.txtGotoPageNum,
             this.btnGotoPage});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 27);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(753, 27);
             this.toolStrip1.TabIndex = 4;
@@ -555,11 +555,13 @@
             this.miViewRefresh.Text = "重新整理(&R)";
             this.miViewRefresh.Click += new System.EventHandler(this.miViewClick);
             // 
-            // 移除所有多餘的空標籤ToolStripMenuItem
+            // miToolsRemoveUselessWords
             // 
-            this.移除所有多餘的空標籤ToolStripMenuItem.Name = "移除所有多餘的空標籤ToolStripMenuItem";
-            this.移除所有多餘的空標籤ToolStripMenuItem.Size = new System.Drawing.Size(267, 26);
-            this.移除所有多餘的空標籤ToolStripMenuItem.Text = "移除所有多餘的空標籤";
+            this.miToolsRemoveUselessWords.Name = "miToolsRemoveUselessWords";
+            this.miToolsRemoveUselessWords.Size = new System.Drawing.Size(267, 26);
+            this.miToolsRemoveUselessWords.Tag = "RemoveUselessWords";
+            this.miToolsRemoveUselessWords.Text = "檢查是否有多餘的空標籤";
+            this.miToolsRemoveUselessWords.Click += new System.EventHandler(this.miToolsClick);
             // 
             // DualEditForm
             // 
@@ -649,6 +651,6 @@
         private System.Windows.Forms.ToolStripMenuItem miToolsRemoveSharpSymbolFromPageNumbers;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem miViewRefresh;
-        private System.Windows.Forms.ToolStripMenuItem 移除所有多餘的空標籤ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miToolsRemoveUselessWords;
     }
 }

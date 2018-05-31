@@ -220,5 +220,72 @@ namespace BrailleToolkit.Helpers
             }
         }
 
+
+        /// <summary>
+        /// 移除點字數量為 0 的 lines，以及一些空標籤。
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="doRemove"></param>
+        /// <param name="emptyLinesCount"></param>
+        /// <param name="emptyTagsCount"></param>
+        public static void RemoveUselessWords(BrailleDocument doc, bool doRemove, out int emptyLinesCount, out int emptyTagsCount)
+        {
+            string[] removableEmptyTags =
+            {
+                ContextTagNames.BrailleTranslatorNote,
+                ContextTagNames.BookName,
+                ContextTagNames.SpecificName,
+                ContextTagNames.Time,
+                ContextTagNames.Coordinate,
+                ContextTagNames.Fraction,
+                ContextTagNames.Phonetic,
+                ContextTagNames.Delete
+            };
+
+
+            emptyLinesCount = 0;
+            emptyTagsCount = 0;
+            for (int lineIdx = doc.LineCount - 1; lineIdx >= 0; lineIdx--)
+            {
+                var brLine = doc.Lines[lineIdx];
+                if (brLine.CellCount < 1)
+                {
+                    if (doRemove)
+                    {
+                        doc.RemoveLine(lineIdx);
+                    }
+                    emptyLinesCount++;
+                    continue;
+                }
+
+                for (int wordIdx = brLine.WordCount - 2; wordIdx >= 0; wordIdx--)
+                {
+                    var brWord = brLine[wordIdx];
+                    if (!brWord.IsContextTag)
+                        continue;
+                    var nextWord = brLine[wordIdx + 1];
+                    if (!nextWord.IsContextTag)
+                        continue;
+
+                    foreach (var tagName in removableEmptyTags)
+                    {
+                        if (brWord.OriginalText == tagName)
+                        {
+                            var endTagName = XmlTagHelper.GetEndTagName(tagName);
+                            if (nextWord.OriginalText == endTagName)
+                            {
+                                if (doRemove)
+                                {
+                                    brLine.RemoveAt(wordIdx + 1);
+                                    brLine.RemoveAt(wordIdx);
+                                }
+                                emptyTagsCount++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }

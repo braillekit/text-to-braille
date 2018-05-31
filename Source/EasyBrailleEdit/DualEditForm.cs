@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
 using BrailleToolkit.Helpers;
+using BrailleToolkit.Tags;
 using EasyBrailleEdit.Common;
 using EasyBrailleEdit.DualEdit;
 using EasyBrailleEdit.Forms;
@@ -509,6 +510,7 @@ namespace EasyBrailleEdit
             }
         }
 
+
         private void miToolsClick(object sender, EventArgs e)
         {
             string s = (string)(sender as ToolStripMenuItem).Tag;
@@ -520,11 +522,33 @@ namespace EasyBrailleEdit
                     {
                         MsgBoxHelper.ShowInfo($"完成。總共移除了 {removedCount} 個 # 號。請核對無誤後再存檔。");
                         _controller.IsDirty = true;
-                        _controller.FillGrid();
+                        _controller.RefreshView();
                     }
                     else
                     {
                         MsgBoxHelper.ShowInfo($"沒有發現任何帶有 # 號的原書頁碼。");
+                    }
+                    break;
+                case "RemoveUselessWords":
+                    int emptyLinesCount;
+                    int emptyTagsCount;
+                    bool doRemove = false;
+                    BrailleDocumentHelper.RemoveUselessWords(BrailleDoc, doRemove, out emptyLinesCount, out emptyTagsCount);
+                    if (emptyLinesCount > 0 || emptyTagsCount > 0)
+                    {
+                        string msg = $"發現 {emptyLinesCount} 個空行，{emptyTagsCount} 個空標籤。要刪除它們嗎？";
+                        if (MsgBoxHelper.ShowYesNo(msg) == DialogResult.Yes)
+                        {
+                            doRemove = true;
+                            BrailleDocumentHelper.RemoveUselessWords(BrailleDoc, doRemove, out emptyLinesCount, out emptyTagsCount);
+                            MsgBoxHelper.ShowInfo($"完成。總共移除了 {emptyLinesCount} 個空行，{emptyTagsCount} 個空標籤。請核對無誤後再存檔。");
+                            _controller.IsDirty = true;
+                            _controller.RefreshView();
+                        }
+                    }
+                    else
+                    {
+                        MsgBoxHelper.ShowInfo("沒有發現任何多餘的空行或空標籤。");
                     }
                     break;
             }

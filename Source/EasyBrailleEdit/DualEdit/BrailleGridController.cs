@@ -515,6 +515,7 @@ namespace EasyBrailleEdit.DualEdit
                 _form.StatusText = "重新調整儲存格大小...";
                 ResizeCells();
                 _grid.ResumeLayout();
+                _form.StatusText = String.Empty;
                 GridFocusCell(_grid.FixedRows, _grid.FixedColumns);
                 _form.StatusProgress = 0;
                 CursorHelper.RestoreCursor();
