@@ -48,13 +48,7 @@ namespace EasyBrailleEdit.DualEdit
             {
                 _form.StatusText = "正在載入資料...";
 
-                var newBrDoc = BrailleDocument.LoadBrailleFile(filename);
-
-                if (_doc != null)
-                {
-                    _doc.Clear();
-                }
-                _doc = newBrDoc;
+                BrailleDoc = BrailleDocument.LoadBrailleFile(filename);
 
                 FileName = filename;
                 IsDirty = false;

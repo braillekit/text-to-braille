@@ -57,6 +57,18 @@ namespace EasyBrailleEdit.DualEdit
         public BrailleDocument BrailleDoc
         {
             get => _doc;
+            private set
+            {
+                if (_doc != value)
+                {
+                    if (_doc != null)
+                    {
+                        _doc.Clear();
+                    }
+                    _doc = value;
+                    PositionMapper.BrailleDoc = _doc;
+                }
+            }
         }
 
         public SourceGrid.Grid Grid { get => _grid; }

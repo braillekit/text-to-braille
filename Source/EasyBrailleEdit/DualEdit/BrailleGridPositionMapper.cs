@@ -21,6 +21,18 @@ namespace EasyBrailleEdit.DualEdit
             _grid = grid;
         }
 
+        public BrailleDocument BrailleDoc
+        {
+            get => _doc;
+            set
+            {
+                if (_doc != value)
+                {
+                    _doc = value;
+                }
+            }
+        }
+
         #region 計算點字、列索引的相關函式
 
         /// <summary>

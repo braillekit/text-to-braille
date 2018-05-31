@@ -13,7 +13,6 @@ namespace EasyBrailleEdit
 {
     public partial class DualEditForm : Form, IBrailleGridForm
     {
-        private BrailleDocument _doc;
         private BrailleGridController _controller;
 
         private DualEditFindForm m_FindForm;
@@ -27,7 +26,7 @@ namespace EasyBrailleEdit
                 {
                     return _controller.BrailleDoc;
                 }
-                return _doc;
+                return null;
             }
         }
 
@@ -102,18 +101,9 @@ namespace EasyBrailleEdit
             InitializeComponent();
         }
 
-        public DualEditForm(BrailleDocument doc)
-            : this()
-        {
-            _doc = doc ?? throw new ArgumentNullException(nameof(doc));
-
-            _controller = new BrailleGridController(this, brGrid, _doc);
-        }
-
         public DualEditForm(string brxFileName) : this()
         {
             _controller = new BrailleGridController(this, brGrid, brxFileName);
-            _doc = _controller.BrailleDoc;
         }
 
         public bool DebugMode { get; set; } = true;
@@ -226,7 +216,6 @@ namespace EasyBrailleEdit
         private void OpenFile()
         {
             _controller.DoOpenFile();
-            _doc = _controller.BrailleDoc;
         }
 
         private void miFileOpen_Click(object sender, EventArgs e)
