@@ -515,6 +515,7 @@ namespace EasyBrailleEdit.DualEdit
                 _form.StatusText = "重新調整儲存格大小...";
                 ResizeCells();
                 _grid.ResumeLayout();
+                GridFocusCell(_grid.FixedRows, _grid.FixedColumns);
                 _form.StatusProgress = 0;
                 CursorHelper.RestoreCursor();
             }
@@ -659,7 +660,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="pos">儲存格位置。</param>
         /// <param name="resetSelection">是否清除選取範圍。</param>
         /// <returns></returns>
-        private bool GridFocusCell(SourceGrid.Position pos, bool resetSelection)
+        public bool GridFocusCell(SourceGrid.Position pos, bool resetSelection)
         {
             if (pos.Row >= _grid.RowsCount)
                 return false;
@@ -669,7 +670,7 @@ namespace EasyBrailleEdit.DualEdit
             return _grid.Selection.Focus(pos, resetSelection);
         }
 
-        private void GridFocusCell(int row, int col)
+        public void GridFocusCell(int row, int col)
         {
             var position = new SourceGrid.Position(row, col);
             GridFocusCell(position, true);
@@ -680,7 +681,7 @@ namespace EasyBrailleEdit.DualEdit
         /// </summary>
         /// <param name="row">列索引。</param>
         /// <param name="select">是否選取。</param>
-        private void GridSelectRow(int row, bool select)
+        public void GridSelectRow(int row, bool select)
         {
             row = PositionMapper.GetBrailleRowIndex(row);
             var range = new SourceGrid.Range(row, _grid.FixedColumns, row + 2, _grid.ColumnsCount);

@@ -175,5 +175,45 @@ namespace BrailleToolkit.Helpers
             endOrgPageNumber = orgPageNum;
         }
 
+        public static int RemoveSharpSymbolFromPageNumbers(BrailleDocument doc)
+        {
+            int removedCount = 0;
+            foreach(var brLine in doc.Lines)
+            {
+                var text = brLine.ToOriginalTextString(null);
+                int wordIdx = text.IndexOf("<P>#");
+                if (wordIdx >= 0)
+                {
+                    removedCount += FindAndRemoveSharpSymbol(brLine, wordIdx + 1);
+                }
+                else
+                {
+                    // 若沒有 <P> 標籤，那麼以連續 36 個底線符號開頭的 BrailleLine 也視為原書頁碼
+                    text = brLine.ToString();
+                    wordIdx = text.IndexOf(OrgPageNumberContextTag.LeadingUnderlines);
+                    if (wordIdx >= 0)
+                    {
+                        removedCount += FindAndRemoveSharpSymbol(brLine, wordIdx + 1);
+                    }
+                }
+            }
+            return removedCount;
+
+            // local function
+            int FindAndRemoveSharpSymbol(BrailleLine brLine, int startWordIdx)
+            {
+                for (int i = startWordIdx + 1; i < brLine.WordCount; i++)
+                {
+                    var brWord = brLine[i];
+                    if (brWord.Text == "#" && brWord.CellCount < 1)
+                    {
+                        brLine.RemoveAt(i);
+                        return 1;
+                    }
+                }
+                return 0;
+            }
+        }
+
     }
 }

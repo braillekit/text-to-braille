@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
+using BrailleToolkit.Helpers;
 using EasyBrailleEdit.Common;
 using EasyBrailleEdit.DualEdit;
 using EasyBrailleEdit.Forms;
@@ -428,8 +429,6 @@ namespace EasyBrailleEdit
                 case "FindNext":
                     FindNext();
                     break;
-                default:
-                    break;
             }
         }
 
@@ -503,6 +502,27 @@ namespace EasyBrailleEdit
                     break;
                 case "Text":
                     _controller.ViewText();
+                    break;
+            }
+        }
+
+        private void miToolsClick(object sender, EventArgs e)
+        {
+            string s = (string)(sender as ToolStripMenuItem).Tag;
+            switch (s)
+            {
+                case "RemoveSharp":
+                    int removedCount = BrailleDocumentHelper.RemoveSharpSymbolFromPageNumbers(BrailleDoc);
+                    if (removedCount > 0)
+                    {
+                        MsgBoxHelper.ShowInfo($"完成。總共移除了 {removedCount} 個 # 號。請核對無誤後再存檔。");
+                        _controller.IsDirty = true;
+                        _controller.FillGrid();
+                    }
+                    else
+                    {
+                        MsgBoxHelper.ShowInfo($"沒有發現任何帶有 # 號的原書頁碼。");
+                    }
                     break;
             }
         }
