@@ -85,6 +85,8 @@ namespace EasyBrailleEdit.DualEdit
             }
         }
 
+        public bool IsUsedForPageTitle { get; }
+
         public string FileName
         {
             get { return m_FileName; }
@@ -162,20 +164,22 @@ namespace EasyBrailleEdit.DualEdit
         {
         }
 
-        public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, BrailleDocument doc) 
+        public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, BrailleDocument doc, bool forPageTitle) 
             : this()
         {
             _form = form;
             _doc = doc;
             _grid = grid;
+            IsUsedForPageTitle = forPageTitle;
         }
 
-        public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, string brxFileName)
+        public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, string brxFileName, bool forPageTitle)
             :this()
         {
             _form = form;
             _grid = grid;
             _doc = LoadFile(brxFileName);
+            IsUsedForPageTitle = forPageTitle;
         }
 
         public void InitializeGrid()

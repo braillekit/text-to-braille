@@ -150,6 +150,7 @@ namespace EasyBrailleEdit.DualEdit
                 return;
 
             var form = new InsertTextForm();
+            form.IsUsedForPageTitle = IsUsedForPageTitle;
             if (form.ShowDialog() == DialogResult.OK)
             {
                 InsertBrailleWords(form.OutputLine.Words, grid, row, col);

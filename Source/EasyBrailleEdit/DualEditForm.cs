@@ -103,7 +103,7 @@ namespace EasyBrailleEdit
 
         public DualEditForm(string brxFileName) : this()
         {
-            _controller = new BrailleGridController(this, brGrid, brxFileName);
+            _controller = new BrailleGridController(this, brGrid, brxFileName, forPageTitle: false);
         }
 
         public bool DebugMode { get; set; } = true;

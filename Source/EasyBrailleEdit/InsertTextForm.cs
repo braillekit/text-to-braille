@@ -16,6 +16,17 @@ namespace EasyBrailleEdit
     public partial class InsertTextForm: Form
     {
         private TextToBrailleConverter _converter = new TextToBrailleConverter();
+        private bool _isUsedForPageTitle;
+
+        public bool IsUsedForPageTitle
+        {
+            get => _isUsedForPageTitle;
+            set
+            {
+                _isUsedForPageTitle = value;
+                btnSymbolDocTitle.Visible = !value;
+            }
+        }
 
         public BrailleLine OutputLine { get; private set; }
 

@@ -35,7 +35,7 @@ namespace EasyBrailleEdit
                 m_TmpBrDoc.Lines.Add(newTitle.TitleLine);		// 塞進暫存文件。
             }
 
-            Controller = new BrailleGridController(this, brGrid, m_TmpBrDoc);
+            Controller = new BrailleGridController(this, brGrid, m_TmpBrDoc, forPageTitle: true);
         }
 
         #region 屬性
