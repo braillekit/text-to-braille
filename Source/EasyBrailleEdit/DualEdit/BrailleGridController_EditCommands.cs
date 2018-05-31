@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Helpers;
 using Huanlin.Windows.Forms;
+using Serilog;
 using SourceGrid;
 
 namespace EasyBrailleEdit.DualEdit
@@ -431,39 +432,19 @@ namespace EasyBrailleEdit.DualEdit
             }
 
             int colToDelete = _positionMapper.WordIndexToGridColumn(lineIdx, wordIdx) - 1;
-            bool isFirstColumn = false;
+
             if (colToDelete < grid.FixedColumns) // // 在列首執行此動作?
             {
-                colToDelete = grid.FixedColumns;
-                isFirstColumn = true;
-            }
-
-            if (isFirstColumn)
-            {
+                // 在列首執行倒退刪除時，要把目前這列上提，銜接至上一列的尾巴。
                 // 先計算新的游標位置
                 int focusRow = orgRow - 3;
                 lineIdx = _positionMapper.GridRowToBrailleLineIndex(focusRow);
                 var brLine = BrailleDoc.Lines[lineIdx];
                 int focusCol = brLine.CellCount + grid.FixedColumns;
 
-                // 持續把下一列接上來，直到沒有發生斷行為止。
-                int joinedToLineIdx;
-                int joinedToWordIdx;
-                bool isFocused = false;
-                while (JoinToPreviousRow(row, out joinedToLineIdx, out joinedToWordIdx))
-                {
-                    if (!isFocused)
-                    {
-                        GridFocusCell(focusRow, focusCol);
-                        isFocused = true;
-                    }
-                    lineIdx = _positionMapper.GridRowToBrailleLineIndex(row) + 1;
-                    if (lineIdx >= BrailleDoc.LineCount)
-                    {
-                        break;
-                    }
-                    row = _positionMapper.LineIndexToGridBrailleRow(lineIdx);
-                }
+                // 把下一列接上來。
+                JoinToPreviousRow(row, out _, out _);
+                GridFocusCell(focusRow, focusCol);
             }
             else
             {
@@ -494,7 +475,7 @@ namespace EasyBrailleEdit.DualEdit
                 }
                 // 把下一列接上來。
                 row = _positionMapper.LineIndexToGridBrailleRow(lineIdx);
-                if (JoinToPreviousRow(row, out _, out _))
+                if (JoinToPreviousRow(row, out _, out _) > 0)
                 {
                     // 當有發生兩列銜接的情形時，列索引不應遞增。
                     continue;
@@ -504,11 +485,11 @@ namespace EasyBrailleEdit.DualEdit
         }
 
         /// <summary>
-        /// 將指定的列附加至上一列。
+        /// 將 A 列附加至 B 列。如果 B 列的剩餘空間不足以容納 A，則不做任何處理，並返回 false。
         /// </summary>
         /// <param name="row"></param>
-        /// <returns>傳回新的列數。如果大於 1，代表有發生斷行。</returns>
-        private bool JoinToPreviousRow(int row, out int joinedToLineIndex, out int joinedToWordIdx)
+        /// <returns>成功則傳回 true，否則傳回 false。</returns>
+        private int JoinToPreviousRow(int row, out int joinedToLineIndex, out int joinedToWordIdx)
         {
             joinedToLineIndex = -1;
             joinedToWordIdx = -1;
@@ -519,7 +500,7 @@ namespace EasyBrailleEdit.DualEdit
             row = _positionMapper.GetBrailleRowIndex(row);  // 確保列索引為點字列。
 
             if (row <= _grid.FixedRows)    // 第一列的列首，無需處理。
-                return false;
+                return 0;
 
             int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
             int prevLineIdx = lineIdx - 1;
@@ -529,10 +510,10 @@ namespace EasyBrailleEdit.DualEdit
 
             // 檢查上一列是否還有空間可以容納當前列的第一個字
             int avail = BrailleDoc.CellsPerLine - prevBrLine.CellCount;
-            if (avail < currBrLine.Words[0].Cells.Count)
+            if (avail < currBrLine.GetFirstVisibleWord().CellCount)
             {
                 // 上一列的空間不夠，就算接上去，還是會在斷行時再度折下來，因此不處理。
-                return false;
+                return 0;
             }
 
             // 記住銜接至上一行的那個字的位置，以便呼叫端把游標移動至該儲存格。
@@ -553,10 +534,17 @@ namespace EasyBrailleEdit.DualEdit
             // 更新 UI：移除本列
             _grid.Rows.RemoveRange(row, 3);
 
-            // 更新上一列
-            ReformatRow(_grid, row - 1);
+            RefreshRowNumbers();
 
-            return true;
+            // 更新上一列
+            int formattedLineCount = ReformatRow(_grid, row - 1);
+            if (formattedLineCount > 2)
+            {
+                MsgBoxHelper.ShowWarning($"斷行之後的結果應該不超過 2 行，但是卻有 {formattedLineCount} 行！\r\n" +
+                    "請另存新檔之後再重新開啟檔案，並檢查剛才修改的地方是否正確，然後通知程式開發人員。");
+            }
+
+            return formattedLineCount;
         }
 
         /// <summary>
@@ -578,7 +566,6 @@ namespace EasyBrailleEdit.DualEdit
             }
 
             BrailleLine newLine = brLine.ShallowCopy(wordIdx, 255);	// 複製到新行。
-            newLine.TrimEnd();	// 去尾空白。 
             BrailleDoc.Lines.Insert(lineIdx + 1, newLine);
             brLine.RemoveRange(wordIdx, 255);	// 從原始串列中刪除掉已經複製到新行的點字。
 

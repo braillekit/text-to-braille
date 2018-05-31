@@ -175,6 +175,11 @@ namespace BrailleToolkit.Helpers
             endOrgPageNumber = orgPageNum;
         }
 
+        /// <summary>
+        /// 刪除雙視文件中所有原書頁碼標籤裡面的 # 號。
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
         public static int RemoveSharpSymbolFromPageNumbers(BrailleDocument doc)
         {
             int removedCount = 0;
