@@ -91,7 +91,7 @@ namespace EasyBrailleEdit.DualEdit
                 return;
             }
 
-            _form.CurrentWordStatusText = $"{brWord.Text} (文件索引:第 {lineIdx} 行，第 {brWordIdx} 字。儲存格索引:橫列={e.NewFocusPosition.Row}，直欄={e.NewFocusPosition.Column})";
+            _form.CurrentWordStatusText = $"{brWord.Text}  |  共 {brWord.CellCount} 方點字  |  文件索引:第 {lineIdx} 行，第 {brWordIdx} 字  |  儲存格索引:橫列={e.NewFocusPosition.Row}，直欄={e.NewFocusPosition.Column})";
 
             // 顯示目前焦點所在的儲存格屬於第幾頁。
             int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
