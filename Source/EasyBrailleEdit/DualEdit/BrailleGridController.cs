@@ -691,6 +691,11 @@ namespace EasyBrailleEdit.DualEdit
 
         private void GridSelectLeftWord(int row, int col)
         {
+            if (row < 0 || col < 0)
+            {
+                return;
+            }
+
             var currentWord = PositionMapper.GetBrailleWordFromGridCell(row, col);
 
             if (currentWord == null)

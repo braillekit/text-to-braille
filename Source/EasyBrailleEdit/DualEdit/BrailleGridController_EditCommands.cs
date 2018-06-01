@@ -221,6 +221,7 @@ namespace EasyBrailleEdit.DualEdit
             else
             {
                 var range = new Range(row, col, row + 2, col + wordList.GetCellCount() - 1);
+                GridFocusCell(row, col);
                 grid.Selection.SelectRange(range, true);
             }
         }
@@ -380,17 +381,19 @@ namespace EasyBrailleEdit.DualEdit
             brLine.Words.RemoveAt(wordIdx);
             IsDirty = true;
 
-            if (brLine.CellCount == 0)    // 如果整列都刪光了，就移除此列。
+            if (brLine.CellCount == 0)    // 如果整列都刪光了
             {
                 if (BrailleDoc.LineCount == 1)
                 {
-                    // 整份文件全刪光時，自動增加一個空方。
+                    brLine.Clear(); // 確保所有 context tags 也都清除掉。
+                    // 整份文件全刪光時，自動增加一個空方。                    
                     brLine.Words.Add(BrailleWord.NewBlank());
                     UpdateCell(row, col, brLine.Words[0]);
                     GridFocusCell(row, col);
                 }
                 else
                 {
+                    // 移除此列。
                     DoDeleteLine(grid, row, lineIdx);
                     GridFocusCell(row, col);
                 }

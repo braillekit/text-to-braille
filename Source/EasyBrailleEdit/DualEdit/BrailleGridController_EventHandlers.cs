@@ -124,6 +124,11 @@ namespace EasyBrailleEdit.DualEdit
             int row = _grid.Selection.ActivePosition.Row;
             int col = _grid.Selection.ActivePosition.Column;
 
+            if (row < 0 || col < 0)
+            {
+                return;
+            }
+
             if (e.Modifiers == Keys.Control)
             {
                 switch (e.KeyCode)
