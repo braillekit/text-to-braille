@@ -696,6 +696,26 @@ namespace EasyBrailleEdit.DualEdit
                 grid.Selection.ResetSelection(false);
                 grid.Selection.SelectRange(new Range(startRow, startCol, endRow + 2, endCol), true);
             }
+            else // 選取單行中的全部或部分文字
+            {
+                // 單列複製時，選取的區域有可能超出該列有點字的範圍（即選到空的儲存格），故複製前必須修正選取區域。
+                int col = endCol;
+                while (col >= startCol)
+                {
+                    if (grid[startRow, col] != null)
+                    {
+                        break;
+                    }
+                    col--;
+                }
+                if (col != endCol)
+                {
+                    // end column 有調整過。
+                    endCol = col;
+                    grid.Selection.ResetSelection(true);
+                    grid.Selection.SelectRange(new Range(startRow, startCol, endRow + 2, endCol), true);
+                }
+            }
             return true;
         }
 
@@ -704,6 +724,18 @@ namespace EasyBrailleEdit.DualEdit
             var result = new List<BrailleLine>();
 
             if (startRow != endRow)
+            {
+                CloneMultipleLines();
+            }
+            else
+            {
+                CloneWordsInOneLine();
+            }
+            return result;
+
+
+            // 複製多列
+            void CloneMultipleLines()
             {
                 if ((endCol - startCol + 1) < (grid.ColumnsCount - grid.FixedColumns))
                 {
@@ -719,28 +751,29 @@ namespace EasyBrailleEdit.DualEdit
                     result.Add(aLine.DeepCopy(0, aLine.WordCount));
                     // TODO: 上面的複製操作，也許該略過 context tags？
                 }
-                return result;
             }
 
             // 選取同一列中的字。
-            int row = startRow;
-            int startWordIdx = _positionMapper.CellPositionToWordIndex(row, startCol);
-            int endWordIdx = _positionMapper.CellPositionToWordIndex(row, endCol);
-
-            // 建立欲複製的點字串列。注意：context tags 都會被忽略。
-
-            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
-            var brLine = BrailleDoc.Lines[lineIdx];
-            var newBrLine = new BrailleLine();
-            for (int i = startWordIdx; i <= endWordIdx; i++)
+            void CloneWordsInOneLine()
             {
-                if (brLine[i].IsContextTag)
-                    continue;
-                var newWord = brLine[i].Copy();
-                newBrLine.Words.Add(newWord);
+                int row = startRow;
+                int startWordIdx = _positionMapper.CellPositionToWordIndex(row, startCol);
+                int endWordIdx = _positionMapper.CellPositionToWordIndex(row, endCol);
+
+                // 建立欲複製的點字串列。注意：context tags 都會被忽略。
+
+                int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
+                var brLine = BrailleDoc.Lines[lineIdx];
+                var newBrLine = new BrailleLine();
+                for (int i = startWordIdx; i <= endWordIdx; i++)
+                {
+                    if (brLine[i].IsContextTag)
+                        continue;
+                    var newWord = brLine[i].Copy();
+                    newBrLine.Words.Add(newWord);
+                }
+                result.Add(newBrLine);
             }
-            result.Add(newBrLine);
-            return result;
         }
 
         private void CopyToClipboard(Grid grid)
@@ -754,11 +787,13 @@ namespace EasyBrailleEdit.DualEdit
             if (startRow == endRow)
             {
                 ClipboardHelper.SetWords(brLines[0].Words);
+                _form.StatusText = $"已複製 {brLines[0].CellCount} 方點字至剪貼簿。";
             }
             else
             {
 
                 ClipboardHelper.SetLines(brLines);
+                _form.StatusText = $"已複製 {brLines.Count} 行文字（點字）至剪貼簿。";
             }
         }
 
