@@ -27,8 +27,8 @@ namespace EasyBrailleEdit.DualEdit
         private SourceGrid.Grid _grid;
         private BrailleGridPositionMapper _positionMapper;
 
-        private string m_FileName;
-        private bool m_IsDirty;   // 檔案內容是否被修改過
+        private string _fileName;
+        private bool _isDirty;   // 檔案內容是否被修改過
 
 
         private BrailleGridDebugger _debugger;
@@ -67,8 +67,22 @@ namespace EasyBrailleEdit.DualEdit
                     }
                     _doc = value;
                     PositionMapper.BrailleDoc = _doc;
+
+                    IsDirty = false;
+                    OnBrailleDocPropertyChanged();
                 }
             }
+        }
+
+        /// <summary>
+        /// 每當 BrailleDoc 屬性改變時要做的事。
+        /// </summary>
+        private void OnBrailleDocPropertyChanged()
+        {
+            InitializeGrid();
+            FillGrid(_doc);
+
+            // 注意：不可在這裡 reset undo buffer，因為執行 undo 時會改變 BrailleDoc 屬性。
         }
 
         public SourceGrid.Grid Grid { get => _grid; }
@@ -89,27 +103,27 @@ namespace EasyBrailleEdit.DualEdit
 
         public string FileName
         {
-            get { return m_FileName; }
+            get { return _fileName; }
             set
             {
                 // 如果是暫存的輸出檔名，則視為尚未存檔。
                 if (value.IndexOf(Constant.Files.CvtOutputTempFileName, StringComparison.CurrentCultureIgnoreCase) >= 0)
                 {
-                    m_IsDirty = true;
+                    _isDirty = true;
                 }
-                m_FileName = value;
+                _fileName = value;
                 UpdateWindowCaption();
             }
         }
 
         public bool IsDirty
         {
-            get { return m_IsDirty; }
+            get { return _isDirty; }
             set
             {
-                if (m_IsDirty != value)
+                if (_isDirty != value)
                 {
-                    m_IsDirty = value;
+                    _isDirty = value;
                     UpdateWindowCaption();
                 }
             }
@@ -120,6 +134,8 @@ namespace EasyBrailleEdit.DualEdit
             get { return m_MenuController; }
         }
 
+
+        public UndoRedoManager UndoRedo { get; }
 
         public BrailleGridDebugger Debugger
         {
@@ -162,6 +178,7 @@ namespace EasyBrailleEdit.DualEdit
 
         private BrailleGridController()
         {
+            UndoRedo = new UndoRedoManager();
         }
 
         public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, BrailleDocument doc, bool forPageTitle) 
@@ -375,11 +392,11 @@ namespace EasyBrailleEdit.DualEdit
             var aForm = _form as Form;
             if (IsNoName())
             {
-                aForm.Text = "雙視編輯 - 未命名 (" + StrHelper.ExtractFileName(m_FileName) + ")";
+                aForm.Text = "雙視編輯 - 未命名 (" + StrHelper.ExtractFileName(_fileName) + ")";
             }
             else
             {
-                aForm.Text = "雙視編輯 - " + StrHelper.ExtractFileName(m_FileName);
+                aForm.Text = "雙視編輯 - " + StrHelper.ExtractFileName(_fileName);
             }
 
             if (IsDirty)
@@ -394,10 +411,10 @@ namespace EasyBrailleEdit.DualEdit
         /// <returns></returns>
         private bool IsNoName()
         {
-            if (String.IsNullOrEmpty(m_FileName))
+            if (String.IsNullOrEmpty(_fileName))
                 return true;
 
-            string fname = StrHelper.ExtractFileName(m_FileName);
+            string fname = StrHelper.ExtractFileName(_fileName);
             if (fname.Equals(Constant.Files.CvtOutputTempFileName, StringComparison.CurrentCultureIgnoreCase))
             {
                 return true;
@@ -514,10 +531,14 @@ namespace EasyBrailleEdit.DualEdit
             {
                 _form.StatusText = "重新調整儲存格大小...";
                 ResizeCells();
+
                 _grid.ResumeLayout();
                 _form.StatusText = String.Empty;
-                GridFocusCell(_grid.FixedRows, _grid.FixedColumns);
                 _form.StatusProgress = 0;
+
+                // 焦點移至第一列的第一個儲存格，並且清除既有的選取區域。
+                GridFocusCell(_grid.FixedRows, _grid.FixedColumns);
+                
                 CursorHelper.RestoreCursor();
             }
         }

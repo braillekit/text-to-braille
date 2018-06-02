@@ -407,10 +407,19 @@ namespace EasyBrailleEdit
             }
         }
 
+        private void Undo()
+        {
+            _controller.Undo();
+        }
+
+        private void Redo()
+        {
+            _controller.Redo();
+        }
+
         private void miEdit_Click(object sender, EventArgs e)
         {
-            string s = (string)(sender as ToolStripMenuItem).Tag;
-            switch (s)
+            switch ((string)(sender as ToolStripMenuItem).Tag)
             {
                 case "DocProperties":
                     EditDocProperties();
@@ -429,6 +438,12 @@ namespace EasyBrailleEdit
                     break;
                 case "FindNext":
                     FindNext();
+                    break;
+                case "Undo":
+                    Undo();
+                    break;
+                case "Redo":
+                    Redo();
                     break;
             }
         }

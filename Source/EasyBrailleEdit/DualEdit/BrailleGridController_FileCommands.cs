@@ -51,24 +51,15 @@ namespace EasyBrailleEdit.DualEdit
                 BrailleDoc = BrailleDocument.LoadBrailleFile(filename);
 
                 FileName = filename;
-                IsDirty = false;
 
-                _form.StatusText = "正在準備顯示資料...";
+                UndoRedo.Reset();
 
-                InitializeGrid();
-
-                FillGrid(_doc);
-
-                // 焦點移至第一列的第一個儲存格。
-                SourceGrid.Position pos = new SourceGrid.Position(_grid.FixedRows, _grid.FixedColumns);
-                GridFocusCell(pos, true);
-
-                return _doc;
+                return BrailleDoc;
             }
             finally
             {
                 CursorHelper.RestoreCursor();
-                _form.StatusText = "";
+                _form.StatusText = String.Empty;
             }
         }
 
@@ -83,7 +74,7 @@ namespace EasyBrailleEdit.DualEdit
                 return DoSaveFileAs();
             }
 
-            InternalSaveFile(m_FileName);
+            InternalSaveFile(_fileName);
             return true;
         }
 

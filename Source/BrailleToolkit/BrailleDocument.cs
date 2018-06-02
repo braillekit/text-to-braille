@@ -20,15 +20,15 @@ namespace BrailleToolkit
     [DataContract]
     public class BrailleDocument
     {
-        [DataMember(Name="Lines")]
+        [DataMember(Name = "Lines")]
         private List<BrailleLine> m_Lines;
 
-        [DataMember(Name="CellsPerLine")]
+        [DataMember(Name = "CellsPerLine")]
         private int m_CellsPerLine = BrailleConst.DefaultCellsPerLine;
         //private BrailleLine m_Title; // 文件標題
 
         [OptionalField]
-        [DataMember(Name="PageTitles")]
+        [DataMember(Name = "PageTitles")]
         private List<BraillePageTitle> m_PageTitles;    // 所有的頁標題。
 
         [NonSerialized]
@@ -50,7 +50,7 @@ namespace BrailleToolkit
             StartPageNumber = 1;
         }
 
-        public BrailleDocument(BrailleProcessor processor, int cellsPerLine=BrailleConst.DefaultCellsPerLine) : this()
+        public BrailleDocument(BrailleProcessor processor, int cellsPerLine = BrailleConst.DefaultCellsPerLine) : this()
         {
             m_Processor = processor;
             m_CellsPerLine = cellsPerLine;
@@ -65,6 +65,31 @@ namespace BrailleToolkit
         }
 
         #endregion
+
+        public BrailleDocument DeepCopy()
+        {
+            string jsonStr = JsonHelper.Serialize(this);
+            return JsonHelper.Deserialize<BrailleDocument>(jsonStr);
+
+/* another way to copy
+            var newDoc = new BrailleDocument();
+            newDoc.FileName = FileName;
+            newDoc.CellsPerLine = CellsPerLine;
+            newDoc.Processor = Processor;
+            newDoc.StartPageNumber = StartPageNumber;
+
+            foreach (var brLine in Lines)
+            {
+                newDoc.Lines.Add(brLine.DeepCopy());
+            }
+
+            foreach (var pageTitle in PageTitles)
+            {
+                newDoc.AddPageTitle(pageTitle.Clone() as BraillePageTitle);
+            }          
+            return newDoc;
+*/
+        }
 
         /// <summary>
         /// 載入明眼字文件並轉換成點字。
@@ -196,7 +221,7 @@ namespace BrailleToolkit
         /// </summary>
         private static void FixInvalidLines(BrailleDocument doc)
         {
-            for (int i = doc.Lines.Count-1; i >= 0; i--)
+            for (int i = doc.Lines.Count - 1; i >= 0; i--)
             {
                 if (doc.Lines[i].CellCount < 1)
                 {
@@ -299,7 +324,7 @@ namespace BrailleToolkit
         private void ProcessLine(string line, int lineNumber)
         {
             BrailleLine brLine = m_Processor.ConvertLine(line, lineNumber);
-            if (brLine != null) 
+            if (brLine != null)
             {
                 AddLine(brLine);
             }
@@ -369,7 +394,7 @@ namespace BrailleToolkit
                     newPageTitles.Add(title);
                     m_Lines.RemoveAt(lineIdx);
                 }
-                else 
+                else
                 {
                     lineIdx++;
                 }
@@ -415,7 +440,7 @@ namespace BrailleToolkit
         /// </summary>
         public void UpdateTitlesLineObject()
         {
-            if (m_PageTitles == null) 
+            if (m_PageTitles == null)
             {
                 return;
             }
@@ -562,24 +587,21 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得字數最長的 line。
         /// </summary>
-        public BrailleLine LongestLine
+        public BrailleLine GetLongestLine()
         {
-            get
+            BrailleLine longestLine = null;
+            int maxCount = -1;
+            int curCount;
+            foreach (BrailleLine brLine in m_Lines)
             {
-                BrailleLine longestLine = null;
-                int maxCount = -1;
-                int curCount;
-                foreach (BrailleLine brLine in m_Lines)
+                curCount = brLine.WordCount;
+                if (curCount > maxCount)
                 {
-                    curCount = brLine.WordCount;
-                    if (curCount > maxCount)
-                    {
-                        longestLine = brLine;
-                        maxCount = brLine.WordCount;
-                    }
+                    longestLine = brLine;
+                    maxCount = brLine.WordCount;
                 }
-                return longestLine;
             }
+            return longestLine;
         }
 
         /// <summary>

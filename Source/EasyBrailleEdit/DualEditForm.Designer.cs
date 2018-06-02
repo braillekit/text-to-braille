@@ -59,8 +59,11 @@
             this.miViewTextZhuyin = new System.Windows.Forms.ToolStripMenuItem();
             this.miViewBraille = new System.Windows.Forms.ToolStripMenuItem();
             this.miViewText = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.miViewRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.miTools = new System.Windows.Forms.ToolStripMenuItem();
             this.miToolsRemoveSharpSymbolFromPageNumbers = new System.Windows.Forms.ToolStripMenuItem();
+            this.miToolsRemoveUselessWords = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -77,9 +80,9 @@
             this.statProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statDocTitle = new System.Windows.Forms.ToolStripStatusLabel();
             this.statPageInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
-            this.miViewRefresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.miToolsRemoveUselessWords = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.miEditUndo = new System.Windows.Forms.ToolStripMenuItem();
+            this.miEditRedo = new System.Windows.Forms.ToolStripMenuItem();
             this.brGrid.SuspendLayout();
             this.statusCurrentText.SuspendLayout();
             this.mnuMain.SuspendLayout();
@@ -244,7 +247,10 @@
             this.toolStripMenuItem3,
             this.尋找FToolStripMenuItem,
             this.miEditFindNext,
-            this.miEditGoto});
+            this.miEditGoto,
+            this.toolStripMenuItem5,
+            this.miEditUndo,
+            this.miEditRedo});
             this.miEdit.Name = "miEdit";
             this.miEdit.Size = new System.Drawing.Size(69, 24);
             this.miEdit.Text = "編輯(&E)";
@@ -324,7 +330,7 @@
             this.miViewBrailleOnly,
             this.miViewTextZhuyin});
             this.miViewMode.Name = "miViewMode";
-            this.miViewMode.Size = new System.Drawing.Size(216, 26);
+            this.miViewMode.Size = new System.Drawing.Size(190, 26);
             this.miViewMode.Text = "模式(&M)";
             this.miViewMode.Visible = false;
             // 
@@ -355,7 +361,7 @@
             // miViewBraille
             // 
             this.miViewBraille.Name = "miViewBraille";
-            this.miViewBraille.Size = new System.Drawing.Size(216, 26);
+            this.miViewBraille.Size = new System.Drawing.Size(190, 26);
             this.miViewBraille.Tag = "Braille";
             this.miViewBraille.Text = "點字(&B)";
             this.miViewBraille.Click += new System.EventHandler(this.miViewClick);
@@ -363,10 +369,24 @@
             // miViewText
             // 
             this.miViewText.Name = "miViewText";
-            this.miViewText.Size = new System.Drawing.Size(216, 26);
+            this.miViewText.Size = new System.Drawing.Size(190, 26);
             this.miViewText.Tag = "Text";
             this.miViewText.Text = "明眼字(&T)";
             this.miViewText.Click += new System.EventHandler(this.miViewClick);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(187, 6);
+            // 
+            // miViewRefresh
+            // 
+            this.miViewRefresh.Name = "miViewRefresh";
+            this.miViewRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.miViewRefresh.Size = new System.Drawing.Size(190, 26);
+            this.miViewRefresh.Tag = "Refresh";
+            this.miViewRefresh.Text = "重新整理(&R)";
+            this.miViewRefresh.Click += new System.EventHandler(this.miViewClick);
             // 
             // miTools
             // 
@@ -384,6 +404,14 @@
             this.miToolsRemoveSharpSymbolFromPageNumbers.Tag = "RemoveSharp";
             this.miToolsRemoveSharpSymbolFromPageNumbers.Text = "移除所有原書頁碼的 # 符號";
             this.miToolsRemoveSharpSymbolFromPageNumbers.Click += new System.EventHandler(this.miToolsClick);
+            // 
+            // miToolsRemoveUselessWords
+            // 
+            this.miToolsRemoveUselessWords.Name = "miToolsRemoveUselessWords";
+            this.miToolsRemoveUselessWords.Size = new System.Drawing.Size(267, 26);
+            this.miToolsRemoveUselessWords.Tag = "RemoveUselessWords";
+            this.miToolsRemoveUselessWords.Text = "檢查是否有多餘的空標籤";
+            this.miToolsRemoveUselessWords.Click += new System.EventHandler(this.miToolsClick);
             // 
             // toolStrip1
             // 
@@ -541,27 +569,28 @@
             this.statPageInfo.Name = "statPageInfo";
             this.statPageInfo.Size = new System.Drawing.Size(70, 19);
             // 
-            // toolStripMenuItem4
+            // toolStripMenuItem5
             // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(213, 6);
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(213, 6);
             // 
-            // miViewRefresh
+            // miEditUndo
             // 
-            this.miViewRefresh.Name = "miViewRefresh";
-            this.miViewRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.miViewRefresh.Size = new System.Drawing.Size(216, 26);
-            this.miViewRefresh.Tag = "Refresh";
-            this.miViewRefresh.Text = "重新整理(&R)";
-            this.miViewRefresh.Click += new System.EventHandler(this.miViewClick);
+            this.miEditUndo.Name = "miEditUndo";
+            this.miEditUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.miEditUndo.Size = new System.Drawing.Size(216, 26);
+            this.miEditUndo.Tag = "Undo";
+            this.miEditUndo.Text = "復原(&U)";
+            this.miEditUndo.Click += new System.EventHandler(this.miEdit_Click);
             // 
-            // miToolsRemoveUselessWords
+            // miEditRedo
             // 
-            this.miToolsRemoveUselessWords.Name = "miToolsRemoveUselessWords";
-            this.miToolsRemoveUselessWords.Size = new System.Drawing.Size(267, 26);
-            this.miToolsRemoveUselessWords.Tag = "RemoveUselessWords";
-            this.miToolsRemoveUselessWords.Text = "檢查是否有多餘的空標籤";
-            this.miToolsRemoveUselessWords.Click += new System.EventHandler(this.miToolsClick);
+            this.miEditRedo.Name = "miEditRedo";
+            this.miEditRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.miEditRedo.Size = new System.Drawing.Size(216, 26);
+            this.miEditRedo.Tag = "Redo";
+            this.miEditRedo.Text = "取消復原";
+            this.miEditRedo.Click += new System.EventHandler(this.miEdit_Click);
             // 
             // DualEditForm
             // 
@@ -652,5 +681,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem miViewRefresh;
         private System.Windows.Forms.ToolStripMenuItem miToolsRemoveUselessWords;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem miEditUndo;
+        private System.Windows.Forms.ToolStripMenuItem miEditRedo;
     }
 }

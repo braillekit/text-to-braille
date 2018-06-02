@@ -153,46 +153,6 @@ namespace BrailleToolkit
             return null;
         }
 
-
-        /// <summary>
-        /// 眖﹚癬﹍竚狡籹﹚计翴 (BrailleWord) 穝ミ翴﹃
-        /// 猔種硂琌 shallow copy穝﹃い琂Τじ把στ獶ミ穝じ
-        /// </summary>
-        /// <param name="index">癬﹍竚</param>
-        /// <param name="count">璶狡籹碭翴</param>
-        /// <returns>穝翴﹃</returns>
-        public BrailleLine ShallowCopy(int index, int count)
-        {
-            BrailleLine brLine = new BrailleLine();
-            BrailleWord newWord = null;
-            while (index < Words.Count && count > 0)
-            {
-                newWord = Words[index]; 
-                brLine.Words.Add(newWord);
-
-                index++;
-                count--;
-
-            }
-            return brLine;
-        }
-
-        public BrailleLine DeepCopy(int index, int count)
-        {
-            BrailleLine brLine = new BrailleLine();
-            BrailleWord newWord = null;
-            while (index < Words.Count && count > 0)
-            {
-                newWord = Words[index].Copy();
-                brLine.Words.Add(newWord);
-
-                index++;
-                count--;
-            }
-            return brLine;
-        }
-
-
         public void RemoveAt(int index)
         {
             Words.RemoveAt(index);
@@ -409,6 +369,51 @@ namespace BrailleToolkit
 
             return startIndex + idx;
         }
+
+
+        /// <summary>
+        /// 眖﹚癬﹍竚狡籹﹚计翴 (BrailleWord) 穝ミ翴﹃
+        /// 猔種硂琌 shallow copy穝﹃い琂Τじ把στ獶ミ穝じ
+        /// </summary>
+        /// <param name="index">癬﹍竚</param>
+        /// <param name="count">璶狡籹碭翴</param>
+        /// <returns>穝翴﹃</returns>
+        public BrailleLine ShallowCopy(int index, int count)
+        {
+            BrailleLine brLine = new BrailleLine();
+            BrailleWord newWord = null;
+            while (index < Words.Count && count > 0)
+            {
+                newWord = Words[index];
+                brLine.Words.Add(newWord);
+
+                index++;
+                count--;
+
+            }
+            return brLine;
+        }
+
+        public BrailleLine DeepCopy()
+        {
+            return DeepCopy(0, WordCount);
+        }
+
+        public BrailleLine DeepCopy(int index, int count)
+        {
+            BrailleLine brLine = new BrailleLine();
+            BrailleWord newWord = null;
+            while (index < Words.Count && count > 0)
+            {
+                newWord = Words[index].Copy();
+                brLine.Words.Add(newWord);
+
+                index++;
+                count--;
+            }
+            return brLine;
+        }
+
 
         #region ICloneable Members
 

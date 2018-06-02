@@ -160,7 +160,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditCellForm";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "修改點字";
             this.Load += new System.EventHandler(this.EditCellForm_Load);
