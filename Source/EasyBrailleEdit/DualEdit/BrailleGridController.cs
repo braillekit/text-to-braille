@@ -178,7 +178,7 @@ namespace EasyBrailleEdit.DualEdit
 
         private BrailleGridController()
         {
-            UndoRedo = new UndoRedoManager();
+            UndoRedo = new UndoRedoManager(AppGlobals.Config.BrailleEditor.MaxUndoLevel);
         }
 
         public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, BrailleDocument doc, bool forPageTitle) 
@@ -494,8 +494,13 @@ namespace EasyBrailleEdit.DualEdit
             int cnt = 0;
             _form.StatusText = "正在準備顯示資料...";
             _form.StatusProgress = 0;
+            _grid.UseWaitCursor = true;
             CursorHelper.ShowWaitCursor();
             _grid.SuspendLayout();
+            var busyForm = new BusyForm();
+            busyForm.Message = "正在刷新視窗內容...";
+            busyForm.Show();
+            Application.DoEvents();
             try
             {
                 int row = FixedRows;
@@ -529,10 +534,13 @@ namespace EasyBrailleEdit.DualEdit
             }
             finally
             {
+                busyForm.Close();
+
                 _form.StatusText = "重新調整儲存格大小...";
                 ResizeCells();
 
                 _grid.ResumeLayout();
+                _grid.UseWaitCursor = false;
                 _form.StatusText = String.Empty;
                 _form.StatusProgress = 0;
 

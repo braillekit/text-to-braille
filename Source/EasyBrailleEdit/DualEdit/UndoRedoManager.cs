@@ -3,13 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Huanlin.Common.Collections;
 
 namespace EasyBrailleEdit.DualEdit
 {
     internal class UndoRedoManager
     {
-        private Stack<BrailleEditMemento> _undoStack = new Stack<BrailleEditMemento>();
-        private Stack<BrailleEditMemento> _redoStack = new Stack<BrailleEditMemento>();
+        private RollingStack<BrailleEditMemento> _undoStack;
+        private RollingStack<BrailleEditMemento> _redoStack;
+
+        public UndoRedoManager(int maxUndoLevel)
+        {
+            _undoStack = new RollingStack<BrailleEditMemento>(maxUndoLevel);
+            _redoStack = new RollingStack<BrailleEditMemento>(maxUndoLevel);
+        }
+
+        public int MaxUndoLevel
+        {
+            get => _undoStack.MaxSize;
+        } 
 
         public BrailleEditMemento Undo(BrailleEditMemento currentState)
         {

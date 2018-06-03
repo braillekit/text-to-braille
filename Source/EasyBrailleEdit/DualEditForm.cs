@@ -143,13 +143,19 @@ namespace EasyBrailleEdit
                 _controller.FillGrid();
             }
 
-            m_FindForm = new DualEditFindForm();
-            m_FindForm.Owner = this;
+            m_FindForm = new DualEditFindForm
+            {
+                Owner = this
+            };
             m_FindForm.DecidingStartPosition += FindForm_DecidingStartPosition;
             m_FindForm.TargetFound += FindForm_TargetFound;
 
-            _undoBufferForm = new UndoBufferForm();
-            _undoBufferForm.Owner = this;
+            _undoBufferForm = new UndoBufferForm()
+            {
+                Owner = this,
+                MaxBufferSize = _controller.UndoRedo.MaxUndoLevel
+            };
+            _undoBufferForm.Show();
 
             BringToFront();
             Activate();

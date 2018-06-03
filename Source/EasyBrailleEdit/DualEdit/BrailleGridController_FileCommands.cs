@@ -46,7 +46,7 @@ namespace EasyBrailleEdit.DualEdit
             CursorHelper.ShowWaitCursor();
             try
             {
-                _form.StatusText = "正在載入資料...";
+                _form.StatusText = $"正在載入檔案：{filename}";
 
                 BrailleDoc = BrailleDocument.LoadBrailleFile(filename);
 
