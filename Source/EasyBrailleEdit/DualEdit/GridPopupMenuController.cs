@@ -32,6 +32,7 @@ namespace EasyBrailleEdit.DualEdit
                 $"插入空方(&B);{DualEditCommand.Names.InsertBlank}",
                 $"在上方插入一行(&L);{DualEditCommand.Names.InsertLine};" + ((int)Shortcut.CtrlShiftI).ToString(),
                 $"在下方插入一行(&M);{DualEditCommand.Names.AddLine};" + ((int)Shortcut.CtrlShiftA).ToString(),
+                $"插入表格(&T);{DualEditCommand.Names.InsertTable};" + ((int)Shortcut.CtrlShiftT).ToString(),
                 "-;",
                 $"刪除(&D);{DualEditCommand.Names.DeleteWord};" + ((int)Shortcut.CtrlDel).ToString(),
                 $"倒退刪除(&K);{DualEditCommand.Names.BackDeleteWord}",

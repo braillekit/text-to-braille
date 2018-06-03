@@ -68,8 +68,6 @@ namespace Test.BrailleToolkit
             Assert.IsTrue(brDoc.LineCount == 7);
             Assert.IsTrue(brDoc.Lines[0].Words[0].IsContextTag);
             Assert.IsTrue(brDoc.Lines[6].Words[0].IsContextTag);
-
-            processor.FormatDocument(brDoc);   // 斷行
         }
     }
 

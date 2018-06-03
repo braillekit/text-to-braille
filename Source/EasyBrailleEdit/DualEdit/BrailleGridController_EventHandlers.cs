@@ -50,6 +50,9 @@ namespace EasyBrailleEdit.DualEdit
                 case DualEditCommand.Names.InsertText:
                     InsertText(grid, row, col);
                     break;
+                case DualEditCommand.Names.InsertTable:
+                    InsertTable(grid, row, col);
+                    break;
                 case DualEditCommand.Names.DeleteWord:
                     DeleteWord(grid, row, col);
                     break;
@@ -189,6 +192,10 @@ namespace EasyBrailleEdit.DualEdit
                         break;
                     case Keys.F:    // 段落重整
                         FormatParagraph(_grid, row, col);
+                        e.Handled = true;
+                        break;
+                    case Keys.T:
+                        InsertTable(_grid, row, col);
                         e.Handled = true;
                         break;
                 }

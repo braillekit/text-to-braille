@@ -748,7 +748,7 @@ namespace EasyBrailleEdit.DualEdit
             SourceGrid.Position activePos = grid.Selection.ActivePosition;
             GridSelectRow(row, true);
 
-            if (needConfirm && MsgBoxHelper.ShowOkCancel("確定要刪除整列?") != DialogResult.OK)
+            if (needConfirm && MsgBoxHelper.ShowOkCancel("確定要刪除整行?") != DialogResult.OK)
             {
                 GridSelectRow(row, false);
                 GridFocusCell(activePos, true);
@@ -785,7 +785,7 @@ namespace EasyBrailleEdit.DualEdit
             if (needUndo)
             {
                 memento = CreateMemento($"刪除第 {lineIdx + 1} 行");
-            }            
+            }
 
             var brLine = BrailleDoc.Lines[lineIdx];
             brLine.Clear();
@@ -983,5 +983,55 @@ namespace EasyBrailleEdit.DualEdit
             }
             MsgBoxHelper.ShowInfo("剪貼簿裡面沒有資料！");
         }
+
+        private void InsertTable(SourceGrid.Grid grid, int row, int col)
+        {
+            if (!CheckCellPosition(row, col))
+                return;
+
+            string[] tableLines =
+            {
+                "<表格>",
+                "┌──┬──┐",
+                "│　　∣　　∣",
+                "├──┼──┤",
+                "│　　∣　　∣",
+                "└──┴──┘",
+                "</表格>"
+            };
+
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
+
+            var processor = BrailleDoc.Processor ?? BrailleProcessor.GetInstance();
+            var brTableLines = new List<BrailleLine>();
+
+            int newRow = row;
+            foreach (var line in tableLines)
+            {
+                var brLine = processor.ConvertLine(line);
+                if (brLine.CellCount > 0)   // <表格> 標籤必須去除，否則 grid 顯示與操作會出錯!
+                {
+                    brTableLines.Add(brLine);
+                    GridInsertRowAt(newRow);
+                    FillRow(brLine, newRow, true);
+                    newRow += 3;
+                }
+                
+            }
+
+            // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
+            var memento = CreateMemento("插入表格");
+
+            BrailleDoc.Lines.InsertRange(lineIdx, brTableLines);
+
+            // 修改文件內容之後，將原先的狀態存入 undo buffer。
+            UndoRedo.SaveMementoForUndo(memento);
+
+            // Update UI
+            RefreshRowNumbers();
+            ResizeCells();
+            GridFocusCell(row, col);
+        }
+
     }
 }

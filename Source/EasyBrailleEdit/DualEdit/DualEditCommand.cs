@@ -23,6 +23,7 @@ namespace EasyBrailleEdit.DualEdit
             public const string InsertLine = "InsertLine";  // 插入一列
             public const string InsertWord = "InsertWord";
             public const string InsertText = "InsertText";
+            public const string InsertTable = "InsertTable";
             public const string PasteFromClipboard = "PasteFromClipboard";
         }
     }
