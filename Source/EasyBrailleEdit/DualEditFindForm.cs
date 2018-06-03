@@ -170,7 +170,8 @@ namespace EasyBrailleEdit
 						return false;
 					}
 					wordIdx = 0;
-				}
+                    brLine = m_BrDoc[lineIdx];
+                }
 			}
 
 			while (true)
