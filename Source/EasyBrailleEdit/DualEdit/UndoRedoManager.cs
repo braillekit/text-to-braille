@@ -11,51 +11,72 @@ namespace EasyBrailleEdit.DualEdit
         private Stack<BrailleEditMemento> _undoStack = new Stack<BrailleEditMemento>();
         private Stack<BrailleEditMemento> _redoStack = new Stack<BrailleEditMemento>();
 
-        public BrailleEditMemento GetUndoMemento()
+        public BrailleEditMemento Undo(BrailleEditMemento currentState)
         {
-            if (_undoStack.Count > 0)
+            if (CanUndo())
             {
-                var m = _undoStack.Pop();
-                _redoStack.Push(m);
-                return m;
+                var lastState = _undoStack.Pop();
+                currentState.Operation = lastState.Operation;
+                _redoStack.Push(currentState);
+
+                OnUndoBufferChanged();
+                return lastState;
             }
             else
                 return null;
         }
 
-        public BrailleEditMemento GetRedoMemento()
+        public BrailleEditMemento Redo(BrailleEditMemento currentState)
         {
-            if (_redoStack.Count > 0)
+            if (CanRedo())
             {
-                var m = _redoStack.Pop();
-                _undoStack.Push(m);
-                return m;
+                var lastState = _redoStack.Pop();
+                currentState.Operation = lastState.Operation;
+                _undoStack.Push(currentState);
+
+                OnUndoBufferChanged();
+                return lastState;
             }
             else
                 return null;
         }
+
         public void SaveMementoForUndo(BrailleEditMemento memento)
         {
             if (memento != null)
             {
                 _undoStack.Push(memento);
                 _redoStack.Clear();
+
+                OnUndoBufferChanged();
             }
         }
-        public bool CanUndo()
-        {
-            return _undoStack.Count > 0;
+        public bool CanUndo() => _undoStack.Count > 0;
 
-        }
-        public bool CanRedo()
-        {
-            return _redoStack.Count > 0;
-        }
+        public bool CanRedo() => _redoStack.Count > 0;
 
         public void Reset()
         {
             _undoStack.Clear();
             _redoStack.Clear();
+        }
+
+        public List<string> GetUndoableOperations()
+        {
+            var result = new List<string>(_undoStack.Count);
+            var undoList = _undoStack.ToList();
+            foreach (var item in undoList)
+            {
+                result.Add(item.Operation);
+            }
+            return result;
+        }
+
+        public event EventHandler<EventArgs> UndoBufferChanged;
+
+        private void OnUndoBufferChanged()
+        {
+            UndoBufferChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

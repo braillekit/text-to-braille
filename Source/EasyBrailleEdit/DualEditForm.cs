@@ -18,6 +18,7 @@ namespace EasyBrailleEdit
         private BrailleGridController _controller;
 
         private DualEditFindForm m_FindForm;
+        private UndoBufferForm _undoBufferForm;
 
 
         public BrailleDocument BrailleDoc
@@ -106,7 +107,15 @@ namespace EasyBrailleEdit
         public DualEditForm(string brxFileName) : this()
         {
             _controller = new BrailleGridController(this, brGrid, brxFileName, forPageTitle: false);
+            _controller.UndoRedo.UndoBufferChanged += UndoRedo_UndoBufferChanged;
         }
+
+        private void UndoRedo_UndoBufferChanged(object sender, EventArgs e)
+        {
+            var undoableOperations = (sender as UndoRedoManager).GetUndoableOperations();
+            _undoBufferForm.UpdateUI(undoableOperations);
+        }
+
 
         public bool DebugMode { get; set; } = true;
 
@@ -138,6 +147,9 @@ namespace EasyBrailleEdit
             m_FindForm.Owner = this;
             m_FindForm.DecidingStartPosition += FindForm_DecidingStartPosition;
             m_FindForm.TargetFound += FindForm_TargetFound;
+
+            _undoBufferForm = new UndoBufferForm();
+            _undoBufferForm.Owner = this;
 
             BringToFront();
             Activate();
@@ -417,6 +429,22 @@ namespace EasyBrailleEdit
             _controller.Redo();
         }
 
+        private void CopyToClipboard()
+        {
+            _controller.CopyToClipboard(brGrid);
+        }
+
+        private void PasteFromClipboard()
+        {
+            var activePosition = brGrid.Selection.ActivePosition;
+            if (activePosition.IsEmpty())
+            {
+                MsgBoxHelper.ShowInfo("請先選擇您想要貼上的儲存格，再執行「貼上」操作。");
+                return;
+            }
+            _controller.PasteFromClipboard(brGrid, activePosition.Row, activePosition.Column);
+        }
+
         private void miEdit_Click(object sender, EventArgs e)
         {
             switch ((string)(sender as ToolStripMenuItem).Tag)
@@ -444,6 +472,12 @@ namespace EasyBrailleEdit
                     break;
                 case "Redo":
                     Redo();
+                    break;
+                case "Copy":
+                    CopyToClipboard();
+                    break;
+                case "Paste":
+                    PasteFromClipboard();
                     break;
             }
         }
@@ -522,9 +556,11 @@ namespace EasyBrailleEdit
                 case "Text":
                     _controller.ViewText();
                     break;
+                case "UndoableOperations":
+                    ViewUndoableOperations();
+                    break;
             }
         }
-
 
         private void miToolsClick(object sender, EventArgs e)
         {
@@ -566,6 +602,18 @@ namespace EasyBrailleEdit
                         MsgBoxHelper.ShowInfo("沒有發現任何多餘的空行或空標籤。");
                     }
                     break;
+            }
+        }
+
+        private void ViewUndoableOperations()
+        {
+            if (_undoBufferForm.Visible)
+            {
+                _undoBufferForm.BringToFront();
+            }
+            else
+            {
+                _undoBufferForm.Show();
             }
         }
     }

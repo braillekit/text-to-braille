@@ -55,6 +55,12 @@
     <Compile Update="Forms\BrailleDocPropertiesForm.Designer.cs">
       <DependentUpon>BrailleDocPropertiesForm.cs</DependentUpon>
     </Compile>
+    <Compile Update="Forms\UndoBufferForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\UndoBufferForm.Designer.cs">
+      <DependentUpon>UndoBufferForm.cs</DependentUpon>
+    </Compile>
     <Compile Update="Forms\ViewTextForm.cs">
       <SubType>Form</SubType>
     </Compile>   
@@ -283,6 +289,10 @@
     <EmbeddedResource Update="Forms\BrailleDocPropertiesForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>BrailleDocPropertiesForm.cs</DependentUpon>
+    </EmbeddedResource>   
+    <EmbeddedResource Update="Forms\UndoBufferForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>UndoBufferForm.cs</DependentUpon>
     </EmbeddedResource>   
   </ItemGroup>
 

@@ -129,7 +129,25 @@ namespace EasyBrailleEdit.DualEdit
                 return;
             }
 
-            if (e.Modifiers == Keys.Control)
+            if (e.Modifiers == Keys.None)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.F4:
+                        EditWord(_grid, row, col);
+                        e.Handled = true;
+                        break;
+                    case Keys.Back:     // 倒退刪除
+                        BackspaceCell(_grid, row, col);
+                        e.Handled = true;
+                        break;
+                    case Keys.Left:
+                        GridSelectLeftWord(row, col);
+                        e.Handled = true;
+                        break;
+                }
+            }
+            else if (e.Modifiers == Keys.Control)
             {
                 switch (e.KeyCode)
                 {
@@ -171,24 +189,6 @@ namespace EasyBrailleEdit.DualEdit
                         break;
                     case Keys.F:    // 段落重整
                         FormatParagraph(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                }
-            }
-            else
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.F4:
-                        EditWord(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.Back:     // 倒退刪除
-                        BackspaceCell(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.Left:
-                        GridSelectLeftWord(row, col);
                         e.Handled = true;
                         break;
                 }

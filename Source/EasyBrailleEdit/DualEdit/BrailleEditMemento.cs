@@ -24,7 +24,7 @@ namespace EasyBrailleEdit.DualEdit
 
     internal class BrailleEditMemento
     {
-        public string Operation { get; }
+        public string Operation { get; set; }
         public BrailleDocument BrailleDoc { get; }
         public bool IsDirty { get; }
         public BrailleGridState GridState { get; }

@@ -52,6 +52,9 @@
             this.尋找FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditFindNext = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditGoto = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.miEditUndo = new System.Windows.Forms.ToolStripMenuItem();
+            this.miEditRedo = new System.Windows.Forms.ToolStripMenuItem();
             this.miView = new System.Windows.Forms.ToolStripMenuItem();
             this.miViewMode = new System.Windows.Forms.ToolStripMenuItem();
             this.miViewAll = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,9 +83,11 @@
             this.statProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statDocTitle = new System.Windows.Forms.ToolStripStatusLabel();
             this.statPageInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-            this.miEditUndo = new System.Windows.Forms.ToolStripMenuItem();
-            this.miEditRedo = new System.Windows.Forms.ToolStripMenuItem();
+            this.miViewUndoableOperations = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.miEditCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
+            this.miEditPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.brGrid.SuspendLayout();
             this.statusCurrentText.SuspendLayout();
             this.mnuMain.SuspendLayout();
@@ -250,7 +255,10 @@
             this.miEditGoto,
             this.toolStripMenuItem5,
             this.miEditUndo,
-            this.miEditRedo});
+            this.miEditRedo,
+            this.toolStripMenuItem7,
+            this.miEditCopy,
+            this.miEditPaste});
             this.miEdit.Name = "miEdit";
             this.miEdit.Size = new System.Drawing.Size(69, 24);
             this.miEdit.Text = "編輯(&E)";
@@ -268,7 +276,7 @@
             this.miEditPageTitle.Name = "miEditPageTitle";
             this.miEditPageTitle.Size = new System.Drawing.Size(216, 26);
             this.miEditPageTitle.Tag = "PageTitles";
-            this.miEditPageTitle.Text = "頁標題";
+            this.miEditPageTitle.Text = "頁標題(&T)";
             this.miEditPageTitle.Click += new System.EventHandler(this.miEdit_Click);
             // 
             // miEditFetchPageTitles
@@ -311,12 +319,37 @@
             this.miEditGoto.Text = "到(&G)";
             this.miEditGoto.Click += new System.EventHandler(this.miEdit_Click);
             // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(213, 6);
+            // 
+            // miEditUndo
+            // 
+            this.miEditUndo.Name = "miEditUndo";
+            this.miEditUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.miEditUndo.Size = new System.Drawing.Size(216, 26);
+            this.miEditUndo.Tag = "Undo";
+            this.miEditUndo.Text = "復原";
+            this.miEditUndo.Click += new System.EventHandler(this.miEdit_Click);
+            // 
+            // miEditRedo
+            // 
+            this.miEditRedo.Name = "miEditRedo";
+            this.miEditRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.miEditRedo.Size = new System.Drawing.Size(216, 26);
+            this.miEditRedo.Tag = "Redo";
+            this.miEditRedo.Text = "重做";
+            this.miEditRedo.Click += new System.EventHandler(this.miEdit_Click);
+            // 
             // miView
             // 
             this.miView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miViewMode,
             this.miViewBraille,
             this.miViewText,
+            this.toolStripMenuItem6,
+            this.miViewUndoableOperations,
             this.toolStripMenuItem4,
             this.miViewRefresh});
             this.miView.Name = "miView";
@@ -330,7 +363,7 @@
             this.miViewBrailleOnly,
             this.miViewTextZhuyin});
             this.miViewMode.Name = "miViewMode";
-            this.miViewMode.Size = new System.Drawing.Size(190, 26);
+            this.miViewMode.Size = new System.Drawing.Size(216, 26);
             this.miViewMode.Text = "模式(&M)";
             this.miViewMode.Visible = false;
             // 
@@ -361,7 +394,7 @@
             // miViewBraille
             // 
             this.miViewBraille.Name = "miViewBraille";
-            this.miViewBraille.Size = new System.Drawing.Size(190, 26);
+            this.miViewBraille.Size = new System.Drawing.Size(216, 26);
             this.miViewBraille.Tag = "Braille";
             this.miViewBraille.Text = "點字(&B)";
             this.miViewBraille.Click += new System.EventHandler(this.miViewClick);
@@ -369,7 +402,7 @@
             // miViewText
             // 
             this.miViewText.Name = "miViewText";
-            this.miViewText.Size = new System.Drawing.Size(190, 26);
+            this.miViewText.Size = new System.Drawing.Size(216, 26);
             this.miViewText.Tag = "Text";
             this.miViewText.Text = "明眼字(&T)";
             this.miViewText.Click += new System.EventHandler(this.miViewClick);
@@ -377,13 +410,13 @@
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(187, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(213, 6);
             // 
             // miViewRefresh
             // 
             this.miViewRefresh.Name = "miViewRefresh";
             this.miViewRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.miViewRefresh.Size = new System.Drawing.Size(190, 26);
+            this.miViewRefresh.Size = new System.Drawing.Size(216, 26);
             this.miViewRefresh.Tag = "Refresh";
             this.miViewRefresh.Text = "重新整理(&R)";
             this.miViewRefresh.Click += new System.EventHandler(this.miViewClick);
@@ -569,28 +602,41 @@
             this.statPageInfo.Name = "statPageInfo";
             this.statPageInfo.Size = new System.Drawing.Size(70, 19);
             // 
-            // toolStripMenuItem5
+            // miViewUndoableOperations
             // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(213, 6);
+            this.miViewUndoableOperations.Name = "miViewUndoableOperations";
+            this.miViewUndoableOperations.Size = new System.Drawing.Size(216, 26);
+            this.miViewUndoableOperations.Tag = "UndoableOperations";
+            this.miViewUndoableOperations.Text = "可復原的操作(&U)";
+            this.miViewUndoableOperations.Click += new System.EventHandler(this.miViewClick);
             // 
-            // miEditUndo
+            // toolStripMenuItem6
             // 
-            this.miEditUndo.Name = "miEditUndo";
-            this.miEditUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.miEditUndo.Size = new System.Drawing.Size(216, 26);
-            this.miEditUndo.Tag = "Undo";
-            this.miEditUndo.Text = "復原(&U)";
-            this.miEditUndo.Click += new System.EventHandler(this.miEdit_Click);
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(213, 6);
             // 
-            // miEditRedo
+            // miEditCopy
             // 
-            this.miEditRedo.Name = "miEditRedo";
-            this.miEditRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.miEditRedo.Size = new System.Drawing.Size(216, 26);
-            this.miEditRedo.Tag = "Redo";
-            this.miEditRedo.Text = "取消復原";
-            this.miEditRedo.Click += new System.EventHandler(this.miEdit_Click);
+            this.miEditCopy.Name = "miEditCopy";
+            this.miEditCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.miEditCopy.Size = new System.Drawing.Size(216, 26);
+            this.miEditCopy.Tag = "Copy";
+            this.miEditCopy.Text = "複製";
+            this.miEditCopy.Click += new System.EventHandler(this.miEdit_Click);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(213, 6);
+            // 
+            // miEditPaste
+            // 
+            this.miEditPaste.Name = "miEditPaste";
+            this.miEditPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.miEditPaste.Size = new System.Drawing.Size(216, 26);
+            this.miEditPaste.Tag = "Paste";
+            this.miEditPaste.Text = "貼上";
+            this.miEditPaste.Click += new System.EventHandler(this.miEdit_Click);
             // 
             // DualEditForm
             // 
@@ -684,5 +730,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem miEditUndo;
         private System.Windows.Forms.ToolStripMenuItem miEditRedo;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem miViewUndoableOperations;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem miEditCopy;
+        private System.Windows.Forms.ToolStripMenuItem miEditPaste;
     }
 }
