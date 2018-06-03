@@ -185,7 +185,7 @@ namespace BrailleToolkit.Helpers
             int removedCount = 0;
             foreach(var brLine in doc.Lines)
             {
-                var text = brLine.ToOriginalTextString(null);
+                var text = brLine.ToOriginalTextString();
                 int wordIdx = text.IndexOf("<P>#");
                 if (wordIdx >= 0)
                 {

@@ -25,7 +25,6 @@ namespace EasyBrailleEdit
         bool m_Modified;	// 檔案內容是否有修改過。
 
         private InvalidCharForm m_InvalidCharForm;
-        private BusyForm m_BusyForm;
 
         private ConversionDialog m_ConvertDialog;
         
@@ -122,12 +121,12 @@ namespace EasyBrailleEdit
         /// <param name="filename">點字檔名。</param>
         private void OpenBrailleFileInEditor(string filename)
         {
-            m_BusyForm = new BusyForm
+            var busyForm = new BusyForm
             {
                 Message = "正在載入點字資料..."
             };
-            m_BusyForm.Show();
-            m_BusyForm.UseWaitCursor = true;
+            busyForm.Show();
+            busyForm.UseWaitCursor = true;
             Enabled = false;
 
             DualEditForm frm = null;
@@ -139,8 +138,7 @@ namespace EasyBrailleEdit
             finally
             {
                 Enabled = true;
-                m_BusyForm.Hide();
-                m_BusyForm.Close();
+                busyForm.Close();
             }
 
             ShowInTaskbar = false;
@@ -375,12 +373,12 @@ namespace EasyBrailleEdit
             if (!ConvertTextToBraille(rtbOrg.Text, out brlFileName))
                 return;
 
-            m_BusyForm = new BusyForm
+            var busyForm = new BusyForm
             {
                 Message = "正在載入點字資料..."
             };
-            m_BusyForm.Show();
-            m_BusyForm.UseWaitCursor = true;
+            busyForm.Show();
+            busyForm.UseWaitCursor = true;
             this.Enabled = false;
 
             DualPrintDialog dlg = null;
@@ -391,8 +389,7 @@ namespace EasyBrailleEdit
             finally
             {
                 this.Enabled = true;
-                m_BusyForm.Hide();
-                m_BusyForm.Close();
+                busyForm.Close();
             }
 
             try

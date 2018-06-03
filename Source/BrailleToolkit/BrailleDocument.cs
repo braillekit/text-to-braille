@@ -290,7 +290,7 @@ namespace BrailleToolkit
                     {
                         writer.WriteLine(pageTitle.ToOriginalTextString());
                     }
-                    writer.WriteLine(Lines[lineIdx].ToOriginalTextString(context));
+                    writer.WriteLine(Lines[lineIdx].ToOriginalTextString());
                 }
             }
         }
@@ -306,7 +306,7 @@ namespace BrailleToolkit
                 {
                     result.AppendLine(pageTitle.ToOriginalTextString());
                 }
-                result.AppendLine(Lines[lineIdx].ToOriginalTextString(context));
+                result.AppendLine(Lines[lineIdx].ToOriginalTextString());
             }
             return result.ToString();
         }

@@ -20,7 +20,7 @@ namespace BrailleToolkit.Helpers
             return (BrailleGlobals.ChinesePunctuations.IndexOf(brWord.Text) >= 0);
         }
 
-        public static string ToString(this List<BrailleWord> brWordList)
+        public static string ToString(List<BrailleWord> brWordList)
         {
             var sb = new StringBuilder();
             foreach (var brWord in brWordList)
@@ -38,12 +38,41 @@ namespace BrailleToolkit.Helpers
             return sb.ToString();
         }
 
-        public static string ToDotNumberString(this List<BrailleWord> brWordList)
+        public static string ToDotNumberString(List<BrailleWord> brWordList)
         {
             var sb = new StringBuilder();
             foreach (var brWord in brWordList)
             {
                 sb.Append(brWord.ToPositionNumberString(useParenthesis: true));
+            }
+            return sb.ToString();
+        }
+
+        public static string ToOriginalTextString(List<BrailleWord> words)
+        {
+            var sb = new StringBuilder();
+            int index = 0;
+            while (index < words.Count)
+            {
+                var brWord = words[index];
+                if (brWord.IsContextTag)
+                {
+                    sb.Append(brWord.Text); // 輸出標籤名稱（可能為起始標籤或結束標籤）。
+                    index++;
+                    continue;
+                }
+                if (brWord.IsConvertedFromTag) // 只要是由 context tag 所衍生的文字都不儲存。
+                {
+                    index++;
+                    continue;
+                }
+
+                // 一般文字，或曾被替換過的文字。
+                if (!String.IsNullOrEmpty(brWord.OriginalText))
+                    sb.Append(brWord.OriginalText);
+                else
+                    sb.Append(brWord.Text);
+                index++;
             }
             return sb.ToString();
         }

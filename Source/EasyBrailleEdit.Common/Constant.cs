@@ -15,6 +15,9 @@
         public const int DefaultCellsPerLine = 40;
         public const int DefaultLinesPerPage = 25;
 
+        // 雙視編輯器的預設最大可復原操作數量
+        public const int DefaultMaxUndoLevel = 10;
+
         public static class Files
         {
             public const string DefaultMainBrailleFileExt = ".brx";    // 預設的點字檔副檔名 (v1為 .btx；v2 為 .brlj)

@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Config.Net" Version="4.9.1" />
+    <PackageReference Include="Config.Net" Version="4.10.0" />
   </ItemGroup>
 
   <ItemGroup>

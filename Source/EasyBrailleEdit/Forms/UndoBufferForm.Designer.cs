@@ -39,8 +39,10 @@
             this.lbxUndoableOperations.ItemHeight = 15;
             this.lbxUndoableOperations.Location = new System.Drawing.Point(0, 0);
             this.lbxUndoableOperations.Name = "lbxUndoableOperations";
+            this.lbxUndoableOperations.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.lbxUndoableOperations.Size = new System.Drawing.Size(307, 365);
             this.lbxUndoableOperations.TabIndex = 0;
+            this.lbxUndoableOperations.Click += new System.EventHandler(this.lbxUndoableOperations_Click);
             // 
             // UndoBufferForm
             // 

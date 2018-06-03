@@ -34,6 +34,8 @@ namespace EasyBrailleEdit.Common.Config
 
         IBrailleConfig Braille { get; set; }  // 會自動視為區段 [Braille] 的設定
 
+        IBrailleEditorConfig BrailleEditor { get; set; }  // 會自動視為區段 [BrailleEditor] 的設定
+
         IPrintingConfig Printing { get; set; } // 會自動視為區段 [Printing] 的設定
     }
 }

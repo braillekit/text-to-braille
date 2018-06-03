@@ -115,7 +115,7 @@ namespace BrailleToolkit
                 return String.Empty;
             }
 
-            string text = TitleLine.ToOriginalTextString(null);
+            string text = TitleLine.ToOriginalTextString();
             if (!text.StartsWith(XmlTagHelper.GetBeginTagName(ContextTagNames.Title)))
             {
                 text = XmlTagHelper.EncloseWithTag(text, ContextTagNames.Title);

@@ -44,16 +44,22 @@ namespace EasyBrailleEdit.DualEdit
 
         public void Undo()
         {
-            var currentState = CreateMemento();
-            var undoState = UndoRedo.Undo(currentState);
-            ApplyMemento(undoState);
+            if (UndoRedo.CanUndo())
+            {
+                var currentState = CreateMemento();
+                var undoState = UndoRedo.Undo(currentState);
+                ApplyMemento(undoState);
+            }
         }
 
         public void Redo()
         {
-            var currentState = CreateMemento();
-            var redoState = UndoRedo.Redo(currentState);
-            ApplyMemento(redoState);
+            if (UndoRedo.CanRedo())
+            {
+                var currentState = CreateMemento();
+                var redoState = UndoRedo.Redo(currentState);
+                ApplyMemento(redoState);
+            }
         }
 
         /// <summary>
@@ -262,7 +268,12 @@ namespace EasyBrailleEdit.DualEdit
             // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
             if (operation == null)
             {
-                operation = $"插入文字：{brLine.ToOriginalTextString(null)}";
+                var s = BrailleWordHelper.ToOriginalTextString(wordList);
+                if (s.Length > 10)
+                {
+                    s = s.Substring(0, 10) + "...";
+                }
+                operation = $"插入文字：{s}";
             }
             var memento = CreateMemento(operation);
 
@@ -484,13 +495,10 @@ namespace EasyBrailleEdit.DualEdit
             col = _positionMapper.WordIndexToGridColumn(lineIdx, wordIdx);
 
             // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
-            var memento = CreateMemento($"刪除字詞：{wordToDelete.Text}");
+            var memento = CreateMemento($"刪除字詞：'{wordToDelete.Text}'");
 
             brLine.Words.RemoveAt(wordIdx);
             IsDirty = true;
-
-            // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
-            UndoRedo.SaveMementoForUndo(memento);
 
             if (brLine.CellCount == 0)    // 如果整列都刪光了
             {
@@ -505,11 +513,18 @@ namespace EasyBrailleEdit.DualEdit
                 else
                 {
                     // 移除此列。
-                    DoDeleteLine(grid, row, lineIdx);
+                    DoDeleteLine(grid, row, lineIdx, needUndo: false);
+
+                    // 將原先的狀態存入 undo buffer。
+                    UndoRedo.SaveMementoForUndo(memento);
+
                     GridFocusCell(row, col);
                 }                
                 return;
             }
+
+            // 將原先的狀態存入 undo buffer。
+            UndoRedo.SaveMementoForUndo(memento);
 
             // Update UI
             ReformatRow(grid, row);
@@ -761,12 +776,16 @@ namespace EasyBrailleEdit.DualEdit
             GridFocusCell(activePos, true);
         }
 
-        private void DoDeleteLine(Grid grid, int row, int lineIdx)
+        private void DoDeleteLine(Grid grid, int row, int lineIdx, bool needUndo = true)
         {
             row = _positionMapper.GetBrailleRowIndex(row);  // 確保列索引為點字列。
 
             // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
-            var memento = CreateMemento($"刪除第 {lineIdx+1} 行");
+            BrailleEditMemento memento = null;
+            if (needUndo)
+            {
+                memento = CreateMemento($"刪除第 {lineIdx + 1} 行");
+            }            
 
             var brLine = BrailleDoc.Lines[lineIdx];
             brLine.Clear();
@@ -775,7 +794,10 @@ namespace EasyBrailleEdit.DualEdit
             IsDirty = true;
 
             // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
-            UndoRedo.SaveMementoForUndo(memento);
+            if (needUndo)
+            {
+                UndoRedo.SaveMementoForUndo(memento);
+            }
 
             // 更新 UI。
             grid.Rows.RemoveRange(row, 3);

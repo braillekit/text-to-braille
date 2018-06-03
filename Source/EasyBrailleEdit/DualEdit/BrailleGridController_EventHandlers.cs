@@ -76,7 +76,7 @@ namespace EasyBrailleEdit.DualEdit
         {
             var lineIdx = _positionMapper.GridRowToBrailleLineIndex(e.Row);
             var brLine = BrailleDoc.Lines[lineIdx];
-            _form.CurrentLineStatusText = brLine.ToOriginalTextString(null);
+            _form.CurrentLineStatusText = brLine.ToOriginalTextString();
         }
 
         public void GridSelection_CellGotFocus(SourceGrid.ChangeActivePositionEventArgs e)

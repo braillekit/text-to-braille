@@ -270,33 +270,9 @@ namespace BrailleToolkit
             return sb.ToString();
         }
 
-        public string ToOriginalTextString(ContextTagManager context)
+        public string ToOriginalTextString()
         {
-            var sb = new StringBuilder();
-            int index = 0;
-            while (index < Words.Count)
-            {
-                var brWord = Words[index];
-                if (brWord.IsContextTag)
-                {
-                    sb.Append(brWord.Text); // 輸出標籤名稱（可能為起始標籤或結束標籤）。
-                    index++;
-                    continue;
-                }
-                if (brWord.IsConvertedFromTag) // 只要是由 context tag 所衍生的文字都不儲存。
-                {
-                    index++;
-                    continue;
-                }
-
-                // 一般文字，或曾被替換過的文字。
-                if (!String.IsNullOrEmpty(brWord.OriginalText))
-                    sb.Append(brWord.OriginalText);
-                else
-                    sb.Append(brWord.Text);
-                index++;
-            }
-            return sb.ToString();
+            return BrailleWordHelper.ToOriginalTextString(Words);
         }
 
         public bool ContainsTitleTag()
