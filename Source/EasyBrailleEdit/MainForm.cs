@@ -965,8 +965,6 @@ namespace EasyBrailleEdit
                 case "Phonetic":
                     InsertPhonetic();
                     break;
-                default:
-                    break;
             }
         }
 
