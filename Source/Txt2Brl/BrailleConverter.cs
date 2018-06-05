@@ -4,7 +4,6 @@ using System.Text;
 using BrailleToolkit;
 using EasyBrailleEdit.Common;
 using NChinese;
-using NChinese.Imm;
 using NChinese.Phonetic;
 using Serilog;
 
@@ -24,12 +23,13 @@ namespace Txt2Brl
         private ZhuyinReverseConverter CreateZhuyinConverter(bool preferIFELanguage)
         {
             IReverseConversionProvider provider = null;
+/*
             if (preferIFELanguage)
             {
                 provider = new ImmZhuyinConversionProvider();
                 Log.Debug("注音字根提供者使用 IFELanguage 版本的 ImmZhuyinConversionProvider。");
             }
-
+*/
             if (provider == null || provider.IsAvailable == false)
             {
                 provider = new ZhuyinReverseConversionProvider();
