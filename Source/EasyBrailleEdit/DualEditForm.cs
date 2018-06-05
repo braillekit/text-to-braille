@@ -590,14 +590,14 @@ namespace EasyBrailleEdit
                     int emptyLinesCount;
                     int emptyTagsCount;
                     bool doRemove = false;
-                    BrailleDocumentHelper.RemoveUselessWords(BrailleDoc, doRemove, out emptyLinesCount, out emptyTagsCount);
+                    BrailleDocumentHelper.RemoveUselessLines(BrailleDoc, doRemove, out emptyLinesCount, out emptyTagsCount);
                     if (emptyLinesCount > 0 || emptyTagsCount > 0)
                     {
                         string msg = $"發現 {emptyLinesCount} 個空行，{emptyTagsCount} 個空標籤。要刪除它們嗎？";
                         if (MsgBoxHelper.ShowYesNo(msg) == DialogResult.Yes)
                         {
                             doRemove = true;
-                            BrailleDocumentHelper.RemoveUselessWords(BrailleDoc, doRemove, out emptyLinesCount, out emptyTagsCount);
+                            BrailleDocumentHelper.RemoveUselessLines(BrailleDoc, doRemove, out emptyLinesCount, out emptyTagsCount);
                             MsgBoxHelper.ShowInfo($"完成。總共移除了 {emptyLinesCount} 個空行，{emptyTagsCount} 個空標籤。請核對無誤後再存檔。");
                             _controller.IsDirty = true;
                             _controller.RefreshView();

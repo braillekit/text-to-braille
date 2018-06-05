@@ -198,7 +198,11 @@ namespace BrailleToolkit
             }
             if (needDigitSymbol)
             {
-                BrailleWord firstDigitWord = brLine.Words[index];
+                var firstDigitWord = brLine.Words[index];
+                if (firstDigitWord.CellCount < 1)
+                {
+                    return; // 防錯.
+                }
                 // 如果已經有加上數字記號就不再重複加。
                 if (!firstDigitWord.Cells[0].Equals(digitCell))
                 {

@@ -1044,6 +1044,8 @@ namespace BrailleToolkit
         {
             var outputLines = new List<BrailleLine>();
 
+            BrailleDocumentHelper.RemoveUselessWords(brLine, true, out _);
+
             if (brLine.IsEmpty())
             {
                 return outputLines;

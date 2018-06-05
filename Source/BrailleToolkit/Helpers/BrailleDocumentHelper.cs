@@ -224,11 +224,11 @@ namespace BrailleToolkit.Helpers
         /// <summary>
         /// 移除點字數量為 0 的 lines，以及一些空標籤。
         /// </summary>
-        /// <param name="doc"></param>
+        /// <param name="brLine"></param>
         /// <param name="doRemove"></param>
         /// <param name="emptyLinesCount"></param>
         /// <param name="emptyTagsCount"></param>
-        public static void RemoveUselessWords(BrailleDocument doc, bool doRemove, out int emptyLinesCount, out int emptyTagsCount)
+        public static void RemoveUselessWords(BrailleLine brLine, bool doRemove, out int emptyTagsCount)
         {
             string[] removableEmptyTags =
             {
@@ -242,12 +242,81 @@ namespace BrailleToolkit.Helpers
                 ContextTagNames.Delete
             };
 
+            emptyTagsCount = 0;
+            for (int wordIdx = brLine.WordCount - 2; wordIdx >= 0; wordIdx--)
+            {
+                var brWord = brLine[wordIdx];
+                var nextWord = brLine[wordIdx + 1];
 
+                if (IsUselessDigitSymbol(brWord, nextWord))
+                {
+                    if (doRemove)
+                    {
+                        brLine.RemoveAt(wordIdx);
+                    }
+                    emptyTagsCount++;
+                    continue;
+                }
+
+                if (!brWord.IsContextTag)
+                    continue;
+                if (!nextWord.IsContextTag)
+                    continue;
+
+                // 當前的 word 和下一個 word 都是 context tag
+
+                foreach (var tagName in removableEmptyTags)
+                {
+                    if (brWord.OriginalText == tagName)
+                    {
+                        var endTagName = XmlTagHelper.GetEndTagName(tagName);
+                        if (nextWord.OriginalText == endTagName)
+                        {
+                            if (doRemove)
+                            {
+                                brLine.RemoveAt(wordIdx + 1);
+                                brLine.RemoveAt(wordIdx);
+                            }
+                            emptyTagsCount++;
+                        }
+                    }
+                }
+            }
+
+            bool IsUselessDigitSymbol(BrailleWord currentWord, BrailleWord nextWord)
+            {
+                if (currentWord.IsContextTag && currentWord.Text == "#")
+                {
+                    // 數符後面如果沒有接數字，那麼這個數符就是多餘的。
+                    if (nextWord == null || nextWord.IsContextTag || !nextWord.IsDigit)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 移除點字數量為 0 的 lines，以及一些空標籤。
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="doRemove"></param>
+        /// <param name="emptyLinesCount"></param>
+        /// <param name="emptyTagsCount"></param>
+        public static void RemoveUselessLines(BrailleDocument doc, bool doRemove, out int emptyLinesCount, out int emptyTagsCount)
+        {
             emptyLinesCount = 0;
             emptyTagsCount = 0;
+
             for (int lineIdx = doc.LineCount - 1; lineIdx >= 0; lineIdx--)
             {
                 var brLine = doc.Lines[lineIdx];
+
+                RemoveUselessWords(brLine, doRemove, out int emptyTagsConuntInLine);
+
+                emptyTagsCount += emptyTagsConuntInLine;
+
                 if (brLine.CellCount < 1)
                 {
                     if (doRemove)
@@ -255,34 +324,6 @@ namespace BrailleToolkit.Helpers
                         doc.RemoveLine(lineIdx);
                     }
                     emptyLinesCount++;
-                    continue;
-                }
-
-                for (int wordIdx = brLine.WordCount - 2; wordIdx >= 0; wordIdx--)
-                {
-                    var brWord = brLine[wordIdx];
-                    if (!brWord.IsContextTag)
-                        continue;
-                    var nextWord = brLine[wordIdx + 1];
-                    if (!nextWord.IsContextTag)
-                        continue;
-
-                    foreach (var tagName in removableEmptyTags)
-                    {
-                        if (brWord.OriginalText == tagName)
-                        {
-                            var endTagName = XmlTagHelper.GetEndTagName(tagName);
-                            if (nextWord.OriginalText == endTagName)
-                            {
-                                if (doRemove)
-                                {
-                                    brLine.RemoveAt(wordIdx + 1);
-                                    brLine.RemoveAt(wordIdx);
-                                }
-                                emptyTagsCount++;
-                            }
-                        }
-                    }
                 }
             }
         }
