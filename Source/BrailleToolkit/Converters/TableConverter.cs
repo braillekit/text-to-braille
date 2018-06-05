@@ -60,8 +60,6 @@ namespace BrailleToolkit.Converters
 					case '│':	// 左直線
 						barType = BarType.Middle;
 						break;
-					default:
-						break;
 				}
 
 				text = ch.ToString();

@@ -27,19 +27,13 @@ namespace BrailleToolkit.Converters
         /// <returns>若指定的字串轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
         protected virtual BrailleWord ConvertToBrailleWord(string text)
         {
-            BrailleWord brWord = new BrailleWord(text);
-
-            string brCode;
-
-            brCode = BrailleTable.Find(text);
+            string brCode = BrailleTable.Find(text);
             if (!String.IsNullOrEmpty(brCode))
             {
+                var brWord = new BrailleWord(text);
                 brWord.AddCells(brCode);
                 return brWord;
             }
-
-            brWord.Clear();
-            brWord = null;
             return null;
         }
 

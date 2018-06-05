@@ -37,5 +37,11 @@ namespace EasyBrailleEdit.Forms
             numCellsPerColumn.Minimum = 1;
             numCellsPerColumn.Maximum = 38;
         }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Close();
+        }
     }
 }

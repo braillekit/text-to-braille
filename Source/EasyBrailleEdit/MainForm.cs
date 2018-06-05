@@ -9,7 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrailleToolkit;
+using BrailleToolkit.Helpers;
 using EasyBrailleEdit.Common;
+using EasyBrailleEdit.Forms;
 using EasyBrailleEdit.Printing;
 using Huanlin.Common.Helpers;
 using Huanlin.Http;
@@ -27,7 +29,7 @@ namespace EasyBrailleEdit
         private InvalidCharForm m_InvalidCharForm;
 
         private ConversionDialog m_ConvertDialog;
-        
+
         private FileRunner m_FileRunner;
 
         public MainForm()
@@ -239,18 +241,18 @@ namespace EasyBrailleEdit
             string phraseFileName = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtInputPhraseListFileName);
 
             // 建立輸入檔案
-            File.WriteAllText(inFileName, content, Encoding.UTF8);	
+            File.WriteAllText(inFileName, content, Encoding.UTF8);
 
             // 建立輸入的詞庫設定檔
             string[] fileNames = m_ConvertDialog.SelectedPhraseFileNames;
             File.WriteAllLines(phraseFileName, fileNames, Encoding.UTF8);
 
             // 刪除輸出檔案
-            if (File.Exists(outFileName))	
+            if (File.Exists(outFileName))
             {
-                File.Delete(outFileName);	
+                File.Delete(outFileName);
             }
-            
+
             InvokeTxt2Brl("\"" + inFileName + "\"", "\"" + outFileName + "\"");
 
             return outFileName;
@@ -347,7 +349,7 @@ namespace EasyBrailleEdit
             if (String.IsNullOrWhiteSpace(defaultPrinter))
             {
                 return false;
-            }           
+            }
             var hasDefaultPrinter = PrinterSettings.InstalledPrinters.Cast<string>()
                 .Any(printerName => defaultPrinter.Equals(printerName, StringComparison.InvariantCultureIgnoreCase));
             return hasDefaultPrinter;
@@ -365,7 +367,7 @@ namespace EasyBrailleEdit
                 if (!SetDefaultPreviewPrinter())
                 {
                     return;
-                }                
+                }
             }
 
             string brlFileName = null;
@@ -502,7 +504,7 @@ namespace EasyBrailleEdit
                         break;
                     }
                     parts = s.Split(' ');
-                    if (parts.Length != 3) 
+                    if (parts.Length != 3)
                     {
                         throw new Exception("檔案格式不正確: " + fname);
                     }
@@ -633,10 +635,10 @@ namespace EasyBrailleEdit
 
             if (SysInfo.IsNetworkConnected())
             {
-                return await DoUpdateAsync(true);	
+                return await DoUpdateAsync(true);
             }
             return false;
-            
+
         }
 
         private async Task CheckUpdateAsync()
@@ -647,7 +649,7 @@ namespace EasyBrailleEdit
                 return;
             }
 
-            if (await DoUpdateAsync(false)) 
+            if (await DoUpdateAsync(false))
             {
                 string msg = "應用程式必須重新啟動才能完成更新程序，是否立即重新啟動？\r\n若您有資料尚未儲存，請選擇【否】。";
                 if (MsgBoxHelper.ShowYesNo(msg) == DialogResult.Yes)
@@ -672,7 +674,7 @@ namespace EasyBrailleEdit
             //updater.ServerUri = "http://localhost/ebeupdate/";
 
             try
-            {                
+            {
                 await updater.GetUpdateListAsync();
             }
             catch (Exception ex)
@@ -757,15 +759,15 @@ namespace EasyBrailleEdit
                 Application.Exit();
                 return;
             }
-/* 新版本有內建注音字根查詢功能，不再需要注音輸入法!
-            // 檢查注音與新注音輸入法（在自動更新之後才檢查）
-            if (!ImmHelper.ZhuyinImeInstalled || !ImmHelper.NewZhuyinImeInstalled)
-            {
-                StatusText = "注意：未偵測到微軟注音或新注音輸入法!";
-                // Close(); 不要結束程式, 因為偵測注音輸入法的函式在 Windows 2008 會失效。
-                // return;
-            }
-*/
+            /* 新版本有內建注音字根查詢功能，不再需要注音輸入法!
+                        // 檢查注音與新注音輸入法（在自動更新之後才檢查）
+                        if (!ImmHelper.ZhuyinImeInstalled || !ImmHelper.NewZhuyinImeInstalled)
+                        {
+                            StatusText = "注意：未偵測到微軟注音或新注音輸入法!";
+                            // Close(); 不要結束程式, 因為偵測注音輸入法的函式在 Windows 2008 會失效。
+                            // return;
+                        }
+            */
             Application.DoEvents();
 
             txtErrors.Visible = false;
@@ -775,21 +777,21 @@ namespace EasyBrailleEdit
             m_InvalidCharForm = new InvalidCharForm(this);
 
             rtbOrg.BringToFront();
-        }        
-
-/*
-        void BrailleProcessor_ConvertionFailed(object sender, ConvertionFailedEventArgs args)
-        {
-            if (m_BusyForm != null)
-            {
-                m_BusyForm.AddInvalidChar(args.InvalidChar.CharValue);
-                Application.DoEvents();
-            }			
         }
-*/		
+
+        /*
+                void BrailleProcessor_ConvertionFailed(object sender, ConvertionFailedEventArgs args)
+                {
+                    if (m_BusyForm != null)
+                    {
+                        m_BusyForm.AddInvalidChar(args.InvalidChar.CharValue);
+                        Application.DoEvents();
+                    }			
+                }
+        */
         private void miFileClicked(object sender, EventArgs e)
         {
-            ToolStripItem obj = (ToolStripItem) sender;
+            ToolStripItem obj = (ToolStripItem)sender;
             switch (obj.Tag.ToString())
             {
                 case "FileNew":
@@ -949,8 +951,6 @@ namespace EasyBrailleEdit
                 case "Options":
                     ShowOptionsDialog();
                     break;
-                default:
-                    break;
             }
         }
 
@@ -959,8 +959,8 @@ namespace EasyBrailleEdit
             ToolStripItem obj = (ToolStripItem)sender;
             switch (obj.Tag.ToString())
             {
-                case "Tbl2x2":
-                    InsertTable(2, 2);
+                case "Table":
+                    InsertTable();
                     break;
                 case "Phonetic":
                     InsertPhonetic();
@@ -968,44 +968,19 @@ namespace EasyBrailleEdit
             }
         }
 
-        /// <summary>
-        /// 插入表格。
-        /// </summary>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
-        private void InsertTable(int row, int col)
+
+
+        private void InsertTable()
         {
-            char leftTop = '┌';
-            char rightTop = '┐';
-//            char leftBottom = '└';
-//            char rightBottom = '┘';
-            char topMiddle = '┬';
-//            char bottomMiddle = '⊥';
-//            char rightMiddle = '┤';
-//            char leftMiddle = '├';
-            char line = '─';
-//            char stick = '│';
-
-            StringBuilder sb = new StringBuilder();
-
-            // 頂部列
-            sb.Append(leftTop);
-            for (int i = 0; i < col; i++)
+            var form = new InsertTableForm();
+            if (form.ShowDialog() == DialogResult.OK)
             {
-                sb.Append(line);
-                if (i == col - 1)
-                {
-                    sb.Append(rightTop);
-                }
-                else 
-                {
-                    sb.Append(topMiddle);
-                }
+                rtbOrg.SelectedText = 
+                    "<表格>\r\n" + 
+                    TextHelper.GenerateTable(form.RowCount, form.ColumnCount, form.CellsPerColumn) + 
+                    "</表格>";
             }
-
-            sb.Append("\n尚未實作完成!");
-
-            rtbOrg.SelectedText = sb.ToString();
+            
         }
 
         private void InsertPhonetic()
@@ -1021,7 +996,7 @@ namespace EasyBrailleEdit
         {
             int col = rtbOrg.SelectionStart;
             int line = rtbOrg.GetLineFromCharIndex(col);
-            statLabelCaretPos.Text = String.Format("列:{0}, 行:{1}", line+1, col+1);
+            statLabelCaretPos.Text = String.Format("列:{0}, 行:{1}", line + 1, col + 1);
         }
 
         private void rtbOrg_SelectionChanged(object sender, EventArgs e)
@@ -1053,13 +1028,13 @@ namespace EasyBrailleEdit
 
             // 避免文字因為修改過了，導致要選取的字元超過該列的字元長度。此處做修正。
             if (charIdx >= rtbOrg.Lines[lineIdx].Length)
-            {				
+            {
                 charIdx = rtbOrg.Lines[lineIdx].Length - 1;
                 charIdxValid = false;
             }
 
             charIdx += charCnt;
-    
+
             rtbOrg.SelectionStart = charIdx;
 
             // 唯有當指定的字元索引有效，才選取該字元。

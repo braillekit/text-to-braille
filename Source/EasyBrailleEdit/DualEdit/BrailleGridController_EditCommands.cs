@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Helpers;
+using EasyBrailleEdit.Forms;
 using Huanlin.Windows.Forms;
 using Serilog;
 using SourceGrid;
@@ -989,16 +990,18 @@ namespace EasyBrailleEdit.DualEdit
             if (!CheckCellPosition(row, col))
                 return;
 
-            string[] tableLines =
+
+            var form = new InsertTableForm();
+            if (form.ShowDialog() != DialogResult.OK)
             {
-                "<表格>",
-                "┌──┬──┐",
-                "│　　∣　　∣",
-                "├──┼──┤",
-                "│　　∣　　∣",
-                "└──┴──┘",
-                "</表格>"
-            };
+                return;
+            }
+
+            string s = "<表格>\n" +
+                TextHelper.GenerateTable(form.RowCount, form.ColumnCount, form.CellsPerColumn) +
+                "</表格>";
+
+            string[] tableLines = s.Split('\n');
 
             int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
 
