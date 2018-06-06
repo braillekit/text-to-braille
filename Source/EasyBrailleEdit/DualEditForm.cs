@@ -150,15 +150,25 @@ namespace EasyBrailleEdit
             m_FindForm.DecidingStartPosition += FindForm_DecidingStartPosition;
             m_FindForm.TargetFound += FindForm_TargetFound;
 
-            _undoBufferForm = new UndoBufferForm()
-            {
-                Owner = this,
-                MaxBufferSize = _controller.UndoRedo.MaxUndoLevel
-            };
-            _undoBufferForm.Show();
+            CreateUndoBufferForm();
 
             BringToFront();
             Activate();
+
+            // 建立並顯示 undo 視窗。
+            void CreateUndoBufferForm()
+            {
+                _undoBufferForm = new UndoBufferForm()
+                {
+                    Owner = this,
+                    MaxBufferSize = _controller.UndoRedo.MaxUndoLevel
+                };
+
+                if (AppGlobals.Config.BrailleEditor.ShowUndoWindow)
+                {
+                    _undoBufferForm.Show();
+                }
+            }
         }
 
         private void GridSelection_FocusRowEntered(object sender, SourceGrid.RowEventArgs e)
@@ -285,8 +295,6 @@ namespace EasyBrailleEdit
                     break;
                 case "Print":
                     _controller.DoPrint();
-                    break;
-                default:
                     break;
             }
         }

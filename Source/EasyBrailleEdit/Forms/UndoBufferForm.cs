@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EasyBrailleEdit.Common;
 using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit.Forms
@@ -47,6 +48,8 @@ namespace EasyBrailleEdit.Forms
                 }
                 Top = Owner.Top + 40;
             }
+
+            chkAlwaysShowThis.Checked = AppGlobals.Config.BrailleEditor.ShowUndoWindow;
         }
 
         public void UpdateUI(List<string> operations)
@@ -88,6 +91,14 @@ namespace EasyBrailleEdit.Forms
         {
             MsgBoxHelper.ShowInfo("按 Ctrl+Z 可復原上一次的修改操作。\r\n按 Ctrl+Y 可取消上一次的復原操作。");
             FocusOwnerForm();
+        }
+
+        private void chkAlwaysShowThis_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AppGlobals.Config.BrailleEditor.ShowUndoWindow != chkAlwaysShowThis.Checked)
+            {
+                AppGlobals.Config.BrailleEditor.ShowUndoWindow = chkAlwaysShowThis.Checked;
+            }            
         }
     }
 }

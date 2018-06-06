@@ -20,7 +20,7 @@ namespace Txt2Brl
 
 		bool _verboseMode;
 
-        private ZhuyinReverseConverter CreateZhuyinConverter(bool preferIFELanguage)
+        private ZhuyinReverseConverter CreateZhuyinConverter()
         {
             IReverseConversionProvider provider = null;
 /*
@@ -40,7 +40,7 @@ namespace Txt2Brl
 
         public BrailleConverter()
 		{
-            _zhuyinConverter = CreateZhuyinConverter(AppGlobals.Config.PreferIFELanguage);
+            _zhuyinConverter = CreateZhuyinConverter();
             Processor = BrailleProcessor.GetInstance(_zhuyinConverter);
 			_doc = new BrailleDocument(Processor);
 

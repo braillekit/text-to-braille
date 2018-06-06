@@ -13,13 +13,6 @@ namespace EasyBrailleEdit.Common.Config
         [Option(Alias = "General.AutoUpdateFilesUrl", DefaultValue = Constant.DefaultAutoUpdateFilesUrl)]
         string AutoUpdateFilesUrl { get; set; }
 
-
-        /// <summary>
-        /// 是否優先使用 IFELanguage API 來反查注音字根。預設為 False。
-        /// </summary>
-        [Option(Alias = "General.PreferIFELanguage", DefaultValue = false)]
-        bool PreferIFELanguage { get; set; }
-
         /// <summary>
         /// 詞庫檔。
         /// </summary>
