@@ -70,7 +70,7 @@ namespace EasyBrailleEdit.DualEdit
         {
             if (_grid[row, col] == null)
             {
-                throw new Exception($"無效的行與列索引: 橫列={row}, 直行={col}。");
+                return null;
             }
 
             return _grid[row, col].Tag as BrailleWord;

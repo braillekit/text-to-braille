@@ -71,6 +71,9 @@ namespace EasyBrailleEdit.DualEdit
                 case DualEditCommand.Names.PasteFromClipboard:
                     PasteFromClipboard(grid, row, col);
                     break;
+                case DualEditCommand.Names.RemoveDigitSymbol:
+                    RemoveDigitSymbol();
+                    break;
             }
             Debugger.ShouldEveryGridCellHasBrailleWord();
         }

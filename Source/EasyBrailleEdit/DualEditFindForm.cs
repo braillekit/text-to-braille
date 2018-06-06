@@ -243,5 +243,9 @@ namespace EasyBrailleEdit
 			}
 		}
 
-	}
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+    }
 }

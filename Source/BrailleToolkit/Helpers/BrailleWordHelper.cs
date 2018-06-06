@@ -99,5 +99,21 @@ namespace BrailleToolkit.Helpers
             }
             return false;
         }
+
+        public static bool RemoveDigitSymbol(BrailleWord brWord)
+        {
+            if (brWord.CellCount <= 1)
+            {
+                // 至少要有兩個 cells 才能執行刪除操作。
+                return false;
+            }
+
+            if ((int)brWord.Cells[0].Value == (int)BrailleCellCode.Digit)
+            {
+                brWord.Cells.RemoveAt(0);
+                return true;
+            }
+            return false;
+        }
     }
 }

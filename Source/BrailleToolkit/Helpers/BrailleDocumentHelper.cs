@@ -248,7 +248,7 @@ namespace BrailleToolkit.Helpers
                 var brWord = brLine[wordIdx];
                 var nextWord = brLine[wordIdx + 1];
 
-                if (IsUselessDigitSymbol(brWord, nextWord))
+                if (IsUselessDigitSymbol(brWord))
                 {
                     if (doRemove)
                     {
@@ -283,15 +283,11 @@ namespace BrailleToolkit.Helpers
                 }
             }
 
-            bool IsUselessDigitSymbol(BrailleWord currentWord, BrailleWord nextWord)
+            bool IsUselessDigitSymbol(BrailleWord currentWord)
             {
-                if (currentWord.IsContextTag && currentWord.Text == "#")
+                if (currentWord.IsContextTag && currentWord.Text == "#" && currentWord.CellCount < 1)
                 {
-                    // 數符後面如果沒有接數字，那麼這個數符就是多餘的。
-                    if (nextWord == null || nextWord.IsContextTag || !nextWord.IsDigit)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
                 return false;
             }

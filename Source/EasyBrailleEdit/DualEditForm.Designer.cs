@@ -88,6 +88,7 @@
             this.statusCurrentText = new System.Windows.Forms.StatusStrip();
             this.statusLabelCurrentWord = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelCurrentLine = new System.Windows.Forms.ToolStripStatusLabel();
+            this.miEditRemoveDigitSymbol = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -103,12 +104,12 @@
             this.brGrid.EnableSort = true;
             this.brGrid.FixedColumns = 1;
             this.brGrid.FixedRows = 1;
-            this.brGrid.Location = new System.Drawing.Point(0, 54);
+            this.brGrid.Location = new System.Drawing.Point(0, 55);
             this.brGrid.Name = "brGrid";
             this.brGrid.OptimizeMode = SourceGrid.CellOptimizeMode.ForRows;
             this.brGrid.RowsCount = 1;
             this.brGrid.SelectionMode = SourceGrid.GridSelectionMode.Cell;
-            this.brGrid.Size = new System.Drawing.Size(753, 416);
+            this.brGrid.Size = new System.Drawing.Size(753, 415);
             this.brGrid.TabIndex = 2;
             this.brGrid.TabStop = true;
             this.brGrid.ToolTipText = "";
@@ -123,7 +124,7 @@
             this.miTools});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(753, 27);
+            this.mnuMain.Size = new System.Drawing.Size(753, 28);
             this.mnuMain.TabIndex = 3;
             this.mnuMain.Text = "menuStrip1";
             // 
@@ -140,7 +141,7 @@
             this.toolStripMenuItem2,
             this.離開XToolStripMenuItem});
             this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(69, 23);
+            this.miFile.Size = new System.Drawing.Size(69, 24);
             this.miFile.Text = "檔案(&F)";
             // 
             // miFileOpen
@@ -219,15 +220,16 @@
             this.miEditRedo,
             this.toolStripMenuItem7,
             this.miEditCopy,
-            this.miEditPaste});
+            this.miEditPaste,
+            this.miEditRemoveDigitSymbol});
             this.miEdit.Name = "miEdit";
-            this.miEdit.Size = new System.Drawing.Size(69, 23);
+            this.miEdit.Size = new System.Drawing.Size(69, 24);
             this.miEdit.Text = "編輯(&E)";
             // 
             // miEditDocProperties
             // 
             this.miEditDocProperties.Name = "miEditDocProperties";
-            this.miEditDocProperties.Size = new System.Drawing.Size(192, 26);
+            this.miEditDocProperties.Size = new System.Drawing.Size(318, 26);
             this.miEditDocProperties.Tag = "DocProperties";
             this.miEditDocProperties.Text = "文件屬性(&P)";
             this.miEditDocProperties.Click += new System.EventHandler(this.miEdit_Click);
@@ -235,7 +237,7 @@
             // miEditPageTitle
             // 
             this.miEditPageTitle.Name = "miEditPageTitle";
-            this.miEditPageTitle.Size = new System.Drawing.Size(192, 26);
+            this.miEditPageTitle.Size = new System.Drawing.Size(318, 26);
             this.miEditPageTitle.Tag = "PageTitles";
             this.miEditPageTitle.Text = "頁標題(&T)";
             this.miEditPageTitle.Click += new System.EventHandler(this.miEdit_Click);
@@ -243,7 +245,7 @@
             // miEditFetchPageTitles
             // 
             this.miEditFetchPageTitles.Name = "miEditFetchPageTitles";
-            this.miEditFetchPageTitles.Size = new System.Drawing.Size(192, 26);
+            this.miEditFetchPageTitles.Size = new System.Drawing.Size(318, 26);
             this.miEditFetchPageTitles.Tag = "FetchPageTitles";
             this.miEditFetchPageTitles.Text = "重新抓取頁標題";
             this.miEditFetchPageTitles.Click += new System.EventHandler(this.miEdit_Click);
@@ -251,13 +253,13 @@
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(189, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(315, 6);
             // 
             // 尋找FToolStripMenuItem
             // 
             this.尋找FToolStripMenuItem.Name = "尋找FToolStripMenuItem";
             this.尋找FToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.尋找FToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
+            this.尋找FToolStripMenuItem.Size = new System.Drawing.Size(318, 26);
             this.尋找FToolStripMenuItem.Tag = "Find";
             this.尋找FToolStripMenuItem.Text = "尋找(&F)";
             this.尋找FToolStripMenuItem.Click += new System.EventHandler(this.miEdit_Click);
@@ -266,7 +268,7 @@
             // 
             this.miEditFindNext.Name = "miEditFindNext";
             this.miEditFindNext.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.miEditFindNext.Size = new System.Drawing.Size(192, 26);
+            this.miEditFindNext.Size = new System.Drawing.Size(318, 26);
             this.miEditFindNext.Tag = "FindNext";
             this.miEditFindNext.Text = "找下一筆(&N)";
             this.miEditFindNext.Click += new System.EventHandler(this.miEdit_Click);
@@ -275,7 +277,7 @@
             // 
             this.miEditGoto.Name = "miEditGoto";
             this.miEditGoto.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.miEditGoto.Size = new System.Drawing.Size(192, 26);
+            this.miEditGoto.Size = new System.Drawing.Size(318, 26);
             this.miEditGoto.Tag = "Goto";
             this.miEditGoto.Text = "到(&G)";
             this.miEditGoto.Click += new System.EventHandler(this.miEdit_Click);
@@ -283,13 +285,13 @@
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(189, 6);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(315, 6);
             // 
             // miEditUndo
             // 
             this.miEditUndo.Name = "miEditUndo";
             this.miEditUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.miEditUndo.Size = new System.Drawing.Size(192, 26);
+            this.miEditUndo.Size = new System.Drawing.Size(318, 26);
             this.miEditUndo.Tag = "Undo";
             this.miEditUndo.Text = "復原";
             this.miEditUndo.Click += new System.EventHandler(this.miEdit_Click);
@@ -298,7 +300,7 @@
             // 
             this.miEditRedo.Name = "miEditRedo";
             this.miEditRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.miEditRedo.Size = new System.Drawing.Size(192, 26);
+            this.miEditRedo.Size = new System.Drawing.Size(318, 26);
             this.miEditRedo.Tag = "Redo";
             this.miEditRedo.Text = "重做";
             this.miEditRedo.Click += new System.EventHandler(this.miEdit_Click);
@@ -306,13 +308,13 @@
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(189, 6);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(315, 6);
             // 
             // miEditCopy
             // 
             this.miEditCopy.Name = "miEditCopy";
             this.miEditCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.miEditCopy.Size = new System.Drawing.Size(192, 26);
+            this.miEditCopy.Size = new System.Drawing.Size(318, 26);
             this.miEditCopy.Tag = "Copy";
             this.miEditCopy.Text = "複製";
             this.miEditCopy.Click += new System.EventHandler(this.miEdit_Click);
@@ -321,7 +323,7 @@
             // 
             this.miEditPaste.Name = "miEditPaste";
             this.miEditPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.miEditPaste.Size = new System.Drawing.Size(192, 26);
+            this.miEditPaste.Size = new System.Drawing.Size(318, 26);
             this.miEditPaste.Tag = "Paste";
             this.miEditPaste.Text = "貼上";
             this.miEditPaste.Click += new System.EventHandler(this.miEdit_Click);
@@ -337,7 +339,7 @@
             this.toolStripMenuItem4,
             this.miViewRefresh});
             this.miView.Name = "miView";
-            this.miView.Size = new System.Drawing.Size(71, 23);
+            this.miView.Size = new System.Drawing.Size(71, 24);
             this.miView.Text = "檢視(&V)";
             // 
             // miViewMode
@@ -426,7 +428,7 @@
             this.miToolsRemoveSharpSymbolFromPageNumbers,
             this.miToolsRemoveUselessWords});
             this.miTools.Name = "miTools";
-            this.miTools.Size = new System.Drawing.Size(69, 23);
+            this.miTools.Size = new System.Drawing.Size(69, 24);
             this.miTools.Text = "工具(&T)";
             // 
             // miToolsRemoveSharpSymbolFromPageNumbers
@@ -459,7 +461,7 @@
             this.toolStripLabel1,
             this.txtGotoPageNum,
             this.btnGotoPage});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 27);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(753, 27);
             this.toolStrip1.TabIndex = 4;
@@ -638,6 +640,16 @@
             this.statusLabelCurrentLine.Text = "statusLabelCurrentLine";
             this.statusLabelCurrentLine.ToolTipText = "游標所在的那一行的明眼字";
             // 
+            // miEditRemoveDigitSymbol
+            // 
+            this.miEditRemoveDigitSymbol.Name = "miEditRemoveDigitSymbol";
+            this.miEditRemoveDigitSymbol.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.D3)));
+            this.miEditRemoveDigitSymbol.Size = new System.Drawing.Size(318, 26);
+            this.miEditRemoveDigitSymbol.Tag = "RemoveDigitSymbol";
+            this.miEditRemoveDigitSymbol.Text = "刪除選取範圍內的數符";
+            this.miEditRemoveDigitSymbol.Click += new System.EventHandler(this.miEdit_Click);
+            // 
             // DualEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
@@ -734,5 +746,6 @@
         private System.Windows.Forms.StatusStrip statusCurrentText;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelCurrentWord;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelCurrentLine;
+        private System.Windows.Forms.ToolStripMenuItem miEditRemoveDigitSymbol;
     }
 }

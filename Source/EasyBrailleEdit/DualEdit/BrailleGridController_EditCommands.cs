@@ -1035,5 +1035,67 @@ namespace EasyBrailleEdit.DualEdit
             GridFocusCell(row, col);
         }
 
+
+        public void RemoveDigitSymbol()
+        {
+            if (_grid.Selection.IsEmpty())
+            {
+                MsgBoxHelper.ShowInfo("empty");
+                return;
+            }
+
+            // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
+            var memento = CreateMemento("刪除數符");
+
+            int totalRemoved = 0;
+            foreach (var range in _grid.Selection.GetSelectionRegion())
+            {
+                var startRow = _positionMapper.GetBrailleRowIndex(range.Start.Row);
+                var endRow = _positionMapper.GetBrailleRowIndex(range.End.Row);
+
+                for (int row = startRow; row <= endRow; row += 3)
+                {
+                    int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
+
+                    int removedCountInLine = 0;
+                    BrailleWord lastWord = null;
+                    for (int col = range.Start.Column; col <= range.End.Column; col++)
+                    {
+                        var currWord = _positionMapper.GetBrailleWordFromGridCell(row, col);
+                        if (currWord == null || ReferenceEquals(currWord, lastWord))
+                            continue;
+
+                        if (BrailleWordHelper.RemoveDigitSymbol(currWord))
+                        {
+                            removedCountInLine++;
+                        }
+                        lastWord = currWord;
+                    }
+
+                    if (removedCountInLine > 0)
+                    {
+                        // Update UI for current row
+                        RecreateRow(row);
+                        FillRow(BrailleDoc.Lines[lineIdx], row, true);
+
+                        _grid.Rows.AutoSizeRow(row);
+                        _grid.Rows.AutoSizeRow(row + 1);
+                        _grid.Rows.AutoSizeRow(row + 2);
+
+                        totalRemoved += removedCountInLine;
+                    }
+                }
+            }
+            if (totalRemoved > 0)
+            {
+                UndoRedo.SaveMementoForUndo(memento);
+                _form.StatusText = $"移除了 {totalRemoved} 個數符。";
+            }
+            else
+            {
+                _form.StatusText = $"沒有找到任何數符。";
+            }
+            
+        }
     }
 }

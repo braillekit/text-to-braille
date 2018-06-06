@@ -459,6 +459,11 @@ namespace EasyBrailleEdit
             _controller.PasteFromClipboard(brGrid, activePosition.Row, activePosition.Column);
         }
 
+        private void RemoveDigitSymbol()
+        {
+            _controller.RemoveDigitSymbol();
+        }
+
         private void miEdit_Click(object sender, EventArgs e)
         {
             switch ((string)(sender as ToolStripMenuItem).Tag)
@@ -492,6 +497,9 @@ namespace EasyBrailleEdit
                     break;
                 case "Paste":
                     PasteFromClipboard();
+                    break;
+                case "RemoveDigitSymbol":
+                    RemoveDigitSymbol();
                     break;
             }
         }

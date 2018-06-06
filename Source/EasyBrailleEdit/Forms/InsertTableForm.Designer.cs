@@ -58,14 +58,14 @@
             // 
             this.numRows.Location = new System.Drawing.Point(168, 14);
             this.numRows.Name = "numRows";
-            this.numRows.Size = new System.Drawing.Size(83, 29);
+            this.numRows.Size = new System.Drawing.Size(70, 29);
             this.numRows.TabIndex = 1;
             // 
             // numColumns
             // 
             this.numColumns.Location = new System.Drawing.Point(168, 61);
             this.numColumns.Name = "numColumns";
-            this.numColumns.Size = new System.Drawing.Size(83, 29);
+            this.numColumns.Size = new System.Drawing.Size(70, 29);
             this.numColumns.TabIndex = 3;
             // 
             // label2
@@ -79,15 +79,15 @@
             // 
             // numCellsPerColumn
             // 
-            this.numCellsPerColumn.Location = new System.Drawing.Point(480, 61);
+            this.numCellsPerColumn.Location = new System.Drawing.Point(469, 61);
             this.numCellsPerColumn.Name = "numCellsPerColumn";
-            this.numCellsPerColumn.Size = new System.Drawing.Size(83, 29);
+            this.numCellsPerColumn.Size = new System.Drawing.Size(69, 29);
             this.numCellsPerColumn.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(274, 65);
+            this.label3.Location = new System.Drawing.Point(264, 65);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(199, 19);
             this.label3.TabIndex = 4;
@@ -104,7 +104,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(618, 127);
+            this.panel1.Size = new System.Drawing.Size(570, 127);
             this.panel1.TabIndex = 6;
             // 
             // panel2
@@ -114,14 +114,14 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 127);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(618, 72);
+            this.panel2.Size = new System.Drawing.Size(570, 72);
             this.panel2.TabIndex = 7;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(480, 13);
+            this.btnCancel.Location = new System.Drawing.Point(432, 13);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(108, 47);
             this.btnCancel.TabIndex = 1;
@@ -131,7 +131,7 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(355, 13);
+            this.btnOK.Location = new System.Drawing.Point(307, 13);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(108, 47);
             this.btnOK.TabIndex = 0;
@@ -145,7 +145,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(618, 199);
+            this.ClientSize = new System.Drawing.Size(570, 199);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("PMingLiU", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
