@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using BrailleToolkit;
 using EasyBrailleEdit.DualEdit;
+using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
 {
@@ -24,6 +25,21 @@ namespace EasyBrailleEdit
             m_TmpBrDoc = new BrailleDocument(brDoc.Processor, brDoc.CellsPerLine);
 
             Titles = new List<BraillePageTitle>();
+
+
+            int deletedCount = 0;
+            for (int i = brDoc.PageTitles.Count-1; i >= 0; i--)
+            {
+                if (brDoc.PageTitles[i].TitleLine.CellCount < 1)
+                {
+                    brDoc.PageTitles.RemoveAt(i);
+                    deletedCount++;
+                }
+            }
+            if (deletedCount > 0)
+            {                
+                MsgBoxHelper.ShowWarning("發現空的頁標題！程式已自動移除此空標題，請記得儲存文件。");
+            }
 
             // 複製所有標題列，並將標題列塞進暫存文件。
             BraillePageTitle newTitle = null;
