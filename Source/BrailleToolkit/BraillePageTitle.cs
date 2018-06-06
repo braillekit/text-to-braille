@@ -15,7 +15,7 @@ namespace BrailleToolkit
     /// </summary>
     [Serializable]
     [DataContract]
-    public class BraillePageTitle : ICloneable
+    public class BraillePageTitle : ICloneable, IComparable
     {
         [DataMember(Name = "TitleLine")]
         private BrailleLine m_TitleLine;
@@ -149,6 +149,16 @@ namespace BrailleToolkit
             return t;
 		}
 
-		#endregion
-	}
+        #endregion
+
+        public int CompareTo(object obj)
+        {
+            var title2 = obj as BraillePageTitle;
+            if (title2 == null)
+            {
+                return 0;
+            }
+            return BeginLineIndex - title2.BeginLineIndex;
+        }
+    }
 }

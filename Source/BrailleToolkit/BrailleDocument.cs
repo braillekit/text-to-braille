@@ -161,12 +161,19 @@ namespace BrailleToolkit
         public void AddPageTitle(BraillePageTitle title)
         {
             PageTitles.Add(title);
+            SortPageTitles();
         }
 
         public void AddPageTitleAt(List<BrailleWord> words, int lineIdx)
         {
             var title = new BraillePageTitle(words, this, lineIdx);
             PageTitles.Add(title);
+            SortPageTitles();
+        }
+
+        private void SortPageTitles()
+        {
+            PageTitles.Sort();
         }
 
         /// <summary>
