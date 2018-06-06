@@ -16,7 +16,7 @@ namespace EasyBrailleEdit
         {
             InitializeComponent();
         }
-
+        
         public DualEditTitleForm(BrailleDocument brDoc)
             : this()
         {
@@ -26,32 +26,46 @@ namespace EasyBrailleEdit
 
             Titles = new List<BraillePageTitle>();
 
-
-            int deletedCount = 0;
-            for (int i = brDoc.PageTitles.Count-1; i >= 0; i--)
+            // 複製所有標題列，並將標題列塞進暫存文件。
+            BraillePageTitle newTitle = null;
+            bool emptyTitleFound = false;
+            foreach (BraillePageTitle t in brDoc.PageTitles)
             {
-                if (brDoc.PageTitles[i].TitleLine.CellCount < 1)
+                if (t.TitleLine.CellCount > 0) // 避免塞進空的頁標題
                 {
-                    brDoc.PageTitles.RemoveAt(i);
-                    deletedCount++;
+                    newTitle = t.Clone() as BraillePageTitle;
+                    Titles.Add(newTitle);
+
+                    m_TmpBrDoc.Lines.Add(newTitle.TitleLine);       // 塞進暫存文件。
+                }
+                else
+                {
+                    emptyTitleFound = true;
                 }
             }
-            if (deletedCount > 0)
-            {                
+
+            if (emptyTitleFound)
+            {
                 MsgBoxHelper.ShowWarning("發現空的頁標題！程式已自動移除此空標題，請記得儲存文件。");
             }
 
-            // 複製所有標題列，並將標題列塞進暫存文件。
-            BraillePageTitle newTitle = null;
-            foreach (BraillePageTitle t in brDoc.PageTitles)
-            {
-                newTitle = t.Clone() as BraillePageTitle;
-                Titles.Add(newTitle);
 
-                m_TmpBrDoc.Lines.Add(newTitle.TitleLine);		// 塞進暫存文件。
-            }
 
             Controller = new BrailleGridController(this, brGrid, m_TmpBrDoc, forPageTitle: true);
+        }
+
+        private int RemoveEmptyTitles()
+        {
+            int deletedCount = 0;
+            for (int i = Titles.Count - 1; i >= 0; i--)
+            {
+                if (Titles[i].TitleLine.CellCount < 1)
+                {
+                    Titles.RemoveAt(i);
+                    deletedCount++;
+                }
+            }
+            return deletedCount;
         }
 
         #region 屬性
@@ -99,12 +113,12 @@ namespace EasyBrailleEdit
             string[] disabledCommands =
             {
                 DualEditCommand.Names.InsertLine,
-                DualEditCommand.Names.DeleteLine,
                 DualEditCommand.Names.BreakLine,
                 DualEditCommand.Names.FormatParagraph,
                 DualEditCommand.Names.AddLine,
-                DualEditCommand.Names.CopyToClipboard,   // 尚未加入，暫且隱藏。
-                DualEditCommand.Names.PasteFromClipboard // 尚未加入，暫且隱藏。
+                DualEditCommand.Names.CopyToClipboard,    // 尚未加入，暫且隱藏。
+                DualEditCommand.Names.PasteFromClipboard, // 尚未加入，暫且隱藏。
+                DualEditCommand.Names.InsertTable
             };
 
             foreach (string cmd in disabledCommands)
@@ -167,5 +181,64 @@ namespace EasyBrailleEdit
             Close();
         }
 
+        private void DualEditTitleForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            int row = brGrid.Selection.ActivePosition.Row;
+            int col = brGrid.Selection.ActivePosition.Column;
+
+            if (row < 0 || col < 0)
+            {
+                return;
+            }
+
+            if (e.Modifiers == Keys.None)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.F4:
+                        Controller.EditWord(brGrid, row, col);
+                        e.Handled = true;
+                        break;
+                    case Keys.Back:     // 倒退刪除
+                        Controller.BackspaceCell(brGrid, row, col);
+                        e.Handled = true;
+                        break;
+                    case Keys.Left:
+                        Controller.GridSelectLeftWord(row, col);
+                        e.Handled = true;
+                        break;
+                }
+            }
+            else if (e.Modifiers == Keys.Control)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.I:        // Ctrl+I: 新增點字。
+                        Controller.InsertWord(brGrid, row, col);
+                        e.Handled = true;
+                        break;
+                    case Keys.Insert:    // Ctrl+Ins: 新增一串文字。
+                        Controller.InsertText(brGrid, row, col);
+                        e.Handled = true;
+                        break;
+                    case Keys.Delete:   // Ctrl+Delete: 刪除一格點字。
+                        Controller.DeleteWord(brGrid, row, col);
+                        RemoveEmptyTitles();                        
+                        e.Handled = true;
+                        break;
+                    case Keys.E:        // Ctrl+E: 刪除一列。
+                        Controller.DeleteLine(brGrid, row, col, true);
+                        RemoveEmptyTitles();
+                        e.Handled = true;
+                        break;
+                    case Keys.C:
+                        Controller.CopyToClipboard(brGrid);
+                        break;
+                    case Keys.V:
+                        Controller.PasteFromClipboard(brGrid, row, col);
+                        break;
+                }
+            }
+        }
     }
 }

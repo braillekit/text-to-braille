@@ -718,7 +718,7 @@ namespace EasyBrailleEdit.DualEdit
             _grid.Selection.SelectRange(range, select);
         }
 
-        private void GridSelectLeftWord(int row, int col)
+        public void GridSelectLeftWord(int row, int col)
         {
             if (row < 0 || col < 0)
             {

@@ -69,7 +69,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="grid">來源 grid。</param>
         /// <param name="row">儲存格的列索引。</param>
         /// <param name="col">儲存格的行索引。</param>
-        private void EditWord(SourceGrid.Grid grid, int row, int col)
+        public void EditWord(SourceGrid.Grid grid, int row, int col)
         {
             /* NOTE
              * 每當儲存格內容有變動時，需考慮以下情況： 
@@ -171,7 +171,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="grid">來源 grid。</param>
         /// <param name="row">儲存格的列索引。</param>
         /// <param name="col">儲存格的行索引。</param>
-        private void InsertWord(SourceGrid.Grid grid, int row, int col)
+        public void InsertWord(SourceGrid.Grid grid, int row, int col)
         {
             if (!CheckCellPosition(row, col))
                 return;
@@ -207,7 +207,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="grid">來源 grid。</param>
         /// <param name="row">儲存格的列索引。</param>
         /// <param name="col">儲存格的行索引。</param>
-        private void InsertText(SourceGrid.Grid grid, int row, int col)
+        public void InsertText(SourceGrid.Grid grid, int row, int col)
         {
             if (!CheckCellPosition(row, col))
                 return;
@@ -453,7 +453,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <summary>
         /// 刪除一個儲存格的點字。
         /// </summary>
-        private void DeleteWord(SourceGrid.Grid grid, int row, int col)
+        public void DeleteWord(SourceGrid.Grid grid, int row, int col)
         {
             // 防錯：如果不是有效的儲存格位置就直接返回。
             if (!CheckCellPosition(row, col))
@@ -541,7 +541,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <summary>
         /// 倒退刪除一個儲存格的點字。若在列首的位置執行此動作，則會將該列附加至上一列。
         /// </summary>
-        private void BackspaceCell(SourceGrid.Grid grid, int row, int col)
+        public void BackspaceCell(SourceGrid.Grid grid, int row, int col)
         {
             // 防錯：如果不是有效的儲存格位置就直接返回。
             if (!CheckCellPosition(row, col))
@@ -735,7 +735,7 @@ namespace EasyBrailleEdit.DualEdit
             grid.Selection.Focus(pos, true);    // 修正選取的儲存格範圍。
         }
 
-        private void DeleteLine(Grid grid, int row, int col, bool needConfirm)
+        public void DeleteLine(Grid grid, int row, int col, bool needConfirm)
         {
             // 防錯：如果不是有效的儲存格位置就直接返回。
             if (!CheckCellPosition(row, col))

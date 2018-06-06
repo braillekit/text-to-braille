@@ -346,7 +346,18 @@ namespace EasyBrailleEdit
             if (form.ShowDialog() == DialogResult.OK)
             {
                 BrailleDoc.PageTitles.Clear();
-                BrailleDoc.PageTitles = form.Titles;
+
+                // 複製所有標題列。
+                BraillePageTitle newTitle = null;
+                foreach (BraillePageTitle t in form.Titles)
+                {
+                    if (t.TitleLine.CellCount > 0)
+                    {
+                        newTitle = t.Clone() as BraillePageTitle;
+                        BrailleDoc.PageTitles.Add(newTitle);
+                    }
+                }
+                _controller.IsDirty = true;
             }
         }
 
