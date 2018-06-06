@@ -652,7 +652,7 @@ namespace EasyBrailleEdit.DualEdit
 
             // 檢查上一列是否還有空間可以容納當前列的第一個字
             int avail = BrailleDoc.CellsPerLine - prevBrLine.CellCount;
-            if (avail < currBrLine.GetFirstVisibleWord().CellCount)
+            if (avail < currBrLine.GetFirstVisibleWord().CellCount || !CanBreakLine(currBrLine))
             {
                 // 上一列的空間不夠，就算接上去，還是會在斷行時再度折下來，因此不處理。
                 return 0;
@@ -687,6 +687,15 @@ namespace EasyBrailleEdit.DualEdit
             }
 
             return formattedLineCount;
+
+            bool CanBreakLine(BrailleLine aLine)
+            {
+                if (aLine[0].IsContextTag && aLine[0].Text == "<P>")
+                {
+                    return false;
+                }
+                return true;
+            }
         }
 
         /// <summary>

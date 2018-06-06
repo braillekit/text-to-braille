@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using BrailleToolkit;
 using EasyBrailleEdit.DualEdit;
 using Huanlin.Windows.Forms;
+using SourceGrid;
+using SourceGrid.Selection;
 
 namespace EasyBrailleEdit
 {
@@ -49,8 +51,6 @@ namespace EasyBrailleEdit
                 MsgBoxHelper.ShowWarning("發現空的頁標題！程式已自動移除此空標題，請記得儲存文件。");
             }
 
-
-
             Controller = new BrailleGridController(this, brGrid, m_TmpBrDoc, forPageTitle: true);
         }
 
@@ -77,7 +77,10 @@ namespace EasyBrailleEdit
         string IBrailleGridForm.StatusText
         {
             get => String.Empty;
-            set { }
+            set
+            {
+                statMessage.Text = value;
+            }
         }
         int IBrailleGridForm.StatusProgress
         {
@@ -88,13 +91,19 @@ namespace EasyBrailleEdit
         string IBrailleGridForm.CurrentWordStatusText
         {
             get => String.Empty;
-            set { }
+            set
+            {
+                statusLabelCurrentWord.Text = value;
+            }
         }
 
         string IBrailleGridForm.CurrentLineStatusText
         {
             get => String.Empty;
-            set { }
+            set
+            {
+                statusLabelCurrentLine.Text = value;
+            }
         }
 
         string IBrailleGridForm.PageNumberText
@@ -107,6 +116,10 @@ namespace EasyBrailleEdit
 
         private void DualEditTitleForm_Load(object sender, EventArgs e)
         {
+            (this as IBrailleGridForm).StatusText = String.Empty;
+            (this as IBrailleGridForm).CurrentLineStatusText = String.Empty;
+            (this as IBrailleGridForm).CurrentWordStatusText = String.Empty;
+
             Controller.InitializeGrid();
 
             // 隱藏禁止使用的功能。
@@ -125,8 +138,26 @@ namespace EasyBrailleEdit
             {
                 Controller.MenuController.HideMenuItem(cmd);
             }
-           
+
+            brGrid.Selection.FocusRowEntered += GridSelection_FocusRowEntered;
+            brGrid.Selection.CellGotFocus += GridSelection_CellGotFocus;
+
             Controller.FillGrid();
+        }
+
+        private void GridSelection_FocusRowEntered(object sender, RowEventArgs e)
+        {
+            var lineIdx = Controller.PositionMapper.GridRowToBrailleLineIndex(e.Row);
+            var brLine = m_TmpBrDoc.Lines[lineIdx];
+
+            
+
+            (this as IBrailleGridForm).CurrentLineStatusText = brLine.ToOriginalTextString();
+        }
+
+        private void GridSelection_CellGotFocus(SelectionBase sender, ChangeActivePositionEventArgs e)
+        {
+            Controller.GridSelection_CellGotFocus(e);
         }
 
         /// <summary>

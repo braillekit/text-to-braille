@@ -447,7 +447,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// 根據每個頁標題得起始列索引更新其對應的 BrailleLine 物件。
+        /// 根據每個頁標題的起始列索引更新其對應的 BrailleLine 物件。
         /// 使用時機：BrailleDocument 從檔案載入完畢時。
         /// </summary>
         public void UpdateTitlesLineObject()

@@ -33,7 +33,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnAbortEdit = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusCurrentText = new System.Windows.Forms.StatusStrip();
+            this.statusLabelCurrentWord = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLabelCurrentLine = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.statusCurrentText.SuspendLayout();
             this.SuspendLayout();
             // 
             // brGrid
@@ -51,7 +58,7 @@
             this.brGrid.OptimizeMode = SourceGrid.CellOptimizeMode.ForRows;
             this.brGrid.RowsCount = 1;
             this.brGrid.SelectionMode = SourceGrid.GridSelectionMode.Cell;
-            this.brGrid.Size = new System.Drawing.Size(899, 495);
+            this.brGrid.Size = new System.Drawing.Size(899, 442);
             this.brGrid.TabIndex = 3;
             this.brGrid.TabStop = true;
             this.brGrid.ToolTipText = "";
@@ -97,12 +104,67 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statMessage});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 534);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(899, 22);
+            this.statusStrip1.TabIndex = 5;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statMessage
+            // 
+            this.statMessage.Name = "statMessage";
+            this.statMessage.Size = new System.Drawing.Size(0, 17);
+            // 
+            // statusCurrentText
+            // 
+            this.statusCurrentText.Font = new System.Drawing.Font("Microsoft JhengHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.statusCurrentText.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusCurrentText.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabelCurrentWord,
+            this.statusLabelCurrentLine});
+            this.statusCurrentText.Location = new System.Drawing.Point(0, 503);
+            this.statusCurrentText.Name = "statusCurrentText";
+            this.statusCurrentText.Size = new System.Drawing.Size(899, 31);
+            this.statusCurrentText.TabIndex = 7;
+            this.statusCurrentText.Text = "statusStrip2";
+            // 
+            // statusLabelCurrentWord
+            // 
+            this.statusLabelCurrentWord.AutoSize = false;
+            this.statusLabelCurrentWord.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.statusLabelCurrentWord.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusLabelCurrentWord.Name = "statusLabelCurrentWord";
+            this.statusLabelCurrentWord.Size = new System.Drawing.Size(520, 26);
+            this.statusLabelCurrentWord.Text = "toolStripStatusLabel1";
+            this.statusLabelCurrentWord.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.statusLabelCurrentWord.ToolTipText = "目前選取的字";
+            // 
+            // statusLabelCurrentLine
+            // 
+            this.statusLabelCurrentLine.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.statusLabelCurrentLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusLabelCurrentLine.Name = "statusLabelCurrentLine";
+            this.statusLabelCurrentLine.Size = new System.Drawing.Size(196, 26);
+            this.statusLabelCurrentLine.Text = "statusLabelCurrentLine";
+            this.statusLabelCurrentLine.ToolTipText = "游標所在的那一行的明眼字";
+            // 
             // DualEditTitleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(899, 556);
             this.Controls.Add(this.brGrid);
+            this.Controls.Add(this.statusCurrentText);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.KeyPreview = true;
@@ -114,7 +176,12 @@
             this.Load += new System.EventHandler(this.DualEditTitleForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DualEditTitleForm_KeyDown);
             this.panel1.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.statusCurrentText.ResumeLayout(false);
+            this.statusCurrentText.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 
@@ -125,5 +192,10 @@
 		private System.Windows.Forms.Button btnAbortEdit;
 		private System.Windows.Forms.Button btnSave;
 		private System.Windows.Forms.Label label1;
-	}
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel statMessage;
+        private System.Windows.Forms.StatusStrip statusCurrentText;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabelCurrentWord;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabelCurrentLine;
+    }
 }
