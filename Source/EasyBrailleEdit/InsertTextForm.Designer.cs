@@ -128,12 +128,12 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.doprdownBtnTableLines = new System.Windows.Forms.ToolStripDropDownButton();
+            this.btnTableMiddleLine = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTableTopLine1 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTableBottomLine1 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTableTopLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTableBottomLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnTableMiddleLine = new System.Windows.Forms.ToolStripMenuItem();
             this.toolBarSymbol1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolBarSymbol2.SuspendLayout();
@@ -1132,6 +1132,13 @@
             this.doprdownBtnTableLines.Text = "表格橫線";
             this.doprdownBtnTableLines.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
             // 
+            // btnTableMiddleLine
+            // 
+            this.btnTableMiddleLine.Name = "btnTableMiddleLine";
+            this.btnTableMiddleLine.Size = new System.Drawing.Size(216, 26);
+            this.btnTableMiddleLine.Tag = "<表格>────────────────────</表格>\\n";
+            this.btnTableMiddleLine.Text = "表格橫槓 (20方)";
+            // 
             // btnTableTopLine1
             // 
             this.btnTableTopLine1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -1160,13 +1167,6 @@
             this.btnTableBottomLine2.Size = new System.Drawing.Size(216, 26);
             this.btnTableBottomLine2.Tag = "<下表格線2></下表格線2>\\n";
             this.btnTableBottomLine2.Text = "下表格線2";
-            // 
-            // btnTableMiddleLine
-            // 
-            this.btnTableMiddleLine.Name = "btnTableMiddleLine";
-            this.btnTableMiddleLine.Size = new System.Drawing.Size(216, 26);
-            this.btnTableMiddleLine.Tag = "<表格>──────────</表格>\\n";
-            this.btnTableMiddleLine.Text = "表格橫槓 (10方)";
             // 
             // InsertTextForm
             // 
