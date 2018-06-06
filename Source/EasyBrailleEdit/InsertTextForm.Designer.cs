@@ -101,6 +101,7 @@
             this.txtBraille = new System.Windows.Forms.TextBox();
             this.lblErrorTitle = new System.Windows.Forms.Label();
             this.toolBarSymbol3 = new System.Windows.Forms.ToolStrip();
+            this.btnSymbolDocTitle = new System.Windows.Forms.ToolStripButton();
             this.btnTagBrailleComment = new System.Windows.Forms.ToolStripButton();
             this.btnSymbolEndTags = new System.Windows.Forms.ToolStripDropDownButton();
             this.btnEndTag1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,7 +133,7 @@
             this.btnTableTopLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTableBottomLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnSymbolDocTitle = new System.Windows.Forms.ToolStripButton();
+            this.btnTableMiddleLine = new System.Windows.Forms.ToolStripMenuItem();
             this.toolBarSymbol1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolBarSymbol2.SuspendLayout();
@@ -881,6 +882,16 @@
             this.toolBarSymbol3.Text = "toolStrip4";
             this.toolBarSymbol3.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
             // 
+            // btnSymbolDocTitle
+            // 
+            this.btnSymbolDocTitle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSymbolDocTitle.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDocTitle.Image")));
+            this.btnSymbolDocTitle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSymbolDocTitle.Name = "btnSymbolDocTitle";
+            this.btnSymbolDocTitle.Size = new System.Drawing.Size(97, 23);
+            this.btnSymbolDocTitle.Tag = "<標題>|</標題>";
+            this.btnSymbolDocTitle.Text = "頁標題";
+            // 
             // btnTagBrailleComment
             // 
             this.btnTagBrailleComment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -1108,6 +1119,7 @@
             // 
             this.doprdownBtnTableLines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.doprdownBtnTableLines.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnTableMiddleLine,
             this.btnTableTopLine1,
             this.btnTableBottomLine1,
             this.btnTableTopLine2,
@@ -1149,15 +1161,12 @@
             this.btnTableBottomLine2.Tag = "<下表格線2></下表格線2>\\n";
             this.btnTableBottomLine2.Text = "下表格線2";
             // 
-            // btnSymbolDocTitle
+            // btnTableMiddleLine
             // 
-            this.btnSymbolDocTitle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolDocTitle.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDocTitle.Image")));
-            this.btnSymbolDocTitle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolDocTitle.Name = "btnSymbolDocTitle";
-            this.btnSymbolDocTitle.Size = new System.Drawing.Size(97, 23);
-            this.btnSymbolDocTitle.Tag = "<標題>|</標題>";
-            this.btnSymbolDocTitle.Text = "頁標題";
+            this.btnTableMiddleLine.Name = "btnTableMiddleLine";
+            this.btnTableMiddleLine.Size = new System.Drawing.Size(216, 26);
+            this.btnTableMiddleLine.Tag = "<表格>──────────</表格>\\n";
+            this.btnTableMiddleLine.Text = "表格橫槓 (10方)";
             // 
             // InsertTextForm
             // 
@@ -1297,5 +1306,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnTableBottomLine2;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripButton btnSymbolDocTitle;
+        private System.Windows.Forms.ToolStripMenuItem btnTableMiddleLine;
     }
 }
