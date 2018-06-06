@@ -281,8 +281,7 @@ namespace EasyBrailleEdit.DualEdit
             // 如果插入的是頁標題，則直接加到頁標題集合裡。
             if (BrailleWordHelper.ContainsTitleTag(wordList))
             {
-                var title = new BraillePageTitle(wordList, lineIdx);
-                BrailleDoc.AddPageTitle(title);
+                BrailleDoc.AddPageTitleAt(wordList, lineIdx);
                 IsDirty = true;
 
                 // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。

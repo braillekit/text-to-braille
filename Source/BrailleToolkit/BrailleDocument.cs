@@ -158,10 +158,15 @@ namespace BrailleToolkit
             Log.Debug($"BrailleDocument.LoadAndConvert() 執行完畢。頁標題數量為 {titleCount}。");
         }
 
-        public int AddPageTitle(BraillePageTitle title)
+        public void AddPageTitle(BraillePageTitle title)
         {
             PageTitles.Add(title);
-            return 1;
+        }
+
+        public void AddPageTitleAt(List<BrailleWord> words, int lineIdx)
+        {
+            var title = new BraillePageTitle(words, this, lineIdx);
+            PageTitles.Add(title);
         }
 
         /// <summary>
