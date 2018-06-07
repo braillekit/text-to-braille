@@ -56,7 +56,7 @@ namespace BrailleToolkit
         }
 
         [DataMember]
-        public List<BrailleWord> Words { get; private set; }
+        public List<BrailleWord> Words { get; protected set; }
 
         public int WordCount
         {

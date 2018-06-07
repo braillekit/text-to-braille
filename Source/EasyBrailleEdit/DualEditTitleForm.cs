@@ -41,6 +41,7 @@ namespace EasyBrailleEdit
                 if (t.TitleLine.CellCount > 0) // 避免塞進空的頁標題
                 {
                     newTitle = t.Clone() as BraillePageTitle;
+                    //newTitle.TitleLine = new BraillePageTitleLine(newTitle.TitleLine, newTitle.BeginLineIndex);
                     Titles.Add(newTitle);
 
                     m_TmpBrDoc.Lines.Add(newTitle.TitleLine);       // 把標題 line 塞進暫存文件。
@@ -153,6 +154,12 @@ namespace EasyBrailleEdit
             var brLine = m_TmpBrDoc.Lines[lineIdx];
 
             string beginLineInfo = "[N/A] ";
+
+            var titleLine = brLine as BraillePageTitleLine;
+            if (titleLine != null)
+            {
+                beginLineInfo = $"[{titleLine.BeginLineIndex + 1}] "; // 顯示的行號是從 1 開始。
+            }
 
             //var pageTitle = m_OrgBrDoc.FindTitle(brLine);
             //if (pageTitle != null)

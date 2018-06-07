@@ -31,46 +31,32 @@ namespace BrailleToolkit
             m_BeginLineIndex = -1;
         }
 
-        public BraillePageTitle(List<BrailleWord> words, BrailleDocument brDoc, int lineIdx)
+        public BraillePageTitle(List<BrailleWord> words, int beginLineIdx, BrailleLine beginLine)
         {
-            SetTitleLine(words, brDoc, lineIdx);
+            SetTitleLine(words, beginLineIdx, beginLine);
 
         }
 
-        public BraillePageTitle(BrailleDocument brDoc, int lineIdx) : this()
+        public BraillePageTitle(BrailleLine titleLine, int beginLineIdx, BrailleLine beginLine) : this()
         {
-            SetTitleLine(brDoc, lineIdx);
+            SetTitleLine(titleLine, beginLineIdx, beginLine);
         }
 
-        private bool SetTitleLine(List<BrailleWord> words, BrailleDocument brDoc, int lineIdx)
+        private void SetTitleLine(List<BrailleWord> words, int beginLineIdx, BrailleLine beginLine)
         {
-            if ((lineIdx + 1) >= brDoc.LineCount)
-            {
-                return false;
-            }
-            BeginLineIndex = lineIdx + 1;   // 從下一列開始就是使用此標題。
-            BeginLineRef = brDoc.Lines[BeginLineIndex];
-
             TitleLine = new BrailleLine();
             TitleLine.Words.AddRange(words);
-            return true;
+
+            BeginLineIndex = beginLineIdx;
+            BeginLineRef = beginLine;
         }
 
-        public void SetTitleLine(BrailleDocument brDoc, int lineIdx)
+        public void SetTitleLine(BrailleLine titleLine, int beginLineIdx, BrailleLine beginLine)
         {
-            m_TitleLine = brDoc.Lines[lineIdx];
+            TitleLine = titleLine;
+            BeginLineIndex = beginLineIdx;
+            BeginLineRef = beginLine;
 
-			BeginLineIndex = lineIdx + 1;   // 從下一列開始就是使用此標題。
-
-			if (BeginLineIndex >= brDoc.LineCount)	// 標題列就是文件的最後一列?
-			{
-				//System.Diagnostics.Trace.WriteLine("BraillePageTitle.SetTitleLine: 標題列後面沒有文字內容!");
-				BeginLineIndex = -1;
-				BeginLineRef = null;
-				return;
-			}
-
-            BeginLineRef = brDoc.Lines[m_BeginLineIndex];
         }
 
         /// <summary>

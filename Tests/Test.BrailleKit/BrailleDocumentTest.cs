@@ -43,6 +43,31 @@ namespace Test.BrailleToolkit
         }
 
         [Test]
+        public void Should_FetchPageTitles_Succeed()
+        {
+            string text =
+                "0\n" +
+                "1\n" +
+                "2\n" +
+                "<標題>insert at 3</標題>\n" +
+                "3\n" +
+                "4\n";
+
+            var processor =  BrailleProcessor.GetInstance();
+
+            var brDoc = new BrailleDocument(processor);
+            using (var reader = new StringReader(text))
+            {
+                brDoc.LoadAndConvert(reader);
+            }
+
+            Assert.IsTrue(brDoc.PageTitles.Count == 1);
+            Assert.IsTrue(brDoc.LineCount == 5);
+            Assert.IsTrue(brDoc.PageTitles[0].BeginLineIndex == 3);
+            Assert.IsTrue(brDoc.PageTitles[0].BeginLineRef.ToString() == "3");
+        }
+
+        [Test]
         public void Should_ConvertTable_Succeed()
         {
             string lines =
@@ -55,8 +80,7 @@ namespace Test.BrailleToolkit
                 "</表格>\n";
             
 
-            BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+            var processor = BrailleProcessor.GetInstance();
 
 
             var brDoc = new BrailleDocument(processor, 32);
@@ -68,6 +92,8 @@ namespace Test.BrailleToolkit
             Assert.IsTrue(brDoc.LineCount == 7);
             Assert.IsTrue(brDoc.Lines[0].Words[0].IsContextTag);
             Assert.IsTrue(brDoc.Lines[6].Words[0].IsContextTag);
+
+            // TODO: Assert 左邊直線與中間和右邊直線的點字是否正確。
         }
     }
 

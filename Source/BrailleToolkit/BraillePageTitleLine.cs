@@ -17,6 +17,12 @@ namespace BrailleToolkit
             BeginLineRef = null;
         }
 
+        public BraillePageTitleLine(BrailleLine brLineForTitle, int beginLineIndex)
+        {
+            Words = brLineForTitle.Words;
+            BeginLineIndex = beginLineIndex;
+        }
+
         public BraillePageTitleLine(BrailleDocument brDoc, int beginLineIndex)
             : this()
         {

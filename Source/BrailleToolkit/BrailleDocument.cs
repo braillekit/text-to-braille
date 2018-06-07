@@ -166,7 +166,11 @@ namespace BrailleToolkit
 
         public void AddPageTitleAt(List<BrailleWord> words, int lineIdx)
         {
-            var title = new BraillePageTitle(words, this, lineIdx);
+            if (lineIdx >= LineCount)
+            {
+                throw new InvalidOperationException($"加入標題列時指定的索引超出文件大小: {lineIdx}");
+            }
+            var title = new BraillePageTitle(words, lineIdx, Lines[lineIdx]);
             PageTitles.Add(title);
             SortPageTitles();
         }
@@ -402,9 +406,12 @@ namespace BrailleToolkit
                 brLine = m_Lines[lineIdx];
                 if (brLine.ContainsTitleTag())
                 {
-                    BraillePageTitle title = new BraillePageTitle(this, lineIdx);
-                    newPageTitles.Add(title);
-                    m_Lines.RemoveAt(lineIdx);
+                    var titleLine = Lines[lineIdx];
+                    var beginLine = Lines[lineIdx + 1];
+                    var pageTitle = new BraillePageTitle(titleLine, lineIdx, beginLine);
+                    newPageTitles.Add(pageTitle);
+
+                    Lines.RemoveAt(lineIdx);
                 }
                 else
                 {
