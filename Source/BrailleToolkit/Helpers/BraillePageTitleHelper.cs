@@ -8,6 +8,5 @@ namespace BrailleToolkit.Helpers
 {
     public static class BraillePageTitleHelper
     {
-        
     }
 }

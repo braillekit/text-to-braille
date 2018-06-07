@@ -12,7 +12,12 @@ namespace EasyBrailleEdit
     public partial class DualEditTitleForm : Form, IBrailleGridForm
     {
         private BrailleDocument m_OrgBrDoc;	// 標題列所屬的 BrailleDocument 物件
-        private BrailleDocument m_TmpBrDoc; // 把所有標題列都丟到這個暫時的 railleDocument 物件
+        private BrailleDocument m_TmpBrDoc; // 把所有標題列都丟到這個暫時的 BrailleDocument 物件
+
+        public List<BraillePageTitle> Titles { get; }
+
+        private BrailleGridController Controller { get; }
+
 
         private DualEditTitleForm()
         {
@@ -38,7 +43,7 @@ namespace EasyBrailleEdit
                     newTitle = t.Clone() as BraillePageTitle;
                     Titles.Add(newTitle);
 
-                    m_TmpBrDoc.Lines.Add(newTitle.TitleLine);       // 塞進暫存文件。
+                    m_TmpBrDoc.Lines.Add(newTitle.TitleLine);       // 把標題 line 塞進暫存文件。
                 }
                 else
                 {
@@ -70,9 +75,6 @@ namespace EasyBrailleEdit
 
         #region 屬性
 
-        public List<BraillePageTitle> Titles { get; }
-
-        private BrailleGridController Controller { get; }
 
         string IBrailleGridForm.StatusText
         {
@@ -150,9 +152,15 @@ namespace EasyBrailleEdit
             var lineIdx = Controller.PositionMapper.GridRowToBrailleLineIndex(e.Row);
             var brLine = m_TmpBrDoc.Lines[lineIdx];
 
-            
+            string beginLineInfo = "[N/A] ";
 
-            (this as IBrailleGridForm).CurrentLineStatusText = brLine.ToOriginalTextString();
+            //var pageTitle = m_OrgBrDoc.FindTitle(brLine);
+            //if (pageTitle != null)
+            //{
+            //    beginLineInfo = $"[{pageTitle.BeginLineIndex + 1}] ";
+            //}
+
+            (this as IBrailleGridForm).CurrentLineStatusText = beginLineInfo + brLine.ToOriginalTextString();
         }
 
         private void GridSelection_CellGotFocus(SelectionBase sender, ChangeActivePositionEventArgs e)

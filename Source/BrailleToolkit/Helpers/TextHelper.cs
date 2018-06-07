@@ -22,7 +22,7 @@ namespace BrailleToolkit.Helpers
                         lineBuf.Append(GetBeginSymbolOfColumn(row, line, col));
                         lineBuf.Append(AddMiddleSymbolOfRow(line));
                     }
-                    lineBuf.Append(GetEndSymbolOfLine(row, line));
+                    lineBuf.Append(GetEndSymbolOfLine(row, line, columnCount));
                     sb.AppendLine(lineBuf.ToString());
                 }
             }
@@ -34,7 +34,7 @@ namespace BrailleToolkit.Helpers
                 lineBuf.Append(GetBeginSymbolOfColumn(rowCount, 0, col));
                 lineBuf.Append(AddMiddleSymbolOfRow(0));
             }
-            lineBuf.Append(GetEndSymbolOfLine(rowCount, 0));
+            lineBuf.Append(GetEndSymbolOfLine(rowCount, 0, columnCount));
             sb.AppendLine(lineBuf.ToString());
 
             return sb.ToString();
@@ -42,6 +42,10 @@ namespace BrailleToolkit.Helpers
 
             string GetBeginSymbolOfColumn(int row, int line, int col)
             {
+                const string LeftVerticalBar = "│";  // 左邊線
+                const string RightVerticalBar = "∣"; // 右邊線
+
+
                 if (line % 2 == 0)
                 {
                     if (col == 0)
@@ -57,7 +61,9 @@ namespace BrailleToolkit.Helpers
                         return "┼";
                     }
                 }
-                return "│";
+                if (col == 0)
+                    return LeftVerticalBar;
+                return RightVerticalBar; 
             }
 
             string AddMiddleSymbolOfRow(int line)
@@ -77,7 +83,7 @@ namespace BrailleToolkit.Helpers
                 return middle.ToString();
             }
 
-            string GetEndSymbolOfLine(int row, int line)
+            string GetEndSymbolOfLine(int row, int line, int col)
             {
                 if (line % 2 == 0)
                 {
@@ -87,7 +93,7 @@ namespace BrailleToolkit.Helpers
                         return "┘";   // 右下角
                     return "┤";
                 }
-                return "│";
+                return "∣";  // 右邊線
             }
         }
 
