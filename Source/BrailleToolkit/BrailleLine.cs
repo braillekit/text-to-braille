@@ -15,6 +15,16 @@ namespace BrailleToolkit
     [DataContract]
     public class BrailleLine : ICloneable
     {
+        [DataMember]
+        public List<BrailleWord> Words { get; protected set; }
+
+        /// <summary>
+        /// 加入 Tag 屬性的最初目的用來記住標題列在雙視文件中的 begin line index，但也可以作為其他用途。
+        /// 此屬性不會序列化，不會保存。
+        /// </summary>
+        public object Tag { get; set; }
+
+
         public BrailleLine()
         {
             Words = new List<BrailleWord>();
@@ -54,9 +64,6 @@ namespace BrailleToolkit
             }
             return false;
         }
-
-        [DataMember]
-        public List<BrailleWord> Words { get; protected set; }
 
         public int WordCount
         {
@@ -356,18 +363,19 @@ namespace BrailleToolkit
         /// <returns>新的點字串列。</returns>
         public BrailleLine ShallowCopy(int index, int count)
         {
-            BrailleLine brLine = new BrailleLine();
+            BrailleLine newLine = new BrailleLine();
             BrailleWord newWord = null;
             while (index < Words.Count && count > 0)
             {
                 newWord = Words[index];
-                brLine.Words.Add(newWord);
+                newLine.Words.Add(newWord);
 
                 index++;
                 count--;
 
             }
-            return brLine;
+            newLine.Tag = Tag;
+            return newLine;
         }
 
         public BrailleLine DeepCopy()
@@ -377,17 +385,18 @@ namespace BrailleToolkit
 
         public BrailleLine DeepCopy(int index, int count)
         {
-            BrailleLine brLine = new BrailleLine();
+            BrailleLine newLine = new BrailleLine();
             BrailleWord newWord = null;
             while (index < Words.Count && count > 0)
             {
                 newWord = Words[index].Copy();
-                brLine.Words.Add(newWord);
+                newLine.Words.Add(newWord);
 
                 index++;
                 count--;
             }
-            return brLine;
+            newLine.Tag = Tag;
+            return newLine;
         }
 
 
@@ -399,15 +408,16 @@ namespace BrailleToolkit
         /// <returns></returns>
         public object Clone()
         {
-            BrailleLine brLine = new BrailleLine();
+            BrailleLine newLine = new BrailleLine();
             BrailleWord newWord = null;
 
             foreach (BrailleWord brWord in Words)
             {
                 newWord = brWord.Copy();
-                brLine.Words.Add(newWord);
+                newLine.Words.Add(newWord);
             }
-            return brLine;
+            newLine.Tag = Tag;
+            return newLine;
         }
 
         #endregion

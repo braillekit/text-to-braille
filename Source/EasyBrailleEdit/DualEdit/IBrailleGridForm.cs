@@ -26,6 +26,7 @@ namespace EasyBrailleEdit.DualEdit
         int StatusProgress { get; set; }
         string CurrentWordStatusText { get; set; }
         string CurrentLineStatusText { get; set; }
+        string CurrentPageTitleStatusText { get; set; }
         string PageNumberText { get; set; }
     }
 }

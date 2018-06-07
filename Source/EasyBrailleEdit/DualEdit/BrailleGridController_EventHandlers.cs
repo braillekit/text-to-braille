@@ -83,6 +83,16 @@ namespace EasyBrailleEdit.DualEdit
             var lineIdx = _positionMapper.GridRowToBrailleLineIndex(e.Row);
             var brLine = BrailleDoc.Lines[lineIdx];
             _form.CurrentLineStatusText = brLine.ToOriginalTextString();
+
+            var pageTitle = BrailleDoc.FindPageTitleByBeginLine(brLine);
+            if (pageTitle != null)
+            {
+                _form.CurrentPageTitleStatusText = $"頁標：{pageTitle.TitleLine.ToString()}";
+            }
+            else
+            {
+                _form.CurrentPageTitleStatusText = String.Empty;
+            }
         }
 
         public void GridSelection_CellGotFocus(SourceGrid.ChangeActivePositionEventArgs e)

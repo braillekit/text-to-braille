@@ -181,7 +181,7 @@ namespace EasyBrailleEdit.DualEdit
             UndoRedo = new UndoRedoManager(AppGlobals.Config.BrailleEditor.MaxUndoLevel);
         }
 
-        public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, BrailleDocument doc, bool forPageTitle) 
+        public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, BrailleDocument doc, bool forPageTitle)
             : this()
         {
             _form = form;
@@ -191,7 +191,7 @@ namespace EasyBrailleEdit.DualEdit
         }
 
         public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, string brxFileName, bool forPageTitle)
-            :this()
+            : this()
         {
             _form = form;
             _grid = grid;
@@ -202,7 +202,7 @@ namespace EasyBrailleEdit.DualEdit
         public void InitializeGrid()
         {
             // 確保既有的欄和列都被清除
-            _grid.Rows.Clear(); 
+            _grid.Rows.Clear();
             _grid.Columns.Clear();
 
             // 設定 grid 預設的欄寬與列高
@@ -364,6 +364,7 @@ namespace EasyBrailleEdit.DualEdit
         private void RefreshRowNumbers()
         {
             int rowNum = 1;
+            int lineIdx = 0;
             int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
 
             if (AppGlobals.Config.Printing.PrintPageFoot)
@@ -373,17 +374,30 @@ namespace EasyBrailleEdit.DualEdit
 
             for (int row = 1; row < _grid.RowsCount; row += 3)
             {
-                if ((rowNum - 1) % linesPerPage == 0)
+                var cell = _grid[row, 0];
+
+                var brLine = BrailleDoc.Lines[lineIdx];
+                var pageTitle = BrailleDoc.FindPageTitleByBeginLine(brLine);
+                if (pageTitle != null)
                 {
-                    _grid[row, 0].View = m_HeaderView2;
-                    _grid[row, 0].Value = rowNum;
+                    cell.Value = $"{rowNum} 標";
                 }
                 else
                 {
-                    _grid[row, 0].View = m_HeaderView;
-                    _grid[row, 0].Value = rowNum;
+                    cell.Value = $"{rowNum}";
                 }
+
+                if ((rowNum - 1) % linesPerPage == 0)
+                {
+                    cell.View = m_HeaderView2;
+                }
+                else
+                {
+                    cell.View = m_HeaderView;
+                }
+                
                 rowNum++;
+                lineIdx++;
             }
         }
 
@@ -546,7 +560,7 @@ namespace EasyBrailleEdit.DualEdit
 
                 // 焦點移至第一列的第一個儲存格，並且清除既有的選取區域。
                 GridFocusCell(_grid.FixedRows, _grid.FixedColumns);
-                
+
                 CursorHelper.RestoreCursor();
             }
         }

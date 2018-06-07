@@ -55,6 +55,7 @@
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
             this.miEditCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.miEditRemoveDigitSymbol = new System.Windows.Forms.ToolStripMenuItem();
             this.miView = new System.Windows.Forms.ToolStripMenuItem();
             this.miViewMode = new System.Windows.Forms.ToolStripMenuItem();
             this.miViewAll = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,7 +89,7 @@
             this.statusCurrentText = new System.Windows.Forms.StatusStrip();
             this.statusLabelCurrentWord = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelCurrentLine = new System.Windows.Forms.ToolStripStatusLabel();
-            this.miEditRemoveDigitSymbol = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusLabelPageTitle = new System.Windows.Forms.ToolStripStatusLabel();
             this.mnuMain.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -104,12 +105,12 @@
             this.brGrid.EnableSort = true;
             this.brGrid.FixedColumns = 1;
             this.brGrid.FixedRows = 1;
-            this.brGrid.Location = new System.Drawing.Point(0, 55);
+            this.brGrid.Location = new System.Drawing.Point(0, 54);
             this.brGrid.Name = "brGrid";
             this.brGrid.OptimizeMode = SourceGrid.CellOptimizeMode.ForRows;
             this.brGrid.RowsCount = 1;
             this.brGrid.SelectionMode = SourceGrid.GridSelectionMode.Cell;
-            this.brGrid.Size = new System.Drawing.Size(753, 415);
+            this.brGrid.Size = new System.Drawing.Size(927, 416);
             this.brGrid.TabIndex = 2;
             this.brGrid.TabStop = true;
             this.brGrid.ToolTipText = "";
@@ -124,7 +125,7 @@
             this.miTools});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(753, 28);
+            this.mnuMain.Size = new System.Drawing.Size(927, 27);
             this.mnuMain.TabIndex = 3;
             this.mnuMain.Text = "menuStrip1";
             // 
@@ -141,7 +142,7 @@
             this.toolStripMenuItem2,
             this.離開XToolStripMenuItem});
             this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(69, 24);
+            this.miFile.Size = new System.Drawing.Size(69, 23);
             this.miFile.Text = "檔案(&F)";
             // 
             // miFileOpen
@@ -223,7 +224,7 @@
             this.miEditPaste,
             this.miEditRemoveDigitSymbol});
             this.miEdit.Name = "miEdit";
-            this.miEdit.Size = new System.Drawing.Size(69, 24);
+            this.miEdit.Size = new System.Drawing.Size(69, 23);
             this.miEdit.Text = "編輯(&E)";
             // 
             // miEditDocProperties
@@ -328,6 +329,16 @@
             this.miEditPaste.Text = "貼上";
             this.miEditPaste.Click += new System.EventHandler(this.miEdit_Click);
             // 
+            // miEditRemoveDigitSymbol
+            // 
+            this.miEditRemoveDigitSymbol.Name = "miEditRemoveDigitSymbol";
+            this.miEditRemoveDigitSymbol.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.D3)));
+            this.miEditRemoveDigitSymbol.Size = new System.Drawing.Size(318, 26);
+            this.miEditRemoveDigitSymbol.Tag = "RemoveDigitSymbol";
+            this.miEditRemoveDigitSymbol.Text = "刪除選取範圍內的數符";
+            this.miEditRemoveDigitSymbol.Click += new System.EventHandler(this.miEdit_Click);
+            // 
             // miView
             // 
             this.miView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -339,7 +350,7 @@
             this.toolStripMenuItem4,
             this.miViewRefresh});
             this.miView.Name = "miView";
-            this.miView.Size = new System.Drawing.Size(71, 24);
+            this.miView.Size = new System.Drawing.Size(71, 23);
             this.miView.Text = "檢視(&V)";
             // 
             // miViewMode
@@ -428,7 +439,7 @@
             this.miToolsRemoveSharpSymbolFromPageNumbers,
             this.miToolsRemoveUselessWords});
             this.miTools.Name = "miTools";
-            this.miTools.Size = new System.Drawing.Size(69, 24);
+            this.miTools.Size = new System.Drawing.Size(69, 23);
             this.miTools.Text = "工具(&T)";
             // 
             // miToolsRemoveSharpSymbolFromPageNumbers
@@ -461,9 +472,9 @@
             this.toolStripLabel1,
             this.txtGotoPageNum,
             this.btnGotoPage});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 27);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(753, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(927, 27);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -568,7 +579,7 @@
             this.statPageInfo});
             this.statusStrip1.Location = new System.Drawing.Point(0, 501);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(753, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(927, 24);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -609,10 +620,11 @@
             this.statusCurrentText.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusCurrentText.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabelCurrentWord,
-            this.statusLabelCurrentLine});
+            this.statusLabelCurrentLine,
+            this.statusLabelPageTitle});
             this.statusCurrentText.Location = new System.Drawing.Point(0, 470);
             this.statusCurrentText.Name = "statusCurrentText";
-            this.statusCurrentText.Size = new System.Drawing.Size(753, 31);
+            this.statusCurrentText.Size = new System.Drawing.Size(927, 31);
             this.statusCurrentText.TabIndex = 6;
             this.statusCurrentText.Text = "statusStrip2";
             // 
@@ -640,21 +652,17 @@
             this.statusLabelCurrentLine.Text = "statusLabelCurrentLine";
             this.statusLabelCurrentLine.ToolTipText = "游標所在的那一行的明眼字";
             // 
-            // miEditRemoveDigitSymbol
+            // statusLabelPageTitle
             // 
-            this.miEditRemoveDigitSymbol.Name = "miEditRemoveDigitSymbol";
-            this.miEditRemoveDigitSymbol.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.D3)));
-            this.miEditRemoveDigitSymbol.Size = new System.Drawing.Size(318, 26);
-            this.miEditRemoveDigitSymbol.Tag = "RemoveDigitSymbol";
-            this.miEditRemoveDigitSymbol.Text = "刪除選取範圍內的數符";
-            this.miEditRemoveDigitSymbol.Click += new System.EventHandler(this.miEdit_Click);
+            this.statusLabelPageTitle.Name = "statusLabelPageTitle";
+            this.statusLabelPageTitle.Size = new System.Drawing.Size(181, 26);
+            this.statusLabelPageTitle.Text = "toolStripStatusLabel1";
             // 
             // DualEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(753, 525);
+            this.ClientSize = new System.Drawing.Size(927, 525);
             this.Controls.Add(this.brGrid);
             this.Controls.Add(this.statusCurrentText);
             this.Controls.Add(this.statusStrip1);
@@ -747,5 +755,6 @@
         private System.Windows.Forms.ToolStripStatusLabel statusLabelCurrentWord;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelCurrentLine;
         private System.Windows.Forms.ToolStripMenuItem miEditRemoveDigitSymbol;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabelPageTitle;
     }
 }

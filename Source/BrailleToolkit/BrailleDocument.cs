@@ -175,6 +175,21 @@ namespace BrailleToolkit
             SortPageTitles();
         }
 
+        public bool IsBeginLineOfPageTitle(int lineIdx)
+        {
+            if (lineIdx < 0 || lineIdx >= LineCount)
+                return false;
+            var brLine = Lines[lineIdx];
+
+            return PageTitles.FindIndex(p => ReferenceEquals(brLine, p.BeginLineRef)) >= 0;
+        }
+
+        public BraillePageTitle FindPageTitleByBeginLine(BrailleLine brLine)
+        {
+            return PageTitles.Find(p => ReferenceEquals(brLine, p.BeginLineRef));
+        }
+
+
         private void SortPageTitles()
         {
             PageTitles.Sort();
@@ -430,11 +445,13 @@ namespace BrailleToolkit
         /// 更新所有頁標題的起始列索引。
         /// 使用時機：BrailleDocument 存檔前、列印前。
         /// </summary>
-        public void UpdateTitlesLineIndex()
+        public int UpdateTitlesLineIndex()
         {
+            int updatedCount = 0;
+
             if (m_PageTitles == null)
             {
-                return;
+                return updatedCount;
             }
 
             BraillePageTitle title;
@@ -450,7 +467,9 @@ namespace BrailleToolkit
                 {
                     idx++;
                 }
+                updatedCount++;
             }
+            return updatedCount;
         }
 
         /// <summary>

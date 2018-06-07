@@ -35,26 +35,33 @@ namespace EasyBrailleEdit
 
         string IBrailleGridForm.CurrentWordStatusText
         {
-            get { return statusLabelCurrentWord.Text; }
-            set { statusLabelCurrentWord.Text = value; }
+            get => statusLabelCurrentWord.Text; 
+            set => statusLabelCurrentWord.Text = value;
         }
 
         string IBrailleGridForm.CurrentLineStatusText
         {
-            get { return statusLabelCurrentLine.Text; }
-            set { statusLabelCurrentLine.Text = value; }
+            get => statusLabelCurrentLine.Text;
+            set => statusLabelCurrentLine.Text = value; 
         }
 
 
         string IBrailleGridForm.StatusText
         {
-            get { return statMessage.Text; }
+            get => statMessage.Text;
             set
             {
                 statMessage.Text = value;
                 statusStrip1.Refresh();
             }
         }
+
+        string IBrailleGridForm.CurrentPageTitleStatusText
+        {
+            get => statusLabelPageTitle.Text;
+            set => statusLabelPageTitle.Text = value;
+        }
+
         string IBrailleGridForm.PageNumberText
         {
             get { return statPageInfo.Text; }
@@ -118,7 +125,7 @@ namespace EasyBrailleEdit
 
 
         public bool DebugMode { get; set; } = true;
-
+        
         private void DualEditForm_Load(object sender, EventArgs e)
         {
             cboZoom.SelectedIndex = 2;  // 100%
@@ -341,6 +348,11 @@ namespace EasyBrailleEdit
 
         private void EditPageTitles()
         {
+            if (BrailleDoc.UpdateTitlesLineIndex() > 0)
+            {
+                _controller.IsDirty = true;
+            }
+
             var form = new DualEditTitleForm(BrailleDoc);
 
             if (form.ShowDialog() == DialogResult.OK)
