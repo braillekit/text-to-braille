@@ -319,6 +319,7 @@ namespace BrailleToolkit
 
         /// <summary>
         /// 在串列中尋找指定的字串，從串列中的第 startIndex 個字開始找起。
+        /// 尋找過程中，會略過 cell count 為 0 的 BrailleWord 物件。
         /// </summary>
         /// <param name="value"></param>
         /// <param name="startIndex"></param>
@@ -326,31 +327,46 @@ namespace BrailleToolkit
         /// <returns></returns>
         public int IndexOf(string value, int startIndex, StringComparison comparisonType)
         {
-            if (startIndex + value.Length > this.WordCount)
+            int index = startIndex;
+            while (index < WordCount)
             {
-                return -1;
-            }
+                if (index + value.Length > WordCount)
+                {
+                    return -1;
+                }
 
-            int i;
-            StringBuilder sb = new StringBuilder();
-            for (i = startIndex; i < this.WordCount; i++)
-            {
-                sb.Append(Words[i].Text);
-            }
+                int matchedCount = 0;
+                int wordPointer = index;
+                while (wordPointer < WordCount)
+                {
+                    var brWord = Words[wordPointer];
+                    if (brWord.CellCount < 1 || String.IsNullOrEmpty(brWord.Text))
+                    {
+                        wordPointer++;  // 跳過 cell count 為 0 的物件
+                        if (matchedCount == 0)
+                        {
+                            // 匹配的字串裡面可以包含 context tag，可是 context tag 不能是匹配字串的第一個字。
+                            index = wordPointer;
+                        }
+                        continue;
+                    }
 
-            int idx = sb.ToString().IndexOf(value, comparisonType);
-            if (idx < 0)
-            {
-                return -1;
-            }
+                    string s = value[matchedCount].ToString();
+                    if (!brWord.Text.Equals(s, comparisonType))
+                    {
+                        break;
+                    }
+                    matchedCount++;
+                    wordPointer++;
 
-            // 有找到，但這是字元索引，還必須修正為點字索引。
-            for (i = startIndex; i < this.WordCount; i++)
-            {
-                idx = idx - Words[i].Text.Length + 1;
+                    if (matchedCount >= value.Length)
+                    {
+                        return index;
+                    }
+                }
+                index++;
             }
-
-            return startIndex + idx;
+            return -1;
         }
 
 

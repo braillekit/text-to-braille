@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BrailleToolkit;
+using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit.DualEdit
 {
@@ -150,6 +151,10 @@ namespace EasyBrailleEdit.DualEdit
             var brWord = _doc.Lines[lineIdx].Words[wordIdx];
             while (col < _grid.ColumnsCount)
             {
+                if (_grid[textRowIdx, col] == null)
+                {
+                    throw new InvalidOperationException($"執行 WordIndexToGridColumn({lineIdx}, {wordIdx})時發現 Grid[{textRowIdx},{col}] 為空!");
+                }
                 var wordInCell = _grid[textRowIdx, col].Tag as BrailleWord;
                 if (ReferenceEquals(wordInCell, brWord))
                 {
