@@ -37,5 +37,20 @@ namespace BrailleToolkit.Converters
             return null;
         }
 
+        protected void EnsureOneSpaceFollowed_UnlessNextWordIsPunctuation(List<BrailleWord> wordList, string nextWord)
+        {
+            EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(wordList, nextWord, BrailleGlobals.ChinesePunctuations);
+        }
+
+        protected void EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(List<BrailleWord> wordList, string nextWord, string exceptedWords)
+        {
+            if (nextWord == " ") return; // 如果下一個字是空白，就不用多加了
+
+            if (exceptedWords.IndexOf(nextWord) < 0)
+            {
+                wordList.Add(BrailleWord.NewBlank());
+            }
+        }
+
     }
 }

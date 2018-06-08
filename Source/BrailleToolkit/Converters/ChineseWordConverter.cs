@@ -158,8 +158,7 @@ namespace BrailleToolkit.Converters
                             EnsureOneSpaceFollowed_UnlessNextWordIsPunctuation(brWordList, nextChar);
                         }
                     }
-                }                
-
+                }
 
                 // 記錄連續中文字元，以修正破音字的注音字根。
                 if (brWord.Text.IsCJK())   // 如果是中文字元，要記錄連續的中文字元區間
@@ -191,21 +190,6 @@ namespace BrailleToolkit.Converters
             }
 
             return brWordList;
-        }
-
-        private void EnsureOneSpaceFollowed_UnlessNextWordIsPunctuation(List<BrailleWord> wordList, string nextWord)
-        {
-            EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(wordList, nextWord, BrailleGlobals.ChinesePunctuations);
-        }
-
-        private void EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(List<BrailleWord> wordList, string nextWord, string exceptedWords)
-        {
-            if (nextWord == " ") return; // 如果下一個字是空白，就不用多加了
-
-            if (exceptedWords.IndexOf(nextWord) < 0)
-            {
-                wordList.Add(BrailleWord.NewBlank());
-            }
         }
 
         /// <summary>
