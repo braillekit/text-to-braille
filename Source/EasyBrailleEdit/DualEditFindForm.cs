@@ -198,7 +198,7 @@ namespace EasyBrailleEdit
 					m_StartLineIndex = m_FoundLineIndex;
 					m_StartWordIndex = m_FoundWordIndex;
 					IsFirstTime = false;
-					return true;	
+					return true;
 				}
 
 				// 沒找到，往下一個字移動.

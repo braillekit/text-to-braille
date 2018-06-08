@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
+using SourceGrid;
 
 namespace EasyBrailleEdit
 {
@@ -25,11 +26,28 @@ namespace EasyBrailleEdit
             {
                 base.OnClick(sender, e);
 
-                SourceGrid.Grid grid = (SourceGrid.Grid)sender.Grid;
+                var grid = (SourceGrid.Grid)sender.Grid;
                 int row = sender.Position.Row;
                 int col = sender.Position.Column;
 
+                BrailleCellSelected(grid, row, col);
+            }
+
+            public override void OnFocusEntered(CellContext sender, EventArgs e)
+            {
+                base.OnFocusEntered(sender, e);
+
+                var grid = (SourceGrid.Grid)sender.Grid;
+                int row = sender.Position.Row;
+                int col = sender.Position.Column;
+
+                BrailleCellSelected(grid, row, col);
+            }
+
+            private void BrailleCellSelected(SourceGrid.Grid grid, int row, int col)
+            {
                 m_Form.lblBraille.Text = grid[row, col].Value.ToString();
+                m_Form.lblBrailleCode.Text = grid[row, col].Tag as string;
             }
         }
 
@@ -59,6 +77,7 @@ namespace EasyBrailleEdit
                     brCodeStr = brCodeNum.ToString("X2");
                     brChar = BrailleFontConverter.ToChar(brCodeStr);
                     brGrid[row, col] = new SourceGrid.Cells.Cell(brChar);
+                    brGrid[row, col].Tag = brCodeStr;
                     brGrid[row, col].AddController(m_ClickController);
 
                     brCodeNum++;
@@ -66,6 +85,9 @@ namespace EasyBrailleEdit
             }
 
             brGrid.AutoSizeCells();
+
+            lblBraille.Text = String.Empty;
+            lblBrailleCode.Text = String.Empty;
         }
 
         public string BrailleText
