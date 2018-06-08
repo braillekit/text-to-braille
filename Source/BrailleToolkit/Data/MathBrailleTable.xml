@@ -11,8 +11,11 @@
   <symbol text="）"    code="3E"    type="Math" Description="數學全形左括弧" />
   <symbol text=","    code="20"    type="Math" Description="半形逗號，第 6 點" />
   <symbol text="，"    code="20"    type="Math" Description="全形逗號，第 6 點" />
+<<<<<<< HEAD
   <symbol text="；"    code="3806"  type="Math" Description="全形分號" />
   <symbol text="。"    code="3832"  type="Math" Description="全形句號" />
+=======
+>>>>>>> a6d0d1f42542b002965a7ae7a3fc1c5554b31029
   
   <!-- 數學符號 -->
   <symbol text="+"    code="2C"     type="Math" Description="加號" />
