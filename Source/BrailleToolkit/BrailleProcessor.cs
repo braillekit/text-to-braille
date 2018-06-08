@@ -457,12 +457,8 @@ namespace BrailleToolkit
                     // 成功轉換成點字，有 n 個字元會從串流中取出
                     brLine.Words.AddRange(brWordList);
 
-                    text.Length = 0;
-                    foreach (BrailleWord brWord in brWordList)
-                    {
-                        text.Append(brWord.Text);
-                    }
-                    textCvtArgs.SetArgValues(lineNumber, text.ToString());
+                    // 通知事件
+                    textCvtArgs.SetArgValues(lineNumber, BrailleWordHelper.ToTextString(brWordList));
                     OnTextConverted(textCvtArgs);
                 }
                 else

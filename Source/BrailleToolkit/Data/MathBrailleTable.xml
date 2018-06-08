@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Symbols>
-
+  <!-- 在數學區塊裡面，有些標點符號的點字跟一般文字的點字不同。 -->
+  <!-- 在這裡定義全形空白是為了比 ChineseWordConverter 搶先一步抓到空白。因為
+       ChineseWordConverter 若碰空白，處理完之後就會緊接著把後續的文字與標點符號
+       一併處理掉，使得 MathConverter 沒機會處理這些特殊的標點符號。 -->
+  <symbol text="　"    code="00"     type="Misc" description="全形空白" />
+  <symbol text="("    code="37"    type="Math" Description="數學半形左括弧" />
+  <symbol text=")"    code="3E"    type="Math" Description="數學半形左括弧" />
+  <symbol text="（"    code="37"    type="Math" Description="數學全形左括弧" />
+  <symbol text="）"    code="3E"    type="Math" Description="數學全形左括弧" />
+  <symbol text=","    code="20"    type="Math" Description="半形逗號，第 6 點" />
+  <symbol text="，"    code="20"    type="Math" Description="全形逗號，第 6 點" />
+  <symbol text="；"    code="3806"  type="Math" Description="全形分號" />
+  <symbol text="。"    code="3832"  type="Math" Description="全形句號" />
+  
   <!-- 數學符號 -->
   <symbol text="+"    code="2C"     type="Math" Description="加號" />
   <symbol text="-"    code="24"     type="Math" Description="減號" />
@@ -9,9 +22,8 @@
   <symbol text="^"    code="18"     type="Math" Description="次方" />
   <symbol text="."    code="28"     type="Math" Description="小數點" />
   <symbol text=":"    code="1002"   type="Math" Description="幾比幾" />
-  <!-- 下面的乘號和除號必須用記事本才能正確顯示 -->  
+  <!-- 下面的乘號和除號必須用支援 unicode 的編輯器才能正確顯示 -->  
   <symbol text="×"    code="0821"   type="Math" Description="乘號" />  
   <symbol text="÷"    code="280C"   type="Math" Description="除號" />  
   <symbol text="="    code="2805"   type="Math" Description="等於" />
-  <symbol text=","    code="20"     type="Math" Description="數學逗號" />
 </Symbols>
