@@ -38,6 +38,16 @@ namespace BrailleToolkit.Helpers
             return sb.ToString();
         }
 
+        public static string ToTextString(List<BrailleWord> brWordList)
+        {
+            var sb = new StringBuilder();
+            foreach (var brWord in brWordList)
+            {
+                sb.Append(brWord.Text);
+            }
+            return sb.ToString();
+        }
+
         public static string ToDotNumberString(List<BrailleWord> brWordList)
         {
             var sb = new StringBuilder();

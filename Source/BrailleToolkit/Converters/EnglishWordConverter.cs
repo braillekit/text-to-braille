@@ -45,6 +45,9 @@ namespace BrailleToolkit.Converters
             BrailleWord brWord;
             List<BrailleWord> brWordList = null;
 
+            const string LeftForMathConverter = "*.:()（）,，";
+            const string LeftForCoordinateConverter = "(,)";
+
             while (!done && charStack.Count > 0)
             {
                 ch = charStack.Peek();   // 只讀取但不從堆疊移走。
@@ -53,7 +56,7 @@ namespace BrailleToolkit.Converters
                 // 如果在數學區塊中
                 if (context.IsActive(ContextTagNames.Math))
                 {
-                    if (ch == '*' || ch == '.' || ch == ':')
+                    if (LeftForMathConverter.IndexOf(ch) >= 0)
                     {
 						break;  // 以上符號須交給 MathConverter 處理。
                     }
@@ -62,7 +65,7 @@ namespace BrailleToolkit.Converters
                 // 如果在座標區塊中，'('、',' 和 ')' 必須交給 CoordinateConverter 處理。
                 if (context.IsActive(ContextTagNames.Coordinate))
                 {
-                    if (ch == '(' || ch == ',' || ch == ')')
+                    if (LeftForCoordinateConverter.IndexOf(ch) >= 0)
                     {
                         break;
                     }

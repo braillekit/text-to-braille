@@ -58,10 +58,12 @@ namespace BrailleToolkit.Converters
                 if (!isExtracted)
                 {
                     charStack.Pop();
+                    isExtracted = true;                  
                 }
             }
             return brWordList;
         }
+
 
         internal override BrailleTableBase BrailleTable
         {

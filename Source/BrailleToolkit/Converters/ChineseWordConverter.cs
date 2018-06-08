@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using BrailleToolkit.Data;
+using BrailleToolkit.Tags;
 using Huanlin.Common.Helpers;
 using NChinese;
 using NChinese.Phonetic;
@@ -25,7 +26,8 @@ namespace BrailleToolkit.Converters
         }
 
         /// <summary>
-        /// 從堆疊中讀取字元，並轉成點字。只處理中文字和中文標點符號。
+        /// 從堆疊中讀取字元，並轉成點字。
+        /// 只處理 ChineseBrailleTable.xml 裡面有定義的符號，主要是中文字和中文標點符號。
         /// </summary>
         /// <param name="charStack">字元堆疊。</param>
         /// <param name="context">情境物件。</param>
@@ -37,7 +39,7 @@ namespace BrailleToolkit.Converters
 
             bool done = false;
             char ch;
-            string text;
+            string currentChar;
             bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
             BrailleWord brWord;
             List<BrailleWord> brWordList = null;
@@ -74,7 +76,7 @@ namespace BrailleToolkit.Converters
                     break;
                 }
 
-                text = ch.ToString();
+                currentChar = ch.ToString();
 
                 // 處理雙字元的標點符號。
                 if (ch == '…' || ch == '－' || ch == '─' || ch == '╴' || ch == '—' || ch == '﹏')
@@ -86,7 +88,7 @@ namespace BrailleToolkit.Converters
                         char ch2 = charStack.Pop();
                         if (ch2 == ch)	// 如果是連續兩個刪節號或破折號。
                         {
-                            text = text + text;
+                            currentChar = currentChar + currentChar;
                             isExtracted = true;
                         }
                         else
@@ -107,7 +109,7 @@ namespace BrailleToolkit.Converters
                         char ch3 = charStack.Pop();
                         if (ch3 == ']' && (ch2 == '↗' || ch2 == '↘'))
                         {
-                            text = text + ch2.ToString() + ch3.ToString();
+                            currentChar = currentChar + ch2.ToString() + ch3.ToString();
                             isExtracted = true;
                         }
                         else
@@ -121,7 +123,7 @@ namespace BrailleToolkit.Converters
                     }
                 }
 
-                brWord = InternalConvert(text);
+                brWord = InternalConvert(currentChar);
                 if (brWord == null)
                     break;
 
@@ -132,7 +134,7 @@ namespace BrailleToolkit.Converters
                     charStack.Pop();
                 }
 
-                if (!StrHelper.IsEmpty(text))   // 避免將空白字元也列入 Chinese。
+                if (!StrHelper.IsEmpty(currentChar))   // 避免將空白字元也列入 Chinese。
                     brWord.Language = BrailleLanguage.Chinese;
 
                 ApplyBrailleConfig(brWord); // 根據組態檔的設定調整點字轉換結果。
@@ -142,6 +144,22 @@ namespace BrailleToolkit.Converters
                     brWordList = new List<BrailleWord>();
                 }
                 brWordList.Add(brWord);
+
+
+                // 看看下一個字元是什麼，以決定是否需要對目前的結果做額外處理，例如：加空方。
+                if (charStack.Count > 0)
+                {
+                    string nextChar = charStack.Peek().ToString();
+
+                    if (context.IsActive(ContextTagNames.Math))
+                    {
+                        if (BrailleGlobals.ChinesePunctuations.IndexOf(currentChar) >= 0)
+                        {
+                            EnsureOneSpaceFollowed_UnlessNextWordIsPunctuation(brWordList, nextChar);
+                        }
+                    }
+                }                
+
 
                 // 記錄連續中文字元，以修正破音字的注音字根。
                 if (brWord.Text.IsCJK())   // 如果是中文字元，要記錄連續的中文字元區間
@@ -162,6 +180,7 @@ namespace BrailleToolkit.Converters
                     chineseStartIdx = -1;
                     chineseEndIdx = -1;
                 }
+
                 idx++;
             }
 
@@ -172,6 +191,21 @@ namespace BrailleToolkit.Converters
             }
 
             return brWordList;
+        }
+
+        private void EnsureOneSpaceFollowed_UnlessNextWordIsPunctuation(List<BrailleWord> wordList, string nextWord)
+        {
+            EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(wordList, nextWord, BrailleGlobals.ChinesePunctuations);
+        }
+
+        private void EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(List<BrailleWord> wordList, string nextWord, string exceptedWords)
+        {
+            if (nextWord == " ") return; // 如果下一個字是空白，就不用多加了
+
+            if (exceptedWords.IndexOf(nextWord) < 0)
+            {
+                wordList.Add(BrailleWord.NewBlank());
+            }
         }
 
         /// <summary>
