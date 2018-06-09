@@ -64,7 +64,7 @@
             this.btnSymbolMathO = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSymbolTemperature = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.toolBarSymbol2 = new System.Windows.Forms.ToolStrip();
+            this.toolBarMath = new System.Windows.Forms.ToolStrip();
             this.btnMathTag = new System.Windows.Forms.ToolStripButton();
             this.btnSymbolMul = new System.Windows.Forms.ToolStripButton();
             this.btnSymbolDiv = new System.Windows.Forms.ToolStripButton();
@@ -136,7 +136,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolBarSymbol1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.toolBarSymbol2.SuspendLayout();
+            this.toolBarMath.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolBarSymbol3.SuspendLayout();
@@ -495,12 +495,12 @@
             this.panel2.Size = new System.Drawing.Size(1188, 71);
             this.panel2.TabIndex = 0;
             // 
-            // toolBarSymbol2
+            // toolBarMath
             // 
-            this.toolBarSymbol2.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.toolBarSymbol2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolBarSymbol2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolBarSymbol2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolBarMath.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.toolBarMath.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolBarMath.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolBarMath.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnMathTag,
             this.btnSymbolMul,
             this.btnSymbolDiv,
@@ -518,11 +518,12 @@
             this.toolStripSeparator15,
             this.btnFineTuning,
             this.btnQuotes});
-            this.toolBarSymbol2.Location = new System.Drawing.Point(0, 26);
-            this.toolBarSymbol2.Name = "toolBarSymbol2";
-            this.toolBarSymbol2.Size = new System.Drawing.Size(1188, 26);
-            this.toolBarSymbol2.TabIndex = 18;
-            this.toolBarSymbol2.Text = "toolStrip3";
+            this.toolBarMath.Location = new System.Drawing.Point(0, 26);
+            this.toolBarMath.Name = "toolBarMath";
+            this.toolBarMath.Size = new System.Drawing.Size(1188, 26);
+            this.toolBarMath.TabIndex = 18;
+            this.toolBarMath.Text = "toolStrip3";
+            this.toolBarMath.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarMath_ItemClicked);
             // 
             // btnMathTag
             // 
@@ -1135,7 +1136,7 @@
             // btnTableMiddleLine
             // 
             this.btnTableMiddleLine.Name = "btnTableMiddleLine";
-            this.btnTableMiddleLine.Size = new System.Drawing.Size(216, 26);
+            this.btnTableMiddleLine.Size = new System.Drawing.Size(214, 26);
             this.btnTableMiddleLine.Tag = "<表格>────────────────────</表格>\\n";
             this.btnTableMiddleLine.Text = "表格橫槓 (20方)";
             // 
@@ -1143,28 +1144,28 @@
             // 
             this.btnTableTopLine1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnTableTopLine1.Name = "btnTableTopLine1";
-            this.btnTableTopLine1.Size = new System.Drawing.Size(216, 26);
+            this.btnTableTopLine1.Size = new System.Drawing.Size(214, 26);
             this.btnTableTopLine1.Tag = "<上表格線1></上表格線1>\\n";
             this.btnTableTopLine1.Text = "上表格線1";
             // 
             // btnTableBottomLine1
             // 
             this.btnTableBottomLine1.Name = "btnTableBottomLine1";
-            this.btnTableBottomLine1.Size = new System.Drawing.Size(216, 26);
+            this.btnTableBottomLine1.Size = new System.Drawing.Size(214, 26);
             this.btnTableBottomLine1.Tag = "<下表格線1></下表格線1>\\n";
             this.btnTableBottomLine1.Text = "下表格線1";
             // 
             // btnTableTopLine2
             // 
             this.btnTableTopLine2.Name = "btnTableTopLine2";
-            this.btnTableTopLine2.Size = new System.Drawing.Size(216, 26);
+            this.btnTableTopLine2.Size = new System.Drawing.Size(214, 26);
             this.btnTableTopLine2.Tag = "<上表格線2></上表格線2>\\n";
             this.btnTableTopLine2.Text = "上表格線2";
             // 
             // btnTableBottomLine2
             // 
             this.btnTableBottomLine2.Name = "btnTableBottomLine2";
-            this.btnTableBottomLine2.Size = new System.Drawing.Size(216, 26);
+            this.btnTableBottomLine2.Size = new System.Drawing.Size(214, 26);
             this.btnTableBottomLine2.Tag = "<下表格線2></下表格線2>\\n";
             this.btnTableBottomLine2.Text = "下表格線2";
             // 
@@ -1176,7 +1177,7 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1188, 572);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.toolBarSymbol2);
+            this.Controls.Add(this.toolBarMath);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolBarSymbol1);
             this.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -1189,8 +1190,8 @@
             this.toolBarSymbol1.ResumeLayout(false);
             this.toolBarSymbol1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.toolBarSymbol2.ResumeLayout(false);
-            this.toolBarSymbol2.PerformLayout();
+            this.toolBarMath.ResumeLayout(false);
+            this.toolBarMath.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -1237,7 +1238,7 @@
         private System.Windows.Forms.ToolStripMenuItem btnSymbolMathO;
         private System.Windows.Forms.ToolStripMenuItem btnSymbolTemperature;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ToolStrip toolBarSymbol2;
+        private System.Windows.Forms.ToolStrip toolBarMath;
         private System.Windows.Forms.ToolStripButton btnMathTag;
         private System.Windows.Forms.ToolStripButton btnSymbolMul;
         private System.Windows.Forms.ToolStripButton btnSymbolDiv;

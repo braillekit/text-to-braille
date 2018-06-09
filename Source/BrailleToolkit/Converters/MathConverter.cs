@@ -66,7 +66,14 @@ namespace BrailleToolkit.Converters
                 {
                     string nextChar = charStack.Peek().ToString();
 
-                    if (BrailleGlobals.ChinesePunctuations.IndexOf(currentChar) >= 0)
+                    if (currentChar == "（" || currentChar == "(")
+                    {
+                        if (nextChar == "）" || nextChar == ")")
+                        {
+                            EnsureOneSpaceFollowed(brWordList, nextChar);
+                        }
+                    }
+                    else if (BrailleGlobals.ChinesePunctuations.IndexOf(currentChar) >= 0)
                     {
                         EnsureOneSpaceFollowed_UnlessNextWordIsPunctuation(brWordList, nextChar);
                     }

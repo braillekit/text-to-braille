@@ -52,5 +52,26 @@ namespace BrailleToolkit.Converters
             }
         }
 
+        protected void EnsureOneSpaceFollowed(List<BrailleWord> wordList, string nextWord)
+        {
+            if (nextWord == " ") return; // 如果下一個字是空白，就不用多加了
+
+            wordList.Add(BrailleWord.NewBlank());
+        }
+
+        protected bool EnsureOneSpaceBetweenParentheses(List<BrailleWord> wordList, string currentWord, string nextWord)
+        {
+            if (currentWord == "（" && nextWord == "）")
+            {
+                wordList.Add(BrailleWord.NewBlank());
+                return true;
+            }
+            if (currentWord == "(" && nextWord == ")")
+            {
+                wordList.Add(BrailleWord.NewBlank());
+                return true;
+            }
+            return false;
+        }
     }
 }

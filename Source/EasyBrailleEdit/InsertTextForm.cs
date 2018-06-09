@@ -37,8 +37,6 @@ namespace EasyBrailleEdit
 
         private void InsertTextForm_Load(object sender, EventArgs e)
         {
-            toolBarSymbol2.Visible = false;
-
             lblErrorTitle.Visible = false;
             lblError.Visible = false;
             lblError.Text = "";
@@ -91,15 +89,16 @@ namespace EasyBrailleEdit
             DialogResult = DialogResult.OK;
         }
 
-        private void toolBarSymbol1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+
+        private void InsertSymbol(ToolStripItem item)
         {
             // 插入符號
-            if (e.ClickedItem.Tag == null)
+            if (item.Tag == null)
             {
-                txtInput.SelectedText = e.ClickedItem.Text;
+                txtInput.SelectedText = item.Text;
                 return;
             }
-            string s = e.ClickedItem.Tag.ToString();
+            string s = item.Tag.ToString();
             if (String.IsNullOrEmpty(s))
             {
                 txtInput.SelectedText = s;
@@ -128,9 +127,19 @@ namespace EasyBrailleEdit
             }
         }
 
+        private void toolBarSymbol1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            InsertSymbol(e.ClickedItem);
+        }
+
         private void InsertTextForm_Shown(object sender, EventArgs e)
         {
             txtInput.Focus();
+        }
+
+        private void toolBarMath_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            InsertSymbol(e.ClickedItem);
         }
     }
 }
