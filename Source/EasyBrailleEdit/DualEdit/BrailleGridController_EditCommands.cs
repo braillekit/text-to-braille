@@ -594,10 +594,12 @@ namespace EasyBrailleEdit.DualEdit
             if (!CheckCellPosition(row, col))
                 return;
 
-            if (MsgBoxHelper.ShowOkCancel("段落重整會將目前所在的段落重新編排，確定要執行此操作嗎？") != DialogResult.OK)
+            if (MsgBoxHelper.ShowOkCancel("段落重整會將目前所在的段落重新編排，最好先存檔之後再執行此操作。\r\n確定要執行此操作嗎？") != DialogResult.OK)
             {
                 return;
             }
+
+            Log.Debug($"執行段落重整。檔案: {FileName}, Grid 位置: [{row},{col}]。");
 
             // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
             var memento = CreateMemento("段落重整");
@@ -605,13 +607,46 @@ namespace EasyBrailleEdit.DualEdit
             row = _positionMapper.GetBrailleRowIndex(row);  // 確保列索引為點字列。
             int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row) + 1; // 從下一列開始處理（把下一列接上去）
 
+            Log.Debug($"從下一列開始銜接段落。初始的 lineIdx={lineIdx}，內容: '{BrailleDoc[lineIdx].ToOriginalTextString()}。'");
+
+
+            int lastLineIdx = -1;
+            int sameLineCount = 0;
             while (lineIdx < BrailleDoc.LineCount)
             {
+                // 防止無窮迴圈
+                if (lastLineIdx == lineIdx)
+                {
+                    sameLineCount++;
+                    if (sameLineCount > 100)
+                    {
+                        Log.Error($"段落重整時偵測到疑似無窮迴圈的情形！lineIdx={lineIdx}，內容: '{BrailleDoc[lineIdx].ToOriginalTextString()}。'");
+
+                        UndoRedo.SaveMementoForUndo(memento);
+
+                        MsgBoxHelper.ShowError("非常抱歉！程式判定無法完成此段落重整操作。\r\n" +
+                            "為了避免程式當掉，已經中止此操作。\r\n" +
+                            "請儘快通知程式開發人員，然後按 Ctrl+Z 以復原此操作。\r\n" +
+                            "您亦可暫且改用刪除操作來銜接段落。");
+                        return;
+                    }
+                }
+                else
+                {
+                    lastLineIdx = lineIdx;
+                    sameLineCount = 1;
+                }
+
                 var currLine = BrailleDoc[lineIdx];
                 if (currLine.IsEmptyOrWhiteSpace() || currLine.IsBeginOfParagraph())
                 {
                     break;
                 }
+
+                string s = $"正在重整第 {lineIdx + 1} 行：{currLine.ToOriginalTextString()}''";
+                Log.Debug(s);
+                _form.StatusText = s;
+
                 // 把下一列接上來。
                 row = _positionMapper.LineIndexToGridBrailleRow(lineIdx);
                 if (JoinToPreviousRow(row, out _, out _) > 0)

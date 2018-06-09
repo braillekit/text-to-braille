@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EasyBrailleEdit.Common;
 using Huanlin.Windows.Forms;
+using Serilog;
 
 namespace EasyBrailleEdit.DualEdit
 {
@@ -99,11 +101,20 @@ namespace EasyBrailleEdit.DualEdit
         {
             var lineIdx = _positionMapper.GridRowToBrailleLineIndex(e.NewFocusPosition.Row);
             var brWord = _positionMapper.GetBrailleWordFromGridCell(e.NewFocusPosition.Row, e.NewFocusPosition.Column);
+
+            if (brWord == null)
+            {
+                Log.Error($"目前點選的儲存格沒有關聯的 BrailleWord 物件! 檔名:{FileName}, Row={e.NewFocusPosition.Row}, Col={e.NewFocusPosition.Column}, lineIdx={lineIdx}, 該列內容: '{BrailleDoc.Lines[lineIdx].ToOriginalTextString()}'");
+                e.Cancel = true;
+                return;
+            }
+
             var brWordIdx = BrailleDoc.Lines[lineIdx].IndexOf(brWord);
 
             if (brWordIdx < 0)
             {
-                MsgBoxHelper.ShowError("程式錯誤! 找不到目前選取之儲存格所對應的點字物件。請通知程式開發人員，謝謝。");
+                Log.Error($"找不到目前點選的儲存格所關聯的 BrailleWord 物件的索引位置! 檔名:{FileName}, Row={e.NewFocusPosition.Row}, Col={e.NewFocusPosition.Column}, lineIdx={lineIdx}, BrailleWord 內容: {brWord.ToString()}, 該列內容: '{BrailleDoc.Lines[lineIdx].ToOriginalTextString()}'");
+                e.Cancel = true;
                 return;
             }
 
