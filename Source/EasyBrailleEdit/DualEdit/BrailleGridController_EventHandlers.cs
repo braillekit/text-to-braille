@@ -70,6 +70,9 @@ namespace EasyBrailleEdit.DualEdit
                 case DualEditCommand.Names.CopyToClipboard:
                     CopyToClipboard(grid);
                     break;
+                case DualEditCommand.Names.CutToClipboard:
+                    CutToClipboard(grid);
+                    break;
                 case DualEditCommand.Names.PasteFromClipboard:
                     PasteFromClipboard(grid, row, col);
                     break;
@@ -193,12 +196,6 @@ namespace EasyBrailleEdit.DualEdit
                     case Keys.E:        // Ctrl+E: 刪除一列。
                         DeleteLine(_grid, row, col, true);
                         e.Handled = true;
-                        break;
-                    case Keys.C:
-                        CopyToClipboard(_grid);
-                        break;
-                    case Keys.V:
-                        PasteFromClipboard(_grid, row, col);
                         break;
                 }
             }

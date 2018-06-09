@@ -466,6 +466,11 @@ namespace EasyBrailleEdit
             _controller.Redo();
         }
 
+        private void CutToClipboard()
+        {
+            _controller.CutToClipboard(brGrid);
+        }
+
         private void CopyToClipboard()
         {
             _controller.CopyToClipboard(brGrid);
@@ -514,6 +519,9 @@ namespace EasyBrailleEdit
                     break;
                 case "Redo":
                     Redo();
+                    break;
+                case "Cut":
+                    CutToClipboard();
                     break;
                 case "Copy":
                     CopyToClipboard();

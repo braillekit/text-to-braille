@@ -15,6 +15,7 @@ namespace EasyBrailleEdit.DualEdit
             public const string BackDeleteWord = "BackDeleteWord";
             public const string BreakLine = "BreakLine";
             public const string CopyToClipboard = "CopyToClipboard";
+            public const string CutToClipboard = "CutToClipboard";
             public const string DeleteLine = "DeleteLine";
             public const string DeleteWord = "DeleteWord";
             public const string EditWord = "EditWord";
