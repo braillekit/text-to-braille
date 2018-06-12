@@ -135,7 +135,10 @@ namespace BrailleToolkit.Helpers
             {
                 pageNumberText =
                     line.Remove(0, OrgPageNumberContextTag.LeadingUnderlines.Length)
-                        .Replace(endTagName, String.Empty);
+                        .Replace(endTagName, String.Empty)
+                        .Replace(ContextTagNames.UpperPosition, String.Empty)
+                        .Replace(XmlTagHelper.GetEndTagName(ContextTagNames.UpperPosition), String.Empty)
+                        .Trim();
             }
 
             return pageNumberText;
@@ -239,7 +242,8 @@ namespace BrailleToolkit.Helpers
                 ContextTagNames.Coordinate,
                 ContextTagNames.Fraction,
                 ContextTagNames.Phonetic,
-                ContextTagNames.Delete
+                ContextTagNames.Delete,
+                ContextTagNames.UpperPosition
             };
 
             emptyTagsCount = 0;
