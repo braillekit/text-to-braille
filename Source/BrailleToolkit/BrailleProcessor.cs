@@ -83,7 +83,8 @@ namespace BrailleToolkit
             _converters = new List<WordConverter>();
 
             ControlTagConverter = new ContextTagConverter();
-            ChineseConverter = new ChineseWordConverter(zhuyinConverter);
+            ZhuyinConverter = zhuyinConverter;
+            ChineseConverter = new ChineseWordConverter(this);
             EnglishConverter = new EnglishWordConverter();
             MathConverter = new MathConverter();
             _coordConverter = new CoordinateConverter();
@@ -139,6 +140,8 @@ namespace BrailleToolkit
         public ContextTagConverter ControlTagConverter { get; set; }
 
         public MathConverter MathConverter { get; set; }
+
+        public ZhuyinReverseConverter ZhuyinConverter { get; set; }
 
         /// <summary>
         /// 是否抑制點字轉換的回饋事件。

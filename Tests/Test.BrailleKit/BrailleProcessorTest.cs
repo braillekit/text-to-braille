@@ -319,13 +319,28 @@ namespace Test.BrailleToolkit
         [TestCase("<上位點>2012-06-12</上位點>", "(3456 12)(245)(1)(12)(36)(245)(124)(36)(1)(12)")]
         public void Should_UseUpperPosition_WhileInContext(string inputText, string expectedPositionNumbers)
         {
-            BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+            var processor = BrailleProcessor.GetInstance(new ZhuyinReverseConverter());
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
             var result = brLine.ToPositionNumberString();
             Assert.AreEqual(expectedPositionNumbers, result);
         }
+
+        [Test]
+        public void Should_UseMathConverterForMathSymbols()
+        {
+            var processor = BrailleProcessor.GetInstance(new ZhuyinReverseConverter());
+
+            var brLine = processor.ConvertLine("<數學>（1cm寬）</數學>");
+
+            var expected = "(12356)(3456 2)(14)(134)()(123 12456 3)(23456)";
+            var actual = brLine.ToPositionNumberString();
+
+            CollectionAssert.AreEqual(expected, actual);
+
+        }
+
+
     }
 }

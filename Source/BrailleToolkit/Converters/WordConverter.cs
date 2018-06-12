@@ -39,7 +39,12 @@ namespace BrailleToolkit.Converters
 
         protected void EnsureOneSpaceFollowed_UnlessNextWordIsPunctuation(List<BrailleWord> wordList, string nextWord)
         {
-            EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(wordList, nextWord, BrailleGlobals.ChinesePunctuations);
+            EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(
+                wordList, 
+                nextWord, 
+                BrailleGlobals.ChinesePunctuations + "<");
+
+            // 註：'<' 是 context tag 的起始符號，碰到此符號時也不加空方。
         }
 
         protected void EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(List<BrailleWord> wordList, string nextWord, string exceptedWords)

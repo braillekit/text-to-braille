@@ -15,14 +15,15 @@ namespace BrailleToolkit.Converters
     public sealed class ChineseWordConverter : WordConverter
     {
         private ChineseBrailleTable _brailleTable;
+        private BrailleProcessor _processor;
 
         public ZhuyinReverseConverter ZhuyinConverter { get; set; }
 
-        public ChineseWordConverter(ZhuyinReverseConverter zhuyinConverter)
-            : base()
+        public ChineseWordConverter(BrailleProcessor processor)
         {
             _brailleTable = ChineseBrailleTable.GetInstance();
-            ZhuyinConverter = zhuyinConverter ?? throw new ArgumentNullException(nameof(zhuyinConverter));
+            _processor = processor;
+            ZhuyinConverter = processor.ZhuyinConverter;
         }
 
         /// <summary>
@@ -121,6 +122,13 @@ namespace BrailleToolkit.Converters
                             isExtracted = false;
                         }
                     }
+                }
+
+                if (context.IsMathActive())
+                {
+                    // 數學區塊裡面的符號，必須留給 MathConverter 處理。
+                    if (_processor.MathConverter.BrailleTable.Exists(currentChar))
+                        break;
                 }
 
                 brWord = InternalConvert(currentChar);

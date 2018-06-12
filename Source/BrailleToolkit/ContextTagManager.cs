@@ -155,6 +155,11 @@ namespace BrailleToolkit
             return _tags[tagName].IsActive;
         }
 
+        public bool IsMathActive()
+        {
+            return IsActive(ContextTagNames.Math);
+        }
+
         public bool IsOrgPageNumberActive()
         {
             return IsActive(ContextTagNames.OrgPageNumber);

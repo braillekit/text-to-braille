@@ -193,7 +193,15 @@ namespace BrailleToolkit.Data
 			return code;
 		}
 
-		protected string FindFromDataRows(DataRow[] rows, string text)
+        public override bool Exists(string text)
+        {
+            CheckLoaded();
+
+            DataRow row = m_Table.Rows.Find(text);
+            return row != null;
+        }
+
+        protected string FindFromDataRows(DataRow[] rows, string text)
 		{
 			foreach (DataRow row in rows)
 			{

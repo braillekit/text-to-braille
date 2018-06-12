@@ -69,6 +69,7 @@
     <Compile Include="BrailleProcessorTest_Format.cs" />
     <Compile Include="ChineseWordConverterTest.cs" />
     <Compile Include="EnglishWordConverterTest.cs" />
+    <Compile Include="MathConverterTest.cs" />
     <Compile Include="Shared.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
