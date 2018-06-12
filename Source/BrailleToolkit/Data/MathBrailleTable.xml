@@ -16,7 +16,6 @@
   <symbol text="："    code="3812"  type="Math" Description="全形冒號" />
   <symbol text="「"    code="26"    type="Math" Description="數學上引號" />
   <symbol text="」"    code="3834"  type="Math" Description="數學下引號" />
-  
   <!-- 數學符號 -->
   <symbol text="+"    code="2C"     type="Math" Description="加號" />
   <symbol text="-"    code="24"     type="Math" Description="減號" />
@@ -24,7 +23,7 @@
   <symbol text="/"    code="280C"   type="Math" Description="除號" />
   <symbol text="^"    code="18"     type="Math" Description="次方" />
   <symbol text="."    code="28"     type="Math" Description="小數點" />
-  <symbol text=":"    code="1002"   type="Math" Description="幾比幾" />
+  <symbol text=":"    code="12"     type="Math" Description="幾比幾" />
   <!-- 下面的乘號和除號必須用支援 unicode 的編輯器才能正確顯示 -->  
   <symbol text="×"    code="0821"   type="Math" Description="乘號" />  
   <symbol text="÷"    code="280C"   type="Math" Description="除號" />  

@@ -134,6 +134,7 @@
             this.btnTableTopLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTableBottomLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnRatio = new System.Windows.Forms.ToolStripButton();
             this.toolBarSymbol1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolBarMath.SuspendLayout();
@@ -490,7 +491,7 @@
             this.panel2.Controls.Add(this.btnOk);
             this.panel2.Controls.Add(this.btnCancel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 501);
+            this.panel2.Location = new System.Drawing.Point(0, 522);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1188, 71);
             this.panel2.TabIndex = 0;
@@ -771,7 +772,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 52);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1188, 449);
+            this.panel3.Size = new System.Drawing.Size(1188, 470);
             this.panel3.TabIndex = 19;
             // 
             // panel1
@@ -786,7 +787,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(100, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1088, 449);
+            this.panel1.Size = new System.Drawing.Size(1088, 470);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -866,6 +867,7 @@
             this.btnSymbolBookName,
             this.toolStripSeparator12,
             this.btnSymbolTime,
+            this.btnRatio,
             this.btnSymbolCoord,
             this.btnFraction,
             this.toolStripSeparator13,
@@ -878,7 +880,7 @@
             this.toolBarSymbol3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.toolBarSymbol3.Location = new System.Drawing.Point(0, 0);
             this.toolBarSymbol3.Name = "toolBarSymbol3";
-            this.toolBarSymbol3.Size = new System.Drawing.Size(100, 449);
+            this.toolBarSymbol3.Size = new System.Drawing.Size(100, 470);
             this.toolBarSymbol3.TabIndex = 15;
             this.toolBarSymbol3.Text = "toolStrip4";
             this.toolBarSymbol3.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
@@ -1136,7 +1138,7 @@
             // btnTableMiddleLine
             // 
             this.btnTableMiddleLine.Name = "btnTableMiddleLine";
-            this.btnTableMiddleLine.Size = new System.Drawing.Size(214, 26);
+            this.btnTableMiddleLine.Size = new System.Drawing.Size(216, 26);
             this.btnTableMiddleLine.Tag = "<表格>────────────────────</表格>\\n";
             this.btnTableMiddleLine.Text = "表格橫槓 (20方)";
             // 
@@ -1144,30 +1146,41 @@
             // 
             this.btnTableTopLine1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnTableTopLine1.Name = "btnTableTopLine1";
-            this.btnTableTopLine1.Size = new System.Drawing.Size(214, 26);
+            this.btnTableTopLine1.Size = new System.Drawing.Size(216, 26);
             this.btnTableTopLine1.Tag = "<上表格線1></上表格線1>\\n";
             this.btnTableTopLine1.Text = "上表格線1";
             // 
             // btnTableBottomLine1
             // 
             this.btnTableBottomLine1.Name = "btnTableBottomLine1";
-            this.btnTableBottomLine1.Size = new System.Drawing.Size(214, 26);
+            this.btnTableBottomLine1.Size = new System.Drawing.Size(216, 26);
             this.btnTableBottomLine1.Tag = "<下表格線1></下表格線1>\\n";
             this.btnTableBottomLine1.Text = "下表格線1";
             // 
             // btnTableTopLine2
             // 
             this.btnTableTopLine2.Name = "btnTableTopLine2";
-            this.btnTableTopLine2.Size = new System.Drawing.Size(214, 26);
+            this.btnTableTopLine2.Size = new System.Drawing.Size(216, 26);
             this.btnTableTopLine2.Tag = "<上表格線2></上表格線2>\\n";
             this.btnTableTopLine2.Text = "上表格線2";
             // 
             // btnTableBottomLine2
             // 
             this.btnTableBottomLine2.Name = "btnTableBottomLine2";
-            this.btnTableBottomLine2.Size = new System.Drawing.Size(214, 26);
+            this.btnTableBottomLine2.Size = new System.Drawing.Size(216, 26);
             this.btnTableBottomLine2.Tag = "<下表格線2></下表格線2>\\n";
             this.btnTableBottomLine2.Text = "下表格線2";
+            // 
+            // btnRatio
+            // 
+            this.btnRatio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnRatio.Image = ((System.Drawing.Image)(resources.GetObject("btnRatio.Image")));
+            this.btnRatio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRatio.Name = "btnRatio";
+            this.btnRatio.Size = new System.Drawing.Size(97, 23);
+            this.btnRatio.Tag = "1:1";
+            this.btnRatio.Text = "比例";
+            this.btnRatio.ToolTipText = "比值符號就是英文半形冒號";
             // 
             // InsertTextForm
             // 
@@ -1175,7 +1188,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1188, 572);
+            this.ClientSize = new System.Drawing.Size(1188, 593);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.toolBarMath);
             this.Controls.Add(this.panel2);
@@ -1308,5 +1321,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripButton btnSymbolDocTitle;
         private System.Windows.Forms.ToolStripMenuItem btnTableMiddleLine;
+        private System.Windows.Forms.ToolStripButton btnRatio;
     }
 }
