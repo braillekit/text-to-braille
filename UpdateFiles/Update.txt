@@ -5,10 +5,10 @@
 '那麼應用程式在下載檔案時可能會發生找不到檔案的錯誤（404 error）。
 '===================================================================
 AppConfig.Default.ini            ; ?     '若 client 端無此檔案才更新
-BrailleToolkit.dll               ; 3.11.21 '若 client 端版本比這裡指定的版本還要舊，則下載
-EasyBrailleEdit.Common.dll       ; 3.11.21 
-EasyBrailleEdit.exe              ; 3.11.21 
-Txt2Brl.exe                      ; 3.11.21 
+BrailleToolkit.dll               ; 3.11.22 '若 client 端版本比這裡指定的版本還要舊，則下載
+EasyBrailleEdit.Common.dll       ; 3.11.22 
+EasyBrailleEdit.exe              ; 3.11.22 
+Txt2Brl.exe                      ; 3.11.22 
 EasyBrailleEdit.exe.config       ; ?
 Txt2Brl.exe.config               ; ?     '若 client 端無此檔案才更新
 Phrase.phf                       ; ?     '若 client 端無此檔案才更新
