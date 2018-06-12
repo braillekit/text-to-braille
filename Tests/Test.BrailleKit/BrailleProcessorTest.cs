@@ -189,7 +189,7 @@ namespace Test.BrailleToolkit
 
             BrailleLine brLine = processor.ConvertLine(inputText);            
 
-            var lines = processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+            var lines = BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var result = lines[0].ToPositionNumberString();
             Assert.AreEqual(expectedPositionNumbers, result);
@@ -205,7 +205,7 @@ namespace Test.BrailleToolkit
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
-            var lines = processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+            var lines = BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var result = lines[0].ToPositionNumberString();
             Assert.AreEqual(expectedPositionNumbers, result);
@@ -234,7 +234,7 @@ namespace Test.BrailleToolkit
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
-            processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+            BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var result = brLine.ToPositionNumberString();
             Assert.AreEqual(expectedPositionNumbers, result);
@@ -250,7 +250,7 @@ namespace Test.BrailleToolkit
             string expectedPositionNumbers = new StringBuilder().Insert(0, "(36)", 36) + "(3456 1)(145)"; // 36 個底線，後面跟著 "14" 的點字（有數符）。
             BrailleLine brLine = processor.ConvertLine(inputText);
 
-            processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+            BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var result = brLine.ToPositionNumberString();
             Assert.AreEqual(expectedPositionNumbers, result);
@@ -266,7 +266,7 @@ namespace Test.BrailleToolkit
             string expectedPositionNumbers = new StringBuilder().Insert(0, "(36)", 36) + "(1346)(24)(1236)"; // 36 個底線，後面跟著 "xiv" 的點字。
             BrailleLine brLine = processor.ConvertLine(inputText);
 
-            processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+            BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var result = brLine.ToPositionNumberString();
             Assert.AreEqual(expectedPositionNumbers, result);
@@ -280,7 +280,7 @@ namespace Test.BrailleToolkit
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
-            processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+            BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var result = brLine.ToPositionNumberString();
             Assert.AreEqual(expectedPositionNumbers, result);
@@ -309,7 +309,7 @@ namespace Test.BrailleToolkit
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
-            processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+            BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var result = brLine.ToPositionNumberString();
             Assert.AreEqual(expectedPositionNumbers, result);

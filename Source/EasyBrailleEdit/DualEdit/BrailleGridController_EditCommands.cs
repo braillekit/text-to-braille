@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Helpers;
+using BrailleToolkit.Tags;
 using EasyBrailleEdit.Forms;
 using Huanlin.Windows.Forms;
 using Serilog;
@@ -668,8 +669,8 @@ namespace EasyBrailleEdit.DualEdit
                 // 在列首執行倒退刪除時，要把目前這列上提，銜接至上一列的尾巴。
                 // 先計算新的游標位置
                 int focusRow = orgRow - 3;
-                lineIdx = _positionMapper.GridRowToBrailleLineIndex(focusRow);
-                var brLine = BrailleDoc.Lines[lineIdx];
+                int previousLineIdx = _positionMapper.GridRowToBrailleLineIndex(focusRow);
+                var brLine = BrailleDoc.Lines[previousLineIdx];
                 int focusCol = brLine.CellCount + grid.FixedColumns;
 
                 // 把下一列接上來。
@@ -677,6 +678,12 @@ namespace EasyBrailleEdit.DualEdit
                 {
                     // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
                     UndoRedo.SaveMementoForUndo(memento);
+                }
+                else
+                {
+                    MsgBoxHelper.ShowInfo($"第 {lineIdx + 1} 行不能銜接至上一行，因為即使接上去，也會因為斷行規則而再度於相同位置折到下一行。");
+                    focusRow = orgRow;
+                    focusCol = col;
                 }
                 GridFocusCell(focusRow, focusCol);
             }
@@ -813,6 +820,17 @@ namespace EasyBrailleEdit.DualEdit
 
             // 更新上一列
             int formattedLineCount = ReformatRow(_grid, row - 1);
+
+            if (formattedLineCount == 2 && BrailleDoc.Lines[joinedToLineIndex].WordCount == joinedToWordIdx)
+            {
+                // 銜接至上一列之後，再經過格式化（斷行）處理，結果依然是兩列，而且上一列的字數跟銜接前的字數一樣
+                // 那就等於跟沒有銜接一樣。也就是說，不能銜接至上一行。
+                Log.Debug($"JoinToPreviousRow() 銜接至第 {prevLineIdx} line 至上一列之後，發現結果跟沒有銜接一樣（因為又經過斷行處理）。傳回 0 以表示沒有發生銜接。銜接的兩列內容如下。");
+                Log.Debug($"JoinToPreviousRow() 欲銜接的列：'{BrailleDoc[lineIdx].ToOriginalTextString()}'");
+                Log.Debug($"JoinToPreviousRow() 接至上一列：'{BrailleDoc[joinedToLineIndex].ToOriginalTextString()}'");
+                return 0;
+            }
+
             if (formattedLineCount > 2)
             {
                 MsgBoxHelper.ShowWarning($"斷行之後的結果應該不超過 2 行，但是卻有 {formattedLineCount} 行！\r\n" +
@@ -825,6 +843,12 @@ namespace EasyBrailleEdit.DualEdit
             {
                 if (aLine[0].IsContextTag && aLine[0].Text == "<P>")
                 {
+                    return false;
+                }
+                if (aLine.CellCount >= BrailleDoc.CellsPerLine 
+                    && aLine.ToString().IndexOf(OrgPageNumberContextTag.LeadingUnderlines) >= 0)
+                {
+                    // 如果這行已經滿格，而且可能是原書頁碼，那就不要斷行，否則斷行時可能會造成錯誤的結果。
                     return false;
                 }
                 return true;

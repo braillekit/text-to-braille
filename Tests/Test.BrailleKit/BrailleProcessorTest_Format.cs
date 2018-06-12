@@ -27,7 +27,7 @@ namespace Test.BrailleToolkit
 
             BrailleLine brLine = target.ConvertLine(input);	// 冒號後面會加一個空方
 
-            var brLines = target.BreakLine(brLine, cellsPerLine, context);
+            var brLines = BrailleDocumentFormatter.BreakLine(brLine, cellsPerLine, context);
 
             Assert.AreEqual(expectedLineCount, brLines.Count);
 
@@ -48,7 +48,7 @@ namespace Test.BrailleToolkit
 
             var processor = BrailleProcessor.GetInstance();
             var line = processor.ConvertLine(inputText);
-            var lines = processor.BreakLine(line, 40, null);
+            var lines = BrailleDocumentFormatter.BreakLine(line, 40, null);
             Assert.IsTrue(lines.Count == 2 && lines[0].CellCount == 40 && lines[1].CellCount == 1);
         }
 
@@ -61,7 +61,7 @@ namespace Test.BrailleToolkit
             BrailleLine brLine = processor.ConvertLine(inputText);
 
             int cellsPerLine = 40;
-            var formattedLines = processor.FormatLine(brLine, cellsPerLine, new ContextTagManager());
+            var formattedLines = BrailleDocumentFormatter.FormatLine(brLine, cellsPerLine, new ContextTagManager());
 
             Assert.IsTrue(formattedLines.Count == 2 && formattedLines[0].CellCount == 38 && formattedLines[1].CellCount == 15);
 
@@ -84,7 +84,7 @@ namespace Test.BrailleToolkit
             BrailleLine brLine = processor.ConvertLine(inputText);
 
             int cellsPerLine = 40;
-            var formattedLines = processor.FormatLine(brLine, cellsPerLine, new ContextTagManager());
+            var formattedLines = BrailleDocumentFormatter.FormatLine(brLine, cellsPerLine, new ContextTagManager());
 
             Assert.IsTrue(formattedLines.Count == 2 && formattedLines[0].CellCount == expectedCellCountOfLine1 && formattedLines[1].CellCount == expectedCellCountOfLine2);
 

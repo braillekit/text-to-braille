@@ -7,7 +7,7 @@ using BrailleToolkit.Helpers;
 
 namespace BrailleToolkit.Tags
 {
-    internal class OrgPageNumberContextTag : GenericContextTag
+    public class OrgPageNumberContextTag : GenericContextTag
     {
         public const string LeadingUnderline = "_";
         public const int NumberOfUnderline = 36;   // 用於表示原書頁次的底線字元數量

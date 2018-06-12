@@ -6,7 +6,7 @@ using BrailleToolkit.Helpers;
 
 namespace BrailleToolkit.Tags
 {
-    internal class GenericContextTag : IContextTag
+    public class GenericContextTag : IContextTag
     {
         public string ConvertablePrefix { get; set; }   // 可轉換成點字的前導文字
         public string ConvertablePostfix { get; set; }  // 可轉換成點字的結尾文字

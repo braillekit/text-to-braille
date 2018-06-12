@@ -837,7 +837,7 @@ namespace EasyBrailleEdit.DualEdit
             row = PositionMapper.GetBrailleRowIndex(row);  // 修正列索引為點字列所在的索引。
 
             int lineIndex = PositionMapper.GridRowToBrailleLineIndex(row);
-            int lineCnt = BrailleProcessor.GetInstance().FormatLine(BrailleDoc, lineIndex, null);
+            int lineCnt = BrailleDocumentFormatter.FormatLine(BrailleDoc, lineIndex, null);
             if (lineCnt > 1)    // 有斷行?
             {
                 // 換上新列
