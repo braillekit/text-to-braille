@@ -128,6 +128,8 @@ namespace BrailleToolkit.Helpers
                     line.Replace(ContextTagNames.OrgPageNumber, String.Empty)
                         .Replace(endTagName, String.Empty)
                         .Replace(OrgPageNumberContextTag.LeadingUnderline, String.Empty)
+                        .Replace(ContextTagNames.UpperPosition, String.Empty)
+                        .Replace(XmlTagHelper.GetEndTagName(ContextTagNames.UpperPosition), String.Empty)
                         .Trim();
 
             }
