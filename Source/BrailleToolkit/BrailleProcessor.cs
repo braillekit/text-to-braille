@@ -709,17 +709,22 @@ namespace BrailleToolkit
                 // 所以可利用 Text 屬性來判斷這是哪一個 context tag，以及是起始標籤還是結束標籤。
 
                 var ctag = brWord.ContextTag;
-
-                if (XmlTagHelper.IsBeginTag(brWord.Text))
+                int ctagIndex = index;
+                
+                if (XmlTagHelper.IsBeginTag(brWord.Text)) // 起始標籤。
                 {
-                    // 處理起始標籤。
-
                     // 優先使用預先建立好的點字串列。
                     if (ctag.PrefixBrailleWords.Count > 0)
                     {
                         index++;
                         brLine.Words.InsertRange(index, ctag.PrefixBrailleWords);
                         index += ctag.PrefixBrailleWords.Count;
+
+                        if (ctag.RemoveTagOnConversion)
+                        {
+                            brLine.RemoveAt(ctagIndex);
+                            index--;
+                        }
                         continue;
                     }
                     // 沒有點字串列的時候才去轉換文字。
@@ -733,6 +738,12 @@ namespace BrailleToolkit
                         index++;
                         brLine.Words.InsertRange(index, newBrLine.Words);
                         index += newBrLine.WordCount;
+
+                        if (ctag.RemoveTagOnConversion)
+                        {
+                            brLine.RemoveAt(ctagIndex);
+                            index--;
+                        }
                         continue;
                     }
                     // 是起始標籤，但不需要轉換成文字：保留此 BraillWord，以便識別這是個 context tag。
@@ -742,9 +753,8 @@ namespace BrailleToolkit
 
                     // 註：也許可以不用急著刪除，而讓它活到轉換程序的最後階段，也就是由清除全部 context tag 的步驟來刪除。
                 }
-                else if (XmlTagHelper.IsEndTag(brWord.Text))
-                {
-                    // 處理結束標籤。
+                else if (XmlTagHelper.IsEndTag(brWord.Text)) // 結束標籤。
+                {                    
 
                     // 優先使用預先建立好的點字串列。
                     if (ctag.PostfixBrailleWords.Count > 0)
@@ -752,6 +762,12 @@ namespace BrailleToolkit
                         index++;
                         brLine.Words.InsertRange(index, ctag.PostfixBrailleWords);
                         index += ctag.PostfixBrailleWords.Count;
+
+                        if (ctag.RemoveTagOnConversion)
+                        {
+                            brLine.RemoveAt(ctagIndex);
+                            index--;
+                        }
                         continue;
                     }
                     // 沒有點字串列的時候才去轉換文字。
@@ -764,6 +780,12 @@ namespace BrailleToolkit
                         }
                         brLine.Words.InsertRange(index, newBrLine.Words);
                         index += newBrLine.WordCount + 1;
+
+                        if (ctag.RemoveTagOnConversion)
+                        {
+                            brLine.RemoveAt(ctagIndex);
+                            index--;
+                        }
                         continue;
                     }
                     // 是結束標籤，但不需要轉換成文字：保留此 BraillWord，以便識別這是個 context tag。

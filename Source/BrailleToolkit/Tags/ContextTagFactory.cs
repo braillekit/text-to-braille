@@ -10,7 +10,8 @@ namespace BrailleToolkit.Tags
     // 列舉常數 for 語境標籤的生命週期（何時要移除該語境標籤）
     public enum ContextLifetime
     {
-        BeforeConvertion,   // 只存在於點字轉換動作之前。
+        BeforeConversion,   // 只存在於點字轉換動作之前。
+        DuringConversion,   // 轉點字過程中的某個時間點會消失。
         BeforeFormatDoc,    // 在點字轉換過程中，直到整份文件進行斷行之前。
         EndOfFormatDoc      // 在整份文件斷行完畢之後即消失。
     }
@@ -89,18 +90,15 @@ namespace BrailleToolkit.Tags
                     }
                 case ContextTagNames.QuotationMark1:
                     {
-                        var tag = new GenericContextTag(tagName);
-                        var brWord = new BrailleWord("「")
-                        {
-                            IsConvertedFromTag = true
-                        };
+                        var tag = new GenericContextTag(
+                                        tagName, 
+                                        ContextLifetime.DuringConversion, 
+                                        removeTagOnConversion: true);
+                        var brWord = new BrailleWord("「");
                         brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 2, 3, 6 }));
                         tag.PrefixBrailleWords.Add(brWord);
-                        
-                        brWord = new BrailleWord("」")
-                        {
-                            IsConvertedFromTag = true
-                        };
+
+                        brWord = new BrailleWord("」");
                         brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 3, 5, 6 }));
                         tag.PostfixBrailleWords.Add(brWord);
 
@@ -109,18 +107,15 @@ namespace BrailleToolkit.Tags
 
                 case ContextTagNames.QuotationMark2:
                     {
-                        var tag = new GenericContextTag(tagName);
-                        var brWord = new BrailleWord("「")
-                        {
-                            IsConvertedFromTag = true
-                        };
+                        var tag = new GenericContextTag(
+                                        tagName, 
+                                        ContextLifetime.DuringConversion,
+                                        removeTagOnConversion: true);
+                        var brWord = new BrailleWord("「");
                         brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 2, 3, 6 }));
                         tag.PrefixBrailleWords.Add(brWord);
 
-                        brWord = new BrailleWord("」")
-                        {
-                            IsConvertedFromTag = true
-                        };
+                        brWord = new BrailleWord("」");
                         brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 4, 5, 6 }));
                         brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 3, 5, 6 }));
                         tag.PostfixBrailleWords.Add(brWord);

@@ -48,6 +48,8 @@ namespace BrailleToolkit.Tags
             }
         }
 
+        public bool RemoveTagOnConversion { get; protected set; }
+
         public virtual void Reset()
         {
             Count = 0;
@@ -71,12 +73,14 @@ namespace BrailleToolkit.Tags
 
         public GenericContextTag(string tagName,
             ContextLifetime lifeTime = ContextLifetime.BeforeFormatDoc,
+            bool removeTagOnConversion = false,
             bool singleLine = false)
         {
             TagName = tagName;
             Lifetime = lifeTime;
             IsSingleLine = singleLine;
             Count = 0;
+            RemoveTagOnConversion = removeTagOnConversion;
 
             ConvertablePrefix = String.Empty;
             ConvertablePostfix = String.Empty;

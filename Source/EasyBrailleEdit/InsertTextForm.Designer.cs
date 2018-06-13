@@ -49,6 +49,10 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSymbolSingleQuoteEng = new System.Windows.Forms.ToolStripButton();
             this.btnSymboleDoubleQuoteEng = new System.Windows.Forms.ToolStripButton();
+            this.btnSymbolQuotationMarks = new System.Windows.Forms.ToolStripDropDownButton();
+            this.btnSymbolQuot1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSymbolQuot2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSymbolQuot3 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSymbolDoubleQuote = new System.Windows.Forms.ToolStripButton();
             this.btnSymbolRoundBracket = new System.Windows.Forms.ToolStripButton();
             this.btnSymbolSquareBracket = new System.Windows.Forms.ToolStripButton();
@@ -134,10 +138,6 @@
             this.btnTableTopLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTableBottomLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnSymbolQuotationMarks = new System.Windows.Forms.ToolStripDropDownButton();
-            this.btnSymbolQuot1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSymbolQuot2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSymbolQuot3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolBarSymbol1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolBarMath.SuspendLayout();
@@ -363,6 +363,54 @@
             this.btnSymboleDoubleQuoteEng.Tag = "“|”";
             this.btnSymboleDoubleQuoteEng.Text = "“ ”";
             this.btnSymboleDoubleQuoteEng.ToolTipText = "雙引號";
+            // 
+            // btnSymbolQuotationMarks
+            // 
+            this.btnSymbolQuotationMarks.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSymbolQuotationMarks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSymbolQuot1,
+            this.btnSymbolQuot2,
+            this.btnSymbolQuot3});
+            this.btnSymbolQuotationMarks.Font = new System.Drawing.Font("PMingLiU", 11.25F);
+            this.btnSymbolQuotationMarks.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuotationMarks.Image")));
+            this.btnSymbolQuotationMarks.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSymbolQuotationMarks.Name = "btnSymbolQuotationMarks";
+            this.btnSymbolQuotationMarks.Size = new System.Drawing.Size(61, 23);
+            this.btnSymbolQuotationMarks.Tag = "NA";
+            this.btnSymbolQuotationMarks.Text = "「」";
+            this.btnSymbolQuotationMarks.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnSymbolQuotationMarks.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
+            // 
+            // btnSymbolQuot1
+            // 
+            this.btnSymbolQuot1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSymbolQuot1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSymbolQuot1.Name = "btnSymbolQuot1";
+            this.btnSymbolQuot1.Size = new System.Drawing.Size(278, 38);
+            this.btnSymbolQuot1.Tag = "「|」";
+            this.btnSymbolQuot1.Text = "一般引號「」";
+            this.btnSymbolQuot1.ToolTipText = "一般中文引號，若以 <數學> 區塊包住，點字會不同。";
+            // 
+            // btnSymbolQuot2
+            // 
+            this.btnSymbolQuot2.Font = new System.Drawing.Font("PMingLiU", 11.25F);
+            this.btnSymbolQuot2.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuot2.Image")));
+            this.btnSymbolQuot2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSymbolQuot2.Name = "btnSymbolQuot2";
+            this.btnSymbolQuot2.Size = new System.Drawing.Size(278, 38);
+            this.btnSymbolQuot2.Tag = "<引號一>|</引號一>";
+            this.btnSymbolQuot2.Text = "特殊引號一";
+            this.btnSymbolQuot2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            // 
+            // btnSymbolQuot3
+            // 
+            this.btnSymbolQuot3.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuot3.Image")));
+            this.btnSymbolQuot3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSymbolQuot3.Name = "btnSymbolQuot3";
+            this.btnSymbolQuot3.Size = new System.Drawing.Size(278, 38);
+            this.btnSymbolQuot3.Tag = "<引號二>|</引號二>";
+            this.btnSymbolQuot3.Text = "特殊引號二";
+            this.btnSymbolQuot3.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
             // btnSymbolDoubleQuote
             // 
@@ -979,28 +1027,28 @@
             // btnChoiceBo
             // 
             this.btnChoiceBo.Name = "btnChoiceBo";
-            this.btnChoiceBo.Size = new System.Drawing.Size(107, 26);
+            this.btnChoiceBo.Size = new System.Drawing.Size(216, 26);
             this.btnChoiceBo.Tag = "<選項>ㄅ.</選項>";
             this.btnChoiceBo.Text = "ㄅ.";
             // 
             // btnChoicePo
             // 
             this.btnChoicePo.Name = "btnChoicePo";
-            this.btnChoicePo.Size = new System.Drawing.Size(107, 26);
+            this.btnChoicePo.Size = new System.Drawing.Size(216, 26);
             this.btnChoicePo.Tag = "<選項>ㄆ.</選項>";
             this.btnChoicePo.Text = "ㄆ.";
             // 
             // btnChoiceMo
             // 
             this.btnChoiceMo.Name = "btnChoiceMo";
-            this.btnChoiceMo.Size = new System.Drawing.Size(107, 26);
+            this.btnChoiceMo.Size = new System.Drawing.Size(216, 26);
             this.btnChoiceMo.Tag = "<選項>ㄇ.</選項>";
             this.btnChoiceMo.Text = "ㄇ.";
             // 
             // btnChoiceFo
             // 
             this.btnChoiceFo.Name = "btnChoiceFo";
-            this.btnChoiceFo.Size = new System.Drawing.Size(107, 26);
+            this.btnChoiceFo.Size = new System.Drawing.Size(216, 26);
             this.btnChoiceFo.Tag = "<選項>ㄈ.</選項>";
             this.btnChoiceFo.Text = "ㄈ.";
             // 
@@ -1172,52 +1220,6 @@
             this.btnTableBottomLine2.Size = new System.Drawing.Size(214, 26);
             this.btnTableBottomLine2.Tag = "<下表格線2></下表格線2>\\n";
             this.btnTableBottomLine2.Text = "下表格線2";
-            // 
-            // btnSymbolQuotationMarks
-            // 
-            this.btnSymbolQuotationMarks.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolQuotationMarks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSymbolQuot1,
-            this.btnSymbolQuot2,
-            this.btnSymbolQuot3});
-            this.btnSymbolQuotationMarks.Font = new System.Drawing.Font("PMingLiU", 11.25F);
-            this.btnSymbolQuotationMarks.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuotationMarks.Image")));
-            this.btnSymbolQuotationMarks.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolQuotationMarks.Name = "btnSymbolQuotationMarks";
-            this.btnSymbolQuotationMarks.Size = new System.Drawing.Size(61, 23);
-            this.btnSymbolQuotationMarks.Text = "「」";
-            this.btnSymbolQuotationMarks.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            // 
-            // btnSymbolQuot1
-            // 
-            this.btnSymbolQuot1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolQuot1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSymbolQuot1.Name = "btnSymbolQuot1";
-            this.btnSymbolQuot1.Size = new System.Drawing.Size(278, 38);
-            this.btnSymbolQuot1.Tag = "「|」";
-            this.btnSymbolQuot1.Text = "一般引號「」";
-            this.btnSymbolQuot1.ToolTipText = "一般中文引號，若以 <數學> 區塊包住，點字會不同。";
-            // 
-            // btnSymbolQuot2
-            // 
-            this.btnSymbolQuot2.Font = new System.Drawing.Font("PMingLiU", 11.25F);
-            this.btnSymbolQuot2.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuot2.Image")));
-            this.btnSymbolQuot2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSymbolQuot2.Name = "btnSymbolQuot2";
-            this.btnSymbolQuot2.Size = new System.Drawing.Size(278, 38);
-            this.btnSymbolQuot2.Tag = "<引號一>|</引號一>";
-            this.btnSymbolQuot2.Text = "特殊引號一";
-            this.btnSymbolQuot2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            // 
-            // btnSymbolQuot3
-            // 
-            this.btnSymbolQuot3.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuot3.Image")));
-            this.btnSymbolQuot3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSymbolQuot3.Name = "btnSymbolQuot3";
-            this.btnSymbolQuot3.Size = new System.Drawing.Size(278, 38);
-            this.btnSymbolQuot3.Tag = "<引號二>|</引號二>";
-            this.btnSymbolQuot3.Text = "特殊引號二";
-            this.btnSymbolQuot3.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
             // InsertTextForm
             // 

@@ -24,6 +24,11 @@ namespace BrailleToolkit.Tags
         /// </summary>
         string EndTagName { get; }
 
+        /// <summary>
+        /// 是否在轉換點字的時候一併把標籤移除（作用等同於把標籤替換成特定文字與點字）。
+        /// </summary>
+        bool RemoveTagOnConversion { get; }
+
         ContextLifetime Lifetime { get; }
 
         /// <summary>
