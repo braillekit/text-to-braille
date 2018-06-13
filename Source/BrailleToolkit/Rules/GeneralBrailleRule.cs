@@ -14,8 +14,8 @@ namespace BrailleToolkit.Rules
     public static class GeneralBrailleRule
     {
         // 底下這些符號的右邊都不用加空方。
-        const string NoExtraSpaceAfterTheseCharacters = "「『＂‘";
-        const string NoExtraSpaceBeforeTheseCharacters = "」』＂′";
+        const string NoExtraSpaceAfterTheseCharacters = "「『“‘";
+        const string NoExtraSpaceBeforeTheseCharacters = "」』”’";
 
         /// <summary>
         /// 補加必要的空白：在英數字母和中文字之間補上空白。
