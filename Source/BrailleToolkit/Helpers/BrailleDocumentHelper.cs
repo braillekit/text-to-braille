@@ -223,6 +223,40 @@ namespace BrailleToolkit.Helpers
             }
         }
 
+        /// <summary>
+        /// 移除代表數字的點位。
+        /// </summary>
+        /// <param name="brLine"></param>
+        /// <param name="beginIdx"></param>
+        /// <param name="endIdx"></param>
+        public static void RemoveDigitCell(BrailleLine brLine, int beginIdx, int endIdx)
+        {
+            if (beginIdx < 0 || endIdx < 0 || beginIdx > endIdx)
+                return;
+
+            if (endIdx >= brLine.WordCount)
+            {
+                endIdx = brLine.WordCount - 1;
+            }
+
+            int wordIdx = beginIdx;
+            BrailleWord brWord;
+            string text;
+
+            while (wordIdx <= endIdx)
+            {
+                brWord = brLine[wordIdx];
+                text = brWord.Text;
+
+                if (text.Length > 0 && Char.IsDigit(text[0]) &&
+                    brWord.Cells[0].Value == (byte)BrailleCellCode.Digit)
+                {
+                    brWord.Cells.RemoveAt(0);	// 移除小數點位.
+                }
+
+                wordIdx++;
+            }
+        }
 
         /// <summary>
         /// 移除點字數量為 0 的 lines，以及一些空標籤。

@@ -425,7 +425,7 @@ namespace BrailleToolkit
         /// 處理包著數字的中括號，例如：【12】。
         /// </summary>
         /// <param name="brLine"></param>
-        public static void ApplyBracketRule(BrailleLine brLine)
+        public static void EnsureNoDigitSymbolInBrackets(BrailleLine brLine)
         {
             int wordIdx = 0;
             BrailleWord brWord;
@@ -455,41 +455,12 @@ namespace BrailleToolkit
                     if (beginIdx >= 0)
                     {
                         endIdx = wordIdx;
-                        RemoveDigitCell(brLine, beginIdx + 1, endIdx - 1);
+                        BrailleDocumentHelper.RemoveDigitCell(brLine, beginIdx + 1, endIdx - 1);
                     }
                 }
                 wordIdx++;
             }
         }
 
-        /// <summary>
-        /// 移除代表數字的點位。
-        /// </summary>
-        /// <param name="brLine"></param>
-        /// <param name="beginIdx"></param>
-        /// <param name="endIdx"></param>
-        public static void RemoveDigitCell(BrailleLine brLine, int beginIdx, int endIdx)
-        {
-            if (beginIdx < 0 || endIdx < 0 || beginIdx > endIdx)
-                return;
-
-            int wordIdx = beginIdx;
-            BrailleWord brWord;
-            string text;
-
-            while (wordIdx < brLine.WordCount)
-            {
-                brWord = brLine[wordIdx];
-                text = brWord.Text;
-
-                if (text.Length > 0 && Char.IsDigit(text[0]) &&
-                    brWord.Cells[0].Value == (byte)BrailleCellCode.Digit)
-                {
-                    brWord.Cells.RemoveAt(0);	// 移除小數點位.
-                }
-
-                wordIdx++;
-            }
-        }
     }
 }

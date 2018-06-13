@@ -527,7 +527,7 @@ namespace BrailleToolkit
             EnglishBrailleRule.ApplyDigitRule(brLine);		// 套用數字規則（加數字符號）。
             EnglishBrailleRule.AddSpaces(brLine);           // 補加必要的空白。
 
-            ChineseBrailleRule.ApplyBracketRule(brLine);    // 套用括弧規則。
+            ChineseBrailleRule.EnsureNoDigitSymbolInBrackets(brLine);    // 套用括弧規則。
 
             // 不刪除多於空白，因為原本輸入時可能就希望縮排。
             //EnglishBrailleRule.ShrinkSpaces(brLine);        // 把連續空白刪到只剩一個。
