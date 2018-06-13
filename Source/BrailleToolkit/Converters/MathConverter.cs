@@ -64,6 +64,8 @@ namespace BrailleToolkit.Converters
                 // 看看下一個字元是什麼，以決定是否需要對目前的結果做額外處理，例如：加空方。
                 if (charStack.Count > 0)
                 {
+                    const string NoExtraSpaceAfterTheseCharacters = "「";
+
                     string nextChar = charStack.Peek().ToString();
 
                     if (currentChar == "（" || currentChar == "(")
@@ -72,6 +74,10 @@ namespace BrailleToolkit.Converters
                         {
                             EnsureOneSpaceFollowed(brWordList, nextChar);
                         }
+                    }
+                    else if (NoExtraSpaceAfterTheseCharacters.IndexOf(currentChar) >= 0)
+                    {
+                        // No need to do anything here, just return to caller.
                     }
                     else if (BrailleGlobals.ChinesePunctuations.IndexOf(currentChar) >= 0)
                     {

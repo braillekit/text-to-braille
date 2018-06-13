@@ -10,6 +10,7 @@ using EasyBrailleEdit.Common;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
 using Huanlin.Common.Extensions;
+using BrailleToolkit.Rules;
 
 namespace BrailleToolkit
 {
@@ -82,10 +83,16 @@ namespace BrailleToolkit
         {
             _converters = new List<WordConverter>();
 
+            /* Note:
+             * 在所有的 converters 當中，只有 ChineseConverter 和 EnglishConverter 
+             * 的 Convert 方法採取貪婪策略，也就會盡量轉換字元，直到碰到無法轉換的字元才返回。
+             * 其他轉換器則是轉完一個字元就返回。
+             */
+
             ControlTagConverter = new ContextTagConverter();
             ZhuyinConverter = zhuyinConverter;
             ChineseConverter = new ChineseWordConverter(this);
-            EnglishConverter = new EnglishWordConverter();
+            EnglishConverter = new EnglishWordConverter(this);
             MathConverter = new MathConverter();
             _coordConverter = new CoordinateConverter();
             _tableConverter = new TableConverter();
@@ -525,7 +532,8 @@ namespace BrailleToolkit
 
             EnglishBrailleRule.ApplyCapitalRule(brLine);    // 套用大寫規則。
             EnglishBrailleRule.ApplyDigitRule(brLine);		// 套用數字規則（加數字符號）。
-            EnglishBrailleRule.AddSpaces(brLine);           // 補加必要的空白。
+
+            GeneralBrailleRule.AddSpaces(brLine);           // 補加必要的空白。
 
             ChineseBrailleRule.EnsureNoDigitSymbolInBrackets(brLine);    // 套用括弧規則。
 

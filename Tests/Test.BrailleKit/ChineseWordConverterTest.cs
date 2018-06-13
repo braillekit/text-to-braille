@@ -35,7 +35,7 @@ namespace Test.BrailleToolkit
         [TestCase("实", "ㄕ　　ˊ", "0A3102")]   // 測試簡體字。
         public void Should_ConvertSingleWord_Succeed(string text, string phCode, string brCode)
 		{
-            var processor = BrailleProcessor.GetInstance(new ZhuyinReverseConverter());
+            var processor = BrailleProcessor.GetInstance();
             var target = new ChineseWordConverter(processor);
 
 			ContextTagManager context = new ContextTagManager();
@@ -52,7 +52,7 @@ namespace Test.BrailleToolkit
         [TestCase("／")]   // 測試無法轉換的字元：/
         public void Should_ConvertInvalidWord_Fail(string text)
         {
-            var processor = BrailleProcessor.GetInstance(new ZhuyinReverseConverter());
+            var processor = BrailleProcessor.GetInstance();
             var target = new ChineseWordConverter(processor);
 
             ContextTagManager context = new ContextTagManager();
@@ -110,7 +110,7 @@ namespace Test.BrailleToolkit
         [TestCaseSource("TestData1")]
         public void Should_NoSpaceBetweenPunctuationAndParenthese(string input, List<BrailleWord> expected)
         {
-            var processor = BrailleProcessor.GetInstance(new ZhuyinReverseConverter());
+            var processor = BrailleProcessor.GetInstance();
             var target = new ChineseWordConverter(processor);
 
             ContextTagManager context = new ContextTagManager();
@@ -127,7 +127,7 @@ namespace Test.BrailleToolkit
         [TestCase("——")]    // 兩個 0x2014
         public void Should_ConvertAllKindsOfEmdashes(string inputText)
         {
-            var processor = BrailleProcessor.GetInstance(new ZhuyinReverseConverter());
+            var processor = BrailleProcessor.GetInstance();
             var target = new ChineseWordConverter(processor);
 
             ContextTagManager context = new ContextTagManager();

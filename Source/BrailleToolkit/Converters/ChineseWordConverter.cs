@@ -40,7 +40,7 @@ namespace BrailleToolkit.Converters
 
             bool done = false;
             char ch;
-            string currentChar;
+            string currentWord;
             bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
             BrailleWord brWord;
             List<BrailleWord> brWordList = null;
@@ -77,7 +77,7 @@ namespace BrailleToolkit.Converters
                     break;
                 }
 
-                currentChar = ch.ToString();
+                currentWord = ch.ToString();
 
                 // 處理雙字元的標點符號。
                 if (ch == '…' || ch == '－' || ch == '─' || ch == '╴' || ch == '—' || ch == '﹏')
@@ -89,7 +89,7 @@ namespace BrailleToolkit.Converters
                         char ch2 = charStack.Pop();
                         if (ch2 == ch)	// 如果是連續兩個刪節號或破折號。
                         {
-                            currentChar = currentChar + currentChar;
+                            currentWord = currentWord + currentWord;
                             isExtracted = true;
                         }
                         else
@@ -110,7 +110,7 @@ namespace BrailleToolkit.Converters
                         char ch3 = charStack.Pop();
                         if (ch3 == ']' && (ch2 == '↗' || ch2 == '↘'))
                         {
-                            currentChar = currentChar + ch2.ToString() + ch3.ToString();
+                            currentWord = currentWord + ch2.ToString() + ch3.ToString();
                             isExtracted = true;
                         }
                         else
@@ -127,11 +127,11 @@ namespace BrailleToolkit.Converters
                 if (context.IsMathActive())
                 {
                     // 數學區塊裡面的符號，必須留給 MathConverter 處理。
-                    if (_processor.MathConverter.BrailleTable.Exists(currentChar))
+                    if (_processor.MathConverter.BrailleTable.Exists(currentWord))
                         break;
                 }
 
-                brWord = InternalConvert(currentChar);
+                brWord = InternalConvert(currentWord);
                 if (brWord == null)
                     break;
 
@@ -142,7 +142,7 @@ namespace BrailleToolkit.Converters
                     charStack.Pop();
                 }
 
-                if (!StrHelper.IsEmpty(currentChar))   // 避免將空白字元也列入 Chinese。
+                if (!StrHelper.IsEmpty(currentWord))   // 避免將空白字元也列入 Chinese。
                     brWord.Language = BrailleLanguage.Chinese;
 
                 ApplyBrailleConfig(brWord); // 根據組態檔的設定調整點字轉換結果。
@@ -161,7 +161,7 @@ namespace BrailleToolkit.Converters
 
                     if (context.IsActive(ContextTagNames.Math))
                     {
-                        if (BrailleGlobals.ChinesePunctuations.IndexOf(currentChar) >= 0)
+                        if (BrailleGlobals.ChinesePunctuations.IndexOf(currentWord) >= 0)
                         {
                             EnsureOneSpaceFollowed_UnlessNextWordIsPunctuation(brWordList, nextChar);
                         }

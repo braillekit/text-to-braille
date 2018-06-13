@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using BrailleToolkit.Tags;
 using BrailleToolkit.Helpers;
 
-namespace BrailleToolkit
+namespace BrailleToolkit.Rules
 {
     public static class ChineseBrailleRule
     {

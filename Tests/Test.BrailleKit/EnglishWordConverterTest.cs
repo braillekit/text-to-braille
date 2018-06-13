@@ -26,7 +26,8 @@ namespace Test.BrailleToolkit
         {
             string msg = "EnglishWordConverter.Convert 測試失敗: ";
 
-            EnglishWordConverter target = new EnglishWordConverter();
+            var processor = BrailleProcessor.GetInstance();
+            var converter = new EnglishWordConverter(processor);
 
 			ContextTagManager context = new ContextTagManager();
 
@@ -36,7 +37,7 @@ namespace Test.BrailleToolkit
             List<BrailleWord> expected = new List<BrailleWord>();
             BrailleWord brWord = new BrailleWord(text, "040404");
             expected.Add(brWord);
-            List<BrailleWord> actual = target.Convert(charStack, context);
+            List<BrailleWord> actual = converter.Convert(charStack, context);
             
             CollectionAssert.AreEqual(expected, actual, msg + text);
             charStack.Clear();
@@ -47,7 +48,7 @@ namespace Test.BrailleToolkit
             brWord = new BrailleWord(text, "2026");
             expected.Clear();
             expected.Add(brWord);
-            actual = target.Convert(charStack, context);
+            actual = converter.Convert(charStack, context);
             CollectionAssert.AreEqual(expected, actual, msg + text);
             charStack.Clear();
 
@@ -57,7 +58,7 @@ namespace Test.BrailleToolkit
             brWord = new BrailleWord(text, "26");
             expected.Clear();
             expected.Add(brWord);
-            actual = target.Convert(charStack, context);
+            actual = converter.Convert(charStack, context);
             CollectionAssert.AreEqual(expected, actual, msg + text);
             charStack.Clear();
 
@@ -67,7 +68,7 @@ namespace Test.BrailleToolkit
             brWord = new BrailleWord(text, "01");
             expected.Clear();
             expected.Add(brWord);
-            actual = target.Convert(charStack, context);
+            actual = converter.Convert(charStack, context);
             CollectionAssert.AreEqual(expected, actual, msg + text);
             charStack.Clear();  
           
@@ -77,7 +78,7 @@ namespace Test.BrailleToolkit
             brWord = new BrailleWord(text, "16");	// 下位點。
             expected.Clear();
             expected.Add(brWord);
-            actual = target.Convert(charStack, context);
+            actual = converter.Convert(charStack, context);
             CollectionAssert.AreEqual(expected, actual, msg + text);
             charStack.Clear();            
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BrailleToolkit.Helpers;
 
 namespace BrailleToolkit.Tags
 {
@@ -85,6 +86,46 @@ namespace BrailleToolkit.Tags
                 default:
                     {
                         return new GenericContextTag(tagName);
+                    }
+                case ContextTagNames.QuotationMark1:
+                    {
+                        var tag = new GenericContextTag(tagName);
+                        var brWord = new BrailleWord("「")
+                        {
+                            IsConvertedFromTag = true
+                        };
+                        brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 2, 3, 6 }));
+                        tag.PrefixBrailleWords.Add(brWord);
+                        
+                        brWord = new BrailleWord("」")
+                        {
+                            IsConvertedFromTag = true
+                        };
+                        brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 3, 5, 6 }));
+                        tag.PostfixBrailleWords.Add(brWord);
+
+                        return tag;
+                    }
+
+                case ContextTagNames.QuotationMark2:
+                    {
+                        var tag = new GenericContextTag(tagName);
+                        var brWord = new BrailleWord("「")
+                        {
+                            IsConvertedFromTag = true
+                        };
+                        brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 2, 3, 6 }));
+                        tag.PrefixBrailleWords.Add(brWord);
+
+                        brWord = new BrailleWord("」")
+                        {
+                            IsConvertedFromTag = true
+                        };
+                        brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 4, 5, 6 }));
+                        brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 3, 5, 6 }));
+                        tag.PostfixBrailleWords.Add(brWord);
+
+                        return tag;
                     }
             }
         }

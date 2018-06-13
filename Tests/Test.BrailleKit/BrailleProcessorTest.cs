@@ -327,20 +327,21 @@ namespace Test.BrailleToolkit
             Assert.AreEqual(expectedPositionNumbers, result);
         }
 
-        [Test]
-        public void Should_UseMathConverterForMathSymbols()
+
+        [TestCase("「你好」", "(56 36)(1345 16 4)(1235 146 4)(36 23)")]
+        [TestCase("「1+2+3=6」", "(56 36)(3456 2)(346)(23)(346)(25)()(46 13)()(3456 235)(36 23)")]
+        [TestCase("「abc」", "(56 36)(1)(12)(14)(36 23)")]
+        [TestCase("<數學>「1+2+3=6」</數學>", "(236)(3456 2)(346)(23)(346)(25)()(46 13)()(3456 235)(456 356)")]
+        [TestCase("<數學>「abc」</數學>", "(236)(1)(12)(14)(456 356)")]
+        public void Should_NoExtraSpaceInQuotationMarks(string inputText, string expectedPositionNumbers)
         {
-            var processor = BrailleProcessor.GetInstance(new ZhuyinReverseConverter());
-
-            var brLine = processor.ConvertLine("<數學>（1cm寬）</數學>");
-
-            var expected = "(12356)(3456 2)(14)(134)()(123 12456 3)(23456)";
+            var processor = BrailleProcessor.GetInstance();
+            var brLine = processor.ConvertLine(inputText);
+            BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
             var actual = brLine.ToPositionNumberString();
 
-            CollectionAssert.AreEqual(expected, actual);
-
+            Assert.AreEqual(expectedPositionNumbers, actual);
         }
-
 
     }
 }

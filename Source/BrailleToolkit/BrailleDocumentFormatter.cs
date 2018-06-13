@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BrailleToolkit.Helpers;
+using BrailleToolkit.Rules;
 using BrailleToolkit.Tags;
 using EasyBrailleEdit.Common;
 
