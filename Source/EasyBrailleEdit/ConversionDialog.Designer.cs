@@ -158,6 +158,7 @@
             // 
             // numLinesPerPage
             // 
+            this.numLinesPerPage.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.numLinesPerPage.Location = new System.Drawing.Point(114, 21);
             this.numLinesPerPage.Name = "numLinesPerPage";
             this.numLinesPerPage.Size = new System.Drawing.Size(60, 29);
@@ -165,6 +166,7 @@
             // 
             // numCellsPerLine
             // 
+            this.numCellsPerLine.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.numCellsPerLine.Location = new System.Drawing.Point(303, 21);
             this.numCellsPerLine.Name = "numCellsPerLine";
             this.numCellsPerLine.Size = new System.Drawing.Size(60, 29);
@@ -190,7 +192,7 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "每頁幾列:";
             // 
-            // ConvertionDialog
+            // ConversionDialog
             // 
             this.AcceptButton = this.btnConvert;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -211,7 +213,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ConvertionDialog";
+            this.Name = "ConversionDialog";
             this.helpProvider1.SetShowHelp(this, true);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

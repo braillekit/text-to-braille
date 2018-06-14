@@ -122,7 +122,7 @@ namespace BrailleToolkit.Helpers
 
             var endTagName = XmlTagHelper.GetEndTagName(ContextTagNames.OrgPageNumber);
             line = line.Trim();
-            if (line.StartsWith(ContextTagNames.OrgPageNumber) && line.EndsWith(endTagName))
+            if (line.StartsWith(ContextTagNames.OrgPageNumber))
             {
                 pageNumberText =
                     line.Replace(ContextTagNames.OrgPageNumber, String.Empty)
@@ -296,6 +296,21 @@ namespace BrailleToolkit.Helpers
                     }
                     emptyTagsCount++;
                     continue;
+                }
+
+                if (nextWord.IsContextTag)
+                {
+                    // 一律移除 <上位點>
+                    if (nextWord.OriginalText == ContextTagNames.UpperPosition ||
+                        nextWord.OriginalText == XmlTagHelper.GetEndTagName(ContextTagNames.UpperPosition))
+                    {
+                        if (doRemove)
+                        {
+                            brLine.RemoveAt(wordIdx + 1);
+                        }
+                        emptyTagsCount++;
+                        continue;
+                    }
                 }
 
                 if (!brWord.IsContextTag)

@@ -201,6 +201,8 @@ namespace EasyBrailleEdit.DualEdit
 
         public void InitializeGrid()
         {
+            _grid.BackColor = Color.DarkGray;
+
             // 確保既有的欄和列都被清除
             _grid.Rows.Clear();
             _grid.Columns.Clear();

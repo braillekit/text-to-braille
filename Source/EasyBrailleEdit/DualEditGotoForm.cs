@@ -34,5 +34,10 @@ namespace EasyBrailleEdit
         {
             get { return (int)numPosition.Value; }
         }
+
+        private void DualEditGotoForm_Shown(object sender, System.EventArgs e)
+        {
+            numPosition.Select(0, 255);
+        }
     }
 }

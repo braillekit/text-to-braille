@@ -53,6 +53,7 @@
             this.miEditUndo = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditRedo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
+            this.miEditCut = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditRemoveDigitSymbol = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,7 +91,6 @@
             this.statusLabelCurrentWord = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelCurrentLine = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelPageTitle = new System.Windows.Forms.ToolStripStatusLabel();
-            this.miEditCut = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -313,6 +313,15 @@
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
             this.toolStripMenuItem7.Size = new System.Drawing.Size(315, 6);
             // 
+            // miEditCut
+            // 
+            this.miEditCut.Name = "miEditCut";
+            this.miEditCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.miEditCut.Size = new System.Drawing.Size(318, 26);
+            this.miEditCut.Tag = "Cut";
+            this.miEditCut.Text = "剪下";
+            this.miEditCut.Click += new System.EventHandler(this.miEdit_Click);
+            // 
             // miEditCopy
             // 
             this.miEditCopy.Name = "miEditCopy";
@@ -457,7 +466,8 @@
             this.miToolsRemoveUselessWords.Name = "miToolsRemoveUselessWords";
             this.miToolsRemoveUselessWords.Size = new System.Drawing.Size(267, 26);
             this.miToolsRemoveUselessWords.Tag = "RemoveUselessWords";
-            this.miToolsRemoveUselessWords.Text = "檢查是否有多餘的空標籤";
+            this.miToolsRemoveUselessWords.Text = "檢查是否有多餘的標籤";
+            this.miToolsRemoveUselessWords.ToolTipText = "注意：<上位點> 標籤一律視為多餘標籤！";
             this.miToolsRemoveUselessWords.Click += new System.EventHandler(this.miToolsClick);
             // 
             // toolStrip1
@@ -659,15 +669,6 @@
             this.statusLabelPageTitle.Name = "statusLabelPageTitle";
             this.statusLabelPageTitle.Size = new System.Drawing.Size(181, 26);
             this.statusLabelPageTitle.Text = "toolStripStatusLabel1";
-            // 
-            // miEditCut
-            // 
-            this.miEditCut.Name = "miEditCut";
-            this.miEditCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.miEditCut.Size = new System.Drawing.Size(318, 26);
-            this.miEditCut.Tag = "Cut";
-            this.miEditCut.Text = "剪下";
-            this.miEditCut.Click += new System.EventHandler(this.miEdit_Click);
             // 
             // DualEditForm
             // 

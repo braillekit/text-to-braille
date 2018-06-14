@@ -640,7 +640,7 @@ namespace EasyBrailleEdit
                     BrailleDocumentHelper.RemoveUselessLines(BrailleDoc, doRemove, out emptyLinesCount, out emptyTagsCount);
                     if (emptyLinesCount > 0 || emptyTagsCount > 0)
                     {
-                        string msg = $"發現 {emptyLinesCount} 個空行，{emptyTagsCount} 個空標籤。要刪除它們嗎？";
+                        string msg = $"發現 {emptyLinesCount} 個空行，{emptyTagsCount} 個多餘標籤（包括<上位點>）。要刪除它們嗎？";
                         if (MsgBoxHelper.ShowYesNo(msg) == DialogResult.Yes)
                         {
                             doRemove = true;
@@ -652,7 +652,7 @@ namespace EasyBrailleEdit
                     }
                     else
                     {
-                        MsgBoxHelper.ShowInfo("沒有發現任何多餘的空行或空標籤。");
+                        MsgBoxHelper.ShowInfo("沒有發現任何多餘的空行或多餘標籤。");
                     }
                     break;
             }

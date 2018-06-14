@@ -135,6 +135,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "移動至";
+            this.Shown += new System.EventHandler(this.DualEditGotoForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.numPosition)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

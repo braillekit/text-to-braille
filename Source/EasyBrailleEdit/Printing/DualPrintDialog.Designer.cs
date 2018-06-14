@@ -319,6 +319,7 @@
             // 
             // txtPageRange
             // 
+            this.txtPageRange.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.txtPageRange.Location = new System.Drawing.Point(92, 43);
             this.txtPageRange.Name = "txtPageRange";
             this.txtPageRange.Size = new System.Drawing.Size(100, 29);
@@ -373,6 +374,7 @@
             // 
             // txtStartPageNumber
             // 
+            this.txtStartPageNumber.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.txtStartPageNumber.Location = new System.Drawing.Point(205, 63);
             this.txtStartPageNumber.Name = "txtStartPageNumber";
             this.txtStartPageNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
