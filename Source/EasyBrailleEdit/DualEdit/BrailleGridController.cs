@@ -840,26 +840,38 @@ namespace EasyBrailleEdit.DualEdit
 
             int lineIndex = PositionMapper.GridRowToBrailleLineIndex(row);
             int lineCnt = BrailleDocumentFormatter.FormatLine(BrailleDoc, lineIndex, null);
-            if (lineCnt > 1)    // 有斷行?
+
+            var busyForm = new BusyForm();
+            busyForm.Message = "正在刷新視窗內容...";
+            busyForm.Show();
+            Application.DoEvents();
+            try
             {
                 // 換上新列
                 RecreateRow(row);
                 FillRow(BrailleDoc[lineIndex], row, true);
 
-                // 插入新列
-                GridInsertRowAt(row + 3);
-                FillRow(BrailleDoc[lineIndex + 1], row + 3, true);
+                // 處理斷行所產生的其他 lines
+                for (int i = 1; i < lineCnt; i++)
+                {
+                    // 插入新列
+                    lineIndex++;
+                    row += 3;
+                    GridInsertRowAt(row);
+                    FillRow(BrailleDoc[lineIndex], row, autoSize: true);
+                }
 
-                // 重新填列號
-                RefreshRowNumbers();
+                if (lineCnt > 1)
+                {
+                    // 重新填列號
+                    RefreshRowNumbers();
+                }
+                return lineCnt;
             }
-            else
+            finally
             {
-                // 換上新列
-                RecreateRow(row);
-                FillRow(BrailleDoc[lineIndex], row, true);
+                busyForm.Close();
             }
-            return lineCnt;
         }
 
         /// <summary>
