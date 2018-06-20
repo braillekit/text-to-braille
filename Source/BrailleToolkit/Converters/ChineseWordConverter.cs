@@ -161,7 +161,8 @@ namespace BrailleToolkit.Converters
 
                     if (context.IsActive(ContextTagNames.Math))
                     {
-                        if (BrailleGlobals.ChinesePunctuations.IndexOf(currentWord) >= 0)
+                        if (BrailleGlobals.ChinesePunctuations.IndexOf(currentWord) >= 0
+                            && currentWord != "【") // 用 【】 包住的編號不要加空方
                         {
                             EnsureOneSpaceFollowed_UnlessNextWordIsPunctuation(brWordList, nextChar);
                         }

@@ -11,7 +11,7 @@ namespace Test.BrailleToolkit
     [TestFixture()]
     public class MathConverterTest
     {
-        //[TestCase("<數學>（1cm寬）</數學>", "(12356)(2)(14)(134)()(123 12456 3)(23456)")]
+        [TestCase("<數學>（1cm寬）</數學>", "(12356)(2)(14)(134)()(123 12456 3)(23456)")]
         [TestCase("<數學>（）×5 =</數學>", "(12356)()(23456)(4 16)(26)()(46 13)")]
         public void Should_NoSpace_NextToParenthesis(string inputText, string expectedPositionNumbers)
         {
@@ -64,6 +64,15 @@ namespace Test.BrailleToolkit
             Assert.AreEqual(expectedPositionNumbers, actual);
         }
 
+        [TestCase("<數學>【1】</數學>", "(12356)(2)(23456)")]
+        public void Should_NoSpace_InCircledNumbers(string inputText, string expectedPositionNumbers)
+        {
+            var processor = BrailleProcessor.GetInstance();
+            var brLine = processor.ConvertLine(inputText);
+            var actual = brLine.ToPositionNumberString();
+
+            Assert.AreEqual(expectedPositionNumbers, actual);
+        }
 
     }
 }
