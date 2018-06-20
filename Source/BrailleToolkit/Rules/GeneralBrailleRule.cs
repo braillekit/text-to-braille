@@ -14,8 +14,8 @@ namespace BrailleToolkit.Rules
     public static class GeneralBrailleRule
     {
         // 底下這些符號的右邊都不用加空方。
-        const string NoExtraSpaceAfterTheseCharacters = "「『“‘";
-        const string NoExtraSpaceBeforeTheseCharacters = "」』”’";
+        const string NoExtraSpaceAfterTheseCharacters = "「『“‘…";
+        const string NoExtraSpaceBeforeTheseCharacters = "」』”’…";
 
         /// <summary>
         /// 補加必要的空白：在英數字母和中文字之間補上空白。
@@ -108,6 +108,11 @@ namespace BrailleToolkit.Rules
                 return false;
             }
 
+            if (lastWord.Text == "？" && currWord.Text == "…") // 問號和刪節號之間要自動加空方
+            {
+                return true;
+            }
+
             if (NoExtraSpaceAfterTheseCharacters.IndexOf(lastWord.Text) >= 0)
             {
                 return false;
@@ -182,7 +187,8 @@ namespace BrailleToolkit.Rules
                         case '）':
                         case '」':
                         case '』':
-                        case '】':	// 用粗中刮弧把數字包起來時，代表題號，不用加空方.
+                        case '】':   // 用粗中刮弧把數字包起來時，代表題號，不用加空方。
+                        case '？':   // 2018-06-20：問號前面接數字時不加空方。
                             return false;
                     }
                 }
@@ -280,13 +286,125 @@ namespace BrailleToolkit.Rules
             index++;
             if (index < brLine.WordCount) // 如果已經到結尾，就不加空方。
             {
-                if (!BrailleWord.IsBlank(brLine[index]))
+                if (!BrailleWord.IsBlank(brLine[index]) && !brLine[index].IsContextTag)
                 {
                     brLine.Words.Insert(index, BrailleWord.NewBlank());
                     wordOffset = 1;
                 }
             }
             return wordOffset;
+        }
+
+
+        /// <summary>
+        /// 套用數字規則：數字前面要加數字符號。
+        /// 由於數字符號和數字不可分割，因此加在第一個數字的 Cells 裡面。
+        /// </summary>
+        /// <param name="brLine"></param>
+        public static void ApplyDigitRule(BrailleLine brLine)
+        {
+            char currChar = '\0';
+            char prevChar = '\0';
+            int digitCount = 0;   // 連續出現的數字數量
+            int firstDigitIndex = -1;
+            BrailleWord brWord;
+
+            for (int i = 0; i < brLine.WordCount; i++)
+            {
+                brWord = brLine[i];
+
+                if (brWord.IsContextTag) // 如果是情境標籤
+                {
+                    // 明確指定數符的時候自然也要加上數符。
+                    if (brWord.Text == "#" && (i + 1 < brLine.WordCount))
+                    {
+                        AddDigitSymbol(brLine, i + 1);
+                    }
+                    continue;
+                }
+                if (brWord.NoDigitCell) // 如果預先指定不加數符（例如: 表示座標、次方時）
+                {
+                    continue;
+                }
+
+                prevChar = currChar;
+                currChar = brWord.Text[0];
+                if (Char.IsDigit(currChar))
+                {
+                    digitCount++;
+
+                    // 記住第一個數字字元在串列中的位置，以便稍後插入點字的數字記號。
+                    if (firstDigitIndex < 0)
+                    {
+                        firstDigitIndex = i;
+                    }
+                    continue;
+                }
+                // 目前的字元不是數字
+
+                const string CharactersAsMathFormulaIfDigitHasAppeared = "+-*/×÷()（）,.…";
+
+                if (digitCount > 0)   // 之前的字元是數字？
+                {
+                    // 如果之前出現過數字，那麼碰到這些字元的時候，仍視為連續的數學式子（即後面的數字不用再加數符）。
+                    if (CharactersAsMathFormulaIfDigitHasAppeared.IndexOf(currChar) >= 0)
+                    {
+                        continue;   // 則繼續處理下一個字元。
+                    }
+                }
+
+                // 目前的字元不是數字，且之前有出現過數字，則需在第一個數字前面加數符。
+                if (firstDigitIndex >= 0)
+                {
+                    AddDigitSymbol(brLine, firstDigitIndex);
+                }
+                firstDigitIndex = -1;
+                digitCount = 0;
+            }
+
+            // 處理最後一次連續數字。
+            if (firstDigitIndex >= 0)
+            {
+                AddDigitSymbol(brLine, firstDigitIndex);
+            }
+        }
+
+        /// <summary>
+        /// 在指定的索引處的 BrailleWord 物件中加入數符。
+        /// 此函式會自動判斷是否有不需加入數符的例外狀況，例如：次方。
+        /// </summary>
+        /// <param name="brLine"></param>
+        /// <param name="index"></param>
+        private static void AddDigitSymbol(BrailleLine brLine, int index)
+        {
+            // 以下這些符號都視為數學算式的一部份，所以後面跟著的數字不加數符。
+            const string NoExtraDigitSymbolAfterTheseCharacters = "^（(+-×÷";
+
+            BrailleCell digitCell = BrailleCell.GetInstance(BrailleCellCode.Digit);
+
+            bool needDigitSymbol = true;
+
+            if (index > 0)    // 先檢查前一個字元，是否為不需加數符的場合。
+            {
+                var prevText = brLine.Words[index - 1].Text;
+                if (NoExtraDigitSymbolAfterTheseCharacters.IndexOf(prevText) >= 0)
+                {
+                    needDigitSymbol = false;
+                }
+            }
+            if (needDigitSymbol)
+            {
+                var firstDigitWord = brLine.Words[index];
+                if (firstDigitWord.CellCount < 1)
+                {
+                    return; // 防錯.
+                }
+                // 如果已經有加上數字記號就不再重複加。
+                if (!firstDigitWord.Cells[0].Equals(digitCell))
+                {
+                    firstDigitWord.Cells.Insert(0, digitCell);
+                }
+            }
         }
 
     }

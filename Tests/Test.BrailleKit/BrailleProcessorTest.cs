@@ -150,11 +150,18 @@ namespace Test.BrailleToolkit
         [TestCase("）」", "(135)(36 23)")]
         public void Should_NoSpace_BetweenRightParenthesisAndPunctuation(string inputText, string expectedPositionNumbers)
         {
-            BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
-
+            var processor = BrailleProcessor.GetInstance();
             BrailleLine brLine = processor.ConvertLine(inputText);
+            var result = brLine.ToPositionNumberString();
+            Assert.AreEqual(expectedPositionNumbers, result);
+        }
 
+        [TestCase("15？", "(3456 2)(26)(135)")]
+        [TestCase("<數學>15？</數學>", "(3456 2)(26)(456 236)")]
+        public void Should_NoSpace_BeforeSpecificPunctuation(string inputText, string expectedPositionNumbers)
+        {
+            var processor = BrailleProcessor.GetInstance();
+            var brLine = processor.ConvertLine(inputText);
             var result = brLine.ToPositionNumberString();
             Assert.AreEqual(expectedPositionNumbers, result);
         }

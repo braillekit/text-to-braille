@@ -64,7 +64,7 @@ namespace BrailleToolkit.Converters
                 // 看看下一個字元是什麼，以決定是否需要對目前的結果做額外處理，例如：加空方。
                 if (charStack.Count > 0)
                 {
-                    const string NoExtraSpaceAfterTheseCharacters = "「";
+                    const string NoExtraSpaceAfterTheseCharacters = "「）)…";
 
                     string nextChar = charStack.Peek().ToString();
 

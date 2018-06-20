@@ -144,7 +144,8 @@ namespace BrailleToolkit
 
                 // 被折行之後的第一個字需要再根據規則調整。
                 EnglishBrailleRule.ApplyCapitalRule(brLine);    // 套用大寫規則。
-                EnglishBrailleRule.ApplyDigitRule(brLine);		// 套用數字規則。
+
+                GeneralBrailleRule.ApplyDigitRule(brLine);		// 套用數字規則。
 
                 isBroken = true;    // 已經至少折了一行
                 maxCellsInLine = cellsPerLine - indents;  // 下一行開始就要自動縮排，共縮 indents 格。

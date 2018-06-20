@@ -531,7 +531,8 @@ namespace BrailleToolkit
             }
 
             EnglishBrailleRule.ApplyCapitalRule(brLine);    // 套用大寫規則。
-            EnglishBrailleRule.ApplyDigitRule(brLine);		// 套用數字規則（加數字符號）。
+
+            GeneralBrailleRule.ApplyDigitRule(brLine);		// 套用數字規則（加數字符號）。
 
             GeneralBrailleRule.AddSpaces(brLine);           // 補加必要的空白。
 
