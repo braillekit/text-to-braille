@@ -253,6 +253,12 @@ namespace EasyBrailleEdit
 
         private void btnPrintBraille_Click(object sender, EventArgs e)
         {
+            // 保護措施
+            if (AppGlobals.IsPrintingDisabled())
+            {
+                return;
+            }
+
             if (m_BrDoc.Lines.Count < 1)
             {
                 MsgBoxHelper.ShowError("沒有資料可供列印!");

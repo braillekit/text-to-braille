@@ -20,6 +20,12 @@ namespace EasyBrailleEdit.DualEdit
 
         public void ViewBraille()
         {
+            // 保護措施
+            if (AppGlobals.IsPrintingDisabled())
+            {
+                return;
+            }
+
             var exporter = new BrailleDataExporter(
                 _doc,
                 AppGlobals.Config.Braille.LinesPerPage,

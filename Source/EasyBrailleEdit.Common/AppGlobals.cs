@@ -76,5 +76,14 @@ namespace EasyBrailleEdit.Common
         {
             return Config.AutoUpdateFilesUrl.IndexOf(Constant.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase) >= 0;
         }
+
+        public static bool IsPrintingDisabled()
+        {
+            if (DateTime.Now >= new DateTime(2018, 7, 10))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
