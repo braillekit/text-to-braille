@@ -464,7 +464,10 @@ namespace BrailleToolkit
 
                 if (brWordList != null && brWordList.Count > 0)
                 {
-                    // 成功轉換成點字，有 n 個字元會從串流中取出
+                    // 成功轉換成點字。若有需要緊接著套用的規則，可在此處理。
+
+                    EnsureNoDigitSymbolAndSpaceInDeleteContext();
+
                     brLine.Words.AddRange(brWordList);
 
                     // 通知事件
@@ -473,7 +476,7 @@ namespace BrailleToolkit
                 }
                 else
                 {
-                    // 無法判斷和處理的字元應該會留存在串流中，將之取出。
+                    // 無法判斷和處理的字元會留存在堆疊中，將之取出。
                     ch = charStack.Pop();
 
                     int charIndex = line.Length - charStack.Count;
@@ -542,6 +545,20 @@ namespace BrailleToolkit
             //EnglishBrailleRule.ShrinkSpaces(brLine);        // 把連續空白刪到只剩一個。
 
             return brLine;
+
+
+            // 確保刪除區塊中的文字都不自動加數符與空方
+            void EnsureNoDigitSymbolAndSpaceInDeleteContext()
+            {
+                if (ContextManager.IsActive(ContextTagNames.Delete))
+                {
+                    foreach (var brWord in brWordList)
+                    {
+                        brWord.NoDigitCell = true;
+                        brWord.NoSpace = true;
+                    }
+                }
+            }
         }
 
         /// <summary>

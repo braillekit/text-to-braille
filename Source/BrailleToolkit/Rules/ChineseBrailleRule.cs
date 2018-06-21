@@ -148,9 +148,6 @@ namespace BrailleToolkit.Rules
                     case "」":  // 下引號的規則同句號。
                         wordIdx += ApplyPeriodRule(brLine, wordIdx);
                         break;
-                    case "，":
-                        wordIdx += ApplyCommaRule(brLine, wordIdx);
-                        break;
                     case "：":
                         wordIdx += ApplyColonRule(brLine, wordIdx);
                         break;
@@ -242,7 +239,8 @@ namespace BrailleToolkit.Rules
         private static int PrefixBlankCell(BrailleLine brLine, int index)
         {
             int wordOffset = 0;
-            if (index > 0 && !BrailleWord.IsBlank(brLine[index - 1]))
+            var brWord = brLine[index - 1];
+            if (index > 0 && !BrailleWord.IsBlank(brWord) && !brWord.NoSpace)
             {
                 brLine.Words.Insert(index, BrailleWord.NewBlank());
                 wordOffset = 1;
@@ -263,7 +261,8 @@ namespace BrailleToolkit.Rules
                 return 0;
 
             int wordOffset = 0;
-            if (!BrailleWord.IsBlank(brLine[index]))
+            var brWord = brLine[index];
+            if (!BrailleWord.IsBlank(brWord) && !brWord.NoSpace)
             {
                 brLine.Words.Insert(index, BrailleWord.NewBlank());
                 wordOffset = 1;
@@ -289,8 +288,8 @@ namespace BrailleToolkit.Rules
                 return 0;
 
             int wordOffset = 0;
-            BrailleWord brWord = brLine[index];
-            if (!BrailleWord.IsBlank(brWord))  // 若原本已有空方，就不再多加。
+            var brWord = brLine[index];
+            if (!BrailleWord.IsBlank(brWord) && !brWord.NoSpace)  
             {
                 // 句號可與標點符號連書而無須加空方。例外：句號後面接前引號 "「" 時需加空方。
                 if (OpeningSymbols.IndexOf(brWord.Text) >= 0 ||
@@ -336,7 +335,7 @@ namespace BrailleToolkit.Rules
             int wordOffset = 0;
             BrailleWord brWord = brLine[index];
 
-            if (!BrailleWord.IsBlank(brWord))  // 若原本已有空方，就不再多加。
+            if (!BrailleWord.IsBlank(brWord) && !brWord.NoSpace)  // 若原本已有空方就不再多加。
             {
                 if (exceptedWords.IndexOf(brWord.Text) < 0)
                 {
@@ -344,12 +343,6 @@ namespace BrailleToolkit.Rules
                     wordOffset = 1;
                 }
             }
-            return wordOffset;
-        }
-
-        private static int ApplyCommaRule(BrailleLine brLine, int index)
-        {
-            int wordOffset = 0;
             return wordOffset;
         }
 

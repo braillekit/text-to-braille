@@ -32,13 +32,13 @@ namespace BrailleToolkit.Rules
             {
                 brWord = brLine[wordIdx];
 
-                if (brWord.IsContextTag)
+                if (brWord.IsContextTag || brWord.NoSpace)
                 {
                     wordIdx++;
                     continue;
                 }
 
-                if (brWord.Text.Length < 1)
+                if (String.IsNullOrWhiteSpace(brWord.Text))
                 {
                     wordIdx++;
                     continue;

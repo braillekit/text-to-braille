@@ -350,5 +350,16 @@ namespace Test.BrailleToolkit
             Assert.AreEqual(expectedPositionNumbers, actual);
         }
 
+        [TestCase("<刪>1？…</刪>", "(246)(2)(135)(5 5 5)(12456)")]
+        public void Should_NoSpaceAndDigitSymbol_InDeleteContext(string inputText, string expectedPositionNumbers)
+        {
+            var processor = BrailleProcessor.GetInstance();
+            var brLine = processor.ConvertLine(inputText);
+            var actual = brLine.ToPositionNumberString();
+
+            Assert.AreEqual(expectedPositionNumbers, actual);
+        }
+
+
     }
 }
