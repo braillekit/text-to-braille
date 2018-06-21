@@ -239,11 +239,14 @@ namespace BrailleToolkit.Rules
         private static int PrefixBlankCell(BrailleLine brLine, int index)
         {
             int wordOffset = 0;
-            var brWord = brLine[index - 1];
-            if (index > 0 && !BrailleWord.IsBlank(brWord) && !brWord.NoSpace)
+            if (index > 0)
             {
-                brLine.Words.Insert(index, BrailleWord.NewBlank());
-                wordOffset = 1;
+                var brWord = brLine[index - 1];
+                if (!BrailleWord.IsBlank(brWord) && !brWord.NoSpace)
+                {
+                    brLine.Words.Insert(index, BrailleWord.NewBlank());
+                    wordOffset = 1;
+                }
             }
             return wordOffset;
         }

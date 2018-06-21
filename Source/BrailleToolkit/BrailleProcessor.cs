@@ -66,6 +66,7 @@ namespace BrailleToolkit
         private CoordinateConverter _coordConverter;
         private TableConverter _tableConverter;
         private PhoneticConverter _phoneticConverter;
+        private UrlConverter _urlConverter;
 
         // Extended converters
         private List<WordConverter> _converters;
@@ -97,6 +98,7 @@ namespace BrailleToolkit
             _coordConverter = new CoordinateConverter();
             _tableConverter = new TableConverter();
             _phoneticConverter = new PhoneticConverter();
+            _urlConverter = new UrlConverter(this);
 
             ContextManager = new ContextTagManager();
 
@@ -134,6 +136,8 @@ namespace BrailleToolkit
 
         #region 屬性
 
+        public ZhuyinReverseConverter ZhuyinConverter { get; set; }
+
         /// <summary>
         /// 取得或設定中文點字轉換器。
         /// </summary>
@@ -147,8 +151,6 @@ namespace BrailleToolkit
         public ContextTagConverter ControlTagConverter { get; set; }
 
         public MathConverter MathConverter { get; set; }
-
-        public ZhuyinReverseConverter ZhuyinConverter { get; set; }
 
         /// <summary>
         /// 是否抑制點字轉換的回饋事件。
@@ -630,7 +632,15 @@ namespace BrailleToolkit
                         return brWordList;
                 }
 
-                // 6. 轉換中文。
+                // 6. 轉換 URL.
+                if (chars.Count > 0 && ContextManager.IsActive(ContextTagNames.Url) && _urlConverter != null)
+                {
+                    brWordList = _urlConverter.Convert(chars, ContextManager);
+                    if (brWordList != null && brWordList.Count > 0)
+                        return brWordList;
+                }
+
+                // 7. 轉換中文。
                 if (chars.Count > 0 && ChineseConverter != null)
                 {
                     // 若成功轉換成點字，就不再 pass 給其它轉換器。
@@ -639,7 +649,7 @@ namespace BrailleToolkit
                         return brWordList;
                 }
 
-                // 7. 轉換英文。
+                // 8. 轉換英文。
                 if (chars.Count > 0 && EnglishConverter != null)
                 {
                     // 若成功轉換成點字，就不再 pass 給其它轉換器。

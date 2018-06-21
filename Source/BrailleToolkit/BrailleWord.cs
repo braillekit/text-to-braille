@@ -609,6 +609,11 @@ namespace BrailleToolkit
         public bool NoSpace { get; set; }
 
         /// <summary>
+        /// 是否不要套用英文字母大寫規則。最初設計目的是給 UrlConverter 使用。
+        /// </summary>
+        public bool NoCapitalRule { get; set; }
+
+        /// <summary>
         /// 是否為英語音標（用來判斷不要加空方）.
         /// </summary>
         public bool IsEngPhonetic { get; set; }

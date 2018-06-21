@@ -360,6 +360,18 @@ namespace Test.BrailleToolkit
             Assert.AreEqual(expectedPositionNumbers, actual);
         }
 
+        [TestCase(
+            "<URL>http://@www-dvp.tw/_file/=1/SG/~2/D?.html%</URL>",
+            "(125)(2345)(2345)(1234)(156)(34)(34)(4)(2456)(2456)(2456)(36)(145)(1236)(1234)(46)(2345)(2456)(34)(456)(124)(24)(123)(15)(34)(123456)" +
+            "(2)(34)(234)(1245)(34)(45)(23)(34)(145)(1456)(46)(125)(2345)(134)(123)(146)")]
+        public void Should_ConvertrUrl(string inputText, string expectedPositionNumbers)
+        {
+            var processor = BrailleProcessor.GetInstance();
+            var brLine = processor.ConvertLine(inputText);
+            var actual = brLine.ToPositionNumberString();
+
+            Assert.AreEqual(expectedPositionNumbers, actual);
+        }
 
     }
 }

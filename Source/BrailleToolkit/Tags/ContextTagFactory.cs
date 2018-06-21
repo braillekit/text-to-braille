@@ -84,10 +84,6 @@ namespace BrailleToolkit.Tags
                     {
                         return new TableSingleLineContextTag(tagName);
                     }
-                default:
-                    {
-                        return new GenericContextTag(tagName);
-                    }
                 case ContextTagNames.QuotationMark1:
                     {
                         var tag = new GenericContextTag(
@@ -121,6 +117,10 @@ namespace BrailleToolkit.Tags
                         tag.PostfixBrailleWords.Add(brWord);
 
                         return tag;
+                    }
+                default:
+                    {
+                        return new GenericContextTag(tagName);
                     }
             }
         }

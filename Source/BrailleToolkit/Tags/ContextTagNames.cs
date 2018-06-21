@@ -30,6 +30,7 @@ namespace BrailleToolkit.Tags
         public const string UpperPosition = "<上位點>";  // 數字一律使用上位點。
         public const string QuotationMark1 = "<引號一>"; // (236)(356)
         public const string QuotationMark2 = "<引號二>"; // (236)(456 356)
+        public const string Url = "<URL>";
 
         // NOTE: 每當有變動時，必須同步修改 AllTagNames 的內容。
 
@@ -56,6 +57,7 @@ namespace BrailleToolkit.Tags
                 OrgPageNumber,          // 原書頁碼
                 Choice,
                 UpperPosition,
+                Url,
                 QuotationMark1,
                 QuotationMark2
             };

@@ -26,8 +26,7 @@ namespace BrailleToolkit.Rules
             {
                 brWord = brLine[wordIdx];
 
-
-                if (brWord.IsContextTag)
+                if (brWord.IsContextTag || brWord.NoCapitalRule)
                 {
                     wordIdx++;
                     continue;

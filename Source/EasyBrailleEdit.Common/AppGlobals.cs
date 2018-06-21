@@ -79,7 +79,8 @@ namespace EasyBrailleEdit.Common
 
         public static bool IsPrintingDisabled()
         {
-            if (DateTime.Now >= new DateTime(2018, 7, 10))
+            // TODO: 註解底下的程式碼。
+            if (DateTime.Now >= new DateTime(2018, 8, 1))
             {
                 return true;
             }

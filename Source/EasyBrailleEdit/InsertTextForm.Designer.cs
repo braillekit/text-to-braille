@@ -105,7 +105,9 @@
             this.lblErrorTitle = new System.Windows.Forms.Label();
             this.toolBarSymbol3 = new System.Windows.Forms.ToolStrip();
             this.btnSymbolDocTitle = new System.Windows.Forms.ToolStripButton();
+            this.btnSymbolOrgPageNum = new System.Windows.Forms.ToolStripButton();
             this.btnTagBrailleComment = new System.Windows.Forms.ToolStripButton();
+            this.btnSymbolDel = new System.Windows.Forms.ToolStripButton();
             this.btnSymbolEndTags = new System.Windows.Forms.ToolStripDropDownButton();
             this.btnEndTag1 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnEndTag2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,8 +140,7 @@
             this.btnTableTopLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTableBottomLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnSymbolOrgPageNum = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolDel = new System.Windows.Forms.ToolStripButton();
+            this.btnUrl = new System.Windows.Forms.ToolStripButton();
             this.toolBarSymbol1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolBarMath.SuspendLayout();
@@ -532,7 +533,7 @@
             this.panel2.Controls.Add(this.btnOk);
             this.panel2.Controls.Add(this.btnCancel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 575);
+            this.panel2.Location = new System.Drawing.Point(0, 663);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1217, 71);
             this.panel2.TabIndex = 0;
@@ -813,7 +814,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 52);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1217, 523);
+            this.panel3.Size = new System.Drawing.Size(1217, 611);
             this.panel3.TabIndex = 19;
             // 
             // panel1
@@ -828,7 +829,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(100, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1117, 523);
+            this.panel1.Size = new System.Drawing.Size(1117, 611);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -913,6 +914,7 @@
             this.btnRatio,
             this.btnSymbolCoord,
             this.btnFraction,
+            this.btnUrl,
             this.toolStripSeparator13,
             this.toolStripButton2,
             this.toolStripButton3,
@@ -923,7 +925,7 @@
             this.toolBarSymbol3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.toolBarSymbol3.Location = new System.Drawing.Point(0, 0);
             this.toolBarSymbol3.Name = "toolBarSymbol3";
-            this.toolBarSymbol3.Size = new System.Drawing.Size(100, 523);
+            this.toolBarSymbol3.Size = new System.Drawing.Size(100, 611);
             this.toolBarSymbol3.TabIndex = 15;
             this.toolBarSymbol3.Text = "toolStrip4";
             this.toolBarSymbol3.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
@@ -938,6 +940,16 @@
             this.btnSymbolDocTitle.Tag = "<標題>|</標題>";
             this.btnSymbolDocTitle.Text = "頁標題";
             // 
+            // btnSymbolOrgPageNum
+            // 
+            this.btnSymbolOrgPageNum.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSymbolOrgPageNum.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolOrgPageNum.Image")));
+            this.btnSymbolOrgPageNum.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSymbolOrgPageNum.Name = "btnSymbolOrgPageNum";
+            this.btnSymbolOrgPageNum.Size = new System.Drawing.Size(97, 23);
+            this.btnSymbolOrgPageNum.Tag = "<P>|</P>";
+            this.btnSymbolOrgPageNum.Text = "原書頁碼";
+            // 
             // btnTagBrailleComment
             // 
             this.btnTagBrailleComment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -948,6 +960,17 @@
             this.btnTagBrailleComment.Tag = "<點譯者註>|</點譯者註>";
             this.btnTagBrailleComment.Text = "點譯者註";
             this.btnTagBrailleComment.ToolTipText = "點譯者注釋";
+            // 
+            // btnSymbolDel
+            // 
+            this.btnSymbolDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSymbolDel.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDel.Image")));
+            this.btnSymbolDel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSymbolDel.Name = "btnSymbolDel";
+            this.btnSymbolDel.Size = new System.Drawing.Size(97, 23);
+            this.btnSymbolDel.Tag = "<刪>|</刪>";
+            this.btnSymbolDel.Text = "刪除文字";
+            this.btnSymbolDel.ToolTipText = "用來表示一段刪除的文字";
             // 
             // btnSymbolEndTags
             // 
@@ -1225,26 +1248,15 @@
             this.btnTableBottomLine2.Tag = "<下表格線2></下表格線2>\\n";
             this.btnTableBottomLine2.Text = "下表格線2";
             // 
-            // btnSymbolOrgPageNum
+            // btnUrl
             // 
-            this.btnSymbolOrgPageNum.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolOrgPageNum.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolOrgPageNum.Image")));
-            this.btnSymbolOrgPageNum.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolOrgPageNum.Name = "btnSymbolOrgPageNum";
-            this.btnSymbolOrgPageNum.Size = new System.Drawing.Size(97, 23);
-            this.btnSymbolOrgPageNum.Tag = "<P>|</P>";
-            this.btnSymbolOrgPageNum.Text = "原書頁碼";
-            // 
-            // btnSymbolDel
-            // 
-            this.btnSymbolDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolDel.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDel.Image")));
-            this.btnSymbolDel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolDel.Name = "btnSymbolDel";
-            this.btnSymbolDel.Size = new System.Drawing.Size(97, 23);
-            this.btnSymbolDel.Tag = "<刪>|</刪>";
-            this.btnSymbolDel.Text = "刪除文字";
-            this.btnSymbolDel.ToolTipText = "用來表示一段刪除的文字";
+            this.btnUrl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnUrl.Image = ((System.Drawing.Image)(resources.GetObject("btnUrl.Image")));
+            this.btnUrl.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnUrl.Name = "btnUrl";
+            this.btnUrl.Size = new System.Drawing.Size(97, 23);
+            this.btnUrl.Tag = "<URL>|<URL>";
+            this.btnUrl.Text = "網址";
             // 
             // InsertTextForm
             // 
@@ -1252,7 +1264,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1217, 646);
+            this.ClientSize = new System.Drawing.Size(1217, 734);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.toolBarMath);
             this.Controls.Add(this.panel2);
@@ -1391,5 +1403,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnSymbolQuot3;
         private System.Windows.Forms.ToolStripButton btnSymbolOrgPageNum;
         private System.Windows.Forms.ToolStripButton btnSymbolDel;
+        private System.Windows.Forms.ToolStripButton btnUrl;
     }
 }
