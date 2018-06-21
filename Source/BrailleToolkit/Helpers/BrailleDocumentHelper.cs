@@ -114,9 +114,12 @@ namespace BrailleToolkit.Helpers
         /// </summary>
         /// <param name="line"></param>
         /// <returns>若傳入的字串不是原書頁碼，則傳回空字串。否則傳回原書頁碼的文字（必須是字串，因為頁碼可能是羅馬數字）。</returns>
-        public static string GetOrgPageNumber(string line)
+        public static bool GetOrgPageNumber(string line, out string orgPageNumber)
         {
-            if (String.IsNullOrEmpty(line)) return String.Empty;
+            bool hasOrgPageNumber = false;
+            orgPageNumber = String.Empty;
+
+            if (String.IsNullOrEmpty(line)) return hasOrgPageNumber;
 
             var pageNumberText = String.Empty;
 
@@ -124,18 +127,21 @@ namespace BrailleToolkit.Helpers
             line = line.Trim();
             if (line.StartsWith(ContextTagNames.OrgPageNumber))
             {
-                pageNumberText =
+                hasOrgPageNumber = true;
+                orgPageNumber =
                     line.Replace(ContextTagNames.OrgPageNumber, String.Empty)
                         .Replace(endTagName, String.Empty)
                         .Replace(OrgPageNumberContextTag.LeadingUnderline, String.Empty)
                         .Replace(ContextTagNames.UpperPosition, String.Empty)
                         .Replace(XmlTagHelper.GetEndTagName(ContextTagNames.UpperPosition), String.Empty)
                         .Trim();
+                
 
             }
             else if (line.StartsWith(OrgPageNumberContextTag.LeadingUnderlines))
             {
-                pageNumberText =
+                hasOrgPageNumber = true;
+                orgPageNumber =
                     line.Remove(0, OrgPageNumberContextTag.LeadingUnderlines.Length)
                         .Replace(endTagName, String.Empty)
                         .Replace(ContextTagNames.UpperPosition, String.Empty)
@@ -143,7 +149,7 @@ namespace BrailleToolkit.Helpers
                         .Trim();
             }
 
-            return pageNumberText;
+            return hasOrgPageNumber;
         }
 
 
@@ -163,8 +169,7 @@ namespace BrailleToolkit.Helpers
         {
             string line = brLine.ToString();
 
-            string orgPageNum = GetOrgPageNumber(line);
-            if (String.IsNullOrEmpty(orgPageNum))
+            if (!GetOrgPageNumber(line, out string orgPageNum))
             {
                 return;
             }
