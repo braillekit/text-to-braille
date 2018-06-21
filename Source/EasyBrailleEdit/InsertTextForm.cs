@@ -67,6 +67,10 @@ namespace EasyBrailleEdit
                 lblErrorTitle.Visible = _converter.HasError;
                 lblError.Visible = _converter.HasError;
                 lblError.Text = _converter.GetInvalidChars();
+                if (String.IsNullOrWhiteSpace(lblError.Text))
+                {
+                    lblError.Text = _converter.Processor.ErrorMessage;
+                }
             }
             finally
             {

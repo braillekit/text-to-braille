@@ -221,10 +221,7 @@ namespace BrailleToolkit
             if (SuppressEvents)
                 return;
 
-            if (_conversionFailedEvent != null)
-            {
-                _conversionFailedEvent(this, args);
-            }
+            _conversionFailedEvent?.Invoke(this, args);
         }
 
         protected virtual void OnTextConverted(TextConvertedEventArgs args)
@@ -834,6 +831,12 @@ namespace BrailleToolkit
 
             s = s.Substring(0, idxEof); // 從字串頭取到 </分數> 標籤之前。
 
+            // 標籤裡面沒有任何文字不視為錯誤。
+            if (String.IsNullOrWhiteSpace(s))
+            {                
+                return new List<BrailleWord>();
+            }
+
             string intPart;
             string numerator;
             string denumerator;
@@ -846,7 +849,7 @@ namespace BrailleToolkit
             Stack<char> charStack;
             List<BrailleWord> brWordList = null;
 
-            List<BrailleWord> brWordListIntPart = new List<BrailleWord>();
+            var brWordListIntPart = new List<BrailleWord>();
 
             if (!String.IsNullOrEmpty(intPart))
             {
