@@ -18,6 +18,10 @@
   <symbol text="？"    code="3826"  type="Punctuation" description="問號" />
   <symbol text="「"    code="26"    type="Math" Description="數學上引號" />
   <symbol text="」"    code="3834"  type="Math" Description="數學下引號" />
+  <symbol text="╳"    code="2D"    type="Math" Description="打叉" />
+  <symbol text="○"    code="15"    type="Math" Description="打圈" />
+  <symbol text="√"    code="221C"   type="Misc" description="打勾（注意: 為了避免跟注音符號的第三聲一樣，故改用根號符號）" />   
+  
   <!-- 數學符號 -->
   <symbol text="+"    code="2C"     type="Math" Description="加號" />
   <symbol text="-"    code="24"     type="Math" Description="減號" />
