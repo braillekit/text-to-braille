@@ -138,6 +138,8 @@
             this.btnTableTopLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTableBottomLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnSymbolOrgPageNum = new System.Windows.Forms.ToolStripButton();
+            this.btnSymbolDel = new System.Windows.Forms.ToolStripButton();
             this.toolBarSymbol1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolBarMath.SuspendLayout();
@@ -386,7 +388,7 @@
             this.btnSymbolQuot1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnSymbolQuot1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSymbolQuot1.Name = "btnSymbolQuot1";
-            this.btnSymbolQuot1.Size = new System.Drawing.Size(278, 38);
+            this.btnSymbolQuot1.Size = new System.Drawing.Size(260, 38);
             this.btnSymbolQuot1.Tag = "「|」";
             this.btnSymbolQuot1.Text = "一般引號「」";
             this.btnSymbolQuot1.ToolTipText = "一般中文引號，若以 <數學> 區塊包住，點字會不同。";
@@ -397,7 +399,7 @@
             this.btnSymbolQuot2.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuot2.Image")));
             this.btnSymbolQuot2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSymbolQuot2.Name = "btnSymbolQuot2";
-            this.btnSymbolQuot2.Size = new System.Drawing.Size(278, 38);
+            this.btnSymbolQuot2.Size = new System.Drawing.Size(260, 38);
             this.btnSymbolQuot2.Tag = "<引號一>|</引號一>";
             this.btnSymbolQuot2.Text = "特殊引號一";
             this.btnSymbolQuot2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -407,7 +409,7 @@
             this.btnSymbolQuot3.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuot3.Image")));
             this.btnSymbolQuot3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSymbolQuot3.Name = "btnSymbolQuot3";
-            this.btnSymbolQuot3.Size = new System.Drawing.Size(278, 38);
+            this.btnSymbolQuot3.Size = new System.Drawing.Size(260, 38);
             this.btnSymbolQuot3.Tag = "<引號二>|</引號二>";
             this.btnSymbolQuot3.Text = "特殊引號二";
             this.btnSymbolQuot3.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -530,7 +532,7 @@
             this.panel2.Controls.Add(this.btnOk);
             this.panel2.Controls.Add(this.btnCancel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 522);
+            this.panel2.Location = new System.Drawing.Point(0, 575);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1217, 71);
             this.panel2.TabIndex = 0;
@@ -811,7 +813,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 52);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1217, 470);
+            this.panel3.Size = new System.Drawing.Size(1217, 523);
             this.panel3.TabIndex = 19;
             // 
             // panel1
@@ -826,7 +828,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(100, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1117, 470);
+            this.panel1.Size = new System.Drawing.Size(1117, 523);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -896,7 +898,9 @@
             this.toolBarSymbol3.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolBarSymbol3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSymbolDocTitle,
+            this.btnSymbolOrgPageNum,
             this.btnTagBrailleComment,
+            this.btnSymbolDel,
             this.btnSymbolEndTags,
             this.toolStripSeparator17,
             this.btnSymbolNumber,
@@ -919,7 +923,7 @@
             this.toolBarSymbol3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.toolBarSymbol3.Location = new System.Drawing.Point(0, 0);
             this.toolBarSymbol3.Name = "toolBarSymbol3";
-            this.toolBarSymbol3.Size = new System.Drawing.Size(100, 470);
+            this.toolBarSymbol3.Size = new System.Drawing.Size(100, 523);
             this.toolBarSymbol3.TabIndex = 15;
             this.toolBarSymbol3.Text = "toolStrip4";
             this.toolBarSymbol3.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
@@ -1027,28 +1031,28 @@
             // btnChoiceBo
             // 
             this.btnChoiceBo.Name = "btnChoiceBo";
-            this.btnChoiceBo.Size = new System.Drawing.Size(216, 26);
+            this.btnChoiceBo.Size = new System.Drawing.Size(107, 26);
             this.btnChoiceBo.Tag = "<選項>ㄅ.</選項>";
             this.btnChoiceBo.Text = "ㄅ.";
             // 
             // btnChoicePo
             // 
             this.btnChoicePo.Name = "btnChoicePo";
-            this.btnChoicePo.Size = new System.Drawing.Size(216, 26);
+            this.btnChoicePo.Size = new System.Drawing.Size(107, 26);
             this.btnChoicePo.Tag = "<選項>ㄆ.</選項>";
             this.btnChoicePo.Text = "ㄆ.";
             // 
             // btnChoiceMo
             // 
             this.btnChoiceMo.Name = "btnChoiceMo";
-            this.btnChoiceMo.Size = new System.Drawing.Size(216, 26);
+            this.btnChoiceMo.Size = new System.Drawing.Size(107, 26);
             this.btnChoiceMo.Tag = "<選項>ㄇ.</選項>";
             this.btnChoiceMo.Text = "ㄇ.";
             // 
             // btnChoiceFo
             // 
             this.btnChoiceFo.Name = "btnChoiceFo";
-            this.btnChoiceFo.Size = new System.Drawing.Size(216, 26);
+            this.btnChoiceFo.Size = new System.Drawing.Size(107, 26);
             this.btnChoiceFo.Tag = "<選項>ㄈ.</選項>";
             this.btnChoiceFo.Text = "ㄈ.";
             // 
@@ -1221,13 +1225,34 @@
             this.btnTableBottomLine2.Tag = "<下表格線2></下表格線2>\\n";
             this.btnTableBottomLine2.Text = "下表格線2";
             // 
+            // btnSymbolOrgPageNum
+            // 
+            this.btnSymbolOrgPageNum.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSymbolOrgPageNum.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolOrgPageNum.Image")));
+            this.btnSymbolOrgPageNum.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSymbolOrgPageNum.Name = "btnSymbolOrgPageNum";
+            this.btnSymbolOrgPageNum.Size = new System.Drawing.Size(97, 23);
+            this.btnSymbolOrgPageNum.Tag = "<P>|</P>";
+            this.btnSymbolOrgPageNum.Text = "原書頁碼";
+            // 
+            // btnSymbolDel
+            // 
+            this.btnSymbolDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSymbolDel.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDel.Image")));
+            this.btnSymbolDel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSymbolDel.Name = "btnSymbolDel";
+            this.btnSymbolDel.Size = new System.Drawing.Size(97, 23);
+            this.btnSymbolDel.Tag = "<刪>|</刪>";
+            this.btnSymbolDel.Text = "刪除文字";
+            this.btnSymbolDel.ToolTipText = "用來表示一段刪除的文字";
+            // 
             // InsertTextForm
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1217, 593);
+            this.ClientSize = new System.Drawing.Size(1217, 646);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.toolBarMath);
             this.Controls.Add(this.panel2);
@@ -1364,5 +1389,7 @@
         private System.Windows.Forms.ToolStripMenuItem btnSymbolQuot1;
         private System.Windows.Forms.ToolStripMenuItem btnSymbolQuot2;
         private System.Windows.Forms.ToolStripMenuItem btnSymbolQuot3;
+        private System.Windows.Forms.ToolStripButton btnSymbolOrgPageNum;
+        private System.Windows.Forms.ToolStripButton btnSymbolDel;
     }
 }

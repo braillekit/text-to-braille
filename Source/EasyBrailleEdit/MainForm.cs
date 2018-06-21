@@ -748,26 +748,9 @@ namespace EasyBrailleEdit
             if (await AutoUpdateAsync())
             {
                 Process.Start(Application.ExecutablePath);
-
-                // 用記事本開啟 ChangeLog.
-                string changeLogFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\ChangeLog.txt";
-                if (File.Exists(changeLogFileName))
-                {
-                    Process.Start("NotePad.exe", changeLogFileName);
-                }
-
                 Application.Exit();
                 return;
             }
-            /* 新版本有內建注音字根查詢功能，不再需要注音輸入法!
-                        // 檢查注音與新注音輸入法（在自動更新之後才檢查）
-                        if (!ImmHelper.ZhuyinImeInstalled || !ImmHelper.NewZhuyinImeInstalled)
-                        {
-                            StatusText = "注意：未偵測到微軟注音或新注音輸入法!";
-                            // Close(); 不要結束程式, 因為偵測注音輸入法的函式在 Windows 2008 會失效。
-                            // return;
-                        }
-            */
             Application.DoEvents();
 
             txtErrors.Visible = false;
@@ -917,8 +900,6 @@ namespace EasyBrailleEdit
                 case "Options":
                     ShowOptionsDialog();
                     break;
-                default:
-                    break;
             }
         }
 
@@ -948,9 +929,24 @@ namespace EasyBrailleEdit
                 case "CheckUpdate":
                     await CheckUpdateAsync();
                     break;
-                case "Options":
-                    ShowOptionsDialog();
+                case "RevisionHistory":
+                    ShowRevisionHistory();
                     break;
+            }
+        }
+
+
+        private void ShowRevisionHistory()
+        {
+            // 用記事本開啟 ChangeLog.
+            string changeLogFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\ChangeLog.txt";
+            if (File.Exists(changeLogFileName))
+            {
+                Process.Start("NotePad.exe", changeLogFileName);
+            }
+            else
+            {
+                MsgBoxHelper.ShowError($"找不到檔案: {changeLogFileName}");
             }
         }
 
