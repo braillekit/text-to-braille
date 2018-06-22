@@ -23,6 +23,14 @@ namespace Test.BrailleToolkit
                 "│　　∣　　∣\n" +
                 "└──┴──┘\n" +
                 "</表格>\n";
+            string[] expectedBrailleCells =
+            {
+                "(2356)(2356)(2356)(2356)(2356)(2356)(2356)",
+                "(123)()()(456)()()(456)",
+                "(1235)(25)(25)(2456)(25)(25)(2456)",
+                "(123)()()(456)()()(456)",
+                "(1245)(1245)(1245)(1245)(1245)(1245)(1245)"
+            };
 
 
             var processor = BrailleProcessor.GetInstance();
@@ -34,11 +42,12 @@ namespace Test.BrailleToolkit
                 brDoc.LoadAndConvert(reader);
             }
 
-            Assert.IsTrue(brDoc.LineCount == 7);
-            Assert.IsTrue(brDoc.Lines[0].Words[0].IsContextTag);
-            Assert.IsTrue(brDoc.Lines[6].Words[0].IsContextTag);
+            Assert.AreEqual(brDoc.LineCount, expectedBrailleCells.Length);
 
-            // TODO: Assert 左邊直線與中間和右邊直線的點字是否正確。
+            for (int i = 0; i < brDoc.LineCount; i++)
+            {
+                Assert.AreEqual(expectedBrailleCells[i], brDoc.Lines[i].ToPositionNumberString());
+            }
         }
 
     }
