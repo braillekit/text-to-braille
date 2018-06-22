@@ -14,7 +14,7 @@
   <symbol text="；"    code="3806"  type="Math" Description="全形分號" />
   <symbol text="。"    code="3832"  type="Math" Description="全形句號" />
   <symbol text="："    code="3812"  type="Math" Description="全形冒號" />
-  <symbol text="…"    code="101010" type="Punctuation" description="刪節號" />
+  <symbol text="…"    code="040404" type="Punctuation" description="刪節號" />
   <symbol text="？"    code="3826"  type="Punctuation" description="問號" />
   <symbol text="「"    code="26"    type="Math" Description="數學上引號" />
   <symbol text="」"    code="3834"  type="Math" Description="數學下引號" />

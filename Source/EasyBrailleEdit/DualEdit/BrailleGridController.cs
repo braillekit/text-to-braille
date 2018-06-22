@@ -129,6 +129,12 @@ namespace EasyBrailleEdit.DualEdit
             }
         }
 
+        /// <summary>
+        /// 是否正忙著更新內部點字物件或更新 UI。
+        /// 如果是的話，就不接受鍵盤操作，以免產生奇怪的狀況：BrailleLine 裡面找不到儲存格所關聯的 BrailleWord 物件。
+        /// </summary>
+        public bool IsBusy { get; set; }
+
         public GridPopupMenuController MenuController
         {
             get { return m_MenuController; }

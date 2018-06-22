@@ -86,43 +86,88 @@ namespace BrailleToolkit.Tags
                     }
                 case ContextTagNames.QuotationMark1:
                     {
-                        var tag = new GenericContextTag(
-                                        tagName, 
-                                        ContextLifetime.DuringConversion, 
-                                        removeTagOnConversion: true);
-                        var brWord = new BrailleWord("「");
-                        brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 2, 3, 6 }));
-                        tag.PrefixBrailleWords.Add(brWord);
-
-                        brWord = new BrailleWord("」");
-                        brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 3, 5, 6 }));
-                        tag.PostfixBrailleWords.Add(brWord);
-
-                        return tag;
+                        return CreateQuotationMark1();
                     }
-
                 case ContextTagNames.QuotationMark2:
                     {
-                        var tag = new GenericContextTag(
-                                        tagName, 
-                                        ContextLifetime.DuringConversion,
-                                        removeTagOnConversion: true);
-                        var brWord = new BrailleWord("「");
-                        brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 2, 3, 6 }));
-                        tag.PrefixBrailleWords.Add(brWord);
-
-                        brWord = new BrailleWord("」");
-                        brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 4, 5, 6 }));
-                        brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 3, 5, 6 }));
-                        tag.PostfixBrailleWords.Add(brWord);
-
-                        return tag;
+                        return CreateQuotationMark2();
+                    }
+                case ContextTagNames.SeparatorLine:
+                    {
+                        return CreateSeparatorLine();
                     }
                 default:
                     {
                         return new GenericContextTag(tagName);
                     }
             }
+        }
+
+        private static IContextTag CreateQuotationMark1()
+        {
+            string tagName = ContextTagNames.QuotationMark1;
+
+            var tag = new GenericContextTag(
+                            tagName,
+                            ContextLifetime.DuringConversion,
+                            removeTagOnConversion: true);
+            var brWord = new BrailleWord("「");
+            brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 2, 3, 6 }));
+            tag.PrefixBrailleWords.Add(brWord);
+
+            brWord = new BrailleWord("」");
+            brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 3, 5, 6 }));
+            tag.PostfixBrailleWords.Add(brWord);
+
+            return tag;
+        }
+
+        private static IContextTag CreateQuotationMark2()
+        {
+            string tagName = ContextTagNames.QuotationMark2;
+
+            var tag = new GenericContextTag(
+                            tagName,
+                            ContextLifetime.DuringConversion,
+                            removeTagOnConversion: true);
+            var brWord = new BrailleWord("「");
+            brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 2, 3, 6 }));
+            tag.PrefixBrailleWords.Add(brWord);
+
+            brWord = new BrailleWord("」");
+            brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 4, 5, 6 }));
+            brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 3, 5, 6 }));
+            tag.PostfixBrailleWords.Add(brWord);
+
+            return tag;
+        }
+
+        private static IContextTag CreateSeparatorLine()
+        {
+            string tagName = ContextTagNames.SeparatorLine;
+
+            var tag = new GenericContextTag(
+                            tagName,
+                            ContextLifetime.DuringConversion,
+                            removeTagOnConversion: true,
+                            singleLine: true);
+
+            string text = "×";
+            var cell1 = BrailleCell.GetInstance(new int[] { 1, 3, 5 });
+            var cell2 = BrailleCell.GetInstance(new int[] { 2, 4, 6 });
+
+            for (int i = 0; i < 20; i++)
+            {
+                var brWord = new BrailleWord(text)
+                {
+                    IsConvertedFromTag = true
+                };
+                brWord.CellList.Add(cell1);
+                brWord.CellList.Add(cell2);
+                brWord.ContextNames = XmlTagHelper.RemoveBracket(tagName);
+                tag.PrefixBrailleWords.Add(brWord);
+            }
+            return tag;
         }
     }
 }

@@ -151,6 +151,13 @@ namespace EasyBrailleEdit.DualEdit
 
         public void Form_KeyDown(KeyEventArgs e)
         {
+            if (IsBusy)
+            {
+                // 如果正忙著處理先前的編輯操作，就暫不接受鍵盤輸入，以免產生奇怪的狀況，
+                // 例如按住 Ctrl+Del 不放，會出現 BrailleLine 裡面找不到儲存格所關聯的 BrailleWord 物件。
+                return;
+            }
+
             int row = _grid.Selection.ActivePosition.Row;
             int col = _grid.Selection.ActivePosition.Column;
 
@@ -159,67 +166,75 @@ namespace EasyBrailleEdit.DualEdit
                 return;
             }
 
-            if (e.Modifiers == Keys.None)
+            IsBusy = true;
+            try
             {
-                switch (e.KeyCode)
+                if (e.Modifiers == Keys.None)
                 {
-                    case Keys.F4:
-                        EditWord(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.Back:     // 倒退刪除
-                        BackspaceCell(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.Left:
-                        GridSelectLeftWord(row, col);
-                        e.Handled = true;
-                        break;
+                    switch (e.KeyCode)
+                    {
+                        case Keys.F4:
+                            EditWord(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.Back:     // 倒退刪除
+                            BackspaceCell(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.Left:
+                            GridSelectLeftWord(row, col);
+                            e.Handled = true;
+                            break;
+                    }
+                }
+                else if (e.Modifiers == Keys.Control)
+                {
+                    switch (e.KeyCode)
+                    {
+                        case Keys.I:        // Ctrl+I: 新增點字。
+                            InsertWord(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.Insert:    // Ctrl+Ins: 新增一串文字。
+                            InsertText(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.Delete:   // Ctrl+Delete: 刪除一格點字。
+                            DeleteWord(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.E:        // Ctrl+E: 刪除一列。
+                            DeleteLine(_grid, row, col, true);
+                            e.Handled = true;
+                            break;
+                    }
+                }
+                else if (e.Modifiers == (Keys.Control | Keys.Shift))
+                {
+                    switch (e.KeyCode)
+                    {
+                        case Keys.A:
+                            AddLine(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.I:
+                            InsertLine(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.F:    // 段落重整
+                            FormatParagraph(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.T:
+                            InsertTable(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                    }
                 }
             }
-            else if (e.Modifiers == Keys.Control)
+            finally
             {
-                switch (e.KeyCode)
-                {
-                    case Keys.I:        // Ctrl+I: 新增點字。
-                        InsertWord(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.Insert:    // Ctrl+Ins: 新增一串文字。
-                        InsertText(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.Delete:   // Ctrl+Delete: 刪除一格點字。
-                        DeleteWord(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.E:        // Ctrl+E: 刪除一列。
-                        DeleteLine(_grid, row, col, true);
-                        e.Handled = true;
-                        break;
-                }
-            }
-            else if (e.Modifiers == (Keys.Control | Keys.Shift))
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.A:
-                        AddLine(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.I:
-                        InsertLine(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.F:    // 段落重整
-                        FormatParagraph(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.T:
-                        InsertTable(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                }
+                IsBusy = false;
             }
         }
     }
