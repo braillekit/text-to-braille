@@ -56,6 +56,6 @@
 
         // 與轉點字規則有關的常數
         public const string DefaultNoSpaceAfterTheseCharacters = "「『“‘…";
-        public const string DefaultNoSpaceBeforeTheseCharacters = "」』”’…，、。？！；：";
+        public const string DefaultNoSpaceBeforeTheseCharacters = "，。？！：；、…」』”’）";
     }
 }
