@@ -586,7 +586,7 @@ namespace EasyBrailleEdit
             }
             else
             {
-                sb.Append(m_FileName);
+                sb.Append($"- {m_FileName}");
             }
             if (Modified)
             {
