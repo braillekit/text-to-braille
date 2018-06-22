@@ -505,6 +505,8 @@ namespace BrailleToolkit
 
             // 注意: 不要隨意調動底下各項檢查規則的順序!
 
+            GeneralBrailleRule.ApplyDontBreakLineRule(brLine);
+
             ChineseBrailleRule.ApplySpecificNameAndBookNameRules(brLine);  // 處理私名號和書名號的規則。
 
             ChineseBrailleRule.ApplyPunctuationRules(brLine);   // 套用中文標點符號規則。

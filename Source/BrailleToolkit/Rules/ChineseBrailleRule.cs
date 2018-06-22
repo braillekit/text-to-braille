@@ -96,13 +96,7 @@ namespace BrailleToolkit.Rules
                         continue;
                     }
                 }
-                // 刪節號與破折號不可位於行首。
-                if (text == "……" || text == "…" || text == "──" || text == "－－" || text == "─" || text == "－")
-                {
-                    brWord.DontBreakLineHere = true;
-                    wordIdx++;
-                    continue;
-                }
+
                 // 處理緊鄰的"（）"，在中間加一空方，使其變成"（ ）"。
                 if ("（".Equals(text) && ((wordIdx + 1) < brLine.WordCount))
                 {

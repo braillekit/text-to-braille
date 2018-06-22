@@ -225,12 +225,17 @@ namespace BrailleToolkit
             int breakIndex = fixedBreakIndex;
 
             BrailleWord breakWord;
+            BrailleWord leftWord = null;
 
             // 必須和前一個字元一起斷至下一行的字元。亦即，只要剛好斷在這些字元，就要改成斷前一個字元。
             char[] joinLeftChars = { ',', '.', '。', '、', '，', '；', '？', '！', '」', '』', '‧' };
+
+            // 不能位於行尾的字元。（行首規則是透過 GeneralBrailleRule.ApplyDontBreakLineRule() 來處理）
+            const string CharactersCannotAtEndOfLine = "（［〔【「『｛“‘";
+
             int loopCount = 0;
 
-            while (breakIndex >= 0)
+            while (breakIndex > 0)
             {
                 loopCount++;
                 if (loopCount > 10000)
@@ -239,6 +244,7 @@ namespace BrailleToolkit
                 }
 
                 breakWord = brLine[breakIndex];
+                leftWord = brLine[breakIndex - 1];
 
                 if (breakWord.DontBreakLineHere)    // 如果之前已經設定這個字不能在此處斷行
                 {
@@ -251,6 +257,13 @@ namespace BrailleToolkit
                     // 前一個字要和此字元一起移到下一行。
                     breakIndex--;
                     continue;   // 繼續判斷前一個字元可否斷行。
+                }
+
+                if (!leftWord.IsContextTag && CharactersCannotAtEndOfLine.IndexOf(leftWord.Text) >= 0)
+                {
+                    // 左括號和上引號都不可以在行尾。
+                    breakIndex--;
+                    continue;
                 }
 
                 if (breakWord.IsWhiteSpace) // 找到空白處，可斷開
@@ -310,12 +323,15 @@ namespace BrailleToolkit
                 breakIndex = fixedBreakIndex;
             }
 
-            // 行首和行尾規則。
+            // 行尾規則。
             if (breakIndex > 1)
             {
-                // 私名號和書名號不可位於行尾。
+                // 檢查不可位於行尾的字元。
                 int newBreakIndex = breakIndex - 1;
                 var lastWord = brLine[newBreakIndex];
+                
+
+                // 私名號和書名號不可位於行尾
                 if (lastWord.IsConvertedFromTag
                     && (lastWord.Text == BrailleConst.DisplayText.SpecificName
                         || lastWord.Text == BrailleConst.DisplayText.BookName))
@@ -336,7 +352,6 @@ namespace BrailleToolkit
             }
 
             // 注意!! 若 breakIndex 傳回 0 會導致呼叫的函式進入無窮迴圈!!
-
             return breakIndex;
         }
 

@@ -21,11 +21,11 @@ namespace Test.BrailleToolkit
         public void Should_BreakLine_Succeed(int cellsPerLine, string input,
             int expectedLineCount, string expectedLine1, string expectedLine2)
         {
-            BrailleProcessor target = BrailleProcessor.GetInstance();
+            var processor = BrailleProcessor.GetInstance();
 
-            ContextTagManager context = new ContextTagManager();
+            var context = new ContextTagManager();
 
-            BrailleLine brLine = target.ConvertLine(input);	// 冒號後面會加一個空方
+            var brLine = processor.ConvertLine(input);	// 冒號後面會加一個空方
 
             var brLines = BrailleDocumentFormatter.BreakLine(brLine, cellsPerLine, context);
 
@@ -40,6 +40,47 @@ namespace Test.BrailleToolkit
                 Assert.AreEqual(expectedLine2, actual2);
             }
         }
+
+        [TestCase("（", "-------------------------------------（ ）")]
+        [TestCase("〔", "--------------------------------------〔 〕")]
+        [TestCase("「", "-------------------------------------「 」")]
+        [TestCase("『", "-------------------------------------『 』")]
+        [TestCase("｛", "--------------------------------------｛｝")]
+        [TestCase("【", "--------------------------------------【 】")]
+        [TestCase("“", "--------------------------------------“ ”")]
+        [TestCase("‘", "-------------------------------------‘ ’")]
+        public void Should_LeftParenthses_NotAtEndOfLine(string leftParenthesis, string inputText)
+        {
+            var processor = BrailleProcessor.GetInstance();
+            var brLine = processor.ConvertLine(inputText);
+            var context = new ContextTagManager();
+            var brLines = BrailleDocumentFormatter.BreakLine(brLine, 40, context);
+
+            brLine = brLines[0];
+
+            Assert.IsTrue(brLine[brLine.WordCount-1].Text != leftParenthesis);
+        }
+
+        [TestCase("）", "-------------------------------------（ ）")]
+        [TestCase("〕", "-------------------------------------〔 〕")]
+        [TestCase("」", "-----------------------------------「 」")]
+        [TestCase("』", "-----------------------------------『 』")]
+        [TestCase("｝", "-------------------------------------｛ ｝")]
+        [TestCase("】", "-------------------------------------【 】")]
+        [TestCase("”", "-------------------------------------“ ”")]
+        [TestCase("’", "------------------------------------‘ ’")]
+        public void Should_RightParenthses_NotAtBeginOfLine(string rightParenthesis, string inputText)
+        {
+            var processor = BrailleProcessor.GetInstance();
+            var brLine = processor.ConvertLine(inputText);
+            var context = new ContextTagManager();
+            var brLines = BrailleDocumentFormatter.BreakLine(brLine, 40, context);
+
+            brLine = brLines[0];
+
+            Assert.IsTrue(brLine[0].Text != rightParenthesis);
+        }
+
 
         [Test]
         public void Should_BreakLine_KeepTrailingSpaces()

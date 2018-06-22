@@ -407,5 +407,32 @@ namespace BrailleToolkit.Rules
             }
         }
 
+        public static void ApplyDontBreakLineRule(BrailleLine brLine)
+        {
+            int wordIdx = 0;
+            BrailleWord brWord;
+            string text;
+
+            while (wordIdx < brLine.WordCount)
+            {
+                brWord = brLine[wordIdx];
+
+                if (brWord.IsContextTag || brWord.IsConvertedFromTag)
+                {
+                    wordIdx++;
+                    continue;
+                }
+                text = brWord.Text;
+
+                // 刪節號與破折號不可位於行首；右括號和下引號也不可位於行首。
+                if (text == "……" || text == "…" || text == "──" || text == "－－" || text == "─" || text == "－"
+                    || text == "）" || text == "］" || text == "〕" || text == "｝" || text == "】"
+                    || text == "」" || text == "』" || text == "”" || text == "’")
+                {
+                    brWord.DontBreakLineHere = true;
+                }
+                wordIdx++;
+            }
+        }
     }
 }

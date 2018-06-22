@@ -11,7 +11,7 @@ namespace Test.BrailleToolkit
     [TestFixture()]
     public class MathConverterTest
     {
-        [TestCase("<數學>15？…</數學>", "(3456 2)(26)(456 236)()(5 5 5)")]
+        [TestCase("<數學>15？…</數學>", "(3456 2)(26)(456 236)()(3 3 3)")]
         public void Should_AddSpace_BetweenQuestionMarkAndEllipsis(string inputText, string expectedPositionNumbers)
         {
             var processor = BrailleProcessor.GetInstance();
@@ -45,7 +45,7 @@ namespace Test.BrailleToolkit
         }
 
 
-        [TestCase("<數學>1+2+…+10</數學>", "(3456 2)(346)(23)(346)(5 5 5)(346)(2)(356)")]
+        [TestCase("<數學>1+2+…+10</數學>", "(3456 2)(346)(23)(346)(3 3 3)(346)(2)(356)")]
         public void Should_NoSpace_NextToEllipsis(string inputText, string expectedPositionNumbers)
         {
             var processor = BrailleProcessor.GetInstance();
