@@ -13,7 +13,8 @@ namespace BrailleToolkit.Tags
         BeforeConversion,   // 只存在於點字轉換動作之前。
         DuringConversion,   // 轉點字過程中的某個時間點會消失。
         BeforeFormatDoc,    // 在點字轉換過程中，直到整份文件進行斷行之前。
-        EndOfFormatDoc      // 在整份文件斷行完畢之後即消失。
+        EndOfFormatDoc,     // 在整份文件斷行完畢之後即消失。
+        Persistent          // 儲存檔案時會保存。
     }
 
 
@@ -96,6 +97,10 @@ namespace BrailleToolkit.Tags
                     {
                         return CreateSeparatorLine();
                     }
+                case ContextTagNames.NoDigitSymbol:
+                    {
+                        return CreateNoDigitSymbol();
+                    }
                 default:
                     {
                         return new GenericContextTag(tagName);
@@ -169,5 +174,18 @@ namespace BrailleToolkit.Tags
             }
             return tag;
         }
+
+        private static IContextTag CreateNoDigitSymbol()
+        {
+            string tagName = ContextTagNames.NoDigitSymbol;
+
+            // 純粹的控制標籤，不帶任何文字、點字的空標籤。
+            return new GenericContextTag(
+                            tagName,
+                            ContextLifetime.DuringConversion,
+                            removeTagOnConversion: true,
+                            singleLine: false);
+        }
+
     }
 }

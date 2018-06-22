@@ -451,7 +451,7 @@ namespace BrailleToolkit
                 {
                     // 成功轉換成點字。若有需要緊接著套用的規則，可在此處理。
 
-                    EnsureNoDigitSymbolAndSpaceInDeleteContext();
+                    EnsureNoDigitSymbolAndSpace();
 
                     brLine.Words.AddRange(brWordList);
 
@@ -532,8 +532,8 @@ namespace BrailleToolkit
             return brLine;
 
 
-            // 確保刪除區塊中的文字都不自動加數符與空方
-            void EnsureNoDigitSymbolAndSpaceInDeleteContext()
+            // 確保特定區塊中的文字都不自動加數符與空方
+            void EnsureNoDigitSymbolAndSpace()
             {
                 if (ContextManager.IsActive(ContextTagNames.Delete))
                 {
@@ -541,6 +541,13 @@ namespace BrailleToolkit
                     {
                         brWord.NoDigitCell = true;
                         brWord.NoSpace = true;
+                    }
+                }
+                else if (ContextManager.IsActive(ContextTagNames.NoDigitSymbol))
+                {
+                    foreach (var brWord in brWordList)
+                    {
+                        brWord.NoDigitCell = true;
                     }
                 }
             }
@@ -757,9 +764,18 @@ namespace BrailleToolkit
                         }
                         continue;
                     }
-                    // 是起始標籤，但不需要轉換成文字：保留此 BraillWord，以便識別這是個 context tag。
-                    brWord.Cells.Clear();
-                    index++;
+                    // 是起始標籤，但不需要轉換成文字。
+                    if (ctag.RemoveTagOnConversion)
+                    {
+                        // 刪除此 tag
+                        brLine.RemoveAt(ctagIndex);
+                    }
+                    else
+                    {
+                        // 保留此 BraillWord，以便識別這是個 context tag
+                        brWord.Cells.Clear();
+                        index++;
+                    }
                     continue;
 
                     // 註：也許可以不用急著刪除，而讓它活到轉換程序的最後階段，也就是由清除全部 context tag 的步驟來刪除。
@@ -799,9 +815,18 @@ namespace BrailleToolkit
                         }
                         continue;
                     }
-                    // 是結束標籤，但不需要轉換成文字：保留此 BraillWord，以便識別這是個 context tag。
-                    brWord.Cells.Clear();
-                    index++;
+                    // 是結束標籤，但不需要轉換成文字。
+                    if (ctag.RemoveTagOnConversion)
+                    {
+                        // 刪除此 tag
+                        brLine.RemoveAt(ctagIndex);
+                    }
+                    else
+                    {
+                        // 保留此 BraillWord，以便識別這是個 context tag
+                        brWord.Cells.Clear();
+                        index++;
+                    }
                     continue;
                 }
                 // 不是起始標籤，也不是結束標籤。這裡應該不可能執行到!

@@ -140,6 +140,8 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnNoDigitSymbol = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolBarSymbol1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolBarMath.SuspendLayout();
@@ -559,6 +561,8 @@
             this.btnSymbolArrows,
             this.toolStripSeparator15,
             this.doprdownBtnLines,
+            this.toolStripSeparator1,
+            this.btnNoDigitSymbol,
             this.btnQuotes});
             this.toolBarMath.Location = new System.Drawing.Point(0, 26);
             this.toolBarMath.Name = "toolBarMath";
@@ -1245,6 +1249,21 @@
             this.toolStripSeparator18.Name = "toolStripSeparator18";
             this.toolStripSeparator18.Size = new System.Drawing.Size(87, 6);
             // 
+            // btnNoDigitSymbol
+            // 
+            this.btnNoDigitSymbol.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnNoDigitSymbol.Image = ((System.Drawing.Image)(resources.GetObject("btnNoDigitSymbol.Image")));
+            this.btnNoDigitSymbol.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNoDigitSymbol.Name = "btnNoDigitSymbol";
+            this.btnNoDigitSymbol.Size = new System.Drawing.Size(70, 23);
+            this.btnNoDigitSymbol.Tag = "<無數符>|</無數符>";
+            this.btnNoDigitSymbol.Text = "無數符";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 26);
+            // 
             // InsertTextForm
             // 
             this.AcceptButton = this.btnOk;
@@ -1390,5 +1409,7 @@
         private System.Windows.Forms.ToolStripMenuItem btnTableTopLine2;
         private System.Windows.Forms.ToolStripMenuItem btnTableBottomLine2;
         private System.Windows.Forms.ToolStripMenuItem 分隔線135246ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btnNoDigitSymbol;
     }
 }

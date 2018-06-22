@@ -72,7 +72,7 @@ namespace BrailleToolkit.Tags
 
 
         public GenericContextTag(string tagName,
-            ContextLifetime lifeTime = ContextLifetime.BeforeFormatDoc,
+            ContextLifetime lifeTime = ContextLifetime.Persistent,
             bool removeTagOnConversion = false,
             bool singleLine = false)
         {
