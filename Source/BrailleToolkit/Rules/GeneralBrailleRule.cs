@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EasyBrailleEdit.Common;
 using Huanlin.Common.Helpers;
 using NChinese;
 
@@ -13,10 +14,6 @@ namespace BrailleToolkit.Rules
     /// </summary>
     public static class GeneralBrailleRule
     {
-        // 底下這些符號的右邊都不用加空方。
-        const string NoExtraSpaceAfterTheseCharacters = "「『“‘…";
-        const string NoExtraSpaceBeforeTheseCharacters = "」』”’…";
-
         /// <summary>
         /// 補加必要的空白：在英數字母和中文字之間補上空白。
         /// </summary>
@@ -32,29 +29,19 @@ namespace BrailleToolkit.Rules
             {
                 brWord = brLine[wordIdx];
 
-                if (brWord.IsContextTag || brWord.NoSpace)
+                if (wordIdx == 0 || brWord.IsContextTag || brWord.NoSpace)
                 {
                     wordIdx++;
                     continue;
                 }
 
-                if (String.IsNullOrWhiteSpace(brWord.Text))
-                {
-                    wordIdx++;
-                    continue;
-                }
-                if (Char.IsWhiteSpace(brWord.Text[0]))
-                {
-                    wordIdx++;
-                    continue;
-                }
-                if (wordIdx == 0)
+                if (String.IsNullOrWhiteSpace(brWord.Text) || Char.IsWhiteSpace(brWord.Text[0]))
                 {
                     wordIdx++;
                     continue;
                 }
 
-                wordOffset = AddBlankForSpecialCharacters(brLine, wordIdx);
+                wordOffset = AddSpaceForSpecialCharacters(brLine, wordIdx);
                 if (wordOffset > 0)
                 {
                     wordIdx += wordOffset;
@@ -113,12 +100,12 @@ namespace BrailleToolkit.Rules
                 return true;
             }
 
-            if (NoExtraSpaceAfterTheseCharacters.IndexOf(lastWord.Text) >= 0)
+            if (AppGlobals.Config.Braille.NoSpaceAfterTheseCharacters.IndexOf(lastWord.Text) >= 0)
             {
                 return false;
             }
 
-            if (NoExtraSpaceBeforeTheseCharacters.IndexOf(currWord.Text) >= 0)
+            if (AppGlobals.Config.Braille.NoSpaceBeforeTheseCharacters.IndexOf(currWord.Text) >= 0)
             {
                 return false;
             }
@@ -202,7 +189,7 @@ namespace BrailleToolkit.Rules
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        private static int AddBlankForSpecialCharacters(BrailleLine brLine, int wordIdx)
+        private static int AddSpaceForSpecialCharacters(BrailleLine brLine, int wordIdx)
         {
             int wordOffset = 0;
             BrailleWord currWord = brLine[wordIdx]; // 目前的字

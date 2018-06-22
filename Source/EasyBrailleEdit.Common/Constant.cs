@@ -53,5 +53,9 @@
         public const double DefaultPrintTextLineSpace = 20.9;   // 預設明眼字列距
 
         public const string DefaultAutoUpdateFilesUrl = "https://raw.githubusercontent.com/huanlin/EasyBrailleEdit/master/UpdateFiles/";
+
+        // 與轉點字規則有關的常數
+        public const string DefaultNoSpaceAfterTheseCharacters = "「『“‘…";
+        public const string DefaultNoSpaceBeforeTheseCharacters = "」』”’…，、。？！；：";
     }
 }

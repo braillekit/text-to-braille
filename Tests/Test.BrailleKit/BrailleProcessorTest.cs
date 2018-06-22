@@ -156,8 +156,14 @@ namespace Test.BrailleToolkit
             Assert.AreEqual(expectedPositionNumbers, result);
         }
 
-        [TestCase("15？", "(3456 2)(26)(135)")]
+        [TestCase("15？", "(3456 2)(26)(135)")]        
+        [TestCase("8-1、", "(3456 236)(36)(2)(6)")]
+        [TestCase("8-1，", "(3456 236)(36)(2)(23)")]
+        [TestCase("8-1。", "(3456 236)(36)(2)(36)")]
         [TestCase("<數學>15？</數學>", "(3456 2)(26)(456 236)")]
+        [TestCase("<數學>8-1、</數學>", "(3456 236)(36)(2)(6)")]
+        [TestCase("<數學>8-1，</數學>", "(3456 236)(36)(2)(6)")]
+        [TestCase("<數學>8-1。</數學>", "(3456 236)(36)(2)(456 256)")]
         public void Should_NoSpace_BeforeSpecificPunctuation(string inputText, string expectedPositionNumbers)
         {
             var processor = BrailleProcessor.GetInstance();
@@ -205,7 +211,7 @@ namespace Test.BrailleToolkit
         //[TestCase("<私名號>台北</私名號>我", "(56 56)(124 2456 2)(135 356 4)()(25 4)")]
         [TestCase("<書名號>魔戒</書名號>我", "(6 36)(134 126 2)(13 346 5)()(25 4)")]
 
-        public void Should_HaveSpace_BetweenSpecificNameAndAlphabet(string inputText, string expectedPositionNumbers)
+        public void Should_AddSpace_BetweenSpecificNameAndAlphabet(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
                 BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
@@ -234,7 +240,7 @@ namespace Test.BrailleToolkit
         [TestCase("<點譯者註>abc</點譯者註>", "(246)(6 3)(1)(12)(14)(135)")]
         [TestCase("<點譯者註>123</點譯者註>", "(246)(6 3)(3456 2)(23)(25)(135)")]
         [TestCase("<點譯者註>：測試？</點譯者註>", "(246)(6 3)(25 25)(245 2346 5)(24 156 5)(135)(135)")]
-        public void Should_NoExtraSpace_InsideBrailleTranslatorNote(string inputText, string expectedPositionNumbers)
+        public void Should_NoSpace_InsideBrailleTranslatorNote(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
                 BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
