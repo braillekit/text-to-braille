@@ -714,49 +714,49 @@
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(216, 26);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(103, 26);
             this.toolStripMenuItem4.Text = "↑";
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(216, 26);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(103, 26);
             this.toolStripMenuItem5.Text = "↓";
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(216, 26);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(103, 26);
             this.toolStripMenuItem3.Text = "←";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(103, 26);
             this.toolStripMenuItem2.Text = "→";
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(216, 26);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(103, 26);
             this.toolStripMenuItem6.Text = "↖";
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(216, 26);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(103, 26);
             this.toolStripMenuItem7.Text = "↗";
             // 
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(216, 26);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(103, 26);
             this.toolStripMenuItem8.Text = "↙";
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(216, 26);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(103, 26);
             this.toolStripMenuItem9.Text = "↘";
             // 
             // toolStripSeparator15
@@ -1094,28 +1094,28 @@
             // btnChoiceBo
             // 
             this.btnChoiceBo.Name = "btnChoiceBo";
-            this.btnChoiceBo.Size = new System.Drawing.Size(216, 26);
+            this.btnChoiceBo.Size = new System.Drawing.Size(107, 26);
             this.btnChoiceBo.Tag = "<選項>ㄅ.</選項>";
             this.btnChoiceBo.Text = "ㄅ.";
             // 
             // btnChoicePo
             // 
             this.btnChoicePo.Name = "btnChoicePo";
-            this.btnChoicePo.Size = new System.Drawing.Size(216, 26);
+            this.btnChoicePo.Size = new System.Drawing.Size(107, 26);
             this.btnChoicePo.Tag = "<選項>ㄆ.</選項>";
             this.btnChoicePo.Text = "ㄆ.";
             // 
             // btnChoiceMo
             // 
             this.btnChoiceMo.Name = "btnChoiceMo";
-            this.btnChoiceMo.Size = new System.Drawing.Size(216, 26);
+            this.btnChoiceMo.Size = new System.Drawing.Size(107, 26);
             this.btnChoiceMo.Tag = "<選項>ㄇ.</選項>";
             this.btnChoiceMo.Text = "ㄇ.";
             // 
             // btnChoiceFo
             // 
             this.btnChoiceFo.Name = "btnChoiceFo";
-            this.btnChoiceFo.Size = new System.Drawing.Size(216, 26);
+            this.btnChoiceFo.Size = new System.Drawing.Size(107, 26);
             this.btnChoiceFo.Tag = "<選項>ㄈ.</選項>";
             this.btnChoiceFo.Text = "ㄈ.";
             // 
@@ -1197,7 +1197,7 @@
             this.btnUrl.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnUrl.Name = "btnUrl";
             this.btnUrl.Size = new System.Drawing.Size(87, 23);
-            this.btnUrl.Tag = "<URL>|<URL>";
+            this.btnUrl.Tag = "<URL>|</URL>";
             this.btnUrl.Text = "網址";
             // 
             // toolStripSeparator13

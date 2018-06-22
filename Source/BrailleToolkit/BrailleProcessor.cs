@@ -433,20 +433,6 @@ namespace BrailleToolkit
             if (line == null)
                 return null;
 
-            // 原書頁碼可能會輸入羅馬數字，所以把底下檢查數字格式的程式碼註解掉。
-            // 如果是原書頁碼，先檢查格式是否正確。
-            //try
-            //{
-            //	GetOrgPageNumber(line);
-            //}
-            //catch (Exception ex)
-            //{
-            //	m_ErrorMsg.Append(String.Format("第 {0} 列 : ", lineNumber));
-            //	m_ErrorMsg.Append(ex.Message);
-            //	m_ErrorMsg.Append("\r\n");
-            //	return null;
-            //}
-
             line = StrHelper.Reverse(line);
             Stack<char> charStack = new Stack<char>(line);
 

@@ -32,6 +32,7 @@ namespace BrailleToolkit.Tags
         public const string QuotationMark1 = "<引號一>"; // (236)(356)
         public const string QuotationMark2 = "<引號二>"; // (236)(456 356)
         public const string SeparatorLine = "<分隔線>";  // (135 246)
+        public const string NoDigitSymbol = "<無數符></無數符>"; // 這是暫時性的控制標籤，只在轉點字過程中存在。
 
         // NOTE: 每當有變動時，必須同步修改 AllTagNames 的內容。
 
@@ -61,7 +62,8 @@ namespace BrailleToolkit.Tags
                 Url,
                 QuotationMark1,
                 QuotationMark2,
-                SeparatorLine
+                SeparatorLine,
+                NoDigitSymbol
             };
 
 
