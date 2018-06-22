@@ -585,11 +585,6 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void miFileExportTxt_Click(object sender, EventArgs e)
-        {
-            _controller.DoExportTextFile();
-        }
-
         private void miFileExportBrl_Click(object sender, EventArgs e)
         {
             _controller.DoExportBrailleFile();

@@ -58,6 +58,11 @@ namespace BrailleToolkit.Helpers
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 注意：此函式其實無法完全呈現原始的明眼字，因為有些標籤是在轉成點字之後就被刪除了。
+        /// </summary>
+        /// <param name="words"></param>
+        /// <returns></returns>
         public static string ToOriginalTextString(List<BrailleWord> words)
         {
             var sb = new StringBuilder();
@@ -71,7 +76,7 @@ namespace BrailleToolkit.Helpers
                     index++;
                     continue;
                 }
-                if (brWord.IsConvertedFromTag) // 只要是由 context tag 所衍生的文字都不儲存。
+                if (brWord.IsConvertedFromTag) // 只要是由 context tag 所衍生的文字都忽略。
                 {
                     index++;
                     continue;

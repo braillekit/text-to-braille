@@ -36,7 +36,6 @@
             this.miFileSave = new System.Windows.Forms.ToolStripMenuItem();
             this.miFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.miFileExportBrl = new System.Windows.Forms.ToolStripMenuItem();
-            this.miFileExportTxt = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.miFilePrint = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -137,7 +136,6 @@
             this.miFileSave,
             this.miFileSaveAs,
             this.miFileExportBrl,
-            this.miFileExportTxt,
             this.toolStripMenuItem1,
             this.miFilePrint,
             this.toolStripMenuItem2,
@@ -175,13 +173,6 @@
             this.miFileExportBrl.Size = new System.Drawing.Size(232, 26);
             this.miFileExportBrl.Text = "匯出點字檔(&B)";
             this.miFileExportBrl.Click += new System.EventHandler(this.miFileExportBrl_Click);
-            // 
-            // miFileExportTxt
-            // 
-            this.miFileExportTxt.Name = "miFileExportTxt";
-            this.miFileExportTxt.Size = new System.Drawing.Size(232, 26);
-            this.miFileExportTxt.Text = "匯出文字檔(&T)";
-            this.miFileExportTxt.Click += new System.EventHandler(this.miFileExportTxt_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -746,7 +737,6 @@
 		private System.Windows.Forms.ToolStripButton btnGotoPage;
 		private System.Windows.Forms.ToolStripMenuItem miEditFindNext;
 		private System.Windows.Forms.ToolStripMenuItem miEditFetchPageTitles;
-        private System.Windows.Forms.ToolStripMenuItem miFileExportTxt;
         private System.Windows.Forms.ToolStripMenuItem miFileExportBrl;
         private System.Windows.Forms.ToolStripMenuItem miViewBraille;
         private System.Windows.Forms.ToolStripMenuItem miViewText;

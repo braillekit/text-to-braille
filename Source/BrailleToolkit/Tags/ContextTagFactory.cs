@@ -10,11 +10,8 @@ namespace BrailleToolkit.Tags
     // 列舉常數 for 語境標籤的生命週期（何時要移除該語境標籤）
     public enum ContextLifetime
     {
-        BeforeConversion,   // 只存在於點字轉換動作之前。
-        DuringConversion,   // 轉點字過程中的某個時間點會消失。
-        BeforeFormatDoc,    // 在點字轉換過程中，直到整份文件進行斷行之前。
-        EndOfFormatDoc,     // 在整份文件斷行完畢之後即消失。
-        Persistent          // 儲存檔案時會保存。
+        Transient,      // 轉點字過程中的某個時間點會消失。
+        Persistent      // 儲存檔案時會保存。
     }
 
 
@@ -31,7 +28,7 @@ namespace BrailleToolkit.Tags
             {
                 case ContextTagNames.Title:
                     {
-                        return new GenericContextTag(tagName, ContextLifetime.EndOfFormatDoc);
+                        return new GenericContextTag(tagName, ContextLifetime.Transient);
                     }
 
                 case ContextTagNames.Delete:
@@ -72,6 +69,11 @@ namespace BrailleToolkit.Tags
                     {
                         return new OrgPageNumberContextTag();
                     }
+                case ContextTagNames.Table:
+                    return new GenericContextTag(
+                        tagName,
+                        lifeTime: ContextLifetime.Transient,
+                        removeTagOnConversion: true);
                 case ContextTagNames.TableTopLine2:
                     {
                         return new TableTopLineContextTag();
@@ -114,7 +116,7 @@ namespace BrailleToolkit.Tags
 
             var tag = new GenericContextTag(
                             tagName,
-                            ContextLifetime.DuringConversion,
+                            ContextLifetime.Transient,
                             removeTagOnConversion: true);
             var brWord = new BrailleWord("「");
             brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 2, 3, 6 }));
@@ -133,7 +135,7 @@ namespace BrailleToolkit.Tags
 
             var tag = new GenericContextTag(
                             tagName,
-                            ContextLifetime.DuringConversion,
+                            ContextLifetime.Transient,
                             removeTagOnConversion: true);
             var brWord = new BrailleWord("「");
             brWord.CellList.Add(BrailleCell.GetInstance(new int[] { 2, 3, 6 }));
@@ -153,7 +155,7 @@ namespace BrailleToolkit.Tags
 
             var tag = new GenericContextTag(
                             tagName,
-                            ContextLifetime.DuringConversion,
+                            ContextLifetime.Transient,
                             removeTagOnConversion: true,
                             singleLine: true);
 
@@ -165,7 +167,9 @@ namespace BrailleToolkit.Tags
             {
                 var brWord = new BrailleWord(text)
                 {
-                    IsConvertedFromTag = true
+                    // 當標籤的 RemoveTagOnConvertion 為 true 時，
+                    // 不要設定 IsConvertedFromTag 為 true，否則在匯出文字檔時，會變成空字串！
+                    IsConvertedFromTag = false
                 };
                 brWord.CellList.Add(cell1);
                 brWord.CellList.Add(cell2);
@@ -182,7 +186,7 @@ namespace BrailleToolkit.Tags
             // 純粹的控制標籤，不帶任何文字、點字的空標籤。
             return new GenericContextTag(
                             tagName,
-                            ContextLifetime.DuringConversion,
+                            ContextLifetime.Transient,
                             removeTagOnConversion: true,
                             singleLine: false);
         }

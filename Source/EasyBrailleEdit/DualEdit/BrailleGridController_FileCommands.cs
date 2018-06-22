@@ -97,6 +97,7 @@ namespace EasyBrailleEdit.DualEdit
             return false;
         }
 
+        [Obsolete("此函式已經不需要。使用者可以從主選單點［檢視 > 明眼字]。")]
         public bool DoExportTextFile()
         {
             var dlg = new SaveFileDialog

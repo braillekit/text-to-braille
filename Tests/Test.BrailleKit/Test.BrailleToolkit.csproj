@@ -72,6 +72,7 @@
     <Compile Include="MathConverterTest.cs" />
     <Compile Include="Shared.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableConverterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestData\TestData_Braille.txt">
