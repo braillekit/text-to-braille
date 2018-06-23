@@ -98,6 +98,8 @@
             this.btnTableTopLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTableBottomLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.分隔線135246ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnNoDigitSymbol = new System.Windows.Forms.ToolStripButton();
             this.btnQuotes = new System.Windows.Forms.ToolStripDropDownButton();
             this.btnSymbolFullDots = new System.Windows.Forms.ToolStripButton();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -140,8 +142,6 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnNoDigitSymbol = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolBarSymbol1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolBarMath.SuspendLayout();
@@ -713,54 +713,56 @@
             this.btnSymbolArrows.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSymbolArrows.Name = "btnSymbolArrows";
             this.btnSymbolArrows.Size = new System.Drawing.Size(61, 23);
+            this.btnSymbolArrows.Tag = "NA";
             this.btnSymbolArrows.Text = "箭頭";
+            this.btnSymbolArrows.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem4.Text = "↑";
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem5.Text = "↓";
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem3.Text = "←";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem2.Text = "→";
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem6.Text = "↖";
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem7.Text = "↗";
             // 
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem8.Text = "↙";
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem9.Text = "↘";
             // 
             // toolStripSeparator15
@@ -829,6 +831,21 @@
             this.分隔線135246ToolStripMenuItem.Tag = "<分隔線></分隔線>\\n";
             this.分隔線135246ToolStripMenuItem.Text = "分隔線（135+246）";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 26);
+            // 
+            // btnNoDigitSymbol
+            // 
+            this.btnNoDigitSymbol.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnNoDigitSymbol.Image = ((System.Drawing.Image)(resources.GetObject("btnNoDigitSymbol.Image")));
+            this.btnNoDigitSymbol.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNoDigitSymbol.Name = "btnNoDigitSymbol";
+            this.btnNoDigitSymbol.Size = new System.Drawing.Size(70, 23);
+            this.btnNoDigitSymbol.Tag = "<無數符>|</無數符>";
+            this.btnNoDigitSymbol.Text = "無數符";
+            // 
             // btnQuotes
             // 
             this.btnQuotes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -838,8 +855,10 @@
             this.btnQuotes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnQuotes.Name = "btnQuotes";
             this.btnQuotes.Size = new System.Drawing.Size(99, 23);
+            this.btnQuotes.Tag = "NA";
             this.btnQuotes.Text = "其他符號";
             this.btnQuotes.ToolTipText = "其他符號";
+            this.btnQuotes.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
             // 
             // btnSymbolFullDots
             // 
@@ -1248,21 +1267,6 @@
             // 
             this.toolStripSeparator18.Name = "toolStripSeparator18";
             this.toolStripSeparator18.Size = new System.Drawing.Size(87, 6);
-            // 
-            // btnNoDigitSymbol
-            // 
-            this.btnNoDigitSymbol.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnNoDigitSymbol.Image = ((System.Drawing.Image)(resources.GetObject("btnNoDigitSymbol.Image")));
-            this.btnNoDigitSymbol.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNoDigitSymbol.Name = "btnNoDigitSymbol";
-            this.btnNoDigitSymbol.Size = new System.Drawing.Size(70, 23);
-            this.btnNoDigitSymbol.Tag = "<無數符>|</無數符>";
-            this.btnNoDigitSymbol.Text = "無數符";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 26);
             // 
             // InsertTextForm
             // 
