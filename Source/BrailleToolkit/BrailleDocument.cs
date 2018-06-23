@@ -4,6 +4,8 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading.Tasks;
+using BrailleToolkit.Helpers;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
 using Serilog;
@@ -324,6 +326,11 @@ namespace BrailleToolkit
                     writer.WriteLine(Lines[lineIdx].ToOriginalTextString());
                 }
             }
+        }
+
+        public async Task ExportToHtmlFileAsync(string outputFileName)
+        {
+            await BrailleDocumentHelper.ExportToHtmlFileAsync(this, outputFileName);
         }
 
         public string GetAllText()

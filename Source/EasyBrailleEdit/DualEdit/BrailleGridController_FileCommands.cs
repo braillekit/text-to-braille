@@ -121,6 +121,24 @@ namespace EasyBrailleEdit.DualEdit
             form.ShowDialog();
         }
 
+
+        public async Task ExportHtmlFileAsync()
+        {
+            var dlg = new SaveFileDialog
+            {
+                DefaultExt = ".html",
+                Filter = "網頁 (*.html)|*.html",
+                FilterIndex = 1
+            };
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                await BrailleDoc.ExportToHtmlFileAsync(dlg.FileName);
+
+                MsgBoxHelper.ShowInfo($"已成功匯出至 HTML 檔案: {dlg.FileName}");
+            }
+        }
+
         private void InternalSaveFile(string filename)
         {
             BrailleDoc.SaveBrailleFile(filename);

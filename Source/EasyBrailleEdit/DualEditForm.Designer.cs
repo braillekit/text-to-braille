@@ -90,6 +90,7 @@
             this.statusLabelCurrentWord = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelCurrentLine = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelPageTitle = new System.Windows.Forms.ToolStripStatusLabel();
+            this.miFileExportHtml = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -136,6 +137,7 @@
             this.miFileSave,
             this.miFileSaveAs,
             this.miFileExportBrl,
+            this.miFileExportHtml,
             this.toolStripMenuItem1,
             this.miFilePrint,
             this.toolStripMenuItem2,
@@ -661,6 +663,13 @@
             this.statusLabelPageTitle.Size = new System.Drawing.Size(181, 26);
             this.statusLabelPageTitle.Text = "toolStripStatusLabel1";
             // 
+            // miFileExportHtml
+            // 
+            this.miFileExportHtml.Name = "miFileExportHtml";
+            this.miFileExportHtml.Size = new System.Drawing.Size(232, 26);
+            this.miFileExportHtml.Text = "匯出為網頁(&H)";
+            this.miFileExportHtml.Click += new System.EventHandler(this.miFileExportHtml_Click);
+            // 
             // DualEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
@@ -759,5 +768,6 @@
         private System.Windows.Forms.ToolStripMenuItem miEditRemoveDigitSymbol;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelPageTitle;
         private System.Windows.Forms.ToolStripMenuItem miEditCut;
+        private System.Windows.Forms.ToolStripMenuItem miFileExportHtml;
     }
 }

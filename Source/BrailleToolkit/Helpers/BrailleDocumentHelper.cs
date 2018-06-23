@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -381,6 +382,40 @@ namespace BrailleToolkit.Helpers
                     }
                     emptyLinesCount++;
                 }
+            }
+        }
+
+        public static async Task ExportToHtmlFileAsync(BrailleDocument doc, string outputFileName)
+        {
+            string cssClassTd = "column";
+            string cssClassBraille = "braille";
+            string cssClassText = "text";
+
+            var sb = new StringBuilder();
+
+            sb.AppendLine("<html charset='UTF-8'>");
+            sb.AppendLine("<head>");
+            sb.AppendLine("<style>");
+            sb.AppendLine("body { font-family: 微軟正黑體; }");
+            sb.AppendLine($".{cssClassTd} {{ text-align: center; }}");
+            sb.AppendLine($".{cssClassBraille} {{ font-family: SimBraille; }}");
+            sb.AppendLine($".{cssClassText} {{  }}");
+            sb.AppendLine("</style>");
+            sb.AppendLine("</head>");
+            sb.AppendLine("<body>");
+
+            using (var writer = new StreamWriter(outputFileName))
+            {
+                await writer.WriteLineAsync(sb.ToString());
+
+                await writer.WriteLineAsync("<table>");
+                foreach (var brLine in doc.Lines)
+                {
+                    await writer.WriteLineAsync(brLine.ToHtmlString("  ", cssClassTd, cssClassBraille, cssClassText));
+                }
+                await writer.WriteLineAsync("</table>");
+
+                await writer.WriteLineAsync("</body></html>");
             }
         }
 

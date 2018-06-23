@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using BrailleToolkit.Tags;
 using BrailleToolkit.Helpers;
+using BrailleToolkit.Converters;
 
 namespace BrailleToolkit
 {
@@ -281,6 +282,36 @@ namespace BrailleToolkit
         {
             return BrailleWordHelper.ToOriginalTextString(Words);
         }
+
+        public string ToHtmlString(string leadingSpaces, string cssClassTd, string cssClassBraille, string cssClassText)
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine($"{leadingSpaces}<tr>");
+
+            foreach (var brWord in Words)
+            {
+                if (brWord.IsContextTag || brWord.CellCount < 1)
+                    continue;
+
+                string brFontText = BrailleFontConverter.ToString(brWord);
+
+                if (String.IsNullOrEmpty(brFontText))
+                {
+                    sb.AppendLine($"無法轉換成對應的點字字型: {brWord.Text}。");
+                    break;
+                }
+
+                sb.AppendLine($"{leadingSpaces}  <td colspan='{brFontText.Length}' class='{cssClassTd}'>");
+                sb.AppendLine($"{leadingSpaces}    <div class='{cssClassBraille}'>{brFontText}</div>");
+                sb.AppendLine($"{leadingSpaces}    <div class='{cssClassText}'>{brWord.Text}</div>");
+                sb.AppendLine($"{leadingSpaces}  </td>");
+            }
+
+            sb.AppendLine($"{leadingSpaces}</tr>");
+            return sb.ToString();
+        }
+
 
         public bool ContainsTitleTag()
         {

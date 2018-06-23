@@ -664,6 +664,11 @@ namespace EasyBrailleEdit
                 _undoBufferForm.Show();
             }
         }
+
+        private async void miFileExportHtml_Click(object sender, EventArgs e)
+        {
+            await _controller.ExportHtmlFileAsync();
+        }
     }
 
 }
