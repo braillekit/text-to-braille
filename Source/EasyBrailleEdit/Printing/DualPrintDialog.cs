@@ -254,7 +254,7 @@ namespace EasyBrailleEdit
         private void btnPrintBraille_Click(object sender, EventArgs e)
         {
             // 保護措施
-            if (AppGlobals.IsPrintingDisabled())
+            if (!AppGlobals.IsPrintingEnabled)
             {
                 return;
             }

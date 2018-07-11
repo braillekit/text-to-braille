@@ -70,7 +70,7 @@ namespace EasyBrailleEdit
         private void DoExportBrailleFile()
         {
             // 保護措施
-            if (AppGlobals.IsPrintingDisabled())
+            if (!AppGlobals.IsPrintingEnabled)
             {
                 return;
             }

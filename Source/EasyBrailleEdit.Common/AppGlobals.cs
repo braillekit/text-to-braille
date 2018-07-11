@@ -8,7 +8,11 @@ namespace EasyBrailleEdit.Common
     public static class AppGlobals
     {
         public static IAppConfig Config { get; } = ConfigHelper.CreateConfig();
+
+        public static string AppPath { get; set;  }
         public static string TempPath { get; } = GetTempPath();
+
+        public static UserLicenseData UserLicense { get; set; } = new UserLicenseData();
 
         // Class constructor.
         static AppGlobals()
@@ -77,14 +81,6 @@ namespace EasyBrailleEdit.Common
             return Config.AutoUpdateFilesUrl.IndexOf(Constant.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase) >= 0;
         }
 
-        public static bool IsPrintingDisabled()
-        {
-            // TODO: 註解底下的程式碼。
-            if (DateTime.Now >= new DateTime(2018, 8, 1))
-            {
-                return true;
-            }
-            return false;
-        }
+        public static bool IsPrintingEnabled { get; set; } = true;
     }
 }

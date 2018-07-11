@@ -39,10 +39,10 @@
             // 
             // txtSrc
             // 
-            this.txtSrc.Location = new System.Drawing.Point(33, 46);
+            this.txtSrc.Location = new System.Drawing.Point(33, 77);
             this.txtSrc.Multiline = true;
             this.txtSrc.Name = "txtSrc";
-            this.txtSrc.Size = new System.Drawing.Size(572, 221);
+            this.txtSrc.Size = new System.Drawing.Size(572, 190);
             this.txtSrc.TabIndex = 0;
             // 
             // txtFormatted
@@ -78,7 +78,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(30, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 16);
+            this.label1.Size = new System.Drawing.Size(109, 20);
             this.label1.TabIndex = 4;
             this.label1.Text = "原始文件：";
             // 
@@ -104,7 +104,7 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(805, 569);
             this.Controls.Add(this.btnSave);

@@ -28,6 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="System.Net.Http">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Net.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
@@ -72,6 +75,12 @@
     </Compile>   
     <Compile Update="Forms\ViewTextForm.Designer.cs">
       <DependentUpon>ViewTextForm.cs</DependentUpon>
+    </Compile>   
+    <Compile Update="Forms\RegForm.cs">
+      <SubType>Form</SubType>
+    </Compile>   
+    <Compile Update="Forms\RegForm.Designer.cs">
+      <DependentUpon>RegForm.cs</DependentUpon>
     </Compile>   
     <Compile Update="InsertTextForm.cs">
       <SubType>Form</SubType>
@@ -264,9 +273,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="RegForm.resx">
-      <DependentUpon>RegForm.cs</DependentUpon>
+    <EmbeddedResource Update="Forms\RegForm.resx">
       <SubType>Designer</SubType>
+      <DependentUpon>RegForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Printing\TextPageSetupDialog.resx">
       <SubType>Designer</SubType>

@@ -133,7 +133,7 @@ namespace EasyBrailleEdit
         void BrailleText_BeginPrint(object sender, PrintEventArgs e)
         {
             // 保護措施
-            if (AppGlobals.IsPrintingDisabled())
+            if (!AppGlobals.IsPrintingEnabled)
             {
                 e.Cancel = true;
                 return;

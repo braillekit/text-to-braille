@@ -21,7 +21,7 @@ namespace EasyBrailleEdit.DualEdit
         public void ViewBraille()
         {
             // 保護措施
-            if (AppGlobals.IsPrintingDisabled())
+            if (!AppGlobals.IsPrintingEnabled)
             {
                 return;
             }

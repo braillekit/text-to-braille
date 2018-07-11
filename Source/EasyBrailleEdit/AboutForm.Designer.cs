@@ -32,12 +32,15 @@ namespace EasyBrailleEdit
         {
             this.btnClose = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblProductName = new System.Windows.Forms.Label();
             this.lblVesion = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblLicensedTo = new System.Windows.Forms.Label();
+            this.lblCustomerName = new System.Windows.Forms.Label();
+            this.btnRegister = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -58,6 +61,8 @@ namespace EasyBrailleEdit
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.lblCustomerName);
+            this.panel1.Controls.Add(this.lblLicensedTo);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.linkLabel1);
             this.panel1.Controls.Add(this.pictureBox1);
@@ -68,15 +73,26 @@ namespace EasyBrailleEdit
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(432, 206);
+            this.panel1.Size = new System.Drawing.Size(432, 267);
             this.panel1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(12, 164);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(105, 24);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "臉書專頁：";
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(110, 103);
+            this.linkLabel1.Location = new System.Drawing.Point(111, 165);
             this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(232, 22);
@@ -121,30 +137,49 @@ namespace EasyBrailleEdit
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.btnRegister);
             this.panel2.Controls.Add(this.btnClose);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 150);
+            this.panel2.Location = new System.Drawing.Point(0, 211);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(432, 56);
             this.panel2.TabIndex = 3;
             // 
-            // label1
+            // lblLicensedTo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(11, 102);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 24);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "臉書專頁：";
+            this.lblLicensedTo.AutoSize = true;
+            this.lblLicensedTo.Location = new System.Drawing.Point(12, 100);
+            this.lblLicensedTo.Name = "lblLicensedTo";
+            this.lblLicensedTo.Size = new System.Drawing.Size(86, 24);
+            this.lblLicensedTo.TabIndex = 10;
+            this.lblLicensedTo.Text = "授權給：";
+            // 
+            // lblCustomerName
+            // 
+            this.lblCustomerName.AutoSize = true;
+            this.lblCustomerName.Location = new System.Drawing.Point(104, 100);
+            this.lblCustomerName.Name = "lblCustomerName";
+            this.lblCustomerName.Size = new System.Drawing.Size(64, 24);
+            this.lblCustomerName.TabIndex = 11;
+            this.lblCustomerName.Text = "label2";
+            // 
+            // btnRegister
+            // 
+            this.btnRegister.Location = new System.Drawing.Point(16, 10);
+            this.btnRegister.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(111, 36);
+            this.btnRegister.TabIndex = 3;
+            this.btnRegister.Text = "註冊";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(432, 206);
+            this.ClientSize = new System.Drawing.Size(432, 267);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -175,5 +210,8 @@ namespace EasyBrailleEdit
 		private System.Windows.Forms.LinkLabel linkLabel1;
         private Label label1;
         private Panel panel2;
+        private Label lblCustomerName;
+        private Label lblLicensedTo;
+        private Button btnRegister;
     }
 }

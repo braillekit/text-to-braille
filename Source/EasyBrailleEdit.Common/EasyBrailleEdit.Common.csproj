@@ -21,12 +21,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="System.Management" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="AppConfig.ForBlind.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="AppConfig.Default.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project> 

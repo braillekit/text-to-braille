@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +13,7 @@ using BrailleToolkit;
 using BrailleToolkit.Helpers;
 using EasyBrailleEdit.Common;
 using EasyBrailleEdit.Forms;
+using EasyBrailleEdit.License;
 using EasyBrailleEdit.Printing;
 using Huanlin.Common.Helpers;
 using Huanlin.Http;
@@ -24,7 +26,7 @@ namespace EasyBrailleEdit
     public partial class MainForm : Form
     {
         string m_FileName;
-        bool m_Modified;	// 檔案內容是否有修改過。
+        bool m_Modified;	// 檔案內容是否有修改過。        
 
         private InvalidCharForm m_InvalidCharForm;
 
@@ -738,6 +740,8 @@ namespace EasyBrailleEdit
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
+            AppGlobals.AppPath = Path.GetDirectoryName(Application.ExecutablePath);
+
             Width = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Width * 0.9);
             Height = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Height * 0.9);
             CenterToScreen();
@@ -753,6 +757,31 @@ namespace EasyBrailleEdit
             }
             Application.DoEvents();
 
+
+            var userLic = LicenseService.GetUserLicenseData();
+            if (!await LicenseService.ValidateUserLicenseAsync(userLic))
+            {
+                userLic = LicenseService.EnterLicenseData();
+                if (userLic == null)
+                {
+                    MsgBoxHelper.ShowWarning("沒有軟體授權資料，將無法列印和輸出雙視文件！");
+                }
+                else
+                {
+                    bool isLicensed = await LicenseService.ValidateUserLicenseAsync(userLic);
+                    if (isLicensed)
+                    {
+                        AppGlobals.IsPrintingEnabled = true;
+                        MsgBoxHelper.ShowInfo("註冊成功!");
+                    }
+                    else
+                    {
+                        MsgBoxHelper.ShowError("註冊失敗：序號無效！");
+                    }
+                }                
+            }
+            AppGlobals.IsPrintingEnabled = AppGlobals.UserLicense.IsValid;
+
             txtErrors.Visible = false;
 
             m_ConvertDialog = new ConversionDialog();
@@ -762,16 +791,6 @@ namespace EasyBrailleEdit
             rtbOrg.BringToFront();
         }
 
-        /*
-                void BrailleProcessor_ConvertionFailed(object sender, ConvertionFailedEventArgs args)
-                {
-                    if (m_BusyForm != null)
-                    {
-                        m_BusyForm.AddInvalidChar(args.InvalidChar.CharValue);
-                        Application.DoEvents();
-                    }			
-                }
-        */
         private void miFileClicked(object sender, EventArgs e)
         {
             ToolStripItem obj = (ToolStripItem)sender;

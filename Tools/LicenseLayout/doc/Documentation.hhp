@@ -1,0 +1,46 @@
+[FILES]
+LicenseKey.html
+LicenseKeyHierarchy.html
+LicenseKey.GenerateKey.html
+LicenseKey.GenerateKeyMembers.html
+LicenseKey.GenerateKeyConstructor.html
+LicenseKey.GenerateKeyProperties.html
+LicenseKey.GenerateKey.Base10.html
+LicenseKey.GenerateKey.LicenseTemplate.html
+LicenseKey.GenerateKey.MaxTokens.html
+LicenseKey.GenerateKey.UseBytes.html
+LicenseKey.GenerateKeyMethods.html
+LicenseKey.GenerateKey.AddToken.html
+LicenseKey.GenerateKey.CreateKey.html
+LicenseKey.GenerateKey.GetLicenseKey.html
+LicenseKey.GenerateKey.TokenTypes.html
+LicenseKey.Randomm.html
+LicenseKey.RandommMembers.html
+LicenseKey.RandommConstructor.html
+LicenseKey.RandommProperties.html
+LicenseKey.Randomm.Base10.html
+LicenseKey.Randomm.UseBytes.html
+LicenseKey.RandommMethods.html
+LicenseKey.Randomm.CreateNumberString.html
+LicenseKey.Randomm.GetRandomNumber.html
+LicenseKey.Randomm.SetMaxLength.html
+
+[OPTIONS]
+Title=Documentation
+Auto Index=Yes
+Binary TOC=Yes
+Compatibility=1.1 or later
+Compiled file=Documentation.chm
+Default Window=MsdnHelp
+Default topic=LicenseKey.html
+Display compile progress=No
+Error log file=Documentation.log
+Full-text search=Yes
+Index file=Documentation.hhk
+Language=0x409 English (United States)
+Contents file=Documentation.hhc
+
+[WINDOWS]
+MsdnHelp="Documentation Help","Documentation.hhc","Documentation.hhk","LicenseKey.html","LicenseKey.html",,,,,0x62520,220,0x387e,[86,51,872,558],,,,,,,0
+
+[INFOTYPES]

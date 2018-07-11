@@ -5,6 +5,11 @@
         public const string AppName = "EasyBrailleEdit";
         public const string FacebookPageUrl = "https://www.facebook.com/easybraille/";
 
+        public const string UsersLicenseFileUrl = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/forblind/users.lic";
+        public const string UsersLicenseFileName = "users.lic";
+        public const string SerialNumberRegKey = "SerialNumber";
+        public const string CustomerNameRegKey = "Customer";
+
         public static class ProductBranches
         {
             public const string Community = "master";         // 社群版  
