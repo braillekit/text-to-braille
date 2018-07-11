@@ -61,8 +61,10 @@ namespace EasyBrailleEdit
             if (userLic != null)
             {                
                 bool isLicensed = await LicenseService.ValidateUserLicenseAsync(userLic);
-                if (isLicensed && AppGlobals.UserLicense.IsValid)
+                if (isLicensed)
                 {
+                    LicenseService.SaveUserLicenseData(userLic);
+                    AppGlobals.IsPrintingEnabled = true;
                     MsgBoxHelper.ShowInfo("註冊成功!");
                 }
                 else

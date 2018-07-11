@@ -16,7 +16,9 @@ GitHub 的 users.lic 檔案
 
 URL: 參見 EasyBrailleEdit.Common.Constant.UsersLicenseFileUrl 屬性。
 
-檔案格式與範例：
+檔案保存於使用者機器端時，會先以單純的 Base64 編碼之後才存至檔案。
+
+未編碼的檔案格式與範例：
 
 序號--------------- 有效期限-- 狀態 客戶名稱
 1111-2222-3333-4444 2018-02-20 0    台北市視障者家長協會

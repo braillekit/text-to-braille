@@ -33,6 +33,18 @@ namespace EasyBrailleEdit.License
             Log.Debug($"成功保存使用者序號 {userLic.SerialNumber} 至 {regKey.Name}");
         }
 
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+            return Convert.ToBase64String(plainTextBytes);
+        }
+
+        public static string Base64Decode(string base64EncodedData)
+        {
+            var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
+            return Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+
         public static async Task<bool> ValidateUserLicenseAsync(UserLicenseData userLic)
         {
             if (userLic == null || userLic.IsEmpty())
@@ -49,10 +61,11 @@ namespace EasyBrailleEdit.License
                 return false;
             }
 
-            var usersLicContent = File.ReadAllLines(usersLicFile, Encoding.UTF8);
+            var usersLicContent = File.ReadAllText(usersLicFile, Encoding.UTF8);
+            usersLicContent = Base64Decode(usersLicContent);
 
             // 比對序號
-            foreach (string line in usersLicContent)
+            foreach (string line in usersLicContent.Split('\n', '\r'))
             {
                 var items = line.Split(' ');
                 if (items.Length < 3)
@@ -82,8 +95,10 @@ namespace EasyBrailleEdit.License
                 {
                     using (var client = new HttpClient())
                     {
+                        // 網址後面加動態參數，以避免快取。
                         string url = Constant.UsersLicenseFileUrl + "?" + DateTime.Now.Ticks;
                         var content = await client.GetStringAsync(url);
+                        content = Base64Encode(content);
                         File.WriteAllText(usersLicFile, content, Encoding.UTF8);
                     }
                 }
