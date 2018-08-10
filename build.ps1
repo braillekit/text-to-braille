@@ -42,7 +42,7 @@ if (!$NoInit) {
     ExecSafe { & $NuGetFile install Nuke.MSBuildLocator -ExcludeVersion -OutputDirectory $TempDirectory -SolutionDirectory $SolutionDirectory }
 }
 
-$MSBuildFile = & "$TempDirectory\Nuke.MSBuildLocator\tools\Nuke.MSBuildLocator.exe"
+$MSBuildFile = & "$TempDirectory\Nuke.MSBuildLocator\tools\Nuke.MSBuildLocator.exe" "$TempDirectory\vswhere\tools\vswhere.exe"
 ExecSafe { & $MSBuildFile $BuildProjectFile }
 
 ###########################################################################
