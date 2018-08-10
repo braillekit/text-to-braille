@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "©öÂIÂùµø"
-#define MyAppVersion "3.2.1"
+#define MyAppVersion "3.12.1"
 #define MyAppPublisher "Michael Tsai"
 #define MyAppExeName "EasyBrailleEdit.exe"
 
@@ -32,7 +32,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "traditional_chinese"; MessagesFile: "compiler:Languages\ChineseTraditional.isl"
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Languages: traditional_chinese english
 
 [Files]
 Source: "Files\LICENSE.md"; DestDir: "{app}"; Flags: ignoreversion
