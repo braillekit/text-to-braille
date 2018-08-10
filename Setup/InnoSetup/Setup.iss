@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "©öÂIÂùµø"
-#define MyAppVersion "3.12.1"
+#define MyAppVersion "3.12.2"
 #define MyAppPublisher "Michael Tsai"
 #define MyAppExeName "EasyBrailleEdit.exe"
 
@@ -49,7 +49,6 @@ Source: "Files\x86\Phrase.phf"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Huanlin.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Huanlin.Windows.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\NChinese.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\x86\NChinese.Imm.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Castle.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Config.Net.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\CommandLine.dll"; DestDir: "{app}"; Flags: ignoreversion

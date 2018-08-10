@@ -8,15 +8,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using EasyBrailleEdit.Common;
 using Huanlin.Windows.Forms;
+using Microsoft.Win32;
 using Serilog;
 
 namespace EasyBrailleEdit.License
 {
     internal static class LicenseService
     {
+        private static RegistryKey GetAppRegKey()
+        {
+            return Registry.CurrentUser.CreateSubKey(@"Software\Michael Tsai\EasyBrailleEdit");
+        }
+
         public static UserLicenseData GetUserLicenseData()
         {
-            var regKey = Application.UserAppDataRegistry.CreateSubKey("EasyBrailleEdit");
+            var regKey = GetAppRegKey();
 
             var userLic = new UserLicenseData();
 
@@ -27,9 +33,9 @@ namespace EasyBrailleEdit.License
 
         public static void SaveUserLicenseData(UserLicenseData userLic)
         {
-            var regKey = Application.UserAppDataRegistry.CreateSubKey("EasyBrailleEdit");
-            regKey.SetValue(Constant.SerialNumberRegKey, userLic.SerialNumber, Microsoft.Win32.RegistryValueKind.String);
-            regKey.SetValue(Constant.CustomerNameRegKey, userLic.CustomerName, Microsoft.Win32.RegistryValueKind.String);
+            var regKey = GetAppRegKey();
+            regKey.SetValue(Constant.SerialNumberRegKey, userLic.SerialNumber, RegistryValueKind.String);
+            regKey.SetValue(Constant.CustomerNameRegKey, userLic.CustomerName, RegistryValueKind.String);
             Log.Debug($"成功保存使用者序號 {userLic.SerialNumber} 至 {regKey.Name}");
         }
 
