@@ -55,7 +55,7 @@ class Build : NukeBuild
             {
                 MSBuild(s => DefaultMSBuildCompile);
 
-                string outputDir = OutputDirectory / "net452";
+                string outputDir = OutputDirectory / "net471";
 
 //                if (GitRepository.Branch.Equals(Constant.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase))
 //                {
@@ -81,7 +81,7 @@ class Build : NukeBuild
             .Requires(() => GitVersion != null)
             .Executes(() =>
             {              
-                var outputDir = OutputDirectory / "net452";
+                var outputDir = OutputDirectory / "net471";
                 var updateDir = RootDirectory / "UpdateFiles";
 
                 Logger.Log($"From: {outputDir}");
