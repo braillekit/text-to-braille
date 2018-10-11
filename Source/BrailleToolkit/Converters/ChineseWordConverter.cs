@@ -231,6 +231,11 @@ namespace BrailleToolkit.Converters
             BrailleWord brWord;
             for (int wordIdx = 0; wordIdx < allPhCodes.Length; wordIdx++)
             {
+                if ((startIdx + wordIdx) >= brWordList.Count)
+                {
+                    // 防錯：防止 GetZhuyinWithPhraseTable 傳回多餘的空元素。
+                    break;
+                }
                 phCode = allPhCodes[wordIdx];
                 brWord = brWordList[startIdx + wordIdx];
                 if (Zhuyin.IsEqual(brWord.PhoneticCode, phCode))    // 如果跟原有的注音字根相同，就略過
