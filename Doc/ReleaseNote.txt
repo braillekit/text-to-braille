@@ -1,12 +1,10 @@
-﻿易點雙視 v3.12.4
+﻿易點雙視 v3.13.0
 
 作業環境需求
 
-  - Windows 7、Windows 8、Windows 10 （注意 Windows XP 已經不支援!）
-  - .NET Framework 3.5 和 .NET Framework 4.5.2 都必須安裝。
+  - Windows 7 SP1、Windows 8、Windows 10 （注意 Windows XP 已經不支援!）
+  - .NET Framework 3.5 和 .NET Framework 4.7.1 都必須安裝。
   
-注意：「易點雙視」為 32 位元應用程式，於 64 位元作業系統可能無法正常執行轉點字的功能。
-
 安裝程序
 
 1.確保已經安裝了所有最新的 Windows Updates。
@@ -17,9 +15,9 @@
 
   下載後直接開啟檔案即可安裝。
 
-3.安裝 .NET Framework 4.5.2 可轉散發套件。
+3.安裝 .NET Framework 4.7.1 可轉散發套件。
   可至微軟網站下載，網址如下：  
-  https://www.microsoft.com/zh-TW/download/details.aspx?id=42642
+  http://go.microsoft.com/fwlink/?linkid=852092
   
   下載後直接開啟檔案即可安裝。
   

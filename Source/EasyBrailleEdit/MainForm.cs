@@ -275,6 +275,12 @@ namespace EasyBrailleEdit
         /// </summary>
         private void ConvertAndShowEditor()
         {
+            if (m_ConvertDialog == null)
+            {
+                MsgBoxHelper.ShowInfo("應用程式尚未載入完成，請稍後再執行此功能。");
+                return;
+            }
+
             if (m_ConvertDialog.ShowDialog() != DialogResult.OK)
             {
                 return;
