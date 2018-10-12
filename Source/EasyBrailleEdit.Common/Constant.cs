@@ -5,6 +5,11 @@
         public const string AppName = "EasyBrailleEdit";
         public const string FacebookPageUrl = "https://www.facebook.com/easybraille/";
 
+        public const string UsersLicenseFileUrl = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/forblind/users.lic";
+        public const string UsersLicenseFileName = "users.lic";
+        public const string SerialNumberRegKey = "SerialNumber";
+        public const string CustomerNameRegKey = "Customer";
+
         public static class ProductBranches
         {
             public const string Community = "master";         // 社群版  
@@ -14,6 +19,9 @@
         // 預設一行最大方數
         public const int DefaultCellsPerLine = 40;
         public const int DefaultLinesPerPage = 25;
+
+        // 雙視編輯器的預設最大可復原操作數量
+        public const int DefaultMaxUndoLevel = 10;
 
         public static class Files
         {
@@ -49,6 +57,10 @@
         public const double DefaultPrintTextLineHeight = 40.0975;  // 明眼字列高（文字高度+列距）
         public const double DefaultPrintTextLineSpace = 20.9;   // 預設明眼字列距
 
-        public const string DefaultAutoUpdateFilesUrl = "https://raw.githubusercontent.com/huanlin/EasyBrailleEdit/master/UpdateFiles/";
+        public const string DefaultAutoUpdateFilesUrl = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/forblind/UpdateFiles/";
+
+        // 與轉點字規則有關的常數
+        public const string DefaultNoSpaceAfterTheseCharacters = "「『“‘…";
+        public const string DefaultNoSpaceBeforeTheseCharacters = "，。？！：；、…」』”’）";
     }
 }

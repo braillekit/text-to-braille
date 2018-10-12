@@ -49,7 +49,10 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSymbolSingleQuoteEng = new System.Windows.Forms.ToolStripButton();
             this.btnSymboleDoubleQuoteEng = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolSingleQuote = new System.Windows.Forms.ToolStripButton();
+            this.btnSymbolQuotationMarks = new System.Windows.Forms.ToolStripDropDownButton();
+            this.btnSymbolQuot1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSymbolQuot2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSymbolQuot3 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSymbolDoubleQuote = new System.Windows.Forms.ToolStripButton();
             this.btnSymbolRoundBracket = new System.Windows.Forms.ToolStripButton();
             this.btnSymbolSquareBracket = new System.Windows.Forms.ToolStripButton();
@@ -64,7 +67,7 @@
             this.btnSymbolMathO = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSymbolTemperature = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.toolBarSymbol2 = new System.Windows.Forms.ToolStrip();
+            this.toolBarMath = new System.Windows.Forms.ToolStrip();
             this.btnMathTag = new System.Windows.Forms.ToolStripButton();
             this.btnSymbolMul = new System.Windows.Forms.ToolStripButton();
             this.btnSymbolDiv = new System.Windows.Forms.ToolStripButton();
@@ -88,8 +91,15 @@
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnFineTuning = new System.Windows.Forms.ToolStripDropDownButton();
-            this.btnTrim = new System.Windows.Forms.ToolStripMenuItem();
+            this.doprdownBtnLines = new System.Windows.Forms.ToolStripDropDownButton();
+            this.btnTableMiddleLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTableTopLine1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTableBottomLine1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTableTopLine2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTableBottomLine2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.分隔線135246ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnNoDigitSymbol = new System.Windows.Forms.ToolStripButton();
             this.btnQuotes = new System.Windows.Forms.ToolStripDropDownButton();
             this.btnSymbolFullDots = new System.Windows.Forms.ToolStripButton();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -101,7 +111,10 @@
             this.txtBraille = new System.Windows.Forms.TextBox();
             this.lblErrorTitle = new System.Windows.Forms.Label();
             this.toolBarSymbol3 = new System.Windows.Forms.ToolStrip();
+            this.btnSymbolDocTitle = new System.Windows.Forms.ToolStripButton();
+            this.btnSymbolOrgPageNum = new System.Windows.Forms.ToolStripButton();
             this.btnTagBrailleComment = new System.Windows.Forms.ToolStripButton();
+            this.btnSymbolDel = new System.Windows.Forms.ToolStripButton();
             this.btnSymbolEndTags = new System.Windows.Forms.ToolStripDropDownButton();
             this.btnEndTag1 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnEndTag2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,24 +131,20 @@
             this.btnSymbolBookName = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSymbolTime = new System.Windows.Forms.ToolStripButton();
+            this.btnRatio = new System.Windows.Forms.ToolStripButton();
             this.btnSymbolCoord = new System.Windows.Forms.ToolStripButton();
             this.btnFraction = new System.Windows.Forms.ToolStripButton();
+            this.btnUrl = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
-            this.doprdownBtnTableLines = new System.Windows.Forms.ToolStripDropDownButton();
-            this.btnTableTopLine1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnTableBottomLine1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnTableTopLine2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnTableBottomLine2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnSymbolDocTitle = new System.Windows.Forms.ToolStripButton();
             this.toolBarSymbol1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.toolBarSymbol2.SuspendLayout();
+            this.toolBarMath.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolBarSymbol3.SuspendLayout();
@@ -144,7 +153,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(961, 14);
+            this.btnOk.Location = new System.Drawing.Point(990, 14);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(95, 34);
             this.btnOk.TabIndex = 5;
@@ -156,7 +165,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(1072, 14);
+            this.btnCancel.Location = new System.Drawing.Point(1101, 14);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(95, 34);
             this.btnCancel.TabIndex = 6;
@@ -185,7 +194,7 @@
             this.toolStripSeparator9,
             this.btnSymbolSingleQuoteEng,
             this.btnSymboleDoubleQuoteEng,
-            this.btnSymbolSingleQuote,
+            this.btnSymbolQuotationMarks,
             this.btnSymbolDoubleQuote,
             this.btnSymbolRoundBracket,
             this.btnSymbolSquareBracket,
@@ -201,7 +210,7 @@
             this.btnSymbolTemperature});
             this.toolBarSymbol1.Location = new System.Drawing.Point(0, 0);
             this.toolBarSymbol1.Name = "toolBarSymbol1";
-            this.toolBarSymbol1.Size = new System.Drawing.Size(1188, 26);
+            this.toolBarSymbol1.Size = new System.Drawing.Size(1217, 26);
             this.toolBarSymbol1.TabIndex = 15;
             this.toolBarSymbol1.Text = "toolStrip2";
             this.toolBarSymbol1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
@@ -359,17 +368,53 @@
             this.btnSymboleDoubleQuoteEng.Text = "“ ”";
             this.btnSymboleDoubleQuoteEng.ToolTipText = "雙引號";
             // 
-            // btnSymbolSingleQuote
+            // btnSymbolQuotationMarks
             // 
-            this.btnSymbolSingleQuote.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolSingleQuote.Font = new System.Drawing.Font("PMingLiU", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnSymbolSingleQuote.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolSingleQuote.Image")));
-            this.btnSymbolSingleQuote.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolSingleQuote.Name = "btnSymbolSingleQuote";
-            this.btnSymbolSingleQuote.Size = new System.Drawing.Size(46, 23);
-            this.btnSymbolSingleQuote.Tag = "「|」";
-            this.btnSymbolSingleQuote.Text = "「」";
-            this.btnSymbolSingleQuote.ToolTipText = "單引號";
+            this.btnSymbolQuotationMarks.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSymbolQuotationMarks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSymbolQuot1,
+            this.btnSymbolQuot2,
+            this.btnSymbolQuot3});
+            this.btnSymbolQuotationMarks.Font = new System.Drawing.Font("PMingLiU", 11.25F);
+            this.btnSymbolQuotationMarks.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuotationMarks.Image")));
+            this.btnSymbolQuotationMarks.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSymbolQuotationMarks.Name = "btnSymbolQuotationMarks";
+            this.btnSymbolQuotationMarks.Size = new System.Drawing.Size(61, 23);
+            this.btnSymbolQuotationMarks.Tag = "NA";
+            this.btnSymbolQuotationMarks.Text = "「」";
+            this.btnSymbolQuotationMarks.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnSymbolQuotationMarks.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
+            // 
+            // btnSymbolQuot1
+            // 
+            this.btnSymbolQuot1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSymbolQuot1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSymbolQuot1.Name = "btnSymbolQuot1";
+            this.btnSymbolQuot1.Size = new System.Drawing.Size(260, 38);
+            this.btnSymbolQuot1.Tag = "「|」";
+            this.btnSymbolQuot1.Text = "一般引號「」";
+            this.btnSymbolQuot1.ToolTipText = "一般中文引號，若以 <數學> 區塊包住，點字會不同。";
+            // 
+            // btnSymbolQuot2
+            // 
+            this.btnSymbolQuot2.Font = new System.Drawing.Font("PMingLiU", 11.25F);
+            this.btnSymbolQuot2.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuot2.Image")));
+            this.btnSymbolQuot2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSymbolQuot2.Name = "btnSymbolQuot2";
+            this.btnSymbolQuot2.Size = new System.Drawing.Size(260, 38);
+            this.btnSymbolQuot2.Tag = "<引號一>|</引號一>";
+            this.btnSymbolQuot2.Text = "特殊引號一";
+            this.btnSymbolQuot2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            // 
+            // btnSymbolQuot3
+            // 
+            this.btnSymbolQuot3.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuot3.Image")));
+            this.btnSymbolQuot3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSymbolQuot3.Name = "btnSymbolQuot3";
+            this.btnSymbolQuot3.Size = new System.Drawing.Size(260, 38);
+            this.btnSymbolQuot3.Tag = "<引號二>|</引號二>";
+            this.btnSymbolQuot3.Text = "特殊引號二";
+            this.btnSymbolQuot3.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
             // btnSymbolDoubleQuote
             // 
@@ -489,17 +534,17 @@
             this.panel2.Controls.Add(this.btnOk);
             this.panel2.Controls.Add(this.btnCancel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 501);
+            this.panel2.Location = new System.Drawing.Point(0, 663);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1188, 71);
+            this.panel2.Size = new System.Drawing.Size(1217, 71);
             this.panel2.TabIndex = 0;
             // 
-            // toolBarSymbol2
+            // toolBarMath
             // 
-            this.toolBarSymbol2.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.toolBarSymbol2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolBarSymbol2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolBarSymbol2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolBarMath.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.toolBarMath.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolBarMath.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolBarMath.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnMathTag,
             this.btnSymbolMul,
             this.btnSymbolDiv,
@@ -515,13 +560,16 @@
             this.btnSymbolMathVertical,
             this.btnSymbolArrows,
             this.toolStripSeparator15,
-            this.btnFineTuning,
+            this.doprdownBtnLines,
+            this.toolStripSeparator1,
+            this.btnNoDigitSymbol,
             this.btnQuotes});
-            this.toolBarSymbol2.Location = new System.Drawing.Point(0, 26);
-            this.toolBarSymbol2.Name = "toolBarSymbol2";
-            this.toolBarSymbol2.Size = new System.Drawing.Size(1188, 26);
-            this.toolBarSymbol2.TabIndex = 18;
-            this.toolBarSymbol2.Text = "toolStrip3";
+            this.toolBarMath.Location = new System.Drawing.Point(0, 26);
+            this.toolBarMath.Name = "toolBarMath";
+            this.toolBarMath.Size = new System.Drawing.Size(1217, 26);
+            this.toolBarMath.TabIndex = 18;
+            this.toolBarMath.Text = "toolStrip3";
+            this.toolBarMath.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarMath_ItemClicked);
             // 
             // btnMathTag
             // 
@@ -665,54 +713,56 @@
             this.btnSymbolArrows.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSymbolArrows.Name = "btnSymbolArrows";
             this.btnSymbolArrows.Size = new System.Drawing.Size(61, 23);
+            this.btnSymbolArrows.Tag = "NA";
             this.btnSymbolArrows.Text = "箭頭";
+            this.btnSymbolArrows.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem4.Text = "↑";
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem5.Text = "↓";
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem3.Text = "←";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem2.Text = "→";
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem6.Text = "↖";
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem7.Text = "↗";
             // 
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem8.Text = "↙";
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(103, 26);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(216, 26);
             this.toolStripMenuItem9.Text = "↘";
             // 
             // toolStripSeparator15
@@ -720,24 +770,81 @@
             this.toolStripSeparator15.Name = "toolStripSeparator15";
             this.toolStripSeparator15.Size = new System.Drawing.Size(6, 26);
             // 
-            // btnFineTuning
+            // doprdownBtnLines
             // 
-            this.btnFineTuning.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnFineTuning.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnTrim});
-            this.btnFineTuning.Image = ((System.Drawing.Image)(resources.GetObject("btnFineTuning.Image")));
-            this.btnFineTuning.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnFineTuning.Name = "btnFineTuning";
-            this.btnFineTuning.Size = new System.Drawing.Size(61, 23);
-            this.btnFineTuning.Text = "微調";
+            this.doprdownBtnLines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.doprdownBtnLines.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnTableMiddleLine,
+            this.btnTableTopLine1,
+            this.btnTableBottomLine1,
+            this.btnTableTopLine2,
+            this.btnTableBottomLine2,
+            this.分隔線135246ToolStripMenuItem});
+            this.doprdownBtnLines.Image = ((System.Drawing.Image)(resources.GetObject("doprdownBtnLines.Image")));
+            this.doprdownBtnLines.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.doprdownBtnLines.Name = "doprdownBtnLines";
+            this.doprdownBtnLines.Size = new System.Drawing.Size(61, 23);
+            this.doprdownBtnLines.Tag = "NA";
+            this.doprdownBtnLines.Text = "橫線";
+            this.doprdownBtnLines.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
             // 
-            // btnTrim
+            // btnTableMiddleLine
             // 
-            this.btnTrim.Enabled = false;
-            this.btnTrim.Name = "btnTrim";
-            this.btnTrim.Size = new System.Drawing.Size(160, 26);
-            this.btnTrim.Tag = "<去空>|</去空>";
-            this.btnTrim.Text = "去除空方";
+            this.btnTableMiddleLine.Name = "btnTableMiddleLine";
+            this.btnTableMiddleLine.Size = new System.Drawing.Size(289, 26);
+            this.btnTableMiddleLine.Tag = "<表格>────────────────────</表格>\\n";
+            this.btnTableMiddleLine.Text = "表格橫槓 (20方)";
+            // 
+            // btnTableTopLine1
+            // 
+            this.btnTableTopLine1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnTableTopLine1.Name = "btnTableTopLine1";
+            this.btnTableTopLine1.Size = new System.Drawing.Size(289, 26);
+            this.btnTableTopLine1.Tag = "<上表格線1></上表格線1>\\n";
+            this.btnTableTopLine1.Text = "上表格線1（2356點）";
+            // 
+            // btnTableBottomLine1
+            // 
+            this.btnTableBottomLine1.Name = "btnTableBottomLine1";
+            this.btnTableBottomLine1.Size = new System.Drawing.Size(289, 26);
+            this.btnTableBottomLine1.Tag = "<下表格線1></下表格線1>\\n";
+            this.btnTableBottomLine1.Text = "下表格線1（1245點）";
+            // 
+            // btnTableTopLine2
+            // 
+            this.btnTableTopLine2.Name = "btnTableTopLine2";
+            this.btnTableTopLine2.Size = new System.Drawing.Size(289, 26);
+            this.btnTableTopLine2.Tag = "<上表格線2></上表格線2>\\n";
+            this.btnTableTopLine2.Text = "上表格線2（2356+1245）";
+            // 
+            // btnTableBottomLine2
+            // 
+            this.btnTableBottomLine2.Name = "btnTableBottomLine2";
+            this.btnTableBottomLine2.Size = new System.Drawing.Size(289, 26);
+            this.btnTableBottomLine2.Tag = "<下表格線2></下表格線2>\\n";
+            this.btnTableBottomLine2.Text = "下表格線2（1245+2356）";
+            // 
+            // 分隔線135246ToolStripMenuItem
+            // 
+            this.分隔線135246ToolStripMenuItem.Name = "分隔線135246ToolStripMenuItem";
+            this.分隔線135246ToolStripMenuItem.Size = new System.Drawing.Size(289, 26);
+            this.分隔線135246ToolStripMenuItem.Tag = "<分隔線></分隔線>\\n";
+            this.分隔線135246ToolStripMenuItem.Text = "分隔線（135+246）";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 26);
+            // 
+            // btnNoDigitSymbol
+            // 
+            this.btnNoDigitSymbol.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnNoDigitSymbol.Image = ((System.Drawing.Image)(resources.GetObject("btnNoDigitSymbol.Image")));
+            this.btnNoDigitSymbol.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNoDigitSymbol.Name = "btnNoDigitSymbol";
+            this.btnNoDigitSymbol.Size = new System.Drawing.Size(70, 23);
+            this.btnNoDigitSymbol.Tag = "<無數符>|</無數符>";
+            this.btnNoDigitSymbol.Text = "無數符";
             // 
             // btnQuotes
             // 
@@ -748,8 +855,10 @@
             this.btnQuotes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnQuotes.Name = "btnQuotes";
             this.btnQuotes.Size = new System.Drawing.Size(99, 23);
+            this.btnQuotes.Tag = "NA";
             this.btnQuotes.Text = "其他符號";
             this.btnQuotes.ToolTipText = "其他符號";
+            this.btnQuotes.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
             // 
             // btnSymbolFullDots
             // 
@@ -769,7 +878,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 52);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1188, 449);
+            this.panel3.Size = new System.Drawing.Size(1217, 611);
             this.panel3.TabIndex = 19;
             // 
             // panel1
@@ -782,9 +891,9 @@
             this.panel1.Controls.Add(this.txtBraille);
             this.panel1.Controls.Add(this.lblErrorTitle);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(100, 0);
+            this.panel1.Location = new System.Drawing.Point(90, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1088, 449);
+            this.panel1.Size = new System.Drawing.Size(1127, 611);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -854,7 +963,9 @@
             this.toolBarSymbol3.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolBarSymbol3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSymbolDocTitle,
+            this.btnSymbolOrgPageNum,
             this.btnTagBrailleComment,
+            this.btnSymbolDel,
             this.btnSymbolEndTags,
             this.toolStripSeparator17,
             this.btnSymbolNumber,
@@ -864,22 +975,43 @@
             this.btnSymbolBookName,
             this.toolStripSeparator12,
             this.btnSymbolTime,
+            this.btnRatio,
             this.btnSymbolCoord,
             this.btnFraction,
+            this.btnUrl,
             this.toolStripSeparator13,
             this.toolStripButton2,
             this.toolStripButton3,
             this.toolStripSeparator16,
             this.toolStripButton1,
-            this.toolStripSeparator18,
-            this.doprdownBtnTableLines});
+            this.toolStripSeparator18});
             this.toolBarSymbol3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.toolBarSymbol3.Location = new System.Drawing.Point(0, 0);
             this.toolBarSymbol3.Name = "toolBarSymbol3";
-            this.toolBarSymbol3.Size = new System.Drawing.Size(100, 449);
+            this.toolBarSymbol3.Size = new System.Drawing.Size(90, 611);
             this.toolBarSymbol3.TabIndex = 15;
             this.toolBarSymbol3.Text = "toolStrip4";
             this.toolBarSymbol3.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
+            // 
+            // btnSymbolDocTitle
+            // 
+            this.btnSymbolDocTitle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSymbolDocTitle.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDocTitle.Image")));
+            this.btnSymbolDocTitle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSymbolDocTitle.Name = "btnSymbolDocTitle";
+            this.btnSymbolDocTitle.Size = new System.Drawing.Size(87, 23);
+            this.btnSymbolDocTitle.Tag = "<標題>|</標題>";
+            this.btnSymbolDocTitle.Text = "頁標題";
+            // 
+            // btnSymbolOrgPageNum
+            // 
+            this.btnSymbolOrgPageNum.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSymbolOrgPageNum.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolOrgPageNum.Image")));
+            this.btnSymbolOrgPageNum.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSymbolOrgPageNum.Name = "btnSymbolOrgPageNum";
+            this.btnSymbolOrgPageNum.Size = new System.Drawing.Size(87, 23);
+            this.btnSymbolOrgPageNum.Tag = "<P>|</P>";
+            this.btnSymbolOrgPageNum.Text = "原書頁碼";
             // 
             // btnTagBrailleComment
             // 
@@ -887,10 +1019,21 @@
             this.btnTagBrailleComment.Image = ((System.Drawing.Image)(resources.GetObject("btnTagBrailleComment.Image")));
             this.btnTagBrailleComment.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTagBrailleComment.Name = "btnTagBrailleComment";
-            this.btnTagBrailleComment.Size = new System.Drawing.Size(97, 23);
+            this.btnTagBrailleComment.Size = new System.Drawing.Size(87, 23);
             this.btnTagBrailleComment.Tag = "<點譯者註>|</點譯者註>";
             this.btnTagBrailleComment.Text = "點譯者註";
             this.btnTagBrailleComment.ToolTipText = "點譯者注釋";
+            // 
+            // btnSymbolDel
+            // 
+            this.btnSymbolDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSymbolDel.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDel.Image")));
+            this.btnSymbolDel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSymbolDel.Name = "btnSymbolDel";
+            this.btnSymbolDel.Size = new System.Drawing.Size(87, 23);
+            this.btnSymbolDel.Tag = "<刪>|</刪>";
+            this.btnSymbolDel.Text = "刪除文字";
+            this.btnSymbolDel.ToolTipText = "用來表示一段刪除的文字";
             // 
             // btnSymbolEndTags
             // 
@@ -902,7 +1045,7 @@
             this.btnSymbolEndTags.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolEndTags.Image")));
             this.btnSymbolEndTags.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSymbolEndTags.Name = "btnSymbolEndTags";
-            this.btnSymbolEndTags.Size = new System.Drawing.Size(97, 23);
+            this.btnSymbolEndTags.Size = new System.Drawing.Size(87, 23);
             this.btnSymbolEndTags.Tag = "NA";
             this.btnSymbolEndTags.Text = "結束";
             this.btnSymbolEndTags.ToolTipText = "表示段落結束的標籤";
@@ -932,7 +1075,7 @@
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(97, 6);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(87, 6);
             // 
             // btnSymbolNumber
             // 
@@ -940,7 +1083,7 @@
             this.btnSymbolNumber.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolNumber.Image")));
             this.btnSymbolNumber.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSymbolNumber.Name = "btnSymbolNumber";
-            this.btnSymbolNumber.Size = new System.Drawing.Size(97, 23);
+            this.btnSymbolNumber.Size = new System.Drawing.Size(87, 23);
             this.btnSymbolNumber.Tag = "#";
             this.btnSymbolNumber.Text = "編號";
             this.btnSymbolNumber.ToolTipText = "數字編號";
@@ -951,7 +1094,7 @@
             this.btnUpperPosition.Image = ((System.Drawing.Image)(resources.GetObject("btnUpperPosition.Image")));
             this.btnUpperPosition.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnUpperPosition.Name = "btnUpperPosition";
-            this.btnUpperPosition.Size = new System.Drawing.Size(97, 23);
+            this.btnUpperPosition.Size = new System.Drawing.Size(87, 23);
             this.btnUpperPosition.Tag = "<上位點>|</上位點>";
             this.btnUpperPosition.Text = "上位點";
             // 
@@ -966,7 +1109,7 @@
             this.btnChoiceDropdownList.Image = ((System.Drawing.Image)(resources.GetObject("btnChoiceDropdownList.Image")));
             this.btnChoiceDropdownList.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnChoiceDropdownList.Name = "btnChoiceDropdownList";
-            this.btnChoiceDropdownList.Size = new System.Drawing.Size(97, 23);
+            this.btnChoiceDropdownList.Size = new System.Drawing.Size(87, 23);
             this.btnChoiceDropdownList.Tag = "NA";
             this.btnChoiceDropdownList.Text = "選項";
             this.btnChoiceDropdownList.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
@@ -1005,7 +1148,7 @@
             this.btnSymbolName.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolName.Image")));
             this.btnSymbolName.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSymbolName.Name = "btnSymbolName";
-            this.btnSymbolName.Size = new System.Drawing.Size(97, 23);
+            this.btnSymbolName.Size = new System.Drawing.Size(87, 23);
             this.btnSymbolName.Tag = "<私名號>|</私名號>";
             this.btnSymbolName.Text = "私名號";
             this.btnSymbolName.ToolTipText = "私名號";
@@ -1016,7 +1159,7 @@
             this.btnSymbolBookName.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolBookName.Image")));
             this.btnSymbolBookName.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSymbolBookName.Name = "btnSymbolBookName";
-            this.btnSymbolBookName.Size = new System.Drawing.Size(97, 23);
+            this.btnSymbolBookName.Size = new System.Drawing.Size(87, 23);
             this.btnSymbolBookName.Tag = "<書名號>|</書名號>";
             this.btnSymbolBookName.Text = "書名號";
             this.btnSymbolBookName.ToolTipText = "書名號 (﹏)";
@@ -1024,7 +1167,7 @@
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(97, 6);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(87, 6);
             // 
             // btnSymbolTime
             // 
@@ -1032,10 +1175,21 @@
             this.btnSymbolTime.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolTime.Image")));
             this.btnSymbolTime.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSymbolTime.Name = "btnSymbolTime";
-            this.btnSymbolTime.Size = new System.Drawing.Size(97, 23);
+            this.btnSymbolTime.Size = new System.Drawing.Size(87, 23);
             this.btnSymbolTime.Tag = "<時間>|</時間>";
             this.btnSymbolTime.Text = "時間";
             this.btnSymbolTime.ToolTipText = "用來表示時間";
+            // 
+            // btnRatio
+            // 
+            this.btnRatio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnRatio.Image = ((System.Drawing.Image)(resources.GetObject("btnRatio.Image")));
+            this.btnRatio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRatio.Name = "btnRatio";
+            this.btnRatio.Size = new System.Drawing.Size(87, 23);
+            this.btnRatio.Tag = "1:1";
+            this.btnRatio.Text = "比例";
+            this.btnRatio.ToolTipText = "比值符號就是英文半形冒號";
             // 
             // btnSymbolCoord
             // 
@@ -1043,7 +1197,7 @@
             this.btnSymbolCoord.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolCoord.Image")));
             this.btnSymbolCoord.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSymbolCoord.Name = "btnSymbolCoord";
-            this.btnSymbolCoord.Size = new System.Drawing.Size(97, 23);
+            this.btnSymbolCoord.Size = new System.Drawing.Size(87, 23);
             this.btnSymbolCoord.Tag = "<座標>(|)</座標>";
             this.btnSymbolCoord.Text = "座標";
             this.btnSymbolCoord.ToolTipText = "範例: <座標>(1,2)</座標>";
@@ -1054,15 +1208,25 @@
             this.btnFraction.Image = ((System.Drawing.Image)(resources.GetObject("btnFraction.Image")));
             this.btnFraction.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnFraction.Name = "btnFraction";
-            this.btnFraction.Size = new System.Drawing.Size(97, 23);
+            this.btnFraction.Size = new System.Drawing.Size(87, 23);
             this.btnFraction.Tag = "<分數>|</分數>";
             this.btnFraction.Text = "分數";
             this.btnFraction.ToolTipText = "範例: 1&2/3 代表一又二分之三";
             // 
+            // btnUrl
+            // 
+            this.btnUrl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnUrl.Image = ((System.Drawing.Image)(resources.GetObject("btnUrl.Image")));
+            this.btnUrl.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnUrl.Name = "btnUrl";
+            this.btnUrl.Size = new System.Drawing.Size(87, 23);
+            this.btnUrl.Tag = "<URL>|</URL>";
+            this.btnUrl.Text = "網址";
+            // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(97, 6);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(87, 6);
             // 
             // toolStripButton2
             // 
@@ -1070,7 +1234,7 @@
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(97, 23);
+            this.toolStripButton2.Size = new System.Drawing.Size(87, 23);
             this.toolStripButton2.Tag = "[↗]";
             this.toolStripButton2.Text = "上升語調";
             // 
@@ -1080,14 +1244,14 @@
             this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(97, 23);
+            this.toolStripButton3.Size = new System.Drawing.Size(87, 23);
             this.toolStripButton3.Tag = "[↘]";
             this.toolStripButton3.Text = "下降語調";
             // 
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(97, 6);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(87, 6);
             // 
             // toolStripButton1
             // 
@@ -1095,69 +1259,14 @@
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(97, 23);
+            this.toolStripButton1.Size = new System.Drawing.Size(87, 23);
             this.toolStripButton1.Tag = "Phonetic";
             this.toolStripButton1.Text = "音標";
             // 
             // toolStripSeparator18
             // 
             this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(97, 6);
-            // 
-            // doprdownBtnTableLines
-            // 
-            this.doprdownBtnTableLines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.doprdownBtnTableLines.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnTableTopLine1,
-            this.btnTableBottomLine1,
-            this.btnTableTopLine2,
-            this.btnTableBottomLine2});
-            this.doprdownBtnTableLines.Image = ((System.Drawing.Image)(resources.GetObject("doprdownBtnTableLines.Image")));
-            this.doprdownBtnTableLines.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.doprdownBtnTableLines.Name = "doprdownBtnTableLines";
-            this.doprdownBtnTableLines.Size = new System.Drawing.Size(97, 23);
-            this.doprdownBtnTableLines.Tag = "NA";
-            this.doprdownBtnTableLines.Text = "表格橫線";
-            this.doprdownBtnTableLines.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
-            // 
-            // btnTableTopLine1
-            // 
-            this.btnTableTopLine1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnTableTopLine1.Name = "btnTableTopLine1";
-            this.btnTableTopLine1.Size = new System.Drawing.Size(216, 26);
-            this.btnTableTopLine1.Tag = "<上表格線1></上表格線1>\\n";
-            this.btnTableTopLine1.Text = "上表格線1";
-            // 
-            // btnTableBottomLine1
-            // 
-            this.btnTableBottomLine1.Name = "btnTableBottomLine1";
-            this.btnTableBottomLine1.Size = new System.Drawing.Size(216, 26);
-            this.btnTableBottomLine1.Tag = "<下表格線1></下表格線1>\\n";
-            this.btnTableBottomLine1.Text = "下表格線1";
-            // 
-            // btnTableTopLine2
-            // 
-            this.btnTableTopLine2.Name = "btnTableTopLine2";
-            this.btnTableTopLine2.Size = new System.Drawing.Size(216, 26);
-            this.btnTableTopLine2.Tag = "<上表格線2></上表格線2>\\n";
-            this.btnTableTopLine2.Text = "上表格線2";
-            // 
-            // btnTableBottomLine2
-            // 
-            this.btnTableBottomLine2.Name = "btnTableBottomLine2";
-            this.btnTableBottomLine2.Size = new System.Drawing.Size(216, 26);
-            this.btnTableBottomLine2.Tag = "<下表格線2></下表格線2>\\n";
-            this.btnTableBottomLine2.Text = "下表格線2";
-            // 
-            // btnSymbolDocTitle
-            // 
-            this.btnSymbolDocTitle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolDocTitle.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDocTitle.Image")));
-            this.btnSymbolDocTitle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolDocTitle.Name = "btnSymbolDocTitle";
-            this.btnSymbolDocTitle.Size = new System.Drawing.Size(97, 23);
-            this.btnSymbolDocTitle.Tag = "<標題>|</標題>";
-            this.btnSymbolDocTitle.Text = "頁標題";
+            this.toolStripSeparator18.Size = new System.Drawing.Size(87, 6);
             // 
             // InsertTextForm
             // 
@@ -1165,9 +1274,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1188, 572);
+            this.ClientSize = new System.Drawing.Size(1217, 734);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.toolBarSymbol2);
+            this.Controls.Add(this.toolBarMath);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolBarSymbol1);
             this.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -1180,8 +1289,8 @@
             this.toolBarSymbol1.ResumeLayout(false);
             this.toolBarSymbol1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.toolBarSymbol2.ResumeLayout(false);
-            this.toolBarSymbol2.PerformLayout();
+            this.toolBarMath.ResumeLayout(false);
+            this.toolBarMath.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -1213,7 +1322,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripButton btnSymbolSingleQuoteEng;
         private System.Windows.Forms.ToolStripButton btnSymboleDoubleQuoteEng;
-        private System.Windows.Forms.ToolStripButton btnSymbolSingleQuote;
         private System.Windows.Forms.ToolStripButton btnSymbolDoubleQuote;
         private System.Windows.Forms.ToolStripButton btnSymbolRoundBracket;
         private System.Windows.Forms.ToolStripButton btnSymbolSquareBracket;
@@ -1228,7 +1336,7 @@
         private System.Windows.Forms.ToolStripMenuItem btnSymbolMathO;
         private System.Windows.Forms.ToolStripMenuItem btnSymbolTemperature;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ToolStrip toolBarSymbol2;
+        private System.Windows.Forms.ToolStrip toolBarMath;
         private System.Windows.Forms.ToolStripButton btnMathTag;
         private System.Windows.Forms.ToolStripButton btnSymbolMul;
         private System.Windows.Forms.ToolStripButton btnSymbolDiv;
@@ -1252,8 +1360,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
-        private System.Windows.Forms.ToolStripDropDownButton btnFineTuning;
-        private System.Windows.Forms.ToolStripMenuItem btnTrim;
         private System.Windows.Forms.ToolStripDropDownButton btnQuotes;
         private System.Windows.Forms.ToolStripButton btnSymbolFullDots;
         private System.Windows.Forms.Panel panel3;
@@ -1290,12 +1396,24 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
-        private System.Windows.Forms.ToolStripDropDownButton doprdownBtnTableLines;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripButton btnSymbolDocTitle;
+        private System.Windows.Forms.ToolStripButton btnRatio;
+        private System.Windows.Forms.ToolStripDropDownButton btnSymbolQuotationMarks;
+        private System.Windows.Forms.ToolStripMenuItem btnSymbolQuot1;
+        private System.Windows.Forms.ToolStripMenuItem btnSymbolQuot2;
+        private System.Windows.Forms.ToolStripMenuItem btnSymbolQuot3;
+        private System.Windows.Forms.ToolStripButton btnSymbolOrgPageNum;
+        private System.Windows.Forms.ToolStripButton btnSymbolDel;
+        private System.Windows.Forms.ToolStripButton btnUrl;
+        private System.Windows.Forms.ToolStripDropDownButton doprdownBtnLines;
+        private System.Windows.Forms.ToolStripMenuItem btnTableMiddleLine;
         private System.Windows.Forms.ToolStripMenuItem btnTableTopLine1;
         private System.Windows.Forms.ToolStripMenuItem btnTableBottomLine1;
         private System.Windows.Forms.ToolStripMenuItem btnTableTopLine2;
         private System.Windows.Forms.ToolStripMenuItem btnTableBottomLine2;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ToolStripButton btnSymbolDocTitle;
+        private System.Windows.Forms.ToolStripMenuItem 分隔線135246ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btnNoDigitSymbol;
     }
 }

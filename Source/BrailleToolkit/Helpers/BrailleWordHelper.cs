@@ -20,7 +20,7 @@ namespace BrailleToolkit.Helpers
             return (BrailleGlobals.ChinesePunctuations.IndexOf(brWord.Text) >= 0);
         }
 
-        public static string ToString(this List<BrailleWord> brWordList)
+        public static string ToString(List<BrailleWord> brWordList)
         {
             var sb = new StringBuilder();
             foreach (var brWord in brWordList)
@@ -38,12 +38,56 @@ namespace BrailleToolkit.Helpers
             return sb.ToString();
         }
 
-        public static string ToDotNumberString(this List<BrailleWord> brWordList)
+        public static string ToTextString(List<BrailleWord> brWordList)
+        {
+            var sb = new StringBuilder();
+            foreach (var brWord in brWordList)
+            {
+                sb.Append(brWord.Text);
+            }
+            return sb.ToString();
+        }
+
+        public static string ToDotNumberString(List<BrailleWord> brWordList)
         {
             var sb = new StringBuilder();
             foreach (var brWord in brWordList)
             {
                 sb.Append(brWord.ToPositionNumberString(useParenthesis: true));
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 注意：此函式其實無法完全呈現原始的明眼字，因為有些標籤是在轉成點字之後就被刪除了。
+        /// </summary>
+        /// <param name="words"></param>
+        /// <returns></returns>
+        public static string ToOriginalTextString(List<BrailleWord> words)
+        {
+            var sb = new StringBuilder();
+            int index = 0;
+            while (index < words.Count)
+            {
+                var brWord = words[index];
+                if (brWord.IsContextTag)
+                {
+                    sb.Append(brWord.Text); // 輸出標籤名稱（可能為起始標籤或結束標籤）。
+                    index++;
+                    continue;
+                }
+                if (brWord.IsConvertedFromTag) // 只要是由 context tag 所衍生的文字都忽略。
+                {
+                    index++;
+                    continue;
+                }
+
+                // 一般文字，或曾被替換過的文字。
+                if (!String.IsNullOrEmpty(brWord.OriginalText))
+                    sb.Append(brWord.OriginalText);
+                else
+                    sb.Append(brWord.Text);
+                index++;
             }
             return sb.ToString();
         }
@@ -66,6 +110,22 @@ namespace BrailleToolkit.Helpers
         {
             if (brWordList.Count > 0 && brWordList[0].Text.Equals(ContextTagNames.Title))
             {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool RemoveDigitSymbol(BrailleWord brWord)
+        {
+            if (brWord.CellCount <= 1)
+            {
+                // 至少要有兩個 cells 才能執行刪除操作。
+                return false;
+            }
+
+            if ((int)brWord.Cells[0].Value == (int)BrailleCellCode.Digit)
+            {
+                brWord.Cells.RemoveAt(0);
                 return true;
             }
             return false;

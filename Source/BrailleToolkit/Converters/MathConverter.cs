@@ -29,7 +29,7 @@ namespace BrailleToolkit.Converters
             //       因為可能會碰到 "</數學>" 標籤，這些必須在 BrailleProcessor 中事先處理掉。
 
             char ch;
-            string text;
+            string currentChar;
             bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
             BrailleWord brWord;
             List<BrailleWord> brWordList = null;
@@ -41,9 +41,9 @@ namespace BrailleToolkit.Converters
             if (ch == '<' || ch == '>') 
                 return null;
 
-            text = ch.ToString();
+            currentChar = ch.ToString();
 
-            brWord = ConvertToBrailleWord(text);
+            brWord = ConvertToBrailleWord(currentChar);
 
             if (brWord != null)
             {
@@ -58,10 +58,36 @@ namespace BrailleToolkit.Converters
                 if (!isExtracted)
                 {
                     charStack.Pop();
+                    isExtracted = true;
+                }
+
+                // 看看下一個字元是什麼，以決定是否需要對目前的結果做額外處理，例如：加空方。
+                if (charStack.Count > 0)
+                {
+                    const string NoExtraSpaceAfterTheseCharacters = "「）)…";
+
+                    string nextChar = charStack.Peek().ToString();
+
+                    if (currentChar == "（" || currentChar == "(")
+                    {
+                        if (nextChar == "）" || nextChar == ")")
+                        {
+                            EnsureOneSpaceFollowed(brWordList, nextChar);
+                        }
+                    }
+                    else if (NoExtraSpaceAfterTheseCharacters.IndexOf(currentChar) >= 0)
+                    {
+                        // No need to do anything here, just return to caller.
+                    }
+                    else if (BrailleGlobals.ChinesePunctuations.IndexOf(currentChar) >= 0)
+                    {
+                        EnsureOneSpaceFollowed_UnlessNextWordIsPunctuation(brWordList, nextChar);
+                    }
                 }
             }
             return brWordList;
         }
+
 
         internal override BrailleTableBase BrailleTable
         {

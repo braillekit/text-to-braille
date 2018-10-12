@@ -32,14 +32,16 @@ namespace EasyBrailleEdit.DualEdit
                 $"插入空方(&B);{DualEditCommand.Names.InsertBlank}",
                 $"在上方插入一行(&L);{DualEditCommand.Names.InsertLine};" + ((int)Shortcut.CtrlShiftI).ToString(),
                 $"在下方插入一行(&M);{DualEditCommand.Names.AddLine};" + ((int)Shortcut.CtrlShiftA).ToString(),
+                $"插入表格(&T);{DualEditCommand.Names.InsertTable};" + ((int)Shortcut.CtrlShiftT).ToString(),
                 "-;",
                 $"刪除(&D);{DualEditCommand.Names.DeleteWord};" + ((int)Shortcut.CtrlDel).ToString(),
                 $"倒退刪除(&K);{DualEditCommand.Names.BackDeleteWord}",
                 $"刪除整行(&R);{DualEditCommand.Names.DeleteLine};" + ((int)Shortcut.CtrlE).ToString(),
                 $"段落重整(&F);{DualEditCommand.Names.FormatParagraph};" + ((int)Shortcut.CtrlShiftF).ToString(),
                 "-;",
-                $"複製(&C);{DualEditCommand.Names.CopyToClipboard};" + ((int)Shortcut.CtrlC).ToString(),
-                $"貼上(&P);{DualEditCommand.Names.PasteFromClipboard};" + ((int)Shortcut.CtrlV).ToString()
+                $"剪下;{DualEditCommand.Names.CutToClipboard};" + ((int)Shortcut.CtrlX).ToString(),
+                $"複製;{DualEditCommand.Names.CopyToClipboard};" + ((int)Shortcut.CtrlC).ToString(),
+                $"貼上;{DualEditCommand.Names.PasteFromClipboard};" + ((int)Shortcut.CtrlV).ToString()
             };
 
             MenuItem mi;

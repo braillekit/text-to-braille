@@ -170,7 +170,8 @@ namespace EasyBrailleEdit
 						return false;
 					}
 					wordIdx = 0;
-				}
+                    brLine = m_BrDoc[lineIdx];
+                }
 			}
 
 			while (true)
@@ -197,7 +198,7 @@ namespace EasyBrailleEdit
 					m_StartLineIndex = m_FoundLineIndex;
 					m_StartWordIndex = m_FoundWordIndex;
 					IsFirstTime = false;
-					return true;	
+					return true;
 				}
 
 				// 沒找到，往下一個字移動.
@@ -242,5 +243,9 @@ namespace EasyBrailleEdit
 			}
 		}
 
-	}
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+    }
 }

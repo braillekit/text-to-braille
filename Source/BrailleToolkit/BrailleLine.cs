@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using BrailleToolkit.Tags;
 using BrailleToolkit.Helpers;
+using BrailleToolkit.Converters;
 
 namespace BrailleToolkit
 {
@@ -15,6 +16,16 @@ namespace BrailleToolkit
     [DataContract]
     public class BrailleLine : ICloneable
     {
+        [DataMember]
+        public List<BrailleWord> Words { get; protected set; }
+
+        /// <summary>
+        /// 加入 Tag 屬性的最初目的用來記住標題列在雙視文件中的 begin line index，但也可以作為其他用途。
+        /// 此屬性不會序列化，不會保存。
+        /// </summary>
+        public object Tag { get; set; }
+
+
         public BrailleLine()
         {
             Words = new List<BrailleWord>();
@@ -54,9 +65,6 @@ namespace BrailleToolkit
             }
             return false;
         }
-
-        [DataMember]
-        public List<BrailleWord> Words { get; private set; }
 
         public int WordCount
         {
@@ -141,44 +149,17 @@ namespace BrailleToolkit
             return -1;
         }
 
-        /// <summary>
-        /// 從指定的起始位置複製指定個數的點字 (BrailleWord) 到新建立的點字串列。
-        /// 注意：這是 shallow copy，新的串列中包含既有的元素參考，而非建立新元素。
-        /// </summary>
-        /// <param name="index">起始位置</param>
-        /// <param name="count">要複製幾個點字。</param>
-        /// <returns>新的點字串列。</returns>
-        public BrailleLine ShallowCopy(int index, int count)
+        public BrailleWord GetFirstVisibleWord()
         {
-            BrailleLine brLine = new BrailleLine();
-            BrailleWord newWord = null;
-            while (index < Words.Count && count > 0)
+            for (int i = 0; i < Words.Count; i++)
             {
-                newWord = Words[index]; 
-                brLine.Words.Add(newWord);
-
-                index++;
-                count--;
-
+                if (Words[i].CellCount > 0)
+                {
+                    return Words[i];
+                }
             }
-            return brLine;
+            return null;
         }
-
-        public BrailleLine DeepCopy(int index, int count)
-        {
-            BrailleLine brLine = new BrailleLine();
-            BrailleWord newWord = null;
-            while (index < Words.Count && count > 0)
-            {
-                newWord = Words[index].Copy();
-                brLine.Words.Add(newWord);
-
-                index++;
-                count--;
-            }
-            return brLine;
-        }
-
 
         public void RemoveAt(int index)
         {
@@ -297,34 +278,40 @@ namespace BrailleToolkit
             return sb.ToString();
         }
 
-        public string ToOriginalTextString(ContextTagManager context)
+        public string ToOriginalTextString()
+        {
+            return BrailleWordHelper.ToOriginalTextString(Words);
+        }
+
+        public string ToHtmlString(string leadingSpaces, string cssClassTd, string cssClassBraille, string cssClassText)
         {
             var sb = new StringBuilder();
-            int index = 0;
-            while (index < Words.Count)
+
+            sb.AppendLine($"{leadingSpaces}<tr>");
+
+            foreach (var brWord in Words)
             {
-                var brWord = Words[index];
-                if (brWord.IsContextTag)
-                {
-                    sb.Append(brWord.Text); // 輸出標籤名稱（可能為起始標籤或結束標籤）。
-                    index++;
+                if (brWord.IsContextTag || brWord.CellCount < 1)
                     continue;
-                }
-                if (brWord.IsConvertedFromTag) // 只要是由 context tag 所衍生的文字都不儲存。
+
+                string brFontText = BrailleFontConverter.ToString(brWord);
+
+                if (String.IsNullOrEmpty(brFontText))
                 {
-                    index++;
-                    continue;
+                    sb.AppendLine($"無法轉換成對應的點字字型: {brWord.Text}。");
+                    break;
                 }
 
-                // 一般文字，或曾被替換過的文字。
-                if (!String.IsNullOrEmpty(brWord.OriginalText))
-                    sb.Append(brWord.OriginalText);
-                else
-                    sb.Append(brWord.Text);
-                index++;
+                sb.AppendLine($"{leadingSpaces}  <td colspan='{brFontText.Length}' class='{cssClassTd}'>");
+                sb.AppendLine($"{leadingSpaces}    <div class='{cssClassBraille}'>{brFontText}</div>");
+                sb.AppendLine($"{leadingSpaces}    <div class='{cssClassText}'>{brWord.Text}</div>");
+                sb.AppendLine($"{leadingSpaces}  </td>");
             }
+
+            sb.AppendLine($"{leadingSpaces}</tr>");
             return sb.ToString();
         }
+
 
         public bool ContainsTitleTag()
         {
@@ -363,6 +350,7 @@ namespace BrailleToolkit
 
         /// <summary>
         /// 在串列中尋找指定的字串，從串列中的第 startIndex 個字開始找起。
+        /// 尋找過程中，會略過 cell count 為 0 的 BrailleWord 物件。
         /// </summary>
         /// <param name="value"></param>
         /// <param name="startIndex"></param>
@@ -370,32 +358,94 @@ namespace BrailleToolkit
         /// <returns></returns>
         public int IndexOf(string value, int startIndex, StringComparison comparisonType)
         {
-            if (startIndex + value.Length > this.WordCount)
+            int index = startIndex;
+            while (index < WordCount)
             {
-                return -1;
-            }
+                if (index + value.Length > WordCount)
+                {
+                    return -1;
+                }
 
-            int i;
-            StringBuilder sb = new StringBuilder();
-            for (i = startIndex; i < this.WordCount; i++)
-            {
-                sb.Append(Words[i].Text);
-            }
+                int matchedCount = 0;
+                int wordPointer = index;
+                while (wordPointer < WordCount)
+                {
+                    var brWord = Words[wordPointer];
+                    if (brWord.CellCount < 1 || String.IsNullOrEmpty(brWord.Text))
+                    {
+                        wordPointer++;  // 跳過 cell count 為 0 的物件
+                        if (matchedCount == 0)
+                        {
+                            // 匹配的字串裡面可以包含 context tag，可是 context tag 不能是匹配字串的第一個字。
+                            index = wordPointer;
+                        }
+                        continue;
+                    }
 
-            int idx = sb.ToString().IndexOf(value, comparisonType);
-            if (idx < 0)
-            {
-                return -1;
-            }
+                    string s = value[matchedCount].ToString();
+                    if (!brWord.Text.Equals(s, comparisonType))
+                    {
+                        break;
+                    }
+                    matchedCount++;
+                    wordPointer++;
 
-            // 有找到，但這是字元索引，還必須修正為點字索引。
-            for (i = startIndex; i < this.WordCount; i++)
-            {
-                idx = idx - Words[i].Text.Length + 1;
+                    if (matchedCount >= value.Length)
+                    {
+                        return index;
+                    }
+                }
+                index++;
             }
-
-            return startIndex + idx;
+            return -1;
         }
+
+
+        /// <summary>
+        /// 從指定的起始位置複製指定個數的點字 (BrailleWord) 到新建立的點字串列。
+        /// 注意：這是 shallow copy，新的串列中包含既有的元素參考，而非建立新元素。
+        /// </summary>
+        /// <param name="index">起始位置</param>
+        /// <param name="count">要複製幾個點字。</param>
+        /// <returns>新的點字串列。</returns>
+        public BrailleLine ShallowCopy(int index, int count)
+        {
+            BrailleLine newLine = new BrailleLine();
+            BrailleWord newWord = null;
+            while (index < Words.Count && count > 0)
+            {
+                newWord = Words[index];
+                newLine.Words.Add(newWord);
+
+                index++;
+                count--;
+
+            }
+            newLine.Tag = Tag;
+            return newLine;
+        }
+
+        public BrailleLine DeepCopy()
+        {
+            return DeepCopy(0, WordCount);
+        }
+
+        public BrailleLine DeepCopy(int index, int count)
+        {
+            BrailleLine newLine = new BrailleLine();
+            BrailleWord newWord = null;
+            while (index < Words.Count && count > 0)
+            {
+                newWord = Words[index].Copy();
+                newLine.Words.Add(newWord);
+
+                index++;
+                count--;
+            }
+            newLine.Tag = Tag;
+            return newLine;
+        }
+
 
         #region ICloneable Members
 
@@ -405,15 +455,16 @@ namespace BrailleToolkit
         /// <returns></returns>
         public object Clone()
         {
-            BrailleLine brLine = new BrailleLine();
+            BrailleLine newLine = new BrailleLine();
             BrailleWord newWord = null;
 
             foreach (BrailleWord brWord in Words)
             {
                 newWord = brWord.Copy();
-                brLine.Words.Add(newWord);
+                newLine.Words.Add(newWord);
             }
-            return brLine;
+            newLine.Tag = Tag;
+            return newLine;
         }
 
         #endregion

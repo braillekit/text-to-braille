@@ -27,5 +27,17 @@ namespace EasyBrailleEdit.Common.Config
         /// </summary>
         [Option(DefaultValue = true)]
         bool UseUpperPositionForOrgPageNumber { get; set; }
+
+        /// <summary>
+        /// 這些字元的右邊一律不加空方。
+        /// </summary>
+        [Option(DefaultValue = Constant.DefaultNoSpaceAfterTheseCharacters)]
+        string NoSpaceAfterTheseCharacters { get; set; }
+
+        /// <summary>
+        /// 這些字元的左邊一律不加空方。
+        /// </summary>
+        [Option(DefaultValue = Constant.DefaultNoSpaceBeforeTheseCharacters)]
+        string NoSpaceBeforeTheseCharacters { get; set; }
     }
 }

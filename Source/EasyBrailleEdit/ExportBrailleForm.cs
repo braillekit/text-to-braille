@@ -63,11 +63,18 @@ namespace EasyBrailleEdit
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+
             DoExportBrailleFile();
         }
 
         private void DoExportBrailleFile()
         {
+            // 保護措施
+            if (!AppGlobals.IsPrintingEnabled)
+            {
+                return;
+            }
+
             int startPageNum = 1;
             if (chkChangeStartPageNum.Checked)
             {

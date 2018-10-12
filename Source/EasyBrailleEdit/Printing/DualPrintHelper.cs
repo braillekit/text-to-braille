@@ -132,6 +132,14 @@ namespace EasyBrailleEdit
 
         void BrailleText_BeginPrint(object sender, PrintEventArgs e)
         {
+            // 保護措施
+            if (!AppGlobals.IsPrintingEnabled)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+
             // 注意: 預覽時以及列印至印表機時都會觸發此事件，這裡應避免重複配置大量資源。
 
             if (m_PreviewOnly && e.PrintAction != PrintAction.PrintToPreview)

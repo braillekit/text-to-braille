@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFramework>net471</TargetFramework>
     <Authors>Michael Tsai</Authors>
     <Company>Michael Tsai</Company>
     <Copyright>Copyright (c) 2008-2018 Michael Tsai</Copyright>
-    <ApplicationIcon />
+    <ApplicationIcon>owl2.ico</ApplicationIcon>
     <OutputType>WinExe</OutputType>
     <StartupObject />
     <Version>1.0.0</Version>
@@ -17,9 +17,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Config.Net" Version="4.9.1" />
-    <PackageReference Include="Huanlin.Common" Version="4.5.8" />
-    <PackageReference Include="Huanlin.Windows" Version="4.5.8" />
+    <PackageReference Include="Config.Net" Version="4.10.1" />
+    <PackageReference Include="Huanlin.Common" Version="4.5.10" />
+    <PackageReference Include="Huanlin.Windows" Version="4.5.10" />
     <PackageReference Include="Serilog" Version="2.7.1" />
     <PackageReference Include="Serilog.Settings.AppSettings" Version="2.2.1-dev-00052" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.0.1-dev-00796" />
@@ -28,6 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="System.Net.Http">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Net.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
@@ -55,11 +58,29 @@
     <Compile Update="Forms\BrailleDocPropertiesForm.Designer.cs">
       <DependentUpon>BrailleDocPropertiesForm.cs</DependentUpon>
     </Compile>
+    <Compile Update="Forms\InsertTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\InsertTableForm.Designer.cs">
+      <DependentUpon>InsertTableForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\UndoBufferForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\UndoBufferForm.Designer.cs">
+      <DependentUpon>UndoBufferForm.cs</DependentUpon>
+    </Compile>
     <Compile Update="Forms\ViewTextForm.cs">
       <SubType>Form</SubType>
     </Compile>   
     <Compile Update="Forms\ViewTextForm.Designer.cs">
       <DependentUpon>ViewTextForm.cs</DependentUpon>
+    </Compile>   
+    <Compile Update="Forms\RegForm.cs">
+      <SubType>Form</SubType>
+    </Compile>   
+    <Compile Update="Forms\RegForm.Designer.cs">
+      <DependentUpon>RegForm.cs</DependentUpon>
     </Compile>   
     <Compile Update="InsertTextForm.cs">
       <SubType>Form</SubType>
@@ -252,9 +273,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="RegForm.resx">
-      <DependentUpon>RegForm.cs</DependentUpon>
+    <EmbeddedResource Update="Forms\RegForm.resx">
       <SubType>Designer</SubType>
+      <DependentUpon>RegForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Printing\TextPageSetupDialog.resx">
       <SubType>Designer</SubType>
@@ -283,6 +304,14 @@
     <EmbeddedResource Update="Forms\BrailleDocPropertiesForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>BrailleDocPropertiesForm.cs</DependentUpon>
+    </EmbeddedResource>   
+    <EmbeddedResource Update="Forms\UndoBufferForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>UndoBufferForm.cs</DependentUpon>
+    </EmbeddedResource>   
+    <EmbeddedResource Update="Forms\InsertTableForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InsertTableForm.cs</DependentUpon>
     </EmbeddedResource>   
   </ItemGroup>
 

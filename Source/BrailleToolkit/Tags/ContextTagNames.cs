@@ -27,7 +27,12 @@ namespace BrailleToolkit.Tags
         public const string BrailleTranslatorNote = "<點譯者註>";
         public const string OrgPageNumber = "<P>";
         public const string Choice = "<選項>"; // 選項裡面的 "ㄅ." 之間不空方，且小數點的點字為 6。
-        public const string UpperPosition = "<上位點>"; // 數字一律使用上位點。
+        public const string UpperPosition = "<上位點>";  // 數字一律使用上位點。
+        public const string Url = "<URL>";
+        public const string QuotationMark1 = "<引號一>"; // (236)(356)
+        public const string QuotationMark2 = "<引號二>"; // (236)(456 356)
+        public const string SeparatorLine = "<分隔線>";  // (135 246)
+        public const string NoDigitSymbol = "<無數符>"; // 這是暫時性的控制標籤，只在轉點字過程中存在。
 
         // NOTE: 每當有變動時，必須同步修改 AllTagNames 的內容。
 
@@ -53,7 +58,12 @@ namespace BrailleToolkit.Tags
                 BrailleTranslatorNote,
                 OrgPageNumber,          // 原書頁碼
                 Choice,
-                UpperPosition
+                UpperPosition,
+                Url,
+                QuotationMark1,
+                QuotationMark2,
+                SeparatorLine,
+                NoDigitSymbol
             };
 
 

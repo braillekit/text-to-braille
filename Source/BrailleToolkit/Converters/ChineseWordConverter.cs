@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using BrailleToolkit.Data;
+using BrailleToolkit.Tags;
 using Huanlin.Common.Helpers;
 using NChinese;
 using NChinese.Phonetic;
@@ -14,18 +15,20 @@ namespace BrailleToolkit.Converters
     public sealed class ChineseWordConverter : WordConverter
     {
         private ChineseBrailleTable _brailleTable;
+        private BrailleProcessor _processor;
 
         public ZhuyinReverseConverter ZhuyinConverter { get; set; }
 
-        public ChineseWordConverter(ZhuyinReverseConverter zhuyinConverter)
-            : base()
+        public ChineseWordConverter(BrailleProcessor processor)
         {
             _brailleTable = ChineseBrailleTable.GetInstance();
-            ZhuyinConverter = zhuyinConverter ?? throw new ArgumentNullException(nameof(zhuyinConverter));
+            _processor = processor;
+            ZhuyinConverter = processor.ZhuyinConverter;
         }
 
         /// <summary>
-        /// 從堆疊中讀取字元，並轉成點字。只處理中文字和中文標點符號。
+        /// 從堆疊中讀取字元，並轉成點字。
+        /// 只處理 ChineseBrailleTable.xml 裡面有定義的符號，主要是中文字和中文標點符號。
         /// </summary>
         /// <param name="charStack">字元堆疊。</param>
         /// <param name="context">情境物件。</param>
@@ -37,7 +40,7 @@ namespace BrailleToolkit.Converters
 
             bool done = false;
             char ch;
-            string text;
+            string currentWord;
             bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
             BrailleWord brWord;
             List<BrailleWord> brWordList = null;
@@ -74,7 +77,7 @@ namespace BrailleToolkit.Converters
                     break;
                 }
 
-                text = ch.ToString();
+                currentWord = ch.ToString();
 
                 // 處理雙字元的標點符號。
                 if (ch == '…' || ch == '－' || ch == '─' || ch == '╴' || ch == '—' || ch == '﹏')
@@ -86,7 +89,7 @@ namespace BrailleToolkit.Converters
                         char ch2 = charStack.Pop();
                         if (ch2 == ch)	// 如果是連續兩個刪節號或破折號。
                         {
-                            text = text + text;
+                            currentWord = currentWord + currentWord;
                             isExtracted = true;
                         }
                         else
@@ -107,7 +110,7 @@ namespace BrailleToolkit.Converters
                         char ch3 = charStack.Pop();
                         if (ch3 == ']' && (ch2 == '↗' || ch2 == '↘'))
                         {
-                            text = text + ch2.ToString() + ch3.ToString();
+                            currentWord = currentWord + ch2.ToString() + ch3.ToString();
                             isExtracted = true;
                         }
                         else
@@ -121,7 +124,14 @@ namespace BrailleToolkit.Converters
                     }
                 }
 
-                brWord = InternalConvert(text);
+                if (context.IsMathActive())
+                {
+                    // 數學區塊裡面的符號，必須留給 MathConverter 處理。
+                    if (_processor.MathConverter.BrailleTable.Exists(currentWord))
+                        break;
+                }
+
+                brWord = InternalConvert(currentWord);
                 if (brWord == null)
                     break;
 
@@ -132,7 +142,7 @@ namespace BrailleToolkit.Converters
                     charStack.Pop();
                 }
 
-                if (!StrHelper.IsEmpty(text))   // 避免將空白字元也列入 Chinese。
+                if (!StrHelper.IsEmpty(currentWord))   // 避免將空白字元也列入 Chinese。
                     brWord.Language = BrailleLanguage.Chinese;
 
                 ApplyBrailleConfig(brWord); // 根據組態檔的設定調整點字轉換結果。
@@ -142,6 +152,22 @@ namespace BrailleToolkit.Converters
                     brWordList = new List<BrailleWord>();
                 }
                 brWordList.Add(brWord);
+
+
+                // 看看下一個字元是什麼，以決定是否需要對目前的結果做額外處理，例如：加空方。
+                if (charStack.Count > 0)
+                {
+                    string nextChar = charStack.Peek().ToString();
+
+                    if (context.IsActive(ContextTagNames.Math))
+                    {
+                        if (BrailleGlobals.ChinesePunctuations.IndexOf(currentWord) >= 0
+                            && currentWord != "【") // 用 【】 包住的編號不要加空方
+                        {
+                            EnsureOneSpaceFollowed_UnlessNextWordIsPunctuation(brWordList, nextChar);
+                        }
+                    }
+                }
 
                 // 記錄連續中文字元，以修正破音字的注音字根。
                 if (brWord.Text.IsCJK())   // 如果是中文字元，要記錄連續的中文字元區間
@@ -162,6 +188,7 @@ namespace BrailleToolkit.Converters
                     chineseStartIdx = -1;
                     chineseEndIdx = -1;
                 }
+
                 idx++;
             }
 
@@ -204,6 +231,11 @@ namespace BrailleToolkit.Converters
             BrailleWord brWord;
             for (int wordIdx = 0; wordIdx < allPhCodes.Length; wordIdx++)
             {
+                if ((startIdx + wordIdx) >= brWordList.Count)
+                {
+                    // 防錯：防止 GetZhuyinWithPhraseTable 傳回多餘的空元素。
+                    break;
+                }
                 phCode = allPhCodes[wordIdx];
                 brWord = brWordList[startIdx + wordIdx];
                 if (Zhuyin.IsEqual(brWord.PhoneticCode, phCode))    // 如果跟原有的注音字根相同，就略過
@@ -260,18 +292,8 @@ namespace BrailleToolkit.Converters
 
             if (text.IsCJK())  // 若是漢字
             {
-                /* 2010-01-03: 不取得所有的注音字根，只取得一組預設的字根，且判斷是否為多音字。等到編輯時使用者要更換注音，才取出所有字根。
-                    // 取得破音字的所有組字字根，每一組字根長度固定為 4 個字元，不足者以全型空白填補。
-                    string[] phCodes = ZhuyinQueryHelper.GetZhuyinSymbols(text, true);  
-                    if (phCodes.Length > 0)
-                    {
-                        brWord.SetPhoneticCodes(phCodes);
-                        phcode = phCodes[0];    // 指定第一組字根為預設的字根。
-                    }
-                */
-
                 // 取得注音字根
-                string[] zhuyinCodes = ZhuyinConverter.GetZhuyin(text);
+                string[] zhuyinCodes = ZhuyinConverter.GetZhuyinWithPhraseTable(text);
 
                 //if (zhuyinCodes == null || zhuyinCodes.Length == 0)
                 //{

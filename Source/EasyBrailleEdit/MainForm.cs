@@ -5,11 +5,15 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrailleToolkit;
+using BrailleToolkit.Helpers;
 using EasyBrailleEdit.Common;
+using EasyBrailleEdit.Forms;
+using EasyBrailleEdit.License;
 using EasyBrailleEdit.Printing;
 using Huanlin.Common.Helpers;
 using Huanlin.Http;
@@ -22,13 +26,12 @@ namespace EasyBrailleEdit
     public partial class MainForm : Form
     {
         string m_FileName;
-        bool m_Modified;	// 檔案內容是否有修改過。
+        bool m_Modified;	// 檔案內容是否有修改過。        
 
         private InvalidCharForm m_InvalidCharForm;
-        private BusyForm m_BusyForm;
 
         private ConversionDialog m_ConvertDialog;
-        
+
         private FileRunner m_FileRunner;
 
         public MainForm()
@@ -122,12 +125,12 @@ namespace EasyBrailleEdit
         /// <param name="filename">點字檔名。</param>
         private void OpenBrailleFileInEditor(string filename)
         {
-            m_BusyForm = new BusyForm
+            var busyForm = new BusyForm
             {
                 Message = "正在載入點字資料..."
             };
-            m_BusyForm.Show();
-            m_BusyForm.UseWaitCursor = true;
+            busyForm.Show();
+            busyForm.UseWaitCursor = true;
             Enabled = false;
 
             DualEditForm frm = null;
@@ -139,8 +142,7 @@ namespace EasyBrailleEdit
             finally
             {
                 Enabled = true;
-                m_BusyForm.Hide();
-                m_BusyForm.Close();
+                busyForm.Close();
             }
 
             ShowInTaskbar = false;
@@ -241,18 +243,18 @@ namespace EasyBrailleEdit
             string phraseFileName = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtInputPhraseListFileName);
 
             // 建立輸入檔案
-            File.WriteAllText(inFileName, content, Encoding.UTF8);	
+            File.WriteAllText(inFileName, content, Encoding.UTF8);
 
             // 建立輸入的詞庫設定檔
             string[] fileNames = m_ConvertDialog.SelectedPhraseFileNames;
             File.WriteAllLines(phraseFileName, fileNames, Encoding.UTF8);
 
             // 刪除輸出檔案
-            if (File.Exists(outFileName))	
+            if (File.Exists(outFileName))
             {
-                File.Delete(outFileName);	
+                File.Delete(outFileName);
             }
-            
+
             InvokeTxt2Brl("\"" + inFileName + "\"", "\"" + outFileName + "\"");
 
             return outFileName;
@@ -273,6 +275,12 @@ namespace EasyBrailleEdit
         /// </summary>
         private void ConvertAndShowEditor()
         {
+            if (m_ConvertDialog == null)
+            {
+                MsgBoxHelper.ShowInfo("應用程式尚未載入完成，請稍後再執行此功能。");
+                return;
+            }
+
             if (m_ConvertDialog.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -349,7 +357,7 @@ namespace EasyBrailleEdit
             if (String.IsNullOrWhiteSpace(defaultPrinter))
             {
                 return false;
-            }           
+            }
             var hasDefaultPrinter = PrinterSettings.InstalledPrinters.Cast<string>()
                 .Any(printerName => defaultPrinter.Equals(printerName, StringComparison.InvariantCultureIgnoreCase));
             return hasDefaultPrinter;
@@ -367,7 +375,7 @@ namespace EasyBrailleEdit
                 if (!SetDefaultPreviewPrinter())
                 {
                     return;
-                }                
+                }
             }
 
             string brlFileName = null;
@@ -375,12 +383,12 @@ namespace EasyBrailleEdit
             if (!ConvertTextToBraille(rtbOrg.Text, out brlFileName))
                 return;
 
-            m_BusyForm = new BusyForm
+            var busyForm = new BusyForm
             {
                 Message = "正在載入點字資料..."
             };
-            m_BusyForm.Show();
-            m_BusyForm.UseWaitCursor = true;
+            busyForm.Show();
+            busyForm.UseWaitCursor = true;
             this.Enabled = false;
 
             DualPrintDialog dlg = null;
@@ -391,8 +399,7 @@ namespace EasyBrailleEdit
             finally
             {
                 this.Enabled = true;
-                m_BusyForm.Hide();
-                m_BusyForm.Close();
+                busyForm.Close();
             }
 
             try
@@ -505,7 +512,7 @@ namespace EasyBrailleEdit
                         break;
                     }
                     parts = s.Split(' ');
-                    if (parts.Length != 3) 
+                    if (parts.Length != 3)
                     {
                         throw new Exception("檔案格式不正確: " + fname);
                     }
@@ -587,7 +594,7 @@ namespace EasyBrailleEdit
             }
             else
             {
-                sb.Append(m_FileName);
+                sb.Append($"- {m_FileName}");
             }
             if (Modified)
             {
@@ -636,10 +643,10 @@ namespace EasyBrailleEdit
 
             if (SysInfo.IsNetworkConnected())
             {
-                return await DoUpdateAsync(true);	
+                return await DoUpdateAsync(true);
             }
             return false;
-            
+
         }
 
         private async Task CheckUpdateAsync()
@@ -650,7 +657,7 @@ namespace EasyBrailleEdit
                 return;
             }
 
-            if (await DoUpdateAsync(false)) 
+            if (await DoUpdateAsync(false))
             {
                 string msg = "應用程式必須重新啟動才能完成更新程序，是否立即重新啟動？\r\n若您有資料尚未儲存，請選擇【否】。";
                 if (MsgBoxHelper.ShowYesNo(msg) == DialogResult.Yes)
@@ -675,7 +682,7 @@ namespace EasyBrailleEdit
             //updater.ServerUri = "http://localhost/ebeupdate/";
 
             try
-            {                
+            {
                 await updater.GetUpdateListAsync();
             }
             catch (Exception ex)
@@ -739,6 +746,8 @@ namespace EasyBrailleEdit
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
+            AppGlobals.AppPath = Path.GetDirectoryName(Application.ExecutablePath);
+
             Width = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Width * 0.9);
             Height = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Height * 0.9);
             CenterToScreen();
@@ -749,27 +758,36 @@ namespace EasyBrailleEdit
             if (await AutoUpdateAsync())
             {
                 Process.Start(Application.ExecutablePath);
-
-                // 用記事本開啟 ChangeLog.
-                string changeLogFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\ChangeLog.txt";
-                if (File.Exists(changeLogFileName))
-                {
-                    Process.Start("NotePad.exe", changeLogFileName);
-                }
-
                 Application.Exit();
                 return;
             }
-/* 新版本有內建注音字根查詢功能，不再需要注音輸入法!
-            // 檢查注音與新注音輸入法（在自動更新之後才檢查）
-            if (!ImmHelper.ZhuyinImeInstalled || !ImmHelper.NewZhuyinImeInstalled)
-            {
-                StatusText = "注意：未偵測到微軟注音或新注音輸入法!";
-                // Close(); 不要結束程式, 因為偵測注音輸入法的函式在 Windows 2008 會失效。
-                // return;
-            }
-*/
             Application.DoEvents();
+
+
+            var userLic = LicenseService.GetUserLicenseData();
+            if (!await LicenseService.ValidateUserLicenseAsync(userLic))
+            {
+                userLic = LicenseService.EnterLicenseData();
+                if (userLic == null)
+                {
+                    MsgBoxHelper.ShowWarning("沒有軟體授權資料，將無法列印和輸出雙視文件！");
+                }
+                else
+                {
+                    bool isLicensed = await LicenseService.ValidateUserLicenseAsync(userLic);
+                    if (isLicensed)
+                    {
+                        LicenseService.SaveUserLicenseData(userLic);
+                        AppGlobals.IsPrintingEnabled = true;
+                        MsgBoxHelper.ShowInfo("註冊成功!");
+                    }
+                    else
+                    {
+                        MsgBoxHelper.ShowError("註冊失敗：序號無效！");
+                    }
+                }                
+            }
+            AppGlobals.IsPrintingEnabled = AppGlobals.UserLicense.IsValid;
 
             txtErrors.Visible = false;
 
@@ -778,21 +796,11 @@ namespace EasyBrailleEdit
             m_InvalidCharForm = new InvalidCharForm(this);
 
             rtbOrg.BringToFront();
-        }        
-
-/*
-        void BrailleProcessor_ConvertionFailed(object sender, ConvertionFailedEventArgs args)
-        {
-            if (m_BusyForm != null)
-            {
-                m_BusyForm.AddInvalidChar(args.InvalidChar.CharValue);
-                Application.DoEvents();
-            }			
         }
-*/		
+
         private void miFileClicked(object sender, EventArgs e)
         {
-            ToolStripItem obj = (ToolStripItem) sender;
+            ToolStripItem obj = (ToolStripItem)sender;
             switch (obj.Tag.ToString())
             {
                 case "FileNew":
@@ -918,8 +926,6 @@ namespace EasyBrailleEdit
                 case "Options":
                     ShowOptionsDialog();
                     break;
-                default:
-                    break;
             }
         }
 
@@ -949,11 +955,24 @@ namespace EasyBrailleEdit
                 case "CheckUpdate":
                     await CheckUpdateAsync();
                     break;
-                case "Options":
-                    ShowOptionsDialog();
+                case "RevisionHistory":
+                    ShowRevisionHistory();
                     break;
-                default:
-                    break;
+            }
+        }
+
+
+        private void ShowRevisionHistory()
+        {
+            // 用記事本開啟 ChangeLog.
+            string changeLogFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\ChangeLog.txt";
+            if (File.Exists(changeLogFileName))
+            {
+                Process.Start("NotePad.exe", changeLogFileName);
+            }
+            else
+            {
+                MsgBoxHelper.ShowError($"找不到檔案: {changeLogFileName}");
             }
         }
 
@@ -962,55 +981,28 @@ namespace EasyBrailleEdit
             ToolStripItem obj = (ToolStripItem)sender;
             switch (obj.Tag.ToString())
             {
-                case "Tbl2x2":
-                    InsertTable(2, 2);
+                case "Table":
+                    InsertTable();
                     break;
                 case "Phonetic":
                     InsertPhonetic();
                     break;
-                default:
-                    break;
             }
         }
 
-        /// <summary>
-        /// 插入表格。
-        /// </summary>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
-        private void InsertTable(int row, int col)
+
+
+        private void InsertTable()
         {
-            char leftTop = '┌';
-            char rightTop = '┐';
-//            char leftBottom = '└';
-//            char rightBottom = '┘';
-            char topMiddle = '┬';
-//            char bottomMiddle = '⊥';
-//            char rightMiddle = '┤';
-//            char leftMiddle = '├';
-            char line = '─';
-//            char stick = '│';
-
-            StringBuilder sb = new StringBuilder();
-
-            // 頂部列
-            sb.Append(leftTop);
-            for (int i = 0; i < col; i++)
+            var form = new InsertTableForm();
+            if (form.ShowDialog() == DialogResult.OK)
             {
-                sb.Append(line);
-                if (i == col - 1)
-                {
-                    sb.Append(rightTop);
-                }
-                else 
-                {
-                    sb.Append(topMiddle);
-                }
+                rtbOrg.SelectedText = 
+                    "<表格>\r\n" + 
+                    TextHelper.GenerateTable(form.RowCount, form.ColumnCount, form.CellsPerColumn) + 
+                    "</表格>";
             }
-
-            sb.Append("\n尚未實作完成!");
-
-            rtbOrg.SelectedText = sb.ToString();
+            
         }
 
         private void InsertPhonetic()
@@ -1026,7 +1018,7 @@ namespace EasyBrailleEdit
         {
             int col = rtbOrg.SelectionStart;
             int line = rtbOrg.GetLineFromCharIndex(col);
-            statLabelCaretPos.Text = String.Format("列:{0}, 行:{1}", line+1, col+1);
+            statLabelCaretPos.Text = String.Format("列:{0}, 行:{1}", line + 1, col + 1);
         }
 
         private void rtbOrg_SelectionChanged(object sender, EventArgs e)
@@ -1058,13 +1050,13 @@ namespace EasyBrailleEdit
 
             // 避免文字因為修改過了，導致要選取的字元超過該列的字元長度。此處做修正。
             if (charIdx >= rtbOrg.Lines[lineIdx].Length)
-            {				
+            {
                 charIdx = rtbOrg.Lines[lineIdx].Length - 1;
                 charIdxValid = false;
             }
 
             charIdx += charCnt;
-    
+
             rtbOrg.SelectionStart = charIdx;
 
             // 唯有當指定的字元索引有效，才選取該字元。

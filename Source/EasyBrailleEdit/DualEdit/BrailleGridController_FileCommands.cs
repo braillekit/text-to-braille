@@ -46,35 +46,20 @@ namespace EasyBrailleEdit.DualEdit
             CursorHelper.ShowWaitCursor();
             try
             {
-                _form.StatusText = "正在載入資料...";
+                _form.StatusText = $"正在載入檔案：{filename}";
 
-                var newBrDoc = BrailleDocument.LoadBrailleFile(filename);
-
-                if (_doc != null)
-                {
-                    _doc.Clear();
-                }
-                _doc = newBrDoc;
+                BrailleDoc = BrailleDocument.LoadBrailleFile(filename);
 
                 FileName = filename;
-                IsDirty = false;
 
-                _form.StatusText = "正在準備顯示資料...";
+                UndoRedo.Reset();
 
-                InitializeGrid();
-
-                FillGrid(_doc);
-
-                // 焦點移至第一列的第一個儲存格。
-                SourceGrid.Position pos = new SourceGrid.Position(_grid.FixedRows, _grid.FixedColumns);
-                GridFocusCell(pos, true);
-
-                return _doc;
+                return BrailleDoc;
             }
             finally
             {
                 CursorHelper.RestoreCursor();
-                _form.StatusText = "";
+                _form.StatusText = String.Empty;
             }
         }
 
@@ -89,7 +74,7 @@ namespace EasyBrailleEdit.DualEdit
                 return DoSaveFileAs();
             }
 
-            InternalSaveFile(m_FileName);
+            InternalSaveFile(_fileName);
             return true;
         }
 
@@ -112,6 +97,7 @@ namespace EasyBrailleEdit.DualEdit
             return false;
         }
 
+        [Obsolete("此函式已經不需要。使用者可以從主選單點［檢視 > 明眼字]。")]
         public bool DoExportTextFile()
         {
             var dlg = new SaveFileDialog
@@ -133,6 +119,24 @@ namespace EasyBrailleEdit.DualEdit
         {
             var form = new ExportBrailleForm(BrailleDoc);
             form.ShowDialog();
+        }
+
+
+        public async Task ExportHtmlFileAsync()
+        {
+            var dlg = new SaveFileDialog
+            {
+                DefaultExt = ".html",
+                Filter = "網頁 (*.html)|*.html",
+                FilterIndex = 1
+            };
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                await BrailleDoc.ExportToHtmlFileAsync(dlg.FileName);
+
+                MsgBoxHelper.ShowInfo($"已成功匯出至 HTML 檔案: {dlg.FileName}");
+            }
         }
 
         private void InternalSaveFile(string filename)

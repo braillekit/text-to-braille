@@ -15,6 +15,7 @@ namespace EasyBrailleEdit.DualEdit
             public const string BackDeleteWord = "BackDeleteWord";
             public const string BreakLine = "BreakLine";
             public const string CopyToClipboard = "CopyToClipboard";
+            public const string CutToClipboard = "CutToClipboard";
             public const string DeleteLine = "DeleteLine";
             public const string DeleteWord = "DeleteWord";
             public const string EditWord = "EditWord";
@@ -23,7 +24,9 @@ namespace EasyBrailleEdit.DualEdit
             public const string InsertLine = "InsertLine";  // 插入一列
             public const string InsertWord = "InsertWord";
             public const string InsertText = "InsertText";
+            public const string InsertTable = "InsertTable";
             public const string PasteFromClipboard = "PasteFromClipboard";
+            public const string RemoveDigitSymbol = "RemoveDigitSymbol";
         }
     }
 }

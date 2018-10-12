@@ -6,7 +6,7 @@ using BrailleToolkit.Helpers;
 
 namespace BrailleToolkit.Tags
 {
-    internal class GenericContextTag : IContextTag
+    public class GenericContextTag : IContextTag
     {
         public string ConvertablePrefix { get; set; }   // 可轉換成點字的前導文字
         public string ConvertablePostfix { get; set; }  // 可轉換成點字的結尾文字
@@ -48,6 +48,8 @@ namespace BrailleToolkit.Tags
             }
         }
 
+        public bool RemoveTagOnConversion { get; protected set; }
+
         public virtual void Reset()
         {
             Count = 0;
@@ -70,13 +72,15 @@ namespace BrailleToolkit.Tags
 
 
         public GenericContextTag(string tagName,
-            ContextLifetime lifeTime = ContextLifetime.BeforeFormatDoc,
+            ContextLifetime lifeTime = ContextLifetime.Persistent,
+            bool removeTagOnConversion = false,
             bool singleLine = false)
         {
             TagName = tagName;
             Lifetime = lifeTime;
             IsSingleLine = singleLine;
             Count = 0;
+            RemoveTagOnConversion = removeTagOnConversion;
 
             ConvertablePrefix = String.Empty;
             ConvertablePostfix = String.Empty;

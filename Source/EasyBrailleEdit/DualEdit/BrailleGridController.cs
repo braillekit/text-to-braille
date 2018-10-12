@@ -27,8 +27,8 @@ namespace EasyBrailleEdit.DualEdit
         private SourceGrid.Grid _grid;
         private BrailleGridPositionMapper _positionMapper;
 
-        private string m_FileName;
-        private bool m_IsDirty;   // 檔案內容是否被修改過
+        private string _fileName;
+        private bool _isDirty;   // 檔案內容是否被修改過
 
 
         private BrailleGridDebugger _debugger;
@@ -57,6 +57,32 @@ namespace EasyBrailleEdit.DualEdit
         public BrailleDocument BrailleDoc
         {
             get => _doc;
+            private set
+            {
+                if (_doc != value)
+                {
+                    if (_doc != null)
+                    {
+                        _doc.Clear();
+                    }
+                    _doc = value;
+                    PositionMapper.BrailleDoc = _doc;
+
+                    IsDirty = false;
+                    OnBrailleDocPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 每當 BrailleDoc 屬性改變時要做的事。
+        /// </summary>
+        private void OnBrailleDocPropertyChanged()
+        {
+            InitializeGrid();
+            FillGrid(_doc);
+
+            // 注意：不可在這裡 reset undo buffer，因為執行 undo 時會改變 BrailleDoc 屬性。
         }
 
         public SourceGrid.Grid Grid { get => _grid; }
@@ -73,39 +99,49 @@ namespace EasyBrailleEdit.DualEdit
             }
         }
 
+        public bool IsUsedForPageTitle { get; }
+
         public string FileName
         {
-            get { return m_FileName; }
+            get { return _fileName; }
             set
             {
                 // 如果是暫存的輸出檔名，則視為尚未存檔。
                 if (value.IndexOf(Constant.Files.CvtOutputTempFileName, StringComparison.CurrentCultureIgnoreCase) >= 0)
                 {
-                    m_IsDirty = true;
+                    _isDirty = true;
                 }
-                m_FileName = value;
+                _fileName = value;
                 UpdateWindowCaption();
             }
         }
 
         public bool IsDirty
         {
-            get { return m_IsDirty; }
+            get { return _isDirty; }
             set
             {
-                if (m_IsDirty != value)
+                if (_isDirty != value)
                 {
-                    m_IsDirty = value;
+                    _isDirty = value;
                     UpdateWindowCaption();
                 }
             }
         }
+
+        /// <summary>
+        /// 是否正忙著更新內部點字物件或更新 UI。
+        /// 如果是的話，就不接受鍵盤操作，以免產生奇怪的狀況：BrailleLine 裡面找不到儲存格所關聯的 BrailleWord 物件。
+        /// </summary>
+        public bool IsBusy { get; set; }
 
         public GridPopupMenuController MenuController
         {
             get { return m_MenuController; }
         }
 
+
+        public UndoRedoManager UndoRedo { get; }
 
         public BrailleGridDebugger Debugger
         {
@@ -148,28 +184,33 @@ namespace EasyBrailleEdit.DualEdit
 
         private BrailleGridController()
         {
+            UndoRedo = new UndoRedoManager(AppGlobals.Config.BrailleEditor.MaxUndoLevel);
         }
 
-        public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, BrailleDocument doc) 
+        public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, BrailleDocument doc, bool forPageTitle)
             : this()
         {
             _form = form;
             _doc = doc;
             _grid = grid;
+            IsUsedForPageTitle = forPageTitle;
         }
 
-        public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, string brxFileName)
-            :this()
+        public BrailleGridController(IBrailleGridForm form, SourceGrid.Grid grid, string brxFileName, bool forPageTitle)
+            : this()
         {
             _form = form;
             _grid = grid;
             _doc = LoadFile(brxFileName);
+            IsUsedForPageTitle = forPageTitle;
         }
 
         public void InitializeGrid()
         {
+            _grid.BackColor = Color.DarkGray;
+
             // 確保既有的欄和列都被清除
-            _grid.Rows.Clear(); 
+            _grid.Rows.Clear();
             _grid.Columns.Clear();
 
             // 設定 grid 預設的欄寬與列高
@@ -331,6 +372,7 @@ namespace EasyBrailleEdit.DualEdit
         private void RefreshRowNumbers()
         {
             int rowNum = 1;
+            int lineIdx = 0;
             int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
 
             if (AppGlobals.Config.Printing.PrintPageFoot)
@@ -340,17 +382,30 @@ namespace EasyBrailleEdit.DualEdit
 
             for (int row = 1; row < _grid.RowsCount; row += 3)
             {
-                if ((rowNum - 1) % linesPerPage == 0)
+                var cell = _grid[row, 0];
+
+                var brLine = BrailleDoc.Lines[lineIdx];
+                var pageTitle = BrailleDoc.FindPageTitleByBeginLine(brLine);
+                if (pageTitle != null)
                 {
-                    _grid[row, 0].View = m_HeaderView2;
-                    _grid[row, 0].Value = rowNum;
+                    cell.Value = $"{rowNum} 標";
                 }
                 else
                 {
-                    _grid[row, 0].View = m_HeaderView;
-                    _grid[row, 0].Value = rowNum;
+                    cell.Value = $"{rowNum}";
                 }
+
+                if ((rowNum - 1) % linesPerPage == 0)
+                {
+                    cell.View = m_HeaderView2;
+                }
+                else
+                {
+                    cell.View = m_HeaderView;
+                }
+                
                 rowNum++;
+                lineIdx++;
             }
         }
 
@@ -359,11 +414,11 @@ namespace EasyBrailleEdit.DualEdit
             var aForm = _form as Form;
             if (IsNoName())
             {
-                aForm.Text = "雙視編輯 - 未命名 (" + StrHelper.ExtractFileName(m_FileName) + ")";
+                aForm.Text = "雙視編輯 - 未命名 (" + StrHelper.ExtractFileName(_fileName) + ")";
             }
             else
             {
-                aForm.Text = "雙視編輯 - " + StrHelper.ExtractFileName(m_FileName);
+                aForm.Text = "雙視編輯 - " + StrHelper.ExtractFileName(_fileName);
             }
 
             if (IsDirty)
@@ -378,10 +433,10 @@ namespace EasyBrailleEdit.DualEdit
         /// <returns></returns>
         private bool IsNoName()
         {
-            if (String.IsNullOrEmpty(m_FileName))
+            if (String.IsNullOrEmpty(_fileName))
                 return true;
 
-            string fname = StrHelper.ExtractFileName(m_FileName);
+            string fname = StrHelper.ExtractFileName(_fileName);
             if (fname.Equals(Constant.Files.CvtOutputTempFileName, StringComparison.CurrentCultureIgnoreCase))
             {
                 return true;
@@ -461,8 +516,13 @@ namespace EasyBrailleEdit.DualEdit
             int cnt = 0;
             _form.StatusText = "正在準備顯示資料...";
             _form.StatusProgress = 0;
+            _grid.UseWaitCursor = true;
             CursorHelper.ShowWaitCursor();
             _grid.SuspendLayout();
+            var busyForm = new BusyForm();
+            busyForm.Message = "正在刷新視窗內容...";
+            busyForm.Show();
+            Application.DoEvents();
             try
             {
                 int row = FixedRows;
@@ -496,10 +556,19 @@ namespace EasyBrailleEdit.DualEdit
             }
             finally
             {
+                busyForm.Close();
+
                 _form.StatusText = "重新調整儲存格大小...";
                 ResizeCells();
+
                 _grid.ResumeLayout();
+                _grid.UseWaitCursor = false;
+                _form.StatusText = String.Empty;
                 _form.StatusProgress = 0;
+
+                // 焦點移至第一列的第一個儲存格，並且清除既有的選取區域。
+                GridFocusCell(_grid.FixedRows, _grid.FixedColumns);
+
                 CursorHelper.RestoreCursor();
             }
         }
@@ -643,7 +712,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="pos">儲存格位置。</param>
         /// <param name="resetSelection">是否清除選取範圍。</param>
         /// <returns></returns>
-        private bool GridFocusCell(SourceGrid.Position pos, bool resetSelection)
+        public bool GridFocusCell(SourceGrid.Position pos, bool resetSelection)
         {
             if (pos.Row >= _grid.RowsCount)
                 return false;
@@ -653,7 +722,7 @@ namespace EasyBrailleEdit.DualEdit
             return _grid.Selection.Focus(pos, resetSelection);
         }
 
-        private void GridFocusCell(int row, int col)
+        public void GridFocusCell(int row, int col)
         {
             var position = new SourceGrid.Position(row, col);
             GridFocusCell(position, true);
@@ -664,15 +733,20 @@ namespace EasyBrailleEdit.DualEdit
         /// </summary>
         /// <param name="row">列索引。</param>
         /// <param name="select">是否選取。</param>
-        private void GridSelectRow(int row, bool select)
+        public void GridSelectRow(int row, bool select)
         {
             row = PositionMapper.GetBrailleRowIndex(row);
             var range = new SourceGrid.Range(row, _grid.FixedColumns, row + 2, _grid.ColumnsCount);
             _grid.Selection.SelectRange(range, select);
         }
 
-        private void GridSelectLeftWord(int row, int col)
+        public void GridSelectLeftWord(int row, int col)
         {
+            if (row < 0 || col < 0)
+            {
+                return;
+            }
+
             var currentWord = PositionMapper.GetBrailleWordFromGridCell(row, col);
 
             if (currentWord == null)
@@ -771,27 +845,39 @@ namespace EasyBrailleEdit.DualEdit
             row = PositionMapper.GetBrailleRowIndex(row);  // 修正列索引為點字列所在的索引。
 
             int lineIndex = PositionMapper.GridRowToBrailleLineIndex(row);
-            int lineCnt = BrailleProcessor.GetInstance().FormatLine(BrailleDoc, lineIndex, null);
-            if (lineCnt > 1)    // 有斷行?
+            int lineCnt = BrailleDocumentFormatter.FormatLine(BrailleDoc, lineIndex, null);
+
+            var busyForm = new BusyForm();
+            busyForm.Message = "正在刷新視窗內容...";
+            busyForm.Show();
+            Application.DoEvents();
+            try
             {
                 // 換上新列
                 RecreateRow(row);
                 FillRow(BrailleDoc[lineIndex], row, true);
 
-                // 插入新列
-                GridInsertRowAt(row + 3);
-                FillRow(BrailleDoc[lineIndex + 1], row + 3, true);
+                // 處理斷行所產生的其他 lines
+                for (int i = 1; i < lineCnt; i++)
+                {
+                    // 插入新列
+                    lineIndex++;
+                    row += 3;
+                    GridInsertRowAt(row);
+                    FillRow(BrailleDoc[lineIndex], row, autoSize: true);
+                }
 
-                // 重新填列號
-                RefreshRowNumbers();
+                if (lineCnt > 1)
+                {
+                    // 重新填列號
+                    RefreshRowNumbers();
+                }
+                return lineCnt;
             }
-            else
+            finally
             {
-                // 換上新列
-                RecreateRow(row);
-                FillRow(BrailleDoc[lineIndex], row, true);
+                busyForm.Close();
             }
-            return lineCnt;
         }
 
         /// <summary>

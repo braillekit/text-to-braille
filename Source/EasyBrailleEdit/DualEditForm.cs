@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
+using BrailleToolkit.Helpers;
+using BrailleToolkit.Tags;
 using EasyBrailleEdit.Common;
 using EasyBrailleEdit.DualEdit;
 using EasyBrailleEdit.Forms;
@@ -13,10 +15,10 @@ namespace EasyBrailleEdit
 {
     public partial class DualEditForm : Form, IBrailleGridForm
     {
-        private BrailleDocument _doc;
         private BrailleGridController _controller;
 
         private DualEditFindForm m_FindForm;
+        private UndoBufferForm _undoBufferForm;
 
 
         public BrailleDocument BrailleDoc
@@ -27,33 +29,40 @@ namespace EasyBrailleEdit
                 {
                     return _controller.BrailleDoc;
                 }
-                return _doc;
+                return null;
             }
         }
 
-        public string CurrentWordStatusText
+        string IBrailleGridForm.CurrentWordStatusText
         {
-            get { return statusLabelCurrentWord.Text; }
-            set { statusLabelCurrentWord.Text = value; }
+            get => statusLabelCurrentWord.Text; 
+            set => statusLabelCurrentWord.Text = value;
         }
 
-        public string CurrentLineStatusText
+        string IBrailleGridForm.CurrentLineStatusText
         {
-            get { return statusLabelCurrentLine.Text; }
-            set { statusLabelCurrentLine.Text = value; }
+            get => statusLabelCurrentLine.Text;
+            set => statusLabelCurrentLine.Text = value; 
         }
 
 
-        public string StatusText
+        string IBrailleGridForm.StatusText
         {
-            get { return statMessage.Text; }
+            get => statMessage.Text;
             set
             {
                 statMessage.Text = value;
                 statusStrip1.Refresh();
             }
         }
-        public string PageNumberText
+
+        string IBrailleGridForm.CurrentPageTitleStatusText
+        {
+            get => statusLabelPageTitle.Text;
+            set => statusLabelPageTitle.Text = value;
+        }
+
+        string IBrailleGridForm.PageNumberText
         {
             get { return statPageInfo.Text; }
             set { statPageInfo.Text = value; }
@@ -102,22 +111,21 @@ namespace EasyBrailleEdit
             InitializeComponent();
         }
 
-        public DualEditForm(BrailleDocument doc)
-            : this()
-        {
-            _doc = doc ?? throw new ArgumentNullException(nameof(doc));
-
-            _controller = new BrailleGridController(this, brGrid, _doc);
-        }
-
         public DualEditForm(string brxFileName) : this()
         {
-            _controller = new BrailleGridController(this, brGrid, brxFileName);
-            _doc = _controller.BrailleDoc;
+            _controller = new BrailleGridController(this, brGrid, brxFileName, forPageTitle: false);
+            _controller.UndoRedo.UndoBufferChanged += UndoRedo_UndoBufferChanged;
         }
 
-        public bool DebugMode { get; set; } = true;
+        private void UndoRedo_UndoBufferChanged(object sender, EventArgs e)
+        {
+            var undoableOperations = (sender as UndoRedoManager).GetUndoableOperations();
+            _undoBufferForm.UpdateUI(undoableOperations);
+        }
 
+
+        public bool DebugMode { get; set; } = true;
+        
         private void DualEditForm_Load(object sender, EventArgs e)
         {
             cboZoom.SelectedIndex = 2;  // 100%
@@ -142,13 +150,32 @@ namespace EasyBrailleEdit
                 _controller.FillGrid();
             }
 
-            m_FindForm = new DualEditFindForm();
-            m_FindForm.Owner = this;
+            m_FindForm = new DualEditFindForm
+            {
+                Owner = this
+            };
             m_FindForm.DecidingStartPosition += FindForm_DecidingStartPosition;
             m_FindForm.TargetFound += FindForm_TargetFound;
 
+            CreateUndoBufferForm();
+
             BringToFront();
             Activate();
+
+            // 建立並顯示 undo 視窗。
+            void CreateUndoBufferForm()
+            {
+                _undoBufferForm = new UndoBufferForm()
+                {
+                    Owner = this,
+                    MaxBufferSize = _controller.UndoRedo.MaxUndoLevel
+                };
+
+                if (AppGlobals.Config.BrailleEditor.ShowUndoWindow)
+                {
+                    _undoBufferForm.Show();
+                }
+            }
         }
 
         private void GridSelection_FocusRowEntered(object sender, SourceGrid.RowEventArgs e)
@@ -226,7 +253,6 @@ namespace EasyBrailleEdit
         private void OpenFile()
         {
             _controller.DoOpenFile();
-            _doc = _controller.BrailleDoc;
         }
 
         private void miFileOpen_Click(object sender, EventArgs e)
@@ -277,8 +303,6 @@ namespace EasyBrailleEdit
                 case "Print":
                     _controller.DoPrint();
                     break;
-                default:
-                    break;
             }
         }
 
@@ -324,12 +348,28 @@ namespace EasyBrailleEdit
 
         private void EditPageTitles()
         {
-            DualEditTitleForm fm = new DualEditTitleForm(BrailleDoc);
-            fm.CellsPerLine = BrailleDoc.CellsPerLine;
-            if (fm.ShowDialog() == DialogResult.OK)
+            if (BrailleDoc.UpdateTitlesLineIndex() > 0)
+            {
+                _controller.IsDirty = true;
+            }
+
+            var form = new DualEditTitleForm(BrailleDoc);
+
+            if (form.ShowDialog() == DialogResult.OK)
             {
                 BrailleDoc.PageTitles.Clear();
-                BrailleDoc.PageTitles = fm.Titles;
+
+                // 複製所有標題列。
+                BraillePageTitle newTitle = null;
+                foreach (BraillePageTitle t in form.Titles)
+                {
+                    if (t.TitleLine.CellCount > 0)
+                    {
+                        newTitle = t.Clone() as BraillePageTitle;
+                        BrailleDoc.PageTitles.Add(newTitle);
+                    }
+                }
+                _controller.IsDirty = true;
             }
         }
 
@@ -416,10 +456,45 @@ namespace EasyBrailleEdit
             }
         }
 
+        private void Undo()
+        {
+            _controller.Undo();
+        }
+
+        private void Redo()
+        {
+            _controller.Redo();
+        }
+
+        private void CutToClipboard()
+        {
+            _controller.CutToClipboard(brGrid);
+        }
+
+        private void CopyToClipboard()
+        {
+            _controller.CopyToClipboard(brGrid);
+        }
+
+        private void PasteFromClipboard()
+        {
+            var activePosition = brGrid.Selection.ActivePosition;
+            if (activePosition.IsEmpty())
+            {
+                MsgBoxHelper.ShowInfo("請先選擇您想要貼上的儲存格，再執行「貼上」操作。");
+                return;
+            }
+            _controller.PasteFromClipboard(brGrid, activePosition.Row, activePosition.Column);
+        }
+
+        private void RemoveDigitSymbol()
+        {
+            _controller.RemoveDigitSymbol();
+        }
+
         private void miEdit_Click(object sender, EventArgs e)
         {
-            string s = (string)(sender as ToolStripMenuItem).Tag;
-            switch (s)
+            switch ((string)(sender as ToolStripMenuItem).Tag)
             {
                 case "DocProperties":
                     EditDocProperties();
@@ -439,7 +514,23 @@ namespace EasyBrailleEdit
                 case "FindNext":
                     FindNext();
                     break;
-                default:
+                case "Undo":
+                    Undo();
+                    break;
+                case "Redo":
+                    Redo();
+                    break;
+                case "Cut":
+                    CutToClipboard();
+                    break;
+                case "Copy":
+                    CopyToClipboard();
+                    break;
+                case "Paste":
+                    PasteFromClipboard();
+                    break;
+                case "RemoveDigitSymbol":
+                    RemoveDigitSymbol();
                     break;
             }
         }
@@ -494,11 +585,6 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void miFileExportTxt_Click(object sender, EventArgs e)
-        {
-            _controller.DoExportTextFile();
-        }
-
         private void miFileExportBrl_Click(object sender, EventArgs e)
         {
             _controller.DoExportBrailleFile();
@@ -509,13 +595,79 @@ namespace EasyBrailleEdit
             ToolStripMenuItem mi = sender as ToolStripMenuItem;
             switch (mi.Tag.ToString())
             {
+                case "Refresh":
+                    _controller.RefreshView();
+                    break;
                 case "Braille":
                     _controller.ViewBraille();
                     break;
                 case "Text":
                     _controller.ViewText();
                     break;
+                case "UndoableOperations":
+                    ViewUndoableOperations();
+                    break;
             }
+        }
+
+        private void miToolsClick(object sender, EventArgs e)
+        {
+            string s = (string)(sender as ToolStripMenuItem).Tag;
+            switch (s)
+            {
+                case "RemoveSharp":
+                    int removedCount = BrailleDocumentHelper.RemoveSharpSymbolFromPageNumbers(BrailleDoc);
+                    if (removedCount > 0)
+                    {
+                        MsgBoxHelper.ShowInfo($"完成。總共移除了 {removedCount} 個 # 號。請核對無誤後再存檔。");
+                        _controller.IsDirty = true;
+                        _controller.RefreshView();
+                    }
+                    else
+                    {
+                        MsgBoxHelper.ShowInfo($"沒有發現任何帶有 # 號的原書頁碼。");
+                    }
+                    break;
+                case "RemoveUselessWords":
+                    int emptyLinesCount;
+                    int emptyTagsCount;
+                    bool doRemove = false;
+                    BrailleDocumentHelper.RemoveUselessLines(BrailleDoc, doRemove, out emptyLinesCount, out emptyTagsCount);
+                    if (emptyLinesCount > 0 || emptyTagsCount > 0)
+                    {
+                        string msg = $"發現 {emptyLinesCount} 個空行，{emptyTagsCount} 個多餘標籤（包括<上位點>）。要刪除它們嗎？";
+                        if (MsgBoxHelper.ShowYesNo(msg) == DialogResult.Yes)
+                        {
+                            doRemove = true;
+                            BrailleDocumentHelper.RemoveUselessLines(BrailleDoc, doRemove, out emptyLinesCount, out emptyTagsCount);
+                            MsgBoxHelper.ShowInfo($"完成。總共移除了 {emptyLinesCount} 個空行，{emptyTagsCount} 個空標籤。請核對無誤後再存檔。");
+                            _controller.IsDirty = true;
+                            _controller.RefreshView();
+                        }
+                    }
+                    else
+                    {
+                        MsgBoxHelper.ShowInfo("沒有發現任何多餘的空行或多餘標籤。");
+                    }
+                    break;
+            }
+        }
+
+        private void ViewUndoableOperations()
+        {
+            if (_undoBufferForm.Visible)
+            {
+                _undoBufferForm.BringToFront();
+            }
+            else
+            {
+                _undoBufferForm.Show();
+            }
+        }
+
+        private async void miFileExportHtml_Click(object sender, EventArgs e)
+        {
+            await _controller.ExportHtmlFileAsync();
         }
     }
 

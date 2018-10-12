@@ -59,7 +59,7 @@
             this.label2.Location = new System.Drawing.Point(48, 128);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 19);
-            this.label2.TabIndex = 1;
+            this.label2.TabIndex = 4;
             this.label2.Text = "點字";
             // 
             // label3
@@ -78,7 +78,7 @@
             this.txtChar.MaxLength = 1;
             this.txtChar.Name = "txtChar";
             this.txtChar.Size = new System.Drawing.Size(70, 29);
-            this.txtChar.TabIndex = 3;
+            this.txtChar.TabIndex = 1;
             this.toolTip1.SetToolTip(this.txtChar, "只能輸入一個字元，若輸入空白字元則為空方。");
             this.txtChar.TextChanged += new System.EventHandler(this.txtChar_TextChanged);
             this.txtChar.Validating += new System.ComponentModel.CancelEventHandler(this.txtChar_Validating);
@@ -90,7 +90,7 @@
             this.cboPhCode.Location = new System.Drawing.Point(106, 77);
             this.cboPhCode.Name = "cboPhCode";
             this.cboPhCode.Size = new System.Drawing.Size(133, 26);
-            this.cboPhCode.TabIndex = 4;
+            this.cboPhCode.TabIndex = 3;
             this.cboPhCode.SelectedIndexChanged += new System.EventHandler(this.cboPhCode_SelectedIndexChanged);
             // 
             // txtBraille
@@ -109,7 +109,7 @@
             this.btnOk.Location = new System.Drawing.Point(69, 194);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 33);
-            this.btnOk.TabIndex = 6;
+            this.btnOk.TabIndex = 7;
             this.btnOk.Text = "確定";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -120,7 +120,7 @@
             this.btnCancel.Location = new System.Drawing.Point(150, 194);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 33);
-            this.btnCancel.TabIndex = 7;
+            this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -130,7 +130,7 @@
             this.btnPickBraille.Location = new System.Drawing.Point(240, 119);
             this.btnPickBraille.Name = "btnPickBraille";
             this.btnPickBraille.Size = new System.Drawing.Size(32, 36);
-            this.btnPickBraille.TabIndex = 8;
+            this.btnPickBraille.TabIndex = 6;
             this.btnPickBraille.UseVisualStyleBackColor = false;
             this.btnPickBraille.Click += new System.EventHandler(this.btnPickBraille_Click);
             // 
@@ -160,7 +160,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditCellForm";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "修改點字";
             this.Load += new System.EventHandler(this.EditCellForm_Load);

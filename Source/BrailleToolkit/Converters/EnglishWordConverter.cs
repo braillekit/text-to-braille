@@ -15,11 +15,12 @@ namespace BrailleToolkit.Converters
     public sealed class EnglishWordConverter : WordConverter
     {
         private EnglishBrailleTable m_Table;
+        private BrailleProcessor _processor;
 
-        public EnglishWordConverter()
-            : base()
+        public EnglishWordConverter(BrailleProcessor processor)
         {
             m_Table = EnglishBrailleTable.GetInstance();
+            _processor = processor;
         }
 
         internal override BrailleTableBase BrailleTable
@@ -40,10 +41,13 @@ namespace BrailleToolkit.Converters
 
             bool done = false;
             char ch;
-			string text;
+			string currentWord;
 			bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
             BrailleWord brWord;
             List<BrailleWord> brWordList = null;
+
+            const string LeftForMathConverter = "*.:()（）,，";
+            const string LeftForCoordinateConverter = "(,)";
 
             while (!done && charStack.Count > 0)
             {
@@ -53,7 +57,7 @@ namespace BrailleToolkit.Converters
                 // 如果在數學區塊中
                 if (context.IsActive(ContextTagNames.Math))
                 {
-                    if (ch == '*' || ch == '.' || ch == ':')
+                    if (LeftForMathConverter.IndexOf(ch) >= 0)
                     {
 						break;  // 以上符號須交給 MathConverter 處理。
                     }
@@ -62,7 +66,7 @@ namespace BrailleToolkit.Converters
                 // 如果在座標區塊中，'('、',' 和 ')' 必須交給 CoordinateConverter 處理。
                 if (context.IsActive(ContextTagNames.Coordinate))
                 {
-                    if (ch == '(' || ch == ',' || ch == ')')
+                    if (LeftForCoordinateConverter.IndexOf(ch) >= 0)
                     {
                         break;
                     }
@@ -79,10 +83,10 @@ namespace BrailleToolkit.Converters
                     }
                 }
 
-                text = ch.ToString();
+                currentWord = ch.ToString();
 
                 // 處理特殊字元。
-                isExtracted = ProcessSpecialEntity(charStack, ref text);
+                isExtracted = ProcessSpecialEntity(charStack, ref currentWord);
 
                 if (!isExtracted)
                 {
@@ -95,7 +99,7 @@ namespace BrailleToolkit.Converters
                         if (ch2 == '.' && ch3 == '.')	// 連續三個點: 刪節號
                         {
                             isExtracted = true;
-                            text = "...";
+                            currentWord = "...";
                         }
                         else
                         {
@@ -108,11 +112,18 @@ namespace BrailleToolkit.Converters
                     // Tab 字元視為一個空白。
                     if (ch == '\t')
                     {
-                        text = " ";
+                        currentWord = " ";
                     }
                 }
 
-                brWord = InternalConvert(text, context);
+                if (context.IsMathActive())
+                {
+                    // 數學區塊裡面的符號，必須留給 MathConverter 處理。
+                    if (_processor.MathConverter.BrailleTable.Exists(currentWord))
+                        break;
+                }
+
+                brWord = InternalConvert(currentWord, context);
                 if (brWord == null)
                      break;
 
@@ -130,7 +141,7 @@ namespace BrailleToolkit.Converters
                     // 不加數字點位。
                     brWord.NoDigitCell = true;
                 }
-				else if (":".Equals(text) && context.IsActive(ContextTagNames.Time))	// 處理時間的冒號。
+				else if (":".Equals(currentWord) && context.IsActive(ContextTagNames.Time))	// 處理時間的冒號。
 				{
 					// 在冒號的點字前面加上 456 點。
 					BrailleCell cell = BrailleCell.GetInstance(new int[] { 4, 5, 6 });

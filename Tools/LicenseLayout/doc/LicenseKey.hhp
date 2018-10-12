@@ -1,0 +1,58 @@
+[FILES]
+LicenseKey.html
+LicenseKeyHierarchy.html
+LicenseKey.Checksum.html
+LicenseKey.ChecksumMembers.html
+LicenseKey.ChecksumConstructor.html
+LicenseKey.ChecksumProperties.html
+LicenseKey.Checksum.ChecksumAlgorithm.html
+LicenseKey.Checksum.ChecksumNumber.html
+LicenseKey.ChecksumMethods.html
+LicenseKey.Checksum.CalculateChecksum.html
+LicenseKey.Checksum.ChecksumType.html
+LicenseKey.GenerateKey.html
+LicenseKey.GenerateKeyMembers.html
+LicenseKey.GenerateKeyConstructor.html
+LicenseKey.GenerateKeyProperties.html
+LicenseKey.GenerateKey.ChecksumAlgorithm.html
+LicenseKey.GenerateKey.LicenseTemplate.html
+LicenseKey.GenerateKey.MaxTokens.html
+LicenseKey.GenerateKey.UseBase10.html
+LicenseKey.GenerateKey.UseBytes.html
+LicenseKey.GenerateKeyMethods.html
+LicenseKey.GenerateKey.AddToken.html
+LicenseKey.GenerateKey.CreateKey.html
+LicenseKey.GenerateKey.DisassembleKey.html
+LicenseKey.GenerateKey.GetLicenseKey.html
+LicenseKey.GenerateKey.TokenTypes.html
+LicenseKey.NumberDisplay.html
+LicenseKey.NumberDisplayMembers.html
+LicenseKey.NumberDisplayConstructor.html
+LicenseKey.NumberDisplayMethods.html
+LicenseKey.NumberDisplay.CreateNumberString.html
+LicenseKey.Randomm.html
+LicenseKey.RandommMembers.html
+LicenseKey.RandommConstructor.html
+LicenseKey.RandommMethods.html
+LicenseKey.Randomm.GetRandomNumber.html
+LicenseKey.Randomm.SetMaxLength.html
+
+[OPTIONS]
+Title=LicenseKey
+Auto Index=Yes
+Binary TOC=Yes
+Compatibility=1.1 or later
+Compiled file=LicenseKey.chm
+Default Window=MsdnHelp
+Default topic=LicenseKey.html
+Display compile progress=No
+Error log file=LicenseKey.log
+Full-text search=Yes
+Index file=LicenseKey.hhk
+Language=0x409 English (United States)
+Contents file=LicenseKey.hhc
+
+[WINDOWS]
+MsdnHelp="LicenseKey Help","LicenseKey.hhc","LicenseKey.hhk","LicenseKey.html","LicenseKey.html",,,,,0x62520,220,0x387e,[86,51,872,558],,,,,,,0
+
+[INFOTYPES]

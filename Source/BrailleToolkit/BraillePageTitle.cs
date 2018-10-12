@@ -15,7 +15,7 @@ namespace BrailleToolkit
     /// </summary>
     [Serializable]
     [DataContract]
-    public class BraillePageTitle : ICloneable
+    public class BraillePageTitle : ICloneable, IComparable
     {
         [DataMember(Name = "TitleLine")]
         private BrailleLine m_TitleLine;
@@ -23,43 +23,41 @@ namespace BrailleToolkit
         [DataMember(Name = "BeginLineIndex")]
         private int m_BeginLineIndex;
 
-        [NonSerialized]
-        private BrailleLine m_BeginLine;
+        public BrailleLine BeginLineRef { get; private set; }
 
         private BraillePageTitle()
         {
             m_TitleLine = null;
             m_BeginLineIndex = -1;
-            m_BeginLine = null;
         }
 
-        public BraillePageTitle(List<BrailleWord> words, int beginLineIndex)
+        public BraillePageTitle(List<BrailleWord> words, int beginLineIdx, BrailleLine beginLine)
+        {
+            SetTitleLine(words, beginLineIdx, beginLine);
+
+        }
+
+        public BraillePageTitle(BrailleLine titleLine, int beginLineIdx, BrailleLine beginLine) : this()
+        {
+            SetTitleLine(titleLine, beginLineIdx, beginLine);
+        }
+
+        private void SetTitleLine(List<BrailleWord> words, int beginLineIdx, BrailleLine beginLine)
         {
             TitleLine = new BrailleLine();
             TitleLine.Words.AddRange(words);
-            BeginLineIndex = beginLineIndex;
+            TitleLine.Tag = beginLineIdx;
+
+            BeginLineIndex = beginLineIdx;
+            BeginLineRef = beginLine;
         }
 
-        public BraillePageTitle(BrailleDocument brDoc, int index) : this()
+        public void SetTitleLine(BrailleLine titleLine, int beginLineIdx, BrailleLine beginLine)
         {
-            SetTitleLine(brDoc, index);
-        }
-
-        public void SetTitleLine(BrailleDocument brDoc, int index)
-        {
-            m_TitleLine = brDoc.Lines[index];
-
-			m_BeginLineIndex = index + 1;   // 從下一列開始就是使用此標題。
-
-			if (m_BeginLineIndex >= brDoc.LineCount)	// 標題列就是文件的最後一列?
-			{
-				//System.Diagnostics.Trace.WriteLine("BraillePageTitle.SetTitleLine: 標題列後面沒有文字內容!");
-				m_BeginLineIndex = -1;
-				m_BeginLine = null;
-				return;
-			}
-
-            m_BeginLine = brDoc.Lines[m_BeginLineIndex];
+            TitleLine = titleLine;
+            TitleLine.Tag = beginLineIdx;
+            BeginLineIndex = beginLineIdx;
+            BeginLineRef = beginLine;
         }
 
         /// <summary>
@@ -69,16 +67,16 @@ namespace BrailleToolkit
         /// <returns></returns>
         public bool UpdateLineIndex(BrailleDocument brDoc)
         {
-            if (m_BeginLine == null)
+            if (BeginLineRef == null)
                 return false;
 
-            int idx = brDoc.Lines.IndexOf(m_BeginLine);
+            int idx = brDoc.Lines.IndexOf(BeginLineRef);
             if (idx < 0)
             {
                 return false;
             }
-            m_BeginLine = brDoc.Lines[idx];
-            m_BeginLineIndex = idx;
+            BeginLineRef = brDoc.Lines[idx];
+            BeginLineIndex = idx;
             return true;
         }
 
@@ -92,7 +90,7 @@ namespace BrailleToolkit
             if (m_BeginLineIndex < 0 || m_BeginLineIndex >= brDoc.LineCount)
                 return false;
 
-            m_BeginLine = brDoc.Lines[m_BeginLineIndex];
+            BeginLineRef = brDoc.Lines[m_BeginLineIndex];
             return true;
         }
         
@@ -105,7 +103,14 @@ namespace BrailleToolkit
         public int BeginLineIndex
         {
             get { return m_BeginLineIndex; }
-            private set { m_BeginLineIndex = value; }
+            private set
+            {
+                m_BeginLineIndex = value;
+                if (TitleLine != null)
+                {
+                    TitleLine.Tag = value;
+                }
+            }
         }
 
         public string ToOriginalTextString()
@@ -115,7 +120,7 @@ namespace BrailleToolkit
                 return String.Empty;
             }
 
-            string text = TitleLine.ToOriginalTextString(null);
+            string text = TitleLine.ToOriginalTextString();
             if (!text.StartsWith(XmlTagHelper.GetBeginTagName(ContextTagNames.Title)))
             {
                 text = XmlTagHelper.EncloseWithTag(text, ContextTagNames.Title);
@@ -131,13 +136,23 @@ namespace BrailleToolkit
 		/// <returns></returns>
 		public object Clone()
 		{
-			BraillePageTitle t = new BraillePageTitle();
-			t.m_TitleLine = (BrailleLine) m_TitleLine.Clone();
-			t.m_BeginLine = m_BeginLine;	// BeginLine 純粹是指標，因此不用深層複製。
-			t.m_BeginLineIndex = m_BeginLineIndex;
-			return t;
+			var newTitle = new BraillePageTitle();
+			newTitle.TitleLine = (BrailleLine) m_TitleLine.Clone();
+			newTitle.BeginLineIndex = m_BeginLineIndex;
+            newTitle.BeginLineRef = BeginLineRef;    // BeginLine 純粹是指標，因此不用深層複製。
+            return newTitle;
 		}
 
-		#endregion
-	}
+        #endregion
+
+        public int CompareTo(object obj)
+        {
+            var title2 = obj as BraillePageTitle;
+            if (title2 == null)
+            {
+                return 0;
+            }
+            return BeginLineIndex - title2.BeginLineIndex;
+        }
+    }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BrailleToolkit;
+using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit.DualEdit
 {
@@ -19,6 +20,18 @@ namespace EasyBrailleEdit.DualEdit
         {
             _doc = doc;
             _grid = grid;
+        }
+
+        public BrailleDocument BrailleDoc
+        {
+            get => _doc;
+            set
+            {
+                if (_doc != value)
+                {
+                    _doc = value;
+                }
+            }
         }
 
         #region 計算點字、列索引的相關函式
@@ -58,7 +71,7 @@ namespace EasyBrailleEdit.DualEdit
         {
             if (_grid[row, col] == null)
             {
-                throw new Exception($"無效的行與列索引: 橫列={row}, 直行={col}。");
+                return null;
             }
 
             return _grid[row, col].Tag as BrailleWord;
@@ -138,6 +151,10 @@ namespace EasyBrailleEdit.DualEdit
             var brWord = _doc.Lines[lineIdx].Words[wordIdx];
             while (col < _grid.ColumnsCount)
             {
+                if (_grid[textRowIdx, col] == null)
+                {
+                    throw new InvalidOperationException($"執行 WordIndexToGridColumn({lineIdx}, {wordIdx})時發現 Grid[{textRowIdx},{col}] 為空!");
+                }
                 var wordInCell = _grid[textRowIdx, col].Tag as BrailleWord;
                 if (ReferenceEquals(wordInCell, brWord))
                 {

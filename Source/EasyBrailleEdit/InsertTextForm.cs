@@ -16,6 +16,17 @@ namespace EasyBrailleEdit
     public partial class InsertTextForm: Form
     {
         private TextToBrailleConverter _converter = new TextToBrailleConverter();
+        private bool _isUsedForPageTitle;
+
+        public bool IsUsedForPageTitle
+        {
+            get => _isUsedForPageTitle;
+            set
+            {
+                _isUsedForPageTitle = value;
+                btnSymbolDocTitle.Visible = !value;
+            }
+        }
 
         public BrailleLine OutputLine { get; private set; }
 
@@ -26,8 +37,6 @@ namespace EasyBrailleEdit
 
         private void InsertTextForm_Load(object sender, EventArgs e)
         {
-            toolBarSymbol2.Visible = false;
-
             lblErrorTitle.Visible = false;
             lblError.Visible = false;
             lblError.Text = "";
@@ -58,6 +67,10 @@ namespace EasyBrailleEdit
                 lblErrorTitle.Visible = _converter.HasError;
                 lblError.Visible = _converter.HasError;
                 lblError.Text = _converter.GetInvalidChars();
+                if (String.IsNullOrWhiteSpace(lblError.Text))
+                {
+                    lblError.Text = _converter.Processor.ErrorMessage;
+                }
             }
             finally
             {
@@ -80,15 +93,16 @@ namespace EasyBrailleEdit
             DialogResult = DialogResult.OK;
         }
 
-        private void toolBarSymbol1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+
+        private void InsertSymbol(ToolStripItem item)
         {
             // 插入符號
-            if (e.ClickedItem.Tag == null)
+            if (item.Tag == null)
             {
-                txtInput.SelectedText = e.ClickedItem.Text;
+                txtInput.SelectedText = item.Text;
                 return;
             }
-            string s = e.ClickedItem.Tag.ToString();
+            string s = item.Tag.ToString();
             if (String.IsNullOrEmpty(s))
             {
                 txtInput.SelectedText = s;
@@ -117,9 +131,19 @@ namespace EasyBrailleEdit
             }
         }
 
+        private void toolBarSymbol1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            InsertSymbol(e.ClickedItem);
+        }
+
         private void InsertTextForm_Shown(object sender, EventArgs e)
         {
             txtInput.Focus();
+        }
+
+        private void toolBarMath_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            InsertSymbol(e.ClickedItem);
         }
     }
 }

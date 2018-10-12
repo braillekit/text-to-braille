@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,31 +115,42 @@ namespace BrailleToolkit.Helpers
         /// </summary>
         /// <param name="line"></param>
         /// <returns>若傳入的字串不是原書頁碼，則傳回空字串。否則傳回原書頁碼的文字（必須是字串，因為頁碼可能是羅馬數字）。</returns>
-        public static string GetOrgPageNumber(string line)
+        public static bool GetOrgPageNumber(string line, out string orgPageNumber)
         {
-            if (String.IsNullOrEmpty(line)) return String.Empty;
+            bool hasOrgPageNumber = false;
+            orgPageNumber = String.Empty;
+
+            if (String.IsNullOrEmpty(line)) return hasOrgPageNumber;
 
             var pageNumberText = String.Empty;
 
             var endTagName = XmlTagHelper.GetEndTagName(ContextTagNames.OrgPageNumber);
             line = line.Trim();
-            if (line.StartsWith(ContextTagNames.OrgPageNumber) && line.EndsWith(endTagName))
+            if (line.StartsWith(ContextTagNames.OrgPageNumber))
             {
-                pageNumberText =
+                hasOrgPageNumber = true;
+                orgPageNumber =
                     line.Replace(ContextTagNames.OrgPageNumber, String.Empty)
                         .Replace(endTagName, String.Empty)
                         .Replace(OrgPageNumberContextTag.LeadingUnderline, String.Empty)
+                        .Replace(ContextTagNames.UpperPosition, String.Empty)
+                        .Replace(XmlTagHelper.GetEndTagName(ContextTagNames.UpperPosition), String.Empty)
                         .Trim();
+                
 
             }
             else if (line.StartsWith(OrgPageNumberContextTag.LeadingUnderlines))
             {
-                pageNumberText =
+                hasOrgPageNumber = true;
+                orgPageNumber =
                     line.Remove(0, OrgPageNumberContextTag.LeadingUnderlines.Length)
-                        .Replace(endTagName, String.Empty);
+                        .Replace(endTagName, String.Empty)
+                        .Replace(ContextTagNames.UpperPosition, String.Empty)
+                        .Replace(XmlTagHelper.GetEndTagName(ContextTagNames.UpperPosition), String.Empty)
+                        .Trim();
             }
 
-            return pageNumberText;
+            return hasOrgPageNumber;
         }
 
 
@@ -158,8 +170,7 @@ namespace BrailleToolkit.Helpers
         {
             string line = brLine.ToString();
 
-            string orgPageNum = GetOrgPageNumber(line);
-            if (String.IsNullOrEmpty(orgPageNum))
+            if (!GetOrgPageNumber(line, out string orgPageNum))
             {
                 return;
             }
@@ -173,6 +184,239 @@ namespace BrailleToolkit.Helpers
                 beginOrgPageNumber = orgPageNum;	// 則起始原書頁碼應該直接使用此頁碼。
             }
             endOrgPageNumber = orgPageNum;
+        }
+
+        /// <summary>
+        /// 刪除雙視文件中所有原書頁碼標籤裡面的 # 號。
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        public static int RemoveSharpSymbolFromPageNumbers(BrailleDocument doc)
+        {
+            int removedCount = 0;
+            foreach(var brLine in doc.Lines)
+            {
+                var text = brLine.ToOriginalTextString();
+                int wordIdx = text.IndexOf("<P>#");
+                if (wordIdx >= 0)
+                {
+                    removedCount += FindAndRemoveSharpSymbol(brLine, wordIdx + 1);
+                }
+                else
+                {
+                    // 若沒有 <P> 標籤，那麼以連續 36 個底線符號開頭的 BrailleLine 也視為原書頁碼
+                    text = brLine.ToString();
+                    wordIdx = text.IndexOf(OrgPageNumberContextTag.LeadingUnderlines);
+                    if (wordIdx >= 0)
+                    {
+                        removedCount += FindAndRemoveSharpSymbol(brLine, wordIdx + 1);
+                    }
+                }
+            }
+            return removedCount;
+
+            // local function
+            int FindAndRemoveSharpSymbol(BrailleLine brLine, int startWordIdx)
+            {
+                for (int i = startWordIdx + 1; i < brLine.WordCount; i++)
+                {
+                    var brWord = brLine[i];
+                    if (brWord.Text == "#" && brWord.CellCount < 1)
+                    {
+                        brLine.RemoveAt(i);
+                        return 1;
+                    }
+                }
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// 移除代表數字的點位。
+        /// </summary>
+        /// <param name="brLine"></param>
+        /// <param name="beginIdx"></param>
+        /// <param name="endIdx"></param>
+        public static void RemoveDigitCell(BrailleLine brLine, int beginIdx, int endIdx)
+        {
+            if (beginIdx < 0 || endIdx < 0 || beginIdx > endIdx)
+                return;
+
+            if (endIdx >= brLine.WordCount)
+            {
+                endIdx = brLine.WordCount - 1;
+            }
+
+            int wordIdx = beginIdx;
+            BrailleWord brWord;
+            string text;
+
+            while (wordIdx <= endIdx)
+            {
+                brWord = brLine[wordIdx];
+                text = brWord.Text;
+
+                if (text.Length > 0 && Char.IsDigit(text[0]) &&
+                    brWord.Cells[0].Value == (byte)BrailleCellCode.Digit)
+                {
+                    brWord.Cells.RemoveAt(0);	// 移除小數點位.
+                }
+
+                wordIdx++;
+            }
+        }
+
+        /// <summary>
+        /// 移除點字數量為 0 的 lines，以及一些空標籤。
+        /// </summary>
+        /// <param name="brLine"></param>
+        /// <param name="doRemove"></param>
+        /// <param name="emptyLinesCount"></param>
+        /// <param name="emptyTagsCount"></param>
+        public static void RemoveUselessWords(BrailleLine brLine, bool doRemove, out int emptyTagsCount)
+        {
+            string[] removableEmptyTags =
+            {
+                ContextTagNames.BrailleTranslatorNote,
+                ContextTagNames.BookName,
+                ContextTagNames.SpecificName,
+                ContextTagNames.Time,
+                ContextTagNames.Coordinate,
+                ContextTagNames.Fraction,
+                ContextTagNames.Phonetic,
+                ContextTagNames.Delete,
+                ContextTagNames.UpperPosition
+            };
+
+            emptyTagsCount = 0;
+            for (int wordIdx = brLine.WordCount - 2; wordIdx >= 0; wordIdx--)
+            {
+                var brWord = brLine[wordIdx];
+                var nextWord = brLine[wordIdx + 1];
+
+                if (IsUselessDigitSymbol(brWord))
+                {
+                    if (doRemove)
+                    {
+                        brLine.RemoveAt(wordIdx);
+                    }
+                    emptyTagsCount++;
+                    continue;
+                }
+
+                if (nextWord.IsContextTag)
+                {
+                    // 一律移除 <上位點>
+                    if (nextWord.OriginalText == ContextTagNames.UpperPosition ||
+                        nextWord.OriginalText == XmlTagHelper.GetEndTagName(ContextTagNames.UpperPosition))
+                    {
+                        if (doRemove)
+                        {
+                            brLine.RemoveAt(wordIdx + 1);
+                        }
+                        emptyTagsCount++;
+                        continue;
+                    }
+                }
+
+                if (!brWord.IsContextTag)
+                    continue;
+                if (!nextWord.IsContextTag)
+                    continue;
+
+                // 當前的 word 和下一個 word 都是 context tag
+
+                foreach (var tagName in removableEmptyTags)
+                {
+                    if (brWord.OriginalText == tagName)
+                    {
+                        var endTagName = XmlTagHelper.GetEndTagName(tagName);
+                        if (nextWord.OriginalText == endTagName)
+                        {
+                            if (doRemove)
+                            {
+                                brLine.RemoveAt(wordIdx + 1);
+                                brLine.RemoveAt(wordIdx);
+                            }
+                            emptyTagsCount++;
+                        }
+                    }
+                }
+            }
+
+            bool IsUselessDigitSymbol(BrailleWord currentWord)
+            {
+                if (currentWord.IsContextTag && currentWord.Text == "#" && currentWord.CellCount < 1)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 移除點字數量為 0 的 lines，以及一些空標籤。
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="doRemove"></param>
+        /// <param name="emptyLinesCount"></param>
+        /// <param name="emptyTagsCount"></param>
+        public static void RemoveUselessLines(BrailleDocument doc, bool doRemove, out int emptyLinesCount, out int emptyTagsCount)
+        {
+            emptyLinesCount = 0;
+            emptyTagsCount = 0;
+
+            for (int lineIdx = doc.LineCount - 1; lineIdx >= 0; lineIdx--)
+            {
+                var brLine = doc.Lines[lineIdx];
+
+                RemoveUselessWords(brLine, doRemove, out int emptyTagsConuntInLine);
+
+                emptyTagsCount += emptyTagsConuntInLine;
+
+                if (brLine.CellCount < 1)
+                {
+                    if (doRemove)
+                    {
+                        doc.RemoveLine(lineIdx);
+                    }
+                    emptyLinesCount++;
+                }
+            }
+        }
+
+        public static async Task ExportToHtmlFileAsync(BrailleDocument doc, string outputFileName)
+        {
+            string cssClassTd = "column";
+            string cssClassBraille = "braille";
+            string cssClassText = "text";
+
+            var sb = new StringBuilder();
+
+            sb.AppendLine("<html charset='UTF-8'>");
+            sb.AppendLine("<head>");
+            sb.AppendLine("<style>");
+            sb.AppendLine("body { font-family: 微軟正黑體; }");
+            sb.AppendLine($".{cssClassTd} {{ text-align: center; }}");
+            sb.AppendLine($".{cssClassBraille} {{ font-family: SimBraille; }}");
+            sb.AppendLine($".{cssClassText} {{  }}");
+            sb.AppendLine("</style>");
+            sb.AppendLine("</head>");
+            sb.AppendLine("<body>");
+
+            using (var writer = new StreamWriter(outputFileName))
+            {
+                await writer.WriteLineAsync(sb.ToString());
+
+                await writer.WriteLineAsync("<table>");
+                foreach (var brLine in doc.Lines)
+                {
+                    await writer.WriteLineAsync(brLine.ToHtmlString("  ", cssClassTd, cssClassBraille, cssClassText));
+                }
+                await writer.WriteLineAsync("</table>");
+
+                await writer.WriteLineAsync("</body></html>");
+            }
         }
 
     }

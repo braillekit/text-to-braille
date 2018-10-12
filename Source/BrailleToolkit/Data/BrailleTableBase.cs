@@ -25,5 +25,12 @@ namespace BrailleToolkit.Data
 		/// <param name="text">欲搜尋的符號。</param>
 		/// <returns>若有找到，則傳回對應的點字碼，否則傳回空字串。</returns>
 		public abstract string Find(string text);
+
+        /// <summary>
+        /// 單純用來判斷某符號是否存在此點字對照表，不取出點字碼。速度比 Find 快。
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public abstract bool Exists(string text);
 	}
 }

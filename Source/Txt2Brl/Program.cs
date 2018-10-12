@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using CommandLine;
 using EasyBrailleEdit.Common;
 using Serilog;
@@ -19,7 +21,10 @@ namespace Txt2Brl
                 .WriteTo.RollingFile(@"Logs\log-txt2brl-{Date}.txt")
                 .CreateLogger();
 
-            Console.WriteLine("Txt2Brl version 3.8 Copyright(c) 2007-2018 Michael Tsai.\n");
+            string filename = Assembly.GetExecutingAssembly().Location;
+            string fileVer = FileVersionInfo.GetVersionInfo(filename).FileVersion;
+
+            Console.WriteLine($"Txt2Brl version {fileVer} Copyright(c) 2007-2018 Michael Tsai.\n");
 
             CommandLine.Parser.Default.ParseArguments<Options>(args)
                .WithParsed<Options>(opts => RunOptionsAndReturnExitCode(opts));

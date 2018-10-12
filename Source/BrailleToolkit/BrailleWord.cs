@@ -39,12 +39,6 @@ namespace BrailleToolkit
         [NonSerialized]
         private bool m_IsContextTag;
 
-        [NonSerialized]
-        private bool m_NoDigitCell;             // 是否不加數符。
-
-        [NonSerialized]
-        private bool m_IsEngPhonetic;			// 是否為英語音標（用來判斷不要加空方）.
-
         //private bool m_QuotationResolved;	// 是否已經識別出左右引號（英文的單引號和雙引號都是同一個符號，但點字不同）
 
         public BrailleWord(string text)
@@ -62,8 +56,8 @@ namespace BrailleToolkit
             ContextNames = String.Empty;
 
             m_IsContextTag = false;
-            m_NoDigitCell = false;
-            m_IsEngPhonetic = false;
+            NoDigitCell = false;
+            IsEngPhonetic = false;
         }
 
         public BrailleWord(string text, BrailleCellCode brCode) : this(text)
@@ -371,7 +365,8 @@ namespace BrailleToolkit
             BrailleWord newBrWord = new BrailleWord(Text);
             newBrWord.Language = Language;
             newBrWord.DontBreakLineHere = DontBreakLineHere;
-            newBrWord.NoDigitCell = m_NoDigitCell;
+            newBrWord.NoDigitCell = NoDigitCell;
+            newBrWord.NoSpace = NoSpace;
             newBrWord.PhoneticCode = PhoneticCode;
             newBrWord.IsPolyphonic = IsPolyphonic;
             newBrWord.IsContextTag = IsContextTag;
@@ -603,17 +598,25 @@ namespace BrailleToolkit
         [DataMember]
         public bool IsConvertedFromTag { get; set; }
 
-        public bool NoDigitCell
-        {
-            get { return m_NoDigitCell; }
-            set { m_NoDigitCell = value; }
-        }
+        /// <summary>
+        /// 是否不加數符。
+        /// </summary>
+        public bool NoDigitCell { get; set; }
 
-        public bool IsEngPhonetic
-        {
-            get { return m_IsEngPhonetic; }
-            set { m_IsEngPhonetic = value; }
-        }
+        /// <summary>
+        /// 是否前後都不加空方。
+        /// </summary>
+        public bool NoSpace { get; set; }
+
+        /// <summary>
+        /// 是否不要套用英文字母大寫規則。最初設計目的是給 UrlConverter 使用。
+        /// </summary>
+        public bool NoCapitalRule { get; set; }
+
+        /// <summary>
+        /// 是否為英語音標（用來判斷不要加空方）.
+        /// </summary>
+        public bool IsEngPhonetic { get; set; }
 
         /// <summary>
         /// 檢查指定的 BrailleWord 是否為數字編號的起始點字。亦即以 # 開頭的數字。

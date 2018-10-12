@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EasyBrailleEdit.Common;
 using Huanlin.Windows.Forms;
+using Serilog;
 
 namespace EasyBrailleEdit.DualEdit
 {
@@ -50,6 +52,9 @@ namespace EasyBrailleEdit.DualEdit
                 case DualEditCommand.Names.InsertText:
                     InsertText(grid, row, col);
                     break;
+                case DualEditCommand.Names.InsertTable:
+                    InsertTable(grid, row, col);
+                    break;
                 case DualEditCommand.Names.DeleteWord:
                     DeleteWord(grid, row, col);
                     break;
@@ -65,8 +70,14 @@ namespace EasyBrailleEdit.DualEdit
                 case DualEditCommand.Names.CopyToClipboard:
                     CopyToClipboard(grid);
                     break;
+                case DualEditCommand.Names.CutToClipboard:
+                    CutToClipboard(grid);
+                    break;
                 case DualEditCommand.Names.PasteFromClipboard:
                     PasteFromClipboard(grid, row, col);
+                    break;
+                case DualEditCommand.Names.RemoveDigitSymbol:
+                    RemoveDigitSymbol();
                     break;
             }
             Debugger.ShouldEveryGridCellHasBrailleWord();
@@ -76,22 +87,41 @@ namespace EasyBrailleEdit.DualEdit
         {
             var lineIdx = _positionMapper.GridRowToBrailleLineIndex(e.Row);
             var brLine = BrailleDoc.Lines[lineIdx];
-            _form.CurrentLineStatusText = brLine.ToOriginalTextString(null);
+            _form.CurrentLineStatusText = brLine.ToOriginalTextString();
+
+            var pageTitle = BrailleDoc.FindPageTitleByBeginLine(brLine);
+            if (pageTitle != null)
+            {
+                _form.CurrentPageTitleStatusText = $"頁標：{pageTitle.TitleLine.ToString()}";
+            }
+            else
+            {
+                _form.CurrentPageTitleStatusText = String.Empty;
+            }
         }
 
         public void GridSelection_CellGotFocus(SourceGrid.ChangeActivePositionEventArgs e)
         {
             var lineIdx = _positionMapper.GridRowToBrailleLineIndex(e.NewFocusPosition.Row);
             var brWord = _positionMapper.GetBrailleWordFromGridCell(e.NewFocusPosition.Row, e.NewFocusPosition.Column);
+
+            if (brWord == null)
+            {
+                Log.Error($"目前點選的儲存格沒有關聯的 BrailleWord 物件! 檔名:{FileName}, Row={e.NewFocusPosition.Row}, Col={e.NewFocusPosition.Column}, lineIdx={lineIdx}, 該列內容: '{BrailleDoc.Lines[lineIdx].ToOriginalTextString()}'");
+                e.Cancel = true;
+                return;
+            }
+
             var brWordIdx = BrailleDoc.Lines[lineIdx].IndexOf(brWord);
 
             if (brWordIdx < 0)
             {
-                MsgBoxHelper.ShowError("程式錯誤! 找不到目前選取之儲存格所對應的點字物件。請通知程式開發人員，謝謝。");
+                Log.Error($"找不到目前點選的儲存格所關聯的 BrailleWord 物件的索引位置! 檔名:{FileName}, Row={e.NewFocusPosition.Row}, Col={e.NewFocusPosition.Column}, lineIdx={lineIdx}, BrailleWord 內容: {brWord.ToString()}, 該列內容: '{BrailleDoc.Lines[lineIdx].ToOriginalTextString()}'");
+                e.Cancel = true;
                 return;
             }
 
-            _form.CurrentWordStatusText = $"{brWord.Text} (文件索引:第 {lineIdx} 行，第 {brWordIdx} 字。儲存格索引:橫列={e.NewFocusPosition.Row}，直欄={e.NewFocusPosition.Column})";
+            _form.CurrentWordStatusText = $"{brWord.Text}  |  共 {brWord.CellCount} 方點字  |  文件索引:第 {lineIdx} 行，第 {brWordIdx} 字  |  儲存格索引:橫列={e.NewFocusPosition.Row}，直欄={e.NewFocusPosition.Column})";
 
             // 顯示目前焦點所在的儲存格屬於第幾頁。
             int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
@@ -121,72 +151,90 @@ namespace EasyBrailleEdit.DualEdit
 
         public void Form_KeyDown(KeyEventArgs e)
         {
+            if (IsBusy)
+            {
+                // 如果正忙著處理先前的編輯操作，就暫不接受鍵盤輸入，以免產生奇怪的狀況，
+                // 例如按住 Ctrl+Del 不放，會出現 BrailleLine 裡面找不到儲存格所關聯的 BrailleWord 物件。
+                return;
+            }
+
             int row = _grid.Selection.ActivePosition.Row;
             int col = _grid.Selection.ActivePosition.Column;
 
-            if (e.Modifiers == Keys.Control)
+            if (row < 0 || col < 0)
             {
-                switch (e.KeyCode)
+                return;
+            }
+
+            IsBusy = true;
+            try
+            {
+                if (e.Modifiers == Keys.None)
                 {
-                    case Keys.I:        // Ctrl+I: 新增點字。
-                        InsertWord(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.Insert:    // Ctrl+Ins: 新增一串文字。
-                        InsertText(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.Delete:   // Ctrl+Delete: 刪除一格點字。
-                        DeleteWord(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.E:        // Ctrl+E: 刪除一列。
-                        DeleteLine(_grid, row, col, true);
-                        e.Handled = true;
-                        break;
-                    case Keys.C:
-                        CopyToClipboard(_grid);
-                        break;
-                    case Keys.V:
-                        PasteFromClipboard(_grid, row, col);
-                        break;
+                    switch (e.KeyCode)
+                    {
+                        case Keys.F4:
+                            EditWord(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.Back:     // 倒退刪除
+                            BackspaceCell(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.Left:
+                            GridSelectLeftWord(row, col);
+                            e.Handled = true;
+                            break;
+                    }
+                }
+                else if (e.Modifiers == Keys.Control)
+                {
+                    switch (e.KeyCode)
+                    {
+                        case Keys.I:        // Ctrl+I: 新增點字。
+                            InsertWord(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.Insert:    // Ctrl+Ins: 新增一串文字。
+                            InsertText(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.Delete:   // Ctrl+Delete: 刪除一格點字。
+                            DeleteWord(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.E:        // Ctrl+E: 刪除一列。
+                            DeleteLine(_grid, row, col, true);
+                            e.Handled = true;
+                            break;
+                    }
+                }
+                else if (e.Modifiers == (Keys.Control | Keys.Shift))
+                {
+                    switch (e.KeyCode)
+                    {
+                        case Keys.A:
+                            AddLine(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.I:
+                            InsertLine(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.F:    // 段落重整
+                            FormatParagraph(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                        case Keys.T:
+                            InsertTable(_grid, row, col);
+                            e.Handled = true;
+                            break;
+                    }
                 }
             }
-            else if (e.Modifiers == (Keys.Control | Keys.Shift))
+            finally
             {
-                switch (e.KeyCode)
-                {
-                    case Keys.A:
-                        AddLine(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.I:
-                        InsertLine(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.F:    // 段落重整
-                        FormatParagraph(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                }
-            }
-            else
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.F4:
-                        EditWord(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.Back:     // 倒退刪除
-                        BackspaceCell(_grid, row, col);
-                        e.Handled = true;
-                        break;
-                    case Keys.Left:
-                        GridSelectLeftWord(row, col);
-                        e.Handled = true;
-                        break;
-                }
+                IsBusy = false;
             }
         }
     }
