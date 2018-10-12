@@ -292,18 +292,8 @@ namespace BrailleToolkit.Converters
 
             if (text.IsCJK())  // 若是漢字
             {
-                /* 2010-01-03: 不取得所有的注音字根，只取得一組預設的字根，且判斷是否為多音字。等到編輯時使用者要更換注音，才取出所有字根。
-                    // 取得破音字的所有組字字根，每一組字根長度固定為 4 個字元，不足者以全型空白填補。
-                    string[] phCodes = ZhuyinQueryHelper.GetZhuyinSymbols(text, true);  
-                    if (phCodes.Length > 0)
-                    {
-                        brWord.SetPhoneticCodes(phCodes);
-                        phcode = phCodes[0];    // 指定第一組字根為預設的字根。
-                    }
-                */
-
                 // 取得注音字根
-                string[] zhuyinCodes = ZhuyinConverter.GetZhuyin(text);
+                string[] zhuyinCodes = ZhuyinConverter.GetZhuyinWithPhraseTable(text);
 
                 //if (zhuyinCodes == null || zhuyinCodes.Length == 0)
                 //{

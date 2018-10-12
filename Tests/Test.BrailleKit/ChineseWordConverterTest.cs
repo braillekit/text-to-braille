@@ -49,6 +49,27 @@ namespace Test.BrailleToolkit
 			CollectionAssert.AreEqual(expected, actual);
         }
 
+        [TestCase("斜", "　ㄨㄛˇ", "1208")]
+        public void Should_ConvertWithPhrase_Succeed(string text, string phCode, string brCode)
+        {
+            ZhuyinPhraseTable.GetInstance().AddPhrase("斜 ㄨㄛˇ");
+
+            var processor = BrailleProcessor.GetInstance();
+            var target = new ChineseWordConverter(processor);
+
+            ContextTagManager context = new ContextTagManager();
+
+            Stack<char> charStack = new Stack<char>(text);
+            List<BrailleWord> expected = new List<BrailleWord>();
+            BrailleWord brWord = new BrailleWord(text, phCode, brCode);
+            expected.Add(brWord);
+            List<BrailleWord> actual = target.Convert(charStack, context);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+
+
         [TestCase("／")]   // 測試無法轉換的字元：/
         public void Should_ConvertInvalidWord_Fail(string text)
         {
