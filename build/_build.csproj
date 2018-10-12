@@ -31,4 +31,8 @@
     <None Include="..\GitVersion.yml" Condition="Exists('..\GitVersion.yml')" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Source\EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using EasyBrailleEdit.Common;
 using Nuke.Common;
 using Nuke.Common.Git;
 using Nuke.Common.ProjectModel;
@@ -53,6 +54,26 @@ class Build : NukeBuild
                 .SetFileVersion(GitVersion.GetNormalizedFileVersion())
                 .SetInformationalVersion(GitVersion.InformationalVersion)
                 .EnableNoRestore());
+
+            string outputDir = OutputDirectory / "net471";
+
+            //                if (GitRepository.Branch.Equals(Constant.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase))
+            //                {
+            string srcFileName = Path.Combine(outputDir, "AppConfig.ForBlind.ini");
+            string dstFileName = Path.Combine(outputDir, "AppConfig.Default.ini");
+
+            Logger.Info(Environment.NewLine + "**********<<< 額外處理 >>>****************");
+            Logger.Info($"使用特定分支版本的預設應用程式組態檔：'{Constant.ProductBranches.TaipeiForBlind}'");
+            File.Copy(srcFileName, dstFileName, true);
+            File.Delete(srcFileName);
+            //                }
+
+            // Removing unnecessary files.
+            var dir = new DirectoryInfo(outputDir);
+            foreach (var file in dir.EnumerateFiles("*.pdb"))
+            {
+                file.Delete();
+            }
         });
 
     Target Deploy => _ => _
@@ -60,7 +81,7 @@ class Build : NukeBuild
             .Requires(() => GitVersion != null)
             .Executes(() =>
             {
-                var outputDir = OutputDirectory / "net452";
+                var outputDir = OutputDirectory / "net471";
                 var updateDir = RootDirectory / "UpdateFiles";
 
                 Logger.Log($"From: {outputDir}");
