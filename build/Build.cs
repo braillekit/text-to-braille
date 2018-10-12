@@ -1,87 +1,66 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
-using EasyBrailleEdit.Common;
-using Nuke.Common.Git;
-using Nuke.Common.Tools.GitVersion;
 using Nuke.Common;
-using static Nuke.Common.Tools.MSBuild.MSBuildTasks;
+using Nuke.Common.Git;
+using Nuke.Common.ProjectModel;
+using Nuke.Common.Tools.DotNet;
+using Nuke.Common.Tools.GitVersion;
+using static Nuke.Common.EnvironmentInfo;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
+using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 class Build : NukeBuild
 {
-    // Console application entry. Also defines the default target.
-    public static int Main() => Execute<Build>(x => x.Compile);
+    public static int Main () => Execute<Build>(x => x.Compile);
 
-    // Auto-injection fields:
+    [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
+    readonly string Configuration = IsLocalBuild ? "Debug" : "Release";
 
-    [GitVersion] readonly GitVersion GitVersion;
-    // Semantic versioning. Must have 'GitVersion.CommandLine' referenced.
-
+    [Solution("Source/EasyBrailleEdit.sln")] readonly Solution Solution;
     [GitRepository] readonly GitRepository GitRepository;
-    // Parses origin, branch name and head from git config.
+    [GitVersion] readonly GitVersion GitVersion;
 
-    // [Parameter] readonly string MyGetApiKey;
-    // Returns command-line arguments and environment variables.
+    AbsolutePath SourceDirectory => RootDirectory / "source";
+    AbsolutePath TestsDirectory => RootDirectory / "tests";
+    AbsolutePath OutputDirectory => RootDirectory / "output";
 
     Target Clean => _ => _
-            //.OnlyWhen(() => false) // Disabled for safety.
-            .Executes(() =>
-            {
-                try
-                {
-                    // note: 當 Visual Studio 已經開啟應用程式專案，以下刪除操作會因為目錄被鎖住而失敗。
-                    DeleteDirectories(GlobDirectories(SourceDirectory, "**/bin", "**/obj"));
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error($"刪除原始碼目錄下的 **/bin 和 **/obj 時發生錯誤: {ex.Message}");
-                }
-                EnsureCleanDirectory(OutputDirectory);
-            });
+        .Executes(() =>
+        {
+            DeleteDirectories(GlobDirectories(SourceDirectory, "**/bin", "**/obj"));
+            DeleteDirectories(GlobDirectories(TestsDirectory, "**/bin", "**/obj"));
+            EnsureCleanDirectory(OutputDirectory);
+        });
 
     Target Restore => _ => _
-            .DependsOn(Clean)
-            .Executes(() =>
-            {
-                MSBuild(s => DefaultMSBuildRestore);
-            });
+        .DependsOn(Clean)
+        .Executes(() =>
+        {
+            DotNetRestore(s => s
+                .SetProjectFile(Solution));
+        });
 
     Target Compile => _ => _
-            .DependsOn(Restore)
-            .Requires(() => GitVersion != null)
-            .Executes(() =>
-            {
-                MSBuild(s => DefaultMSBuildCompile);
-
-                string outputDir = OutputDirectory / "net471";
-
-//                if (GitRepository.Branch.Equals(Constant.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase))
-//                {
-                string srcFileName = Path.Combine(outputDir, "AppConfig.ForBlind.ini");
-                string dstFileName = Path.Combine(outputDir, "AppConfig.Default.ini");
-
-                Logger.Info(Environment.NewLine + "**********<<< 額外處理 >>>****************");
-                Logger.Info($"使用特定分支版本的預設應用程式組態檔：'{Constant.ProductBranches.TaipeiForBlind}'");
-                File.Copy(srcFileName, dstFileName, true);
-                File.Delete(srcFileName);
-//                }
-
-                // Removing unnecessary files.
-                var dir = new DirectoryInfo(outputDir);
-                foreach (var file in dir.EnumerateFiles("*.pdb"))
-                {
-                    file.Delete();
-                }
-            });
+        .DependsOn(Restore)
+        .Executes(() =>
+        {
+            DotNetBuild(s => s
+                .SetProjectFile(Solution)
+                .SetConfiguration(Configuration)
+                .SetAssemblyVersion(GitVersion.GetNormalizedAssemblyVersion())
+                .SetFileVersion(GitVersion.GetNormalizedFileVersion())
+                .SetInformationalVersion(GitVersion.InformationalVersion)
+                .EnableNoRestore());
+        });
 
     Target Deploy => _ => _
             .DependsOn(Compile)
             .Requires(() => GitVersion != null)
             .Executes(() =>
-            {              
-                var outputDir = OutputDirectory / "net471";
+            {
+                var outputDir = OutputDirectory / "net452";
                 var updateDir = RootDirectory / "UpdateFiles";
 
                 Logger.Log($"From: {outputDir}");
@@ -103,12 +82,11 @@ class Build : NukeBuild
 
                     Logger.Log($"Copied {fname}");
                 }
-                
+
                 string changeLogFile = RootDirectory / "Doc/ChangeLog.txt";
                 File.Copy(changeLogFile, updateDir / Path.GetFileName(changeLogFile), true);
                 Logger.Log($"\r\nCopied {Path.GetFileName(changeLogFile)}");
 
                 // Don't forget to manually modify Update.txt.
             });
-
 }
