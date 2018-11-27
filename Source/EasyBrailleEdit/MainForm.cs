@@ -902,12 +902,20 @@ namespace EasyBrailleEdit
             s = s.Replace(@"\n", "\n");
 
             int i = s.IndexOf('|');
-            if (i >= 0)
+            if (i >= 0) // 有包含 '|' 字元者代表成對的標記或符號。
             {
-                rtbOrg.SelectedText = s.Remove(i, 1);
+                int selectionLength = rtbOrg.SelectionLength;
+                var leftPart = s.Substring(0, i);
+                var rightPart = s.Substring(i + 1);
+                rtbOrg.SelectedText = leftPart + rtbOrg.SelectedText + rightPart;
+                //rtbOrg.SelectedText = s.Remove(i, 1);
                 rtbOrg.Update();
                 Application.DoEvents();
-                rtbOrg.SelectionStart -= (s.Length - i - 1);
+
+                if (selectionLength < 1)
+                {
+                    rtbOrg.SelectionStart -= (s.Length - i - 1);
+                }
             }
             else
             {
