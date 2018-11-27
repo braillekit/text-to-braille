@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 using BrailleToolkit;
-using BrailleToolkit.Converters;
 using BrailleToolkit.Helpers;
-using BrailleToolkit.Tags;
 using EasyBrailleEdit.Common;
 using EasyBrailleEdit.DualEdit;
 using EasyBrailleEdit.Forms;
-using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
@@ -466,6 +462,11 @@ namespace EasyBrailleEdit
             _controller.Redo();
         }
 
+        private void SelectAll()
+        {
+            _controller.SelectAll(brGrid);
+        }
+
         private void CutToClipboard()
         {
             _controller.CutToClipboard(brGrid);
@@ -519,6 +520,9 @@ namespace EasyBrailleEdit
                     break;
                 case "Redo":
                     Redo();
+                    break;
+                case "SelectAll":
+                    SelectAll();
                     break;
                 case "Cut":
                     CutToClipboard();

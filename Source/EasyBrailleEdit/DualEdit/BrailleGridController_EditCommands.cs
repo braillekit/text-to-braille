@@ -1007,6 +1007,14 @@ namespace EasyBrailleEdit.DualEdit
             int deletedLineCount = endLineIdx - startLineIdx + 1;
             grid.Rows.RemoveRange(startRow, 3 * deletedLineCount);
 
+            if (grid.RowsCount == grid.FixedRows)
+            {
+                // 不能全刪，至少要有一個空方，否則會因為沒有任何儲存格 UI 而無法使用任何編輯功能。
+                BrailleDoc.EnsureAtLeastOneWord();
+                GridEnsureAtLeastOneRow();
+                FillGrid();
+            }
+
             RefreshRowNumbers();
 
             GridSelectRow(startRow, false);
@@ -1143,6 +1151,13 @@ namespace EasyBrailleEdit.DualEdit
                 }
                 result.Add(newBrLine);
             }
+        }
+
+
+        public void SelectAll(Grid grid)
+        {
+            var range = new Range(grid.FixedRows, grid.FixedColumns, grid.RowsCount-1, grid.ColumnsCount - grid.FixedColumns);
+            grid.Selection.SelectRange(range, true);
         }
 
         public void CopyToClipboard(Grid grid)

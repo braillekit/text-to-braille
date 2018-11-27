@@ -920,5 +920,13 @@ namespace EasyBrailleEdit.DualEdit
             }
         }
 
+        public void GridEnsureAtLeastOneRow()
+        {
+            if (_grid.RowsCount == _grid.FixedRows)
+            {
+                GridInsertRowAt(_grid.FixedRows);
+            }
+        }
+
     }
 }

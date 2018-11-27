@@ -67,6 +67,9 @@ namespace EasyBrailleEdit.DualEdit
                 case DualEditCommand.Names.FormatParagraph:
                     FormatParagraph(grid, row, col);
                     break;
+                case DualEditCommand.Names.SelectAll:
+                    SelectAll(grid);
+                    break;
                 case DualEditCommand.Names.CopyToClipboard:
                     CopyToClipboard(grid);
                     break;

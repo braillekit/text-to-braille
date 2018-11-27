@@ -14,6 +14,7 @@ namespace EasyBrailleEdit.DualEdit
             public const string AppendWord = "AppendWord";  // 在列尾插入空方
             public const string BackDeleteWord = "BackDeleteWord";
             public const string BreakLine = "BreakLine";
+            public const string SelectAll = "SelectAll";
             public const string CopyToClipboard = "CopyToClipboard";
             public const string CutToClipboard = "CutToClipboard";
             public const string DeleteLine = "DeleteLine";

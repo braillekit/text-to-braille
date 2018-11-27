@@ -39,6 +39,7 @@ namespace EasyBrailleEdit.DualEdit
                 $"刪除整行(&R);{DualEditCommand.Names.DeleteLine};" + ((int)Shortcut.CtrlE).ToString(),
                 $"段落重整(&F);{DualEditCommand.Names.FormatParagraph};" + ((int)Shortcut.CtrlShiftF).ToString(),
                 "-;",
+                $"全選;{DualEditCommand.Names.SelectAll};" + ((int)Shortcut.CtrlA).ToString(),
                 $"剪下;{DualEditCommand.Names.CutToClipboard};" + ((int)Shortcut.CtrlX).ToString(),
                 $"複製;{DualEditCommand.Names.CopyToClipboard};" + ((int)Shortcut.CtrlC).ToString(),
                 $"貼上;{DualEditCommand.Names.PasteFromClipboard};" + ((int)Shortcut.CtrlV).ToString()

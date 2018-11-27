@@ -392,6 +392,19 @@ namespace BrailleToolkit
             m_Lines.RemoveAt(index);
         }
 
+        /// <summary>
+        /// 確保至少有一個字。
+        /// </summary>
+        public void EnsureAtLeastOneWord()
+        {
+            if (Lines.Count == 0)
+            {
+                var brLine = new BrailleLine();
+                brLine.Words.Add(BrailleWord.BlankWord);
+                AddLine(brLine);
+            }
+        }
+
         public void Clear()
         {
             m_Lines.Clear();
