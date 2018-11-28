@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net471</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <Authors>Michael Tsai</Authors>
     <Company>Michael Tsai</Company>
     <Copyright>Copyright (c) 2008-2018 Michael Tsai</Copyright>
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

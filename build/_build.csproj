@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>net461</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <RootNamespace></RootNamespace>
     <IsPackable>False</IsPackable>
@@ -11,13 +11,14 @@
 
   <ItemGroup>
     <PackageReference Include="Nuke.Common" Version="0.12.2" />
-    <PackageReference Include="GitVersion.CommandLine" Version="4.0.0" />
+    <PackageReference Include="GitVersion.CommandLine" Version="3.6.5" />
   </ItemGroup>
 
   <ItemGroup>
     <NukeMetadata Include="**\*.json" Exclude="bin\**;obj\**" />
     <NukeExternalFiles Include="**\*.*.ext" Exclude="bin\**;obj\**" />
     <None Remove="*.csproj.DotSettings;*.ref.*.txt" />
+    <Compile Include="..\Source\EasyBrailleEdit.Common\Constant.cs" Link="Constant.cs" />
     
     <!-- Common build related files -->
     <None Include="..\build.ps1" />
@@ -29,10 +30,6 @@
     <None Include="..\appveyor.yml" Condition="Exists('..\appveyor.yml')" />
     <None Include="..\.travis.yml" Condition="Exists('..\.travis.yml')" />
     <None Include="..\GitVersion.yml" Condition="Exists('..\GitVersion.yml')" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Source\EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj" />
   </ItemGroup>
 
 </Project>
