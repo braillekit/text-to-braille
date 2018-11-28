@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "©öÂIÂùµø"
-#define MyAppVersion "3.12.3"
+#define MyAppVersion "3.14.0"
 #define MyAppPublisher "Michael Tsai"
 #define MyAppExeName "EasyBrailleEdit.exe"
 
@@ -57,6 +57,7 @@ Source: "Files\x86\Serilog.Settings.AppSettings.dll"; DestDir: "{app}"; Flags: i
 Source: "Files\x86\Serilog.Sinks.File.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Serilog.Sinks.RollingFile.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\SourceGrid.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\System.Reflection.TypeExtensions.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\System.ValueTuple.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: "Fonts\simbrl.ttf"; DestDir: "{fonts}"; Flags: onlyifdoesntexist uninsneveruninstall; FontInstall: "SimBraille"
