@@ -20,6 +20,7 @@ using Huanlin.Http;
 using Huanlin.Windows.Forms;
 using Huanlin.Windows.Sys;
 using Serilog;
+using ScintillaNET;
 
 namespace EasyBrailleEdit
 {
@@ -27,6 +28,8 @@ namespace EasyBrailleEdit
     {
         string m_FileName;
         bool m_Modified;	// 檔案內容是否有修改過。        
+
+        private Scintilla m_TextArea;
 
         private InvalidCharForm m_InvalidCharForm;
 
@@ -46,10 +49,55 @@ namespace EasyBrailleEdit
             m_FileRunner = new FileRunner();
 
             m_Modified = false;
-            NewFile();
         }
 
         #region 方法
+
+
+        private void InitTextArea()
+        {
+            m_TextArea = new Scintilla();
+            panFill.Controls.Add(m_TextArea);
+
+            m_TextArea.Dock = DockStyle.Fill;
+            m_TextArea.Margin = new Padding(3);
+
+            // Line numbers
+            m_TextArea.Margins[0].Type = MarginType.Number;
+            m_TextArea.Margins[0].Width = 35;
+
+            // Styling
+            m_TextArea.Lexer = Lexer.Xml;
+            foreach (var style in m_TextArea.Styles)
+            {
+                style.Font = "微軟正黑體";
+                style.SizeF = panFill.Font.Size;
+            };
+            m_TextArea.Styles[Style.Xml.Tag].Font = "標楷體";
+            m_TextArea.Styles[Style.Xml.Tag].Bold = true;
+            m_TextArea.Styles[Style.Xml.Tag].ForeColor = Color.Maroon;
+            m_TextArea.Styles[Style.Xml.TagEnd].Font = "標楷體";
+            m_TextArea.Styles[Style.Xml.TagEnd].Bold = true;
+            m_TextArea.Styles[Style.Xml.TagEnd].ForeColor = Color.Maroon;
+
+            m_TextArea.CaretWidth = 3;
+            m_TextArea.CaretForeColor = Color.Blue;
+
+            // Events
+            m_TextArea.TextChanged += TextArea_TextChanged;
+            m_TextArea.UpdateUI += TextArea_UpdateUI;
+        }
+
+        private void TextArea_TextChanged(object sender, EventArgs e)
+        {
+            Modified = true;
+        }
+
+        private void TextArea_UpdateUI(object sender, UpdateUIEventArgs e)
+        {
+            UpdateCaretPosition();
+        }
+
 
         private void NewFile()
         {
@@ -63,8 +111,9 @@ namespace EasyBrailleEdit
                     SaveFile();
                 }
             }
-            rtbOrg.Clear();
-            rtbOrg.ClearUndo();
+
+            m_TextArea.Clear();
+            m_TextArea.EmptyUndoBuffer();
             Modified = false;
             FileName = "";
         }
@@ -94,26 +143,29 @@ namespace EasyBrailleEdit
                     string s = dlg.FileName.Replace(Constant.Files.DefaultMainBrailleFileExt, ".txt");
                     if (File.Exists(s))
                     {
-                        this.FileName = s;
+                        FileName = s;
                         if (FileHelper.IsUTF8Encoded(FileName))
                         {
-                            rtbOrg.Text = File.ReadAllText(FileName, Encoding.UTF8);
+                            m_TextArea.Text = File.ReadAllText(FileName, Encoding.UTF8);
                         }
-                        rtbOrg.LoadFile(FileName, RichTextBoxStreamType.PlainText);
+                        else
+                        {
+                            m_TextArea.Text = File.ReadAllText(FileName, Encoding.Default);
+                        }
                     }
 
                     OpenBrailleFileInEditor(dlg.FileName);
                 }
                 else
                 {
-                    this.FileName = dlg.FileName;
+                    FileName = dlg.FileName;
                     if (FileHelper.IsUTF8Encoded(FileName))
                     {
-                        rtbOrg.Text = File.ReadAllText(FileName, Encoding.UTF8);
+                        m_TextArea.Text = File.ReadAllText(FileName, Encoding.UTF8);
                     }
                     else
                     {
-                        rtbOrg.LoadFile(FileName, RichTextBoxStreamType.PlainText);
+                        m_TextArea.Text = File.ReadAllText(FileName, Encoding.Default);
                     }
                 }
             }
@@ -145,14 +197,16 @@ namespace EasyBrailleEdit
                 busyForm.Close();
             }
 
-            ShowInTaskbar = false;
+            m_TextArea.Enabled = false;
+            Enabled = false;
             try
             {
                 frm.ShowDialog();
             }
             finally
             {
-                ShowInTaskbar = true;
+                Enabled = true;
+                m_TextArea.Enabled = true;
                 Show();
                 BringToFront();
                 Activate();
@@ -165,7 +219,7 @@ namespace EasyBrailleEdit
             {
                 return SaveFileAs();
             }
-            File.WriteAllText(m_FileName, rtbOrg.Text, Encoding.UTF8);
+            File.WriteAllText(m_FileName, m_TextArea.Text, Encoding.UTF8);
             Modified = false;
             StatusText = "檔案儲存成功。";
             return true;
@@ -291,9 +345,9 @@ namespace EasyBrailleEdit
             // 決定要轉換的輸入文字
             string content;
 
-            if (rtbOrg.SelectionLength > 1) // 若有選取文字，就只轉換選取的部份。
+            if (!String.IsNullOrEmpty(m_TextArea.SelectedText)) // 若有選取文字，就只轉換選取的部份。
             {
-                content = rtbOrg.SelectedText;
+                content = m_TextArea.SelectedText;
             }
             else
             {
@@ -306,7 +360,7 @@ namespace EasyBrailleEdit
                     switch (MsgBoxHelper.ShowYesNoCancel(s))
                     {
                         case DialogResult.Yes:
-                            content = rtbOrg.Text;
+                            content = m_TextArea.Text;
                             break;
                         case DialogResult.No:
                             if (File.Exists(brljFileName))
@@ -325,7 +379,7 @@ namespace EasyBrailleEdit
                 }
                 else
                 {
-                    content = rtbOrg.Text;
+                    content = m_TextArea.Text;
                 }
             }
 
@@ -380,7 +434,7 @@ namespace EasyBrailleEdit
 
             string brlFileName = null;
 
-            if (!ConvertTextToBraille(rtbOrg.Text, out brlFileName))
+            if (!ConvertTextToBraille(m_TextArea.Text, out brlFileName))
                 return;
 
             var busyForm = new BusyForm
@@ -536,12 +590,15 @@ namespace EasyBrailleEdit
         /// </summary>
         private void ShowInvlaidCharForm(int errorCount)
         {
+            BringToFront();
+            Activate();
+
             MsgBoxHelper.ShowError("共有 " + errorCount.ToString() + " 個字元無法轉換!\r\n" +
                 "請逐一修正後再執行轉換程序。");
 
             m_InvalidCharForm.Show();
             m_InvalidCharForm.Left = this.Left + this.Width - m_InvalidCharForm.Width - 4;
-            m_InvalidCharForm.Top = rtbOrg.PointToScreen(new Point(0, 0)).Y;
+            m_InvalidCharForm.Top = m_TextArea.PointToScreen(new Point(0, 0)).Y;
             m_InvalidCharForm.Height = 400;
             if (m_InvalidCharForm.Bottom > (this.Bottom - 30))
             {
@@ -752,7 +809,12 @@ namespace EasyBrailleEdit
             Height = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Height * 0.9);
             CenterToScreen();
 
+            InitTextArea();
+
             StatusText = "";
+
+            NewFile();
+
 
             // 自動檢查更新
             if (await AutoUpdateAsync())
@@ -795,7 +857,7 @@ namespace EasyBrailleEdit
 
             m_InvalidCharForm = new InvalidCharForm(this);
 
-            rtbOrg.BringToFront();
+            m_TextArea.BringToFront();
         }
 
         private void miFileClicked(object sender, EventArgs e)
@@ -827,11 +889,6 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void rtbOrg_TextChanged(object sender, EventArgs e)
-        {
-            Modified = true;
-        }
-
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = false;
@@ -859,22 +916,22 @@ namespace EasyBrailleEdit
             switch (obj.Tag.ToString())
             {
                 case "EditUndo":
-                    rtbOrg.Undo();
+                    m_TextArea.Undo();
                     break;
                 case "EditRedo":
-                    rtbOrg.Redo();
+                    m_TextArea.Redo();
                     break;
                 case "EditCut":
-                    rtbOrg.Cut();
+                    m_TextArea.Cut();
                     break;
                 case "EditCopy":
-                    rtbOrg.Copy();
+                    m_TextArea.Copy();
                     break;
                 case "EditPaste":
-                    rtbOrg.Paste();
+                    m_TextArea.Paste();
                     break;
                 case "EditSelectAll":
-                    rtbOrg.SelectAll();
+                    m_TextArea.SelectAll();
                     break;
                 default:
                     break;
@@ -888,13 +945,13 @@ namespace EasyBrailleEdit
             ToolStripItem obj = (ToolStripItem)sender;
             if (obj.Tag == null)
             {
-                rtbOrg.SelectedText = obj.Text;
+                m_TextArea.ReplaceSelection(obj.Text);
                 return;
             }
             string s = obj.Tag.ToString();
             if (String.IsNullOrEmpty(s))
             {
-                rtbOrg.SelectedText = s;
+                m_TextArea.ReplaceSelection(s);
                 return;
             }
 
@@ -904,22 +961,23 @@ namespace EasyBrailleEdit
             int i = s.IndexOf('|');
             if (i >= 0) // 有包含 '|' 字元者代表成對的標記或符號。
             {
-                int selectionLength = rtbOrg.SelectionLength;
+                int selectionLength = m_TextArea.SelectedText.Length;
                 var leftPart = s.Substring(0, i);
-                var rightPart = s.Substring(i + 1);
-                rtbOrg.SelectedText = leftPart + rtbOrg.SelectedText + rightPart;
-                //rtbOrg.SelectedText = s.Remove(i, 1);
-                rtbOrg.Update();
+                var rightPart = s.Substring(i + 1);               
+                m_TextArea.ReplaceSelection(leftPart + m_TextArea.SelectedText + rightPart);
+                
+                m_TextArea.Update();
                 Application.DoEvents();
 
                 if (selectionLength < 1)
-                {
-                    rtbOrg.SelectionStart -= (s.Length - i - 1);
+                {                    
+                    m_TextArea.CurrentPosition -= (s.Length - i - 1);
+                    m_TextArea.SetEmptySelection(m_TextArea.CurrentPosition);
                 }
             }
             else
             {
-                rtbOrg.SelectedText = s;
+                m_TextArea.ReplaceSelection(s);
             }
         }
 
@@ -1005,10 +1063,10 @@ namespace EasyBrailleEdit
             var form = new InsertTableForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
-                rtbOrg.SelectedText = 
+                m_TextArea.ReplaceSelection(
                     "<表格>\r\n" + 
                     TextHelper.GenerateTable(form.RowCount, form.ColumnCount, form.CellsPerColumn) + 
-                    "</表格>";
+                    "</表格>");
             }
             
         }
@@ -1018,20 +1076,15 @@ namespace EasyBrailleEdit
             PhoneticForm fm = new PhoneticForm();
             if (fm.ShowDialog() == DialogResult.OK)
             {
-                rtbOrg.SelectedText = "<音標>" + fm.Phonetic + "</音標>";
+                m_TextArea.ReplaceSelection("<音標>" + fm.Phonetic + "</音標>");
             }
         }
 
         private void UpdateCaretPosition()
         {
-            int col = rtbOrg.SelectionStart;
-            int line = rtbOrg.GetLineFromCharIndex(col);
-            statLabelCaretPos.Text = String.Format("列:{0}, 行:{1}", line + 1, col + 1);
-        }
-
-        private void rtbOrg_SelectionChanged(object sender, EventArgs e)
-        {
-            UpdateCaretPosition();
+            int line = m_TextArea.CurrentLine;
+            int col = m_TextArea.CurrentPosition - m_TextArea.Lines[line].Position;
+            statLabelCaretPos.Text = $"列:{line+1}, 行:{col+1}";
         }
 
         /// <summary>
@@ -1041,40 +1094,47 @@ namespace EasyBrailleEdit
         /// <param name="charIdx">該列的第幾個字元。</param>
         public void SelectChar(int lineIdx, int charIdx)
         {
-            if (lineIdx >= rtbOrg.Lines.Length)
+            if (lineIdx >= m_TextArea.Lines.Count)
                 return;
+
+
+            int pos = m_TextArea.Lines[lineIdx].Position + charIdx;
+            m_TextArea.SetEmptySelection(pos);
+            return;
+
 
             int i = 0;
             int charCnt = 0;
 
             // 先算出目標列之前總共有幾個字元（因為 SelectionStart 屬性是整段內容的字元索引）。
-            while (i < lineIdx && i < rtbOrg.Lines.Length)
+            while (i < lineIdx && i < m_TextArea.Lines.Count)
             {
-                charCnt += rtbOrg.Lines[i].Length + 1;	// 要多算一個換行符號。
+                charCnt += m_TextArea.Lines[i].Length + 1;	// 要多算一個換行符號。
                 i++;
             }
 
             bool charIdxValid = true;	// 指定的字元索引是否有效。
 
             // 避免文字因為修改過了，導致要選取的字元超過該列的字元長度。此處做修正。
-            if (charIdx >= rtbOrg.Lines[lineIdx].Length)
+            if (charIdx >= m_TextArea.Lines[lineIdx].Length)
             {
-                charIdx = rtbOrg.Lines[lineIdx].Length - 1;
+                charIdx = m_TextArea.Lines[lineIdx].Length - 1;
                 charIdxValid = false;
             }
 
             charIdx += charCnt;
 
-            rtbOrg.SelectionStart = charIdx;
+            m_TextArea.SelectionStart = charIdx;
 
             // 唯有當指定的字元索引有效，才選取該字元。
             if (charIdxValid)
             {
-                rtbOrg.Select(charIdx, 1);
+                m_TextArea.SelectionStart = charIdx;
+                m_TextArea.SelectionEnd = charIdx + 1;
             }
             else
             {
-                rtbOrg.SelectionLength = 0;
+                m_TextArea.ClearSelections();
             }
         }
     }
