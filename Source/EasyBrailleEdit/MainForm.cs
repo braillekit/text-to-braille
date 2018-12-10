@@ -1100,44 +1100,15 @@ namespace EasyBrailleEdit
                 return;
 
 
+            // 避免文字因為修改過了，導致要選取的字元超過該列的字元長度。此處做修正。
+            int lineLength = m_TextArea.Lines[lineIdx].Length;
+            if (charIdx >= lineLength)
+            {
+                charIdx = lineLength - 1;
+            }
+
             int pos = m_TextArea.Lines[lineIdx].Position + charIdx;
             m_TextArea.SetEmptySelection(pos);
-            return;
-
-
-            int i = 0;
-            int charCnt = 0;
-
-            // 先算出目標列之前總共有幾個字元（因為 SelectionStart 屬性是整段內容的字元索引）。
-            while (i < lineIdx && i < m_TextArea.Lines.Count)
-            {
-                charCnt += m_TextArea.Lines[i].Length + 1;	// 要多算一個換行符號。
-                i++;
-            }
-
-            bool charIdxValid = true;	// 指定的字元索引是否有效。
-
-            // 避免文字因為修改過了，導致要選取的字元超過該列的字元長度。此處做修正。
-            if (charIdx >= m_TextArea.Lines[lineIdx].Length)
-            {
-                charIdx = m_TextArea.Lines[lineIdx].Length - 1;
-                charIdxValid = false;
-            }
-
-            charIdx += charCnt;
-
-            m_TextArea.SelectionStart = charIdx;
-
-            // 唯有當指定的字元索引有效，才選取該字元。
-            if (charIdxValid)
-            {
-                m_TextArea.SelectionStart = charIdx;
-                m_TextArea.SelectionEnd = charIdx + 1;
-            }
-            else
-            {
-                m_TextArea.ClearSelections();
-            }
         }
     }
 }
