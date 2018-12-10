@@ -59,8 +59,9 @@ namespace EasyBrailleEdit
             m_TextArea = new Scintilla();
             panFill.Controls.Add(m_TextArea);
 
-            m_TextArea.ImeMode = ImeMode.On;
             m_TextArea.Dock = DockStyle.Fill;
+            m_TextArea.ImeMode = ImeMode.On;
+            m_TextArea.WrapMode = WrapMode.Char;
             m_TextArea.Margin = new Padding(3);
 
             // Line numbers
