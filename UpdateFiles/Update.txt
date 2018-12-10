@@ -7,10 +7,10 @@
 ' - 特定版本號碼代表若 client 端版本比這裡指定的版本還要舊，則下載。
 '===================================================================
 AppConfig.Default.ini            ; ?     
-BrailleToolkit.dll               ; 3.14.0 
-EasyBrailleEdit.Common.dll       ; 3.14.0 
-EasyBrailleEdit.exe              ; 3.14.0 
-Txt2Brl.exe                      ; 3.14.0 
+BrailleToolkit.dll               ; 3.14.1 
+EasyBrailleEdit.Common.dll       ; 3.14.1 
+EasyBrailleEdit.exe              ; 3.14.1 
+Txt2Brl.exe                      ; 3.14.1 
 EasyBrailleEdit.exe.config       ; ?
 Txt2Brl.exe.config               ; ?     
 Phrase.phf                       ; ?     
@@ -20,6 +20,7 @@ NChinese.dll                     ; 0.5.1
 Config.Net.dll                   ; 4.11.0
 Castle.Core.dll                  ; 4.2.1
 CommandLine.dll                  ; 2.3.0
+ScintillaNET.dll                 ; 3.6.3
 Serilog.dll                      ; 2.7.1
 Serilog.Settings.AppSettings.dll ; 2.2.2
 Serilog.Sinks.File.dll           ; 4.0.1
