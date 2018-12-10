@@ -681,46 +681,64 @@ namespace EasyBrailleEdit
         private int _verticalScrollPosition = -1;
 
 
-        // 若上次卷軸位置距離目前位置大於一個 LargeChange，則視為 WinKey+D 造成的現象，故不紀錄卷軸位置。
+        // 若上次卷軸位置距離目前位置大於一個 LargeChange，或者目前位置小於 0，則視為 WinKey+D 造成的現象，故不紀錄卷軸位置。
         private bool VScrollDistanceTooLarge(int lastPos, int currPos, int largeChange) 
         {
             if (currPos >= largeChange)
-            {
                 return false;
-            }
+
+            if (currPos < 0)
+                return true;
+
             var diff = lastPos - currPos;
-            return (diff >= largeChange);
+            return (diff > largeChange);
 
         }
 
         private void GridVScrollPositionChanged(object sender, SourceGrid.ScrollPositionChangedEventArgs e)
         {
-            // Do NOT chathe following code! 這是為了避開 WinKey+D 按下時重置 grid 垂直卷軸位置的 bug。
-            // 神奇數字 28 是根據 log 所得到的數字：按下 WinKey+D 時，grid 垂直卷軸位置會先被重設為 28，然後才離開視窗。
+            // Do NOT change following code without strong reason! 
+            // 這些程式碼是為了避開幾種會造成 grid 垂直卷軸位置自動重設的 bug。
+
             var grid = sender as SourceGrid.Grid;
             if (grid == null)
                 return;
 
+            DebugGridVScrollValue("Enter GridVScrollPositionChanged");
+
             var vsb = grid.VScrollBar;            
             if (vsb.Maximum > vsb.LargeChange)
             {
-                //var diff = _verticalScrollPosition - grid.VScrollBar.Value;
-                if (vsb.Maximum >= grid.VScrollBar.LargeChange && 
-                    !VScrollDistanceTooLarge(_verticalScrollPosition, vsb.Value, vsb.LargeChange))
+                if (vsb.Maximum >= grid.VScrollBar.LargeChange)
                 {
-                    _verticalScrollPosition = vsb.Value;
-                    _verticvalScrollMax = vsb.Maximum;
+                    if (VScrollDistanceTooLarge(_verticalScrollPosition, vsb.Value, vsb.LargeChange))
+                    {
+                        // 修正卷軸位置
+                        vsb.Maximum = _verticvalScrollMax;
+                        vsb.Value = _verticalScrollPosition;
+                    }
+                    else
+                    {
+                        _verticalScrollPosition = vsb.Value;
+                        _verticvalScrollMax = vsb.Maximum;
+                    }
                 }
             }
-            DebugGridVScrollValue("GridVScrollPositionChanged");
+            else
+            {
+                // 修正卷軸位置
+                vsb.Maximum = _verticvalScrollMax;
+                vsb.Value = _verticalScrollPosition;
+            }
+
+            DebugGridVScrollValue("Leave GridVScrollPositionChanged");
         }
 
         private void DebugGridVScrollValue(string src)
         {
-/* 當應用程式視窗來回切換，造成垂直卷軸位置不正確時，可將以下程式碼恢復，以便從 log 檔案中觀察卷軸的狀態變化。
-            Log.Debug($"LargeChange: {brGrid.VScrollBar.LargeChange}, Max: {brGrid.VScrollBar.Maximum}, Pos: {brGrid.VScrollBar.Value}");
-            Log.Debug($"{src} : {brGrid.VScrollBar.Minimum}-{_verticvalScrollMax} : {_verticalScrollPosition}");
-*/
+            // 當應用程式視窗來回切換，造成垂直卷軸位置不正確時，可將以下程式碼恢復，以便從 log 檔案中觀察卷軸的狀態變化。            
+            //Log.Debug($"{src} : {brGrid.VScrollBar.Minimum}-{_verticvalScrollMax} : {_verticalScrollPosition}");
+            //Log.Debug($"Grid LargeChange: {brGrid.VScrollBar.LargeChange}, Max: {brGrid.VScrollBar.Maximum}, Pos: {brGrid.VScrollBar.Value}");
         }
 
         private void DualEditForm_Activated(object sender, EventArgs e)
