@@ -139,7 +139,6 @@ namespace EasyBrailleEdit
             };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                Modified = false;
                 if (dlg.FileName.EndsWith(Constant.Files.DefaultMainBrailleFileExt, StringComparison.CurrentCultureIgnoreCase))
                 {
                     string s = dlg.FileName.Replace(Constant.Files.DefaultMainBrailleFileExt, ".txt");
@@ -155,6 +154,7 @@ namespace EasyBrailleEdit
                             m_TextArea.Text = File.ReadAllText(FileName, Encoding.Default);
                         }
                     }
+                    Modified = false;
 
                     OpenBrailleFileInEditor(dlg.FileName);
                 }
@@ -169,6 +169,7 @@ namespace EasyBrailleEdit
                     {
                         m_TextArea.Text = File.ReadAllText(FileName, Encoding.Default);
                     }
+                    Modified = false;
                 }
             }
         }
