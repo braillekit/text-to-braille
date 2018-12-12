@@ -19,8 +19,8 @@
 
   <ItemGroup>
     <PackageReference Include="Config.Net" Version="4.11.0" />
-    <PackageReference Include="Huanlin.Common" Version="4.5.10" />
-    <PackageReference Include="Huanlin.Windows" Version="4.5.10" />
+    <PackageReference Include="Huanlin.Common" Version="4.5.11" />
+    <PackageReference Include="Huanlin.Windows" Version="4.5.11" />
     <PackageReference Include="jacobslusser.ScintillaNET" Version="3.6.3" />
     <PackageReference Include="Serilog" Version="2.7.1" />
     <PackageReference Include="Serilog.Settings.AppSettings" Version="2.2.2" />
@@ -182,12 +182,6 @@
     <Compile Update="EditCellForm.Designer.cs">
       <DependentUpon>EditCellForm.cs</DependentUpon>
     </Compile>
-    <Compile Update="FormattedForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="FormattedForm.Designer.cs">
-      <DependentUpon>FormattedForm.cs</DependentUpon>
-    </Compile>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,10 +254,6 @@
     <EmbeddedResource Update="EditCellForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EditCellForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="FormattedForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormattedForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="MainForm.resx">
       <SubType>Designer</SubType>
