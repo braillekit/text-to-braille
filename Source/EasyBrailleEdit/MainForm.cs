@@ -21,7 +21,7 @@ using Huanlin.Windows.Forms;
 using Huanlin.Windows.Sys;
 using Serilog;
 using ScintillaNET;
-using ScintillaNET_FindReplaceDialog;
+using ScintillaNET.FindReplaceTools;
 
 namespace EasyBrailleEdit
 {
