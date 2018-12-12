@@ -802,8 +802,7 @@ namespace EasyBrailleEdit
             };
 
             // debug using local update feed.
-            //updater.ServerUri = "http://localhost/ebeupdate/";
-            updater.ServerUri = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/test-auto-update-subfolder/UpdateFiles/";
+            // updater.ServerUri = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/test-auto-update-subfolder/UpdateFiles/";
 
             try
             {
