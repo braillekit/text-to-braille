@@ -21,6 +21,7 @@ using Huanlin.Windows.Forms;
 using Huanlin.Windows.Sys;
 using Serilog;
 using ScintillaNET;
+using ScintillaNET_FindReplaceDialog;
 
 namespace EasyBrailleEdit
 {
@@ -36,6 +37,9 @@ namespace EasyBrailleEdit
         private ConversionDialog m_ConvertDialog;
 
         private FileRunner m_FileRunner;
+
+        private FindReplace FindReplaceDialog;
+
 
         public MainForm()
         {
@@ -53,6 +57,25 @@ namespace EasyBrailleEdit
 
         #region 方法
 
+
+        private void InitFindReplaceDialog(Scintilla scintilla)
+        {
+            FindReplaceDialog = new FindReplace();
+            FindReplaceDialog.Scintilla = scintilla;
+            FindReplaceDialog.FindAllResults += FindReplaceDialog_FindAllResults;
+            FindReplaceDialog.KeyPressed += TextArea_KeyDown;
+
+            FindReplaceDialog.Window.StartPosition = FormStartPosition.CenterParent;
+            FindReplaceDialog.Window.ShowMarkAtMatchedLine = true;
+            FindReplaceDialog.Window.HighlightMatches = true;
+        }
+
+        private void FindReplaceDialog_FindAllResults(object sender, FindResultsEventArgs FindAllResults)
+        {
+            // 沒有用單獨 panel 顯示搜尋結果也沒關係，因為搜尋結果可以直接標示在編輯器中。
+            // Pass on find results
+            //findAllResultsPanel1.UpdateFindAllResults(FindAllResults.FindReplace, FindAllResults.FindAllResults);
+        }
 
         private void InitTextArea()
         {
@@ -88,6 +111,46 @@ namespace EasyBrailleEdit
             // Events
             m_TextArea.TextChanged += TextArea_TextChanged;
             m_TextArea.UpdateUI += TextArea_UpdateUI;
+            m_TextArea.KeyDown += TextArea_KeyDown;
+
+
+            InitFindReplaceDialog(m_TextArea);
+        }
+
+        private void TextArea_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.F)
+            {
+                FindReplaceDialog.ShowFind();
+                e.SuppressKeyPress = true;
+            }
+            else if (e.Shift && e.KeyCode == Keys.F3)
+            {
+                FindReplaceDialog.Window.FindPrevious();
+                e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.F3)
+            {
+                FindReplaceDialog.Window.FindNext();
+                e.SuppressKeyPress = true;
+            }
+            else if (e.Control && e.KeyCode == Keys.H)
+            {
+                FindReplaceDialog.ShowReplace();
+                e.SuppressKeyPress = true;
+            }
+            else if (e.Control && e.KeyCode == Keys.I)
+            {
+                FindReplaceDialog.ShowIncrementalSearch();
+                e.SuppressKeyPress = true;
+            }
+            else if (e.Control && e.KeyCode == Keys.G)
+            {
+                GoTo MyGoTo = new GoTo((Scintilla)sender);
+                MyGoTo.ShowGoToDialog();
+                e.SuppressKeyPress = true;
+            }
+
         }
 
         private void TextArea_TextChanged(object sender, EventArgs e)
@@ -935,6 +998,12 @@ namespace EasyBrailleEdit
                     break;
                 case "EditSelectAll":
                     m_TextArea.SelectAll();
+                    break;
+                case "EditFind":
+                    FindReplaceDialog.ShowFind();
+                    break;
+                case "EditReplace":
+                    FindReplaceDialog.ShowReplace();
                     break;
                 default:
                     break;
