@@ -25,7 +25,7 @@ SolidCompression=yes
 UsePreviousAppDir=False
 AllowRootDirectory=True
 AllowUNCPath=False
-VersionInfoCopyright=Copyright (c) 2008-2018 Michael Tsai
+VersionInfoCopyright=Copyright (c) 2008-2019 Michael Tsai
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
