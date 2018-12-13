@@ -23,6 +23,8 @@ using Serilog;
 using ScintillaNET;
 using ScintillaNET.FindReplaceTools;
 using Microsoft.Win32;
+using System.Net.Mail;
+using System.Net;
 
 namespace EasyBrailleEdit
 {
@@ -893,7 +895,7 @@ namespace EasyBrailleEdit
             Application.DoEvents();
 
 
-            var userLic = LicenseService.GetUserLicenseData();
+            var userLic = LicenseHelper.GetUserLicenseData();
 
             if (userLic.IsExpired())
             {
@@ -903,22 +905,22 @@ namespace EasyBrailleEdit
             }
             Application.DoEvents();
 
-            if (!userLic.ExpiredDate.HasValue && !await LicenseService.ValidateUserLicenseAsync(userLic))
+            if (!userLic.ExpiredDate.HasValue && !await LicenseHelper.ValidateUserLicenseAsync(userLic))
             {
                 // 設定預設的試用期限
-                LicenseService.SetTrialExpirationDate();
+                LicenseHelper.SetTrialExpirationDate();
 
-                userLic = LicenseService.EnterLicenseData();
+                userLic = LicenseHelper.EnterLicenseData();
                 if (userLic == null)
                 {
                     MsgBoxHelper.ShowWarning("沒有軟體授權資料，將無法列印和輸出雙視文件，且試用期限為 30 天。");
                 }
                 else
                 {
-                    bool isLicensed = await LicenseService.ValidateUserLicenseAsync(userLic);
+                    bool isLicensed = await LicenseHelper.ValidateUserLicenseAsync(userLic);
                     if (isLicensed)
                     {
-                        LicenseService.SaveUserLicenseData(userLic);
+                        LicenseHelper.SaveUserLicenseData(userLic);
                         AppGlobals.IsPrintingEnabled = true;
                         MsgBoxHelper.ShowInfo("註冊成功!");
                     }
@@ -929,6 +931,9 @@ namespace EasyBrailleEdit
                 }                
             }
             AppGlobals.IsPrintingEnabled = AppGlobals.UserLicense.IsActive;
+
+
+            await TrackUserAsync();
 
             txtErrors.Visible = false;
 
@@ -946,6 +951,60 @@ namespace EasyBrailleEdit
                 {
                     OpenBrailleFileInEditor(args[1]);
                 }      
+            }
+        }
+
+
+        private async Task TrackUserAsync()
+        {
+            try
+            {
+                if (!LicenseHelper.NeedTrackUser())
+                {
+                    return;
+                }
+
+                string externalIP = GetExternalIP();
+
+                var msg = new MailMessage();
+                msg.To.Add("mailsender.tw@gmail.com");
+                msg.From = new MailAddress("noreply@gmail.com", "Huanlin Mail Sender", Encoding.UTF8);
+                /* 上面3個參數分別是發件人地址（可以隨便寫），發件人姓名，編碼*/
+                msg.Subject = "易點雙視 user tracking";//郵件標題
+                msg.SubjectEncoding = System.Text.Encoding.UTF8;//郵件標題編碼
+                msg.Body = $"External IP: {externalIP}\r\nComputer Name: {Environment.MachineName}\r\n" +
+                    $"OS Version: {Environment.OSVersion}\r\nUser Name: {Environment.UserName}";
+                msg.BodyEncoding = Encoding.UTF8;//郵件內容編碼 
+                //msg.Attachments.Add(new Attachment(@"D:\test2.docx"));  //附件
+                msg.IsBodyHtml = false;//是否是HTML郵件 
+
+                var client = new SmtpClient();
+                client.Credentials = new NetworkCredential("mailsender.tw@gmail.com", "m@i1sender2018"); //這裡要填正確的帳號跟密碼
+                client.Host = "smtp.gmail.com"; // 設定smtp Server
+                client.Port = 25; // 設定Port
+                client.EnableSsl = true; // gmail預設開啟驗證
+                await client.SendMailAsync(msg); // 寄出信件
+
+                client.Dispose();
+                msg.Dispose();
+
+                LicenseHelper.SaveTrackUserTime();
+            }
+            catch 
+            {
+                // Keep quiet.
+            }
+
+            string GetExternalIP()
+            {
+                try
+                {
+                    return new WebClient().DownloadString("http://icanhazip.com");
+                }
+                catch (Exception ex)
+                {
+                    return $"Failed to get external IP: {ex.Message}";
+                }
             }
         }
 

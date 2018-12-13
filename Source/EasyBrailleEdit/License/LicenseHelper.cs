@@ -13,7 +13,7 @@ using Serilog;
 
 namespace EasyBrailleEdit.License
 {
-    internal static class LicenseService
+    internal static class LicenseHelper
     {
         private static RegistryKey GetAppRegKey()
         {
@@ -162,7 +162,6 @@ namespace EasyBrailleEdit.License
             {
                 return true;
             }
-
         }
 
         public static UserLicenseData EnterLicenseData()
@@ -178,6 +177,31 @@ namespace EasyBrailleEdit.License
                 SerialNumber = regForm.LicenseKey,
                 CustomerName = regForm.CustomerName
             };
+        }
+
+        public static bool NeedTrackUser()
+        {
+            var regKey = GetAppRegKey();
+
+            try
+            {
+                var lastTime = Convert.ToDateTime(regKey.GetValue(Constant.LastTimeTrackingUser));                
+                if (lastTime < DateTime.Now.AddDays(-1)) // 每兩天追蹤一次
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return true;
+            }
+        }
+
+        public static void SaveTrackUserTime()
+        {
+            var regKey = GetAppRegKey();
+            regKey.SetValue(Constant.LastTimeTrackingUser, DateTime.Now.ToString("yyyy/MM/dd"));
         }
     }
 }

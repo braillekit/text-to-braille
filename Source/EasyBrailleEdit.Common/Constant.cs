@@ -10,6 +10,7 @@
         public const string SerialNumberRegKey = "SerialNumber";
         public const string CustomerNameRegKey = "Customer";
         public const string ExpiredDateRegKey = "ExpiredDate";
+        public const string LastTimeTrackingUser = "LastTimeTrackingUser";
 
         public static class ProductBranches
         {
