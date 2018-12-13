@@ -16,13 +16,11 @@ using EasyBrailleEdit.Forms;
 using EasyBrailleEdit.License;
 using EasyBrailleEdit.Printing;
 using Huanlin.Common.Helpers;
-using Huanlin.Http;
 using Huanlin.Windows.Forms;
 using Huanlin.Windows.Sys;
 using Serilog;
 using ScintillaNET;
 using ScintillaNET.FindReplaceTools;
-using Microsoft.Win32;
 using System.Net.Mail;
 using System.Net;
 
@@ -899,7 +897,7 @@ namespace EasyBrailleEdit
 
             if (userLic.IsExpired())
             {
-                MessageBox.Show("試用期限已過，如果您需要繼續使用這套軟體，請至\r\n https://www.facebook.com/easybraille/ \r\n 洽詢購買事宜。謝謝！");
+                MsgBoxHelper.ShowInfo("試用期限已過，如果您需要繼續使用這套軟體，請至\r\n https://www.facebook.com/easybraille/ \r\n 洽詢購買事宜。謝謝！");
                 Application.Exit();
                 return;
             }
@@ -933,7 +931,19 @@ namespace EasyBrailleEdit
             AppGlobals.IsPrintingEnabled = AppGlobals.UserLicense.IsActive;
 
 
-            await TrackUserAsync();
+            // 檢查 IP 黑名單
+            var blockedIPList = await LicenseHelper.DownloadBlockedIPListAsync();
+            string externalIP = (await GetExternalIPAsync()).Trim();
+            bool isBlockedIP = blockedIPList.IndexOf(externalIP) >= 0;
+
+            await TrackUserAsync(externalIP, isBlockedIP);
+
+            if (isBlockedIP)
+            {
+                MsgBoxHelper.ShowError("軟體授權資訊不正確！請洽詢銷售此軟體的零售商，或至易點雙視的臉書專頁詢問。");
+                Application.Exit();
+                return;
+            }
 
             txtErrors.Visible = false;
 
@@ -954,17 +964,32 @@ namespace EasyBrailleEdit
             }
         }
 
+        async Task<string> GetExternalIPAsync()
+        {
+            var webClient = new WebClient();
+            try
+            {
+                return await webClient.DownloadStringTaskAsync("http://icanhazip.com");
+            }
+            catch (Exception ex)
+            {
+                return $"Failed to get external IP: {ex.Message}";
+            }
+            finally
+            {
+                webClient.Dispose();
+            }
+        }
 
-        private async Task TrackUserAsync()
+
+        private async Task TrackUserAsync(string externalIP, bool isBlocked)
         {
             try
             {
                 if (!LicenseHelper.NeedTrackUser())
                 {
                     return;
-                }
-
-                string externalIP = GetExternalIP();
+                }                
 
                 var msg = new MailMessage();
                 msg.To.Add("mailsender.tw@gmail.com");
@@ -972,7 +997,7 @@ namespace EasyBrailleEdit
                 /* 上面3個參數分別是發件人地址（可以隨便寫），發件人姓名，編碼*/
                 msg.Subject = "易點雙視 user tracking";//郵件標題
                 msg.SubjectEncoding = System.Text.Encoding.UTF8;//郵件標題編碼
-                msg.Body = $"External IP: {externalIP}\r\nComputer Name: {Environment.MachineName}\r\n" +
+                msg.Body = $"External IP: {externalIP} (Blocked: {isBlocked})\r\nComputer Name: {Environment.MachineName}\r\n" +
                     $"OS Version: {Environment.OSVersion}\r\nUser Name: {Environment.UserName}";
                 msg.BodyEncoding = Encoding.UTF8;//郵件內容編碼 
                 //msg.Attachments.Add(new Attachment(@"D:\test2.docx"));  //附件
@@ -993,18 +1018,6 @@ namespace EasyBrailleEdit
             catch 
             {
                 // Keep quiet.
-            }
-
-            string GetExternalIP()
-            {
-                try
-                {
-                    return new WebClient().DownloadString("http://icanhazip.com");
-                }
-                catch (Exception ex)
-                {
-                    return $"Failed to get external IP: {ex.Message}";
-                }
             }
         }
 

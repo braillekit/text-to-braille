@@ -137,6 +137,35 @@ namespace EasyBrailleEdit.License
         }
 
 
+        public static async Task<List<string>> DownloadBlockedIPListAsync()
+        {
+            var result = new List<string>();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    // 網址後面加動態參數，以避免快取。
+                    string url = Constant.BlockedIPFileUrl + "?" + DateTime.Now.Ticks;
+                    var content = await client.GetStringAsync(url);
+                    if (string.IsNullOrWhiteSpace(content))
+                        return result;
+
+                    foreach (var ip in content.Split('\r', 'n', ' '))
+                    {
+                        if (string.IsNullOrWhiteSpace(ip))
+                            continue;
+                        result.Add(ip.Trim());
+                    }
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"無法下載 {Constant.BlockedIPFileUrl} : {ex.Message}");
+                return result;
+            }
+        }
+
         public static void SetTrialExpirationDate()
         {
             var regKey = GetAppRegKey();
