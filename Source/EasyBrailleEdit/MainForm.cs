@@ -22,6 +22,7 @@ using Huanlin.Windows.Sys;
 using Serilog;
 using ScintillaNET;
 using ScintillaNET.FindReplaceTools;
+using Microsoft.Win32;
 
 namespace EasyBrailleEdit
 {
@@ -204,21 +205,6 @@ namespace EasyBrailleEdit
             {
                 if (dlg.FileName.EndsWith(Constant.Files.DefaultMainBrailleFileExt, StringComparison.CurrentCultureIgnoreCase))
                 {
-                    string s = dlg.FileName.Replace(Constant.Files.DefaultMainBrailleFileExt, ".txt");
-                    if (File.Exists(s))
-                    {
-                        FileName = s;
-                        if (FileHelper.IsUTF8Encoded(FileName))
-                        {
-                            m_TextArea.Text = File.ReadAllText(FileName, Encoding.UTF8);
-                        }
-                        else
-                        {
-                            m_TextArea.Text = File.ReadAllText(FileName, Encoding.Default);
-                        }
-                    }
-                    Modified = false;
-
                     OpenBrailleFileInEditor(dlg.FileName);
                 }
                 else
@@ -232,8 +218,8 @@ namespace EasyBrailleEdit
                     {
                         m_TextArea.Text = File.ReadAllText(FileName, Encoding.Default);
                     }
-                    Modified = false;
                 }
+                Modified = false;
             }
         }
 
@@ -243,6 +229,21 @@ namespace EasyBrailleEdit
         /// <param name="filename">點字檔名。</param>
         private void OpenBrailleFileInEditor(string filename)
         {
+            // 自動載入相同主檔名的明眼字檔案（如果存在的話）
+            string s = filename.Replace(Constant.Files.DefaultMainBrailleFileExt, ".txt");
+            if (File.Exists(s))
+            {
+                FileName = s;
+                if (FileHelper.IsUTF8Encoded(FileName))
+                {
+                    m_TextArea.Text = File.ReadAllText(FileName, Encoding.UTF8);
+                }
+                else
+                {
+                    m_TextArea.Text = File.ReadAllText(FileName, Encoding.Default);
+                }
+            }            
+
             var busyForm = new BusyForm
             {
                 Message = "正在載入點字資料..."
@@ -922,8 +923,18 @@ namespace EasyBrailleEdit
             m_ConvertDialog = new ConversionDialog();
 
             m_InvalidCharForm = new InvalidCharForm(this);
-
+            
             m_TextArea.BringToFront();
+
+            // 處理來自命令列的參數
+            var args = Environment.GetCommandLineArgs();
+            if (args.Length > 1 && args[1].EndsWith(Constant.Files.DefaultMainBrailleFileExt))
+            {
+                if (File.Exists(args[1]))
+                {
+                    OpenBrailleFileInEditor(args[1]);
+                }                
+            }
         }
 
         private void miFileClicked(object sender, EventArgs e)
