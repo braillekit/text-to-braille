@@ -9,6 +9,7 @@
         public const string UsersLicenseFileName = "users.lic";
         public const string SerialNumberRegKey = "SerialNumber";
         public const string CustomerNameRegKey = "Customer";
+        public const string ExpiredDateRegKey = "ExpiredDate";
 
         public static class ProductBranches
         {

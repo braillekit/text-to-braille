@@ -26,8 +26,25 @@ namespace EasyBrailleEdit.License
 
             var userLic = new UserLicenseData();
 
-            userLic.SerialNumber = Convert.ToString(regKey.GetValue(Constant.SerialNumberRegKey));
-            userLic.CustomerName = Convert.ToString(regKey.GetValue(Constant.CustomerNameRegKey));
+            try
+            {
+                userLic.SerialNumber = Convert.ToString(regKey.GetValue(Constant.SerialNumberRegKey));
+                userLic.CustomerName = Convert.ToString(regKey.GetValue(Constant.CustomerNameRegKey));
+                var expDateStr = Convert.ToString(regKey.GetValue(Constant.ExpiredDateRegKey));
+                if (string.IsNullOrWhiteSpace(expDateStr))
+                {
+                    userLic.ExpiredDate = null;
+                }
+                else
+                {
+                    userLic.ExpiredDate = Convert.ToDateTime(expDateStr);
+                }
+                
+            }
+            catch
+            {
+                // ignore error.
+            }
             return userLic;
         }
 
@@ -36,6 +53,7 @@ namespace EasyBrailleEdit.License
             var regKey = GetAppRegKey();
             regKey.SetValue(Constant.SerialNumberRegKey, userLic.SerialNumber, RegistryValueKind.String);
             regKey.SetValue(Constant.CustomerNameRegKey, userLic.CustomerName, RegistryValueKind.String);
+            regKey.SetValue(Constant.ExpiredDateRegKey, userLic.ExpiredDate?.ToString("yyyy/MM/dd"), RegistryValueKind.String);
             Log.Debug($"成功保存使用者序號 {userLic.SerialNumber} 至 {regKey.Name}");
         }
 
@@ -84,12 +102,15 @@ namespace EasyBrailleEdit.License
                     || snFlag != 0 || DateTime.Now > expiredDate)
                     continue;
 
+                // Overwrite 使用期限
+                userLic.ExpiredDate = expiredDate;
 
                 // 保存註冊資訊。
                 SaveUserLicenseData(userLic);
-                AppGlobals.UserLicense.IsValid = true;
+                AppGlobals.UserLicense.IsActive = true;
                 AppGlobals.UserLicense.CustomerName = userLic.CustomerName;
                 AppGlobals.UserLicense.SerialNumber = userLic.SerialNumber;
+                AppGlobals.UserLicense.ExpiredDate = userLic.ExpiredDate;
                 return true;
             }
             Log.Debug($"使用者輸入的序號無效: {userLic.SerialNumber}");
@@ -113,6 +134,35 @@ namespace EasyBrailleEdit.License
                     Log.Error($"無法下載 {Constant.UsersLicenseFileUrl} : {ex.Message}");
                 }
             }
+        }
+
+
+        public static void SetTrialExpirationDate()
+        {
+            var regKey = GetAppRegKey();
+
+            var s = Convert.ToString(regKey.GetValue(Constant.ExpiredDateRegKey));
+            if (string.IsNullOrWhiteSpace(s))
+            {
+                var expDate = DateTime.Now.AddDays(30);
+                regKey.SetValue(Constant.ExpiredDateRegKey, expDate.ToString("yyyy/MM/dd"), RegistryValueKind.String);
+            }
+        }
+
+        public static bool IsTrialExpired()
+        {
+            var regKey = GetAppRegKey();
+
+            try
+            {
+                var expDate = Convert.ToDateTime(regKey.GetValue(Constant.ExpiredDateRegKey));
+                return DateTime.Now > expDate;
+            }
+            catch
+            {
+                return true;
+            }
+
         }
 
         public static UserLicenseData EnterLicenseData()

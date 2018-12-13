@@ -894,12 +894,24 @@ namespace EasyBrailleEdit
 
 
             var userLic = LicenseService.GetUserLicenseData();
-            if (!await LicenseService.ValidateUserLicenseAsync(userLic))
+
+            if (userLic.IsExpired())
             {
+                MessageBox.Show("試用期限已過，如果您需要繼續使用這套軟體，請至\r\n https://www.facebook.com/easybraille/ \r\n 洽詢購買事宜。謝謝！");
+                Application.Exit();
+                return;
+            }
+            Application.DoEvents();
+
+            if (!userLic.ExpiredDate.HasValue && !await LicenseService.ValidateUserLicenseAsync(userLic))
+            {
+                // 設定預設的試用期限
+                LicenseService.SetTrialExpirationDate();
+
                 userLic = LicenseService.EnterLicenseData();
                 if (userLic == null)
                 {
-                    MsgBoxHelper.ShowWarning("沒有軟體授權資料，將無法列印和輸出雙視文件！");
+                    MsgBoxHelper.ShowWarning("沒有軟體授權資料，將無法列印和輸出雙視文件，且試用期限為 30 天。");
                 }
                 else
                 {
@@ -916,7 +928,7 @@ namespace EasyBrailleEdit
                     }
                 }                
             }
-            AppGlobals.IsPrintingEnabled = AppGlobals.UserLicense.IsValid;
+            AppGlobals.IsPrintingEnabled = AppGlobals.UserLicense.IsActive;
 
             txtErrors.Visible = false;
 
@@ -933,7 +945,7 @@ namespace EasyBrailleEdit
                 if (File.Exists(args[1]))
                 {
                     OpenBrailleFileInEditor(args[1]);
-                }                
+                }      
             }
         }
 
