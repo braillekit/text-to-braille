@@ -59,6 +59,9 @@ Source: "Files\x86\Serilog.Sinks.RollingFile.dll"; DestDir: "{app}"; Flags: igno
 Source: "Files\x86\SourceGrid.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\System.Reflection.TypeExtensions.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\System.ValueTuple.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\ScintillaNET.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\ScintillaNET.FindReplaceTools.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\output\net472\zh-Hant\ScintillaNET.FindReplaceTools.resources.dll"; DestDir: "{app}\zh-Hant\"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: "Fonts\simbrl.ttf"; DestDir: "{fonts}"; Flags: onlyifdoesntexist uninsneveruninstall; FontInstall: "SimBraille"
 Source: "Files\¨Ï¥Î¤â¥U.pdf"; DestDir: "{app}"; Flags: ignoreversion
