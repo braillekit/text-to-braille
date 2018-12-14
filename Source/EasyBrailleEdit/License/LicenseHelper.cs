@@ -69,7 +69,12 @@ namespace EasyBrailleEdit.License
             return Encoding.UTF8.GetString(base64EncodedBytes);
         }
 
-        public static async Task<bool> ValidateUserLicenseAsync(UserLicenseData userLic)
+        /// <summary>
+        /// 驗證傳入的使用者授權資料，如果驗證通過，則保存於全域變數 AppGlobals.UserLicense。
+        /// </summary>
+        /// <param name="userLic"></param>
+        /// <returns></returns>
+        public static async Task<bool> ValidateAndSaveUseLicenseAsync(UserLicenseData userLic)
         {
             if (userLic == null || userLic.IsEmpty())
                 return false;

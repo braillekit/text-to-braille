@@ -69,7 +69,7 @@ namespace EasyBrailleEdit
             var userLic = LicenseHelper.EnterLicenseData();
             if (userLic != null)
             {                
-                bool isLicensed = await LicenseHelper.ValidateUserLicenseAsync(userLic);
+                bool isLicensed = await LicenseHelper.ValidateAndSaveUseLicenseAsync(userLic);
                 if (isLicensed)
                 {
                     LicenseHelper.SaveUserLicenseData(userLic);

@@ -177,8 +177,12 @@ namespace EasyBrailleEdit
                     SaveFile();
                 }
             }
+            ResetFileInfo();
+        }
 
-            m_TextArea.Clear();
+        private void ResetFileInfo()
+        {
+            m_TextArea.ClearAll();
             m_TextArea.EmptyUndoBuffer();
             Modified = false;
             FileName = "";
@@ -203,46 +207,60 @@ namespace EasyBrailleEdit
             };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
+                Modified = false;
                 if (dlg.FileName.EndsWith(Constant.Files.DefaultMainBrailleFileExt, StringComparison.CurrentCultureIgnoreCase))
-                {
+                {                    
                     OpenBrailleFileInEditor(dlg.FileName);
                 }
                 else
                 {
                     FileName = dlg.FileName;
-                    if (FileHelper.IsUTF8Encoded(FileName))
-                    {
-                        m_TextArea.Text = File.ReadAllText(FileName, Encoding.UTF8);
-                    }
-                    else
-                    {
-                        m_TextArea.Text = File.ReadAllText(FileName, Encoding.Default);
-                    }
+                    m_TextArea.Text = File.ReadAllText(FileName, Encoding.UTF8);
+                    /*
+                                        if (FileHelper.IsUTF8Encoded(FileName))
+                                        {
+                                            m_TextArea.Text = File.ReadAllText(FileName, Encoding.UTF8);
+                                        }
+                                        else
+                                        {
+                                            m_TextArea.Text = File.ReadAllText(FileName, Encoding.Default);
+                                        }
+                    */
                 }
-                Modified = false;
+                Modified = false; // 必須再清除一次，因為編輯區域載入新內容時會由 event handler 設定為 true。
             }
         }
 
         /// <summary>
         /// 載入雙視檔案，並開啟雙視編輯視窗。
         /// </summary>
-        /// <param name="filename">點字檔名。</param>
+        /// <param name="filename">點字檔名。有可能是 cvt_out.tmp 或任何 .brx 檔案。</param>
         private void OpenBrailleFileInEditor(string filename)
-        {
-            // 自動載入相同主檔名的明眼字檔案（如果存在的話）
-            string s = filename.Replace(Constant.Files.DefaultMainBrailleFileExt, ".txt");
-            if (File.Exists(s))
+        {            
+            if (Path.GetExtension(filename).Equals(Constant.Files.DefaultMainBrailleFileExt, StringComparison.OrdinalIgnoreCase))
             {
-                FileName = s;
-                if (FileHelper.IsUTF8Encoded(FileName))
+                if (Modified)
                 {
-                    m_TextArea.Text = File.ReadAllText(FileName, Encoding.UTF8);
+                    MsgBoxHelper.ShowInfo("編輯區內的文件尚未儲存，不自動載入新的明眼字檔案，而只載入雙視檔案。");
                 }
                 else
                 {
-                    m_TextArea.Text = File.ReadAllText(FileName, Encoding.Default);
+                    // 自動載入相同主檔名的明眼字檔案（如果存在的話）
+                    string s = Path.ChangeExtension(filename, ".txt");
+                    if (File.Exists(s))
+                    {
+                        FileName = s;
+                        if (FileHelper.IsUTF8Encoded(FileName))
+                        {
+                            m_TextArea.Text = File.ReadAllText(FileName, Encoding.UTF8);
+                        }
+                        else
+                        {
+                            m_TextArea.Text = File.ReadAllText(FileName, Encoding.Default);
+                        }
+                    }
                 }
-            }            
+            }
 
             var busyForm = new BusyForm
             {
@@ -903,7 +921,10 @@ namespace EasyBrailleEdit
             }
             Application.DoEvents();
 
-            if (!userLic.ExpiredDate.HasValue && !await LicenseHelper.ValidateUserLicenseAsync(userLic))
+
+            bool isLicenseValid = await LicenseHelper.ValidateAndSaveUseLicenseAsync(userLic);
+
+            if (!userLic.ExpiredDate.HasValue && !isLicenseValid)
             {
                 // 設定預設的試用期限
                 LicenseHelper.SetTrialExpirationDate();
@@ -915,7 +936,7 @@ namespace EasyBrailleEdit
                 }
                 else
                 {
-                    bool isLicensed = await LicenseHelper.ValidateUserLicenseAsync(userLic);
+                    bool isLicensed = await LicenseHelper.ValidateAndSaveUseLicenseAsync(userLic);
                     if (isLicensed)
                     {
                         LicenseHelper.SaveUserLicenseData(userLic);
