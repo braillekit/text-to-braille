@@ -957,7 +957,7 @@ namespace EasyBrailleEdit
             string externalIP = (await GetExternalIPAsync()).Trim();
             bool isBlockedIP = blockedIPList.IndexOf(externalIP) >= 0;
 
-            await TrackUserAsync(externalIP, isBlockedIP);
+            await TrackUserAsync(userLic, externalIP, isBlockedIP);
 
             if (isBlockedIP)
             {
@@ -1003,14 +1003,22 @@ namespace EasyBrailleEdit
         }
 
 
-        private async Task TrackUserAsync(string externalIP, bool isBlocked)
+        private async Task TrackUserAsync(UserLicenseData userLic, string externalIP, bool isBlocked)
         {
             try
             {
                 if (!LicenseHelper.NeedTrackUser())
                 {
                     return;
-                }                
+                }
+
+                var sb = new StringBuilder();
+                sb.AppendLine($"External IP: {externalIP} (Blocked: {isBlocked})");
+                sb.AppendLine($"Computer Name: {Environment.MachineName}");
+                sb.AppendLine($"OS Version: {Environment.OSVersion}");
+                sb.AppendLine($"User Name: {Environment.UserName}");
+                sb.AppendLine($"註冊名稱: {userLic?.CustomerName}");
+                sb.AppendLine($"註冊序號: {userLic?.SerialNumber}");
 
                 var msg = new MailMessage();
                 msg.To.Add("mailsender.tw@gmail.com");
@@ -1018,8 +1026,7 @@ namespace EasyBrailleEdit
                 /* 上面3個參數分別是發件人地址（可以隨便寫），發件人姓名，編碼*/
                 msg.Subject = "易點雙視 user tracking";//郵件標題
                 msg.SubjectEncoding = System.Text.Encoding.UTF8;//郵件標題編碼
-                msg.Body = $"External IP: {externalIP} (Blocked: {isBlocked})\r\nComputer Name: {Environment.MachineName}\r\n" +
-                    $"OS Version: {Environment.OSVersion}\r\nUser Name: {Environment.UserName}";
+                msg.Body = sb.ToString();
                 msg.BodyEncoding = Encoding.UTF8;//郵件內容編碼 
                 //msg.Attachments.Add(new Attachment(@"D:\test2.docx"));  //附件
                 msg.IsBodyHtml = false;//是否是HTML郵件 
