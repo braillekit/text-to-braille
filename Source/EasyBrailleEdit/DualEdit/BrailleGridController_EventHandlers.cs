@@ -86,6 +86,16 @@ namespace EasyBrailleEdit.DualEdit
             Debugger.ShouldEveryGridCellHasBrailleWord();
         }
 
+
+        public void Grid_MouseDoubleClick(SourceGrid.Grid grid, MouseEventArgs e)
+        {
+            if (grid == null || grid.MouseCellPosition.IsEmpty()) //grid.Selection.ActivePosition.IsEmpty())
+                return;
+
+            //EditWord(grid, grid.Selection.ActivePosition.Row, grid.Selection.ActivePosition.Column);
+            EditWord(grid, grid.MouseCellPosition.Row, grid.MouseCellPosition.Column);
+        }
+
         public void GridSelection_FocusRowEntered(SourceGrid.RowEventArgs e)
         {
             var lineIdx = _positionMapper.GridRowToBrailleLineIndex(e.Row);

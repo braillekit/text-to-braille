@@ -135,6 +135,7 @@ namespace EasyBrailleEdit
             brGrid.Selection.FocusColumnEntered += GridSelection_FocusColumnEntered;
             brGrid.Selection.CellGotFocus += GridSelection_CellGotFocus;
             brGrid.VScrollPositionChanged += GridVScrollPositionChanged;
+            brGrid.MouseDoubleClick += Grid_MouseDoubleClick;
 
             statusLabelCurrentWord.Text = String.Empty;
             statusLabelCurrentLine.Text = String.Empty;
@@ -174,6 +175,12 @@ namespace EasyBrailleEdit
                     _undoBufferForm.Show();
                 }
             }
+        }
+
+        private void Grid_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var grid = (SourceGrid.Grid)sender;
+            _controller.Grid_MouseDoubleClick(grid, e);
         }
 
         private void GridSelection_FocusRowEntered(object sender, SourceGrid.RowEventArgs e)

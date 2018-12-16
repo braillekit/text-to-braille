@@ -148,8 +148,15 @@ namespace EasyBrailleEdit
 
             brGrid.Selection.FocusRowEntered += GridSelection_FocusRowEntered;
             brGrid.Selection.CellGotFocus += GridSelection_CellGotFocus;
+            brGrid.MouseDoubleClick += Grid_MouseDoubleClick;
 
             Controller.FillGrid();
+        }
+
+        private void Grid_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var grid = (SourceGrid.Grid)sender;
+            Controller.Grid_MouseDoubleClick(grid, e);
         }
 
         private void GridSelection_FocusRowEntered(object sender, RowEventArgs e)
