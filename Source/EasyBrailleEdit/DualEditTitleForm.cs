@@ -137,9 +137,8 @@ namespace EasyBrailleEdit
                 DualEditCommand.Names.BreakLine,
                 DualEditCommand.Names.FormatParagraph,
                 DualEditCommand.Names.AddLine,
-                DualEditCommand.Names.CopyToClipboard,    // 尚未加入，暫且隱藏。
-                DualEditCommand.Names.PasteFromClipboard, // 尚未加入，暫且隱藏。
-                DualEditCommand.Names.InsertTable
+                DualEditCommand.Names.InsertTable,
+                DualEditCommand.Names.SelectAll
             };
 
             foreach (string cmd in disabledCommands)
@@ -288,6 +287,9 @@ namespace EasyBrailleEdit
                         break;
                     case Keys.C:
                         Controller.CopyToClipboard(brGrid);
+                        break;
+                    case Keys.X:
+                        Controller.CutToClipboard(brGrid);
                         break;
                     case Keys.V:
                         Controller.PasteFromClipboard(brGrid, row, col);

@@ -40,8 +40,7 @@ namespace EasyBrailleEdit
         private FileRunner m_FileRunner;
 
         private FindReplace FindReplaceDialog;
-
-
+        
         public MainForm()
         {
             InitializeComponent();
@@ -420,6 +419,8 @@ namespace EasyBrailleEdit
                 return;
             }
 
+            m_ConvertDialog.IsConvertingSelectedText = !string.IsNullOrEmpty(m_TextArea.SelectedText);
+
             if (m_ConvertDialog.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -430,7 +431,7 @@ namespace EasyBrailleEdit
             // 決定要轉換的輸入文字
             string content;
 
-            if (!String.IsNullOrEmpty(m_TextArea.SelectedText)) // 若有選取文字，就只轉換選取的部份。
+            if (m_ConvertDialog.IsConvertingSelectedText) // 若有選取文字，就只轉換選取的部份。
             {
                 content = m_TextArea.SelectedText;
             }

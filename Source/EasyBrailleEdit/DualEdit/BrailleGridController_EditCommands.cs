@@ -1056,12 +1056,19 @@ namespace EasyBrailleEdit.DualEdit
 
             if (startRow != endRow) // 選取多行？
             {
+                if (IsUsedForPageTitle)
+                {
+                    MsgBoxHelper.ShowInfo("頁標題編輯模式下不可複製多列文字，因為每一列頁標題都與正文中特定列的位置有關。");
+                    grid.Selection.ResetSelection(false);
+                    return false;
+                }
+
                 int totalColumns = grid.ColumnsCount - grid.FixedColumns;
                 if ((endCol - startCol + 1) < totalColumns)
                 {
                     int startLineIdx = _positionMapper.GridRowToBrailleLineIndex(startRow);
                     int endLineIdx = _positionMapper.GridRowToBrailleLineIndex(endRow);
-                    var s = $"複製或剪下多行時，必須選取整行。\r\n您是否要複製或剪下第 {startLineIdx + 1} 至 {endLineIdx + 1} 行？";
+                    var s = $"複製或剪下多欄時，必須選取整列。\r\n您是否要複製或剪下第 {startLineIdx + 1} 至 {endLineIdx + 1} 列？";
                     if (MsgBoxHelper.ShowYesNo(s) != DialogResult.Yes)
                         return false;
 
