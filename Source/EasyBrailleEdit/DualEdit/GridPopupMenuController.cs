@@ -42,7 +42,8 @@ namespace EasyBrailleEdit.DualEdit
                 $"全選;{DualEditCommand.Names.SelectAll};" + ((int)Shortcut.CtrlA).ToString(),
                 $"剪下;{DualEditCommand.Names.CutToClipboard};" + ((int)Shortcut.CtrlX).ToString(),
                 $"複製;{DualEditCommand.Names.CopyToClipboard};" + ((int)Shortcut.CtrlC).ToString(),
-                $"貼上;{DualEditCommand.Names.PasteFromClipboard};" + ((int)Shortcut.CtrlV).ToString()
+                $"貼上;{DualEditCommand.Names.PasteFromClipboard};" + ((int)Shortcut.CtrlV).ToString(),
+                $"貼上至行尾;{DualEditCommand.Names.PasteToEndOfLine};" + ((int)Shortcut.CtrlShiftV).ToString()
             };
 
             MenuItem mi;

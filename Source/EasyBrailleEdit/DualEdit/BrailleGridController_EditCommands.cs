@@ -317,6 +317,42 @@ namespace EasyBrailleEdit.DualEdit
             }
         }
 
+        private void AppendBrailleWords(List<BrailleWord> wordList, SourceGrid.Grid grid, int row, string operation = null)
+        {
+            var activePos = grid.Selection.ActivePosition;
+
+            row = _positionMapper.GetBrailleRowIndex(row); // 確保列索引是點字所在的列。
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
+            BrailleLine brLine = BrailleDoc.Lines[lineIdx];
+
+
+            // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
+            if (operation == null)
+            {
+                var s = BrailleWordHelper.ToOriginalTextString(wordList);
+                if (s.Length > 10)
+                {
+                    s = s.Substring(0, 10) + "...";
+                }
+                operation = $"插入文字：{s}";
+            }
+            var memento = CreateMemento(operation);
+
+            // 在第 wordIdx 個字之前插入新點字。
+            brLine.Words.AddRange(wordList);
+            IsDirty = true;
+
+            // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
+            UndoRedo.SaveMementoForUndo(memento);
+
+            // Update UI
+            int formattedLineCount = ReformatRow(grid, row);
+
+            // 把焦點移至原本所在的儲存格。
+            GridFocusCell(activePos.Row, activePos.Column);
+        }
+
+
         /// <summary>
         /// 在行尾附加點字。
         /// </summary>
@@ -1233,7 +1269,27 @@ namespace EasyBrailleEdit.DualEdit
             }
             if (brLines != null)
             {
-                InsertBrailleLines(brLines, grid, row, col, $"從剪貼簿貼上 {brLines.Count} 行");
+                InsertBrailleLines(brLines, grid, row, col, $"從剪貼簿貼上 {brLines.Count} 列");
+                return;
+            }
+            MsgBoxHelper.ShowInfo("剪貼簿裡面沒有資料！");
+        }
+
+        public void PasteToEndOfLine(Grid grid, int row, int col)
+        {
+            _form.StatusText = String.Empty;
+
+            var brWords = ClipboardHelper.GetWords();
+            var brLines = ClipboardHelper.GetLines();
+
+            if (brWords != null)
+            {
+                AppendBrailleWords(brWords, grid, row, "從剪貼簿貼上文字至行尾");
+                return;
+            }
+            if (brLines != null)
+            {
+                MsgBoxHelper.ShowInfo("無法貼上，因為貼至行尾的操作不適用於多行選取。");
                 return;
             }
             MsgBoxHelper.ShowInfo("剪貼簿裡面沒有資料！");

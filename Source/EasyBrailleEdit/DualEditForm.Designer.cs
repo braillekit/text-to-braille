@@ -57,6 +57,7 @@
             this.miEditCut = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.miEditPasteToEndOfRow = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditRemoveDigitSymbol = new System.Windows.Forms.ToolStripMenuItem();
             this.miView = new System.Windows.Forms.ToolStripMenuItem();
             this.miViewMode = new System.Windows.Forms.ToolStripMenuItem();
@@ -107,12 +108,12 @@
             this.brGrid.EnableSort = true;
             this.brGrid.FixedColumns = 1;
             this.brGrid.FixedRows = 1;
-            this.brGrid.Location = new System.Drawing.Point(0, 54);
+            this.brGrid.Location = new System.Drawing.Point(0, 55);
             this.brGrid.Name = "brGrid";
             this.brGrid.OptimizeMode = SourceGrid.CellOptimizeMode.ForRows;
             this.brGrid.RowsCount = 1;
             this.brGrid.SelectionMode = SourceGrid.GridSelectionMode.Cell;
-            this.brGrid.Size = new System.Drawing.Size(927, 416);
+            this.brGrid.Size = new System.Drawing.Size(927, 415);
             this.brGrid.TabIndex = 2;
             this.brGrid.TabStop = true;
             this.brGrid.ToolTipText = "";
@@ -127,7 +128,7 @@
             this.miTools});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(927, 27);
+            this.mnuMain.Size = new System.Drawing.Size(927, 28);
             this.mnuMain.TabIndex = 3;
             this.mnuMain.Text = "menuStrip1";
             // 
@@ -144,7 +145,7 @@
             this.toolStripMenuItem2,
             this.離開XToolStripMenuItem});
             this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(69, 23);
+            this.miFile.Size = new System.Drawing.Size(69, 24);
             this.miFile.Text = "檔案(&F)";
             // 
             // miFileOpen
@@ -226,9 +227,10 @@
             this.miEditCut,
             this.miEditCopy,
             this.miEditPaste,
+            this.miEditPasteToEndOfRow,
             this.miEditRemoveDigitSymbol});
             this.miEdit.Name = "miEdit";
-            this.miEdit.Size = new System.Drawing.Size(69, 23);
+            this.miEdit.Size = new System.Drawing.Size(69, 24);
             this.miEdit.Text = "編輯(&E)";
             // 
             // miEditDocProperties
@@ -351,6 +353,16 @@
             this.miEditPaste.Text = "貼上";
             this.miEditPaste.Click += new System.EventHandler(this.miEdit_Click);
             // 
+            // miEditPasteToEndOfRow
+            // 
+            this.miEditPasteToEndOfRow.Name = "miEditPasteToEndOfRow";
+            this.miEditPasteToEndOfRow.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.V)));
+            this.miEditPasteToEndOfRow.Size = new System.Drawing.Size(318, 26);
+            this.miEditPasteToEndOfRow.Tag = "PasteToEndOfLine";
+            this.miEditPasteToEndOfRow.Text = "貼上至行尾";
+            this.miEditPasteToEndOfRow.Click += new System.EventHandler(this.miEdit_Click);
+            // 
             // miEditRemoveDigitSymbol
             // 
             this.miEditRemoveDigitSymbol.Name = "miEditRemoveDigitSymbol";
@@ -372,7 +384,7 @@
             this.toolStripMenuItem4,
             this.miViewRefresh});
             this.miView.Name = "miView";
-            this.miView.Size = new System.Drawing.Size(71, 23);
+            this.miView.Size = new System.Drawing.Size(71, 24);
             this.miView.Text = "檢視(&V)";
             // 
             // miViewMode
@@ -461,7 +473,7 @@
             this.miToolsRemoveSharpSymbolFromPageNumbers,
             this.miToolsRemoveUselessWords});
             this.miTools.Name = "miTools";
-            this.miTools.Size = new System.Drawing.Size(69, 23);
+            this.miTools.Size = new System.Drawing.Size(69, 24);
             this.miTools.Text = "工具(&T)";
             // 
             // miToolsRemoveSharpSymbolFromPageNumbers
@@ -495,7 +507,7 @@
             this.toolStripLabel1,
             this.txtGotoPageNum,
             this.btnGotoPage});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 27);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(927, 27);
             this.toolStrip1.TabIndex = 4;
@@ -783,5 +795,6 @@
         private System.Windows.Forms.ToolStripMenuItem miEditCut;
         private System.Windows.Forms.ToolStripMenuItem miFileExportHtml;
         private System.Windows.Forms.ToolStripMenuItem miEditSelectAll;
+        private System.Windows.Forms.ToolStripMenuItem miEditPasteToEndOfRow;
     }
 }

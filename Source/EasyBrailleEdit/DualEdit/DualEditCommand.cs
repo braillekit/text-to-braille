@@ -27,6 +27,7 @@ namespace EasyBrailleEdit.DualEdit
             public const string InsertText = "InsertText";
             public const string InsertTable = "InsertTable";
             public const string PasteFromClipboard = "PasteFromClipboard";
+            public const string PasteToEndOfLine = "PasteToEndOfLine";
             public const string RemoveDigitSymbol = "RemoveDigitSymbol";
         }
     }

@@ -497,6 +497,17 @@ namespace EasyBrailleEdit
             _controller.PasteFromClipboard(brGrid, activePosition.Row, activePosition.Column);
         }
 
+        private void PasteToEndOfLine()
+        {
+            var activePosition = brGrid.Selection.ActivePosition;
+            if (activePosition.IsEmpty())
+            {
+                MsgBoxHelper.ShowInfo("請先點選您想要貼上的資料列，再執行此操作。");
+                return;
+            }
+            _controller.PasteToEndOfLine(brGrid, activePosition.Row, activePosition.Column);
+        }
+
         private void RemoveDigitSymbol()
         {
             _controller.RemoveDigitSymbol();
@@ -541,6 +552,9 @@ namespace EasyBrailleEdit
                     break;
                 case "Paste":
                     PasteFromClipboard();
+                    break;
+                case DualEditCommand.Names.PasteToEndOfLine:
+                    PasteToEndOfLine();
                     break;
                 case "RemoveDigitSymbol":
                     RemoveDigitSymbol();

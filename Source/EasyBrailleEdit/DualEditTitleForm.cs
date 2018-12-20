@@ -270,6 +270,13 @@ namespace EasyBrailleEdit
                         break;
                 }
             }
+            else if (e.Modifiers == (Keys.Control | Keys.Shift))
+            {
+                if (e.KeyCode == Keys.V)
+                {
+                    Controller.PasteToEndOfLine(brGrid, row, col);
+                }
+            }
             else if (e.Modifiers == Keys.Control)
             {
                 switch (e.KeyCode)

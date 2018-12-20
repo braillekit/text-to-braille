@@ -79,6 +79,9 @@ namespace EasyBrailleEdit.DualEdit
                 case DualEditCommand.Names.PasteFromClipboard:
                     PasteFromClipboard(grid, row, col);
                     break;
+                case DualEditCommand.Names.PasteToEndOfLine:
+                    PasteToEndOfLine(grid, row, col);
+                    break;
                 case DualEditCommand.Names.RemoveDigitSymbol:
                     RemoveDigitSymbol();
                     break;
@@ -241,6 +244,9 @@ namespace EasyBrailleEdit.DualEdit
                         case Keys.T:
                             InsertTable(_grid, row, col);
                             e.Handled = true;
+                            break;
+                        case Keys.V:
+                            PasteToEndOfLine(_grid, row, col);
                             break;
                     }
                 }
