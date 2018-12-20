@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
-using BrailleToolkit.Helpers;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
 using NUnit.Framework;

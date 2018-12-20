@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
+using BrailleToolkit.Helpers;
 using Huanlin.Common.Helpers;
 
 namespace BrailleToolkit
@@ -104,7 +105,7 @@ namespace BrailleToolkit
         /// <summary>
         /// 將點位轉換成 byte 值。
         /// </summary>
-        /// <param name="posNumbers">點位</param>
+        /// <param name="posNumberString">一方點字的點位。例如 "1356"。</param>
         /// <returns></returns>
         public static byte PositionNumberStringToByte(string posNumberString)
         {
@@ -119,6 +120,22 @@ namespace BrailleToolkit
             }
 
             return ConvertHelper.BitsToByte(bits);
+        }
+
+        /// <summary>
+        /// 把陣列中的點位字串轉換成十六進制代碼。
+        /// </summary>
+        /// <param name="positionNumbers"></param>
+        /// <returns></returns>
+        public static string PositionNumbersToHexString(string[] positionNumbers)
+        {
+            var result = new StringBuilder();
+            foreach (var posNum in positionNumbers)
+            {
+                var byteValue = PositionNumberStringToByte(posNum);
+                result.Append(byteValue.ToString("X2"));
+            }
+            return result.ToString();
         }
 
         private BrailleCell(byte value)
@@ -190,24 +207,12 @@ namespace BrailleToolkit
 
         public string ToHexString()
         {
-            return m_Value.ToString("X2", CultureInfo.CurrentUICulture);
+            return BrailleCellHelper.ByteToHexString(m_Value);
         }
 
         public string ToPositionNumberString()
         {
-            var sb = new StringBuilder();
-            byte x = Value;
-            int dot = 1;
-            while (dot <= 6)
-            {
-                if ((x & 1) == 1)
-                {
-                    sb.Append(dot.ToString());
-                }
-                x = (byte)(x >> 1);
-                dot++;
-            }
-            return sb.ToString();
+            return BrailleCellHelper.ByteToPositionNumberString(Value);
         }
     }
 }

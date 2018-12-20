@@ -172,6 +172,8 @@ namespace BrailleToolkit.Rules
                     case "≧":
                     case "∠":
                     case "⊥":
+                    case "↔":
+                    case "△":
                         wordIdx += EncloseBlankCells(brLine, wordIdx);
                         break;
                     case "√":   // 打勾符號，前後須加空方，後面接逗號時需特殊處理。
