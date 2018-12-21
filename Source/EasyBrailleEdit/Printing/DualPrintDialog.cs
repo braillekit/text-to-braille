@@ -141,10 +141,10 @@ namespace EasyBrailleEdit
             {
                 LinesPerPage = AppGlobals.Config.Braille.LinesPerPage,
                 PrintPageFoot = chkPrintPageFoot.Checked,
-
-                // 列印範圍
-                AllPages = rdoPrintAll.Checked
+                Copies = (int)textPrintCopies.Value,
+                AllPages = rdoPrintAll.Checked // 列印範圍
             };
+
             if (!prnOpt.AllPages) 
             {
                 string[] pageRange = txtPageRange.Text.Split(new char[] {'-'});
@@ -170,7 +170,7 @@ namespace EasyBrailleEdit
                     MsgBoxHelper.ShowError("列印範圍無效! 起始頁或終止頁超出總頁數。");
                     txtPageRange.Focus();
                     return null;
-                }
+                }                
             }
 
             // 起始頁碼

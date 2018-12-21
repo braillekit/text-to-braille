@@ -21,6 +21,7 @@ namespace EasyBrailleEdit
         private bool m_AllPages;    // 列印全部？
         private int m_FromPage;
         private int m_ToPage;
+        private int m_Copies;
 
 
         public PrintOptions() : base()
@@ -28,6 +29,7 @@ namespace EasyBrailleEdit
             m_AllPages = true;
             m_FromPage = 0;
             m_ToPage = 0;
+            m_Copies = 1;
 
             DoubleSide = false;
             PrintPageFoot = true;
@@ -71,6 +73,17 @@ namespace EasyBrailleEdit
                 if (value < 1)
                     throw new ArgumentException("終止頁數不可小於 1。");
                 m_ToPage = value;
+            }
+        }
+
+        public int Copies
+        {
+            get { return m_Copies; }
+            set
+            {
+                if (m_Copies < 1)
+                    throw new ArgumentException("列印份數不可小於 1。");
+                m_Copies = value;
             }
         }
 
