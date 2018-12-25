@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BrailleToolkit;
+﻿using BrailleToolkit;
 using BrailleToolkit.Converters;
 using EasyBrailleEdit.Common;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
+using System;
+using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace EasyBrailleEdit.DualEdit
 {
@@ -33,6 +30,8 @@ namespace EasyBrailleEdit.DualEdit
 
         private BrailleGridDebugger _debugger;
         private ViewMode m_ViewMode = ViewMode.All;
+
+        private SemaphoreSlim semaphore = new SemaphoreSlim(1, 1); // 用來避免多執行緒重入同一區塊或同時存取同一份資源
 
         #region 供 Grid 使用的物件
 
@@ -403,7 +402,7 @@ namespace EasyBrailleEdit.DualEdit
                 {
                     cell.View = m_HeaderView;
                 }
-                
+
                 rowNum++;
                 lineIdx++;
             }
@@ -514,7 +513,7 @@ namespace EasyBrailleEdit.DualEdit
             }
 
             int cnt = 0;
-            _form.StatusText = "正在準備顯示資料...";
+            _form.StatusText = "正在刷新視窗內容...";
             _form.StatusProgress = 0;
             _grid.UseWaitCursor = true;
             CursorHelper.ShowWaitCursor();
@@ -847,37 +846,28 @@ namespace EasyBrailleEdit.DualEdit
             int lineIndex = PositionMapper.GridRowToBrailleLineIndex(row);
             int lineCnt = BrailleDocumentFormatter.FormatLine(BrailleDoc, lineIndex, null);
 
-            var busyForm = new BusyForm();
-            busyForm.Message = "正在刷新視窗內容...";
-            busyForm.Show();
+            // 換上新列
+            RecreateRow(row);
+            FillRow(BrailleDoc[lineIndex], row, true);
+
+            // 處理斷行所產生的其他 lines
+            for (int i = 1; i < lineCnt; i++)
+            {
+                // 插入新列
+                lineIndex++;
+                row += 3;
+                GridInsertRowAt(row);
+                FillRow(BrailleDoc[lineIndex], row, autoSize: true);
+            }
+
+            if (lineCnt > 1)
+            {
+                // 重新填列號
+                RefreshRowNumbers();
+            }
             Application.DoEvents();
-            try
-            {
-                // 換上新列
-                RecreateRow(row);
-                FillRow(BrailleDoc[lineIndex], row, true);
 
-                // 處理斷行所產生的其他 lines
-                for (int i = 1; i < lineCnt; i++)
-                {
-                    // 插入新列
-                    lineIndex++;
-                    row += 3;
-                    GridInsertRowAt(row);
-                    FillRow(BrailleDoc[lineIndex], row, autoSize: true);
-                }
-
-                if (lineCnt > 1)
-                {
-                    // 重新填列號
-                    RefreshRowNumbers();
-                }
-                return lineCnt;
-            }
-            finally
-            {
-                busyForm.Close();
-            }
+            return lineCnt;
         }
 
         /// <summary>
