@@ -103,15 +103,16 @@ namespace EasyBrailleEdit.License
                     continue;
                 string sn = items[0].Trim().Replace("-", "");
                 DateTime expiredDate = Convert.ToDateTime(items[1]);
-                int snFlag = Convert.ToInt32(items[2]);
+                int versionFlag = Convert.ToInt32(items[2]);
 
                 if (string.IsNullOrWhiteSpace(sn) || sn != userLic.SerialNumber || DateTime.Now > expiredDate)
                     continue;
-                if (!VersionLicense.IsValid(snFlag))
+                if (!VersionLicense.IsValid(versionFlag))
                     continue;
 
                 // Overwrite 使用期限
                 userLic.ExpiredDate = expiredDate;
+                userLic.VersionLicense = versionFlag;
 
                 // 保存註冊資訊。
                 SaveUserLicenseData(userLic);
@@ -119,7 +120,7 @@ namespace EasyBrailleEdit.License
                 AppGlobals.UserLicense.CustomerName = userLic.CustomerName;
                 AppGlobals.UserLicense.SerialNumber = userLic.SerialNumber;
                 AppGlobals.UserLicense.ExpiredDate = userLic.ExpiredDate;
-                AppGlobals.UserLicense.VersionLicense = snFlag;
+                AppGlobals.UserLicense.VersionLicense = versionFlag;
                 return true;
             }
             Log.Debug($"使用者輸入的序號無效: {userLic.SerialNumber}");
