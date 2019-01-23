@@ -10,6 +10,10 @@
         public const string SerialNumberRegKey = "SerialNumber";
         public const string CustomerNameRegKey = "Customer";
         public const string VersionLicenseRegKey = "VersionLicense";
+        public const string ExpiredDateRegKey = "ExpiredDate";
+        public const string LastTimeTrackingUser = "LastTimeTrackingUser";
+
+        public const string BlockedIPFileUrl = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/forblind/blockedip.txt";
 
         public static class ProductBranches
         {

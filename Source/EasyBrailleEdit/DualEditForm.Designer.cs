@@ -36,6 +36,7 @@
             this.miFileSave = new System.Windows.Forms.ToolStripMenuItem();
             this.miFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.miFileExportBrl = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFileExportHtml = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.miFilePrint = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -45,16 +46,18 @@
             this.miEditPageTitle = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditFetchPageTitles = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.尋找FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miEditFind = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditFindNext = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditGoto = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.miEditUndo = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditRedo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
+            this.miEditSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditCut = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.miEditPasteToEndOfRow = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditRemoveDigitSymbol = new System.Windows.Forms.ToolStripMenuItem();
             this.miView = new System.Windows.Forms.ToolStripMenuItem();
             this.miViewMode = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,7 +93,6 @@
             this.statusLabelCurrentWord = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelCurrentLine = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelPageTitle = new System.Windows.Forms.ToolStripStatusLabel();
-            this.miFileExportHtml = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -176,6 +178,13 @@
             this.miFileExportBrl.Text = "匯出點字檔(&B)";
             this.miFileExportBrl.Click += new System.EventHandler(this.miFileExportBrl_Click);
             // 
+            // miFileExportHtml
+            // 
+            this.miFileExportHtml.Name = "miFileExportHtml";
+            this.miFileExportHtml.Size = new System.Drawing.Size(232, 26);
+            this.miFileExportHtml.Text = "匯出為網頁(&H)";
+            this.miFileExportHtml.Click += new System.EventHandler(this.miFileExportHtml_Click);
+            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
@@ -207,16 +216,18 @@
             this.miEditPageTitle,
             this.miEditFetchPageTitles,
             this.toolStripMenuItem3,
-            this.尋找FToolStripMenuItem,
+            this.miEditFind,
             this.miEditFindNext,
             this.miEditGoto,
             this.toolStripMenuItem5,
             this.miEditUndo,
             this.miEditRedo,
             this.toolStripMenuItem7,
+            this.miEditSelectAll,
             this.miEditCut,
             this.miEditCopy,
             this.miEditPaste,
+            this.miEditPasteToEndOfRow,
             this.miEditRemoveDigitSymbol});
             this.miEdit.Name = "miEdit";
             this.miEdit.Size = new System.Drawing.Size(69, 24);
@@ -251,14 +262,14 @@
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(315, 6);
             // 
-            // 尋找FToolStripMenuItem
+            // miEditFind
             // 
-            this.尋找FToolStripMenuItem.Name = "尋找FToolStripMenuItem";
-            this.尋找FToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.尋找FToolStripMenuItem.Size = new System.Drawing.Size(318, 26);
-            this.尋找FToolStripMenuItem.Tag = "Find";
-            this.尋找FToolStripMenuItem.Text = "尋找(&F)";
-            this.尋找FToolStripMenuItem.Click += new System.EventHandler(this.miEdit_Click);
+            this.miEditFind.Name = "miEditFind";
+            this.miEditFind.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.miEditFind.Size = new System.Drawing.Size(318, 26);
+            this.miEditFind.Tag = "Find";
+            this.miEditFind.Text = "尋找(&F)";
+            this.miEditFind.Click += new System.EventHandler(this.miEdit_Click);
             // 
             // miEditFindNext
             // 
@@ -306,6 +317,15 @@
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
             this.toolStripMenuItem7.Size = new System.Drawing.Size(315, 6);
             // 
+            // miEditSelectAll
+            // 
+            this.miEditSelectAll.Name = "miEditSelectAll";
+            this.miEditSelectAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.miEditSelectAll.Size = new System.Drawing.Size(318, 26);
+            this.miEditSelectAll.Tag = "SelectAll";
+            this.miEditSelectAll.Text = "全選";
+            this.miEditSelectAll.Click += new System.EventHandler(this.miEdit_Click);
+            // 
             // miEditCut
             // 
             this.miEditCut.Name = "miEditCut";
@@ -332,6 +352,16 @@
             this.miEditPaste.Tag = "Paste";
             this.miEditPaste.Text = "貼上";
             this.miEditPaste.Click += new System.EventHandler(this.miEdit_Click);
+            // 
+            // miEditPasteToEndOfRow
+            // 
+            this.miEditPasteToEndOfRow.Name = "miEditPasteToEndOfRow";
+            this.miEditPasteToEndOfRow.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.V)));
+            this.miEditPasteToEndOfRow.Size = new System.Drawing.Size(318, 26);
+            this.miEditPasteToEndOfRow.Tag = "PasteToEndOfLine";
+            this.miEditPasteToEndOfRow.Text = "貼上至行尾";
+            this.miEditPasteToEndOfRow.Click += new System.EventHandler(this.miEdit_Click);
             // 
             // miEditRemoveDigitSymbol
             // 
@@ -663,13 +693,6 @@
             this.statusLabelPageTitle.Size = new System.Drawing.Size(181, 26);
             this.statusLabelPageTitle.Text = "toolStripStatusLabel1";
             // 
-            // miFileExportHtml
-            // 
-            this.miFileExportHtml.Name = "miFileExportHtml";
-            this.miFileExportHtml.Size = new System.Drawing.Size(232, 26);
-            this.miFileExportHtml.Text = "匯出為網頁(&H)";
-            this.miFileExportHtml.Click += new System.EventHandler(this.miFileExportHtml_Click);
-            // 
             // DualEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
@@ -687,6 +710,8 @@
             this.Name = "DualEditForm";
             this.Text = "雙視編輯";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Activated += new System.EventHandler(this.DualEditForm_Activated);
+            this.Deactivate += new System.EventHandler(this.DualEditForm_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DualEditForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DualEditForm_FormClosed);
             this.Load += new System.EventHandler(this.DualEditForm_Load);
@@ -736,7 +761,7 @@
         private System.Windows.Forms.ToolStripMenuItem miViewTextZhuyin;
         private System.Windows.Forms.ToolStripStatusLabel statPageInfo;
         private System.Windows.Forms.ToolStripStatusLabel statDocTitle;
-        private System.Windows.Forms.ToolStripMenuItem 尋找FToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miEditFind;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
 		private System.Windows.Forms.ToolStripMenuItem miEditPageTitle;
 		private System.Windows.Forms.ToolStripMenuItem miEditGoto;
@@ -769,5 +794,7 @@
         private System.Windows.Forms.ToolStripStatusLabel statusLabelPageTitle;
         private System.Windows.Forms.ToolStripMenuItem miEditCut;
         private System.Windows.Forms.ToolStripMenuItem miFileExportHtml;
+        private System.Windows.Forms.ToolStripMenuItem miEditSelectAll;
+        private System.Windows.Forms.ToolStripMenuItem miEditPasteToEndOfRow;
     }
 }

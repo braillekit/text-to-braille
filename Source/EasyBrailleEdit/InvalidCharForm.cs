@@ -26,7 +26,7 @@ namespace EasyBrailleEdit
 
         public void Add(CharPosition charPos)
         {
-            String s = String.Format("({0},{1}) : {2}", charPos.LineNumber, charPos.CharIndex, charPos.CharValue);
+            var s = $"({charPos.LineNumber},{charPos.CharIndex}) : {charPos.CharValue}";
             lbxInvalidChars.Items.Add(s);
         }
 

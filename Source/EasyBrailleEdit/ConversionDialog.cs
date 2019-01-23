@@ -15,6 +15,23 @@ namespace EasyBrailleEdit
         private ArrayList m_SelectedPhraseFileNames;
         private const char PhraseFileNameSeparator = '|';
 
+        private bool m_IsConvertingSelectedTet;
+
+        public bool IsConvertingSelectedText
+        {
+            get { return m_IsConvertingSelectedTet; }
+            set
+            {
+                m_IsConvertingSelectedTet = value;
+                Text = "將明眼字轉為點字";
+                if (value)
+                {
+                    Text = Text + " （只轉換已選取的文字）";
+                }
+            }
+        }
+
+
         public ConversionDialog()
         {
             m_SelectedPhraseFileNames = new ArrayList();

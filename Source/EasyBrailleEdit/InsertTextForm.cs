@@ -120,10 +120,17 @@ namespace EasyBrailleEdit
             int i = s.IndexOf('|');
             if (i >= 0)
             {
-                txtInput.SelectedText = s.Remove(i, 1);
+                int selectionLength = txtInput.SelectedText.Length;
+                var leftPart = s.Substring(0, i);
+                var rightPart = s.Substring(i + 1);
+                txtInput.SelectedText = leftPart + txtInput.SelectedText + rightPart;
                 txtInput.Update();
                 Application.DoEvents();
-                txtInput.SelectionStart -= (s.Length - i - 1);
+
+                if (selectionLength < 1)
+                {
+                    txtInput.SelectionStart -= (s.Length - i - 1);
+                }                
             }
             else
             {

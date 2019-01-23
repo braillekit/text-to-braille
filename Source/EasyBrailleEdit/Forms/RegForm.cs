@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.IO;
 using System.Windows.Forms;
-using System.Configuration;
-using System.Security.Cryptography;
-using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
-using Huanlin.Http;
-using Huanlin.Collections;
-using Huanlin.Common.Cryptography;
 
 namespace EasyBrailleEdit
 {

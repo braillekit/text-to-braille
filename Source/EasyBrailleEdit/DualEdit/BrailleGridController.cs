@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BrailleToolkit;
+﻿using BrailleToolkit;
 using BrailleToolkit.Converters;
 using EasyBrailleEdit.Common;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
+using System;
+using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace EasyBrailleEdit.DualEdit
 {
@@ -33,6 +30,8 @@ namespace EasyBrailleEdit.DualEdit
 
         private BrailleGridDebugger _debugger;
         private ViewMode m_ViewMode = ViewMode.All;
+
+        private SemaphoreSlim semaphore = new SemaphoreSlim(1, 1); // 用來避免多執行緒重入同一區塊或同時存取同一份資源
 
         #region 供 Grid 使用的物件
 
@@ -374,12 +373,7 @@ namespace EasyBrailleEdit.DualEdit
             int rowNum = 1;
             int pageCount = 0;
             int lineIdx = 0;
-            int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
-
-            if (AppGlobals.Config.Printing.PrintPageFoot)
-            {
-                linesPerPage--; // 頁碼佔一列，所以每頁實際的點字列數少一列。
-            }
+            int linesPerPage = GetLinesPerPageForGrid();
 
             for (int row = 1; row < _grid.RowsCount; row += 3)
             {
@@ -405,7 +399,7 @@ namespace EasyBrailleEdit.DualEdit
                 {
                     cell.View = m_HeaderView;
                 }
-                
+
                 rowNum++;
                 lineIdx++;
             }
@@ -504,6 +498,18 @@ namespace EasyBrailleEdit.DualEdit
             FillGrid(BrailleDoc);
         }
 
+
+        private int GetLinesPerPageForGrid()
+        {
+            int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
+
+            if (AppGlobals.Config.Printing.PrintPageFoot)
+            {
+                linesPerPage--; // 頁碼佔一列，所以每頁實際的點字列數少一列。
+            }
+            return linesPerPage;
+        }
+
         /// <summary>
         /// 將 BrailleDocument 文件內容填入 grid。
         /// </summary>
@@ -516,7 +522,7 @@ namespace EasyBrailleEdit.DualEdit
             }
 
             int lineCount = 0;
-            _form.StatusText = "正在準備顯示資料...";
+            _form.StatusText = "正在刷新視窗內容...";
             _form.StatusProgress = 0;
             _grid.UseWaitCursor = true;
             CursorHelper.ShowWaitCursor();
@@ -528,16 +534,17 @@ namespace EasyBrailleEdit.DualEdit
             try
             {
                 int row = FixedRows;
-                int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
                 int pageCount = 0;
+                int linesPerPage = GetLinesPerPageForGrid();
                 int maxOutputPage = VersionLicense.GetMaxOutputPage(AppGlobals.UserLicense.VersionLicense);
                 foreach (BrailleLine brLine in brDoc.Lines)
                 {
                     if (maxOutputPage > 0)
                     {
-                        if (pageCount > maxOutputPage)
+                        if (pageCount >= maxOutputPage)
                         {
-                            MsgBoxHelper.ShowInfo($"抱歉！家用版最多只能編輯 {maxOutputPage} 頁，超出的頁數已經截斷。");
+                            busyForm.Close();
+                            MsgBoxHelper.ShowInfo($"抱歉！家用版最多只能編輯和列印 {maxOutputPage} 頁，超出頁數的資料不會顯示出來。");
                             break;
                         }
                     }
@@ -865,37 +872,28 @@ namespace EasyBrailleEdit.DualEdit
             int lineIndex = PositionMapper.GridRowToBrailleLineIndex(row);
             int lineCnt = BrailleDocumentFormatter.FormatLine(BrailleDoc, lineIndex, null);
 
-            var busyForm = new BusyForm();
-            busyForm.Message = "正在刷新視窗內容...";
-            busyForm.Show();
+            // 換上新列
+            RecreateRow(row);
+            FillRow(BrailleDoc[lineIndex], row, true);
+
+            // 處理斷行所產生的其他 lines
+            for (int i = 1; i < lineCnt; i++)
+            {
+                // 插入新列
+                lineIndex++;
+                row += 3;
+                GridInsertRowAt(row);
+                FillRow(BrailleDoc[lineIndex], row, autoSize: true);
+            }
+
+            if (lineCnt > 1)
+            {
+                // 重新填列號
+                RefreshRowNumbers();
+            }
             Application.DoEvents();
-            try
-            {
-                // 換上新列
-                RecreateRow(row);
-                FillRow(BrailleDoc[lineIndex], row, true);
 
-                // 處理斷行所產生的其他 lines
-                for (int i = 1; i < lineCnt; i++)
-                {
-                    // 插入新列
-                    lineIndex++;
-                    row += 3;
-                    GridInsertRowAt(row);
-                    FillRow(BrailleDoc[lineIndex], row, autoSize: true);
-                }
-
-                if (lineCnt > 1)
-                {
-                    // 重新填列號
-                    RefreshRowNumbers();
-                }
-                return lineCnt;
-            }
-            finally
-            {
-                busyForm.Close();
-            }
+            return lineCnt;
         }
 
         /// <summary>
@@ -935,6 +933,14 @@ namespace EasyBrailleEdit.DualEdit
             else if (ViewMode == ViewMode.TextAndZhuyin)
             {
                 _grid.Rows.HideRow(row);
+            }
+        }
+
+        public void GridEnsureAtLeastOneRow()
+        {
+            if (_grid.RowsCount == _grid.FixedRows)
+            {
+                GridInsertRowAt(_grid.FixedRows);
             }
         }
 

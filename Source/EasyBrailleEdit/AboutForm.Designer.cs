@@ -32,6 +32,8 @@ namespace EasyBrailleEdit
         {
             this.btnClose = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblExpiredDate = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.lblCustomerName = new System.Windows.Forms.Label();
             this.lblLicensedTo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,6 +65,8 @@ namespace EasyBrailleEdit
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.lblVersionLicense);
+            this.panel1.Controls.Add(this.lblExpiredDate);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.lblCustomerName);
             this.panel1.Controls.Add(this.lblLicensedTo);
             this.panel1.Controls.Add(this.label1);
@@ -78,23 +82,45 @@ namespace EasyBrailleEdit
             this.panel1.Size = new System.Drawing.Size(432, 267);
             this.panel1.TabIndex = 0;
             // 
+            // lblExpiredDate
+            // 
+            this.lblExpiredDate.AutoSize = true;
+            this.lblExpiredDate.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblExpiredDate.Location = new System.Drawing.Point(113, 124);
+            this.lblExpiredDate.Name = "lblExpiredDate";
+            this.lblExpiredDate.Size = new System.Drawing.Size(126, 22);
+            this.lblExpiredDate.TabIndex = 13;
+            this.lblExpiredDate.Text = "lblExpiredDate";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Location = new System.Drawing.Point(12, 124);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 22);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "使用期限：";
+            // 
             // lblCustomerName
             // 
             this.lblCustomerName.AutoSize = true;
-            this.lblCustomerName.Location = new System.Drawing.Point(104, 100);
+            this.lblCustomerName.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblCustomerName.Location = new System.Drawing.Point(111, 100);
             this.lblCustomerName.Name = "lblCustomerName";
-            this.lblCustomerName.Size = new System.Drawing.Size(64, 24);
+            this.lblCustomerName.Size = new System.Drawing.Size(156, 22);
             this.lblCustomerName.TabIndex = 11;
-            this.lblCustomerName.Text = "label2";
+            this.lblCustomerName.Text = "lblCustomerName";
             // 
             // lblLicensedTo
             // 
             this.lblLicensedTo.AutoSize = true;
+            this.lblLicensedTo.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lblLicensedTo.Location = new System.Drawing.Point(12, 100);
             this.lblLicensedTo.Name = "lblLicensedTo";
-            this.lblLicensedTo.Size = new System.Drawing.Size(86, 24);
+            this.lblLicensedTo.Size = new System.Drawing.Size(95, 22);
             this.lblLicensedTo.TabIndex = 10;
-            this.lblLicensedTo.Text = "授權給：";
+            this.lblLicensedTo.Text = "授權對象：";
             // 
             // label1
             // 
@@ -181,9 +207,9 @@ namespace EasyBrailleEdit
             this.lblVersionLicense.AutoSize = true;
             this.lblVersionLicense.Location = new System.Drawing.Point(189, 15);
             this.lblVersionLicense.Name = "lblVersionLicense";
-            this.lblVersionLicense.Size = new System.Drawing.Size(168, 24);
-            this.lblVersionLicense.TabIndex = 12;
-            this.lblVersionLicense.Text = "lblVersionLicense";
+            this.lblVersionLicense.Size = new System.Drawing.Size(64, 24);
+            this.lblVersionLicense.TabIndex = 14;
+            this.lblVersionLicense.Text = "label3";
             // 
             // AboutForm
             // 
@@ -224,6 +250,8 @@ namespace EasyBrailleEdit
         private Label lblCustomerName;
         private Label lblLicensedTo;
         private Button btnRegister;
+        private Label lblExpiredDate;
+        private Label label2;
         private Label lblVersionLicense;
     }
 }

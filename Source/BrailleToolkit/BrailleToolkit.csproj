@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net471</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <RootNamespace>BrailleToolkit</RootNamespace>
     <IsPackable>False</IsPackable>
@@ -13,7 +13,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <OutputPath>..\..\Output\net452\</OutputPath>
+    <OutputPath>..\..\Output</OutputPath>
     <LangVersion>default</LangVersion>
   </PropertyGroup>
 
@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Huanlin.Common" Version="4.5.10" />
+    <PackageReference Include="Huanlin.Common" Version="4.5.11" />
     <PackageReference Include="NChinese" Version="0.5.1" />
     <PackageReference Include="Serilog" Version="2.7.1" />
   </ItemGroup>
