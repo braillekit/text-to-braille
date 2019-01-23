@@ -11,6 +11,7 @@ namespace EasyBrailleEdit.Common
         public bool IsValid { get; set; }
         public string CustomerName { get; set; }
         public string SerialNumber { get; set; }
+        public int VersionLicense { get; set; }
 
         public bool IsEmpty()
         {

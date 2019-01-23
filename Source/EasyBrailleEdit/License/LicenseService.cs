@@ -28,6 +28,7 @@ namespace EasyBrailleEdit.License
 
             userLic.SerialNumber = Convert.ToString(regKey.GetValue(Constant.SerialNumberRegKey));
             userLic.CustomerName = Convert.ToString(regKey.GetValue(Constant.CustomerNameRegKey));
+            userLic.VersionLicense = Convert.ToInt32(regKey.GetValue(Constant.VersionLicenseRegKey));
             return userLic;
         }
 
@@ -36,6 +37,7 @@ namespace EasyBrailleEdit.License
             var regKey = GetAppRegKey();
             regKey.SetValue(Constant.SerialNumberRegKey, userLic.SerialNumber, RegistryValueKind.String);
             regKey.SetValue(Constant.CustomerNameRegKey, userLic.CustomerName, RegistryValueKind.String);
+            regKey.SetValue(Constant.VersionLicenseRegKey, userLic.VersionLicense, RegistryValueKind.String);
             Log.Debug($"成功保存使用者序號 {userLic.SerialNumber} 至 {regKey.Name}");
         }
 
@@ -80,16 +82,17 @@ namespace EasyBrailleEdit.License
                 DateTime expiredDate = Convert.ToDateTime(items[1]);
                 int snFlag = Convert.ToInt32(items[2]);
 
-                if (String.IsNullOrWhiteSpace(sn) || sn != userLic.SerialNumber
-                    || snFlag != 0 || DateTime.Now > expiredDate)
+                if (string.IsNullOrWhiteSpace(sn) || sn != userLic.SerialNumber || DateTime.Now > expiredDate)
                     continue;
-
+                if (VersionLicense.IsValid(snFlag))
+                    continue;
 
                 // 保存註冊資訊。
                 SaveUserLicenseData(userLic);
                 AppGlobals.UserLicense.IsValid = true;
                 AppGlobals.UserLicense.CustomerName = userLic.CustomerName;
                 AppGlobals.UserLicense.SerialNumber = userLic.SerialNumber;
+                AppGlobals.UserLicense.VersionLicense = userLic.VersionLicense;
                 return true;
             }
             Log.Debug($"使用者輸入的序號無效: {userLic.SerialNumber}");

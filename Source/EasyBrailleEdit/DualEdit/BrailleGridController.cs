@@ -372,6 +372,7 @@ namespace EasyBrailleEdit.DualEdit
         private void RefreshRowNumbers()
         {
             int rowNum = 1;
+            int pageCount = 0;
             int lineIdx = 0;
             int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
 
@@ -397,6 +398,7 @@ namespace EasyBrailleEdit.DualEdit
 
                 if ((rowNum - 1) % linesPerPage == 0)
                 {
+                    pageCount++;
                     cell.View = m_HeaderView2;
                 }
                 else
@@ -513,7 +515,7 @@ namespace EasyBrailleEdit.DualEdit
                 return;
             }
 
-            int cnt = 0;
+            int lineCount = 0;
             _form.StatusText = "正在準備顯示資料...";
             _form.StatusProgress = 0;
             _grid.UseWaitCursor = true;
@@ -526,8 +528,20 @@ namespace EasyBrailleEdit.DualEdit
             try
             {
                 int row = FixedRows;
+                int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
+                int pageCount = 0;
+                int maxOutputPage = VersionLicense.GetMaxOutputPage(AppGlobals.UserLicense.VersionLicense);
                 foreach (BrailleLine brLine in brDoc.Lines)
                 {
+                    if (maxOutputPage > 0)
+                    {
+                        if (pageCount > maxOutputPage)
+                        {
+                            MsgBoxHelper.ShowInfo($"抱歉！家用版最多只能編輯 {maxOutputPage} 頁，超出的頁數已經截斷。");
+                            break;
+                        }
+                    }
+
                     if (brLine.CellCount < 1)
                     {
                         continue; // 有可能是空的列，例如 <表格> 起始標籤就單獨佔據一列。
@@ -550,8 +564,12 @@ namespace EasyBrailleEdit.DualEdit
 
                     row += 3;
 
-                    cnt++;
-                    _form.StatusProgress = cnt * 100 / brDoc.Lines.Count;
+                    lineCount++;
+                    if (lineCount % linesPerPage == 0)
+                    {
+                        pageCount++;
+                    }
+                    _form.StatusProgress = lineCount * 100 / brDoc.Lines.Count;
                 }
             }
             finally

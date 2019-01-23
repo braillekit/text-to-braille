@@ -43,9 +43,10 @@ namespace EasyBrailleEdit
 
         private void UpdateUI()
         {
+            lblVersionLicense.Text = VersionLicense.GetName(AppGlobals.UserLicense.VersionLicense);
             if (AppGlobals.UserLicense.IsValid)
             {
-                lblCustomerName.Text = AppGlobals.UserLicense.CustomerName;
+                lblCustomerName.Text = AppGlobals.UserLicense.CustomerName;                
                 btnRegister.Text = "重新註冊";
             }
             else

@@ -32,15 +32,16 @@ namespace EasyBrailleEdit
         {
             this.btnClose = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblCustomerName = new System.Windows.Forms.Label();
+            this.lblLicensedTo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblProductName = new System.Windows.Forms.Label();
             this.lblVesion = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblLicensedTo = new System.Windows.Forms.Label();
-            this.lblCustomerName = new System.Windows.Forms.Label();
             this.btnRegister = new System.Windows.Forms.Button();
+            this.lblVersionLicense = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -61,6 +62,7 @@ namespace EasyBrailleEdit
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.lblVersionLicense);
             this.panel1.Controls.Add(this.lblCustomerName);
             this.panel1.Controls.Add(this.lblLicensedTo);
             this.panel1.Controls.Add(this.label1);
@@ -75,6 +77,24 @@ namespace EasyBrailleEdit
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
             this.panel1.Size = new System.Drawing.Size(432, 267);
             this.panel1.TabIndex = 0;
+            // 
+            // lblCustomerName
+            // 
+            this.lblCustomerName.AutoSize = true;
+            this.lblCustomerName.Location = new System.Drawing.Point(104, 100);
+            this.lblCustomerName.Name = "lblCustomerName";
+            this.lblCustomerName.Size = new System.Drawing.Size(64, 24);
+            this.lblCustomerName.TabIndex = 11;
+            this.lblCustomerName.Text = "label2";
+            // 
+            // lblLicensedTo
+            // 
+            this.lblLicensedTo.AutoSize = true;
+            this.lblLicensedTo.Location = new System.Drawing.Point(12, 100);
+            this.lblLicensedTo.Name = "lblLicensedTo";
+            this.lblLicensedTo.Size = new System.Drawing.Size(86, 24);
+            this.lblLicensedTo.TabIndex = 10;
+            this.lblLicensedTo.Text = "授權給：";
             // 
             // label1
             // 
@@ -119,9 +139,9 @@ namespace EasyBrailleEdit
             this.lblProductName.Location = new System.Drawing.Point(96, 15);
             this.lblProductName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(148, 24);
+            this.lblProductName.Size = new System.Drawing.Size(86, 24);
             this.lblProductName.TabIndex = 3;
-            this.lblProductName.Text = "易點雙視 專業版";
+            this.lblProductName.Text = "易點雙視";
             // 
             // lblVesion
             // 
@@ -145,24 +165,6 @@ namespace EasyBrailleEdit
             this.panel2.Size = new System.Drawing.Size(432, 56);
             this.panel2.TabIndex = 3;
             // 
-            // lblLicensedTo
-            // 
-            this.lblLicensedTo.AutoSize = true;
-            this.lblLicensedTo.Location = new System.Drawing.Point(12, 100);
-            this.lblLicensedTo.Name = "lblLicensedTo";
-            this.lblLicensedTo.Size = new System.Drawing.Size(86, 24);
-            this.lblLicensedTo.TabIndex = 10;
-            this.lblLicensedTo.Text = "授權給：";
-            // 
-            // lblCustomerName
-            // 
-            this.lblCustomerName.AutoSize = true;
-            this.lblCustomerName.Location = new System.Drawing.Point(104, 100);
-            this.lblCustomerName.Name = "lblCustomerName";
-            this.lblCustomerName.Size = new System.Drawing.Size(64, 24);
-            this.lblCustomerName.TabIndex = 11;
-            this.lblCustomerName.Text = "label2";
-            // 
             // btnRegister
             // 
             this.btnRegister.Location = new System.Drawing.Point(16, 10);
@@ -173,6 +175,15 @@ namespace EasyBrailleEdit
             this.btnRegister.Text = "註冊";
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
+            // lblVersionLicense
+            // 
+            this.lblVersionLicense.AutoSize = true;
+            this.lblVersionLicense.Location = new System.Drawing.Point(189, 15);
+            this.lblVersionLicense.Name = "lblVersionLicense";
+            this.lblVersionLicense.Size = new System.Drawing.Size(168, 24);
+            this.lblVersionLicense.TabIndex = 12;
+            this.lblVersionLicense.Text = "lblVersionLicense";
             // 
             // AboutForm
             // 
@@ -213,5 +224,6 @@ namespace EasyBrailleEdit
         private Label lblCustomerName;
         private Label lblLicensedTo;
         private Button btnRegister;
+        private Label lblVersionLicense;
     }
 }
