@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "©öÂIÂùµø"
-#define MyAppVersion "3.15.2"
+#define MyAppVersion "3.15.8"
 #define MyAppPublisher "Michael Tsai"
 #define MyAppExeName "EasyBrailleEdit.exe"
 
