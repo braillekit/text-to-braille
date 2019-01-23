@@ -99,22 +99,13 @@ namespace EasyBrailleEdit.DualEdit
             int lineIdx = GridRowToBrailleLineIndex(row);
             BrailleLine brLine = _doc.Lines[lineIdx];
 
-            return brLine.IndexOf(wordInQuestion);
+            int wordIndex = brLine.IndexOf(wordInQuestion);
+            if (wordIndex < 0)
+            {
+                throw new Exception($"Grid 儲存格有點字物件 '{wordInQuestion.ToString()}'，但是在 BraillDocument 中找不到此點字物件!（可能是多執行緒重入所致）");
+            }
 
-            /* 舊方法, 有嚴重 bug: 沒有考慮到 IsContextTag==true 的 BrailleWord 物件。
-                        int wordIdx = 0;
-                        int i = _grid.FixedColumns;
-
-                        // 由於每個點字可能有多方，即在 grid 中可能合併多行，因此必須考慮合併的情形。
-                        while (true)
-                        {
-                            i += _grid[gridRowIndex, i].ColumnSpan;
-                            if (i > gridColumnIndex)
-                                break;
-                            wordIdx++;
-                        }
-                        return wordIdx;
-            */
+            return wordIndex;
         }
 
         /// <summary>

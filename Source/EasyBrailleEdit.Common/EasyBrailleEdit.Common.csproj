@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net471</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <RootNamespace>EasyBrailleEdit.Common</RootNamespace>
     <IsPackable>False</IsPackable>
@@ -13,15 +13,11 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <OutputPath>..\..\Output\net452</OutputPath>
+    <OutputPath>..\..\Output\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Config.Net" Version="4.10.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.Management" />
+    <PackageReference Include="Config.Net" Version="4.11.0" />
   </ItemGroup>
 
   <ItemGroup>

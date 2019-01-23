@@ -77,10 +77,11 @@
             // 
             // label1
             // 
+            this.label1.Font = new System.Drawing.Font("PMingLiU", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label1.ForeColor = System.Drawing.Color.Maroon;
             this.label1.Location = new System.Drawing.Point(300, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(242, 34);
+            this.label1.Size = new System.Drawing.Size(519, 34);
             this.label1.TabIndex = 8;
             this.label1.Text = "頁標題的長度最好不要超過 30 方，否則列印時可能會截斷。";
             // 

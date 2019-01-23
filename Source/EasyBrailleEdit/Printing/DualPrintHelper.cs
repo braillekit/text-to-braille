@@ -28,6 +28,7 @@ namespace EasyBrailleEdit
 
         private bool m_PreviewOnly;				// 是否只預覽，不列印
 
+        private int m_PrintedCopies;
         private int m_PrintedPageCount;			// 已列印的頁數
 
         // 列印明眼字時需要的變數
@@ -53,6 +54,7 @@ namespace EasyBrailleEdit
             m_PrintOptions = prnOpt;
 
             m_PrintDoc = new PrintDocument();
+            m_PrintDoc.PrinterSettings.Copies = (short)m_PrintOptions.Copies;
             m_PrintDoc.BeginPrint += BrailleText_BeginPrint;
             m_PrintDoc.QueryPageSettings += BrailleText_QueryPageSettings;
             m_PrintDoc.PrintPage += BrailleText_PrintPage;
@@ -100,6 +102,7 @@ namespace EasyBrailleEdit
             m_EndOrgPageNumber = null;   // 表示沒有指定原書頁碼。
 
             m_PrintedPageCount = 0;
+            m_PrintedCopies = 0;
         }
 
 
@@ -152,6 +155,7 @@ namespace EasyBrailleEdit
             InitializePrintParameters();	// 初始化列印的共用參數（both 明眼字 and 點字）
 
             m_PrintDoc.PrinterSettings.PrinterName = m_PrintOptions.PrinterName;
+            m_PrintDoc.PrinterSettings.Copies = (short)m_PrintOptions.Copies;
             m_PrintDoc.DocumentName = "易點雙視文件";
             if (!String.IsNullOrEmpty(m_BrDoc.FileName))
             {
@@ -375,7 +379,7 @@ namespace EasyBrailleEdit
             int lineCnt = 0;
             double y = 0;
             int marginLeft = e.MarginBounds.Left;
-            int marginTop = e.MarginBounds.Top;            
+            int marginTop = e.MarginBounds.Top;
 
             // 以下處理已不需要，因為已經增加了偶數頁的列印邊界設定。
             // 若為雙面列印，偶數頁的左邊界要向左偏移，上邊界要向上移。
@@ -384,12 +388,13 @@ namespace EasyBrailleEdit
             //    marginLeft -= 9;
             //    marginTop -= 2;
             //}
-           
+
             while (lineCnt < m_PrintOptions.LinesPerPage)
             {
                 if (lineIdx >= m_BrDoc.Lines.Count)
                 {
-                    e.HasMorePages = false;
+                    if (m_PrintedCopies >= m_PrintOptions.Copies)
+                        e.HasMorePages = false;
                     break;
                 }
 
@@ -454,7 +459,20 @@ namespace EasyBrailleEdit
 
             if (m_PageNum >= stopPageNum)
             {
-                e.HasMorePages = false;
+                m_PrintedCopies++;
+                if (m_PrintedCopies >= m_PrintOptions.Copies)
+                {
+                    e.HasMorePages = false;
+                }
+                else
+                {
+                    e.HasMorePages = true;
+                    m_PageNum = 0;
+                    m_DisplayedPageNum = 1;
+                    m_BeginOrgPageNumber = null;
+                    m_EndOrgPageNumber = null;
+                }
+                
             }
 
             m_PrintedPageCount++;

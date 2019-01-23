@@ -43,7 +43,7 @@ namespace EasyBrailleEdit
 
         private void UpdateUI()
         {
-            if (AppGlobals.UserLicense.IsValid)
+            if (AppGlobals.UserLicense.IsActive)
             {
                 lblCustomerName.Text = AppGlobals.UserLicense.CustomerName;
                 btnRegister.Text = "重新註冊";
@@ -53,17 +53,26 @@ namespace EasyBrailleEdit
                 lblCustomerName.Text = "(未授權)";
                 btnRegister.Text = "註冊";
             }
+            DateTime? expDate = LicenseHelper.GetUserLicenseData()?.ExpiredDate;
+            if (expDate?.Year > 2099)
+            {
+                lblExpiredDate.Text = "無期限";
+            }
+            else
+            {
+                lblExpiredDate.Text = expDate?.ToString("yyyy/MM/dd");
+            }            
         }
 
         private async void btnRegister_Click(object sender, EventArgs e)
         {
-            var userLic = LicenseService.EnterLicenseData();
+            var userLic = LicenseHelper.EnterLicenseData();
             if (userLic != null)
             {                
-                bool isLicensed = await LicenseService.ValidateUserLicenseAsync(userLic);
+                bool isLicensed = await LicenseHelper.ValidateAndSaveUseLicenseAsync(userLic);
                 if (isLicensed)
                 {
-                    LicenseService.SaveUserLicenseData(userLic);
+                    LicenseHelper.SaveUserLicenseData(userLic);
                     AppGlobals.IsPrintingEnabled = true;
                     MsgBoxHelper.ShowInfo("註冊成功!");
                 }

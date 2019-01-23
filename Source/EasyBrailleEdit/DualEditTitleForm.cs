@@ -137,9 +137,8 @@ namespace EasyBrailleEdit
                 DualEditCommand.Names.BreakLine,
                 DualEditCommand.Names.FormatParagraph,
                 DualEditCommand.Names.AddLine,
-                DualEditCommand.Names.CopyToClipboard,    // 尚未加入，暫且隱藏。
-                DualEditCommand.Names.PasteFromClipboard, // 尚未加入，暫且隱藏。
-                DualEditCommand.Names.InsertTable
+                DualEditCommand.Names.InsertTable,
+                DualEditCommand.Names.SelectAll
             };
 
             foreach (string cmd in disabledCommands)
@@ -149,8 +148,15 @@ namespace EasyBrailleEdit
 
             brGrid.Selection.FocusRowEntered += GridSelection_FocusRowEntered;
             brGrid.Selection.CellGotFocus += GridSelection_CellGotFocus;
+            brGrid.MouseDoubleClick += Grid_MouseDoubleClick;
 
             Controller.FillGrid();
+        }
+
+        private void Grid_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var grid = (SourceGrid.Grid)sender;
+            Controller.Grid_MouseDoubleClick(grid, e);
         }
 
         private void GridSelection_FocusRowEntered(object sender, RowEventArgs e)
@@ -264,6 +270,13 @@ namespace EasyBrailleEdit
                         break;
                 }
             }
+            else if (e.Modifiers == (Keys.Control | Keys.Shift))
+            {
+                if (e.KeyCode == Keys.V)
+                {
+                    Controller.PasteToEndOfLine(brGrid, row, col);
+                }
+            }
             else if (e.Modifiers == Keys.Control)
             {
                 switch (e.KeyCode)
@@ -288,6 +301,9 @@ namespace EasyBrailleEdit
                         break;
                     case Keys.C:
                         Controller.CopyToClipboard(brGrid);
+                        break;
+                    case Keys.X:
+                        Controller.CutToClipboard(brGrid);
                         break;
                     case Keys.V:
                         Controller.PasteFromClipboard(brGrid, row, col);

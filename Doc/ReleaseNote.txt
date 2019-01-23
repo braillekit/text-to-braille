@@ -1,9 +1,9 @@
-﻿易點雙視 v3.13.0
+﻿易點雙視 v3.15.0
 
 作業環境需求
 
   - Windows 7 SP1、Windows 8、Windows 10 （注意 Windows XP 已經不支援!）
-  - .NET Framework 3.5 和 .NET Framework 4.7.1 都必須安裝。
+  - .NET Framework 3.5 和 .NET Framework 4.7.2 都必須安裝。
   
 安裝程序
 
@@ -15,9 +15,9 @@
 
   下載後直接開啟檔案即可安裝。
 
-3.安裝 .NET Framework 4.7.1 可轉散發套件。
+3.安裝 .NET Framework 4.7.2 可轉散發套件。
   可至微軟網站下載，網址如下：  
-  http://go.microsoft.com/fwlink/?linkid=852092
+  http://go.microsoft.com/fwlink/?linkid=863265
   
   下載後直接開啟檔案即可安裝。
   

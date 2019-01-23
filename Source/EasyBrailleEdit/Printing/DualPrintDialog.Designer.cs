@@ -62,6 +62,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.chkRememberOptions = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textPrintCopies = new System.Windows.Forms.NumericUpDown();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabText.SuspendLayout();
@@ -69,6 +71,7 @@
             this.gboxRange.SuspendLayout();
             this.gboxOptions.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textPrintCopies)).BeginInit();
             this.SuspendLayout();
             // 
             // btnPrintText
@@ -121,6 +124,8 @@
             // 
             // tabText
             // 
+            this.tabText.Controls.Add(this.textPrintCopies);
+            this.tabText.Controls.Add(this.label1);
             this.tabText.Controls.Add(this.btnPageSetup);
             this.tabText.Controls.Add(this.btnPrintText);
             this.tabText.Controls.Add(this.cboPrinters);
@@ -427,6 +432,37 @@
             this.chkRememberOptions.Text = "記住這次的設定";
             this.chkRememberOptions.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(299, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 19);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "列印份數:";
+            // 
+            // textPrintCopies
+            // 
+            this.textPrintCopies.Location = new System.Drawing.Point(395, 57);
+            this.textPrintCopies.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.textPrintCopies.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.textPrintCopies.Name = "textPrintCopies";
+            this.textPrintCopies.Size = new System.Drawing.Size(62, 29);
+            this.textPrintCopies.TabIndex = 7;
+            this.textPrintCopies.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // DualPrintDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -457,6 +493,7 @@
             this.gboxOptions.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textPrintCopies)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -496,5 +533,7 @@
         private System.Windows.Forms.CheckBox chkSendPageBreakAtEof;
         private System.Windows.Forms.Label lblCellsPerLine;
         private System.Windows.Forms.Label lblLinesPerPage;
+        private System.Windows.Forms.NumericUpDown textPrintCopies;
+        private System.Windows.Forms.Label label1;
     }
 }

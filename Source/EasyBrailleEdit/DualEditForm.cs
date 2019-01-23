@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 using BrailleToolkit;
-using BrailleToolkit.Converters;
 using BrailleToolkit.Helpers;
-using BrailleToolkit.Tags;
 using EasyBrailleEdit.Common;
 using EasyBrailleEdit.DualEdit;
 using EasyBrailleEdit.Forms;
-using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
+using Serilog;
 
 namespace EasyBrailleEdit
 {
@@ -137,6 +134,8 @@ namespace EasyBrailleEdit
             brGrid.Selection.FocusRowEntered += GridSelection_FocusRowEntered;
             brGrid.Selection.FocusColumnEntered += GridSelection_FocusColumnEntered;
             brGrid.Selection.CellGotFocus += GridSelection_CellGotFocus;
+            brGrid.VScrollPositionChanged += GridVScrollPositionChanged;
+            brGrid.MouseDoubleClick += Grid_MouseDoubleClick;
 
             statusLabelCurrentWord.Text = String.Empty;
             statusLabelCurrentLine.Text = String.Empty;
@@ -176,6 +175,12 @@ namespace EasyBrailleEdit
                     _undoBufferForm.Show();
                 }
             }
+        }
+
+        private void Grid_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var grid = (SourceGrid.Grid)sender;
+            _controller.Grid_MouseDoubleClick(grid, e);
         }
 
         private void GridSelection_FocusRowEntered(object sender, SourceGrid.RowEventArgs e)
@@ -466,6 +471,11 @@ namespace EasyBrailleEdit
             _controller.Redo();
         }
 
+        private void SelectAll()
+        {
+            _controller.SelectAll(brGrid);
+        }
+
         private void CutToClipboard()
         {
             _controller.CutToClipboard(brGrid);
@@ -485,6 +495,17 @@ namespace EasyBrailleEdit
                 return;
             }
             _controller.PasteFromClipboard(brGrid, activePosition.Row, activePosition.Column);
+        }
+
+        private void PasteToEndOfLine()
+        {
+            var activePosition = brGrid.Selection.ActivePosition;
+            if (activePosition.IsEmpty())
+            {
+                MsgBoxHelper.ShowInfo("請先點選您想要貼上的資料列，再執行此操作。");
+                return;
+            }
+            _controller.PasteToEndOfLine(brGrid, activePosition.Row, activePosition.Column);
         }
 
         private void RemoveDigitSymbol()
@@ -520,6 +541,9 @@ namespace EasyBrailleEdit
                 case "Redo":
                     Redo();
                     break;
+                case "SelectAll":
+                    SelectAll();
+                    break;
                 case "Cut":
                     CutToClipboard();
                     break;
@@ -528,6 +552,9 @@ namespace EasyBrailleEdit
                     break;
                 case "Paste":
                     PasteFromClipboard();
+                    break;
+                case DualEditCommand.Names.PasteToEndOfLine:
+                    PasteToEndOfLine();
                     break;
                 case "RemoveDigitSymbol":
                     RemoveDigitSymbol();
@@ -669,6 +696,94 @@ namespace EasyBrailleEdit
         {
             await _controller.ExportHtmlFileAsync();
         }
+
+
+        private int _verticvalScrollMax = -1;
+        private int _verticalScrollPosition = -1;
+
+
+        // 若上次卷軸位置距離目前位置大於一個 LargeChange，或者目前位置小於 0，則視為 WinKey+D 造成的現象，故不紀錄卷軸位置。
+        private bool VScrollDistanceTooLarge(int lastPos, int currPos, int largeChange) 
+        {
+            if (currPos >= largeChange)
+                return false;
+
+            if (currPos < 0)
+                return true;
+
+            var diff = lastPos - currPos;
+            return (diff > largeChange);
+
+        }
+
+        private void GridVScrollPositionChanged(object sender, SourceGrid.ScrollPositionChangedEventArgs e)
+        {
+            // Do NOT change following code without strong reason! 
+            // 這些程式碼是為了避開幾種會造成 grid 垂直卷軸位置自動重設的 bug。
+
+            var grid = sender as SourceGrid.Grid;
+            if (grid == null)
+                return;
+
+            DebugGridVScrollValue("Enter GridVScrollPositionChanged");
+
+            var vsb = grid.VScrollBar;            
+            if (vsb.Maximum > vsb.LargeChange)
+            {
+                if (vsb.Maximum >= grid.VScrollBar.LargeChange)
+                {
+                    if (VScrollDistanceTooLarge(_verticalScrollPosition, vsb.Value, vsb.LargeChange))
+                    {
+                        // 修正卷軸位置
+                        vsb.Maximum = _verticvalScrollMax;
+                        vsb.Value = _verticalScrollPosition;
+                    }
+                    else
+                    {
+                        _verticalScrollPosition = vsb.Value;
+                        _verticvalScrollMax = vsb.Maximum;
+                    }
+                }
+            }
+            else
+            {
+                // 修正卷軸位置
+                vsb.Maximum = _verticvalScrollMax;
+                vsb.Value = _verticalScrollPosition;
+            }
+
+            DebugGridVScrollValue("Leave GridVScrollPositionChanged");
+        }
+
+        private void DebugGridVScrollValue(string src)
+        {
+            // 當應用程式視窗來回切換，造成垂直卷軸位置不正確時，可將以下程式碼恢復，以便從 log 檔案中觀察卷軸的狀態變化。            
+            //Log.Debug($"{src} : {brGrid.VScrollBar.Minimum}-{_verticvalScrollMax} : {_verticalScrollPosition}");
+            //Log.Debug($"Grid LargeChange: {brGrid.VScrollBar.LargeChange}, Max: {brGrid.VScrollBar.Maximum}, Pos: {brGrid.VScrollBar.Value}");
+        }
+
+        private void DualEditForm_Activated(object sender, EventArgs e)
+        {
+            if (_verticvalScrollMax >= 0)
+            {
+                brGrid.VScrollBar.Maximum = _verticvalScrollMax;
+                brGrid.VScrollBar.Value = _verticalScrollPosition;
+            }
+            DebugGridVScrollValue("DualEditForm_Activated");
+        }
+
+        private void DualEditForm_Deactivate(object sender, EventArgs e)
+        {
+            // 按 Windows+D 的時候，垂直卷軸的最大值會是 -1，必須避開。
+            var vsb = brGrid.VScrollBar;
+            if (vsb.Maximum >= 0 && !VScrollDistanceTooLarge(_verticalScrollPosition, vsb.Value, vsb.LargeChange))
+            {
+                _verticvalScrollMax = vsb.Maximum;
+                _verticalScrollPosition = vsb.Value;
+            }
+            DebugGridVScrollValue("DualEditForm_Deactivate");
+        }
+
     }
 
 }

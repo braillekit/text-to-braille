@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "易點雙視"
-#define MyAppVersion "3.12.3"
+#define MyAppVersion "3.15.2"
 #define MyAppPublisher "Michael Tsai"
 #define MyAppExeName "EasyBrailleEdit.exe"
 
@@ -25,7 +25,7 @@ SolidCompression=yes
 UsePreviousAppDir=False
 AllowRootDirectory=True
 AllowUNCPath=False
-VersionInfoCopyright=Copyright (c) 2008-2018 Michael Tsai
+VersionInfoCopyright=Copyright (c) 2008-2019 Michael Tsai
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -45,7 +45,7 @@ Source: "Files\x86\EasyBrailleEdit.Common.dll"; DestDir: "{app}"; Flags: ignorev
 Source: "Files\x86\EasyBrailleEdit.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Txt2Brl.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Txt2Brl.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\x86\Phrase.phf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\Phrase.phf"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist
 Source: "Files\x86\Huanlin.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Huanlin.Windows.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\NChinese.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -57,7 +57,11 @@ Source: "Files\x86\Serilog.Settings.AppSettings.dll"; DestDir: "{app}"; Flags: i
 Source: "Files\x86\Serilog.Sinks.File.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Serilog.Sinks.RollingFile.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\SourceGrid.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\System.Reflection.TypeExtensions.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\System.ValueTuple.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\ScintillaNET.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\ScintillaNET.FindReplaceTools.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\zh-Hant\ScintillaNET.FindReplaceTools.resources.dll"; DestDir: "{app}\zh-Hant\"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: "Fonts\simbrl.ttf"; DestDir: "{fonts}"; Flags: onlyifdoesntexist uninsneveruninstall; FontInstall: "SimBraille"
 Source: "Files\使用手冊.pdf"; DestDir: "{app}"; Flags: ignoreversion
@@ -70,3 +74,8 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
+[Registry]
+Root: "HKCR"; Subkey: ".brx"; ValueType: string; ValueData: "EasyBrailleEdit3.brx"
+Root: "HKCR"; Subkey: "EasyBrailleEdit3.brx\shell\open\command"; ValueType: string; ValueData: """{app}\{#MyAppExeName}"" ""%1"""; Flags: uninsdeletekey
+Root: "HKCR"; Subkey: "Applications\EasyBrailleEdit.exe\shell\open"; ValueType: string; ValueName: "FriendlyAppName"; ValueData: "易點雙視"; Flags: uninsdeletekey
+Root: "HKCR"; Subkey: "Applications\EasyBrailleEdit.exe\shell\open\command"; ValueType: string; ValueData: """{app}\{#MyAppExeName}"" ""%1"""

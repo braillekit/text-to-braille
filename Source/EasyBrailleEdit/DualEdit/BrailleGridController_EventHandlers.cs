@@ -67,6 +67,9 @@ namespace EasyBrailleEdit.DualEdit
                 case DualEditCommand.Names.FormatParagraph:
                     FormatParagraph(grid, row, col);
                     break;
+                case DualEditCommand.Names.SelectAll:
+                    SelectAll(grid);
+                    break;
                 case DualEditCommand.Names.CopyToClipboard:
                     CopyToClipboard(grid);
                     break;
@@ -76,11 +79,24 @@ namespace EasyBrailleEdit.DualEdit
                 case DualEditCommand.Names.PasteFromClipboard:
                     PasteFromClipboard(grid, row, col);
                     break;
+                case DualEditCommand.Names.PasteToEndOfLine:
+                    PasteToEndOfLine(grid, row, col);
+                    break;
                 case DualEditCommand.Names.RemoveDigitSymbol:
                     RemoveDigitSymbol();
                     break;
             }
             Debugger.ShouldEveryGridCellHasBrailleWord();
+        }
+
+
+        public void Grid_MouseDoubleClick(SourceGrid.Grid grid, MouseEventArgs e)
+        {
+            if (grid == null || grid.MouseCellPosition.IsEmpty()) //grid.Selection.ActivePosition.IsEmpty())
+                return;
+
+            //EditWord(grid, grid.Selection.ActivePosition.Row, grid.Selection.ActivePosition.Column);
+            EditWord(grid, grid.MouseCellPosition.Row, grid.MouseCellPosition.Column);
         }
 
         public void GridSelection_FocusRowEntered(SourceGrid.RowEventArgs e)
@@ -228,6 +244,9 @@ namespace EasyBrailleEdit.DualEdit
                         case Keys.T:
                             InsertTable(_grid, row, col);
                             e.Handled = true;
+                            break;
+                        case Keys.V:
+                            PasteToEndOfLine(_grid, row, col);
                             break;
                     }
                 }

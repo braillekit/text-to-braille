@@ -8,17 +8,35 @@ namespace EasyBrailleEdit.Common
 {
     public class UserLicenseData
     {
-        public bool IsValid { get; set; }
+        public bool IsActive { get; set; }
         public string CustomerName { get; set; }
         public string SerialNumber { get; set; }
 
+        public DateTime? ExpiredDate { get; set; }
+
         public bool IsEmpty()
         {
-            if (String.IsNullOrEmpty(SerialNumber) || String.IsNullOrEmpty(CustomerName))
+            if (string.IsNullOrEmpty(SerialNumber) || string.IsNullOrEmpty(CustomerName))
             {
                 return true;
             }
             return false;
         }
+
+
+        public bool IsExpired()
+        {
+            if (ExpiredDate.HasValue)
+            {
+                return (DateTime.Now > ExpiredDate);
+            }
+            return false;
+        }
+
+        public bool IsValid()
+        {
+            return IsActive && !IsEmpty() && !IsExpired();
+        }
+
     }
 }

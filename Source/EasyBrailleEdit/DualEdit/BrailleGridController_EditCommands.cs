@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BrailleToolkit;
+﻿using BrailleToolkit;
 using BrailleToolkit.Helpers;
 using BrailleToolkit.Tags;
 using EasyBrailleEdit.Forms;
 using Huanlin.Windows.Forms;
 using Serilog;
 using SourceGrid;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows.Forms;
 
 namespace EasyBrailleEdit.DualEdit
 {
@@ -259,7 +257,7 @@ namespace EasyBrailleEdit.DualEdit
             grid.Selection.SelectRange(range, true);
         }
 
-        private void InsertBrailleWords(List<BrailleWord> wordList, SourceGrid.Grid grid, int row, int col, string operation=null)
+        private void InsertBrailleWords(List<BrailleWord> wordList, SourceGrid.Grid grid, int row, int col, string operation = null)
         {
             row = _positionMapper.GetBrailleRowIndex(row); // 確保列索引是點字所在的列。
             int wordIdx = _positionMapper.CellPositionToWordIndex(row, col);
@@ -316,6 +314,42 @@ namespace EasyBrailleEdit.DualEdit
                 grid.Selection.SelectRange(range, true);
             }
         }
+
+        private void AppendBrailleWords(List<BrailleWord> wordList, SourceGrid.Grid grid, int row, string operation = null)
+        {
+            var activePos = grid.Selection.ActivePosition;
+
+            row = _positionMapper.GetBrailleRowIndex(row); // 確保列索引是點字所在的列。
+            int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
+            BrailleLine brLine = BrailleDoc.Lines[lineIdx];
+
+
+            // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
+            if (operation == null)
+            {
+                var s = BrailleWordHelper.ToOriginalTextString(wordList);
+                if (s.Length > 10)
+                {
+                    s = s.Substring(0, 10) + "...";
+                }
+                operation = $"插入文字：{s}";
+            }
+            var memento = CreateMemento(operation);
+
+            // 在第 wordIdx 個字之前插入新點字。
+            brLine.Words.AddRange(wordList);
+            IsDirty = true;
+
+            // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
+            UndoRedo.SaveMementoForUndo(memento);
+
+            // Update UI
+            int formattedLineCount = ReformatRow(grid, row);
+
+            // 把焦點移至原本所在的儲存格。
+            GridFocusCell(activePos.Row, activePos.Column);
+        }
+
 
         /// <summary>
         /// 在行尾附加點字。
@@ -492,51 +526,65 @@ namespace EasyBrailleEdit.DualEdit
                     return;
             }
 
-            // 取得目前要刪除的字的第一個 cell 的 column index。此操作必須在刪字之前做。
-            col = _positionMapper.WordIndexToGridColumn(lineIdx, wordIdx);
-
-            // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
-            var memento = CreateMemento($"刪除字詞：'{wordToDelete.Text}'");
-
-            brLine.Words.RemoveAt(wordIdx);
-            IsDirty = true;
-
-            if (brLine.CellCount == 0)    // 如果整列都刪光了
-            {
-                if (BrailleDoc.LineCount == 1)
-                {
-                    brLine.Clear(); // 確保所有 context tags 也都清除掉。
-                    // 整份文件全刪光時，自動增加一個空方。                    
-                    brLine.Words.Add(BrailleWord.NewBlank());
-                    UpdateCell(row, col, brLine.Words[0]);
-                    GridFocusCell(row, col);
-                }
-                else
-                {
-                    // 移除此列。
-                    DoDeleteLine(grid, row, lineIdx, needUndo: false);
-
-                    // 將原先的狀態存入 undo buffer。
-                    UndoRedo.SaveMementoForUndo(memento);
-
-                    GridFocusCell(row, col);
-                }                
+            // Avoid reentrancy.
+            if (semaphore.CurrentCount < 1)
                 return;
-            }
 
-            // 將原先的狀態存入 undo buffer。
-            UndoRedo.SaveMementoForUndo(memento);
+            semaphore.Wait();
 
-            // Update UI
-            ReformatRow(grid, row);
-            grid.Selection.ResetSelection(false); // 修正選取的儲存格範圍。
-
-            // 如果被刪除的是目前所在列的最後一個字，則游標應移動至刪除該字之後的最後一個字的位置。
-            if (col - FixedColumns >= brLine.CellCount)
+            try
             {
-                col = brLine.CellCount - 1 + grid.FixedColumns;
+                // 取得目前要刪除的字的第一個 cell 的 column index。此操作必須在刪字之前做。
+                col = _positionMapper.WordIndexToGridColumn(lineIdx, wordIdx);
+
+                // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
+                var memento = CreateMemento($"刪除字詞：'{wordToDelete.Text}'");
+
+                brLine.Words.RemoveAt(wordIdx);
+                IsDirty = true;
+
+                if (brLine.CellCount == 0)    // 如果整列都刪光了
+                {
+                    if (BrailleDoc.LineCount == 1)
+                    {
+                        brLine.Clear(); // 確保所有 context tags 也都清除掉。
+                                        // 整份文件全刪光時，自動增加一個空方。                    
+                        brLine.Words.Add(BrailleWord.NewBlank());
+                        UpdateCell(row, col, brLine.Words[0]);
+                        GridFocusCell(row, col);
+                    }
+                    else
+                    {
+                        // 移除此列。
+                        DoDeleteLine(grid, row, lineIdx, needUndo: false);
+
+                        // 將原先的狀態存入 undo buffer。
+                        UndoRedo.SaveMementoForUndo(memento);
+
+                        GridFocusCell(row, col);
+                    }
+                    return;
+                }
+
+                // 將原先的狀態存入 undo buffer。
+                UndoRedo.SaveMementoForUndo(memento);
+
+                // Update UI
+                ReformatRow(grid, row);
+                grid.Selection.ResetSelection(false); // 修正選取的儲存格範圍。
+
+                // 如果被刪除的是目前所在列的最後一個字，則游標應移動至刪除該字之後的最後一個字的位置。
+                if (col - FixedColumns >= brLine.CellCount)
+                {
+                    col = brLine.CellCount - 1 + grid.FixedColumns;
+                }
+                GridFocusCell(orgRow, col);
             }
-            GridFocusCell(orgRow, col);
+            finally
+            {
+                semaphore.Release();
+            }
+
         }
 
         /// <summary>
@@ -546,7 +594,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="row"></param>
         /// <param name="startCol"></param>
         /// <param name="endCol"></param>
-        public void DeleteMultipleWords(SourceGrid.Grid grid, int row, int startCol, int endCol, string command=null)
+        public void DeleteMultipleWords(SourceGrid.Grid grid, int row, int startCol, int endCol, string command = null)
         {
             int orgRow = row;
             row = _positionMapper.GetBrailleRowIndex(row);
@@ -663,33 +711,46 @@ namespace EasyBrailleEdit.DualEdit
 
             if (colToDelete < grid.FixedColumns) // // 在列首執行此動作?
             {
-                // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
-                var memento = CreateMemento("接到上一行");
+                // Avoid reentrancy.
+                if (semaphore.CurrentCount < 1)
+                    return;
 
-                // 在列首執行倒退刪除時，要把目前這列上提，銜接至上一列的尾巴。
-                // 先計算新的游標位置
-                int focusRow = orgRow - 3;
-                int previousLineIdx = _positionMapper.GridRowToBrailleLineIndex(focusRow);
-                var brLine = BrailleDoc.Lines[previousLineIdx];
-                int focusCol = brLine.CellCount + grid.FixedColumns;
+                semaphore.Wait();
 
-                // 把下一列接上來。
-                if (JoinToPreviousRow(row, out _, out _) > 0)
+                try
                 {
-                    // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
-                    UndoRedo.SaveMementoForUndo(memento);
+                    // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
+                    var memento = CreateMemento("接到上一行");
+
+                    // 在列首執行倒退刪除時，要把目前這列上提，銜接至上一列的尾巴。
+                    // 先計算新的游標位置
+                    int focusRow = orgRow - 3;
+                    int previousLineIdx = _positionMapper.GridRowToBrailleLineIndex(focusRow);
+                    var brLine = BrailleDoc.Lines[previousLineIdx];
+                    int focusCol = brLine.CellCount + grid.FixedColumns;
+
+                    // 把下一列接上來。
+                    if (JoinToPreviousRow(row, out _, out _) > 0)
+                    {
+                        // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
+                        UndoRedo.SaveMementoForUndo(memento);
+                    }
+                    else
+                    {
+                        MsgBoxHelper.ShowInfo($"第 {lineIdx + 1} 行不能銜接至上一行，因為即使接上去，也會因為斷行規則而再度於相同位置折到下一行。");
+                        focusRow = orgRow;
+                        focusCol = col;
+                    }
+                    GridFocusCell(focusRow, focusCol);
                 }
-                else
+                finally
                 {
-                    MsgBoxHelper.ShowInfo($"第 {lineIdx + 1} 行不能銜接至上一行，因為即使接上去，也會因為斷行規則而再度於相同位置折到下一行。");
-                    focusRow = orgRow;
-                    focusCol = col;
+                    semaphore.Release();
                 }
-                GridFocusCell(focusRow, focusCol);
             }
             else
             {
-                DeleteWord(grid, orgRow, colToDelete);
+                DeleteWord(grid, orgRow, colToDelete); // note: 此方法本身有 semaphore 保護
             }
         }
 
@@ -845,7 +906,7 @@ namespace EasyBrailleEdit.DualEdit
                 {
                     return false;
                 }
-                if (aLine.CellCount >= BrailleDoc.CellsPerLine 
+                if (aLine.CellCount >= BrailleDoc.CellsPerLine
                     && aLine.ToString().IndexOf(OrgPageNumberContextTag.LeadingUnderlines) >= 0)
                 {
                     // 如果這行已經滿格，而且可能是原書頁碼，那就不要斷行，否則斷行時可能會造成錯誤的結果。
@@ -973,7 +1034,7 @@ namespace EasyBrailleEdit.DualEdit
             GridSelectRow(row, false);
         }
 
-        public void DeleteMultipleLines(Grid grid, int startRow, int endRow, string commandName=null)
+        public void DeleteMultipleLines(Grid grid, int startRow, int endRow, string commandName = null)
         {
             if (startRow < grid.FixedRows || startRow >= grid.RowsCount || endRow < grid.FixedRows || endRow >= grid.RowsCount || endRow < startRow)
             {
@@ -987,7 +1048,7 @@ namespace EasyBrailleEdit.DualEdit
             {
                 commandName = "刪除";
             }
-            commandName += $"第 {startLineIdx + 1} 至 { endLineIdx + 1} 行";            
+            commandName += $"第 {startLineIdx + 1} 至 { endLineIdx + 1} 行";
 
             // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
             var memento = CreateMemento(commandName);
@@ -1006,6 +1067,14 @@ namespace EasyBrailleEdit.DualEdit
             // 更新 UI。
             int deletedLineCount = endLineIdx - startLineIdx + 1;
             grid.Rows.RemoveRange(startRow, 3 * deletedLineCount);
+
+            if (grid.RowsCount == grid.FixedRows)
+            {
+                // 不能全刪，至少要有一個空方，否則會因為沒有任何儲存格 UI 而無法使用任何編輯功能。
+                BrailleDoc.EnsureAtLeastOneWord();
+                GridEnsureAtLeastOneRow();
+                FillGrid();
+            }
 
             RefreshRowNumbers();
 
@@ -1048,12 +1117,19 @@ namespace EasyBrailleEdit.DualEdit
 
             if (startRow != endRow) // 選取多行？
             {
+                if (IsUsedForPageTitle)
+                {
+                    MsgBoxHelper.ShowInfo("頁標題編輯模式下不可複製多列文字，因為每一列頁標題都與正文中特定列的位置有關。");
+                    grid.Selection.ResetSelection(false);
+                    return false;
+                }
+
                 int totalColumns = grid.ColumnsCount - grid.FixedColumns;
                 if ((endCol - startCol + 1) < totalColumns)
                 {
                     int startLineIdx = _positionMapper.GridRowToBrailleLineIndex(startRow);
                     int endLineIdx = _positionMapper.GridRowToBrailleLineIndex(endRow);
-                    var s = $"複製或剪下多行時，必須選取整行。\r\n您是否要複製或剪下第 {startLineIdx + 1} 至 {endLineIdx + 1} 行？";
+                    var s = $"複製或剪下多欄時，必須選取整列。\r\n您是否要複製或剪下第 {startLineIdx + 1} 至 {endLineIdx + 1} 列？";
                     if (MsgBoxHelper.ShowYesNo(s) != DialogResult.Yes)
                         return false;
 
@@ -1145,6 +1221,13 @@ namespace EasyBrailleEdit.DualEdit
             }
         }
 
+
+        public void SelectAll(Grid grid)
+        {
+            var range = new Range(grid.FixedRows, grid.FixedColumns, grid.RowsCount - 1, grid.ColumnsCount - grid.FixedColumns);
+            grid.Selection.SelectRange(range, true);
+        }
+
         public void CopyToClipboard(Grid grid)
         {
             int startRow, startCol, endRow, endCol;
@@ -1167,27 +1250,41 @@ namespace EasyBrailleEdit.DualEdit
 
         public void CutToClipboard(Grid grid)
         {
+            // Avoid reentrancy by clicking multiple Ctrl+X very quickly.
+            if (semaphore.CurrentCount < 1)
+                return;
+
+
             int startRow, startCol, endRow, endCol;
 
             if (!GetSelectionRange(grid, out startRow, out startCol, out endRow, out endCol))
                 return;
 
-            var brLines = CloneSelectedBrailleWords(grid, startRow, startCol, endRow, endCol);
-            if (startRow == endRow)
+            semaphore.Wait();
+
+            try
             {
-                ClipboardHelper.SetWords(brLines[0].Words);
+                var brLines = CloneSelectedBrailleWords(grid, startRow, startCol, endRow, endCol);
+                if (startRow == endRow)
+                {
+                    ClipboardHelper.SetWords(brLines[0].Words);
 
-                DeleteMultipleWords(grid, startRow, startCol, endCol, "剪下選取的文字");
+                    DeleteMultipleWords(grid, startRow, startCol, endCol, "剪下選取的文字");
 
-                _form.StatusText = $"已剪下 {brLines[0].CellCount} 方點字至剪貼簿。";
+                    _form.StatusText = $"已剪下 {brLines[0].CellCount} 方點字至剪貼簿。";
+                }
+                else
+                {
+                    ClipboardHelper.SetLines(brLines);
+
+                    DeleteMultipleLines(grid, startRow, endRow, "剪下");
+
+                    _form.StatusText = $"已剪下 {brLines.Count} 行文字（點字）至剪貼簿。";
+                }
             }
-            else
+            finally
             {
-                ClipboardHelper.SetLines(brLines);
-
-                DeleteMultipleLines(grid, startRow, endRow, "剪下");
-
-                _form.StatusText = $"已剪下 {brLines.Count} 行文字（點字）至剪貼簿。";
+                semaphore.Release();
             }
         }
 
@@ -1199,22 +1296,68 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="col">目標儲存格的直欄索引</param>
         public void PasteFromClipboard(Grid grid, int row, int col)
         {
-            _form.StatusText = String.Empty;
-
-            var brWords = ClipboardHelper.GetWords();
-            var brLines = ClipboardHelper.GetLines();
-
-            if (brWords != null)
-            {
-                InsertBrailleWords(brWords, grid, row, col, "從剪貼簿貼上一串文字");
+            // Avoid reentrancy.
+            if (semaphore.CurrentCount < 1)
                 return;
-            }
-            if (brLines != null)
+
+            semaphore.Wait();
+
+            try
             {
-                InsertBrailleLines(brLines, grid, row, col, $"從剪貼簿貼上 {brLines.Count} 行");
-                return;
+                _form.StatusText = String.Empty;
+
+                var brWords = ClipboardHelper.GetWords();
+                var brLines = ClipboardHelper.GetLines();
+
+                if (brWords != null)
+                {
+                    InsertBrailleWords(brWords, grid, row, col, "從剪貼簿貼上一串文字");
+                    return;
+                }
+                if (brLines != null)
+                {
+                    InsertBrailleLines(brLines, grid, row, col, $"從剪貼簿貼上 {brLines.Count} 列");
+                    return;
+                }
+                MsgBoxHelper.ShowInfo("剪貼簿裡面沒有資料！");
             }
-            MsgBoxHelper.ShowInfo("剪貼簿裡面沒有資料！");
+            finally
+            {
+                semaphore.Release();
+            }
+        }
+
+        public void PasteToEndOfLine(Grid grid, int row, int col)
+        {
+            // Avoid reentrancy.
+            if (semaphore.CurrentCount < 1)
+                return;
+
+            semaphore.Wait();
+
+            try
+            {
+                _form.StatusText = String.Empty;
+
+                var brWords = ClipboardHelper.GetWords();
+                var brLines = ClipboardHelper.GetLines();
+
+                if (brWords != null)
+                {
+                    AppendBrailleWords(brWords, grid, row, "從剪貼簿貼上文字至行尾");
+                    return;
+                }
+                if (brLines != null)
+                {
+                    MsgBoxHelper.ShowInfo("無法貼上，因為貼至行尾的操作不適用於多行選取。");
+                    return;
+                }
+                MsgBoxHelper.ShowInfo("剪貼簿裡面沒有資料！");
+            }
+            finally
+            {
+                semaphore.Release();
+            }
         }
 
         private void InsertTable(SourceGrid.Grid grid, int row, int col)
@@ -1251,7 +1394,7 @@ namespace EasyBrailleEdit.DualEdit
                     FillRow(brLine, newRow, true);
                     newRow += 3;
                 }
-                
+
             }
 
             // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
@@ -1328,7 +1471,7 @@ namespace EasyBrailleEdit.DualEdit
             {
                 _form.StatusText = $"沒有找到任何數符。";
             }
-            
+
         }
     }
 }
