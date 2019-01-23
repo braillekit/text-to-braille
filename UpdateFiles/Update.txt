@@ -7,10 +7,10 @@
 ' - 特定版本號碼代表若 client 端版本比這裡指定的版本還要舊，則下載。
 '===================================================================
 AppConfig.Default.ini                                 ; ?     
-BrailleToolkit.dll                                    ; 3.15.8
-EasyBrailleEdit.Common.dll                            ; 3.15.8
-EasyBrailleEdit.exe                                   ; 3.15.8
-Txt2Brl.exe                                           ; 3.15.8
+BrailleToolkit.dll                                    ; 3.15.9
+EasyBrailleEdit.Common.dll                            ; 3.15.9
+EasyBrailleEdit.exe                                   ; 3.15.9
+Txt2Brl.exe                                           ; 3.15.9
 EasyBrailleEdit.exe.config                            ; ?
 Txt2Brl.exe.config                                    ; ?     
 Phrase.phf                                            ; ?     
