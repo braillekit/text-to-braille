@@ -371,13 +371,9 @@ namespace EasyBrailleEdit.DualEdit
         private void RefreshRowNumbers()
         {
             int rowNum = 1;
+            int pageCount = 0;
             int lineIdx = 0;
-            int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
-
-            if (AppGlobals.Config.Printing.PrintPageFoot)
-            {
-                linesPerPage--; // 頁碼佔一列，所以每頁實際的點字列數少一列。
-            }
+            int linesPerPage = GetLinesPerPageForGrid();
 
             for (int row = 1; row < _grid.RowsCount; row += 3)
             {
@@ -396,6 +392,7 @@ namespace EasyBrailleEdit.DualEdit
 
                 if ((rowNum - 1) % linesPerPage == 0)
                 {
+                    pageCount++;
                     cell.View = m_HeaderView2;
                 }
                 else
@@ -501,6 +498,18 @@ namespace EasyBrailleEdit.DualEdit
             FillGrid(BrailleDoc);
         }
 
+
+        private int GetLinesPerPageForGrid()
+        {
+            int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
+
+            if (AppGlobals.Config.Printing.PrintPageFoot)
+            {
+                linesPerPage--; // 頁碼佔一列，所以每頁實際的點字列數少一列。
+            }
+            return linesPerPage;
+        }
+
         /// <summary>
         /// 將 BrailleDocument 文件內容填入 grid。
         /// </summary>
@@ -512,7 +521,7 @@ namespace EasyBrailleEdit.DualEdit
                 return;
             }
 
-            int cnt = 0;
+            int lineCount = 0;
             _form.StatusText = "正在刷新視窗內容...";
             _form.StatusProgress = 0;
             _grid.UseWaitCursor = true;
@@ -525,8 +534,21 @@ namespace EasyBrailleEdit.DualEdit
             try
             {
                 int row = FixedRows;
+                int pageCount = 0;
+                int linesPerPage = GetLinesPerPageForGrid();
+                int maxOutputPage = VersionLicense.GetMaxOutputPage(AppGlobals.UserLicense.VersionLicense);
                 foreach (BrailleLine brLine in brDoc.Lines)
                 {
+                    if (maxOutputPage > 0)
+                    {
+                        if (pageCount >= maxOutputPage)
+                        {
+                            busyForm.Close();
+                            MsgBoxHelper.ShowInfo($"抱歉！家用版最多只能編輯和列印 {maxOutputPage} 頁，超出頁數的資料不會顯示出來。");
+                            break;
+                        }
+                    }
+
                     if (brLine.CellCount < 1)
                     {
                         continue; // 有可能是空的列，例如 <表格> 起始標籤就單獨佔據一列。
@@ -549,8 +571,12 @@ namespace EasyBrailleEdit.DualEdit
 
                     row += 3;
 
-                    cnt++;
-                    _form.StatusProgress = cnt * 100 / brDoc.Lines.Count;
+                    lineCount++;
+                    if (lineCount % linesPerPage == 0)
+                    {
+                        pageCount++;
+                    }
+                    _form.StatusProgress = lineCount * 100 / brDoc.Lines.Count;
                 }
             }
             finally

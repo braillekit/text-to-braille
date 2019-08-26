@@ -43,6 +43,8 @@ namespace EasyBrailleEdit
 
         private void UpdateUI()
         {
+            lblVersionLicense.Text = VersionLicense.GetName(AppGlobals.UserLicense.VersionLicense);
+
             if (AppGlobals.UserLicense.IsActive)
             {
                 lblCustomerName.Text = AppGlobals.UserLicense.CustomerName;
@@ -74,7 +76,7 @@ namespace EasyBrailleEdit
                 {
                     LicenseHelper.SaveUserLicenseData(userLic);
                     AppGlobals.IsPrintingEnabled = true;
-                    MsgBoxHelper.ShowInfo("註冊成功!");
+                    MsgBoxHelper.ShowInfo($"註冊成功! 版本： {VersionLicense.GetName(AppGlobals.UserLicense.VersionLicense)}");
                 }
                 else
                 {

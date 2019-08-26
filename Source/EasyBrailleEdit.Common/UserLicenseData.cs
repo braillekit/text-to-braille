@@ -11,6 +11,7 @@ namespace EasyBrailleEdit.Common
         public bool IsActive { get; set; }
         public string CustomerName { get; set; }
         public string SerialNumber { get; set; }
+        public int VersionLicense { get; set; }
 
         public DateTime? ExpiredDate { get; set; }
 

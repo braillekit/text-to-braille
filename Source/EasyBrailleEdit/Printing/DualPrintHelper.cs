@@ -476,6 +476,13 @@ namespace EasyBrailleEdit
             }
 
             m_PrintedPageCount++;
+
+            // 檢查是否超出此授權版本所能列印的最大頁數。
+            int maxOutputPage = VersionLicense.GetMaxOutputPage(AppGlobals.UserLicense.VersionLicense);
+            if (maxOutputPage > 0 && m_PrintedPageCount >= maxOutputPage)
+            {
+                e.HasMorePages = false;
+            }
         }
 
         /// <summary>

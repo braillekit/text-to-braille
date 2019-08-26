@@ -247,6 +247,32 @@ namespace BrailleToolkit
             return sb.ToString();
         }
 
+        public string ToTextString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (BrailleWord brWord in Words)
+            {
+                if (brWord.IsContextTag)
+                {
+                    sb.Append(brWord.Text); // 輸出標籤名稱（可能為起始標籤或結束標籤）。
+                    continue;
+                }
+                if (brWord.IsConvertedFromTag) // 只要是由 context tag 所衍生的文字都忽略。
+                {
+                    continue;
+                }
+
+                sb.Append(brWord.ToString());
+            }
+            return sb.ToString();
+        }
+
+        public string ToOriginalTextString()
+        {
+            return BrailleWordHelper.ToOriginalTextString(Words);
+        }
+
         /// <summary>
         /// 將本串列中的所有點字轉成 16 進位的字串。
         /// </summary>
@@ -276,11 +302,6 @@ namespace BrailleToolkit
                 sb.Append(brWord.ToPositionNumberString(useParenthesis: true));
             }
             return sb.ToString();
-        }
-
-        public string ToOriginalTextString()
-        {
-            return BrailleWordHelper.ToOriginalTextString(Words);
         }
 
         public string ToHtmlString(string leadingSpaces, string cssClassTd, string cssClassBraille, string cssClassText)

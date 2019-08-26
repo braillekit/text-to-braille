@@ -32,6 +32,8 @@ namespace EasyBrailleEdit
         {
             this.btnClose = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblExpiredDate = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.lblCustomerName = new System.Windows.Forms.Label();
             this.lblLicensedTo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,8 +43,7 @@ namespace EasyBrailleEdit
             this.lblVesion = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnRegister = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblExpiredDate = new System.Windows.Forms.Label();
+            this.lblVersionLicense = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -63,6 +64,7 @@ namespace EasyBrailleEdit
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.lblVersionLicense);
             this.panel1.Controls.Add(this.lblExpiredDate);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.lblCustomerName);
@@ -79,6 +81,26 @@ namespace EasyBrailleEdit
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
             this.panel1.Size = new System.Drawing.Size(432, 267);
             this.panel1.TabIndex = 0;
+            // 
+            // lblExpiredDate
+            // 
+            this.lblExpiredDate.AutoSize = true;
+            this.lblExpiredDate.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblExpiredDate.Location = new System.Drawing.Point(113, 124);
+            this.lblExpiredDate.Name = "lblExpiredDate";
+            this.lblExpiredDate.Size = new System.Drawing.Size(126, 22);
+            this.lblExpiredDate.TabIndex = 13;
+            this.lblExpiredDate.Text = "lblExpiredDate";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Location = new System.Drawing.Point(12, 124);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 22);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "使用期限：";
             // 
             // lblCustomerName
             // 
@@ -143,9 +165,9 @@ namespace EasyBrailleEdit
             this.lblProductName.Location = new System.Drawing.Point(96, 15);
             this.lblProductName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(148, 24);
+            this.lblProductName.Size = new System.Drawing.Size(86, 24);
             this.lblProductName.TabIndex = 3;
-            this.lblProductName.Text = "易點雙視 專業版";
+            this.lblProductName.Text = "易點雙視";
             // 
             // lblVesion
             // 
@@ -180,25 +202,14 @@ namespace EasyBrailleEdit
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
-            // label2
+            // lblVersionLicense
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(12, 124);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 22);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "使用期限：";
-            // 
-            // lblExpiredDate
-            // 
-            this.lblExpiredDate.AutoSize = true;
-            this.lblExpiredDate.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lblExpiredDate.Location = new System.Drawing.Point(113, 124);
-            this.lblExpiredDate.Name = "lblExpiredDate";
-            this.lblExpiredDate.Size = new System.Drawing.Size(126, 22);
-            this.lblExpiredDate.TabIndex = 13;
-            this.lblExpiredDate.Text = "lblExpiredDate";
+            this.lblVersionLicense.AutoSize = true;
+            this.lblVersionLicense.Location = new System.Drawing.Point(189, 15);
+            this.lblVersionLicense.Name = "lblVersionLicense";
+            this.lblVersionLicense.Size = new System.Drawing.Size(64, 24);
+            this.lblVersionLicense.TabIndex = 14;
+            this.lblVersionLicense.Text = "label3";
             // 
             // AboutForm
             // 
@@ -241,5 +252,6 @@ namespace EasyBrailleEdit
         private Button btnRegister;
         private Label lblExpiredDate;
         private Label label2;
+        private Label lblVersionLicense;
     }
 }

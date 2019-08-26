@@ -942,7 +942,7 @@ namespace EasyBrailleEdit
                     {
                         LicenseHelper.SaveUserLicenseData(userLic);
                         AppGlobals.IsPrintingEnabled = true;
-                        MsgBoxHelper.ShowInfo("註冊成功!");
+                        MsgBoxHelper.ShowInfo("註冊成功! 版本：" + VersionLicense.GetName(AppGlobals.UserLicense.VersionLicense));
                     }
                     else
                     {
