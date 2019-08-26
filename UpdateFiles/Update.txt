@@ -16,10 +16,10 @@ Txt2Brl.exe.config                                    ; ?
 Phrase.phf                                            ; ?     
 Huanlin.Common.dll                                    ; 4.5.11
 Huanlin.Windows.dll                                   ; 4.5.11
-NChinese.dll                                          ; 0.5.1
+NChinese.dll                                          ; 0.5.2
 Config.Net.dll                                        ; 4.11.0
 Castle.Core.dll                                       ; 4.2.1
-CommandLine.dll                                       ; 2.4.3
+CommandLine.dll                                       ; 2.6.0
 ScintillaNET.dll                                      ; 3.6.3
 ScintillaNET.FindReplaceTools.dll                     ; 1.4.1
 zh-Hant/ScintillaNET.FindReplaceTools.resources.dll   ; 1.4.1

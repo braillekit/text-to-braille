@@ -1,1 +1,1 @@
-﻿powershell -command "(Get-Item *.dll).VersionInfo |" ^ "Out-File versions.txt"
+powershell -command "(Get-Item *.dll).VersionInfo |" ^ "Out-File versions.txt"
