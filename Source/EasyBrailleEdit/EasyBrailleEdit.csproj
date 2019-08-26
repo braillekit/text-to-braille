@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Config.Net" Version="4.11.0" />
+    <PackageReference Include="Config.Net" Version="4.13.7" />
     <PackageReference Include="Huanlin.Common" Version="4.5.11" />
     <PackageReference Include="Huanlin.Windows" Version="4.5.11" />
     <PackageReference Include="jacobslusser.ScintillaNET" Version="3.6.3" />

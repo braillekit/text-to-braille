@@ -6,11 +6,14 @@ using Nuke.Common.Git;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.MSBuild;
 using Nuke.Common.Tools.GitVersion;
+using Nuke.Common.Utilities;
+using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.EnvironmentInfo;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.MSBuild.MSBuildTasks;
 using EasyBrailleEdit.Common;
+using Nuke.Common.IO;
 
 class Build : NukeBuild
 {
@@ -32,8 +35,8 @@ class Build : NukeBuild
     Target Clean => _ => _
         .Executes(() =>
         {
-            DeleteDirectories(GlobDirectories(SourceDirectory, "**/bin", "**/obj"));
-            DeleteDirectories(GlobDirectories(TestsDirectory, "**/bin", "**/obj"));
+            GlobDirectories(SourceDirectory, "**/bin", "**/obj").ForEach(DeleteDirectory);
+            GlobDirectories(TestsDirectory, "**/bin", "**/obj").ForEach(DeleteDirectory);
             EnsureCleanDirectory(OutputDirectory);
         });
 
@@ -86,8 +89,8 @@ class Build : NukeBuild
             {
                 var updateDir = RootDirectory / "UpdateFiles";
 
-                Logger.Log($"From: {RealOutputDirectory}");
-                Logger.Log($"To: {updateDir}");
+                Logger.Info($"From: {RealOutputDirectory}");
+                Logger.Info($"To: {updateDir}");
 
                 var files = Directory.EnumerateFiles(RealOutputDirectory, "*.*", SearchOption.TopDirectoryOnly)
                     .Where(s => s.EndsWith(".exe") || s.EndsWith(".dll")
@@ -95,7 +98,7 @@ class Build : NukeBuild
                     .ToList();
 
 
-                Logger.Log($"Copying {files.Count} files...");
+                Logger.Info($"Copying {files.Count} files...");
 
                 foreach (var filename in files)
                 {
@@ -103,12 +106,12 @@ class Build : NukeBuild
                     string dstFileName = updateDir / fname;
                     File.Copy(filename, dstFileName, true);
 
-                    Logger.Log($"Copied {fname}");
+                    Logger.Info($"Copied {fname}");
                 }
 
                 string changeLogFile = RootDirectory / "Doc/ChangeLog.txt";
                 File.Copy(changeLogFile, updateDir / Path.GetFileName(changeLogFile), true);
-                Logger.Log($"\r\nCopied {Path.GetFileName(changeLogFile)}");
+                Logger.Info($"\r\nCopied {Path.GetFileName(changeLogFile)}");
 
                 // Don't forget to manually modify Update.txt.
             });
