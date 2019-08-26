@@ -344,7 +344,7 @@ namespace BrailleToolkit
                 {
                     result.AppendLine(pageTitle.ToOriginalTextString());
                 }
-                result.AppendLine(Lines[lineIdx].ToOriginalTextString());
+                result.AppendLine(Lines[lineIdx].ToTextString());
             }
             return result.ToString();
         }
