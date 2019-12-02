@@ -44,7 +44,7 @@
   <ItemGroup>
     <PackageReference Include="Huanlin.Common" Version="4.5.11" />
     <PackageReference Include="NChinese" Version="0.5.2" />
-    <PackageReference Include="Serilog" Version="2.8.0" />
+    <PackageReference Include="Serilog" Version="2.9.0" />
   </ItemGroup>
 
   <ItemGroup>
