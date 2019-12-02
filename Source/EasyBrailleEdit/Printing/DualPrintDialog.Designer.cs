@@ -32,8 +32,12 @@
             this.btnPrintText = new System.Windows.Forms.Button();
             this.btnPrintBraille = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtBrailleCellWdith = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabText = new System.Windows.Forms.TabPage();
+            this.textPrintCopies = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnPageSetup = new System.Windows.Forms.Button();
             this.cboPrinters = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -62,16 +66,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.chkRememberOptions = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textPrintCopies = new System.Windows.Forms.NumericUpDown();
+            this.btnToDefaultBrailleWidth = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabText.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textPrintCopies)).BeginInit();
             this.tabBraille.SuspendLayout();
             this.gboxRange.SuspendLayout();
             this.gboxOptions.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textPrintCopies)).BeginInit();
             this.SuspendLayout();
             // 
             // btnPrintText
@@ -102,25 +105,46 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnToDefaultBrailleWidth);
+            this.panel2.Controls.Add(this.txtBrailleCellWdith);
+            this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.tabControl1);
             this.panel2.Controls.Add(this.gboxRange);
             this.panel2.Controls.Add(this.gboxOptions);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(633, 437);
+            this.panel2.Size = new System.Drawing.Size(633, 482);
             this.panel2.TabIndex = 0;
+            // 
+            // txtBrailleCellWdith
+            // 
+            this.txtBrailleCellWdith.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.txtBrailleCellWdith.Location = new System.Drawing.Point(240, 141);
+            this.txtBrailleCellWdith.Name = "txtBrailleCellWdith";
+            this.txtBrailleCellWdith.Size = new System.Drawing.Size(64, 29);
+            this.txtBrailleCellWdith.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.txtBrailleCellWdith, "此參數也會影響每個明眼字的列印寬度。");
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(20, 145);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(218, 19);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "每一方點字的列印寬度：";
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabText);
             this.tabControl1.Controls.Add(this.tabBraille);
             this.tabControl1.ItemSize = new System.Drawing.Size(60, 25);
-            this.tabControl1.Location = new System.Drawing.Point(16, 147);
+            this.tabControl1.Location = new System.Drawing.Point(16, 192);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(596, 217);
-            this.tabControl1.TabIndex = 2;
+            this.tabControl1.TabIndex = 3;
             // 
             // tabText
             // 
@@ -138,6 +162,37 @@
             this.tabText.Size = new System.Drawing.Size(588, 184);
             this.tabText.TabIndex = 0;
             this.tabText.Text = "明眼字";
+            // 
+            // textPrintCopies
+            // 
+            this.textPrintCopies.Location = new System.Drawing.Point(395, 57);
+            this.textPrintCopies.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.textPrintCopies.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.textPrintCopies.Name = "textPrintCopies";
+            this.textPrintCopies.Size = new System.Drawing.Size(62, 29);
+            this.textPrintCopies.TabIndex = 7;
+            this.textPrintCopies.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(299, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 19);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "列印份數:";
             // 
             // btnPageSetup
             // 
@@ -307,7 +362,7 @@
             this.gboxRange.Controls.Add(this.rdoPrintAll);
             this.gboxRange.Location = new System.Drawing.Point(16, 12);
             this.gboxRange.Name = "gboxRange";
-            this.gboxRange.Size = new System.Drawing.Size(308, 120);
+            this.gboxRange.Size = new System.Drawing.Size(308, 116);
             this.gboxRange.TabIndex = 0;
             this.gboxRange.TabStop = false;
             this.gboxRange.Text = "範圍";
@@ -316,7 +371,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("PMingLiU", 10F);
-            this.label2.Location = new System.Drawing.Point(89, 75);
+            this.label2.Location = new System.Drawing.Point(89, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(207, 17);
             this.label2.TabIndex = 3;
@@ -361,7 +416,7 @@
             this.gboxOptions.Controls.Add(this.chkPrintPageFoot);
             this.gboxOptions.Location = new System.Drawing.Point(345, 12);
             this.gboxOptions.Name = "gboxOptions";
-            this.gboxOptions.Size = new System.Drawing.Size(267, 111);
+            this.gboxOptions.Size = new System.Drawing.Size(267, 112);
             this.gboxOptions.TabIndex = 1;
             this.gboxOptions.TabStop = false;
             this.gboxOptions.Text = "選項";
@@ -404,7 +459,7 @@
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.chkRememberOptions);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 381);
+            this.panel1.Location = new System.Drawing.Point(0, 426);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(633, 56);
             this.panel1.TabIndex = 1;
@@ -432,43 +487,23 @@
             this.chkRememberOptions.Text = "記住這次的設定";
             this.chkRememberOptions.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // btnToDefaultBrailleWidth
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(299, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 19);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "列印份數:";
-            // 
-            // textPrintCopies
-            // 
-            this.textPrintCopies.Location = new System.Drawing.Point(395, 57);
-            this.textPrintCopies.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.textPrintCopies.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.textPrintCopies.Name = "textPrintCopies";
-            this.textPrintCopies.Size = new System.Drawing.Size(62, 29);
-            this.textPrintCopies.TabIndex = 7;
-            this.textPrintCopies.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.btnToDefaultBrailleWidth.Location = new System.Drawing.Point(308, 141);
+            this.btnToDefaultBrailleWidth.Name = "btnToDefaultBrailleWidth";
+            this.btnToDefaultBrailleWidth.Size = new System.Drawing.Size(124, 30);
+            this.btnToDefaultBrailleWidth.TabIndex = 5;
+            this.btnToDefaultBrailleWidth.Text = "恢復預設值";
+            this.toolTip1.SetToolTip(this.btnToDefaultBrailleWidth, "設定紙張、邊界、字型");
+            this.btnToDefaultBrailleWidth.UseVisualStyleBackColor = true;
+            this.btnToDefaultBrailleWidth.Click += new System.EventHandler(this.btnToDefaultBrailleWidth_Click);
             // 
             // DualPrintDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(633, 437);
+            this.ClientSize = new System.Drawing.Size(633, 482);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("PMingLiU", 11F);
@@ -482,9 +517,11 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DualPrintDialog_FormClosing);
             this.Load += new System.EventHandler(this.DualPrintDialog_Load);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabText.ResumeLayout(false);
             this.tabText.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textPrintCopies)).EndInit();
             this.tabBraille.ResumeLayout(false);
             this.tabBraille.PerformLayout();
             this.gboxRange.ResumeLayout(false);
@@ -493,7 +530,6 @@
             this.gboxOptions.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textPrintCopies)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -535,5 +571,8 @@
         private System.Windows.Forms.Label lblLinesPerPage;
         private System.Windows.Forms.NumericUpDown textPrintCopies;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtBrailleCellWdith;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnToDefaultBrailleWidth;
     }
 }

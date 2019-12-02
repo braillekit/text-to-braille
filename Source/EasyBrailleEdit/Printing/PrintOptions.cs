@@ -18,18 +18,20 @@ namespace EasyBrailleEdit
     public class PrintOptions
     {
         // 列印範圍
-        private bool m_AllPages;    // 列印全部？
         private int m_FromPage;
         private int m_ToPage;
         private int m_Copies;
+        private double m_BrailleCellWidth;
 
 
         public PrintOptions() : base()
         {
-            m_AllPages = true;
+            AllPages = true;
             m_FromPage = 0;
             m_ToPage = 0;
             m_Copies = 1;
+
+            m_BrailleCellWidth = Constant.DefaultBrailleWidth;
 
             DoubleSide = false;
             PrintPageFoot = true;
@@ -92,17 +94,13 @@ namespace EasyBrailleEdit
         /// </summary>
         public void CheckRange()
         {
-            if (m_AllPages)
+            if (AllPages)
                 return;
             if (m_ToPage < m_FromPage)
                 throw new ArgumentException("終止頁數不可小於起始頁數!");
         }
 
-        public bool AllPages
-        {
-            get { return m_AllPages; }
-            set { m_AllPages = value; }
-        }
+        public bool AllPages { get; set; }
 
         public int LinesPerPage { get; set; }
 
@@ -138,5 +136,18 @@ namespace EasyBrailleEdit
         /// 2016-11-02: 新版本的行為是根據 ET Trident 打印機來修改，比較合理。舊版本用換行符號來迫使印表機跳頁的作法不好。
         /// </summary>
         public bool BrUseNewLineForPageBreak { get; set; }
+
+        public double BrailleCellWidth
+        {
+            get { return m_BrailleCellWidth; }
+            set
+            {
+                if (value < 5 || value > 40)
+                {
+                    throw new Exception("指定的數值超出合法範圍！BrailleCellWdith 應介於 5～40 之間。");
+                }
+                m_BrailleCellWidth = value;
+            }
+        }
     }
 }

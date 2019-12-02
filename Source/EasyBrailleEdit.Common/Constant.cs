@@ -25,6 +25,9 @@
         public const int DefaultCellsPerLine = 40;
         public const int DefaultLinesPerPage = 25;
 
+        // 預設一方點字的寬度。此參數會用來計算每個明眼字的字寬（會影響字距）
+        public const double DefaultBrailleWidth = 24;
+
         // 雙視編輯器的預設最大可復原操作數量
         public const int DefaultMaxUndoLevel = 10;
 

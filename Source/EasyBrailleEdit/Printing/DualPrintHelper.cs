@@ -17,7 +17,7 @@ namespace EasyBrailleEdit
         public const string PaperName = "點字紙";
         public const int PaperWidth = 1300;        // 紙張寬度 13 inchess * 100.
         public const int PaperHeight = 1100;       // 紙張高度 11 inches * 100.        
-        const double BrailleCellWidth = 24; // 一方點字的寬度
+
         const int PageNumberRightOffset = 120;  // 頁碼距離右邊界的偏移點數
         const int PageNumberBottomOffset = 25;  // 頁碼距離上邊界的偏移點數
 
@@ -513,7 +513,7 @@ namespace EasyBrailleEdit
                 if (cellCnt + brWord.CellCount > maxCells)  // 如果目前要印的字將會超過最大方數
                     break;  // 則中止
 
-                x = cellCnt * BrailleCellWidth + marginLeft;
+                x = cellCnt * m_PrintOptions.BrailleCellWidth + marginLeft;
                 graphics.DrawString(brWord.Text, m_TextFont, m_TextBrush, (float)x, (float)y);
 
                 cellCnt += brWord.CellCount;
@@ -542,10 +542,10 @@ namespace EasyBrailleEdit
 
             // 點字頁碼
             cellCnt = pageNum.ToString().Length;
-            x = (m_BrDoc.CellsPerLine - cellCnt) * BrailleCellWidth + marginLeft;
+            x = (m_BrDoc.CellsPerLine - cellCnt) * m_PrintOptions.BrailleCellWidth + marginLeft;
             if (cellCnt < 2)
             {
-                x = x - BrailleCellWidth; // textWidth - 1.6;	// 2008-8-26: 修正個位數頁碼位置太靠右邊的問題
+                x = x - m_PrintOptions.BrailleCellWidth; // textWidth - 1.6;	// 2008-8-26: 修正個位數頁碼位置太靠右邊的問題
             }
             graphics.DrawString(pageNum.ToString(), m_TextFont, m_TextBrush, (float)x, (float)y);
 
@@ -570,10 +570,10 @@ namespace EasyBrailleEdit
                 }
 
                 cellCnt = orgPageNum.Length + cellCnt + 2;  // 額外加點字頁碼的一個數字點位和一個空方。
-                x = (m_BrDoc.CellsPerLine - cellCnt) * BrailleCellWidth + marginLeft;
+                x = (m_BrDoc.CellsPerLine - cellCnt) * m_PrintOptions.BrailleCellWidth + marginLeft;
                 if (cellCnt < 2)
                 {
-                    x = x - BrailleCellWidth; // textWidth - 1.6;	// 2008-8-26: 修正個位數頁碼位置太靠右邊的問題
+                    x = x - m_PrintOptions.BrailleCellWidth; // textWidth - 1.6;	// 2008-8-26: 修正個位數頁碼位置太靠右邊的問題
                 }
                 graphics.DrawString(orgPageNum, m_TextFont, m_TextBrush, (float)x, (float)y);
             }
