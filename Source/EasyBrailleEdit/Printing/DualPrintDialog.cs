@@ -39,25 +39,25 @@ namespace EasyBrailleEdit
 
         private void LoadSettings()
         {			
-            var cfg = AppGlobals.Config.Printing;
+            var cfgPrint = AppGlobals.Config.Printing;
 
-            chkPrintPageFoot.Checked = cfg.PrintPageFoot;
+            chkPrintPageFoot.Checked = cfgPrint.PrintPageFoot;
             chkChangeStartPageNum.Checked = false;
             txtStartPageNumber.Text = "1";
             cboPrintTextManualDoubleSide.SelectedIndex = 0;
-            chkPrintBraille.Checked = cfg.PrintBrailleToBrailler;
-            chkPrintBrailleToFile.Checked = cfg.PrintBrailleToFile;
-            txtBrailleFileName.TextBox.Text = cfg.PrintBrailleToFileName;
-            chkSendPageBreakAtEof.Checked = cfg.PrintBrailleSendPageBreakAtEndOfDoc;
+            chkPrintBraille.Checked = cfgPrint.PrintBrailleToBrailler;
+            chkPrintBrailleToFile.Checked = cfgPrint.PrintBrailleToFile;
+            txtBrailleFileName.TextBox.Text = cfgPrint.PrintBrailleToFileName;
+            chkSendPageBreakAtEof.Checked = cfgPrint.PrintBrailleSendPageBreakAtEndOfDoc;
             lblLinesPerPage.Text = AppGlobals.Config.Braille.LinesPerPage.ToString();
             lblCellsPerLine.Text = m_BrDoc.CellsPerLine.ToString();
 
-            m_PaperSourceName = cfg.PrintTextPaperSourceName;
-            m_PaperName = cfg.PrintTextPaperName;
-            m_TextFontName = cfg.PrintTextFontName;
-            m_TextFontSize = cfg.PrintTextFontSize;
-            m_OddPageMargins = new Margins(cfg.PrintTextMarginLeft, cfg.PrintTextMarginRight, cfg.PrintTextMarginTop, cfg.PrintTextMarginBottom);
-            m_EvenPageMargins = new Margins(cfg.PrintTextMarginLeft2, cfg.PrintTextMarginRight2, cfg.PrintTextMarginTop2, cfg.PrintTextMarginBottom2);
+            m_PaperSourceName = cfgPrint.PrintTextPaperSourceName;
+            m_PaperName = cfgPrint.PrintTextPaperName;
+            m_TextFontName = cfgPrint.PrintTextFontName;
+            m_TextFontSize = cfgPrint.PrintTextFontSize;
+            m_OddPageMargins = new Margins(cfgPrint.PrintTextMarginLeft, cfgPrint.PrintTextMarginRight, cfgPrint.PrintTextMarginTop, cfgPrint.PrintTextMarginBottom);
+            m_EvenPageMargins = new Margins(cfgPrint.PrintTextMarginLeft2, cfgPrint.PrintTextMarginRight2, cfgPrint.PrintTextMarginTop2, cfgPrint.PrintTextMarginBottom2);
 
             cboPrinters.Items.Clear();
             cboPrintersForBraille.Items.Clear();
@@ -67,14 +67,17 @@ namespace EasyBrailleEdit
                 cboPrinters.Items.Add(s);
                 cboPrintersForBraille.Items.Add(s);
             }
-            if (!String.IsNullOrEmpty(cfg.DefaultTextPrinter))
+            if (!String.IsNullOrEmpty(cfgPrint.DefaultTextPrinter))
             {
-                cboPrinters.SelectedIndex = cboPrinters.Items.IndexOf(cfg.DefaultTextPrinter);
+                cboPrinters.SelectedIndex = cboPrinters.Items.IndexOf(cfgPrint.DefaultTextPrinter);
             }
-            if (!String.IsNullOrWhiteSpace(cfg.BraillePrinterName))
+            if (!String.IsNullOrWhiteSpace(cfgPrint.BraillePrinterName))
             {
-                cboPrintersForBraille.Text = cfg.BraillePrinterName;
+                cboPrintersForBraille.Text = cfgPrint.BraillePrinterName;
             }
+
+            txtBrailleCellWdith.Text = cfgPrint.BrailleCellWidth.ToString();
+            txtTextLineHeight.Text = cfgPrint.PrintTextLineHeight.ToString();
         }
 
         private void SaveSettings()
@@ -99,7 +102,9 @@ namespace EasyBrailleEdit
             cfgPrint.PrintTextMarginBottom2 = m_EvenPageMargins.Bottom;
             cfgPrint.PrintTextFontName = m_TextFontName;
             cfgPrint.PrintTextFontSize = m_TextFontSize;
+            cfgPrint.PrintTextLineHeight = Convert.ToDouble(txtTextLineHeight.Text);
 
+            cfgPrint.BrailleCellWidth = Convert.ToDouble(txtBrailleCellWdith.Text);
             cfgPrint.PrintBrailleSendPageBreakAtEndOfDoc = chkSendPageBreakAtEof.Checked;
         }
 
@@ -215,6 +220,9 @@ namespace EasyBrailleEdit
             prnOpt.EvenPageMargins = m_EvenPageMargins;
 
             prnOpt.BrSendPageBreakAtEndOfDoc = chkSendPageBreakAtEof.Checked;
+
+            prnOpt.BrailleCellWidth = Convert.ToDouble(txtBrailleCellWdith.Text);
+            prnOpt.TextLineHeight = Convert.ToDouble(txtTextLineHeight.Text);
 
             return prnOpt;
         }
@@ -381,6 +389,16 @@ namespace EasyBrailleEdit
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void btnToDefaultBrailleWidth_Click(object sender, EventArgs e)
+        {
+            txtBrailleCellWdith.Text = Constant.DefaultBrailleWidth.ToString();
+        }
+
+        private void btnToDefaultTextLineHeight_Click(object sender, EventArgs e)
+        {
+            txtTextLineHeight.Text = Constant.DefaultPrintTextLineHeight.ToString();
         }
     }
 

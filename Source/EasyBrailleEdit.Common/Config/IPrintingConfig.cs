@@ -28,6 +28,10 @@ namespace EasyBrailleEdit.Common.Config
         [Option(DefaultValue = true)]
         bool PrintPageFoot { get; set; }
 
+        // 一方點字的寬度。此參數會用來計算每個明眼字的字寬（會影響字距）
+        [Option(DefaultValue = Constant.DefaultBrailleWidth)]
+        double BrailleCellWidth { get; set; }
+
         [Option(DefaultValue = "新細明體")]
         string PrintTextFontName { get; set; }
 

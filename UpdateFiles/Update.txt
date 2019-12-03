@@ -7,26 +7,27 @@
 ' - 特定版本號碼代表若 client 端版本比這裡指定的版本還要舊，則下載。
 '===================================================================
 AppConfig.Default.ini                                 ; ?     
-BrailleToolkit.dll                                    ; 3.16.0
-EasyBrailleEdit.Common.dll                            ; 3.16.0
-EasyBrailleEdit.exe                                   ; 3.16.0
-Txt2Brl.exe                                           ; 3.16.0
+BrailleToolkit.dll                                    ; 3.18.0
+EasyBrailleEdit.Common.dll                            ; 3.18.0
+EasyBrailleEdit.exe                                   ; 3.18.0
+Txt2Brl.exe                                           ; 3.18.0
 EasyBrailleEdit.exe.config                            ; ?
 Txt2Brl.exe.config                                    ; ?     
 Phrase.phf                                            ; ?     
 Huanlin.Common.dll                                    ; 4.5.11
 Huanlin.Windows.dll                                   ; 4.5.11
 NChinese.dll                                          ; 0.5.2
-Config.Net.dll                                        ; 4.11.0
+Config.Net.dll                                        ; 4.14.14
 Castle.Core.dll                                       ; 4.2.1
 CommandLine.dll                                       ; 2.6.0
 ScintillaNET.dll                                      ; 3.6.3
 ScintillaNET.FindReplaceTools.dll                     ; 1.4.1
 zh-Hant/ScintillaNET.FindReplaceTools.resources.dll   ; 1.4.1
-Serilog.dll                                           ; 2.8.0
+Serilog.dll                                           ; 2.9.0
 Serilog.Settings.AppSettings.dll                      ; 2.2.2
-Serilog.Sinks.File.dll                                ; 4.0.1
+Serilog.Sinks.File.dll                                ; 4.1.0
 Serilog.Sinks.RollingFile.dll                         ; 3.3.1
 SourceGrid.dll                                        ; 4.40.4580
+System.Configuration.ConfigurationManager.dll         ; 4.700.19
 System.Reflection.TypeExtensions.dll                  ; 4.6.24027
 System.ValueTuple.dll                                 ; 4.6.26515
