@@ -22,6 +22,7 @@ namespace EasyBrailleEdit
         private int m_ToPage;
         private int m_Copies;
         private double m_BrailleCellWidth;
+        private double m_TextLineHeight;
 
 
         public PrintOptions() : base()
@@ -32,6 +33,7 @@ namespace EasyBrailleEdit
             m_Copies = 1;
 
             m_BrailleCellWidth = Constant.DefaultBrailleWidth;
+            m_TextLineHeight = Constant.DefaultPrintTextLineHeight;
 
             DoubleSide = false;
             PrintPageFoot = true;
@@ -147,6 +149,19 @@ namespace EasyBrailleEdit
                     throw new Exception("指定的數值超出合法範圍！BrailleCellWdith 應介於 5～40 之間。");
                 }
                 m_BrailleCellWidth = value;
+            }
+        }
+
+        public double TextLineHeight
+        {
+            get { return m_TextLineHeight; }
+            set
+            {
+                if (value < 20 || value > 80)
+                {
+                    throw new Exception("數值超出合法範圍！PrintTextLineHeight 應介於 20～80 之間。");
+                }
+                m_TextLineHeight = value;
             }
         }
     }

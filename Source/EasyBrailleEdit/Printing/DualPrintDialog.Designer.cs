@@ -32,6 +32,10 @@
             this.btnPrintText = new System.Windows.Forms.Button();
             this.btnPrintBraille = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnToDefaultTextLineHeight = new System.Windows.Forms.Button();
+            this.txtTextLineHeight = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnToDefaultBrailleWidth = new System.Windows.Forms.Button();
             this.txtBrailleCellWdith = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -66,7 +70,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.chkRememberOptions = new System.Windows.Forms.CheckBox();
-            this.btnToDefaultBrailleWidth = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabText.SuspendLayout();
@@ -81,11 +84,11 @@
             // 
             this.btnPrintText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnPrintText.BackColor = System.Drawing.Color.LightGoldenrodYellow;
-            this.btnPrintText.Location = new System.Drawing.Point(16, 130);
+            this.btnPrintText.Location = new System.Drawing.Point(424, 104);
             this.btnPrintText.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintText.Name = "btnPrintText";
-            this.btnPrintText.Size = new System.Drawing.Size(140, 35);
-            this.btnPrintText.TabIndex = 5;
+            this.btnPrintText.Size = new System.Drawing.Size(140, 40);
+            this.btnPrintText.TabIndex = 7;
             this.btnPrintText.Text = "預覽列印(&T)";
             this.btnPrintText.UseVisualStyleBackColor = false;
             this.btnPrintText.Click += new System.EventHandler(this.btnPrintText_Click);
@@ -94,10 +97,10 @@
             // 
             this.btnPrintBraille.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnPrintBraille.BackColor = System.Drawing.Color.LightCyan;
-            this.btnPrintBraille.Location = new System.Drawing.Point(445, 134);
+            this.btnPrintBraille.Location = new System.Drawing.Point(448, 108);
             this.btnPrintBraille.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintBraille.Name = "btnPrintBraille";
-            this.btnPrintBraille.Size = new System.Drawing.Size(120, 43);
+            this.btnPrintBraille.Size = new System.Drawing.Size(124, 43);
             this.btnPrintBraille.TabIndex = 9;
             this.btnPrintBraille.Text = "列印點字(&P)";
             this.btnPrintBraille.UseVisualStyleBackColor = false;
@@ -105,6 +108,9 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnToDefaultTextLineHeight);
+            this.panel2.Controls.Add(this.txtTextLineHeight);
+            this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.btnToDefaultBrailleWidth);
             this.panel2.Controls.Add(this.txtBrailleCellWdith);
             this.panel2.Controls.Add(this.label6);
@@ -117,13 +123,53 @@
             this.panel2.Size = new System.Drawing.Size(633, 482);
             this.panel2.TabIndex = 0;
             // 
+            // btnToDefaultTextLineHeight
+            // 
+            this.btnToDefaultTextLineHeight.Location = new System.Drawing.Point(328, 176);
+            this.btnToDefaultTextLineHeight.Name = "btnToDefaultTextLineHeight";
+            this.btnToDefaultTextLineHeight.Size = new System.Drawing.Size(124, 31);
+            this.btnToDefaultTextLineHeight.TabIndex = 7;
+            this.btnToDefaultTextLineHeight.Text = "恢復預設值";
+            this.toolTip1.SetToolTip(this.btnToDefaultTextLineHeight, "設定紙張、邊界、字型");
+            this.btnToDefaultTextLineHeight.UseVisualStyleBackColor = true;
+            this.btnToDefaultTextLineHeight.Click += new System.EventHandler(this.btnToDefaultTextLineHeight_Click);
+            // 
+            // txtTextLineHeight
+            // 
+            this.txtTextLineHeight.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.txtTextLineHeight.Location = new System.Drawing.Point(240, 176);
+            this.txtTextLineHeight.Name = "txtTextLineHeight";
+            this.txtTextLineHeight.Size = new System.Drawing.Size(80, 29);
+            this.txtTextLineHeight.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.txtTextLineHeight, "也就是「字高」加上「列距」。");
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(20, 180);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(199, 19);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "每一列明眼字的高度：";
+            // 
+            // btnToDefaultBrailleWidth
+            // 
+            this.btnToDefaultBrailleWidth.Location = new System.Drawing.Point(328, 140);
+            this.btnToDefaultBrailleWidth.Name = "btnToDefaultBrailleWidth";
+            this.btnToDefaultBrailleWidth.Size = new System.Drawing.Size(124, 31);
+            this.btnToDefaultBrailleWidth.TabIndex = 4;
+            this.btnToDefaultBrailleWidth.Text = "恢復預設值";
+            this.toolTip1.SetToolTip(this.btnToDefaultBrailleWidth, "設定紙張、邊界、字型");
+            this.btnToDefaultBrailleWidth.UseVisualStyleBackColor = true;
+            this.btnToDefaultBrailleWidth.Click += new System.EventHandler(this.btnToDefaultBrailleWidth_Click);
+            // 
             // txtBrailleCellWdith
             // 
             this.txtBrailleCellWdith.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.txtBrailleCellWdith.Location = new System.Drawing.Point(240, 141);
             this.txtBrailleCellWdith.Name = "txtBrailleCellWdith";
-            this.txtBrailleCellWdith.Size = new System.Drawing.Size(64, 29);
-            this.txtBrailleCellWdith.TabIndex = 4;
+            this.txtBrailleCellWdith.Size = new System.Drawing.Size(80, 29);
+            this.txtBrailleCellWdith.TabIndex = 3;
             this.toolTip1.SetToolTip(this.txtBrailleCellWdith, "此參數也會影響每個明眼字的列印寬度。");
             // 
             // label6
@@ -140,11 +186,11 @@
             this.tabControl1.Controls.Add(this.tabText);
             this.tabControl1.Controls.Add(this.tabBraille);
             this.tabControl1.ItemSize = new System.Drawing.Size(60, 25);
-            this.tabControl1.Location = new System.Drawing.Point(16, 192);
+            this.tabControl1.Location = new System.Drawing.Point(16, 216);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(596, 217);
-            this.tabControl1.TabIndex = 3;
+            this.tabControl1.Size = new System.Drawing.Size(596, 196);
+            this.tabControl1.TabIndex = 8;
             // 
             // tabText
             // 
@@ -159,13 +205,13 @@
             this.tabText.Location = new System.Drawing.Point(4, 29);
             this.tabText.Name = "tabText";
             this.tabText.Padding = new System.Windows.Forms.Padding(3);
-            this.tabText.Size = new System.Drawing.Size(588, 184);
+            this.tabText.Size = new System.Drawing.Size(588, 163);
             this.tabText.TabIndex = 0;
             this.tabText.Text = "明眼字";
             // 
             // textPrintCopies
             // 
-            this.textPrintCopies.Location = new System.Drawing.Point(395, 57);
+            this.textPrintCopies.Location = new System.Drawing.Point(108, 96);
             this.textPrintCopies.Maximum = new decimal(new int[] {
             99,
             0,
@@ -178,7 +224,7 @@
             0});
             this.textPrintCopies.Name = "textPrintCopies";
             this.textPrintCopies.Size = new System.Drawing.Size(62, 29);
-            this.textPrintCopies.TabIndex = 7;
+            this.textPrintCopies.TabIndex = 6;
             this.textPrintCopies.Value = new decimal(new int[] {
             1,
             0,
@@ -188,17 +234,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(299, 60);
+            this.label1.Location = new System.Drawing.Point(12, 100);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 19);
-            this.label1.TabIndex = 6;
+            this.label1.TabIndex = 5;
             this.label1.Text = "列印份數:";
             // 
             // btnPageSetup
             // 
-            this.btnPageSetup.Location = new System.Drawing.Point(395, 14);
+            this.btnPageSetup.Location = new System.Drawing.Point(406, 14);
             this.btnPageSetup.Name = "btnPageSetup";
-            this.btnPageSetup.Size = new System.Drawing.Size(146, 30);
+            this.btnPageSetup.Size = new System.Drawing.Size(164, 31);
             this.btnPageSetup.TabIndex = 2;
             this.btnPageSetup.Text = "設定列印格式(&P)";
             this.toolTip1.SetToolTip(this.btnPageSetup, "設定紙張、邊界、字型");
@@ -208,7 +254,7 @@
             // cboPrinters
             // 
             this.cboPrinters.FormattingEnabled = true;
-            this.cboPrinters.Location = new System.Drawing.Point(90, 17);
+            this.cboPrinters.Location = new System.Drawing.Point(96, 16);
             this.cboPrinters.Name = "cboPrinters";
             this.cboPrinters.Size = new System.Drawing.Size(299, 26);
             this.cboPrinters.TabIndex = 1;
@@ -218,9 +264,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(13, 21);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 19);
+            this.label4.Size = new System.Drawing.Size(85, 19);
             this.label4.TabIndex = 0;
-            this.label4.Text = "印表機:";
+            this.label4.Text = "印表機：";
             // 
             // cboPrintTextManualDoubleSide
             // 
@@ -230,7 +276,7 @@
             "不需要",
             "只印奇數頁",
             "只印偶數頁"});
-            this.cboPrintTextManualDoubleSide.Location = new System.Drawing.Point(147, 57);
+            this.cboPrintTextManualDoubleSide.Location = new System.Drawing.Point(160, 56);
             this.cboPrintTextManualDoubleSide.Name = "cboPrintTextManualDoubleSide";
             this.cboPrintTextManualDoubleSide.Size = new System.Drawing.Size(113, 26);
             this.cboPrintTextManualDoubleSide.TabIndex = 4;
@@ -240,9 +286,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(13, 60);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(128, 19);
+            this.label3.Size = new System.Drawing.Size(142, 19);
             this.label3.TabIndex = 3;
-            this.label3.Text = "手動雙面列印:";
+            this.label3.Text = "手動雙面列印：";
             // 
             // tabBraille
             // 
@@ -259,7 +305,7 @@
             this.tabBraille.Location = new System.Drawing.Point(4, 29);
             this.tabBraille.Name = "tabBraille";
             this.tabBraille.Padding = new System.Windows.Forms.Padding(3);
-            this.tabBraille.Size = new System.Drawing.Size(588, 184);
+            this.tabBraille.Size = new System.Drawing.Size(588, 163);
             this.tabBraille.TabIndex = 1;
             this.tabBraille.Text = "點字";
             // 
@@ -317,7 +363,7 @@
             // txtBrailleFileName
             // 
             this.txtBrailleFileName.BackColor = System.Drawing.Color.Transparent;
-            this.txtBrailleFileName.Location = new System.Drawing.Point(149, 70);
+            this.txtBrailleFileName.Location = new System.Drawing.Point(152, 64);
             this.txtBrailleFileName.Name = "txtBrailleFileName";
             this.txtBrailleFileName.Size = new System.Drawing.Size(416, 32);
             this.txtBrailleFileName.TabIndex = 6;
@@ -325,7 +371,7 @@
             // chkPrintBrailleToFile
             // 
             this.chkPrintBrailleToFile.AutoSize = true;
-            this.chkPrintBrailleToFile.Location = new System.Drawing.Point(17, 74);
+            this.chkPrintBrailleToFile.Location = new System.Drawing.Point(16, 68);
             this.chkPrintBrailleToFile.Name = "chkPrintBrailleToFile";
             this.chkPrintBrailleToFile.Size = new System.Drawing.Size(126, 23);
             this.chkPrintBrailleToFile.TabIndex = 5;
@@ -362,7 +408,7 @@
             this.gboxRange.Controls.Add(this.rdoPrintAll);
             this.gboxRange.Location = new System.Drawing.Point(16, 12);
             this.gboxRange.Name = "gboxRange";
-            this.gboxRange.Size = new System.Drawing.Size(308, 116);
+            this.gboxRange.Size = new System.Drawing.Size(308, 112);
             this.gboxRange.TabIndex = 0;
             this.gboxRange.TabStop = false;
             this.gboxRange.Text = "範圍";
@@ -487,17 +533,6 @@
             this.chkRememberOptions.Text = "記住這次的設定";
             this.chkRememberOptions.UseVisualStyleBackColor = true;
             // 
-            // btnToDefaultBrailleWidth
-            // 
-            this.btnToDefaultBrailleWidth.Location = new System.Drawing.Point(308, 141);
-            this.btnToDefaultBrailleWidth.Name = "btnToDefaultBrailleWidth";
-            this.btnToDefaultBrailleWidth.Size = new System.Drawing.Size(124, 30);
-            this.btnToDefaultBrailleWidth.TabIndex = 5;
-            this.btnToDefaultBrailleWidth.Text = "恢復預設值";
-            this.toolTip1.SetToolTip(this.btnToDefaultBrailleWidth, "設定紙張、邊界、字型");
-            this.btnToDefaultBrailleWidth.UseVisualStyleBackColor = true;
-            this.btnToDefaultBrailleWidth.Click += new System.EventHandler(this.btnToDefaultBrailleWidth_Click);
-            // 
             // DualPrintDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -574,5 +609,8 @@
         private System.Windows.Forms.TextBox txtBrailleCellWdith;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnToDefaultBrailleWidth;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnToDefaultTextLineHeight;
+        private System.Windows.Forms.TextBox txtTextLineHeight;
     }
 }

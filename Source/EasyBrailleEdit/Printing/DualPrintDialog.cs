@@ -77,6 +77,7 @@ namespace EasyBrailleEdit
             }
 
             txtBrailleCellWdith.Text = cfgPrint.BrailleCellWidth.ToString();
+            txtTextLineHeight.Text = cfgPrint.PrintTextLineHeight.ToString();
         }
 
         private void SaveSettings()
@@ -101,6 +102,7 @@ namespace EasyBrailleEdit
             cfgPrint.PrintTextMarginBottom2 = m_EvenPageMargins.Bottom;
             cfgPrint.PrintTextFontName = m_TextFontName;
             cfgPrint.PrintTextFontSize = m_TextFontSize;
+            cfgPrint.PrintTextLineHeight = Convert.ToDouble(txtTextLineHeight.Text);
 
             cfgPrint.BrailleCellWidth = Convert.ToDouble(txtBrailleCellWdith.Text);
             cfgPrint.PrintBrailleSendPageBreakAtEndOfDoc = chkSendPageBreakAtEof.Checked;
@@ -220,6 +222,7 @@ namespace EasyBrailleEdit
             prnOpt.BrSendPageBreakAtEndOfDoc = chkSendPageBreakAtEof.Checked;
 
             prnOpt.BrailleCellWidth = Convert.ToDouble(txtBrailleCellWdith.Text);
+            prnOpt.TextLineHeight = Convert.ToDouble(txtTextLineHeight.Text);
 
             return prnOpt;
         }
@@ -391,6 +394,11 @@ namespace EasyBrailleEdit
         private void btnToDefaultBrailleWidth_Click(object sender, EventArgs e)
         {
             txtBrailleCellWdith.Text = Constant.DefaultBrailleWidth.ToString();
+        }
+
+        private void btnToDefaultTextLineHeight_Click(object sender, EventArgs e)
+        {
+            txtTextLineHeight.Text = Constant.DefaultPrintTextLineHeight.ToString();
         }
     }
 

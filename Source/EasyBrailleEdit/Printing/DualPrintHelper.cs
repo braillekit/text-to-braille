@@ -195,7 +195,7 @@ namespace EasyBrailleEdit
             m_TextBrush = new SolidBrush(Color.Black);
             m_TextFont = new Font("新細明體", (float)AppGlobals.Config.Printing.PrintTextFontSize);
             m_TextHeight = m_TextFont.GetHeight();
-            m_LineHeight = AppGlobals.Config.Printing.PrintTextLineHeight;
+            m_LineHeight = m_PrintOptions.TextLineHeight;
         }
 
         void BrailleText_EndPrint(object sender, PrintEventArgs e)
