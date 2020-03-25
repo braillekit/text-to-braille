@@ -1,47 +1,39 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
-    <Authors>Michael Tsai</Authors>
-    <Company>Michael Tsai</Company>
-    <Copyright>Copyright (c) 2008-2018 Michael Tsai</Copyright>
-    <ApplicationIcon>app.ico</ApplicationIcon>
     <OutputType>WinExe</OutputType>
-    <StartupObject />
-    <Version>1.0.0</Version>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>EasyBrailleEdit</RootNamespace>
+    <AssemblyName>EasyBrailleEdit</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\Output\</OutputPath>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>..\..\Output</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Config.Net" Version="4.14.14" />
+    <PackageReference Include="Config.Net" Version="4.14.23" />
+    <PackageReference Include="fernandreu.ScintillaNET" Version="4.0.4" />
     <PackageReference Include="Huanlin.Common" Version="4.5.11" />
     <PackageReference Include="Huanlin.Windows" Version="4.5.11" />
-    <PackageReference Include="jacobslusser.ScintillaNET" Version="3.6.3" />
+    <PackageReference Include="NChinese" Version="0.5.2" />
     <PackageReference Include="Serilog" Version="2.9.0" />
     <PackageReference Include="Serilog.Settings.AppSettings" Version="2.2.2" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
-    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.1-dev-00771" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
     <PackageReference Include="SourceGrid" Version="4.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BrailleToolkit\BrailleToolkit.csproj" />
+    <ProjectReference Include="..\EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="ScintillaNET.FindReplaceTools">
       <HintPath>..\..\Lib\ScintillaNET.FindReplaceTools.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Net.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\BrailleToolkit\BrailleToolkit.csproj" />
-    <ProjectReference Include="..\EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,76 +43,11 @@
     <Compile Update="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Update="ExportBrailleForm.cs">
+    <Compile Update="BusyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ExportBrailleForm.Designer.cs">
-      <DependentUpon>ExportBrailleForm.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Forms\BrailleDocPropertiesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\BrailleDocPropertiesForm.Designer.cs">
-      <DependentUpon>BrailleDocPropertiesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Forms\InsertTableForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\InsertTableForm.Designer.cs">
-      <DependentUpon>InsertTableForm.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Forms\UndoBufferForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\UndoBufferForm.Designer.cs">
-      <DependentUpon>UndoBufferForm.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Forms\ViewTextForm.cs">
-      <SubType>Form</SubType>
-    </Compile>   
-    <Compile Update="Forms\ViewTextForm.Designer.cs">
-      <DependentUpon>ViewTextForm.cs</DependentUpon>
-    </Compile>   
-    <Compile Update="Forms\RegForm.cs">
-      <SubType>Form</SubType>
-    </Compile>   
-    <Compile Update="Forms\RegForm.Designer.cs">
-      <DependentUpon>RegForm.cs</DependentUpon>
-    </Compile>   
-    <Compile Update="InsertTextForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="InsertTextForm.Designer.cs">
-      <DependentUpon>InsertTextForm.cs</DependentUpon>
-    </Compile>   
-    <Compile Update="PhoneticForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="PhoneticForm.Designer.cs">
-      <DependentUpon>PhoneticForm.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Printing\ConfigTextPrinterForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Printing\ConfigTextPrinterForm.Designer.cs">
-      <DependentUpon>ConfigTextPrinterForm.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Printing\ConfigTextPrinterPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Printing\ConfigTextPrinterPanel.Designer.cs">
-      <DependentUpon>ConfigTextPrinterPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="RemindTrialForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="RemindTrialForm.Designer.cs">
-      <DependentUpon>RemindTrialForm.cs</DependentUpon>
+    <Compile Update="BusyForm.Designer.cs">
+      <DependentUpon>BusyForm.cs</DependentUpon>
     </Compile>
     <Compile Update="ConversionDialog.cs">
       <SubType>Form</SubType>
@@ -133,12 +60,6 @@
     </Compile>
     <Compile Update="ConversionProgressForm.Designer.cs">
       <DependentUpon>ConversionProgressForm.cs</DependentUpon>
-    </Compile>
-    <Compile Update="BusyForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="BusyForm.Designer.cs">
-      <DependentUpon>BusyForm.cs</DependentUpon>
     </Compile>
     <Compile Update="DualEditFindForm.cs">
       <SubType>Form</SubType>
@@ -163,18 +84,6 @@
     </Compile>
     <Compile Update="DualEditTitleForm.Designer.cs">
       <DependentUpon>DualEditTitleForm.cs</DependentUpon>
-    </Compile>    
-    <Compile Update="InvalidCharForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="InvalidCharForm.Designer.cs">
-      <DependentUpon>InvalidCharForm.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Printing\DualPrintDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Printing\DualPrintDialog.Designer.cs">
-      <DependentUpon>DualPrintDialog.cs</DependentUpon>
     </Compile>
     <Compile Update="EditCellForm.cs">
       <SubType>Form</SubType>
@@ -182,11 +91,65 @@
     <Compile Update="EditCellForm.Designer.cs">
       <DependentUpon>EditCellForm.cs</DependentUpon>
     </Compile>
+    <Compile Update="ExportBrailleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ExportBrailleForm.Designer.cs">
+      <DependentUpon>ExportBrailleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\BrailleDocPropertiesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\BrailleDocPropertiesForm.Designer.cs">
+      <DependentUpon>BrailleDocPropertiesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\InsertTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\InsertTableForm.Designer.cs">
+      <DependentUpon>InsertTableForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\RegForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\RegForm.designer.cs">
+      <DependentUpon>RegForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\UndoBufferForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\UndoBufferForm.Designer.cs">
+      <DependentUpon>UndoBufferForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\ViewTextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\ViewTextForm.Designer.cs">
+      <DependentUpon>ViewTextForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="InsertTextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="InsertTextForm.Designer.cs">
+      <DependentUpon>InsertTextForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="InvalidCharForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="InvalidCharForm.Designer.cs">
+      <DependentUpon>InvalidCharForm.cs</DependentUpon>
+    </Compile>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="PhoneticForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PhoneticForm.Designer.cs">
+      <DependentUpon>PhoneticForm.cs</DependentUpon>
     </Compile>
     <Compile Update="PickBrailleForm.cs">
       <SubType>Form</SubType>
@@ -194,30 +157,48 @@
     <Compile Update="PickBrailleForm.Designer.cs">
       <DependentUpon>PickBrailleForm.cs</DependentUpon>
     </Compile>
+    <Compile Update="Printing\ConfigTextPrinterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Printing\ConfigTextPrinterForm.Designer.cs">
+      <DependentUpon>ConfigTextPrinterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Printing\ConfigTextPrinterPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Printing\ConfigTextPrinterPanel.Designer.cs">
+      <DependentUpon>ConfigTextPrinterPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Printing\DualPrintDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Printing\DualPrintDialog.Designer.cs">
+      <DependentUpon>DualPrintDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Printing\TextPageSetupDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="UpdateProgressForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UpdateProgressForm.Designer.cs">
       <DependentUpon>UpdateProgressForm.cs</DependentUpon>
     </Compile>
+  </ItemGroup>
 
+  <ItemGroup>
     <EmbeddedResource Update="AboutForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="PhoneticForm.resx">
-      <DependentUpon>PhoneticForm.cs</DependentUpon>
+    <EmbeddedResource Update="BusyForm.resx">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Printing\ConfigTextPrinterForm.resx">
-      <DependentUpon>ConfigTextPrinterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Printing\ConfigTextPrinterPanel.resx">
-      <DependentUpon>ConfigTextPrinterPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="RemindTrialForm.resx">
-      <DependentUpon>RemindTrialForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
+      <DependentUpon>BusyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="ConversionDialog.resx">
       <SubType>Designer</SubType>
@@ -227,87 +208,92 @@
       <SubType>Designer</SubType>
       <DependentUpon>ConversionProgressForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="BusyForm.resx">
-      <DependentUpon>BusyForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Update="DualEditFindForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DualEditFindForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="DualEditForm.resx">
-      <DependentUpon>DualEditForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+      <DependentUpon>DualEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="DualEditGotoForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DualEditGotoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="InvalidCharForm.resx">
+    <EmbeddedResource Update="DualEditTitleForm.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>InvalidCharForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Printing\DualPrintDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>DualPrintDialog.cs</DependentUpon>
+      <DependentUpon>DualEditTitleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="EditCellForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EditCellForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="MainForm.resx">
+    <EmbeddedResource Update="ExportBrailleForm.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>MainForm.cs</DependentUpon>
+      <DependentUpon>ExportBrailleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="PickBrailleForm.resx">
+    <EmbeddedResource Update="Forms\BrailleDocPropertiesForm.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>PickBrailleForm.cs</DependentUpon>
+      <DependentUpon>BrailleDocPropertiesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Forms\InsertTableForm.resx">
       <SubType>Designer</SubType>
+      <DependentUpon>InsertTableForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Forms\RegForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RegForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Update="Forms\UndoBufferForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>UndoBufferForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\ViewTextForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ViewTextForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="InsertTextForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InsertTextForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="InvalidCharForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InvalidCharForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PhoneticForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PhoneticForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PickBrailleForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PickBrailleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Printing\ConfigTextPrinterForm.resx">
+      <DependentUpon>ConfigTextPrinterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Printing\ConfigTextPrinterPanel.resx">
+      <DependentUpon>ConfigTextPrinterPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Printing\DualPrintDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DualPrintDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Update="Printing\TextPageSetupDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TextPageSetupDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="DualEditTitleForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>DualEditTitleForm.cs</DependentUpon>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="UpdateProgressForm.resx">
+      <SubType>Designer</SubType>
       <DependentUpon>UpdateProgressForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>      
-    <EmbeddedResource Update="InsertTextForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>InsertTextForm.cs</DependentUpon>
-    </EmbeddedResource>   
-    <EmbeddedResource Update="ExportBrailleForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ExportBrailleForm.cs</DependentUpon>
-    </EmbeddedResource>   
-    <EmbeddedResource Update="Forms\ViewTextForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ViewTextForm.cs</DependentUpon>
-    </EmbeddedResource>   
-    <EmbeddedResource Update="Forms\BrailleDocPropertiesForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>BrailleDocPropertiesForm.cs</DependentUpon>
-    </EmbeddedResource>   
-    <EmbeddedResource Update="Forms\UndoBufferForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UndoBufferForm.cs</DependentUpon>
-    </EmbeddedResource>   
-    <EmbeddedResource Update="Forms\InsertTableForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>InsertTableForm.cs</DependentUpon>
-    </EmbeddedResource>   
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -318,5 +304,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
 </Project>
- 

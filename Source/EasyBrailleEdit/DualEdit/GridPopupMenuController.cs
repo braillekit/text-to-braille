@@ -14,7 +14,7 @@ namespace EasyBrailleEdit.DualEdit
     /// </summary>
     public class GridPopupMenuController : SourceGrid.Cells.Controllers.ControllerBase
     {
-        private ContextMenu m_Menu = new ContextMenu();
+        private ContextMenuStrip m_Menu = new ContextMenuStrip();
         private SourceGrid.CellContext m_CellContext;
 
         private event SourceGrid.CellContextEventHandler m_PopupMenuClick = null;
@@ -46,14 +46,14 @@ namespace EasyBrailleEdit.DualEdit
                 $"貼上至行尾;{DualEditCommand.Names.PasteToEndOfLine};" + ((int)Shortcut.CtrlShiftV).ToString()
             };
 
-            MenuItem mi;
+            ToolStripMenuItem mi;
             char[] sep = { ';' };
             EventHandler clickHandler = new EventHandler(GridPopupMenuItem_Click);
 
             foreach (string s in menuItemDefs)
             {
                 string[] def = s.Split(sep);
-                mi = new MenuItem(def[0]);
+                mi = new ToolStripMenuItem(def[0]);
                 mi.Tag = def[1];
                 if (!mi.Text.Equals("-"))
                 {
@@ -61,9 +61,9 @@ namespace EasyBrailleEdit.DualEdit
                 }
                 if (def.Length > 2)
                 {
-                    mi.Shortcut = (Shortcut)Convert.ToInt32(def[2]);
+                    mi.ShortcutKeys = (Keys)Convert.ToInt32(def[2]);
                 }
-                m_Menu.MenuItems.Add(mi);
+                m_Menu.Items.Add(mi);
             }
         }
 
@@ -73,7 +73,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="tag"></param>
         public void HideMenuItem(string tag)
         {
-            foreach (MenuItem item in m_Menu.MenuItems)
+            foreach (ToolStripMenuItem item in m_Menu.Items)
             {
                 if (tag.Equals((string)item.Tag, StringComparison.CurrentCultureIgnoreCase))
                 {
@@ -95,7 +95,7 @@ namespace EasyBrailleEdit.DualEdit
 
         private void GridPopupMenuItem_Click(object sender, EventArgs e)
         {
-            MenuItem mi = (MenuItem)sender;
+            var mi = (ToolStripMenuItem)sender;
             if (mi != null)
             {
                 SourceGrid.CellContextEventArgs args = new SourceGrid.CellContextEventArgs(m_CellContext);

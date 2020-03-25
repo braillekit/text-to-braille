@@ -30,8 +30,10 @@ namespace EasyBrailleEdit
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             this.btnClose = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblVersionLicense = new System.Windows.Forms.Label();
             this.lblExpiredDate = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblCustomerName = new System.Windows.Forms.Label();
@@ -43,7 +45,6 @@ namespace EasyBrailleEdit
             this.lblVesion = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnRegister = new System.Windows.Forms.Button();
-            this.lblVersionLicense = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -82,10 +83,19 @@ namespace EasyBrailleEdit
             this.panel1.Size = new System.Drawing.Size(432, 267);
             this.panel1.TabIndex = 0;
             // 
+            // lblVersionLicense
+            // 
+            this.lblVersionLicense.AutoSize = true;
+            this.lblVersionLicense.Location = new System.Drawing.Point(189, 15);
+            this.lblVersionLicense.Name = "lblVersionLicense";
+            this.lblVersionLicense.Size = new System.Drawing.Size(61, 23);
+            this.lblVersionLicense.TabIndex = 14;
+            this.lblVersionLicense.Text = "label3";
+            // 
             // lblExpiredDate
             // 
             this.lblExpiredDate.AutoSize = true;
-            this.lblExpiredDate.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblExpiredDate.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblExpiredDate.Location = new System.Drawing.Point(113, 124);
             this.lblExpiredDate.Name = "lblExpiredDate";
             this.lblExpiredDate.Size = new System.Drawing.Size(126, 22);
@@ -95,7 +105,7 @@ namespace EasyBrailleEdit
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(12, 124);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 22);
@@ -105,7 +115,7 @@ namespace EasyBrailleEdit
             // lblCustomerName
             // 
             this.lblCustomerName.AutoSize = true;
-            this.lblCustomerName.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblCustomerName.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblCustomerName.Location = new System.Drawing.Point(111, 100);
             this.lblCustomerName.Name = "lblCustomerName";
             this.lblCustomerName.Size = new System.Drawing.Size(156, 22);
@@ -115,7 +125,7 @@ namespace EasyBrailleEdit
             // lblLicensedTo
             // 
             this.lblLicensedTo.AutoSize = true;
-            this.lblLicensedTo.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblLicensedTo.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblLicensedTo.Location = new System.Drawing.Point(12, 100);
             this.lblLicensedTo.Name = "lblLicensedTo";
             this.lblLicensedTo.Size = new System.Drawing.Size(95, 22);
@@ -125,11 +135,11 @@ namespace EasyBrailleEdit
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(12, 164);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 24);
+            this.label1.Size = new System.Drawing.Size(100, 23);
             this.label1.TabIndex = 9;
             this.label1.Text = "臉書專頁：";
             // 
@@ -137,7 +147,7 @@ namespace EasyBrailleEdit
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.linkLabel1.Location = new System.Drawing.Point(111, 165);
             this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel1.Name = "linkLabel1";
@@ -149,7 +159,7 @@ namespace EasyBrailleEdit
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::EasyBrailleEdit.Properties.Resources.owl2;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(4, 6);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
@@ -161,22 +171,22 @@ namespace EasyBrailleEdit
             // lblProductName
             // 
             this.lblProductName.AutoSize = true;
-            this.lblProductName.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblProductName.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblProductName.Location = new System.Drawing.Point(96, 15);
             this.lblProductName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(86, 24);
+            this.lblProductName.Size = new System.Drawing.Size(82, 23);
             this.lblProductName.TabIndex = 3;
             this.lblProductName.Text = "易點雙視";
             // 
             // lblVesion
             // 
             this.lblVesion.AutoSize = true;
-            this.lblVesion.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblVesion.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblVesion.Location = new System.Drawing.Point(96, 50);
             this.lblVesion.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblVesion.Name = "lblVesion";
-            this.lblVesion.Size = new System.Drawing.Size(132, 24);
+            this.lblVesion.Size = new System.Drawing.Size(122, 23);
             this.lblVesion.TabIndex = 2;
             this.lblVesion.Text = "1.0.2008.0103";
             // 
@@ -202,15 +212,6 @@ namespace EasyBrailleEdit
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
-            // lblVersionLicense
-            // 
-            this.lblVersionLicense.AutoSize = true;
-            this.lblVersionLicense.Location = new System.Drawing.Point(189, 15);
-            this.lblVersionLicense.Name = "lblVersionLicense";
-            this.lblVersionLicense.Size = new System.Drawing.Size(64, 24);
-            this.lblVersionLicense.TabIndex = 14;
-            this.lblVersionLicense.Text = "label3";
-            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
@@ -219,7 +220,7 @@ namespace EasyBrailleEdit
             this.ClientSize = new System.Drawing.Size(432, 267);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(5);
             this.MaximizeBox = false;

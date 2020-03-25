@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditCellForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -95,7 +96,7 @@
             // 
             // txtBraille
             // 
-            this.txtBraille.Font = new System.Drawing.Font("SimBraille", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBraille.Font = new System.Drawing.Font("SimBraille", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtBraille.Location = new System.Drawing.Point(101, 116);
             this.txtBraille.MaxLength = 3;
             this.txtBraille.Name = "txtBraille";
@@ -126,7 +127,7 @@
             // 
             // btnPickBraille
             // 
-            this.btnPickBraille.Image = global::EasyBrailleEdit.Properties.Resources.PickBraille;
+            this.btnPickBraille.Image = ((System.Drawing.Image)(resources.GetObject("btnPickBraille.Image")));
             this.btnPickBraille.Location = new System.Drawing.Point(240, 119);
             this.btnPickBraille.Name = "btnPickBraille";
             this.btnPickBraille.Size = new System.Drawing.Size(32, 36);
@@ -153,7 +154,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("PMingLiU", 11F);
+            this.Font = new System.Drawing.Font("新細明體", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);

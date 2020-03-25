@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Michael Tsai</Authors>
     <Company>Michael Tsai</Company>
     <Copyright>Copyright (c) 2008-2018 Michael Tsai</Copyright>
@@ -16,8 +16,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.6.0" />
-    <PackageReference Include="Config.Net" Version="4.14.14" />
+    <PackageReference Include="CommandLineParser" Version="2.7.82" />
+    <PackageReference Include="Config.Net" Version="4.14.23" />
     <PackageReference Include="Huanlin.Common" Version="4.5.11" />
     <PackageReference Include="NChinese" Version="0.5.2" />
     <PackageReference Include="Serilog" Version="2.9.0" />
