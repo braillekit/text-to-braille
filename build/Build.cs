@@ -14,6 +14,7 @@ using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.MSBuild.MSBuildTasks;
 using EasyBrailleEdit.Common;
 using Nuke.Common.IO;
+using Nuke.Common.Tools.DotNet;
 
 class Build : NukeBuild
 {
@@ -44,24 +45,21 @@ class Build : NukeBuild
         .DependsOn(Clean)
         .Executes(() =>
         {
-            MSBuild(s => s
-                .SetTargetPath(Solution)
-                .SetTargets("Restore"));
+            DotNetTasks.DotNetRestore(_ => _
+                .SetProjectFile(Solution));
         });
 
     Target Compile => _ => _
         .DependsOn(Restore)
         .Executes(() =>
         {
-            MSBuild(s => s
-                .SetTargetPath(Solution)
-                .SetTargets("Rebuild")
+            DotNetTasks.DotNetBuild(_ => _
+                .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
                 .SetAssemblyVersion(GitVersion.AssemblySemVer)
                 .SetFileVersion(GitVersion.AssemblySemFileVer)
                 .SetInformationalVersion(GitVersion.InformationalVersion)
-                .SetMaxCpuCount(Environment.ProcessorCount)
-                .SetNodeReuse(IsLocalBuild));
+                .EnableNoRestore());
 
             //                if (GitRepository.Branch.Equals(Constant.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase))
             //                {
