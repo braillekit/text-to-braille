@@ -47,7 +47,7 @@ namespace EasyBrailleEdit
 
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.AppSettings()
-                .WriteTo.RollingFile(@"Logs\log-main-{Date}.txt")
+                .WriteTo.File(@"Logs\log-main-.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             m_FileRunner = new FileRunner();

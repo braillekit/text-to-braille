@@ -18,7 +18,7 @@ namespace Txt2Brl
         {
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.AppSettings()
-                .WriteTo.RollingFile(@"Logs\log-txt2brl-{Date}.txt")
+                .WriteTo.File(@"Logs\log-txt2brl-.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             string filename = Assembly.GetExecutingAssembly().Location;
