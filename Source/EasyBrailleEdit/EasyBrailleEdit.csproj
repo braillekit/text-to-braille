@@ -6,19 +6,33 @@
     <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>EasyBrailleEdit</RootNamespace>
     <AssemblyName>EasyBrailleEdit</AssemblyName>
-    <Version>4.0.0</Version>
+    <Version></Version>
+    <Nullable>disable</Nullable>
+    <Copyright>Copyright (c) 2008-2022 Michael Tsai (蔡煥麟)</Copyright>
+    <Description>易點雙視（EasyBraillEdit）是一個 Windows 應用程式，主要用途是編輯與列印雙視教材，以供視障朋友摸讀。</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\Output</OutputPath>
+    <OutputPath>..\..\Output\EasyBrailleEdit</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Config.Net" Version="4.19.0" />
-    <PackageReference Include="DumpExtensions" Version="2.0.0" />
     <PackageReference Include="fernandreu.ScintillaNET" Version="4.2.0" />
     <PackageReference Include="Huanlin.Common" Version="5.0.0" />
     <PackageReference Include="Huanlin.Windows" Version="5.0.0" />
+    <PackageReference Include="MinVer" Version="2.5.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="NChinese" Version="0.6.0" />
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.Settings.AppSettings" Version="2.2.2" />
