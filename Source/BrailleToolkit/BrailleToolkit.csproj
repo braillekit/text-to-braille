@@ -11,12 +11,6 @@
     <StartupObject />
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <OutputPath>..\..\Output</OutputPath>
-    <LangVersion>default</LangVersion>
-  </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Data\BrailleCharTbl.txt" />
     <None Remove="Data\BrailleFontTbl.txt" />
