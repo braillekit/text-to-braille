@@ -21,8 +21,6 @@ using Huanlin.Windows.Sys;
 using Serilog;
 using ScintillaNET;
 using ScintillaNET.FindReplaceTools;
-using System.Net.Mail;
-using System.Net;
 
 namespace EasyBrailleEdit
 {
@@ -779,7 +777,7 @@ namespace EasyBrailleEdit
         /// <returns>傳回 true 表示更新成功，必須結束程式。</returns>
         private async Task<bool> AutoUpdateAsync()
         {
-            if (!AppGlobals.Config.AutoUpdate)
+            if (!AppGlobals.Config.General.AutoUpdate)
             {
                 return false;
             }
@@ -817,7 +815,7 @@ namespace EasyBrailleEdit
             var updater = new Huanlin.Http.HttpUpdater()
             {
                 ClientPath = Application.StartupPath,
-                ServerUri = AppGlobals.Config.AutoUpdateFilesUrl,
+                ServerUri = AppGlobals.Config.General.AutoUpdateFilesUrl,
                 ChangeLogFileName = "ChangeLog.txt"
             };
 

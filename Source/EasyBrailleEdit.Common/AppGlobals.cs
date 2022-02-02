@@ -7,7 +7,7 @@ namespace EasyBrailleEdit.Common
 {
     public static class AppGlobals
     {
-        public static IAppConfig Config { get; } = ConfigHelper.CreateConfig();
+        public static AppConfig Config { get; } = AppConfig.GetInstance();
 
         public static string AppPath { get; set;  }
         public static string TempPath { get; } = GetTempPath();
@@ -78,7 +78,7 @@ namespace EasyBrailleEdit.Common
 
         public static bool IsLicensedFor_TaipeiForBlind()
         {
-            return Config.AutoUpdateFilesUrl.IndexOf(Constant.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase) >= 0;
+            return Config.General.AutoUpdateFilesUrl.IndexOf(Constant.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase) >= 0;
         }
 
         public static bool IsPrintingEnabled { get; set; } = true;

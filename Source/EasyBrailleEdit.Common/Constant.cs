@@ -61,6 +61,7 @@
         public const int DefaultPrintTextMarginRight2 = 150;
         public const int DefaultPrintTextMarginBottom2 = 100;
 
+        public const string DefaultPrintTextFontName = "新細明體";
         public const double DefaultPrintTextFontSize = 12;      // 預設明眼字字型大小
         public const double DefaultPrintTextLineHeight = 40.0975;  // 明眼字列高（文字高度+列距）
         public const double DefaultPrintTextLineSpace = 20.9;   // 預設明眼字列距

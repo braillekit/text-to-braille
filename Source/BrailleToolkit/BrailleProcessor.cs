@@ -107,7 +107,7 @@ namespace BrailleToolkit
             SuppressEvents = false;
 
             // 轉點字之前，預先替換的文字
-            var replacedText = AppGlobals.Config.AutoReplacedText.EnsureNotEncloseWith("{", "}");
+            var replacedText = AppGlobals.Config.General.AutoReplacedText.EnsureNotEncloseWith("{", "}");
             _autoReplacedText = StrHelper.SplitToDictionary(replacedText, ' ', '=');
         }
 
