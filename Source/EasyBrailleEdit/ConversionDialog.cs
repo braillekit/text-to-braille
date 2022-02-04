@@ -125,10 +125,13 @@ namespace EasyBrailleEdit
                 {
                     sb.Remove(sb.Length - 1, 1);
                 }
-                AppGlobals.Config.General.PhraseFiles = sb.ToString();
 
-                AppGlobals.Config.Braille.LinesPerPage = (int) numLinesPerPage.Value;
-                AppGlobals.Config.Braille.CellsPerLine = (int) numCellsPerLine.Value;
+                var config = AppGlobals.Config;
+                config.General.PhraseFiles = sb.ToString();
+                config.Braille.LinesPerPage = (int) numLinesPerPage.Value;
+                config.Braille.CellsPerLine = (int) numCellsPerLine.Value;
+                config.Save();
+                
             }
         }
 

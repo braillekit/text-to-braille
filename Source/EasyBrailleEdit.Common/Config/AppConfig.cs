@@ -18,11 +18,6 @@ namespace EasyBrailleEdit.Common.Config
 
         private static AppConfig _instance;
 
-        static AppConfig()
-        {
-            Configuration.IgnoreInlineComments = false;
-        }
-
         public static AppConfig GetInstance()
         {
             if (_instance == null)
@@ -86,10 +81,10 @@ namespace EasyBrailleEdit.Common.Config
             }
 
             _configFileName = filename;
-            //_config = Configuration.LoadFromFile(_configFileName, Encoding.UTF8);
 
+            Configuration.IgnoreInlineComments = false;
             Configuration.SupressArrayParsing = true;
-            _config = Configuration.LoadFromString("[General]\r\nAutoReplacedText = {﹔=；  《=<書名號>  》=</書名號>  〈=<書名號>  〉=</書名號>}");
+            _config = Configuration.LoadFromFile(_configFileName, Encoding.UTF8);
 
             General = _config[GeneralSection.Name].ToObject<GeneralSection>();
             Braille = _config[BrailleSection.Name].ToObject<BrailleSection>();
@@ -99,6 +94,10 @@ namespace EasyBrailleEdit.Common.Config
 
         public void Save()
         {
+            _config[GeneralSection.Name].GetValuesFrom(General);
+            _config[BrailleSection.Name].GetValuesFrom(Braille);
+            _config[BrailleEditorSection.Name].GetValuesFrom(BrailleEditor);
+            _config[PrintingSection.Name].GetValuesFrom(Printing);
             _config.SaveToFile(_configFileName, Encoding.UTF8);
         }
     }

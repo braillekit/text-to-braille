@@ -55,18 +55,21 @@
             this.grpPhrases.Controls.Add(this.btnRemovePhraseTbl);
             this.grpPhrases.Controls.Add(this.btnAddPhraseTbl);
             this.grpPhrases.Controls.Add(this.clbPhraseTbl);
-            this.grpPhrases.Location = new System.Drawing.Point(12, 72);
+            this.grpPhrases.Location = new System.Drawing.Point(16, 76);
+            this.grpPhrases.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.grpPhrases.Name = "grpPhrases";
-            this.grpPhrases.Size = new System.Drawing.Size(444, 195);
+            this.grpPhrases.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.grpPhrases.Size = new System.Drawing.Size(556, 237);
             this.grpPhrases.TabIndex = 4;
             this.grpPhrases.TabStop = false;
             this.grpPhrases.Text = "注音詞庫";
             // 
             // btnMoveDown
             // 
-            this.btnMoveDown.Location = new System.Drawing.Point(372, 134);
+            this.btnMoveDown.Location = new System.Drawing.Point(463, 179);
+            this.btnMoveDown.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnMoveDown.Name = "btnMoveDown";
-            this.btnMoveDown.Size = new System.Drawing.Size(60, 28);
+            this.btnMoveDown.Size = new System.Drawing.Size(76, 37);
             this.btnMoveDown.TabIndex = 4;
             this.btnMoveDown.Text = "下移";
             this.btnMoveDown.UseVisualStyleBackColor = true;
@@ -74,9 +77,10 @@
             // 
             // btnMoveUp
             // 
-            this.btnMoveUp.Location = new System.Drawing.Point(372, 100);
+            this.btnMoveUp.Location = new System.Drawing.Point(463, 134);
+            this.btnMoveUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnMoveUp.Name = "btnMoveUp";
-            this.btnMoveUp.Size = new System.Drawing.Size(60, 28);
+            this.btnMoveUp.Size = new System.Drawing.Size(76, 37);
             this.btnMoveUp.TabIndex = 3;
             this.btnMoveUp.Text = "上移";
             this.btnMoveUp.UseVisualStyleBackColor = true;
@@ -84,9 +88,10 @@
             // 
             // btnRemovePhraseTbl
             // 
-            this.btnRemovePhraseTbl.Location = new System.Drawing.Point(372, 66);
+            this.btnRemovePhraseTbl.Location = new System.Drawing.Point(463, 88);
+            this.btnRemovePhraseTbl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRemovePhraseTbl.Name = "btnRemovePhraseTbl";
-            this.btnRemovePhraseTbl.Size = new System.Drawing.Size(60, 28);
+            this.btnRemovePhraseTbl.Size = new System.Drawing.Size(76, 37);
             this.btnRemovePhraseTbl.TabIndex = 2;
             this.btnRemovePhraseTbl.Text = "移除";
             this.btnRemovePhraseTbl.UseVisualStyleBackColor = true;
@@ -94,9 +99,10 @@
             // 
             // btnAddPhraseTbl
             // 
-            this.btnAddPhraseTbl.Location = new System.Drawing.Point(372, 32);
+            this.btnAddPhraseTbl.Location = new System.Drawing.Point(463, 43);
+            this.btnAddPhraseTbl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddPhraseTbl.Name = "btnAddPhraseTbl";
-            this.btnAddPhraseTbl.Size = new System.Drawing.Size(60, 28);
+            this.btnAddPhraseTbl.Size = new System.Drawing.Size(76, 37);
             this.btnAddPhraseTbl.TabIndex = 1;
             this.btnAddPhraseTbl.Text = "加入";
             this.btnAddPhraseTbl.UseVisualStyleBackColor = true;
@@ -106,10 +112,11 @@
             // 
             this.clbPhraseTbl.FormattingEnabled = true;
             this.helpProvider1.SetHelpString(this.clbPhraseTbl, "您可以自訂注音詞庫，以調整特定詞彙的注音拼音。注意：詞庫的套用順序是由上而下，因此若有重複定義的詞彙，將以最後套用的詞庫為準。");
-            this.clbPhraseTbl.Location = new System.Drawing.Point(12, 32);
+            this.clbPhraseTbl.Location = new System.Drawing.Point(17, 43);
+            this.clbPhraseTbl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.clbPhraseTbl.Name = "clbPhraseTbl";
             this.helpProvider1.SetShowHelp(this.clbPhraseTbl, true);
-            this.clbPhraseTbl.Size = new System.Drawing.Size(352, 124);
+            this.clbPhraseTbl.Size = new System.Drawing.Size(440, 172);
             this.clbPhraseTbl.TabIndex = 0;
             this.clbPhraseTbl.SelectedIndexChanged += new System.EventHandler(this.clbPhraseTbl_SelectedIndexChanged);
             // 
@@ -119,9 +126,10 @@
             this.chkRemember.AutoSize = true;
             this.chkRemember.Checked = true;
             this.chkRemember.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkRemember.Location = new System.Drawing.Point(12, 304);
+            this.chkRemember.Location = new System.Drawing.Point(22, 333);
+            this.chkRemember.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.chkRemember.Name = "chkRemember";
-            this.chkRemember.Size = new System.Drawing.Size(164, 23);
+            this.chkRemember.Size = new System.Drawing.Size(140, 24);
             this.chkRemember.TabIndex = 5;
             this.chkRemember.Text = "記住這次的設定";
             this.chkRemember.UseVisualStyleBackColor = true;
@@ -130,9 +138,10 @@
             // 
             this.btnConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConvert.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnConvert.Location = new System.Drawing.Point(242, 289);
+            this.btnConvert.Location = new System.Drawing.Point(304, 333);
+            this.btnConvert.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(121, 34);
+            this.btnConvert.Size = new System.Drawing.Size(151, 45);
             this.btnConvert.TabIndex = 6;
             this.btnConvert.Text = "執行轉換(&G)";
             this.btnConvert.UseVisualStyleBackColor = true;
@@ -149,9 +158,10 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(369, 289);
+            this.btnCancel.Location = new System.Drawing.Point(461, 333);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 34);
+            this.btnCancel.Size = new System.Drawing.Size(93, 45);
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -159,46 +169,46 @@
             // numLinesPerPage
             // 
             this.numLinesPerPage.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.numLinesPerPage.Location = new System.Drawing.Point(114, 21);
+            this.numLinesPerPage.Location = new System.Drawing.Point(142, 28);
+            this.numLinesPerPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.numLinesPerPage.Name = "numLinesPerPage";
-            this.numLinesPerPage.Size = new System.Drawing.Size(60, 29);
+            this.numLinesPerPage.Size = new System.Drawing.Size(76, 29);
             this.numLinesPerPage.TabIndex = 1;
             // 
             // numCellsPerLine
             // 
             this.numCellsPerLine.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.numCellsPerLine.Location = new System.Drawing.Point(303, 21);
+            this.numCellsPerLine.Location = new System.Drawing.Point(379, 28);
+            this.numCellsPerLine.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.numCellsPerLine.Name = "numCellsPerLine";
-            this.numCellsPerLine.Size = new System.Drawing.Size(60, 29);
+            this.numCellsPerLine.Size = new System.Drawing.Size(76, 29);
             this.numCellsPerLine.TabIndex = 3;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("PMingLiU", 11F);
-            this.label7.Location = new System.Drawing.Point(207, 23);
+            this.label7.Location = new System.Drawing.Point(259, 31);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(90, 19);
+            this.label7.Size = new System.Drawing.Size(77, 20);
             this.label7.TabIndex = 2;
             this.label7.Text = "每列幾方:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("PMingLiU", 11F);
-            this.label5.Location = new System.Drawing.Point(18, 23);
+            this.label5.Location = new System.Drawing.Point(22, 31);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(90, 19);
+            this.label5.Size = new System.Drawing.Size(77, 20);
             this.label5.TabIndex = 0;
             this.label5.Text = "每頁幾列:";
             // 
             // ConversionDialog
             // 
             this.AcceptButton = this.btnConvert;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(472, 335);
+            this.ClientSize = new System.Drawing.Size(590, 392);
             this.Controls.Add(this.numLinesPerPage);
             this.Controls.Add(this.numCellsPerLine);
             this.Controls.Add(this.label7);
@@ -207,10 +217,10 @@
             this.Controls.Add(this.btnConvert);
             this.Controls.Add(this.chkRemember);
             this.Controls.Add(this.grpPhrases);
-            this.Font = new System.Drawing.Font("PMingLiU", 11F);
+            this.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConversionDialog";
