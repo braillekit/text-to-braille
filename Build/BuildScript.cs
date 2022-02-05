@@ -3,8 +3,6 @@ using FlubuCore.Context;
 using FlubuCore.Context.Attributes.BuildProperties;
 using FlubuCore.IO;
 using FlubuCore.Scripting;
-using FlubuCore.Tasks.Attributes;
-using FlubuCore.Tasks.Versioning;
 
 // 注意：需要 FlubuCore v5.1.8 或更新的版本。
 namespace _Build

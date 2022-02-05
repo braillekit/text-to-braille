@@ -24,7 +24,7 @@ namespace Txt2Brl
             string filename = Assembly.GetExecutingAssembly().Location;
             string fileVer = FileVersionInfo.GetVersionInfo(filename).FileVersion;
 
-            Console.WriteLine($"Txt2Brl version {fileVer} Copyright(c) 2007-2018 Michael Tsai.\n");
+            Console.WriteLine($"Txt2Brl version {fileVer} Copyright(c) 2008-2022 Michael Tsai.\n");
 
             CommandLine.Parser.Default.ParseArguments<Options>(args)
                .WithParsed<Options>(opts => RunOptionsAndReturnExitCode(opts));
