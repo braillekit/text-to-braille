@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Net.Http.Handlers;
 using System.Windows.Forms;
-using Huanlin.Http;
+using Huanlin.Common.Http;
 
 namespace EasyBrailleEdit
 {
@@ -31,7 +32,7 @@ namespace EasyBrailleEdit
         }
 
 
-        public void updator_DownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
+        public void updator_DownloadProgressChanged(object sender, HttpProgressEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }

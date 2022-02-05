@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{CECA7BC5-3A2
 	ProjectSection(SolutionItems) = preProject
 		..\Doc\ChangeLog.txt = ..\Doc\ChangeLog.txt
 		..\Doc\ReleaseNote.txt = ..\Doc\ReleaseNote.txt
+		..\Doc\技術文件\部署程序.txt = ..\Doc\技術文件\部署程序.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{564D6238-5E27-47A8-82F8-5E924565757A}"

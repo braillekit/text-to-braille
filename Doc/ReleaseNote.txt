@@ -1,22 +1,27 @@
-﻿易點雙視 v3.18
+﻿易點雙視 v4.1.0
 
 作業環境需求
 
   - Windows 7 SP1、Windows 8、Windows 10 （注意 Windows XP 已經不支援!）
-  - .NET 5 （舊版需要 Framework 3.5 和 .NET Framework 4.7.2）。
-  
+  - .NET 6 （舊版需要 Framework 3.5 和 .NET Framework 4.7.2）。
+
 安裝程序
+
+（若安裝過程碰到問題，可聯繫作者以遠端連線的方式協助。作者信箱：huanlin.tsai@gmail.com）
 
 1.確保已經安裝了所有最新的 Windows Updates。
 
-2.下載並安裝 .NET 5，先以瀏覽器開啟以下網址：
+2.下載並安裝 .NET 6，先以瀏覽器開啟以下網址：
 
-  https://dotnet.microsoft.com/download/dotnet/5.0/runtime/
+  https://dotnet.microsoft.com/en-us/download/dotnet/6.0/runtime
  
+  在 Run desktop apps 區塊中，根據你的電腦架構選擇 x64、x86、或 Arm64 的版本。
+  下載完成後，執行安裝程式。
+
 3.安裝「易點雙視」
 
   執行安裝程式 setup.exe 即可開始安裝。
-  預設的應用程式安裝路徑為 C:\EasyBrailleEdit3。
+  預設的應用程式安裝路徑為 C:\EasyBrailleEdit4。
 
 
 備註：舊版需要安裝 .NET Framework 4.7.2 可轉散發套件，下載網址如下：  

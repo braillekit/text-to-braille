@@ -23,13 +23,14 @@
 
   <ItemGroup>
     <PackageReference Include="fernandreu.ScintillaNET" Version="4.2.0" />
-    <PackageReference Include="Huanlin.Common" Version="5.0.0" />
-    <PackageReference Include="Huanlin.Windows" Version="5.0.0" />
+    <PackageReference Include="Huanlin.Common" Version="5.1.0" />
+    <PackageReference Include="Huanlin.Windows" Version="5.1.0" />
     <PackageReference Include="MinVer" Version="2.5.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="NChinese" Version="0.6.0" />
+    <PackageReference Include="NChinese" Version="0.7.0" />
+    <PackageReference Include="ScintillaNET_FindReplaceDialog-huanlin" Version="1.5.2" />
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.Settings.AppSettings" Version="2.2.2" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
@@ -39,12 +40,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BrailleToolkit\BrailleToolkit.csproj" />
     <ProjectReference Include="..\EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="ScintillaNET.FindReplaceTools">
-      <HintPath>..\..\Lib\ScintillaNET.FindReplaceTools.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>
