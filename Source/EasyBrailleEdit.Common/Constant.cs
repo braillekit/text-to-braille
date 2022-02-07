@@ -5,7 +5,8 @@
         public const string AppName = "EasyBrailleEdit";
         public const string FacebookPageUrl = "https://www.facebook.com/easybraille/";
 
-        public const string DefaultAutoUpdateFilesUrl = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/Update4/UpdateFiles/";
+        public const string DefaultAutoUpdateRootUrl = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/Update4/";
+        public const string DefaultAutoUpdateFilesUrl = DefaultAutoUpdateRootUrl + "UpdateFiles/";
 
         public const string UsersLicenseFileName = "users.lic";
         public const string SerialNumberRegKey = "SerialNumber";

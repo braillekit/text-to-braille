@@ -128,7 +128,7 @@ namespace EasyBrailleEdit.License
 
             async Task DownloadUserLicenseFileAsync()
             {
-                string url = Constant.DefaultAutoUpdateFilesUrl.EnsureEndWith("/") + Constant.UsersLicenseFileName
+                string url = Constant.DefaultAutoUpdateRootUrl.EnsureEndWith("/") + Constant.UsersLicenseFileName
                            + "?" + DateTime.Now.Ticks; // 網址後面加動態參數，以避免快取。
                 try
                 {
