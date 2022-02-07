@@ -12,7 +12,12 @@
     <Description>易點雙視（EasyBraillEdit）是一個 Windows 應用程式，主要用途是編輯與列印雙視教材，以供視障朋友摸讀。</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <BaseOutputPath>..\..\Output\EasyBrailleEdit</BaseOutputPath>
+    <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="app.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\README.md">
