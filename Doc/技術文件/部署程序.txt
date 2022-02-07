@@ -13,9 +13,8 @@
 
 6. 到 UpdateFiles 資料夾下修改 Update.txt 內容，確保版號正確。
 
-5.把 UpdateFiles 資料夾下的檔案 commit 至 GitHub 的 "forblind"
-  分支底下的 UpdateFiles 資料夾。  
+5.把 UpdateFiles 資料夾下的檔案 commit 至 GitHub 專案的 "Update4" 分支的 UpdateFiles 資料夾。  
   repo URL:
-  https://github.com/huanlin/easy-braille-edit/tree/forblind
+  https://github.com/huanlin/easy-braille-edit/tree/Update4
 
 6.在本機測試能否自動更新。

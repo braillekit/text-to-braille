@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EasyBrailleEdit.Common;
-using Huanlin.Windows.Forms;
 using Microsoft.Win32;
 using Serilog;
+using Huanlin.Common.Extensions;
 
 namespace EasyBrailleEdit.License
 {
@@ -128,12 +128,12 @@ namespace EasyBrailleEdit.License
 
             async Task DownloadUserLicenseFileAsync()
             {
+                string url = Constant.DefaultAutoUpdateFilesUrl.EnsureEndWith("/") + Constant.UsersLicenseFileName
+                           + "?" + DateTime.Now.Ticks; // 網址後面加動態參數，以避免快取。
                 try
                 {
                     using (var client = new HttpClient())
-                    {
-                        // 網址後面加動態參數，以避免快取。
-                        string url = Constant.UsersLicenseFileUrl + "?" + DateTime.Now.Ticks;
+                    {                        
                         var content = await client.GetStringAsync(url);
                         content = Base64Encode(content);
                         File.WriteAllText(usersLicFile, content, Encoding.UTF8);
@@ -141,38 +141,8 @@ namespace EasyBrailleEdit.License
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"無法下載 {Constant.UsersLicenseFileUrl} : {ex.Message}");
+                    Log.Error($"無法下載 {url} : {ex.Message}");
                 }
-            }
-        }
-
-
-        public static async Task<List<string>> DownloadBlockedIPListAsync()
-        {
-            var result = new List<string>();
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    // 網址後面加動態參數，以避免快取。
-                    string url = Constant.BlockedIPFileUrl + "?" + DateTime.Now.Ticks;
-                    var content = await client.GetStringAsync(url);
-                    if (string.IsNullOrWhiteSpace(content))
-                        return result;
-
-                    foreach (var ip in content.Split('\r', 'n', ' '))
-                    {
-                        if (string.IsNullOrWhiteSpace(ip))
-                            continue;
-                        result.Add(ip.Trim());
-                    }
-                    return result;
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"無法下載 {Constant.BlockedIPFileUrl} : {ex.Message}");
-                return result;
             }
         }
 

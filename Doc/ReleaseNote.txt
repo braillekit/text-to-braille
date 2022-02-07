@@ -2,30 +2,26 @@
 
 作業環境需求
 
-  - Windows 7 SP1、Windows 8、Windows 10 （注意 Windows XP 已經不支援!）
-  - .NET 6 （舊版需要 Framework 3.5 和 .NET Framework 4.7.2）。
+  - Windows 7 SP1、Windows 8、Windows 10。注意：僅支援 64 位元電腦。
+  - .NET 6
 
 安裝程序
 
-（若安裝過程碰到問題，可聯繫作者以遠端連線的方式協助。作者信箱：huanlin.tsai@gmail.com）
-
 1.確保已經安裝了所有最新的 Windows Updates。
 
-2.下載並安裝 .NET 6，先以瀏覽器開啟以下網址：
+2.下載並安裝 .NET 6 SDK，先以瀏覽器開啟以下網址：
 
-  https://dotnet.microsoft.com/en-us/download/dotnet/6.0/runtime
- 
-  在 Run desktop apps 區塊中，根據你的電腦架構選擇 x64、x86、或 Arm64 的版本。
-  下載完成後，執行安裝程式。
+  https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+
+  在頁面上找到 SDK 6.x.x，然後點選 Windows 的 x64 下載連結，
+  即可下載 .NET 6 SDK 的安裝程式。下載後直接執行安裝程式。
 
 3.安裝「易點雙視」
 
   執行安裝程式 setup.exe 即可開始安裝。
   預設的應用程式安裝路徑為 C:\EasyBrailleEdit4。
 
+  下載後直接開啟檔案即可安裝。
 
-備註：舊版需要安裝 .NET Framework 4.7.2 可轉散發套件，下載網址如下：  
 
-http://go.microsoft.com/fwlink/?linkid=863265
-  
-下載後直接開啟檔案即可安裝。
+若安裝過程碰到問題，可聯繫作者以遠端連線的方式協助。作者信箱：huanlin.tsai@gmail.com

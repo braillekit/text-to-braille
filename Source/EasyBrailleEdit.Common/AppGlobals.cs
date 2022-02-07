@@ -76,11 +76,6 @@ namespace EasyBrailleEdit.Common
 			return path;
 		}
 
-        public static bool IsLicensedFor_TaipeiForBlind()
-        {
-            return Config.General.AutoUpdateFilesUrl.IndexOf(Constant.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase) >= 0;
-        }
-
         public static bool IsPrintingEnabled { get; set; } = true;
     }
 }
