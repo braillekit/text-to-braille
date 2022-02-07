@@ -18,10 +18,5 @@ Easy Braille Edit（易點雙視）是一套運行於微軟視窗作業系統、
 * 可標示原書頁碼，以及自動計算與列印點字頁碼。
 * 自動偵測新版本並自動透過網際網路下載。
 
-如果您願意協助改進這個工具，歡迎提供建議、或直接修改程式碼（修改完成後請發 pull request）。
 
-## 授權方式
-
-本開源專案採 [MIT 授權](https://github.com/huanlin/EasyBrailleEdit/blob/master/LICENSE.md)。
-
-Copyright (C) 2007-2018 Michael Tsai (蔡煥麟).
+Copyright (c) 2007-2022 Michael Tsai (蔡煥麟).
