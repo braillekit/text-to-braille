@@ -18,13 +18,13 @@ namespace Txt2Brl
         {
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.AppSettings()
-                .WriteTo.RollingFile(@"Logs\log-txt2brl-{Date}.txt")
+                .WriteTo.File(@"Logs\log-txt2brl-.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             string filename = Assembly.GetExecutingAssembly().Location;
             string fileVer = FileVersionInfo.GetVersionInfo(filename).FileVersion;
 
-            Console.WriteLine($"Txt2Brl version {fileVer} Copyright(c) 2007-2018 Michael Tsai.\n");
+            Console.WriteLine($"Txt2Brl version {fileVer} Copyright(c) 2008-2022 Michael Tsai.\n");
 
             CommandLine.Parser.Default.ParseArguments<Options>(args)
                .WithParsed<Options>(opts => RunOptionsAndReturnExitCode(opts));

@@ -45,7 +45,7 @@ namespace EasyBrailleEdit
             numCellsPerLine.Value = AppGlobals.Config.Braille.CellsPerLine;
 
             List<KeyValuePair<string, string>> fileUsages = StrHelper.SplitToKeyValuePairs(
-                AppGlobals.Config.PhraseFiles, PhraseFileNameSeparator, '=');
+                AppGlobals.Config.General.PhraseFiles, PhraseFileNameSeparator, '=');
 
             clbPhraseTbl.Items.Clear();
             AddPhraseFiles(fileUsages);
@@ -125,10 +125,13 @@ namespace EasyBrailleEdit
                 {
                     sb.Remove(sb.Length - 1, 1);
                 }
-                AppGlobals.Config.PhraseFiles = sb.ToString();
 
-                AppGlobals.Config.Braille.LinesPerPage = (int) numLinesPerPage.Value;
-                AppGlobals.Config.Braille.CellsPerLine = (int) numCellsPerLine.Value;                
+                var config = AppGlobals.Config;
+                config.General.PhraseFiles = sb.ToString();
+                config.Braille.LinesPerPage = (int) numLinesPerPage.Value;
+                config.Braille.CellsPerLine = (int) numCellsPerLine.Value;
+                config.Save();
+                
             }
         }
 

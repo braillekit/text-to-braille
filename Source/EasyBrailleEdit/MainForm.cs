@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,9 +19,7 @@ using Huanlin.Windows.Forms;
 using Huanlin.Windows.Sys;
 using Serilog;
 using ScintillaNET;
-using ScintillaNET.FindReplaceTools;
-using System.Net.Mail;
-using System.Net;
+using ScintillaNET_FindReplaceDialog;
 
 namespace EasyBrailleEdit
 {
@@ -47,7 +44,7 @@ namespace EasyBrailleEdit
 
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.AppSettings()
-                .WriteTo.RollingFile(@"Logs\log-main-{Date}.txt")
+                .WriteTo.File(@"Logs\log-main-.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             m_FileRunner = new FileRunner();
@@ -779,7 +776,7 @@ namespace EasyBrailleEdit
         /// <returns>傳回 true 表示更新成功，必須結束程式。</returns>
         private async Task<bool> AutoUpdateAsync()
         {
-            if (!AppGlobals.Config.AutoUpdate)
+            if (!AppGlobals.Config.General.AutoUpdate)
             {
                 return false;
             }
@@ -814,10 +811,10 @@ namespace EasyBrailleEdit
 
         private async Task<bool> DoUpdateAsync(bool autoMode)
         {
-            var updater = new Huanlin.Http.HttpUpdater()
+            var updater = new Huanlin.Common.Http.HttpUpdater()
             {
                 ClientPath = Application.StartupPath,
-                ServerUri = AppGlobals.Config.AutoUpdateFilesUrl,
+                ServerUri = AppGlobals.Config.General.AutoUpdateFilesUrl,
                 ChangeLogFileName = "ChangeLog.txt"
             };
 
@@ -953,20 +950,6 @@ namespace EasyBrailleEdit
             AppGlobals.IsPrintingEnabled = AppGlobals.UserLicense.IsActive;
 
 
-            // 檢查 IP 黑名單
-            var blockedIPList = await LicenseHelper.DownloadBlockedIPListAsync();
-            string externalIP = (await GetExternalIPAsync()).Trim();
-            bool isBlockedIP = blockedIPList.IndexOf(externalIP) >= 0;
-
-            await TrackUserAsync(userLic, externalIP, isBlockedIP);
-
-            if (isBlockedIP)
-            {
-                MsgBoxHelper.ShowError("軟體授權資訊不正確！請洽詢銷售此軟體的零售商，或至易點雙視的臉書專頁詢問。");
-                Application.Exit();
-                return;
-            }
-
             txtErrors.Visible = false;
 
             m_ConvertDialog = new ConversionDialog();
@@ -983,70 +966,6 @@ namespace EasyBrailleEdit
                 {
                     OpenBrailleFileInEditor(args[1]);
                 }      
-            }
-        }
-
-        async Task<string> GetExternalIPAsync()
-        {
-            var webClient = new WebClient();
-            try
-            {
-                return await webClient.DownloadStringTaskAsync("http://icanhazip.com");
-            }
-            catch (Exception ex)
-            {
-                return $"Failed to get external IP: {ex.Message}";
-            }
-            finally
-            {
-                webClient.Dispose();
-            }
-        }
-
-
-        private async Task TrackUserAsync(UserLicenseData userLic, string externalIP, bool isBlocked)
-        {
-            try
-            {
-                if (!LicenseHelper.NeedTrackUser())
-                {
-                    return;
-                }
-
-                var sb = new StringBuilder();
-                sb.AppendLine($"External IP: {externalIP} (Blocked: {isBlocked})");
-                sb.AppendLine($"Computer Name: {Environment.MachineName}");
-                sb.AppendLine($"OS Version: {Environment.OSVersion}");
-                sb.AppendLine($"User Name: {Environment.UserName}");
-                sb.AppendLine($"註冊名稱: {userLic?.CustomerName}");
-                sb.AppendLine($"註冊序號: {userLic?.SerialNumber}");
-
-                var msg = new MailMessage();
-                msg.To.Add("mailsender.tw@gmail.com");
-                msg.From = new MailAddress("noreply@gmail.com", "Huanlin Mail Sender", Encoding.UTF8);
-                /* 上面3個參數分別是發件人地址（可以隨便寫），發件人姓名，編碼*/
-                msg.Subject = "易點雙視 user tracking";//郵件標題
-                msg.SubjectEncoding = System.Text.Encoding.UTF8;//郵件標題編碼
-                msg.Body = sb.ToString();
-                msg.BodyEncoding = Encoding.UTF8;//郵件內容編碼 
-                //msg.Attachments.Add(new Attachment(@"D:\test2.docx"));  //附件
-                msg.IsBodyHtml = false;//是否是HTML郵件 
-
-                var client = new SmtpClient();
-                client.Credentials = new NetworkCredential("mailsender.tw@gmail.com", "m@i1sender2018"); //這裡要填正確的帳號跟密碼
-                client.Host = "smtp.gmail.com"; // 設定smtp Server
-                client.Port = 25; // 設定Port
-                client.EnableSsl = true; // gmail預設開啟驗證
-                await client.SendMailAsync(msg); // 寄出信件
-
-                client.Dispose();
-                msg.Dispose();
-
-                LicenseHelper.SaveTrackUserTime();
-            }
-            catch 
-            {
-                // Keep quiet.
             }
         }
 

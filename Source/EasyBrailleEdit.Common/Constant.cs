@@ -5,21 +5,15 @@
         public const string AppName = "EasyBrailleEdit";
         public const string FacebookPageUrl = "https://www.facebook.com/easybraille/";
 
-        public const string UsersLicenseFileUrl = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/forblind/users.lic";
+        public const string DefaultAutoUpdateRootUrl = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/Update4/";
+        public const string DefaultAutoUpdateFilesUrl = DefaultAutoUpdateRootUrl + "UpdateFiles/";
+
         public const string UsersLicenseFileName = "users.lic";
         public const string SerialNumberRegKey = "SerialNumber";
         public const string CustomerNameRegKey = "Customer";
         public const string VersionLicenseRegKey = "VersionLicense";
         public const string ExpiredDateRegKey = "ExpiredDate";
         public const string LastTimeTrackingUser = "LastTimeTrackingUser";
-
-        public const string BlockedIPFileUrl = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/forblind/blockedip.txt";
-
-        public static class ProductBranches
-        {
-            public const string Community = "master";         // 社群版  
-            public const string TaipeiForBlind = "forblind";  // 台北市視障者家長協會
-        }
 
         // 預設一行最大方數
         public const int DefaultCellsPerLine = 40;
@@ -61,11 +55,10 @@
         public const int DefaultPrintTextMarginRight2 = 150;
         public const int DefaultPrintTextMarginBottom2 = 100;
 
+        public const string DefaultPrintTextFontName = "新細明體";
         public const double DefaultPrintTextFontSize = 12;      // 預設明眼字字型大小
         public const double DefaultPrintTextLineHeight = 40.0975;  // 明眼字列高（文字高度+列距）
-        public const double DefaultPrintTextLineSpace = 20.9;   // 預設明眼字列距
-
-        public const string DefaultAutoUpdateFilesUrl = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/forblind/UpdateFiles/";
+        public const double DefaultPrintTextLineSpace = 20.9;   // 預設明眼字列距      
 
         // 與轉點字規則有關的常數
         public const string DefaultNoSpaceAfterTheseCharacters = "「『“‘…";

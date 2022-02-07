@@ -253,7 +253,7 @@ namespace EasyBrailleEdit.DualEdit
             RefreshRowNumbers();    // 重新填列號
 
             int endRow = row + brLines.Count * 3 - 1;
-            var range = new Range(row, grid.FixedColumns, endRow, grid.ColumnsCount - grid.FixedColumns);
+            var range = new SourceGrid.Range(row, grid.FixedColumns, endRow, grid.ColumnsCount - grid.FixedColumns);
             grid.Selection.SelectRange(range, true);
         }
 
@@ -309,7 +309,7 @@ namespace EasyBrailleEdit.DualEdit
             }
             else
             {
-                var range = new Range(row, col, row + 2, col + wordList.GetCellCount() - 1);
+                var range = new SourceGrid.Range(row, col, row + 2, col + wordList.GetCellCount() - 1);
                 GridFocusCell(row, col);
                 grid.Selection.SelectRange(range, true);
             }
@@ -1139,7 +1139,7 @@ namespace EasyBrailleEdit.DualEdit
                 }
 
                 grid.Selection.ResetSelection(false);
-                grid.Selection.SelectRange(new Range(startRow, startCol, endRow + 2, endCol), true);
+                grid.Selection.SelectRange(new SourceGrid.Range(startRow, startCol, endRow + 2, endCol), true);
             }
             else // 選取單行中的全部或部分文字
             {
@@ -1158,7 +1158,7 @@ namespace EasyBrailleEdit.DualEdit
                     // end column 有調整過。
                     endCol = col;
                     grid.Selection.ResetSelection(true);
-                    grid.Selection.SelectRange(new Range(startRow, startCol, endRow + 2, endCol), true);
+                    grid.Selection.SelectRange(new SourceGrid.Range(startRow, startCol, endRow + 2, endCol), true);
                 }
             }
             return true;
@@ -1224,7 +1224,7 @@ namespace EasyBrailleEdit.DualEdit
 
         public void SelectAll(Grid grid)
         {
-            var range = new Range(grid.FixedRows, grid.FixedColumns, grid.RowsCount - 1, grid.ColumnsCount - grid.FixedColumns);
+            var range = new SourceGrid.Range(grid.FixedRows, grid.FixedColumns, grid.RowsCount - 1, grid.ColumnsCount - grid.FixedColumns);
             grid.Selection.SelectRange(range, true);
         }
 

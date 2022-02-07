@@ -1,17 +1,20 @@
 
-1.確保 ChangeLog.txt 已經編寫完成，而且所有改變皆已 commit。
+1. 確保 ChangeLog.txt 已經編寫完成，而且所有改變皆已 commit。
 
-2.建立 tag，例如： "v3.12.0"。
+2. 建立 git tag，例如："4.1.0"，並且推送至 git server。
 
-3.在專案原始碼的根目錄下執行 PowerShell 命令：
+3. 在專案原始碼的根目錄下執行命令：
 
-  .\build deploy
+  flubu compile
   
-4.到 UpdateFiles 資料夾下修改 Update.txt 內容，確保版號正確。
+4. 執行 output 資料夾底下的 combine.bat。
 
-5.把 UpdateFiles 資料夾下的檔案 commit 至 GitHub 的 "forblind"
-  分支底下的 UpdateFiles 資料夾。  
+5. 把 Combined\Release\ 資料夾底下的檔案手動揀選需要的檔案，並複製到 UpdateFiles 資料夾。
+
+6. 到 UpdateFiles 資料夾下修改 Update.txt 內容，確保版號正確。
+
+5.把 UpdateFiles 資料夾下的檔案 commit 至 GitHub 專案的 "Update4" 分支的 UpdateFiles 資料夾。  
   repo URL:
-  https://github.com/huanlin/easy-braille-edit/tree/forblind
+  https://github.com/huanlin/easy-braille-edit/tree/Update4
 
 6.在本機測試能否自動更新。

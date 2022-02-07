@@ -1,39 +1,42 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Authors>Michael Tsai</Authors>
     <Company>Michael Tsai</Company>
-    <Copyright>Copyright (c) 2008-2018 Michael Tsai</Copyright>
+    <Copyright>Copyright (c) 2008-2022 Michael Tsai (蔡煥麟)</Copyright>
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\Output</OutputPath>
+    <Version></Version>
+    <Nullable>disable</Nullable>
+    <Description>TxtBrl 是易點雙視（EasyBraillEdit）的命令列工具，用途是將文字檔案轉換成點字檔案。</Description>
+    <BaseOutputPath>..\..\Output\Txt2Brl</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.6.0" />
-    <PackageReference Include="Config.Net" Version="4.14.14" />
-    <PackageReference Include="Huanlin.Common" Version="4.5.11" />
-    <PackageReference Include="NChinese" Version="0.5.2" />
-    <PackageReference Include="Serilog" Version="2.9.0" />
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
+    <PackageReference Include="Huanlin.Common" Version="5.1.0" />
+    <PackageReference Include="MinVer" Version="2.5.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NChinese" Version="0.7.0" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.Settings.AppSettings" Version="2.2.2" />
-    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
-    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.1-dev-00771" />
-    <PackageReference Include="SourceGrid" Version="4.4.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BrailleToolkit\BrailleToolkit.csproj" />
     <ProjectReference Include="..\EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
 
   <ItemGroup>

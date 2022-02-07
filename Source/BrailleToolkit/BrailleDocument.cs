@@ -209,42 +209,8 @@ namespace BrailleToolkit
                 throw new FileNotFoundException("檔案不存在: " + filename);
             }
 
-            BrailleDocument brDoc = null;
-
-            // 舊版的 .btx 反序列化.
-            if (Path.GetExtension(filename).Equals(".btx", StringComparison.CurrentCultureIgnoreCase))
-            {
-                using (FileStream fs = new FileStream(filename, FileMode.Open))
-                {
-                    BinaryReader br = new BinaryReader(fs);
-
-                    int fileVersion = br.ReadInt32();
-                    int lineCount = br.ReadInt32();
-                    int reserved1 = br.ReadInt32();
-                    int reserved2 = br.ReadInt32();
-
-                    IFormatter fmter = new BinaryFormatter();
-                    brDoc = (BrailleDocument)fmter.Deserialize(fs);
-                    br.Close();
-
-                    // 設定新增的屬性：BrailleWord.IsPolyphnic。等到 .btx 正式除役，這裡就不需要了。
-                    foreach (BrailleLine brLine in brDoc.Lines)
-                    {
-                        foreach (BrailleWord brWord in brLine.Words)
-                        {
-                            if (!String.IsNullOrEmpty(brWord.PhoneticCode))
-                            {
-                                brWord.IsPolyphonic = ZhuyinQueryHelper.IsPolyphonic(brWord.Text);
-                            }
-                        }
-                    }
-
-                    return brDoc;
-                }
-            }
-
             string jsonStr = File.ReadAllText(filename);
-            brDoc = JsonHelper.Deserialize<BrailleDocument>(jsonStr);
+            BrailleDocument brDoc = JsonHelper.Deserialize<BrailleDocument>(jsonStr);
             FixInvalidLines(brDoc);
             return brDoc;
         }
@@ -271,40 +237,6 @@ namespace BrailleToolkit
         public void SaveBrailleFile(string filename)
         {
             UpdateTitlesLineIndex();
-
-            // 舊版的 .btx 序列化.
-            if (Path.GetExtension(filename).Equals(".btx", StringComparison.CurrentCultureIgnoreCase))
-            {
-                // 版本相容處理
-                foreach (BrailleLine brLine in this.Lines)
-                {
-                    foreach (BrailleWord brWord in brLine.Words)
-                    {
-                        if (!String.IsNullOrEmpty(brWord.PhoneticCode))
-                        {
-                            brWord.PhoneticCodes.Clear();
-                            brWord.PhoneticCodes.Add(brWord.PhoneticCode);
-                        }
-                    }
-                }
-
-                using (FileStream fs = new FileStream(filename, FileMode.Create))
-                {
-                    BinaryWriter bw = new BinaryWriter(fs);
-
-                    bw.Write(1000);                 // 文件版本: 1.0.0.0
-                    bw.Write(this.LineCount);		// 寫入列數
-                    bw.Write(0);                    // 保留未用
-                    bw.Write(0);                    // 保留未用
-
-                    IFormatter fmter = new BinaryFormatter();
-                    fmter.Serialize(fs, this);
-
-                    bw.Flush();
-                    bw.Close();
-                }
-                return;
-            }
 
             string jsonStr = JsonHelper.Serialize<BrailleDocument>(this);
             File.WriteAllText(filename, jsonStr);
