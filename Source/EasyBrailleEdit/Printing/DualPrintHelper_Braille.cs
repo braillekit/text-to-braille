@@ -94,7 +94,7 @@ namespace EasyBrailleEdit
         {
             int lineCnt = 0;
             int pageNum = 0;			// 程式內部處理的頁碼
-            int maxOutputPage = VersionLicense.GetMaxOutputPage(AppGlobals.UserLicense.VersionLicense);
+            int maxOutputPage = AppGlobals.UserLicense.GetMaxPages();
 
             BrailleLine brLine;
             StringBuilder sb = new StringBuilder();

@@ -78,7 +78,7 @@ namespace EasyBrailleEdit.License
         /// <returns></returns>
         public static async Task<bool> ValidateAndSaveUseLicenseAsync(UserLicenseData userLic)
         {
-            if (userLic == null || userLic.IsEmpty())
+            if (userLic == null || userLic.IsEmpty)
                 return false;
 
             // 下載註冊資訊檔。
@@ -107,7 +107,7 @@ namespace EasyBrailleEdit.License
 
                 if (string.IsNullOrWhiteSpace(sn) || sn != userLic.SerialNumber || DateTime.Now > expiredDate)
                     continue;
-                if (!VersionLicense.IsValid(versionFlag))
+                if (!ProductVersionType.IsValid(versionFlag))
                     continue;
 
                 // Overwrite 使用期限

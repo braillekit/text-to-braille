@@ -69,10 +69,13 @@ namespace EasyBrailleEdit
 
         private void DoExportBrailleFile()
         {
-            // 保護措施
-            if (!AppGlobals.IsPrintingEnabled)
+            if (AppGlobals.UserLicense.IsExpired)
             {
-                return;
+                MsgBoxHelper.ShowInfo(Constant.TrialExpiredMessage);
+            }
+            else if (AppGlobals.UserLicense.IsTrial)
+            {
+                MsgBoxHelper.ShowInfo(Constant.TrialVersionMessage);
             }
 
             int startPageNum = 1;

@@ -20,10 +20,13 @@ namespace EasyBrailleEdit.DualEdit
 
         public void ViewBraille()
         {
-            // 保護措施
-            if (!AppGlobals.IsPrintingEnabled)
+            if (AppGlobals.UserLicense.IsExpired)
             {
-                return;
+                MsgBoxHelper.ShowInfo(Constant.TrialExpiredMessage);
+            }
+            else if (AppGlobals.UserLicense.IsTrial)
+            {
+                MsgBoxHelper.ShowInfo(Constant.TrialVersionMessage);
             }
 
             var exporter = new BrailleDataExporter(

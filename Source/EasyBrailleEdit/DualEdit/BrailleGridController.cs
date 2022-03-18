@@ -536,17 +536,14 @@ namespace EasyBrailleEdit.DualEdit
                 int row = FixedRows;
                 int pageCount = 0;
                 int linesPerPage = GetLinesPerPageForGrid();
-                int maxOutputPage = VersionLicense.GetMaxOutputPage(AppGlobals.UserLicense.VersionLicense);
+                int maxOutputPage = AppGlobals.UserLicense.GetMaxPages();
                 foreach (BrailleLine brLine in brDoc.Lines)
                 {
-                    if (maxOutputPage > 0)
+                    if (pageCount >= maxOutputPage)
                     {
-                        if (pageCount >= maxOutputPage)
-                        {
-                            busyForm.Close();
-                            MsgBoxHelper.ShowInfo($"抱歉！家用版最多只能編輯和列印 {maxOutputPage} 頁，超出頁數的資料不會顯示出來。");
-                            break;
-                        }
+                        busyForm.Close();
+                        MsgBoxHelper.ShowInfo($"您目前使用之版本的頁數限制為 {maxOutputPage} 頁，超出頁數的資料不會顯示或列印出來。");
+                        break;
                     }
 
                     if (brLine.CellCount < 1)

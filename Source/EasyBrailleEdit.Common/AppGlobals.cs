@@ -75,7 +75,5 @@ namespace EasyBrailleEdit.Common
 			}
 			return path;
 		}
-
-        public static bool IsPrintingEnabled { get; set; } = true;
     }
 }
