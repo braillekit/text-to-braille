@@ -70,6 +70,13 @@ namespace EasyBrailleEdit
         {
             m_TotalPages = AppGlobals.CalcTotalPages(m_BrDoc.Lines.Count, m_PrintOptions.LinesPerPage, m_PrintOptions.PrintPageFoot);
 
+            // 套用版本授權限制
+            int maxPages = AppGlobals.UserLicense.GetMaxPages();
+            if (m_TotalPages > maxPages)
+            {
+                m_TotalPages = maxPages;
+            }
+
             if (m_PrintOptions.AllPages)    // 列印全部?
             {
                 m_PrintOptions.FromPage = 1;
@@ -135,14 +142,6 @@ namespace EasyBrailleEdit
 
         void BrailleText_BeginPrint(object sender, PrintEventArgs e)
         {
-            // 保護措施
-            if (!AppGlobals.IsPrintingEnabled)
-            {
-                e.Cancel = true;
-                return;
-            }
-
-
             // 注意: 預覽時以及列印至印表機時都會觸發此事件，這裡應避免重複配置大量資源。
 
             if (m_PreviewOnly && e.PrintAction != PrintAction.PrintToPreview)
@@ -478,7 +477,7 @@ namespace EasyBrailleEdit
             m_PrintedPageCount++;
 
             // 檢查是否超出此授權版本所能列印的最大頁數。
-            int maxOutputPage = VersionLicense.GetMaxOutputPage(AppGlobals.UserLicense.VersionLicense);
+            int maxOutputPage = AppGlobals.UserLicense.GetMaxPages();
             if (maxOutputPage > 0 && m_PrintedPageCount >= maxOutputPage)
             {
                 e.HasMorePages = false;

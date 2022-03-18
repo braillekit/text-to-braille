@@ -259,14 +259,20 @@ namespace EasyBrailleEdit
             prn.PrintText(true);
         }
 
+        private void ShowTrialVersionMessage()
+        {
+            if (AppGlobals.UserLicense.IsExpired)
+            {
+                MsgBoxHelper.ShowInfo(Constant.TrialExpiredMessage);
+            }
+            else if (AppGlobals.UserLicense.IsTrial)
+            {
+                MsgBoxHelper.ShowInfo(Constant.TrialVersionMessage);
+            }
+        }
+
         private void btnPrintBraille_Click(object sender, EventArgs e)
         {
-            // 保護措施
-            if (!AppGlobals.IsPrintingEnabled)
-            {
-                return;
-            }
-
             if (m_BrDoc.Lines.Count < 1)
             {
                 MsgBoxHelper.ShowError("沒有資料可供列印!");
@@ -293,6 +299,8 @@ namespace EasyBrailleEdit
                 }
             }
 
+            ShowTrialVersionMessage();
+    
             PrintOptions prnOpt = GetPrintOptions();
             if (prnOpt == null)
                 return;
@@ -313,6 +321,8 @@ namespace EasyBrailleEdit
                 MsgBoxHelper.ShowError("尚未選擇印表機!");
                 return;
             }
+
+            ShowTrialVersionMessage();
 
             PrintOptions prnOpt = GetPrintOptions();
             if (prnOpt == null)

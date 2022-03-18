@@ -910,15 +910,12 @@ namespace EasyBrailleEdit
 
 
             var userLic = LicenseHelper.GetUserLicenseData();
+            AppGlobals.UserLicense = userLic;
 
-            if (userLic.IsExpired())
-            {
-                MsgBoxHelper.ShowInfo("試用期限已過，如果您需要繼續使用這套軟體，請至\r\n https://www.facebook.com/easybraille/ \r\n 洽詢購買事宜。謝謝！");
-                Application.Exit();
-                return;
+            if (userLic.IsExpired)
+            {                
+                MsgBoxHelper.ShowInfo(Constant.TrialExpiredMessage);
             }
-            Application.DoEvents();
-
 
             bool isLicenseValid = await LicenseHelper.ValidateAndSaveUseLicenseAsync(userLic);
 
@@ -930,7 +927,7 @@ namespace EasyBrailleEdit
                 userLic = LicenseHelper.EnterLicenseData();
                 if (userLic == null)
                 {
-                    MsgBoxHelper.ShowWarning("沒有軟體授權資料，將無法列印和輸出雙視文件，且試用期限為 30 天。");
+                    MsgBoxHelper.ShowWarning(Constant.TrialVersionMessage);
                 }
                 else
                 {
@@ -938,8 +935,7 @@ namespace EasyBrailleEdit
                     if (isLicensed)
                     {
                         LicenseHelper.SaveUserLicenseData(userLic);
-                        AppGlobals.IsPrintingEnabled = true;
-                        MsgBoxHelper.ShowInfo("註冊成功! 版本：" + VersionLicense.GetName(AppGlobals.UserLicense.VersionLicense));
+                        MsgBoxHelper.ShowInfo("註冊成功! 版本：" + AppGlobals.UserLicense.GetProductVersionName());
                     }
                     else
                     {
@@ -947,8 +943,11 @@ namespace EasyBrailleEdit
                     }
                 }                
             }
-            AppGlobals.IsPrintingEnabled = AppGlobals.UserLicense.IsActive;
 
+            if (AppGlobals.UserLicense.IsNearExpiration(beforeDays: 7))
+            {
+                MsgBoxHelper.ShowInfo($"提醒您：試用期限將於 {AppGlobals.UserLicense.ExpiredDate: yyyy/MM/dd} 到期。");
+            }
 
             txtErrors.Visible = false;
 

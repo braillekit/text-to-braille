@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BrailleToolkit.Converters;
 using BrailleToolkit.Helpers;
+using EasyBrailleEdit.Common;
 
 namespace BrailleToolkit
 {
@@ -50,7 +51,7 @@ namespace BrailleToolkit
 
             string brailleText = GetAllBrailleText(out endPageNumber);
 
-            Encoding enc = Encoding.GetEncoding("BIG5");
+            Encoding enc = Encoding.UTF8;
             File.WriteAllText(fileName, brailleText, enc);
 
             return endPageNumber;
@@ -103,6 +104,8 @@ namespace BrailleToolkit
 
             int realLinesPerPage = LinesPerPage;
 
+            int maxPages = AppGlobals.UserLicense.GetMaxPages();
+
             if (NeedPageFooter)  // 如需輸出頁碼，每頁可印列數便少一列。
             {
                 realLinesPerPage--;
@@ -118,6 +121,11 @@ namespace BrailleToolkit
             // 準備輸出至點字印表機的資料
             while (lineIdx < _brDoc.LineCount)
             {
+                if (pageNum >= maxPages) // 試用版的列印限制
+                {
+                    break;
+                }
+
                 brLine = _brDoc.Lines[lineIdx];
                 bool isFirstLineOfCurrentPage = lineCnt % realLinesPerPage == 0;
                 BrailleDocumentHelper.SetBeginEndOrgPageNumber(
@@ -136,8 +144,6 @@ namespace BrailleToolkit
                 {
                     if (NeedPageFooter)  // 是否要印頁尾？
                     {
-                        pageNum++;
-
                         sb.Append(BrailleDocumentHelper.GetBraillePageFoot(
                             _brDoc, lineIdx, displayedPageNum, beginOrgPageNum, endOrgPageNum));
 
@@ -146,6 +152,7 @@ namespace BrailleToolkit
                         AddPageBreak(sb);
                     }
 
+                    pageNum++;
                     displayedPageNum++;
 
                     // 每一頁開始列印時，都要把上一頁的終止原書頁碼指定給本頁的起始原書頁碼。

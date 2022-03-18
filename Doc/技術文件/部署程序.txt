@@ -1,7 +1,8 @@
+部署程序
 
-1. 確保 ChangeLog.txt 已經編寫完成，而且所有改變皆已 commit。
+1. 確保 ChangeLog.txt 已經編寫完成，而且所有改變皆已 commit，並且合併至 main branch。
 
-2. 建立 git tag，例如："4.1.0"，並且推送至 git server。
+2. 在 main branch 建立 git tag，例如："4.1.0"，並且推送至 git server。
 
 3. 在專案原始碼的根目錄下執行命令：
 
