@@ -24,3 +24,8 @@
 6.在本機測試能否自動更新。
 
 7. 使用 InnoSetup 製作安裝程式：Setup\InnoSetup\iss。
+
+注意：易點雙視無法在 Windows 11 Sandbox 環境中正常執行，應用程式載入時會發生錯誤：
+     「找不到指定的模組。」
+     但是在一般 Windows 10 或 Windows 11 環境上執行則沒有問題。
+     參見：https://www.huanlintalk.com/2022/02/scintillanet-load-failed.html

@@ -30,6 +30,10 @@
     <PackageReference Include="fernandreu.ScintillaNET" Version="4.2.0" />
     <PackageReference Include="Huanlin.Common" Version="5.1.0" />
     <PackageReference Include="Huanlin.Windows" Version="5.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MinVer" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -308,6 +312,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="App.config">
+      <TransformOnBuild>true</TransformOnBuild>
+    </None>
     <None Update="app.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
