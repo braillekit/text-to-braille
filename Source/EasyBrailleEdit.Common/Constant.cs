@@ -9,6 +9,7 @@
         public const string DefaultAutoUpdateFilesUrl = DefaultAutoUpdateRootUrl + "UpdateFiles/";
 
         public const string UsersLicenseFileName = "users.lic";
+        public const string AppRegistryRoot = @"Software\Michael Tsai\EasyBrailleEdit";
         public const string SerialNumberRegKey = "SerialNumber";
         public const string CustomerNameRegKey = "Customer";
         public const string VersionLicenseRegKey = "VersionLicense";

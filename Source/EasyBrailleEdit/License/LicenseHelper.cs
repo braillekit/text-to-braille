@@ -17,7 +17,7 @@ namespace EasyBrailleEdit.License
     {
         private static RegistryKey GetAppRegKey()
         {
-            return Registry.CurrentUser.CreateSubKey(@"Software\Michael Tsai\EasyBrailleEdit");
+            return Registry.CurrentUser.CreateSubKey(Constant.AppRegistryRoot);
         }
 
         public static UserLicenseData GetUserLicenseData()
