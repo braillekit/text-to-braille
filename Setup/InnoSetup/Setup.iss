@@ -38,6 +38,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "Files\LICENSE.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\ReleaseNote.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\app.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\ChangeLog.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\AppConfig.Default.ini"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\zh-Hant\System.Web.Services.Description.resources.dll"; DestDir: "{app}\zh-Hant"; Flags: ignoreversion
