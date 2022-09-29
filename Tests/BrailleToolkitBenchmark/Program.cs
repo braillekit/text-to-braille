@@ -1,4 +1,13 @@
 ﻿
+using BenchmarkDotNet.Running;
+using BenchmarkDotNet.Configs;
 using BrailleToolkitBenchmark;
+using BenchmarkDotNet.Loggers;
 
-BenchmarkDotNet.Running.BenchmarkRunner.Run<BrailleProcessorBenchmarks>();
+BenchmarkRunner.Run<BrailleProcessorBenchmarks>();
+
+/*
+var bm = new BrailleProcessorBenchmarks();
+var s = bm.ConvertLineTestChinese();
+Console.WriteLine(s);
+*/

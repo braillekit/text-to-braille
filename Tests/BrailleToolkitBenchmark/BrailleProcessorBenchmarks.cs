@@ -12,6 +12,7 @@ namespace BrailleToolkitBenchmark
     //[SimpleJob(RuntimeMoniker.Net60)]
     //[SimpleJob(RuntimeMoniker.Net70)]
     [MemoryDiagnoser]
+    [UnicodeConsoleLogger]
     public class BrailleProcessorBenchmarks
     {
         BrailleProcessor processor = BrailleProcessor.GetInstance();
@@ -20,13 +21,13 @@ namespace BrailleToolkitBenchmark
         public string ConvertLineTestChinese()
         {
             // 測試明眼字內含注音符號、冒號後面跟著"我"、以及引號、句號。
-            string line = "ㄅˇ你說：我是誰？　我說：「我是神。」";
-            string expected = "ㄅˇ你說： 我是誰？　我說：「我是神。」";
+            string line = "ㄅˇ我是誰？　我說：「我是神。」";
+            string expected = "ㄅˇ我是誰？　我說：「我是神。」";
             BrailleLine brLine = processor.ConvertLine(line);
             string actual = brLine.ToString();
             if (actual != expected)
             {
-                Console.WriteLine("轉換失敗!");
+                Console.WriteLine($"'{expected}' <> '{actual}'");
             }
             return actual;
         }
