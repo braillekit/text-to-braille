@@ -5,7 +5,7 @@ using BrailleToolkit.Data;
 
 namespace BrailleToolkit.Converters
 {
-	public sealed class PhoneticConverter : WordConverter
+	public class PhoneticConverter : WordConverter
 	{
 		private PhoneticBrailleTable m_Table;
 

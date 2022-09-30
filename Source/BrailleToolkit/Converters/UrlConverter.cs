@@ -12,7 +12,7 @@ namespace BrailleToolkit.Converters
     /// <summary>
     /// 處理英數字的點字轉換。
     /// </summary>
-    public sealed class UrlConverter : WordConverter
+    public class UrlConverter : WordConverter
     {
         private UrlBrailleTable m_Table;
         private BrailleProcessor _processor;

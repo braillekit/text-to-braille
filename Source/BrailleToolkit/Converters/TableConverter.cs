@@ -6,7 +6,7 @@ using BrailleToolkit.Data;
 
 namespace BrailleToolkit.Converters
 {
-	public sealed class TableConverter : WordConverter
+	public class TableConverter : WordConverter
 	{
 		private TableBrailleTable m_Table;
 
