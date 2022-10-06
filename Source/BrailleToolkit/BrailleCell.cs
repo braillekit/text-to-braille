@@ -28,7 +28,7 @@ namespace BrailleToolkit
     /// </summary>
     [Serializable]
     [DataContract]
-    public class BrailleCell
+    public sealed class BrailleCell
     {
         private static BrailleCell[] m_AllCells;
 

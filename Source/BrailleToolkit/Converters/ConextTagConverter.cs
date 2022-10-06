@@ -14,7 +14,7 @@ namespace BrailleToolkit.Converters
     /// 這樣的話，後續的轉換器在碰到半形的小於、大於符號時，就可以當作是一般的
     /// 字元處理（由 EnglishBrailleConverter 處理）。
     /// </summary>
-    public class ContextTagConverter : WordConverter
+    public sealed class ContextTagConverter : WordConverter
     {
         public ContextTagConverter()
             : base()

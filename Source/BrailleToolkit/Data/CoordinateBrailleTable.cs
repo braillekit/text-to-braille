@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace BrailleToolkit.Data
 {
-    internal class CoordinateBrailleTable : XmlBrailleTable
+    internal sealed class CoordinateBrailleTable : XmlBrailleTable
     {
         private static CoordinateBrailleTable m_Instance = null;
 

@@ -7,7 +7,7 @@ using BrailleToolkit.Helpers;
 
 namespace BrailleToolkit.Tags
 {
-    internal class TableSingleLineContextTag : GenericContextTag
+    internal sealed class TableSingleLineContextTag : GenericContextTag
     {
         const string TopLine = "▔";
         const string BottomLine = "▁";

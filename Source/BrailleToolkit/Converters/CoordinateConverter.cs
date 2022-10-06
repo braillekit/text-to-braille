@@ -5,7 +5,7 @@ using BrailleToolkit.Data;
 
 namespace BrailleToolkit.Converters
 {
-    public class CoordinateConverter : WordConverter
+    public sealed class CoordinateConverter : WordConverter
     {
         private CoordinateBrailleTable m_Table;
 

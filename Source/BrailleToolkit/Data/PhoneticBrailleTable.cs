@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BrailleToolkit.Data
 {
-	internal class PhoneticBrailleTable : XmlBrailleTable
+	internal sealed class PhoneticBrailleTable : XmlBrailleTable
 	{
 		private static PhoneticBrailleTable m_Instance = null;
 

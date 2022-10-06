@@ -14,7 +14,7 @@ namespace BrailleToolkit.Data
 	/// <summary>
 	/// 從 XML 檔案讀取點字對照表，並提供搜尋功能。
 	/// </summary>
-	public class XmlBrailleTable : BrailleTableBase
+	public sealed class XmlBrailleTable : BrailleTableBase
 	{
 		private string m_FileName;
 		private bool m_Loaded;

@@ -59,7 +59,7 @@ namespace BrailleToolkit
     /// 1. 所有 exception 訊息會存入 ErrorMessage 屬性。
     /// 2. 所有無法轉換的字元會丟到 InvalidChars 屬性。
     /// </summary>
-    public class BrailleProcessor
+    public sealed class BrailleProcessor
     {
         private static BrailleProcessor s_Processor;
 

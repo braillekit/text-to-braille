@@ -11,7 +11,7 @@ namespace BrailleToolkit.Converters
     /// <summary>
     /// 點字碼轉換器。用來將點字碼轉換成可輸出至點字印表機和「超點」點字觸摸器的 ASCII 字元。
     /// </summary>
-    public class BrailleCharConverter
+    public sealed class BrailleCharConverter
     {
         private static Dictionary<string, string> m_CharTable;
 

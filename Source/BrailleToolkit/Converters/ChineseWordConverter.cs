@@ -12,7 +12,7 @@ namespace BrailleToolkit.Converters
     /// <summary>
     /// 中文點字轉換器。
     /// </summary>
-    public class ChineseWordConverter : WordConverter
+    public sealed class ChineseWordConverter : WordConverter
     {
         private ChineseBrailleTable _brailleTable;
         private BrailleProcessor _processor;

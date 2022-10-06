@@ -11,7 +11,7 @@ namespace BrailleToolkit.Converters
     /// <summary>
     /// 點字字型轉換器。用來將點字碼轉換成點字字型對應的 ASCII 字元。
     /// </summary>
-    public class BrailleFontConverter
+    public sealed class BrailleFontConverter
     {
         private static Hashtable m_FontTable;
 
