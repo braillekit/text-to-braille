@@ -15,7 +15,7 @@ namespace BrailleToolkit
     /// 此類別可用來將一串明眼字轉換成點字，並保存於 BrailleLine 物件中。
     /// 此類別不做格式化（斷行、段落編排），僅適用於單行字串的轉換，而不適合用來轉換包含多行文字的文件。
     /// </summary>
-    public class TextToBrailleConverter
+    public sealed class TextToBrailleConverter
     {
         public BrailleProcessor Processor { get; }
         public BrailleDocument Doc { get; }

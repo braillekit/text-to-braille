@@ -21,7 +21,7 @@ namespace BrailleToolkit
         public int CharIndex { get; set; }      // 第幾個字元
     }
 
-    public class ConversionFailedEventArgs : EventArgs
+    public sealed class ConversionFailedEventArgs : EventArgs
     {
         public string OriginalText { get; private set; }
 
@@ -41,7 +41,7 @@ namespace BrailleToolkit
         }
     }
 
-    public class TextConvertedEventArgs : EventArgs
+    public sealed class TextConvertedEventArgs : EventArgs
     {
         internal void SetArgValues(int lineNum, string text)
         {

@@ -9,7 +9,7 @@ namespace BrailleToolkit
     /// <summary>
     /// 情境標籤管理員。
     /// </summary>
-    public class ContextTagManager
+    public sealed class ContextTagManager
     {
         private Dictionary<string, IContextTag> _tags;
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EasyBrailleEdit.Common.Config.Sections
 {
-    public record GeneralSection
+    public sealed record GeneralSection
     {
         public const string Name = "General";
 

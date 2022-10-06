@@ -15,7 +15,7 @@ namespace BrailleToolkit
     /// </summary>
     [Serializable]
     [DataContract]
-    public class BraillePageTitle : ICloneable, IComparable
+    public sealed class BraillePageTitle : ICloneable, IComparable
     {
         [DataMember(Name = "TitleLine")]
         private BrailleLine m_TitleLine;

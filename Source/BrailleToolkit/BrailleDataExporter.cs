@@ -14,7 +14,7 @@ namespace BrailleToolkit
     /// 此類別的程式碼，最初是從 DualPrintHelper_Braille.cs 中複製過來，因為匯出點字檔跟
     /// 列印點字的處理方式很接近，只有某些字元需要替換掉（參閱 FixBrailleDataForWCBE 方法）。
     /// </summary>
-    public class BrailleDataExporter
+    public sealed class BrailleDataExporter
     {
         const string NewLine = "\n";
         const string NewPage = "\f";

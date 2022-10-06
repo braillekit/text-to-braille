@@ -11,7 +11,7 @@ namespace EasyBrailleEdit.Common.Config
     /// <summary>
     /// 此類別提供了應用程式組態檔的載入與儲存。
     /// </summary>
-    public class AppConfig
+    public sealed class AppConfig
     {
         private const string IniFileName = "AppConfig.ini";
         private const string IniFileNameDefault = "AppConfig.Default.ini";

@@ -20,7 +20,7 @@ namespace BrailleToolkit
     /// </summary>
     [Serializable]
     [DataContract]
-    public class BrailleDocument
+    public sealed class BrailleDocument
     {
         [DataMember(Name = "Lines")]
         private List<BrailleLine> m_Lines;

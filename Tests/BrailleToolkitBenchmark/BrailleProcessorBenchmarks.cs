@@ -16,20 +16,13 @@ namespace BrailleToolkitBenchmark
     public class BrailleProcessorBenchmarks
     {
         BrailleProcessor processor = BrailleProcessor.GetInstance();
-    
+
         [Benchmark]
         public string ConvertLineTestChinese()
         {
-            // 測試明眼字內含注音符號、冒號後面跟著"我"、以及引號、句號。
-            string line = "ㄅˇ我是誰？　我說：「我是神。」";
-            string expected = "ㄅˇ我是誰？　我說：「我是神。」";
-            BrailleLine brLine = processor.ConvertLine(line);
-            string actual = brLine.ToString();
-            if (actual != expected)
-            {
-                Console.WriteLine($"'{expected}' <> '{actual}'");
-            }
-            return actual;
+            var brDoc = new BrailleDocument(processor, 32);
+            brDoc.Convert("《湯姆歷險記》（英語：The Adventures of Tom Sawyer）是一部美國著名的兒童文學作品 <分數>1/2</分數>");
+            return brDoc.GetAllText();
         }
     }
 }

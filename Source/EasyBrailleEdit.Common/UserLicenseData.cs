@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EasyBrailleEdit.Common
 {
-    public record UserLicenseData
+    public sealed record UserLicenseData
     {
         public bool IsActive { get; set; }
         public string CustomerName { get; set; }

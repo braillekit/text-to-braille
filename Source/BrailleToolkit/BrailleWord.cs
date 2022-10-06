@@ -23,7 +23,7 @@ namespace BrailleToolkit
     /// </summary>
     [Serializable]
     [DataContract]
-    public class BrailleWord
+    public sealed class BrailleWord
     {
         public static BrailleWord BlankWord { get; } = NewBlank();
 

@@ -9,7 +9,7 @@ namespace BrailleToolkit
 {
     [Serializable]
     [DataContract]
-    public class BrailleCellList
+    public sealed class BrailleCellList
     {
         private List<BrailleCell> m_Cells;
 

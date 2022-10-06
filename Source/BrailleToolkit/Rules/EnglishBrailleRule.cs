@@ -6,7 +6,7 @@ using NChinese;
 
 namespace BrailleToolkit.Rules
 {
-    internal class EnglishBrailleRule
+    internal sealed class EnglishBrailleRule
     {
         private EnglishBrailleRule() { }
 

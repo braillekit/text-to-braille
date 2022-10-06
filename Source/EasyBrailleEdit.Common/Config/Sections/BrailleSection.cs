@@ -9,7 +9,7 @@ namespace EasyBrailleEdit.Common.Config.Sections
     /// <summary>
     /// 區段 [Braille]
     /// </summary>
-    public record BrailleSection
+    public sealed record BrailleSection
     {
         public const string Name = "Braille";
 
