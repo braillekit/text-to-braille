@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace BrailleToolkit.Data
 {
-	internal sealed class UrlBrailleTable : XmlBrailleTable
+	internal class UrlBrailleTable : XmlBrailleTable
 	{
         private static UrlBrailleTable m_Instance = null;
 
