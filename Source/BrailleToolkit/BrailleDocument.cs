@@ -42,6 +42,11 @@ namespace BrailleToolkit
         [DataMember]
         public int StartPageNumber { get; set; }    // 起始頁碼
 
+        static BrailleDocument()
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        }
+
         #region 建構函式
 
         public BrailleDocument()
@@ -103,10 +108,10 @@ namespace BrailleToolkit
             if (m_Processor == null)
                 throw new Exception("在呼叫 BrailleDocument.Load 之前，請先指定 BrailleProcessor。");
 
-            Encoding enc = Encoding.Default;
-            if (FileHelper.IsUTF8Encoded(m_FileName))
+            Encoding enc = Encoding.UTF8;
+            if (!FileHelper.IsUTF8Encoded(m_FileName))
             {
-                enc = Encoding.UTF8;
+                enc = Encoding.GetEncoding(950); // BIG-5
             }
             using (StreamReader sr = new StreamReader(m_FileName, enc, true))
             {

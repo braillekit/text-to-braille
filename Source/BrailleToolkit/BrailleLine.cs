@@ -14,7 +14,7 @@ namespace BrailleToolkit
     /// </summary>
     [Serializable]
     [DataContract]
-    public sealed class BrailleLine : ICloneable
+    public class BrailleLine : ICloneable
     {
         [DataMember]
         public List<BrailleWord> Words { get; protected set; }
