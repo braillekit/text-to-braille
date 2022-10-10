@@ -3,7 +3,7 @@
 
 #define MyProductName "易點雙視 v4"
 #define MyAppName "易點雙視"
-#define MyAppVersion "4.1"
+#define MyAppVersion "4.2"
 #define MyAppPublisher "蔡煥麟"
 #define MyAppExeName "EasyBrailleEdit.exe"
 
