@@ -1,20 +1,20 @@
-﻿易點雙視 v4.1
+﻿易點雙視 v4.2
 
 作業環境需求
 
   - Windows 7 SP1、Windows 8、Windows 10。注意：僅支援 64 位元電腦。
-  - .NET 6
+  - .NET 7
 
 安裝程序
 
 1.確保已經安裝了所有最新的 Windows Updates。
 
-2.下載並安裝 .NET 6 SDK，先以瀏覽器開啟以下網址：
+2.下載並安裝 .NET 7 SDK，先以瀏覽器開啟以下網址：
 
-  https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+  https://dotnet.microsoft.com/en-us/download/dotnet/7.0
 
-  在頁面上找到 SDK 6.x.x，然後點選 Windows 的 x64 下載連結，
-  即可下載 .NET 6 SDK 的安裝程式。下載後直接執行安裝程式。
+  在頁面上找到 SDK 7.x.x，裡面有 Arm64、x64、和 x86 三種版本，請點選
+  x64 下載連結，即可下載 .NET SDK 安裝程式。下載後，直接執行安裝程式。
 
 3.安裝「易點雙視」
 
