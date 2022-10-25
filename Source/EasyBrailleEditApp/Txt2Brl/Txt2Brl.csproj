@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Authors>Michael Tsai</Authors>
+    <Company>Michael Tsai</Company>
+    <Copyright>Copyright (c) 2008-2022 Michael Tsai (蔡煥麟)</Copyright>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Version></Version>
+    <Nullable>disable</Nullable>
+    <Description>TxtBrl 是易點雙視（EasyBraillEdit）的命令列工具，用途是將文字檔案轉換成點字檔案。</Description>
+    <BaseOutputPath>..\..\..\Output\Txt2Brl</BaseOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <PackageReference Include="Huanlin.Common" Version="5.2.0" />
+    <PackageReference Include="MinVer" Version="4.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NChinese" Version="1.1.0" />
+    <PackageReference Include="Serilog" Version="2.12.0" />
+    <PackageReference Include="Serilog.Settings.AppSettings" Version="2.2.2" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BrailleToolkit\BrailleToolkit.csproj" />
+    <ProjectReference Include="..\EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="sample.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
+ 

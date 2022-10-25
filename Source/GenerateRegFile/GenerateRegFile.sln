@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33015.44
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenerateRegFile", "GenerateRegFile.csproj", "{20C10B57-46C8-41BE-BBCB-90E71BB3DED4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LicenseKeyBuilder", "..\LicenseLayout\LicenseKeyBuilder\LicenseKeyBuilder.csproj", "{028CEA00-9887-4691-B9A4-241F7BED3615}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20C10B57-46C8-41BE-BBCB-90E71BB3DED4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20C10B57-46C8-41BE-BBCB-90E71BB3DED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20C10B57-46C8-41BE-BBCB-90E71BB3DED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20C10B57-46C8-41BE-BBCB-90E71BB3DED4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{028CEA00-9887-4691-B9A4-241F7BED3615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{028CEA00-9887-4691-B9A4-241F7BED3615}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{028CEA00-9887-4691-B9A4-241F7BED3615}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{028CEA00-9887-4691-B9A4-241F7BED3615}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E1EC96A-9C27-4F5A-8ABD-BAB7A1143B8D}
+	EndGlobalSection
+EndGlobal
