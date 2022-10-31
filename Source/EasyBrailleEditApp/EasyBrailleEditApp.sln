@@ -39,7 +39,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyBrailleEdit", "EasyBrai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build", "..\..\Build\Build.csproj", "{D95DA0AC-382A-4456-AA40-6B399792AFC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrailleToolkitBenchmark", "..\Tests\BrailleToolkitBenchmark\BrailleToolkitBenchmark.csproj", "{696732E2-7E48-4056-BEB9-FF880EAC89A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrailleToolkitBenchmark", "..\Tests\BrailleToolkitBenchmark\BrailleToolkitBenchmark.csproj", "{696732E2-7E48-4056-BEB9-FF880EAC89A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
