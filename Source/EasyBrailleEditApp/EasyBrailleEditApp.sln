@@ -41,6 +41,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build", "..\..\Build\Build.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrailleToolkitBenchmark", "..\Tests\BrailleToolkitBenchmark\BrailleToolkitBenchmark.csproj", "{696732E2-7E48-4056-BEB9-FF880EAC89A8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrailleTestbed", "BrailleTestbed\BrailleTestbed.csproj", "{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -134,6 +136,18 @@ Global
 		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Release|x64.Build.0 = Release|Any CPU
 		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Release|x86.ActiveCfg = Release|Any CPU
 		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Release|x86.Build.0 = Release|Any CPU
+		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Debug|x64.Build.0 = Debug|Any CPU
+		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Debug|x86.Build.0 = Debug|Any CPU
+		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Release|x64.ActiveCfg = Release|Any CPU
+		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Release|x64.Build.0 = Release|Any CPU
+		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Release|x86.ActiveCfg = Release|Any CPU
+		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,6 +155,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6} = {564D6238-5E27-47A8-82F8-5E924565757A}
 		{696732E2-7E48-4056-BEB9-FF880EAC89A8} = {564D6238-5E27-47A8-82F8-5E924565757A}
+		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB} = {564D6238-5E27-47A8-82F8-5E924565757A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {64A80D6E-27C3-4C07-B706-51A082163D61}

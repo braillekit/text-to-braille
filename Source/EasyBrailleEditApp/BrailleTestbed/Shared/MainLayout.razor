@@ -1,0 +1,39 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider Theme="_myTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar>
+        BlazorApp1
+    </MudAppBar>
+    <MudDrawer Open="true">
+        <NavMenu />
+    </MudDrawer>
+
+    <MudMainContent>
+        <MudContainer Fxied="true">
+            @Body
+        </MudContainer>        
+    </MudMainContent>
+</MudLayout>
+
+@code 
+{
+    private MudTheme _myTheme = new MudTheme()
+        {
+            Typography = new Typography()
+            {
+                Default = new Default()
+                {
+                    FontFamily = new[] { "微軟正黑體", "新細明體", "Helvetica", "Arial", "sans-serif" }
+                }
+            },
+            Palette = new Palette()
+            {
+                Primary = Colors.Blue.Default,
+            }
+        };
+}
+
