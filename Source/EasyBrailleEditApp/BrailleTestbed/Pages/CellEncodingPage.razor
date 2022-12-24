@@ -8,8 +8,8 @@
 <MudContainer Class="pa-8">
     <MudPaper Outlined="false" Elevation="0" >
         <MudStack AlignItems="AlignItems.Start">
-            <MudTextField Placeholder="輸入點位" Label="輸入點位" HelperText="例如: 1356" @bind-Value="_positionNumbers" MaxLength="6" Variant="Variant.Outlined"></MudTextField>
-            <MudButton Class="mt-4" Color="Color.Primary" Variant="Variant.Filled" OnClick="PositionNumbersToHex">轉換</MudButton>                        
+            <MudNumericField Required="true" Min="1" Max="123456" HideSpinButtons="true" Placeholder="輸入點位" Label="輸入點位" HelperText="例如: 1356" @bind-Value="_positionNumbers" MaxLength="6" Variant="Variant.Outlined" />
+            <MudButton Class="mt-4" Variant="Variant.Filled" OnClick="PositionNumbersToHex">轉換</MudButton>
         </MudStack>
         <div style="width: 200px;">
             <MudStack Row="true" Class="mt-8" AlignItems="AlignItems.End">
@@ -21,12 +21,12 @@
 </MudContainer>
         
 @code {
-    private string _positionNumbers;
+    private int _positionNumbers = 123456;
     private string _cellHexCode;
 
     private void PositionNumbersToHex()
     {
-        byte cellValue = BrailleCellHelper.PositionNumberStringToByte(_positionNumbers);
+        byte cellValue = BrailleCellHelper.PositionNumberStringToByte(Convert.ToString(_positionNumbers));
         _cellHexCode = BrailleCellHelper.ByteToHexString(cellValue);
     }
 }

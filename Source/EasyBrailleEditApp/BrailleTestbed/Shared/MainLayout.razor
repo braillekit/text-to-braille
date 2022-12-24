@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider Theme="_myTheme" />
+<MudThemeProvider Theme="_myTheme" IsDarkMode="false" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
@@ -31,8 +31,20 @@
                 }
             },
             Palette = new Palette()
+            {                
+                AppbarBackground = "#1976D2",
+                AppbarText = "#FFFFFF",
+                Primary = "#607D8B",
+                PrimaryDarken = "#455A64",
+                PrimaryLighten = "#CFD8DC",
+                TextPrimary = "#212121",
+                TextSecondary = "#757575",
+                Divider = "#BDBDBD"
+
+            },
+            PaletteDark = new PaletteDark()
             {
-                Primary = Colors.Blue.Default,
+                Primary = Colors.Blue.Darken4
             }
         };
 }
