@@ -40,7 +40,7 @@ namespace EasyBrailleEdit.License
                 {
                     userLic.ExpiredDate = Convert.ToDateTime(expDateStr);
                 }
-                
+
             }
             catch
             {
@@ -99,29 +99,40 @@ namespace EasyBrailleEdit.License
             foreach (string line in usersLicContent.Split('\n', '\r'))
             {
                 var items = line.Split(' ');
-                if (items.Length < 3)
-                    continue;
-                string sn = items[0].Trim().Replace("-", "");
-                DateTime expiredDate = Convert.ToDateTime(items[1]);
-                int versionFlag = Convert.ToInt32(items[2]);
+                if (items.Length < 4)
+                {
+                    throw new Exception("註冊檔案內容格式錯誤！錯誤碼: 1。");
+                }
 
-                if (string.IsNullOrWhiteSpace(sn) || sn != userLic.SerialNumber || DateTime.Now > expiredDate)
-                    continue;
-                if (!ProductVersionType.IsValid(versionFlag))
-                    continue;
+                try
+                {
+                    string sn = items[0].Trim().Replace("-", "");
+                    DateTime expiredDate = Convert.ToDateTime(items[1]);
+                    int versionFlag = Convert.ToInt32(items[2]);
 
-                // Overwrite 使用期限
-                userLic.ExpiredDate = expiredDate;
-                userLic.VersionLicense = versionFlag;
+                    if (string.IsNullOrWhiteSpace(sn) || sn != userLic.SerialNumber || DateTime.Now > expiredDate)
+                        continue;
+                    if (!ProductVersionType.IsValid(versionFlag))
+                        continue;
 
-                // 保存註冊資訊。
-                SaveUserLicenseData(userLic);
-                AppGlobals.UserLicense.IsActive = true;
-                AppGlobals.UserLicense.CustomerName = userLic.CustomerName;
-                AppGlobals.UserLicense.SerialNumber = userLic.SerialNumber;
-                AppGlobals.UserLicense.ExpiredDate = userLic.ExpiredDate;
-                AppGlobals.UserLicense.VersionLicense = versionFlag;
-                return true;
+                    // Overwrite 使用期限
+                    userLic.ExpiredDate = expiredDate;
+                    userLic.VersionLicense = versionFlag;
+
+                    // 保存註冊資訊。
+                    SaveUserLicenseData(userLic);
+                    AppGlobals.UserLicense.IsActive = true;
+                    AppGlobals.UserLicense.CustomerName = userLic.CustomerName;
+                    AppGlobals.UserLicense.SerialNumber = userLic.SerialNumber;
+                    AppGlobals.UserLicense.ExpiredDate = userLic.ExpiredDate;
+                    AppGlobals.UserLicense.VersionLicense = versionFlag;
+                    return true;
+                }
+                catch (Exception ex) 
+                    when (ex is InvalidCastException || ex is FormatException || ex is OverflowException)
+                {
+                    throw new Exception("註冊檔案內容格式錯誤！錯誤碼: 2。");
+                }
             }
             Log.Debug($"使用者輸入的序號無效: {userLic.SerialNumber}");
             return false;
@@ -133,7 +144,7 @@ namespace EasyBrailleEdit.License
                 try
                 {
                     using (var client = new HttpClient())
-                    {                        
+                    {
                         var content = await client.GetStringAsync(url);
                         content = Base64Encode(content);
                         File.WriteAllText(usersLicFile, content, Encoding.UTF8);
@@ -194,7 +205,7 @@ namespace EasyBrailleEdit.License
 
             try
             {
-                var lastTime = Convert.ToDateTime(regKey.GetValue(Constant.LastTimeTrackingUser));                
+                var lastTime = Convert.ToDateTime(regKey.GetValue(Constant.LastTimeTrackingUser));
                 if (lastTime < DateTime.Now.AddDays(-1)) // 每兩天追蹤一次
                 {
                     return true;
