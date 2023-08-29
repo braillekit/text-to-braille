@@ -31,7 +31,6 @@ namespace Txt2Brl
             for (int i = 0; args != null && i < args.Length; i++)
             {
                 Log.Debug($"arg[{i}] = {args[i]}");
-                Console.WriteLine($"arg[{i}] = {args[i]}");
             }
 
             CommandLine.Parser.Default.ParseArguments<Options>(args)
@@ -117,7 +116,6 @@ namespace Txt2Brl
             {
                 Log.Error(ex.ToString());
                 Console.WriteLine(ex.ToString());
-                Console.ReadLine();
                 return;
             }
 
