@@ -28,7 +28,7 @@ namespace EasyBrailleEdit.Common.Config.Sections
         public string ErrorProneWords { get; set; } = "為";
 
         /// <summary>
-        /// ; 原書頁碼的數字都使用上位點，且不加數符。
+        /// 原書頁碼的數字都使用上位點，且不加數符。
         /// </summary>
         public bool UseUpperPositionForOrgPageNumber { get; set; } = true;
 
@@ -41,6 +41,11 @@ namespace EasyBrailleEdit.Common.Config.Sections
         /// 這些字元的左邊一律不加空方。
         /// </summary>
         public string NoSpaceBeforeTheseCharacters { get; set; } = Constant.DefaultNoSpaceBeforeTheseCharacters;
+
+        /// <summary>
+        /// 數字一律使用上位點。v4.2.1 (2023-9-1) 之後開始支援此選項。
+        /// </summary>
+        public bool UseUpperPositionForNumbers {  get; set; } = false;
     }
 
 }

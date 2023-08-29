@@ -67,7 +67,8 @@ namespace EasyBrailleEdit.Common
                 throw new Exception("Assembly.GetExecutingAssembly() 無法取得組件!");
             }
 
-            string path = Path.Combine(Path.GetDirectoryName(asmb.Location), @"\Temp\");
+            string dirName = Path.GetDirectoryName(asmb.Location);
+            string path = Path.Join(dirName, @"Temp\");
            
 			if (!Directory.Exists(path))
 			{

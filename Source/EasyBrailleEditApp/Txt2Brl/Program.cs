@@ -17,18 +17,27 @@ namespace Txt2Brl
         static int Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
-                .ReadFrom.AppSettings()
-                .WriteTo.File(@"Logs\log-txt2brl-.txt", rollingInterval: RollingInterval.Day)
+                .MinimumLevel.Debug()
+                .WriteTo.File(@"Logs\log-txt2brl-.txt",                     
+                    rollingInterval: RollingInterval.Day,
+                    rollOnFileSizeLimit: true)
                 .CreateLogger();
 
             string filename = Assembly.GetExecutingAssembly().Location;
             string fileVer = FileVersionInfo.GetVersionInfo(filename).FileVersion;
 
-            Console.WriteLine($"Txt2Brl version {fileVer} Copyright(c) 2008-2022 Michael Tsai.\n");
+            Console.WriteLine($"Txt2Brl version {fileVer} Copyright(c) 2008-2023 Michael Tsai.\n");
+
+            for (int i = 0; args != null && i < args.Length; i++)
+            {
+                Log.Debug($"arg[{i}] = {args[i]}");
+                Console.WriteLine($"arg[{i}] = {args[i]}");
+            }
 
             CommandLine.Parser.Default.ParseArguments<Options>(args)
                .WithParsed<Options>(opts => RunOptionsAndReturnExitCode(opts));
-           
+
+            Log.CloseAndFlush();
             return 0;
         }
 
@@ -71,7 +80,18 @@ namespace Txt2Brl
                 {
                     opts.OutputFileName = Path.ChangeExtension(opts.InputFileName, Constant.Files.DefaultMainBrailleFileExt);
                 }
-                Console.WriteLine("輸入檔案: " + opts.InputFileName);
+
+                if (!File.Exists(opts.InputFileName))
+                {
+                    var s = $"檔案不存在: {opts.InputFileName}";
+                    Log.Error(s);
+                    Console.WriteLine(s);
+                    return;
+                }
+
+                var msg = "輸入檔案: " + opts.InputFileName;
+                Log.Debug(msg);
+                Console.WriteLine(msg);
             }
             Log.Debug("輸出檔案: " + opts.OutputFileName);
             Log.Debug("每列方數: " + opts.CellsPerLine);
@@ -82,13 +102,23 @@ namespace Txt2Brl
             Console.WriteLine(" ");
             Console.WriteLine("轉換工作開始於 " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
 
-            if (opts.Stdin)
+            try
             {
-                DoConvertString(inputText, opts.OutputFileName, opts.CellsPerLine, opts.Verbose);
+                if (opts.Stdin)
+                {
+                    DoConvertString(inputText, opts.OutputFileName, opts.CellsPerLine, opts.Verbose);
+                }
+                else
+                {
+                    DoConvertFile(opts.InputFileName, opts.OutputFileName, opts.CellsPerLine, opts.Verbose);
+                }
             }
-            else
-            {                
-                DoConvertFile(opts.InputFileName, opts.OutputFileName, opts.CellsPerLine, opts.Verbose);
+            catch (Exception ex)
+            {
+                Log.Error(ex.ToString());
+                Console.WriteLine(ex.ToString());
+                Console.ReadLine();
+                return;
             }
 
             Log.Debug("轉換完畢。");

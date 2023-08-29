@@ -106,8 +106,8 @@
   <symbol text="】"   code="3E"     type="Punctuation" description="右方括號(粗)" />
   <symbol text="｛"   code="26"     type="Punctuation" description="左大括號" />
   <symbol text="｝"   code="34"     type="Punctuation" description="右大括號" />
-  <symbol text="《"   code=""     type="Punctuation" description="左書名號" />
-  <symbol text="》"   code=""     type="Punctuation" description="右書名號" />
+  <symbol text="《"   dots="126 126"  type="Punctuation" description="左書名號" />
+  <symbol text="》"   dots="345 345"  type="Punctuation" description="右書名號" />
 
 	<!-- 數學符號 -->
   <symbol text="←"   code="2A1212"     type="Math" description="箭頭向左" />

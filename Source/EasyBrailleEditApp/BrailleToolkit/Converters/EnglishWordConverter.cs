@@ -250,7 +250,7 @@ namespace BrailleToolkit.Converters
 				if (CharHelper.IsAsciiDigit(ch))
 				{
                     bool useUpperPositionDots = false;  // 一般數字取下位點。
-                    if (context.IsActive(ContextTagNames.UpperPosition))
+                    if (AppGlobals.Config.Braille.UseUpperPositionForNumbers || context.IsActive(ContextTagNames.UpperPosition))
                     {
                         useUpperPositionDots = true;
                     }

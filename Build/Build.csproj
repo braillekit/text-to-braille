@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FlubuCore" Version="6.4.4" />
+    <PackageReference Include="FlubuCore" Version="7.0.1" />
   </ItemGroup>
 
 </Project>
