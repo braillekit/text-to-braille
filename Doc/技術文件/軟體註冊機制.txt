@@ -1,4 +1,4 @@
-易點雙視 3.x 軟體註冊機制
+易點雙視 4.x 軟體註冊機制
 
 應用程式啟動時，去 github 讀取 users.lic 檔案，並將此檔案編碼之後，保存在應用程式所在目錄。
 如果沒有網路，或者無法下載 users.lic，則檢查本機是否有這個檔案。
@@ -14,7 +14,7 @@
 
 GitHub 的 users.lic 檔案
 
-URL: 參見 EasyBrailleEdit.Common.Constant.UsersLicenseFileUrl 屬性。
+URL: 參見 EasyBrailleEdit.Common.Constant.DefaultAutoUpdateRootUrl 字串常數。
 
 檔案保存於使用者機器端時，會先以單純的 Base64 編碼之後才存至檔案。
 
