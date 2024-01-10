@@ -1,0 +1,39 @@
+pull_requests:
+  do_not_increment_build_number: true
+
+image: Visual Studio 2022
+configuration: Release
+
+branches:
+  only:
+    - master
+skip_branch_with_pr: true
+
+before_build:
+  - cmd: dotnet restore SharpConfig.sln
+
+build:
+  project: 'SharpConfig.sln'
+  verbosity: minimal
+  
+after_build:
+  - dotnet pack Src\SharpConfig.csproj
+
+test:
+  assemblies:
+    only:
+    - Output\Tests\Release\net6.0\Tests.dll
+
+deploy:
+  - provider: NuGet
+    api_key:
+      secure: F+FEV17LBxIXlSSCC5LD2P9rhkpjGzzD34LaalIJRCSW+8mM9YeI08i9WU/0ZojP
+    on:
+      APPVEYOR_REPO_TAG: true
+    artifact: /.*(\.|\.s)nupkg/
+
+artifacts:
+  - path: Output\**\*.nupkg
+
+nuget:
+  disable_publish_on_pr: true

@@ -106,6 +106,8 @@ namespace EasyBrailleEdit
 
             cfgPrint.BrailleCellWidth = Convert.ToDouble(txtBrailleCellWdith.Text);
             cfgPrint.PrintBrailleSendPageBreakAtEndOfDoc = chkSendPageBreakAtEof.Checked;
+
+            AppGlobals.Config.Save();
         }
 
         private void DualPrintDialog_Load(object sender, EventArgs e)

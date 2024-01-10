@@ -13,9 +13,9 @@ namespace EasyBrailleEdit.Common.Config.Sections
     {
         public const string Name = "Printing";
 
-        public string BraillePrinterName { get; set; } = String.Empty;
+        public string BraillePrinterName { get; set; } = String.Empty; // 預設點字印表機
         public string BraillePrinterPort { get; set; } = "LPT1";
-        public string DefaultTextPrinter { get; set; } = String.Empty;
+        public string DefaultTextPrinter { get; set; } = String.Empty; // 預設明眼字印表機
         public bool PrintBrailleSendPageBreakAtEndOfDoc { get; set; } = false;
         public bool PrintBrailleToBrailler { get; set; } = true;
         public bool PrintBrailleToFile { get; set; } = false;
@@ -24,6 +24,9 @@ namespace EasyBrailleEdit.Common.Config.Sections
 
         // 一方點字的寬度。此參數會用來計算每個明眼字的字寬（會影響字距）
         public double BrailleCellWidth { get; set; } = Constant.DefaultBrailleWidth;
+
+        public string PrintTextPaperName { get; set; } = string.Empty;
+        public string PrintTextPaperSourceName { get; set; } = string.Empty;
 
         public string PrintTextFontName { get; set; } = Constant.DefaultPrintTextFontName;
 
@@ -52,9 +55,6 @@ namespace EasyBrailleEdit.Common.Config.Sections
 
         #endregion
 
-        public string PrintTextPaperName { get; set; } = string.Empty;
-
-        public string PrintTextPaperSourceName { get; set; } = string.Empty;
     }
 
 }

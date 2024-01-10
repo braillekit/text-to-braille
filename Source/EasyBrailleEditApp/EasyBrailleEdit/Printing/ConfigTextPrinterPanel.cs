@@ -58,6 +58,8 @@ namespace EasyBrailleEdit.Printing
             cfg.PrintTextMarginBottom2 = m_EvenPageMargins.Bottom;
             cfg.PrintTextFontName = m_TextFontName;
             cfg.PrintTextFontSize = m_TextFontSize;
+
+            AppGlobals.Config.Save();
         }
         
 

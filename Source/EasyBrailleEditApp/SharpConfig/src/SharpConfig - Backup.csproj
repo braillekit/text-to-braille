@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net7.0</TargetFrameworks>
+    <Description>An easy to use CFG/INI configuration library for .NET.</Description>
+    <Copyright>Copyright 2013-2022 Cemalettin Dervis, Michael Tsai</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <AssemblyVersion></AssemblyVersion>
+    <FileVersion></FileVersion>
+    <PackageIcon>SharpConfigLogo.png</PackageIcon>
+    <PackageLicenseFile></PackageLicenseFile>
+    <Version></Version>
+    <Authors>Cemalettin Dervis, Michael Tsai</Authors>
+    <PackageProjectUrl>https://github.com/huanlin/SharpConfig</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/huanlin/SharpConfig.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>sharpconfig config c# csharp cfg ini configuration library</PackageTags>
+    <PackageReleaseNotes>Please see the project URL for the latest release notes.</PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <Nullable>disable</Nullable>
+    <BaseOutputPath>..\Output\SharpConfig</BaseOutputPath>
+    <PackageId>$(AssemblyName)-huanlin</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\SharpConfigLogo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MinVer" Version="2.5.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
