@@ -20,131 +20,123 @@
 			base.Dispose(disposing);
 		}
 
-		#region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
-            this.rdoLine = new System.Windows.Forms.RadioButton();
-            this.rdoPage = new System.Windows.Forms.RadioButton();
-            this.numPosition = new System.Windows.Forms.NumericUpDown();
-            this.btnOk = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numPosition)).BeginInit();
-            this.SuspendLayout();
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            rdoLine = new System.Windows.Forms.RadioButton();
+            rdoPage = new System.Windows.Forms.RadioButton();
+            numPosition = new System.Windows.Forms.NumericUpDown();
+            btnOk = new System.Windows.Forms.Button();
+            btnCancel = new System.Windows.Forms.Button();
+            label1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)numPosition).BeginInit();
+            SuspendLayout();
             // 
             // rdoLine
             // 
-            this.rdoLine.AutoSize = true;
-            this.rdoLine.Checked = true;
-            this.rdoLine.Location = new System.Drawing.Point(141, 30);
-            this.rdoLine.Name = "rdoLine";
-            this.rdoLine.Size = new System.Drawing.Size(77, 23);
-            this.rdoLine.TabIndex = 1;
-            this.rdoLine.TabStop = true;
-            this.rdoLine.Text = "列 (&L)";
-            this.rdoLine.UseVisualStyleBackColor = true;
+            rdoLine.AutoSize = true;
+            rdoLine.Checked = true;
+            rdoLine.Location = new System.Drawing.Point(147, 33);
+            rdoLine.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            rdoLine.Name = "rdoLine";
+            rdoLine.Size = new System.Drawing.Size(64, 23);
+            rdoLine.TabIndex = 1;
+            rdoLine.TabStop = true;
+            rdoLine.Text = "列 (&L)";
+            rdoLine.UseVisualStyleBackColor = true;
             // 
             // rdoPage
             // 
-            this.rdoPage.AutoSize = true;
-            this.rdoPage.Location = new System.Drawing.Point(234, 30);
-            this.rdoPage.Name = "rdoPage";
-            this.rdoPage.Size = new System.Drawing.Size(76, 23);
-            this.rdoPage.TabIndex = 2;
-            this.rdoPage.Text = "頁 (&P)";
-            this.rdoPage.UseVisualStyleBackColor = true;
+            rdoPage.AutoSize = true;
+            rdoPage.Location = new System.Drawing.Point(227, 33);
+            rdoPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            rdoPage.Name = "rdoPage";
+            rdoPage.Size = new System.Drawing.Size(65, 23);
+            rdoPage.TabIndex = 2;
+            rdoPage.Text = "頁 (&P)";
+            rdoPage.UseVisualStyleBackColor = true;
             // 
             // numPosition
             // 
-            this.numPosition.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.numPosition.Location = new System.Drawing.Point(46, 26);
-            this.numPosition.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numPosition.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numPosition.Name = "numPosition";
-            this.numPosition.Size = new System.Drawing.Size(79, 30);
-            this.numPosition.TabIndex = 0;
-            this.numPosition.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            numPosition.ImeMode = System.Windows.Forms.ImeMode.Off;
+            numPosition.Location = new System.Drawing.Point(52, 33);
+            numPosition.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            numPosition.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            numPosition.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numPosition.Name = "numPosition";
+            numPosition.Size = new System.Drawing.Size(58, 27);
+            numPosition.TabIndex = 0;
+            numPosition.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // btnOk
             // 
-            this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(87, 91);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(81, 43);
-            this.btnOk.TabIndex = 3;
-            this.btnOk.Text = "確定";
-            this.btnOk.UseVisualStyleBackColor = true;
+            btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            btnOk.Location = new System.Drawing.Point(75, 108);
+            btnOk.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnOk.Name = "btnOk";
+            btnOk.Size = new System.Drawing.Size(91, 37);
+            btnOk.TabIndex = 3;
+            btnOk.Text = "確定";
+            btnOk.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(174, 91);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(84, 43);
-            this.btnCancel.TabIndex = 4;
-            this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            btnCancel.Location = new System.Drawing.Point(172, 108);
+            btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(94, 37);
+            btnCancel.TabIndex = 4;
+            btnCancel.Text = "取消";
+            btnCancel.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 19);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "第";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(22, 37);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(24, 19);
+            label1.TabIndex = 5;
+            label1.Text = "第";
             // 
             // DualEditGotoForm
             // 
-            this.AcceptButton = this.btnOk;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(341, 146);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.numPosition);
-            this.Controls.Add(this.rdoPage);
-            this.Controls.Add(this.rdoLine);
-            this.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "DualEditGotoForm";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "移動至";
-            this.Shown += new System.EventHandler(this.DualEditGotoForm_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.numPosition)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AcceptButton = btnOk;
+            AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            CancelButton = btnCancel;
+            ClientSize = new System.Drawing.Size(339, 158);
+            Controls.Add(label1);
+            Controls.Add(btnCancel);
+            Controls.Add(btnOk);
+            Controls.Add(numPosition);
+            Controls.Add(rdoPage);
+            Controls.Add(rdoLine);
+            Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "DualEditGotoForm";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "移動至";
+            Shown += DualEditGotoForm_Shown;
+            ((System.ComponentModel.ISupportInitialize)numPosition).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
+        }
 
-		}
+        #endregion
 
-		#endregion
-
-		private System.Windows.Forms.RadioButton rdoLine;
+        private System.Windows.Forms.RadioButton rdoLine;
 		private System.Windows.Forms.RadioButton rdoPage;
 		private System.Windows.Forms.NumericUpDown numPosition;
 		private System.Windows.Forms.Button btnOk;

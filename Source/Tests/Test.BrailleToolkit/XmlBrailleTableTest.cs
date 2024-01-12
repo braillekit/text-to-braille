@@ -30,7 +30,7 @@ namespace Test.BrailleToolkit
             xmlTbl.LoadFromXmlString(xml.ToString());
 
             var actualCode = xmlTbl.Find(text);
-            Assert.AreEqual(actualCode, expectedCode);
+            Assert.That(actualCode, Is.EqualTo(expectedCode));
         }
     }
 }

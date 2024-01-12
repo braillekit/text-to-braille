@@ -22,10 +22,5 @@ namespace EasyBrailleEdit.Printing
             Close();
         }
 
-        private void configTextPrinterPanel_Load(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }

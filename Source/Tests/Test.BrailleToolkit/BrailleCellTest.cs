@@ -26,7 +26,7 @@ namespace Test.BrailleToolkit
         public void Should_CreateInstanceWithDotNumbers(int[] dotNumbers, byte expectedValue)
         {
             var brCell = BrailleCell.GetInstance(dotNumbers);
-            Assert.AreEqual(brCell.Value, expectedValue);
+            Assert.That(brCell.Value, Is.EqualTo(expectedValue));
         }
 
         [TestCase(0x01, "1")]
@@ -38,7 +38,7 @@ namespace Test.BrailleToolkit
         public void Should_GetDotNumberString(byte brailleValue, string expectedDots)
         {
             var brCell = BrailleCell.GetInstance(brailleValue);
-            Assert.AreEqual(brCell.ToPositionNumberString(), expectedDots);
+            Assert.That(brCell.ToPositionNumberString(), Is.EqualTo(expectedDots));
         }
 
     }

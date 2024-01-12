@@ -17,10 +17,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\SharpConfig\src\SharpConfig.csproj" />
+    <PackageReference Include="SharpConfig-huanlin" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>

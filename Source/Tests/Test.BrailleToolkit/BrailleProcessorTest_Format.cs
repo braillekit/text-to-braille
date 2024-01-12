@@ -29,15 +29,15 @@ namespace Test.BrailleToolkit
 
             var brLines = BrailleDocumentFormatter.BreakLine(brLine, cellsPerLine, context);
 
-            Assert.AreEqual(expectedLineCount, brLines.Count);
+            Assert.That(expectedLineCount, Is.EqualTo(brLines.Count));
 
             string actual = brLines[0].ToString();
-            Assert.AreEqual(expectedLine1, actual);
+            Assert.That(expectedLine1, Is.EqualTo(actual));
 
             if (expectedLineCount > 1)
             {
                 string actual2 = brLines[1].ToString();
-                Assert.AreEqual(expectedLine2, actual2);
+                Assert.That(expectedLine2, Is.EqualTo(actual2));
             }
         }
 
@@ -58,7 +58,7 @@ namespace Test.BrailleToolkit
 
             brLine = brLines[0];
 
-            Assert.IsTrue(brLine[brLine.WordCount-1].Text != leftParenthesis);
+            Assert.That(brLine[brLine.WordCount-1].Text != leftParenthesis, Is.True);
         }
 
         [TestCase("）", "-------------------------------------（ ）")]
@@ -78,7 +78,7 @@ namespace Test.BrailleToolkit
 
             brLine = brLines[0];
 
-            Assert.IsTrue(brLine[0].Text != rightParenthesis);
+            Assert.That(brLine[0].Text != rightParenthesis, Is.True);
         }
 
 
@@ -90,7 +90,7 @@ namespace Test.BrailleToolkit
             var processor = BrailleProcessor.GetInstance();
             var line = processor.ConvertLine(inputText);
             var lines = BrailleDocumentFormatter.BreakLine(line, 40, null);
-            Assert.IsTrue(lines.Count == 2 && lines[0].CellCount == 40 && lines[1].CellCount == 1);
+            Assert.That(lines.Count == 2 && lines[0].CellCount == 40 && lines[1].CellCount == 1, Is.True);
         }
 
         [TestCase("0123456789012345678901234567890123456<書名號>哈利波特</書名號>。")]
@@ -104,12 +104,12 @@ namespace Test.BrailleToolkit
             int cellsPerLine = 40;
             var formattedLines = BrailleDocumentFormatter.FormatLine(brLine, cellsPerLine, new ContextTagManager());
 
-            Assert.IsTrue(formattedLines.Count == 2 && formattedLines[0].CellCount == 38 && formattedLines[1].CellCount == 15);
+            Assert.That(formattedLines.Count == 2 && formattedLines[0].CellCount == 38 && formattedLines[1].CellCount == 15, Is.True);
 
             // 第二行應該會以書名號開始，因為書名號單獨出現在行尾時必須折到下一行。
-            Assert.AreEqual("<書名號>", formattedLines[1].Words[0].Text);
+            Assert.That("<書名號>", Is.EqualTo(formattedLines[1].Words[0].Text));
             string expectedBeginCellsOfSecondLine = "(6 36)";
-            Assert.AreEqual(expectedBeginCellsOfSecondLine, formattedLines[1].Words[1].ToPositionNumberString(true));
+            Assert.That(expectedBeginCellsOfSecondLine, Is.EquivalentTo(formattedLines[1].Words[1].ToPositionNumberString(true)));
         }
 
         [TestCase("012345678901234567890123456782測試……的功能", 35, 15, "……")]
@@ -127,10 +127,10 @@ namespace Test.BrailleToolkit
             int cellsPerLine = 40;
             var formattedLines = BrailleDocumentFormatter.FormatLine(brLine, cellsPerLine, new ContextTagManager());
 
-            Assert.IsTrue(formattedLines.Count == 2 && formattedLines[0].CellCount == expectedCellCountOfLine1 && formattedLines[1].CellCount == expectedCellCountOfLine2);
+            Assert.That(formattedLines.Count == 2 && formattedLines[0].CellCount == expectedCellCountOfLine1 && formattedLines[1].CellCount == expectedCellCountOfLine2);
 
             // 第二行不應該以刪節號開頭。
-            Assert.AreNotEqual(textShouldNotBeginOfLine, formattedLines[1].Words[0].Text);
+            Assert.That(textShouldNotBeginOfLine, !Is.EqualTo(formattedLines[1].Words[0].Text));
         }
 
     }

@@ -28,118 +28,112 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.numStartPageNumber = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblCellsPerLine = new System.Windows.Forms.Label();
-            this.btnOk = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numStartPageNumber)).BeginInit();
-            this.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
+            numStartPageNumber = new System.Windows.Forms.NumericUpDown();
+            label2 = new System.Windows.Forms.Label();
+            lblCellsPerLine = new System.Windows.Forms.Label();
+            btnOk = new System.Windows.Forms.Button();
+            label3 = new System.Windows.Forms.Label();
+            btnCancel = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)numStartPageNumber).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 62);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 19);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "起始頁碼：";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(23, 56);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(84, 19);
+            label1.TabIndex = 2;
+            label1.Text = "起始頁碼：";
             // 
             // numStartPageNumber
             // 
-            this.numStartPageNumber.Location = new System.Drawing.Point(131, 60);
-            this.numStartPageNumber.Maximum = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-            this.numStartPageNumber.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numStartPageNumber.Name = "numStartPageNumber";
-            this.numStartPageNumber.Size = new System.Drawing.Size(75, 29);
-            this.numStartPageNumber.TabIndex = 3;
-            this.numStartPageNumber.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            numStartPageNumber.Location = new System.Drawing.Point(115, 54);
+            numStartPageNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            numStartPageNumber.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            numStartPageNumber.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numStartPageNumber.Name = "numStartPageNumber";
+            numStartPageNumber.Size = new System.Drawing.Size(74, 27);
+            numStartPageNumber.TabIndex = 3;
+            numStartPageNumber.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 19);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "每列方數：";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(23, 25);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(84, 19);
+            label2.TabIndex = 0;
+            label2.Text = "每列方數：";
             // 
             // lblCellsPerLine
             // 
-            this.lblCellsPerLine.AutoSize = true;
-            this.lblCellsPerLine.Location = new System.Drawing.Point(127, 26);
-            this.lblCellsPerLine.Name = "lblCellsPerLine";
-            this.lblCellsPerLine.Size = new System.Drawing.Size(53, 19);
-            this.lblCellsPerLine.TabIndex = 1;
-            this.lblCellsPerLine.Text = "label3";
+            lblCellsPerLine.AutoSize = true;
+            lblCellsPerLine.Location = new System.Drawing.Point(115, 25);
+            lblCellsPerLine.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lblCellsPerLine.Name = "lblCellsPerLine";
+            lblCellsPerLine.Size = new System.Drawing.Size(51, 19);
+            lblCellsPerLine.TabIndex = 1;
+            lblCellsPerLine.Text = "label3";
             // 
             // btnOk
             // 
-            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(302, 120);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(90, 39);
-            this.btnOk.TabIndex = 5;
-            this.btnOk.Text = "確定";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnOk.Location = new System.Drawing.Point(283, 119);
+            btnOk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            btnOk.Name = "btnOk";
+            btnOk.Size = new System.Drawing.Size(88, 43);
+            btnOk.TabIndex = 5;
+            btnOk.Text = "確定";
+            btnOk.UseVisualStyleBackColor = true;
+            btnOk.Click += btnOk_Click;
             // 
             // label3
             // 
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(255, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(242, 67);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "注意：若有修改屬性值，再關閉此視窗後，還必須再執行存檔操作，這些修改內容才會保存在檔案裡。";
+            label3.ForeColor = System.Drawing.Color.Red;
+            label3.Location = new System.Drawing.Point(216, 25);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(271, 74);
+            label3.TabIndex = 4;
+            label3.Text = "注意：若有修改屬性值，再關閉此視窗後，還必須再執行存檔操作，這些修改內容才會保存在檔案裡。";
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(407, 120);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(90, 39);
-            this.btnCancel.TabIndex = 6;
-            this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            btnCancel.Location = new System.Drawing.Point(379, 119);
+            btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(88, 43);
+            btnCancel.TabIndex = 6;
+            btnCancel.Text = "取消";
+            btnCancel.UseVisualStyleBackColor = true;
             // 
             // BrailleDocPropertiesForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(521, 177);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.lblCellsPerLine);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.numStartPageNumber);
-            this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("PMingLiU", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "BrailleDocPropertiesForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "雙視文件的屬性";
-            ((System.ComponentModel.ISupportInitialize)(this.numStartPageNumber)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(501, 175);
+            Controls.Add(btnCancel);
+            Controls.Add(label3);
+            Controls.Add(btnOk);
+            Controls.Add(lblCellsPerLine);
+            Controls.Add(label2);
+            Controls.Add(numStartPageNumber);
+            Controls.Add(label1);
+            Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            Name = "BrailleDocPropertiesForm";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "雙視文件的屬性";
+            ((System.ComponentModel.ISupportInitialize)numStartPageNumber).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

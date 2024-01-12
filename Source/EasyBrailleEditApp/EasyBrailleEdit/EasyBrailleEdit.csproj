@@ -16,6 +16,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="dytdkezs.z4h~" />
+    <None Remove="Forms\w53nmm3a.k1b~" />
+    <None Remove="Printing\fbur2e1r.kva~" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="app.ico" />
   </ItemGroup>
 
@@ -40,7 +46,7 @@
     </PackageReference>
     <PackageReference Include="NChinese" Version="1.1.0" />
     <PackageReference Include="ScintillaNET_FindReplaceDialog-huanlin" Version="1.5.2" />
-    <PackageReference Include="Serilog" Version="3.0.1" />
+    <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="Serilog.Settings.AppSettings" Version="2.2.2" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="SourceGrid-huanlin" Version="6.0.10" />

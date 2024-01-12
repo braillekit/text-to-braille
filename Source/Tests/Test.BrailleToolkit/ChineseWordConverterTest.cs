@@ -7,6 +7,7 @@ using BrailleToolkit.Converters;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Test.BrailleToolkit
 {
@@ -154,9 +155,9 @@ namespace Test.BrailleToolkit
 
             var charStack = new Stack<char>(inputText);
             List<BrailleWord> actual = target.Convert(charStack, context);
-            Assert.IsTrue(actual != null && actual.Count == 1);
+            Assert.That(actual != null && actual.Count == 1, Is.True);
 
-            Assert.AreEqual("(5 2)", actual[0].ToPositionNumberString(true));
+            Assert.That("(5 2)", Is.EqualTo(actual[0].ToPositionNumberString(true)));
         }
 
     }

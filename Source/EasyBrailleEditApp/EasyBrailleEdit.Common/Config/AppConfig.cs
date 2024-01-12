@@ -13,17 +13,14 @@ namespace EasyBrailleEdit.Common.Config
     /// </summary>
     public sealed class AppConfig
     {
-        private const string IniFileName = "AppConfig.ini";
-        private const string IniFileNameDefault = "AppConfig.Default.ini";
+        public const string IniFileName = "AppConfig.ini";
+        public const string IniFileNameDefault = "AppConfig.Default.ini";
 
         private static AppConfig _instance;
 
         public static AppConfig GetInstance()
         {
-            if (_instance == null)
-            {
-                _instance = new AppConfig();
-            }
+            _instance ??= new AppConfig();
 
             return _instance;
         }
@@ -46,9 +43,9 @@ namespace EasyBrailleEdit.Common.Config
             Load();
         }
 
-        private void CreateDefaultConfigFile(string filename)
+        private static void CreateDefaultConfigFile(string filename)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             sb.AppendLine(";應用程式組態檔");
             sb.AppendLine("[General}]");
             sb.AppendLine($"AutoUpdate=true");
@@ -59,11 +56,8 @@ namespace EasyBrailleEdit.Common.Config
 
         public void Load()
         {
-            Assembly asmb = Assembly.GetExecutingAssembly();
-            if (asmb == null)
-            {
-                throw new Exception("Assembly.GetExecutingAssembly() 無法取得組件!");
-            }
+            Assembly asmb = Assembly.GetExecutingAssembly() ?? throw new Exception("Assembly.GetExecutingAssembly() 無法取得組件!");
+
             string path = Path.GetDirectoryName(asmb.Location);
             string filename = Path.Combine(path, IniFileName);
 

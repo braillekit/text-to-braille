@@ -18,7 +18,7 @@ namespace Test.BrailleToolkit
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
 
-            Assert.AreEqual(expectedPositionNumbers, actual);
+            Assert.That(expectedPositionNumbers, Is.EqualTo(actual));
         }
 
 
@@ -31,7 +31,7 @@ namespace Test.BrailleToolkit
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
 
-            Assert.AreEqual(expectedPositionNumbers, actual);
+            Assert.That(expectedPositionNumbers, Is.EqualTo(actual));
         }
 
         [TestCase("<數學>【1】</數學>", "(12356)(2)(23456)")]
@@ -41,7 +41,7 @@ namespace Test.BrailleToolkit
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
 
-            Assert.AreEqual(expectedPositionNumbers, actual);
+            Assert.That(expectedPositionNumbers, Is.EqualTo(actual));
         }
 
 
@@ -52,7 +52,7 @@ namespace Test.BrailleToolkit
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
 
-            Assert.AreEqual(expectedPositionNumbers, actual);
+            Assert.That(expectedPositionNumbers, Is.EqualTo(actual));
         }
 
         [TestCase("<數學>（1+2)</數學>", "(12356)(2)(346)(23)(23456)")]
@@ -62,7 +62,7 @@ namespace Test.BrailleToolkit
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
 
-            Assert.AreEqual(expectedPositionNumbers, actual);
+            Assert.That(expectedPositionNumbers, Is.EqualTo(actual));
         }
 
 
@@ -73,7 +73,7 @@ namespace Test.BrailleToolkit
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
 
-            Assert.AreEqual(expectedPositionNumbers, actual);
+            Assert.That(expectedPositionNumbers, Is.EqualTo(actual));
         }
 
     }

@@ -42,28 +42,28 @@ namespace Test.BrailleToolkit
             string expected = "ㄅˇ你說： 我是誰？　我說：「我是神。」";
             BrailleLine brLine = target.ConvertLine(line);
             string actual = brLine.ToString();
-            Assert.AreEqual(expected, actual, msg + line);
+            Assert.That(expected, Is.EqualTo(actual), msg + line);
 
             // 測試破折號和刪節號。
             line = "第一種破折號：─，第二種破折號：－，連續破折號：──，－－。";
             expected = "第一種破折號：─，第二種破折號：－，連續破折號：──，－－。";
             brLine = target.ConvertLine(line);
             actual = brLine.ToString();
-            Assert.AreEqual(expected, actual, msg + line);
+            Assert.That(expected, Is.EqualTo(actual), msg + line);
 
             // 測試刪節號。
             line = "單：…，雙：……";
             expected = "單：…，雙：……";
             brLine = target.ConvertLine(line);
             actual = brLine.ToString();
-            Assert.AreEqual(expected, actual, msg + line);
+            Assert.That(expected, Is.EqualTo(actual), msg + line);
 
             // 測試連續多個全形空白：保留空白。
             line = "空　　　白　　　";
             expected = "空　　　白　　　";
             brLine = target.ConvertLine(line);
             actual = brLine.ToString();
-            Assert.AreEqual(expected, actual, msg + line);
+            Assert.That(expected, Is.EqualTo(actual), msg + line);
         }
 
         public void ConvertLineTestEnglish(BrailleProcessor target)
@@ -75,22 +75,22 @@ namespace Test.BrailleToolkit
             string expected = "Hello";
             BrailleLine brLine = target.ConvertLine(line);
             string actual = brLine.ToString();
-            Assert.AreEqual(expected, actual, msg + line);
+            Assert.That(expected, Is.EqualTo(actual), msg + line);
             bool isOk = (brLine[0].Cells[0].Value == (byte)BrailleCellCode.Capital) &&
                 (brLine[0].Cells[1].Value == 0x13);
-            Assert.IsTrue(isOk, msg + line);
+            Assert.That(isOk, msg + line);
 
             // 測試兩個大寫字母。
             line = "ABC";
             expected = "ABC";
             brLine = target.ConvertLine(line);
             actual = brLine.ToString();
-            Assert.AreEqual(expected, actual, msg + line);
+            Assert.That(expected, Is.EqualTo(actual), msg + line);
             isOk = (brLine[0].Cells[0].Value == (byte)BrailleCellCode.Capital) &&
                 (brLine[0].Cells[1].Value == (byte)BrailleCellCode.Capital) &&
                 (brLine[0].Cells[2].Value == 0x01) &&   // 'A'
                 (brLine[1].Cells[0].Value == 0x03);     // 'B'
-            Assert.IsTrue(isOk, msg + line);
+            Assert.That(isOk, msg + line);
 
             // 測試數字。
             line = "123,56 2006-09-29";
@@ -101,14 +101,14 @@ namespace Test.BrailleToolkit
                 (brLine[4].Cells[0].Value != (byte)BrailleCellCode.Capital) &&	// 逗號視為數字的延續，不用額外加數字記號。
                 (brLine[7].Cells[0].Value == (byte)BrailleCellCode.Digit) &&
                 (brLine[12].Cells[0].Value != (byte)BrailleCellCode.Capital);	// 連字號視為數字的延續，不用額外加數字記號。
-            Assert.IsTrue(isOk, msg + line);
+            Assert.That(isOk, msg + line);
 
             // 測試連續多個空白：保留空白。
             line = "a   b   ";
             expected = "a   b   ";
             brLine = target.ConvertLine(line);
             actual = brLine.ToString();
-            Assert.AreEqual(expected, actual, msg + line);
+            Assert.That(actual, Is.EqualTo(expected), msg + line);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Test.BrailleToolkit
             string expected = new string('ˍ', 20) + "測試";
             string actual = target.ReplaceSimpleTagsWithConvertableText(line);
 
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [TestCase(
@@ -136,8 +136,8 @@ namespace Test.BrailleToolkit
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
-            var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(expectedPositionNumbers, result);
+            var actual = brLine.ToPositionNumberString();
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
 
@@ -152,8 +152,8 @@ namespace Test.BrailleToolkit
         {
             var processor = BrailleProcessor.GetInstance();
             BrailleLine brLine = processor.ConvertLine(inputText);
-            var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(expectedPositionNumbers, result);
+            var actual = brLine.ToPositionNumberString();
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
         [TestCase("15？", "(3456 2)(26)(135)")]        
@@ -168,8 +168,8 @@ namespace Test.BrailleToolkit
         {
             var processor = BrailleProcessor.GetInstance();
             var brLine = processor.ConvertLine(inputText);
-            var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(expectedPositionNumbers, result);
+            var actual = brLine.ToPositionNumberString();
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
 
@@ -188,8 +188,8 @@ namespace Test.BrailleToolkit
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
-            var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(expectedPositionNumbers, result);
+            var actual = brLine.ToPositionNumberString();
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
 
@@ -204,8 +204,8 @@ namespace Test.BrailleToolkit
 
             var lines = BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
-            var result = lines[0].ToPositionNumberString();
-            Assert.AreEqual(expectedPositionNumbers, result);
+            var actual = lines[0].ToPositionNumberString();
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
         //[TestCase("<私名號>台北</私名號>我", "(56 56)(124 2456 2)(135 356 4)()(25 4)")]
@@ -220,8 +220,8 @@ namespace Test.BrailleToolkit
 
             var lines = BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
-            var result = lines[0].ToPositionNumberString();
-            Assert.AreEqual(expectedPositionNumbers, result);
+            var actual = lines[0].ToPositionNumberString();
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
         [TestCase("<分數>1/2</分數>。", "(1456 2)(34)(23 3456)(36)")]
@@ -232,8 +232,8 @@ namespace Test.BrailleToolkit
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
-            var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(expectedPositionNumbers, result);
+            var actual = brLine.ToPositionNumberString();
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
         [TestCase("<點譯者註>台北</點譯者註>。", "(246)(6 3)(124 2456 2)(135 356 4)(135)(36)")]
@@ -249,8 +249,8 @@ namespace Test.BrailleToolkit
 
             BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
-            var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(expectedPositionNumbers, result);
+            var actual = brLine.ToPositionNumberString();
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
         [Test]
@@ -265,8 +265,8 @@ namespace Test.BrailleToolkit
 
             BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
-            var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(expectedPositionNumbers, result);
+            var actual = brLine.ToPositionNumberString();
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
         [Test]
@@ -281,8 +281,8 @@ namespace Test.BrailleToolkit
 
             BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
-            var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(expectedPositionNumbers, result);
+            var actual = brLine.ToPositionNumberString();
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
         [TestCase("<選項>ㄅ.</選項>", "(135)(6)")]
@@ -295,8 +295,8 @@ namespace Test.BrailleToolkit
 
             BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
-            var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(expectedPositionNumbers, result);
+            var actual = brLine.ToPositionNumberString();
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
         [TestCase("#1-2. 1", "#1-2. 1", "(3456 1)(36)(12)(256)()(3456 2)")] // 編號的數字使用上位點；非編號的數字使用下位點。
@@ -307,10 +307,10 @@ namespace Test.BrailleToolkit
             var brLine = processor.ConvertLine(input);
             var actual = brLine.ToString();
 
-            Assert.AreEqual(input, expected);
+            Assert.That(input, Is.EqualTo(expected));
 
             var actualDots = brLine.ToPositionNumberString();
-            Assert.AreEqual(expectedDots, actualDots);
+            Assert.That(expectedDots, Is.EqualTo(actualDots));
         }
 
         [TestCase("#2012/#06/#12", "(3456 12)(245)(1)(12)(34)(3456 245)(124)(34)(3456 1)(12)")]
@@ -325,7 +325,7 @@ namespace Test.BrailleToolkit
             BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(expectedPositionNumbers, result);
+            Assert.That(result, Is.EqualTo(expectedPositionNumbers));
         }
 
         [TestCase("<上位點>2012/06/12</上位點>", "(3456 12)(245)(1)(12)(34)(245)(124)(34)(1)(12)")]
@@ -337,7 +337,7 @@ namespace Test.BrailleToolkit
             BrailleLine brLine = processor.ConvertLine(inputText);
 
             var result = brLine.ToPositionNumberString();
-            Assert.AreEqual(expectedPositionNumbers, result);
+            Assert.That(result, Is.EqualTo(expectedPositionNumbers));
         }
 
 
@@ -353,7 +353,7 @@ namespace Test.BrailleToolkit
             BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
             var actual = brLine.ToPositionNumberString();
 
-            Assert.AreEqual(expectedPositionNumbers, actual);
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
         [TestCase("<刪>1？…</刪>", "(246)(2)(135)(5 5 5)(12456)")]
@@ -363,7 +363,7 @@ namespace Test.BrailleToolkit
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
 
-            Assert.AreEqual(expectedPositionNumbers, actual);
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
         [TestCase(
@@ -376,7 +376,7 @@ namespace Test.BrailleToolkit
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
 
-            Assert.AreEqual(expectedPositionNumbers, actual);
+            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
         }
 
     }

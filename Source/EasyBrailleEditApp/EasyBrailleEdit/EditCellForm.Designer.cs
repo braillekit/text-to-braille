@@ -28,147 +28,152 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditCellForm));
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtChar = new System.Windows.Forms.TextBox();
-            this.cboPhCode = new System.Windows.Forms.ComboBox();
-            this.txtBraille = new System.Windows.Forms.TextBox();
-            this.btnOk = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnPickBraille = new System.Windows.Forms.Button();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            txtChar = new System.Windows.Forms.TextBox();
+            cboPhCode = new System.Windows.Forms.ComboBox();
+            txtBraille = new System.Windows.Forms.TextBox();
+            btnOk = new System.Windows.Forms.Button();
+            btnCancel = new System.Windows.Forms.Button();
+            btnPickBraille = new System.Windows.Forms.Button();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            toolTip1 = new System.Windows.Forms.ToolTip(components);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 41);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 19);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "明眼字";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(37, 29);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(54, 19);
+            label1.TabIndex = 0;
+            label1.Text = "明眼字";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(48, 128);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 19);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "點字";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(52, 121);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(39, 19);
+            label2.TabIndex = 4;
+            label2.Text = "點字";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 80);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 19);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "注音碼";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(37, 71);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(54, 19);
+            label3.TabIndex = 2;
+            label3.Text = "注音碼";
             // 
             // txtChar
             // 
-            this.txtChar.Location = new System.Drawing.Point(106, 38);
-            this.txtChar.MaxLength = 1;
-            this.txtChar.Name = "txtChar";
-            this.txtChar.Size = new System.Drawing.Size(70, 29);
-            this.txtChar.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.txtChar, "只能輸入一個字元，若輸入空白字元則為空方。");
-            this.txtChar.TextChanged += new System.EventHandler(this.txtChar_TextChanged);
-            this.txtChar.Validating += new System.ComponentModel.CancelEventHandler(this.txtChar_Validating);
+            txtChar.Location = new System.Drawing.Point(98, 26);
+            txtChar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            txtChar.MaxLength = 1;
+            txtChar.Name = "txtChar";
+            txtChar.Size = new System.Drawing.Size(78, 27);
+            txtChar.TabIndex = 1;
+            toolTip1.SetToolTip(txtChar, "只能輸入一個字元，若輸入空白字元則為空方。");
+            txtChar.TextChanged += txtChar_TextChanged;
+            txtChar.Validating += txtChar_Validating;
             // 
             // cboPhCode
             // 
-            this.cboPhCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboPhCode.FormattingEnabled = true;
-            this.cboPhCode.Location = new System.Drawing.Point(106, 77);
-            this.cboPhCode.Name = "cboPhCode";
-            this.cboPhCode.Size = new System.Drawing.Size(133, 26);
-            this.cboPhCode.TabIndex = 3;
-            this.cboPhCode.SelectedIndexChanged += new System.EventHandler(this.cboPhCode_SelectedIndexChanged);
+            cboPhCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cboPhCode.FormattingEnabled = true;
+            cboPhCode.Location = new System.Drawing.Point(98, 68);
+            cboPhCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            cboPhCode.Name = "cboPhCode";
+            cboPhCode.Size = new System.Drawing.Size(149, 27);
+            cboPhCode.TabIndex = 3;
+            cboPhCode.SelectedIndexChanged += cboPhCode_SelectedIndexChanged;
             // 
             // txtBraille
             // 
-            this.txtBraille.Font = new System.Drawing.Font("SimBraille", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtBraille.Location = new System.Drawing.Point(101, 116);
-            this.txtBraille.MaxLength = 3;
-            this.txtBraille.Name = "txtBraille";
-            this.txtBraille.Size = new System.Drawing.Size(133, 47);
-            this.txtBraille.TabIndex = 5;
-            this.txtBraille.TextChanged += new System.EventHandler(this.txtBraille_TextChanged);
-            this.txtBraille.Validating += new System.ComponentModel.CancelEventHandler(this.txtBraille_Validating);
+            txtBraille.Font = new System.Drawing.Font("SimBraille", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            txtBraille.Location = new System.Drawing.Point(98, 110);
+            txtBraille.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            txtBraille.MaxLength = 3;
+            txtBraille.Name = "txtBraille";
+            txtBraille.Size = new System.Drawing.Size(149, 39);
+            txtBraille.TabIndex = 5;
+            txtBraille.TextChanged += txtBraille_TextChanged;
+            txtBraille.Validating += txtBraille_Validating;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(69, 194);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 33);
-            this.btnOk.TabIndex = 7;
-            this.btnOk.Text = "確定";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            btnOk.Location = new System.Drawing.Point(78, 194);
+            btnOk.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnOk.Name = "btnOk";
+            btnOk.Size = new System.Drawing.Size(84, 42);
+            btnOk.TabIndex = 7;
+            btnOk.Text = "確定";
+            btnOk.UseVisualStyleBackColor = true;
+            btnOk.Click += btnOk_Click;
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(150, 194);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 33);
-            this.btnCancel.TabIndex = 8;
-            this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            btnCancel.Location = new System.Drawing.Point(168, 194);
+            btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(84, 42);
+            btnCancel.TabIndex = 8;
+            btnCancel.Text = "取消";
+            btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnPickBraille
             // 
-            this.btnPickBraille.Image = ((System.Drawing.Image)(resources.GetObject("btnPickBraille.Image")));
-            this.btnPickBraille.Location = new System.Drawing.Point(240, 119);
-            this.btnPickBraille.Name = "btnPickBraille";
-            this.btnPickBraille.Size = new System.Drawing.Size(32, 36);
-            this.btnPickBraille.TabIndex = 6;
-            this.btnPickBraille.UseVisualStyleBackColor = false;
-            this.btnPickBraille.Click += new System.EventHandler(this.btnPickBraille_Click);
+            btnPickBraille.Image = (System.Drawing.Image)resources.GetObject("btnPickBraille.Image");
+            btnPickBraille.Location = new System.Drawing.Point(253, 107);
+            btnPickBraille.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnPickBraille.Name = "btnPickBraille";
+            btnPickBraille.Size = new System.Drawing.Size(36, 46);
+            btnPickBraille.TabIndex = 6;
+            btnPickBraille.UseVisualStyleBackColor = false;
+            btnPickBraille.Click += btnPickBraille_Click;
             // 
             // errorProvider1
             // 
-            this.errorProvider1.ContainerControl = this;
+            errorProvider1.ContainerControl = this;
             // 
             // EditCellForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(303, 253);
-            this.Controls.Add(this.btnPickBraille);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.txtBraille);
-            this.Controls.Add(this.cboPhCode);
-            this.Controls.Add(this.txtChar);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("新細明體", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "EditCellForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "修改點字";
-            this.Load += new System.EventHandler(this.EditCellForm_Load);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.EditCellForm_KeyUp);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            CancelButton = btnCancel;
+            ClientSize = new System.Drawing.Size(325, 252);
+            Controls.Add(btnPickBraille);
+            Controls.Add(btnCancel);
+            Controls.Add(btnOk);
+            Controls.Add(txtBraille);
+            Controls.Add(cboPhCode);
+            Controls.Add(txtChar);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            KeyPreview = true;
+            Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "EditCellForm";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "修改點字";
+            Load += EditCellForm_Load;
+            KeyUp += EditCellForm_KeyUp;
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

@@ -28,72 +28,72 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.configTextPrinterPanel = new EasyBrailleEdit.Printing.ConfigTextPrinterPanel();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
+            panel1 = new System.Windows.Forms.Panel();
+            btnCancel = new System.Windows.Forms.Button();
+            btnOK = new System.Windows.Forms.Button();
+            configTextPrinterPanel = new ConfigTextPrinterPanel();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnCancel);
-            this.panel1.Controls.Add(this.btnOK);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 110);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(529, 54);
-            this.panel1.TabIndex = 1;
-            // 
-            // btnOK
-            // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(309, 10);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(94, 32);
-            this.btnOK.TabIndex = 0;
-            this.btnOK.Text = "確定(&O)";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            panel1.Controls.Add(btnCancel);
+            panel1.Controls.Add(btnOK);
+            panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panel1.Location = new System.Drawing.Point(0, 140);
+            panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(595, 68);
+            panel1.TabIndex = 1;
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(409, 10);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(97, 32);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "取消(&C)";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            btnCancel.Location = new System.Drawing.Point(460, 13);
+            btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(109, 41);
+            btnCancel.TabIndex = 1;
+            btnCancel.Text = "取消(&C)";
+            btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnOK
+            // 
+            btnOK.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnOK.Location = new System.Drawing.Point(348, 13);
+            btnOK.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnOK.Name = "btnOK";
+            btnOK.Size = new System.Drawing.Size(106, 41);
+            btnOK.TabIndex = 0;
+            btnOK.Text = "確定(&O)";
+            btnOK.UseVisualStyleBackColor = true;
+            btnOK.Click += btnOK_Click;
             // 
             // configTextPrinterPanel
             // 
-            this.configTextPrinterPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.configTextPrinterPanel.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.configTextPrinterPanel.Location = new System.Drawing.Point(0, 0);
-            this.configTextPrinterPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.configTextPrinterPanel.Name = "configTextPrinterPanel";
-            this.configTextPrinterPanel.Size = new System.Drawing.Size(529, 164);
-            this.configTextPrinterPanel.TabIndex = 0;
-            this.configTextPrinterPanel.Load += new System.EventHandler(this.configTextPrinterPanel_Load);
+            configTextPrinterPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            configTextPrinterPanel.Location = new System.Drawing.Point(0, 0);
+            configTextPrinterPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            configTextPrinterPanel.Name = "configTextPrinterPanel";
+            configTextPrinterPanel.Size = new System.Drawing.Size(595, 208);
+            configTextPrinterPanel.TabIndex = 0;
             // 
             // ConfigTextPrinterForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 164);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.configTextPrinterPanel);
-            this.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "ConfigTextPrinterForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "設定明眼字印表機";
-            this.Load += new System.EventHandler(this.ConfigTextPrinterForm_Load);
-            this.panel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(595, 208);
+            Controls.Add(panel1);
+            Controls.Add(configTextPrinterPanel);
+            Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Name = "ConfigTextPrinterForm";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "設定明眼字印表機";
+            Load += ConfigTextPrinterForm_Load;
+            panel1.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion

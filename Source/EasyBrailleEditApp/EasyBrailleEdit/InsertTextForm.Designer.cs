@@ -28,1278 +28,1180 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InsertTextForm));
-            this.btnOk = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.toolBarSymbol1 = new System.Windows.Forms.ToolStrip();
-            this.btnSymbolComma = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolPeriod = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolDun = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolSemicolon = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolColon = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolQuestion = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolExclamation = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnTableOfContentDot = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolEtc = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolEtc2 = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolDash = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolDash2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSymbolSingleQuoteEng = new System.Windows.Forms.ToolStripButton();
-            this.btnSymboleDoubleQuoteEng = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolQuotationMarks = new System.Windows.Forms.ToolStripDropDownButton();
-            this.btnSymbolQuot1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSymbolQuot2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSymbolQuot3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSymbolDoubleQuote = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolRoundBracket = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolSquareBracket = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolBigBracket = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolSpecialNumber = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSymbolO = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSymbolX = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSymbolSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSymbolStar = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSymbolImportant = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSymbolMathO = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSymbolTemperature = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.toolBarMath = new System.Windows.Forms.ToolStrip();
-            this.btnMathTag = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolMul = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolDiv = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolMathEqual = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolMathNotEqual = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolMathLE = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolMathGE = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolNearEqual = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolMathBecause = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolMathSo = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolMathPlusMinus = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolMathAngle = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolMathVertical = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolArrows = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            this.doprdownBtnLines = new System.Windows.Forms.ToolStripDropDownButton();
-            this.btnTableMiddleLine = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnTableTopLine1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnTableBottomLine1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnTableTopLine2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnTableBottomLine2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.分隔線135246ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnNoDigitSymbol = new System.Windows.Forms.ToolStripButton();
-            this.btnQuotes = new System.Windows.Forms.ToolStripDropDownButton();
-            this.btnSymbolFullDots = new System.Windows.Forms.ToolStripButton();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtInput = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblError = new System.Windows.Forms.Label();
-            this.txtBraille = new System.Windows.Forms.TextBox();
-            this.lblErrorTitle = new System.Windows.Forms.Label();
-            this.toolBarSymbol3 = new System.Windows.Forms.ToolStrip();
-            this.btnSymbolDocTitle = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolOrgPageNum = new System.Windows.Forms.ToolStripButton();
-            this.btnTagBrailleComment = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolDel = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolEndTags = new System.Windows.Forms.ToolStripDropDownButton();
-            this.btnEndTag1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnEndTag2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnEndTag3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSymbolNumber = new System.Windows.Forms.ToolStripButton();
-            this.btnUpperPosition = new System.Windows.Forms.ToolStripButton();
-            this.btnChoiceDropdownList = new System.Windows.Forms.ToolStripDropDownButton();
-            this.btnChoiceBo = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnChoicePo = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnChoiceMo = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnChoiceFo = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSymbolName = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolBookName = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSymbolTime = new System.Windows.Forms.ToolStripButton();
-            this.btnRatio = new System.Windows.Forms.ToolStripButton();
-            this.btnSymbolCoord = new System.Windows.Forms.ToolStripButton();
-            this.btnFraction = new System.Windows.Forms.ToolStripButton();
-            this.btnUrl = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolBarSymbol1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.toolBarMath.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.toolBarSymbol3.SuspendLayout();
-            this.SuspendLayout();
+            btnOk = new System.Windows.Forms.Button();
+            btnCancel = new System.Windows.Forms.Button();
+            toolBarSymbol1 = new System.Windows.Forms.ToolStrip();
+            btnSymbolComma = new System.Windows.Forms.ToolStripButton();
+            btnSymbolPeriod = new System.Windows.Forms.ToolStripButton();
+            btnSymbolDun = new System.Windows.Forms.ToolStripButton();
+            btnSymbolSemicolon = new System.Windows.Forms.ToolStripButton();
+            btnSymbolColon = new System.Windows.Forms.ToolStripButton();
+            btnSymbolQuestion = new System.Windows.Forms.ToolStripButton();
+            btnSymbolExclamation = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            btnTableOfContentDot = new System.Windows.Forms.ToolStripButton();
+            btnSymbolEtc = new System.Windows.Forms.ToolStripButton();
+            btnSymbolEtc2 = new System.Windows.Forms.ToolStripButton();
+            btnSymbolDash = new System.Windows.Forms.ToolStripButton();
+            btnSymbolDash2 = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            btnSymbolSingleQuoteEng = new System.Windows.Forms.ToolStripButton();
+            btnSymboleDoubleQuoteEng = new System.Windows.Forms.ToolStripButton();
+            btnSymbolQuotationMarks = new System.Windows.Forms.ToolStripDropDownButton();
+            btnSymbolQuot1 = new System.Windows.Forms.ToolStripMenuItem();
+            btnSymbolQuot2 = new System.Windows.Forms.ToolStripMenuItem();
+            btnSymbolQuot3 = new System.Windows.Forms.ToolStripMenuItem();
+            btnSymbolDoubleQuote = new System.Windows.Forms.ToolStripButton();
+            btnSymbolRoundBracket = new System.Windows.Forms.ToolStripButton();
+            btnSymbolSquareBracket = new System.Windows.Forms.ToolStripButton();
+            btnSymbolBigBracket = new System.Windows.Forms.ToolStripButton();
+            btnSymbolSpecialNumber = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            btnSymbolO = new System.Windows.Forms.ToolStripMenuItem();
+            btnSymbolX = new System.Windows.Forms.ToolStripMenuItem();
+            btnSymbolSelect = new System.Windows.Forms.ToolStripMenuItem();
+            btnSymbolStar = new System.Windows.Forms.ToolStripMenuItem();
+            btnSymbolImportant = new System.Windows.Forms.ToolStripMenuItem();
+            btnSymbolMathO = new System.Windows.Forms.ToolStripMenuItem();
+            btnSymbolTemperature = new System.Windows.Forms.ToolStripMenuItem();
+            panel2 = new System.Windows.Forms.Panel();
+            toolBarMath = new System.Windows.Forms.ToolStrip();
+            btnMathTag = new System.Windows.Forms.ToolStripButton();
+            btnSymbolMul = new System.Windows.Forms.ToolStripButton();
+            btnSymbolDiv = new System.Windows.Forms.ToolStripButton();
+            btnSymbolMathEqual = new System.Windows.Forms.ToolStripButton();
+            btnSymbolMathNotEqual = new System.Windows.Forms.ToolStripButton();
+            btnSymbolMathLE = new System.Windows.Forms.ToolStripButton();
+            btnSymbolMathGE = new System.Windows.Forms.ToolStripButton();
+            btnSymbolNearEqual = new System.Windows.Forms.ToolStripButton();
+            btnSymbolMathBecause = new System.Windows.Forms.ToolStripButton();
+            btnSymbolMathSo = new System.Windows.Forms.ToolStripButton();
+            btnSymbolMathPlusMinus = new System.Windows.Forms.ToolStripButton();
+            btnSymbolMathAngle = new System.Windows.Forms.ToolStripButton();
+            btnSymbolMathVertical = new System.Windows.Forms.ToolStripButton();
+            btnSymbolArrows = new System.Windows.Forms.ToolStripDropDownButton();
+            toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            doprdownBtnLines = new System.Windows.Forms.ToolStripDropDownButton();
+            btnTableMiddleLine = new System.Windows.Forms.ToolStripMenuItem();
+            btnTableTopLine1 = new System.Windows.Forms.ToolStripMenuItem();
+            btnTableBottomLine1 = new System.Windows.Forms.ToolStripMenuItem();
+            btnTableTopLine2 = new System.Windows.Forms.ToolStripMenuItem();
+            btnTableBottomLine2 = new System.Windows.Forms.ToolStripMenuItem();
+            分隔線135246ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            btnNoDigitSymbol = new System.Windows.Forms.ToolStripButton();
+            btnQuotes = new System.Windows.Forms.ToolStripDropDownButton();
+            btnSymbolFullDots = new System.Windows.Forms.ToolStripButton();
+            panel3 = new System.Windows.Forms.Panel();
+            panel1 = new System.Windows.Forms.Panel();
+            label1 = new System.Windows.Forms.Label();
+            txtInput = new System.Windows.Forms.TextBox();
+            label2 = new System.Windows.Forms.Label();
+            lblError = new System.Windows.Forms.Label();
+            txtBraille = new System.Windows.Forms.TextBox();
+            lblErrorTitle = new System.Windows.Forms.Label();
+            toolBarSymbol3 = new System.Windows.Forms.ToolStrip();
+            btnSymbolDocTitle = new System.Windows.Forms.ToolStripButton();
+            btnSymbolOrgPageNum = new System.Windows.Forms.ToolStripButton();
+            btnTagBrailleComment = new System.Windows.Forms.ToolStripButton();
+            btnSymbolDel = new System.Windows.Forms.ToolStripButton();
+            btnSymbolEndTags = new System.Windows.Forms.ToolStripDropDownButton();
+            btnEndTag1 = new System.Windows.Forms.ToolStripMenuItem();
+            btnEndTag2 = new System.Windows.Forms.ToolStripMenuItem();
+            btnEndTag3 = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
+            btnSymbolNumber = new System.Windows.Forms.ToolStripButton();
+            btnUpperPosition = new System.Windows.Forms.ToolStripButton();
+            btnChoiceDropdownList = new System.Windows.Forms.ToolStripDropDownButton();
+            btnChoiceBo = new System.Windows.Forms.ToolStripMenuItem();
+            btnChoicePo = new System.Windows.Forms.ToolStripMenuItem();
+            btnChoiceMo = new System.Windows.Forms.ToolStripMenuItem();
+            btnChoiceFo = new System.Windows.Forms.ToolStripMenuItem();
+            btnSymbolName = new System.Windows.Forms.ToolStripButton();
+            btnSymbolBookName = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            btnSymbolTime = new System.Windows.Forms.ToolStripButton();
+            btnRatio = new System.Windows.Forms.ToolStripButton();
+            btnSymbolCoord = new System.Windows.Forms.ToolStripButton();
+            btnFraction = new System.Windows.Forms.ToolStripButton();
+            btnUrl = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
+            toolTip1 = new System.Windows.Forms.ToolTip(components);
+            toolBarSymbol1.SuspendLayout();
+            panel2.SuspendLayout();
+            toolBarMath.SuspendLayout();
+            panel3.SuspendLayout();
+            panel1.SuspendLayout();
+            toolBarSymbol3.SuspendLayout();
+            SuspendLayout();
             // 
             // btnOk
             // 
-            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(990, 14);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(95, 34);
-            this.btnOk.TabIndex = 5;
-            this.btnOk.Text = "確定";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnOk.Location = new System.Drawing.Point(1114, 15);
+            btnOk.Name = "btnOk";
+            btnOk.Size = new System.Drawing.Size(107, 36);
+            btnOk.TabIndex = 5;
+            btnOk.Text = "確定";
+            btnOk.UseVisualStyleBackColor = true;
+            btnOk.Click += btnOk_Click;
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(1101, 14);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(95, 34);
-            this.btnCancel.TabIndex = 6;
-            this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            btnCancel.Location = new System.Drawing.Point(1239, 15);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(107, 36);
+            btnCancel.TabIndex = 6;
+            btnCancel.Text = "取消";
+            btnCancel.UseVisualStyleBackColor = true;
             // 
             // toolBarSymbol1
             // 
-            this.toolBarSymbol1.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.toolBarSymbol1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolBarSymbol1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolBarSymbol1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSymbolComma,
-            this.btnSymbolPeriod,
-            this.btnSymbolDun,
-            this.btnSymbolSemicolon,
-            this.btnSymbolColon,
-            this.btnSymbolQuestion,
-            this.btnSymbolExclamation,
-            this.toolStripSeparator7,
-            this.btnTableOfContentDot,
-            this.btnSymbolEtc,
-            this.btnSymbolEtc2,
-            this.btnSymbolDash,
-            this.btnSymbolDash2,
-            this.toolStripSeparator9,
-            this.btnSymbolSingleQuoteEng,
-            this.btnSymboleDoubleQuoteEng,
-            this.btnSymbolQuotationMarks,
-            this.btnSymbolDoubleQuote,
-            this.btnSymbolRoundBracket,
-            this.btnSymbolSquareBracket,
-            this.btnSymbolBigBracket,
-            this.btnSymbolSpecialNumber,
-            this.toolStripSeparator8,
-            this.btnSymbolO,
-            this.btnSymbolX,
-            this.btnSymbolSelect,
-            this.btnSymbolStar,
-            this.btnSymbolImportant,
-            this.btnSymbolMathO,
-            this.btnSymbolTemperature});
-            this.toolBarSymbol1.Location = new System.Drawing.Point(0, 0);
-            this.toolBarSymbol1.Name = "toolBarSymbol1";
-            this.toolBarSymbol1.Size = new System.Drawing.Size(1217, 26);
-            this.toolBarSymbol1.TabIndex = 15;
-            this.toolBarSymbol1.Text = "toolStrip2";
-            this.toolBarSymbol1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
+            toolBarSymbol1.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            toolBarSymbol1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolBarSymbol1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolBarSymbol1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnSymbolComma, btnSymbolPeriod, btnSymbolDun, btnSymbolSemicolon, btnSymbolColon, btnSymbolQuestion, btnSymbolExclamation, toolStripSeparator7, btnTableOfContentDot, btnSymbolEtc, btnSymbolEtc2, btnSymbolDash, btnSymbolDash2, toolStripSeparator9, btnSymbolSingleQuoteEng, btnSymboleDoubleQuoteEng, btnSymbolQuotationMarks, btnSymbolDoubleQuote, btnSymbolRoundBracket, btnSymbolSquareBracket, btnSymbolBigBracket, btnSymbolSpecialNumber, toolStripSeparator8, btnSymbolO, btnSymbolX, btnSymbolSelect, btnSymbolStar, btnSymbolImportant, btnSymbolMathO, btnSymbolTemperature });
+            toolBarSymbol1.Location = new System.Drawing.Point(0, 0);
+            toolBarSymbol1.Name = "toolBarSymbol1";
+            toolBarSymbol1.Size = new System.Drawing.Size(1369, 26);
+            toolBarSymbol1.TabIndex = 15;
+            toolBarSymbol1.Text = "toolStrip2";
+            toolBarSymbol1.ItemClicked += toolBarSymbol1_ItemClicked;
             // 
             // btnSymbolComma
             // 
-            this.btnSymbolComma.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolComma.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolComma.Image")));
-            this.btnSymbolComma.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolComma.Name = "btnSymbolComma";
-            this.btnSymbolComma.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolComma.Text = "，";
-            this.btnSymbolComma.ToolTipText = "逗號";
+            btnSymbolComma.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolComma.Image = (System.Drawing.Image)resources.GetObject("btnSymbolComma.Image");
+            btnSymbolComma.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolComma.Name = "btnSymbolComma";
+            btnSymbolComma.Size = new System.Drawing.Size(28, 23);
+            btnSymbolComma.Text = "，";
+            btnSymbolComma.ToolTipText = "逗號";
             // 
             // btnSymbolPeriod
             // 
-            this.btnSymbolPeriod.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolPeriod.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolPeriod.Image")));
-            this.btnSymbolPeriod.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolPeriod.Name = "btnSymbolPeriod";
-            this.btnSymbolPeriod.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolPeriod.Text = "。";
-            this.btnSymbolPeriod.ToolTipText = "句號";
+            btnSymbolPeriod.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolPeriod.Image = (System.Drawing.Image)resources.GetObject("btnSymbolPeriod.Image");
+            btnSymbolPeriod.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolPeriod.Name = "btnSymbolPeriod";
+            btnSymbolPeriod.Size = new System.Drawing.Size(26, 22);
+            btnSymbolPeriod.Text = "。";
+            btnSymbolPeriod.ToolTipText = "句號";
             // 
             // btnSymbolDun
             // 
-            this.btnSymbolDun.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolDun.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDun.Image")));
-            this.btnSymbolDun.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolDun.Name = "btnSymbolDun";
-            this.btnSymbolDun.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolDun.Text = "、";
-            this.btnSymbolDun.ToolTipText = "頓號";
+            btnSymbolDun.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolDun.Image = (System.Drawing.Image)resources.GetObject("btnSymbolDun.Image");
+            btnSymbolDun.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolDun.Name = "btnSymbolDun";
+            btnSymbolDun.Size = new System.Drawing.Size(26, 22);
+            btnSymbolDun.Text = "、";
+            btnSymbolDun.ToolTipText = "頓號";
             // 
             // btnSymbolSemicolon
             // 
-            this.btnSymbolSemicolon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolSemicolon.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolSemicolon.Image")));
-            this.btnSymbolSemicolon.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolSemicolon.Name = "btnSymbolSemicolon";
-            this.btnSymbolSemicolon.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolSemicolon.Text = "；";
-            this.btnSymbolSemicolon.ToolTipText = "分號";
+            btnSymbolSemicolon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolSemicolon.Image = (System.Drawing.Image)resources.GetObject("btnSymbolSemicolon.Image");
+            btnSymbolSemicolon.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolSemicolon.Name = "btnSymbolSemicolon";
+            btnSymbolSemicolon.Size = new System.Drawing.Size(26, 22);
+            btnSymbolSemicolon.Text = "；";
+            btnSymbolSemicolon.ToolTipText = "分號";
             // 
             // btnSymbolColon
             // 
-            this.btnSymbolColon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolColon.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolColon.Image")));
-            this.btnSymbolColon.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolColon.Name = "btnSymbolColon";
-            this.btnSymbolColon.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolColon.Text = "：";
-            this.btnSymbolColon.ToolTipText = "冒號";
+            btnSymbolColon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolColon.Image = (System.Drawing.Image)resources.GetObject("btnSymbolColon.Image");
+            btnSymbolColon.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolColon.Name = "btnSymbolColon";
+            btnSymbolColon.Size = new System.Drawing.Size(26, 22);
+            btnSymbolColon.Text = "：";
+            btnSymbolColon.ToolTipText = "冒號";
             // 
             // btnSymbolQuestion
             // 
-            this.btnSymbolQuestion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolQuestion.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuestion.Image")));
-            this.btnSymbolQuestion.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolQuestion.Name = "btnSymbolQuestion";
-            this.btnSymbolQuestion.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolQuestion.Text = "？";
-            this.btnSymbolQuestion.ToolTipText = "問號";
+            btnSymbolQuestion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolQuestion.Image = (System.Drawing.Image)resources.GetObject("btnSymbolQuestion.Image");
+            btnSymbolQuestion.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolQuestion.Name = "btnSymbolQuestion";
+            btnSymbolQuestion.Size = new System.Drawing.Size(26, 22);
+            btnSymbolQuestion.Text = "？";
+            btnSymbolQuestion.ToolTipText = "問號";
             // 
             // btnSymbolExclamation
             // 
-            this.btnSymbolExclamation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolExclamation.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolExclamation.Image")));
-            this.btnSymbolExclamation.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolExclamation.Name = "btnSymbolExclamation";
-            this.btnSymbolExclamation.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolExclamation.Text = "！";
-            this.btnSymbolExclamation.ToolTipText = "驚嘆號";
+            btnSymbolExclamation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolExclamation.Image = (System.Drawing.Image)resources.GetObject("btnSymbolExclamation.Image");
+            btnSymbolExclamation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolExclamation.Name = "btnSymbolExclamation";
+            btnSymbolExclamation.Size = new System.Drawing.Size(26, 22);
+            btnSymbolExclamation.Text = "！";
+            btnSymbolExclamation.ToolTipText = "驚嘆號";
             // 
             // toolStripSeparator7
             // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 26);
+            toolStripSeparator7.Name = "toolStripSeparator7";
+            toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
             // 
             // btnTableOfContentDot
             // 
-            this.btnTableOfContentDot.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnTableOfContentDot.Image = ((System.Drawing.Image)(resources.GetObject("btnTableOfContentDot.Image")));
-            this.btnTableOfContentDot.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTableOfContentDot.Name = "btnTableOfContentDot";
-            this.btnTableOfContentDot.Size = new System.Drawing.Size(32, 23);
-            this.btnTableOfContentDot.Text = "﹒";
-            this.btnTableOfContentDot.ToolTipText = "目錄的點點";
+            btnTableOfContentDot.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnTableOfContentDot.Image = (System.Drawing.Image)resources.GetObject("btnTableOfContentDot.Image");
+            btnTableOfContentDot.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnTableOfContentDot.Name = "btnTableOfContentDot";
+            btnTableOfContentDot.Size = new System.Drawing.Size(26, 22);
+            btnTableOfContentDot.Text = "﹒";
+            btnTableOfContentDot.ToolTipText = "目錄的點點";
             // 
             // btnSymbolEtc
             // 
-            this.btnSymbolEtc.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.btnSymbolEtc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolEtc.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolEtc.Image")));
-            this.btnSymbolEtc.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolEtc.Name = "btnSymbolEtc";
-            this.btnSymbolEtc.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolEtc.Text = "…";
-            this.btnSymbolEtc.ToolTipText = "短刪節號";
+            btnSymbolEtc.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            btnSymbolEtc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolEtc.Image = (System.Drawing.Image)resources.GetObject("btnSymbolEtc.Image");
+            btnSymbolEtc.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolEtc.Name = "btnSymbolEtc";
+            btnSymbolEtc.Size = new System.Drawing.Size(26, 22);
+            btnSymbolEtc.Text = "…";
+            btnSymbolEtc.ToolTipText = "短刪節號";
             // 
             // btnSymbolEtc2
             // 
-            this.btnSymbolEtc2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolEtc2.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolEtc2.Image")));
-            this.btnSymbolEtc2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolEtc2.Name = "btnSymbolEtc2";
-            this.btnSymbolEtc2.Size = new System.Drawing.Size(51, 23);
-            this.btnSymbolEtc2.Text = "……";
-            this.btnSymbolEtc2.ToolTipText = "刪節號";
+            btnSymbolEtc2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolEtc2.Image = (System.Drawing.Image)resources.GetObject("btnSymbolEtc2.Image");
+            btnSymbolEtc2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolEtc2.Name = "btnSymbolEtc2";
+            btnSymbolEtc2.Size = new System.Drawing.Size(41, 22);
+            btnSymbolEtc2.Text = "……";
+            btnSymbolEtc2.ToolTipText = "刪節號";
             // 
             // btnSymbolDash
             // 
-            this.btnSymbolDash.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolDash.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDash.Image")));
-            this.btnSymbolDash.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolDash.Name = "btnSymbolDash";
-            this.btnSymbolDash.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolDash.Text = "─";
-            this.btnSymbolDash.ToolTipText = "短破折號";
+            btnSymbolDash.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolDash.Image = (System.Drawing.Image)resources.GetObject("btnSymbolDash.Image");
+            btnSymbolDash.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolDash.Name = "btnSymbolDash";
+            btnSymbolDash.Size = new System.Drawing.Size(26, 22);
+            btnSymbolDash.Text = "─";
+            btnSymbolDash.ToolTipText = "短破折號";
             // 
             // btnSymbolDash2
             // 
-            this.btnSymbolDash2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolDash2.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDash2.Image")));
-            this.btnSymbolDash2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolDash2.Name = "btnSymbolDash2";
-            this.btnSymbolDash2.Size = new System.Drawing.Size(51, 23);
-            this.btnSymbolDash2.Text = "──";
-            this.btnSymbolDash2.ToolTipText = "破折號";
+            btnSymbolDash2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolDash2.Image = (System.Drawing.Image)resources.GetObject("btnSymbolDash2.Image");
+            btnSymbolDash2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolDash2.Name = "btnSymbolDash2";
+            btnSymbolDash2.Size = new System.Drawing.Size(41, 22);
+            btnSymbolDash2.Text = "──";
+            btnSymbolDash2.ToolTipText = "破折號";
             // 
             // toolStripSeparator9
             // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 26);
+            toolStripSeparator9.Name = "toolStripSeparator9";
+            toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
             // 
             // btnSymbolSingleQuoteEng
             // 
-            this.btnSymbolSingleQuoteEng.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolSingleQuoteEng.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolSingleQuoteEng.Image")));
-            this.btnSymbolSingleQuoteEng.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolSingleQuoteEng.Name = "btnSymbolSingleQuoteEng";
-            this.btnSymbolSingleQuoteEng.Size = new System.Drawing.Size(56, 23);
-            this.btnSymbolSingleQuoteEng.Tag = "‘|’";
-            this.btnSymbolSingleQuoteEng.Text = "‘ ’";
-            this.btnSymbolSingleQuoteEng.ToolTipText = "單引號";
+            btnSymbolSingleQuoteEng.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolSingleQuoteEng.Image = (System.Drawing.Image)resources.GetObject("btnSymbolSingleQuoteEng.Image");
+            btnSymbolSingleQuoteEng.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolSingleQuoteEng.Name = "btnSymbolSingleQuoteEng";
+            btnSymbolSingleQuoteEng.Size = new System.Drawing.Size(45, 22);
+            btnSymbolSingleQuoteEng.Tag = "‘|’";
+            btnSymbolSingleQuoteEng.Text = "‘ ’";
+            btnSymbolSingleQuoteEng.ToolTipText = "單引號";
             // 
             // btnSymboleDoubleQuoteEng
             // 
-            this.btnSymboleDoubleQuoteEng.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymboleDoubleQuoteEng.Image = ((System.Drawing.Image)(resources.GetObject("btnSymboleDoubleQuoteEng.Image")));
-            this.btnSymboleDoubleQuoteEng.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymboleDoubleQuoteEng.Name = "btnSymboleDoubleQuoteEng";
-            this.btnSymboleDoubleQuoteEng.Size = new System.Drawing.Size(56, 23);
-            this.btnSymboleDoubleQuoteEng.Tag = "“|”";
-            this.btnSymboleDoubleQuoteEng.Text = "“ ”";
-            this.btnSymboleDoubleQuoteEng.ToolTipText = "雙引號";
+            btnSymboleDoubleQuoteEng.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymboleDoubleQuoteEng.Image = (System.Drawing.Image)resources.GetObject("btnSymboleDoubleQuoteEng.Image");
+            btnSymboleDoubleQuoteEng.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymboleDoubleQuoteEng.Name = "btnSymboleDoubleQuoteEng";
+            btnSymboleDoubleQuoteEng.Size = new System.Drawing.Size(45, 22);
+            btnSymboleDoubleQuoteEng.Tag = "“|”";
+            btnSymboleDoubleQuoteEng.Text = "“ ”";
+            btnSymboleDoubleQuoteEng.ToolTipText = "雙引號";
             // 
             // btnSymbolQuotationMarks
             // 
-            this.btnSymbolQuotationMarks.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolQuotationMarks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSymbolQuot1,
-            this.btnSymbolQuot2,
-            this.btnSymbolQuot3});
-            this.btnSymbolQuotationMarks.Font = new System.Drawing.Font("PMingLiU", 11.25F);
-            this.btnSymbolQuotationMarks.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuotationMarks.Image")));
-            this.btnSymbolQuotationMarks.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolQuotationMarks.Name = "btnSymbolQuotationMarks";
-            this.btnSymbolQuotationMarks.Size = new System.Drawing.Size(61, 23);
-            this.btnSymbolQuotationMarks.Tag = "NA";
-            this.btnSymbolQuotationMarks.Text = "「」";
-            this.btnSymbolQuotationMarks.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnSymbolQuotationMarks.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
+            btnSymbolQuotationMarks.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolQuotationMarks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { btnSymbolQuot1, btnSymbolQuot2, btnSymbolQuot3 });
+            btnSymbolQuotationMarks.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnSymbolQuotationMarks.Image = (System.Drawing.Image)resources.GetObject("btnSymbolQuotationMarks.Image");
+            btnSymbolQuotationMarks.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolQuotationMarks.Name = "btnSymbolQuotationMarks";
+            btnSymbolQuotationMarks.Size = new System.Drawing.Size(50, 22);
+            btnSymbolQuotationMarks.Tag = "NA";
+            btnSymbolQuotationMarks.Text = "「」";
+            btnSymbolQuotationMarks.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            btnSymbolQuotationMarks.DropDownItemClicked += toolBarSymbol1_ItemClicked;
             // 
             // btnSymbolQuot1
             // 
-            this.btnSymbolQuot1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolQuot1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSymbolQuot1.Name = "btnSymbolQuot1";
-            this.btnSymbolQuot1.Size = new System.Drawing.Size(260, 38);
-            this.btnSymbolQuot1.Tag = "「|」";
-            this.btnSymbolQuot1.Text = "一般引號「」";
-            this.btnSymbolQuot1.ToolTipText = "一般中文引號，若以 <數學> 區塊包住，點字會不同。";
+            btnSymbolQuot1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolQuot1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnSymbolQuot1.Name = "btnSymbolQuot1";
+            btnSymbolQuot1.Size = new System.Drawing.Size(230, 38);
+            btnSymbolQuot1.Tag = "「|」";
+            btnSymbolQuot1.Text = "一般引號「」";
+            btnSymbolQuot1.ToolTipText = "一般中文引號，若以 <數學> 區塊包住，點字會不同。";
             // 
             // btnSymbolQuot2
             // 
-            this.btnSymbolQuot2.Font = new System.Drawing.Font("PMingLiU", 11.25F);
-            this.btnSymbolQuot2.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuot2.Image")));
-            this.btnSymbolQuot2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSymbolQuot2.Name = "btnSymbolQuot2";
-            this.btnSymbolQuot2.Size = new System.Drawing.Size(260, 38);
-            this.btnSymbolQuot2.Tag = "<引號一>|</引號一>";
-            this.btnSymbolQuot2.Text = "特殊引號一";
-            this.btnSymbolQuot2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            btnSymbolQuot2.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnSymbolQuot2.Image = (System.Drawing.Image)resources.GetObject("btnSymbolQuot2.Image");
+            btnSymbolQuot2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnSymbolQuot2.Name = "btnSymbolQuot2";
+            btnSymbolQuot2.Size = new System.Drawing.Size(230, 38);
+            btnSymbolQuot2.Tag = "<引號一>|</引號一>";
+            btnSymbolQuot2.Text = "特殊引號一";
+            btnSymbolQuot2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
             // btnSymbolQuot3
             // 
-            this.btnSymbolQuot3.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolQuot3.Image")));
-            this.btnSymbolQuot3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSymbolQuot3.Name = "btnSymbolQuot3";
-            this.btnSymbolQuot3.Size = new System.Drawing.Size(260, 38);
-            this.btnSymbolQuot3.Tag = "<引號二>|</引號二>";
-            this.btnSymbolQuot3.Text = "特殊引號二";
-            this.btnSymbolQuot3.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            btnSymbolQuot3.Image = (System.Drawing.Image)resources.GetObject("btnSymbolQuot3.Image");
+            btnSymbolQuot3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnSymbolQuot3.Name = "btnSymbolQuot3";
+            btnSymbolQuot3.Size = new System.Drawing.Size(230, 38);
+            btnSymbolQuot3.Tag = "<引號二>|</引號二>";
+            btnSymbolQuot3.Text = "特殊引號二";
+            btnSymbolQuot3.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
             // btnSymbolDoubleQuote
             // 
-            this.btnSymbolDoubleQuote.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolDoubleQuote.Font = new System.Drawing.Font("PMingLiU", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnSymbolDoubleQuote.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDoubleQuote.Image")));
-            this.btnSymbolDoubleQuote.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolDoubleQuote.Name = "btnSymbolDoubleQuote";
-            this.btnSymbolDoubleQuote.Size = new System.Drawing.Size(46, 23);
-            this.btnSymbolDoubleQuote.Tag = "『|』";
-            this.btnSymbolDoubleQuote.Text = "『』";
-            this.btnSymbolDoubleQuote.ToolTipText = "雙引號";
+            btnSymbolDoubleQuote.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolDoubleQuote.Font = new System.Drawing.Font("PMingLiU", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnSymbolDoubleQuote.Image = (System.Drawing.Image)resources.GetObject("btnSymbolDoubleQuote.Image");
+            btnSymbolDoubleQuote.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolDoubleQuote.Name = "btnSymbolDoubleQuote";
+            btnSymbolDoubleQuote.Size = new System.Drawing.Size(37, 22);
+            btnSymbolDoubleQuote.Tag = "『|』";
+            btnSymbolDoubleQuote.Text = "『』";
+            btnSymbolDoubleQuote.ToolTipText = "雙引號";
             // 
             // btnSymbolRoundBracket
             // 
-            this.btnSymbolRoundBracket.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolRoundBracket.Font = new System.Drawing.Font("PMingLiU", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnSymbolRoundBracket.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolRoundBracket.Image")));
-            this.btnSymbolRoundBracket.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolRoundBracket.Name = "btnSymbolRoundBracket";
-            this.btnSymbolRoundBracket.Size = new System.Drawing.Size(46, 23);
-            this.btnSymbolRoundBracket.Tag = "（|）";
-            this.btnSymbolRoundBracket.Text = "（）";
-            this.btnSymbolRoundBracket.ToolTipText = "圓括弧";
+            btnSymbolRoundBracket.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolRoundBracket.Font = new System.Drawing.Font("PMingLiU", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnSymbolRoundBracket.Image = (System.Drawing.Image)resources.GetObject("btnSymbolRoundBracket.Image");
+            btnSymbolRoundBracket.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolRoundBracket.Name = "btnSymbolRoundBracket";
+            btnSymbolRoundBracket.Size = new System.Drawing.Size(37, 22);
+            btnSymbolRoundBracket.Tag = "（|）";
+            btnSymbolRoundBracket.Text = "（）";
+            btnSymbolRoundBracket.ToolTipText = "圓括弧";
             // 
             // btnSymbolSquareBracket
             // 
-            this.btnSymbolSquareBracket.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolSquareBracket.Font = new System.Drawing.Font("PMingLiU", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnSymbolSquareBracket.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolSquareBracket.Image")));
-            this.btnSymbolSquareBracket.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolSquareBracket.Name = "btnSymbolSquareBracket";
-            this.btnSymbolSquareBracket.Size = new System.Drawing.Size(46, 23);
-            this.btnSymbolSquareBracket.Tag = "〔|〕";
-            this.btnSymbolSquareBracket.Text = "〔〕";
-            this.btnSymbolSquareBracket.ToolTipText = "方括號";
+            btnSymbolSquareBracket.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolSquareBracket.Font = new System.Drawing.Font("PMingLiU", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnSymbolSquareBracket.Image = (System.Drawing.Image)resources.GetObject("btnSymbolSquareBracket.Image");
+            btnSymbolSquareBracket.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolSquareBracket.Name = "btnSymbolSquareBracket";
+            btnSymbolSquareBracket.Size = new System.Drawing.Size(37, 22);
+            btnSymbolSquareBracket.Tag = "〔|〕";
+            btnSymbolSquareBracket.Text = "〔〕";
+            btnSymbolSquareBracket.ToolTipText = "方括號";
             // 
             // btnSymbolBigBracket
             // 
-            this.btnSymbolBigBracket.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolBigBracket.Font = new System.Drawing.Font("PMingLiU", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnSymbolBigBracket.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolBigBracket.Image")));
-            this.btnSymbolBigBracket.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolBigBracket.Name = "btnSymbolBigBracket";
-            this.btnSymbolBigBracket.Size = new System.Drawing.Size(46, 23);
-            this.btnSymbolBigBracket.Tag = "｛|｝";
-            this.btnSymbolBigBracket.Text = "｛｝";
-            this.btnSymbolBigBracket.ToolTipText = "大括號";
+            btnSymbolBigBracket.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolBigBracket.Font = new System.Drawing.Font("PMingLiU", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnSymbolBigBracket.Image = (System.Drawing.Image)resources.GetObject("btnSymbolBigBracket.Image");
+            btnSymbolBigBracket.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolBigBracket.Name = "btnSymbolBigBracket";
+            btnSymbolBigBracket.Size = new System.Drawing.Size(37, 22);
+            btnSymbolBigBracket.Tag = "｛|｝";
+            btnSymbolBigBracket.Text = "｛｝";
+            btnSymbolBigBracket.ToolTipText = "大括號";
             // 
             // btnSymbolSpecialNumber
             // 
-            this.btnSymbolSpecialNumber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolSpecialNumber.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolSpecialNumber.Image")));
-            this.btnSymbolSpecialNumber.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolSpecialNumber.Name = "btnSymbolSpecialNumber";
-            this.btnSymbolSpecialNumber.Size = new System.Drawing.Size(51, 23);
-            this.btnSymbolSpecialNumber.Tag = "【|】";
-            this.btnSymbolSpecialNumber.Text = "【】";
-            this.btnSymbolSpecialNumber.ToolTipText = "選擇題的答案編號，例如：【2】。";
+            btnSymbolSpecialNumber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolSpecialNumber.Image = (System.Drawing.Image)resources.GetObject("btnSymbolSpecialNumber.Image");
+            btnSymbolSpecialNumber.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolSpecialNumber.Name = "btnSymbolSpecialNumber";
+            btnSymbolSpecialNumber.Size = new System.Drawing.Size(41, 22);
+            btnSymbolSpecialNumber.Tag = "【|】";
+            btnSymbolSpecialNumber.Text = "【】";
+            btnSymbolSpecialNumber.ToolTipText = "選擇題的答案編號，例如：【2】。";
             // 
             // toolStripSeparator8
             // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 26);
+            toolStripSeparator8.Name = "toolStripSeparator8";
+            toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
             // 
             // btnSymbolO
             // 
-            this.btnSymbolO.Name = "btnSymbolO";
-            this.btnSymbolO.Size = new System.Drawing.Size(40, 26);
-            this.btnSymbolO.Text = "○";
-            this.btnSymbolO.ToolTipText = "是非題的打圈符號";
+            btnSymbolO.Name = "btnSymbolO";
+            btnSymbolO.Size = new System.Drawing.Size(34, 25);
+            btnSymbolO.Text = "○";
+            btnSymbolO.ToolTipText = "是非題的打圈符號";
             // 
             // btnSymbolX
             // 
-            this.btnSymbolX.Name = "btnSymbolX";
-            this.btnSymbolX.Size = new System.Drawing.Size(40, 26);
-            this.btnSymbolX.Text = "╳";
-            this.btnSymbolX.ToolTipText = "是非題的打叉符號";
+            btnSymbolX.Name = "btnSymbolX";
+            btnSymbolX.Size = new System.Drawing.Size(34, 25);
+            btnSymbolX.Text = "╳";
+            btnSymbolX.ToolTipText = "是非題的打叉符號";
             // 
             // btnSymbolSelect
             // 
-            this.btnSymbolSelect.Name = "btnSymbolSelect";
-            this.btnSymbolSelect.Size = new System.Drawing.Size(40, 26);
-            this.btnSymbolSelect.Text = "√";
-            this.btnSymbolSelect.ToolTipText = "打勾符號（注意：\"ˇ\" 用於表示注音的三聲符號）";
+            btnSymbolSelect.Name = "btnSymbolSelect";
+            btnSymbolSelect.Size = new System.Drawing.Size(34, 25);
+            btnSymbolSelect.Text = "√";
+            btnSymbolSelect.ToolTipText = "打勾符號（注意：\"ˇ\" 用於表示注音的三聲符號）";
             // 
             // btnSymbolStar
             // 
-            this.btnSymbolStar.Name = "btnSymbolStar";
-            this.btnSymbolStar.Size = new System.Drawing.Size(40, 26);
-            this.btnSymbolStar.Text = "※";
-            this.btnSymbolStar.ToolTipText = "星標號";
+            btnSymbolStar.Name = "btnSymbolStar";
+            btnSymbolStar.Size = new System.Drawing.Size(34, 25);
+            btnSymbolStar.Text = "※";
+            btnSymbolStar.ToolTipText = "星標號";
             // 
             // btnSymbolImportant
             // 
-            this.btnSymbolImportant.Name = "btnSymbolImportant";
-            this.btnSymbolImportant.Size = new System.Drawing.Size(40, 26);
-            this.btnSymbolImportant.Text = "◎";
-            this.btnSymbolImportant.ToolTipText = "精讀號";
+            btnSymbolImportant.Name = "btnSymbolImportant";
+            btnSymbolImportant.Size = new System.Drawing.Size(34, 25);
+            btnSymbolImportant.Text = "◎";
+            btnSymbolImportant.ToolTipText = "精讀號";
             // 
             // btnSymbolMathO
             // 
-            this.btnSymbolMathO.Name = "btnSymbolMathO";
-            this.btnSymbolMathO.Size = new System.Drawing.Size(40, 26);
-            this.btnSymbolMathO.Text = "∘";
-            this.btnSymbolMathO.ToolTipText = "度";
+            btnSymbolMathO.Name = "btnSymbolMathO";
+            btnSymbolMathO.Size = new System.Drawing.Size(34, 25);
+            btnSymbolMathO.Text = "∘";
+            btnSymbolMathO.ToolTipText = "度";
             // 
             // btnSymbolTemperature
             // 
-            this.btnSymbolTemperature.Name = "btnSymbolTemperature";
-            this.btnSymbolTemperature.Size = new System.Drawing.Size(40, 26);
-            this.btnSymbolTemperature.Text = "℃";
-            this.btnSymbolTemperature.ToolTipText = "溫度符號，與前面的數字連書，後加空方。";
+            btnSymbolTemperature.Name = "btnSymbolTemperature";
+            btnSymbolTemperature.Size = new System.Drawing.Size(34, 25);
+            btnSymbolTemperature.Text = "℃";
+            btnSymbolTemperature.ToolTipText = "溫度符號，與前面的數字連書，後加空方。";
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.btnOk);
-            this.panel2.Controls.Add(this.btnCancel);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 663);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1217, 71);
-            this.panel2.TabIndex = 0;
+            panel2.Controls.Add(btnOk);
+            panel2.Controls.Add(btnCancel);
+            panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panel2.Location = new System.Drawing.Point(0, 700);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(1369, 75);
+            panel2.TabIndex = 0;
             // 
             // toolBarMath
             // 
-            this.toolBarMath.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.toolBarMath.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolBarMath.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolBarMath.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnMathTag,
-            this.btnSymbolMul,
-            this.btnSymbolDiv,
-            this.btnSymbolMathEqual,
-            this.btnSymbolMathNotEqual,
-            this.btnSymbolMathLE,
-            this.btnSymbolMathGE,
-            this.btnSymbolNearEqual,
-            this.btnSymbolMathBecause,
-            this.btnSymbolMathSo,
-            this.btnSymbolMathPlusMinus,
-            this.btnSymbolMathAngle,
-            this.btnSymbolMathVertical,
-            this.btnSymbolArrows,
-            this.toolStripSeparator15,
-            this.doprdownBtnLines,
-            this.toolStripSeparator1,
-            this.btnNoDigitSymbol,
-            this.btnQuotes});
-            this.toolBarMath.Location = new System.Drawing.Point(0, 26);
-            this.toolBarMath.Name = "toolBarMath";
-            this.toolBarMath.Size = new System.Drawing.Size(1217, 26);
-            this.toolBarMath.TabIndex = 18;
-            this.toolBarMath.Text = "toolStrip3";
-            this.toolBarMath.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarMath_ItemClicked);
+            toolBarMath.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            toolBarMath.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolBarMath.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolBarMath.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnMathTag, btnSymbolMul, btnSymbolDiv, btnSymbolMathEqual, btnSymbolMathNotEqual, btnSymbolMathLE, btnSymbolMathGE, btnSymbolNearEqual, btnSymbolMathBecause, btnSymbolMathSo, btnSymbolMathPlusMinus, btnSymbolMathAngle, btnSymbolMathVertical, btnSymbolArrows, toolStripSeparator15, doprdownBtnLines, toolStripSeparator1, btnNoDigitSymbol, btnQuotes });
+            toolBarMath.Location = new System.Drawing.Point(0, 26);
+            toolBarMath.Name = "toolBarMath";
+            toolBarMath.Size = new System.Drawing.Size(1369, 26);
+            toolBarMath.TabIndex = 18;
+            toolBarMath.Text = "toolStrip3";
+            toolBarMath.ItemClicked += toolBarMath_ItemClicked;
             // 
             // btnMathTag
             // 
-            this.btnMathTag.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnMathTag.Image = ((System.Drawing.Image)(resources.GetObject("btnMathTag.Image")));
-            this.btnMathTag.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMathTag.Name = "btnMathTag";
-            this.btnMathTag.Size = new System.Drawing.Size(89, 23);
-            this.btnMathTag.Tag = "<數學>|</數學>";
-            this.btnMathTag.Text = "數學區塊";
+            btnMathTag.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnMathTag.Image = (System.Drawing.Image)resources.GetObject("btnMathTag.Image");
+            btnMathTag.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnMathTag.Name = "btnMathTag";
+            btnMathTag.Size = new System.Drawing.Size(71, 22);
+            btnMathTag.Tag = "<數學>|</數學>";
+            btnMathTag.Text = "數學區塊";
             // 
             // btnSymbolMul
             // 
-            this.btnSymbolMul.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolMul.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolMul.Image")));
-            this.btnSymbolMul.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolMul.Name = "btnSymbolMul";
-            this.btnSymbolMul.Size = new System.Drawing.Size(23, 23);
-            this.btnSymbolMul.Text = "×";
-            this.btnSymbolMul.ToolTipText = "數學乘號";
+            btnSymbolMul.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolMul.Image = (System.Drawing.Image)resources.GetObject("btnSymbolMul.Image");
+            btnSymbolMul.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolMul.Name = "btnSymbolMul";
+            btnSymbolMul.Size = new System.Drawing.Size(23, 22);
+            btnSymbolMul.Text = "×";
+            btnSymbolMul.ToolTipText = "數學乘號";
             // 
             // btnSymbolDiv
             // 
-            this.btnSymbolDiv.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolDiv.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDiv.Image")));
-            this.btnSymbolDiv.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolDiv.Name = "btnSymbolDiv";
-            this.btnSymbolDiv.Size = new System.Drawing.Size(24, 23);
-            this.btnSymbolDiv.Text = "÷";
-            this.btnSymbolDiv.ToolTipText = "數學除號";
+            btnSymbolDiv.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolDiv.Image = (System.Drawing.Image)resources.GetObject("btnSymbolDiv.Image");
+            btnSymbolDiv.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolDiv.Name = "btnSymbolDiv";
+            btnSymbolDiv.Size = new System.Drawing.Size(23, 22);
+            btnSymbolDiv.Text = "÷";
+            btnSymbolDiv.ToolTipText = "數學除號";
             // 
             // btnSymbolMathEqual
             // 
-            this.btnSymbolMathEqual.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolMathEqual.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolMathEqual.Image")));
-            this.btnSymbolMathEqual.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolMathEqual.Name = "btnSymbolMathEqual";
-            this.btnSymbolMathEqual.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolMathEqual.Text = "＝";
-            this.btnSymbolMathEqual.ToolTipText = "等於";
+            btnSymbolMathEqual.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolMathEqual.Image = (System.Drawing.Image)resources.GetObject("btnSymbolMathEqual.Image");
+            btnSymbolMathEqual.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolMathEqual.Name = "btnSymbolMathEqual";
+            btnSymbolMathEqual.Size = new System.Drawing.Size(26, 22);
+            btnSymbolMathEqual.Text = "＝";
+            btnSymbolMathEqual.ToolTipText = "等於";
             // 
             // btnSymbolMathNotEqual
             // 
-            this.btnSymbolMathNotEqual.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolMathNotEqual.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolMathNotEqual.Image")));
-            this.btnSymbolMathNotEqual.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolMathNotEqual.Name = "btnSymbolMathNotEqual";
-            this.btnSymbolMathNotEqual.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolMathNotEqual.Text = "≠";
-            this.btnSymbolMathNotEqual.ToolTipText = "不等於";
+            btnSymbolMathNotEqual.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolMathNotEqual.Image = (System.Drawing.Image)resources.GetObject("btnSymbolMathNotEqual.Image");
+            btnSymbolMathNotEqual.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolMathNotEqual.Name = "btnSymbolMathNotEqual";
+            btnSymbolMathNotEqual.Size = new System.Drawing.Size(26, 22);
+            btnSymbolMathNotEqual.Text = "≠";
+            btnSymbolMathNotEqual.ToolTipText = "不等於";
             // 
             // btnSymbolMathLE
             // 
-            this.btnSymbolMathLE.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolMathLE.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolMathLE.Image")));
-            this.btnSymbolMathLE.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolMathLE.Name = "btnSymbolMathLE";
-            this.btnSymbolMathLE.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolMathLE.Text = "≦";
-            this.btnSymbolMathLE.ToolTipText = "小於等於";
+            btnSymbolMathLE.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolMathLE.Image = (System.Drawing.Image)resources.GetObject("btnSymbolMathLE.Image");
+            btnSymbolMathLE.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolMathLE.Name = "btnSymbolMathLE";
+            btnSymbolMathLE.Size = new System.Drawing.Size(26, 22);
+            btnSymbolMathLE.Text = "≦";
+            btnSymbolMathLE.ToolTipText = "小於等於";
             // 
             // btnSymbolMathGE
             // 
-            this.btnSymbolMathGE.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolMathGE.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolMathGE.Image")));
-            this.btnSymbolMathGE.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolMathGE.Name = "btnSymbolMathGE";
-            this.btnSymbolMathGE.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolMathGE.Text = "≧";
-            this.btnSymbolMathGE.ToolTipText = "大於等於";
+            btnSymbolMathGE.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolMathGE.Image = (System.Drawing.Image)resources.GetObject("btnSymbolMathGE.Image");
+            btnSymbolMathGE.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolMathGE.Name = "btnSymbolMathGE";
+            btnSymbolMathGE.Size = new System.Drawing.Size(26, 22);
+            btnSymbolMathGE.Text = "≧";
+            btnSymbolMathGE.ToolTipText = "大於等於";
             // 
             // btnSymbolNearEqual
             // 
-            this.btnSymbolNearEqual.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolNearEqual.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolNearEqual.Image")));
-            this.btnSymbolNearEqual.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolNearEqual.Name = "btnSymbolNearEqual";
-            this.btnSymbolNearEqual.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolNearEqual.Text = "≒";
+            btnSymbolNearEqual.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolNearEqual.Image = (System.Drawing.Image)resources.GetObject("btnSymbolNearEqual.Image");
+            btnSymbolNearEqual.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolNearEqual.Name = "btnSymbolNearEqual";
+            btnSymbolNearEqual.Size = new System.Drawing.Size(26, 22);
+            btnSymbolNearEqual.Text = "≒";
             // 
             // btnSymbolMathBecause
             // 
-            this.btnSymbolMathBecause.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolMathBecause.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolMathBecause.Image")));
-            this.btnSymbolMathBecause.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolMathBecause.Name = "btnSymbolMathBecause";
-            this.btnSymbolMathBecause.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolMathBecause.Text = "∵";
+            btnSymbolMathBecause.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolMathBecause.Image = (System.Drawing.Image)resources.GetObject("btnSymbolMathBecause.Image");
+            btnSymbolMathBecause.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolMathBecause.Name = "btnSymbolMathBecause";
+            btnSymbolMathBecause.Size = new System.Drawing.Size(26, 22);
+            btnSymbolMathBecause.Text = "∵";
             // 
             // btnSymbolMathSo
             // 
-            this.btnSymbolMathSo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolMathSo.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolMathSo.Image")));
-            this.btnSymbolMathSo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolMathSo.Name = "btnSymbolMathSo";
-            this.btnSymbolMathSo.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolMathSo.Text = "∴";
+            btnSymbolMathSo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolMathSo.Image = (System.Drawing.Image)resources.GetObject("btnSymbolMathSo.Image");
+            btnSymbolMathSo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolMathSo.Name = "btnSymbolMathSo";
+            btnSymbolMathSo.Size = new System.Drawing.Size(26, 22);
+            btnSymbolMathSo.Text = "∴";
             // 
             // btnSymbolMathPlusMinus
             // 
-            this.btnSymbolMathPlusMinus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolMathPlusMinus.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolMathPlusMinus.Image")));
-            this.btnSymbolMathPlusMinus.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolMathPlusMinus.Name = "btnSymbolMathPlusMinus";
-            this.btnSymbolMathPlusMinus.Size = new System.Drawing.Size(23, 23);
-            this.btnSymbolMathPlusMinus.Text = "±";
+            btnSymbolMathPlusMinus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolMathPlusMinus.Image = (System.Drawing.Image)resources.GetObject("btnSymbolMathPlusMinus.Image");
+            btnSymbolMathPlusMinus.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolMathPlusMinus.Name = "btnSymbolMathPlusMinus";
+            btnSymbolMathPlusMinus.Size = new System.Drawing.Size(23, 22);
+            btnSymbolMathPlusMinus.Text = "±";
             // 
             // btnSymbolMathAngle
             // 
-            this.btnSymbolMathAngle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolMathAngle.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolMathAngle.Image")));
-            this.btnSymbolMathAngle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolMathAngle.Name = "btnSymbolMathAngle";
-            this.btnSymbolMathAngle.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolMathAngle.Text = "∠";
-            this.btnSymbolMathAngle.ToolTipText = "角度符號";
+            btnSymbolMathAngle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolMathAngle.Image = (System.Drawing.Image)resources.GetObject("btnSymbolMathAngle.Image");
+            btnSymbolMathAngle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolMathAngle.Name = "btnSymbolMathAngle";
+            btnSymbolMathAngle.Size = new System.Drawing.Size(26, 22);
+            btnSymbolMathAngle.Text = "∠";
+            btnSymbolMathAngle.ToolTipText = "角度符號";
             // 
             // btnSymbolMathVertical
             // 
-            this.btnSymbolMathVertical.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolMathVertical.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolMathVertical.Image")));
-            this.btnSymbolMathVertical.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolMathVertical.Name = "btnSymbolMathVertical";
-            this.btnSymbolMathVertical.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolMathVertical.Text = "⊥";
-            this.btnSymbolMathVertical.ToolTipText = "垂直";
+            btnSymbolMathVertical.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolMathVertical.Image = (System.Drawing.Image)resources.GetObject("btnSymbolMathVertical.Image");
+            btnSymbolMathVertical.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolMathVertical.Name = "btnSymbolMathVertical";
+            btnSymbolMathVertical.Size = new System.Drawing.Size(26, 22);
+            btnSymbolMathVertical.Text = "⊥";
+            btnSymbolMathVertical.ToolTipText = "垂直";
             // 
             // btnSymbolArrows
             // 
-            this.btnSymbolArrows.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolArrows.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem4,
-            this.toolStripMenuItem5,
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem6,
-            this.toolStripMenuItem7,
-            this.toolStripMenuItem8,
-            this.toolStripMenuItem9});
-            this.btnSymbolArrows.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolArrows.Image")));
-            this.btnSymbolArrows.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolArrows.Name = "btnSymbolArrows";
-            this.btnSymbolArrows.Size = new System.Drawing.Size(61, 23);
-            this.btnSymbolArrows.Tag = "NA";
-            this.btnSymbolArrows.Text = "箭頭";
-            this.btnSymbolArrows.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
+            btnSymbolArrows.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolArrows.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuItem4, toolStripMenuItem5, toolStripMenuItem3, toolStripMenuItem2, toolStripMenuItem6, toolStripMenuItem7, toolStripMenuItem8, toolStripMenuItem9 });
+            btnSymbolArrows.Image = (System.Drawing.Image)resources.GetObject("btnSymbolArrows.Image");
+            btnSymbolArrows.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolArrows.Name = "btnSymbolArrows";
+            btnSymbolArrows.Size = new System.Drawing.Size(50, 22);
+            btnSymbolArrows.Tag = "NA";
+            btnSymbolArrows.Text = "箭頭";
+            btnSymbolArrows.DropDownItemClicked += toolBarSymbol1_ItemClicked;
             // 
             // toolStripMenuItem4
             // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(216, 26);
-            this.toolStripMenuItem4.Text = "↑";
+            toolStripMenuItem4.Name = "toolStripMenuItem4";
+            toolStripMenuItem4.Size = new System.Drawing.Size(89, 22);
+            toolStripMenuItem4.Text = "↑";
             // 
             // toolStripMenuItem5
             // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(216, 26);
-            this.toolStripMenuItem5.Text = "↓";
+            toolStripMenuItem5.Name = "toolStripMenuItem5";
+            toolStripMenuItem5.Size = new System.Drawing.Size(89, 22);
+            toolStripMenuItem5.Text = "↓";
             // 
             // toolStripMenuItem3
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(216, 26);
-            this.toolStripMenuItem3.Text = "←";
+            toolStripMenuItem3.Name = "toolStripMenuItem3";
+            toolStripMenuItem3.Size = new System.Drawing.Size(89, 22);
+            toolStripMenuItem3.Text = "←";
             // 
             // toolStripMenuItem2
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
-            this.toolStripMenuItem2.Text = "→";
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new System.Drawing.Size(89, 22);
+            toolStripMenuItem2.Text = "→";
             // 
             // toolStripMenuItem6
             // 
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(216, 26);
-            this.toolStripMenuItem6.Text = "↖";
+            toolStripMenuItem6.Name = "toolStripMenuItem6";
+            toolStripMenuItem6.Size = new System.Drawing.Size(89, 22);
+            toolStripMenuItem6.Text = "↖";
             // 
             // toolStripMenuItem7
             // 
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(216, 26);
-            this.toolStripMenuItem7.Text = "↗";
+            toolStripMenuItem7.Name = "toolStripMenuItem7";
+            toolStripMenuItem7.Size = new System.Drawing.Size(89, 22);
+            toolStripMenuItem7.Text = "↗";
             // 
             // toolStripMenuItem8
             // 
-            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(216, 26);
-            this.toolStripMenuItem8.Text = "↙";
+            toolStripMenuItem8.Name = "toolStripMenuItem8";
+            toolStripMenuItem8.Size = new System.Drawing.Size(89, 22);
+            toolStripMenuItem8.Text = "↙";
             // 
             // toolStripMenuItem9
             // 
-            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(216, 26);
-            this.toolStripMenuItem9.Text = "↘";
+            toolStripMenuItem9.Name = "toolStripMenuItem9";
+            toolStripMenuItem9.Size = new System.Drawing.Size(89, 22);
+            toolStripMenuItem9.Text = "↘";
             // 
             // toolStripSeparator15
             // 
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 26);
+            toolStripSeparator15.Name = "toolStripSeparator15";
+            toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
             // 
             // doprdownBtnLines
             // 
-            this.doprdownBtnLines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.doprdownBtnLines.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnTableMiddleLine,
-            this.btnTableTopLine1,
-            this.btnTableBottomLine1,
-            this.btnTableTopLine2,
-            this.btnTableBottomLine2,
-            this.分隔線135246ToolStripMenuItem});
-            this.doprdownBtnLines.Image = ((System.Drawing.Image)(resources.GetObject("doprdownBtnLines.Image")));
-            this.doprdownBtnLines.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.doprdownBtnLines.Name = "doprdownBtnLines";
-            this.doprdownBtnLines.Size = new System.Drawing.Size(61, 23);
-            this.doprdownBtnLines.Tag = "NA";
-            this.doprdownBtnLines.Text = "橫線";
-            this.doprdownBtnLines.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
+            doprdownBtnLines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            doprdownBtnLines.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { btnTableMiddleLine, btnTableTopLine1, btnTableBottomLine1, btnTableTopLine2, btnTableBottomLine2, 分隔線135246ToolStripMenuItem });
+            doprdownBtnLines.Image = (System.Drawing.Image)resources.GetObject("doprdownBtnLines.Image");
+            doprdownBtnLines.ImageTransparentColor = System.Drawing.Color.Magenta;
+            doprdownBtnLines.Name = "doprdownBtnLines";
+            doprdownBtnLines.Size = new System.Drawing.Size(50, 22);
+            doprdownBtnLines.Tag = "NA";
+            doprdownBtnLines.Text = "橫線";
+            doprdownBtnLines.DropDownItemClicked += toolBarSymbol1_ItemClicked;
             // 
             // btnTableMiddleLine
             // 
-            this.btnTableMiddleLine.Name = "btnTableMiddleLine";
-            this.btnTableMiddleLine.Size = new System.Drawing.Size(289, 26);
-            this.btnTableMiddleLine.Tag = "<表格>────────────────────</表格>\\n";
-            this.btnTableMiddleLine.Text = "表格橫槓 (20方)";
+            btnTableMiddleLine.Name = "btnTableMiddleLine";
+            btnTableMiddleLine.Size = new System.Drawing.Size(235, 22);
+            btnTableMiddleLine.Tag = "<表格>────────────────────</表格>\\n";
+            btnTableMiddleLine.Text = "表格橫槓 (20方)";
             // 
             // btnTableTopLine1
             // 
-            this.btnTableTopLine1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnTableTopLine1.Name = "btnTableTopLine1";
-            this.btnTableTopLine1.Size = new System.Drawing.Size(289, 26);
-            this.btnTableTopLine1.Tag = "<上表格線1></上表格線1>\\n";
-            this.btnTableTopLine1.Text = "上表格線1（2356點）";
+            btnTableTopLine1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnTableTopLine1.Name = "btnTableTopLine1";
+            btnTableTopLine1.Size = new System.Drawing.Size(235, 22);
+            btnTableTopLine1.Tag = "<上表格線1></上表格線1>\\n";
+            btnTableTopLine1.Text = "上表格線1（2356點）";
             // 
             // btnTableBottomLine1
             // 
-            this.btnTableBottomLine1.Name = "btnTableBottomLine1";
-            this.btnTableBottomLine1.Size = new System.Drawing.Size(289, 26);
-            this.btnTableBottomLine1.Tag = "<下表格線1></下表格線1>\\n";
-            this.btnTableBottomLine1.Text = "下表格線1（1245點）";
+            btnTableBottomLine1.Name = "btnTableBottomLine1";
+            btnTableBottomLine1.Size = new System.Drawing.Size(235, 22);
+            btnTableBottomLine1.Tag = "<下表格線1></下表格線1>\\n";
+            btnTableBottomLine1.Text = "下表格線1（1245點）";
             // 
             // btnTableTopLine2
             // 
-            this.btnTableTopLine2.Name = "btnTableTopLine2";
-            this.btnTableTopLine2.Size = new System.Drawing.Size(289, 26);
-            this.btnTableTopLine2.Tag = "<上表格線2></上表格線2>\\n";
-            this.btnTableTopLine2.Text = "上表格線2（2356+1245）";
+            btnTableTopLine2.Name = "btnTableTopLine2";
+            btnTableTopLine2.Size = new System.Drawing.Size(235, 22);
+            btnTableTopLine2.Tag = "<上表格線2></上表格線2>\\n";
+            btnTableTopLine2.Text = "上表格線2（2356+1245）";
             // 
             // btnTableBottomLine2
             // 
-            this.btnTableBottomLine2.Name = "btnTableBottomLine2";
-            this.btnTableBottomLine2.Size = new System.Drawing.Size(289, 26);
-            this.btnTableBottomLine2.Tag = "<下表格線2></下表格線2>\\n";
-            this.btnTableBottomLine2.Text = "下表格線2（1245+2356）";
+            btnTableBottomLine2.Name = "btnTableBottomLine2";
+            btnTableBottomLine2.Size = new System.Drawing.Size(235, 22);
+            btnTableBottomLine2.Tag = "<下表格線2></下表格線2>\\n";
+            btnTableBottomLine2.Text = "下表格線2（1245+2356）";
             // 
             // 分隔線135246ToolStripMenuItem
             // 
-            this.分隔線135246ToolStripMenuItem.Name = "分隔線135246ToolStripMenuItem";
-            this.分隔線135246ToolStripMenuItem.Size = new System.Drawing.Size(289, 26);
-            this.分隔線135246ToolStripMenuItem.Tag = "<分隔線></分隔線>\\n";
-            this.分隔線135246ToolStripMenuItem.Text = "分隔線（135+246）";
+            分隔線135246ToolStripMenuItem.Name = "分隔線135246ToolStripMenuItem";
+            分隔線135246ToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            分隔線135246ToolStripMenuItem.Tag = "<分隔線></分隔線>\\n";
+            分隔線135246ToolStripMenuItem.Text = "分隔線（135+246）";
             // 
             // toolStripSeparator1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 26);
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // btnNoDigitSymbol
             // 
-            this.btnNoDigitSymbol.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnNoDigitSymbol.Image = ((System.Drawing.Image)(resources.GetObject("btnNoDigitSymbol.Image")));
-            this.btnNoDigitSymbol.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNoDigitSymbol.Name = "btnNoDigitSymbol";
-            this.btnNoDigitSymbol.Size = new System.Drawing.Size(70, 23);
-            this.btnNoDigitSymbol.Tag = "<無數符>|</無數符>";
-            this.btnNoDigitSymbol.Text = "無數符";
+            btnNoDigitSymbol.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnNoDigitSymbol.Image = (System.Drawing.Image)resources.GetObject("btnNoDigitSymbol.Image");
+            btnNoDigitSymbol.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnNoDigitSymbol.Name = "btnNoDigitSymbol";
+            btnNoDigitSymbol.Size = new System.Drawing.Size(56, 22);
+            btnNoDigitSymbol.Tag = "<無數符>|</無數符>";
+            btnNoDigitSymbol.Text = "無數符";
             // 
             // btnQuotes
             // 
-            this.btnQuotes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnQuotes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSymbolFullDots});
-            this.btnQuotes.Image = ((System.Drawing.Image)(resources.GetObject("btnQuotes.Image")));
-            this.btnQuotes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnQuotes.Name = "btnQuotes";
-            this.btnQuotes.Size = new System.Drawing.Size(99, 23);
-            this.btnQuotes.Tag = "NA";
-            this.btnQuotes.Text = "其他符號";
-            this.btnQuotes.ToolTipText = "其他符號";
-            this.btnQuotes.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
+            btnQuotes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnQuotes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { btnSymbolFullDots });
+            btnQuotes.Image = (System.Drawing.Image)resources.GetObject("btnQuotes.Image");
+            btnQuotes.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnQuotes.Name = "btnQuotes";
+            btnQuotes.Size = new System.Drawing.Size(80, 22);
+            btnQuotes.Tag = "NA";
+            btnQuotes.Text = "其他符號";
+            btnQuotes.ToolTipText = "其他符號";
+            btnQuotes.DropDownItemClicked += toolBarSymbol1_ItemClicked;
             // 
             // btnSymbolFullDots
             // 
-            this.btnSymbolFullDots.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolFullDots.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolFullDots.Image")));
-            this.btnSymbolFullDots.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolFullDots.Name = "btnSymbolFullDots";
-            this.btnSymbolFullDots.Size = new System.Drawing.Size(32, 23);
-            this.btnSymbolFullDots.Tag = "□|□";
-            this.btnSymbolFullDots.Text = "□";
-            this.btnSymbolFullDots.ToolTipText = "滿點（可用於輔助幼兒學習點字）";
+            btnSymbolFullDots.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolFullDots.Image = (System.Drawing.Image)resources.GetObject("btnSymbolFullDots.Image");
+            btnSymbolFullDots.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolFullDots.Name = "btnSymbolFullDots";
+            btnSymbolFullDots.Size = new System.Drawing.Size(26, 19);
+            btnSymbolFullDots.Tag = "□|□";
+            btnSymbolFullDots.Text = "□";
+            btnSymbolFullDots.ToolTipText = "滿點（可用於輔助幼兒學習點字）";
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.panel1);
-            this.panel3.Controls.Add(this.toolBarSymbol3);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 52);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1217, 611);
-            this.panel3.TabIndex = 19;
+            panel3.Controls.Add(panel1);
+            panel3.Controls.Add(toolBarSymbol3);
+            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel3.Location = new System.Drawing.Point(0, 52);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(1369, 648);
+            panel3.TabIndex = 19;
             // 
             // panel1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.txtInput);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.lblError);
-            this.panel1.Controls.Add(this.txtBraille);
-            this.panel1.Controls.Add(this.lblErrorTitle);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(90, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1127, 611);
-            this.panel1.TabIndex = 0;
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(txtInput);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(lblError);
+            panel1.Controls.Add(txtBraille);
+            panel1.Controls.Add(lblErrorTitle);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(74, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(1295, 648);
+            panel1.TabIndex = 0;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 24);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "輸入文字：";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(33, 22);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(84, 19);
+            label1.TabIndex = 0;
+            label1.Text = "輸入文字：";
             // 
             // txtInput
             // 
-            this.txtInput.Location = new System.Drawing.Point(141, 21);
-            this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(910, 31);
-            this.txtInput.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.txtInput, "這裡只能輸入單行文字。如需編排段落與修改個別點字，請回到雙視編輯視窗中進行編修。");
-            this.txtInput.TextChanged += new System.EventHandler(this.txtInput_TextChanged);
+            txtInput.Location = new System.Drawing.Point(159, 22);
+            txtInput.Name = "txtInput";
+            txtInput.Size = new System.Drawing.Size(1023, 27);
+            txtInput.TabIndex = 3;
+            toolTip1.SetToolTip(txtInput, "這裡只能輸入單行文字。如需編排段落與修改個別點字，請回到雙視編輯視窗中進行編修。");
+            txtInput.TextChanged += txtInput_TextChanged;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 71);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 24);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "點字預覽：";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(33, 75);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(84, 19);
+            label2.TabIndex = 2;
+            label2.Text = "點字預覽：";
             // 
             // lblError
             // 
-            this.lblError.AutoSize = true;
-            this.lblError.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lblError.ForeColor = System.Drawing.Color.Red;
-            this.lblError.Location = new System.Drawing.Point(193, 357);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(65, 24);
-            this.lblError.TabIndex = 7;
-            this.lblError.Text = "label4";
+            lblError.AutoSize = true;
+            lblError.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblError.ForeColor = System.Drawing.Color.Red;
+            lblError.Location = new System.Drawing.Point(217, 377);
+            lblError.Name = "lblError";
+            lblError.Size = new System.Drawing.Size(53, 19);
+            lblError.TabIndex = 7;
+            lblError.Text = "label4";
             // 
             // txtBraille
             // 
-            this.txtBraille.Font = new System.Drawing.Font("SimBraille", 20.25F);
-            this.txtBraille.Location = new System.Drawing.Point(141, 71);
-            this.txtBraille.Multiline = true;
-            this.txtBraille.Name = "txtBraille";
-            this.txtBraille.ReadOnly = true;
-            this.txtBraille.Size = new System.Drawing.Size(910, 250);
-            this.txtBraille.TabIndex = 3;
+            txtBraille.Font = new System.Drawing.Font("SimBraille", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            txtBraille.Location = new System.Drawing.Point(159, 75);
+            txtBraille.Multiline = true;
+            txtBraille.Name = "txtBraille";
+            txtBraille.ReadOnly = true;
+            txtBraille.Size = new System.Drawing.Size(1023, 264);
+            txtBraille.TabIndex = 3;
             // 
             // lblErrorTitle
             // 
-            this.lblErrorTitle.AutoSize = true;
-            this.lblErrorTitle.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lblErrorTitle.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorTitle.Location = new System.Drawing.Point(25, 357);
-            this.lblErrorTitle.Name = "lblErrorTitle";
-            this.lblErrorTitle.Size = new System.Drawing.Size(162, 24);
-            this.lblErrorTitle.TabIndex = 6;
-            this.lblErrorTitle.Text = "無法轉換的字元：";
+            lblErrorTitle.AutoSize = true;
+            lblErrorTitle.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblErrorTitle.ForeColor = System.Drawing.Color.Red;
+            lblErrorTitle.Location = new System.Drawing.Point(28, 377);
+            lblErrorTitle.Name = "lblErrorTitle";
+            lblErrorTitle.Size = new System.Drawing.Size(129, 19);
+            lblErrorTitle.TabIndex = 6;
+            lblErrorTitle.Text = "無法轉換的字元：";
             // 
             // toolBarSymbol3
             // 
-            this.toolBarSymbol3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.toolBarSymbol3.Font = new System.Drawing.Font("PMingLiU", 11F);
-            this.toolBarSymbol3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolBarSymbol3.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolBarSymbol3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSymbolDocTitle,
-            this.btnSymbolOrgPageNum,
-            this.btnTagBrailleComment,
-            this.btnSymbolDel,
-            this.btnSymbolEndTags,
-            this.toolStripSeparator17,
-            this.btnSymbolNumber,
-            this.btnUpperPosition,
-            this.btnChoiceDropdownList,
-            this.btnSymbolName,
-            this.btnSymbolBookName,
-            this.toolStripSeparator12,
-            this.btnSymbolTime,
-            this.btnRatio,
-            this.btnSymbolCoord,
-            this.btnFraction,
-            this.btnUrl,
-            this.toolStripSeparator13,
-            this.toolStripButton2,
-            this.toolStripButton3,
-            this.toolStripSeparator16,
-            this.toolStripButton1,
-            this.toolStripSeparator18});
-            this.toolBarSymbol3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.toolBarSymbol3.Location = new System.Drawing.Point(0, 0);
-            this.toolBarSymbol3.Name = "toolBarSymbol3";
-            this.toolBarSymbol3.Size = new System.Drawing.Size(90, 611);
-            this.toolBarSymbol3.TabIndex = 15;
-            this.toolBarSymbol3.Text = "toolStrip4";
-            this.toolBarSymbol3.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
+            toolBarSymbol3.Dock = System.Windows.Forms.DockStyle.Left;
+            toolBarSymbol3.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            toolBarSymbol3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolBarSymbol3.ImageScalingSize = new System.Drawing.Size(20, 20);
+            toolBarSymbol3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnSymbolDocTitle, btnSymbolOrgPageNum, btnTagBrailleComment, btnSymbolDel, btnSymbolEndTags, toolStripSeparator17, btnSymbolNumber, btnUpperPosition, btnChoiceDropdownList, btnSymbolName, btnSymbolBookName, toolStripSeparator12, btnSymbolTime, btnRatio, btnSymbolCoord, btnFraction, btnUrl, toolStripSeparator13, toolStripButton2, toolStripButton3, toolStripSeparator16, toolStripButton1, toolStripSeparator18 });
+            toolBarSymbol3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            toolBarSymbol3.Location = new System.Drawing.Point(0, 0);
+            toolBarSymbol3.Name = "toolBarSymbol3";
+            toolBarSymbol3.Size = new System.Drawing.Size(74, 648);
+            toolBarSymbol3.TabIndex = 15;
+            toolBarSymbol3.Text = "toolStrip4";
+            toolBarSymbol3.ItemClicked += toolBarSymbol1_ItemClicked;
             // 
             // btnSymbolDocTitle
             // 
-            this.btnSymbolDocTitle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolDocTitle.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDocTitle.Image")));
-            this.btnSymbolDocTitle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolDocTitle.Name = "btnSymbolDocTitle";
-            this.btnSymbolDocTitle.Size = new System.Drawing.Size(87, 23);
-            this.btnSymbolDocTitle.Tag = "<標題>|</標題>";
-            this.btnSymbolDocTitle.Text = "頁標題";
+            btnSymbolDocTitle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolDocTitle.Image = (System.Drawing.Image)resources.GetObject("btnSymbolDocTitle.Image");
+            btnSymbolDocTitle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolDocTitle.Name = "btnSymbolDocTitle";
+            btnSymbolDocTitle.Size = new System.Drawing.Size(69, 19);
+            btnSymbolDocTitle.Tag = "<標題>|</標題>";
+            btnSymbolDocTitle.Text = "頁標題";
             // 
             // btnSymbolOrgPageNum
             // 
-            this.btnSymbolOrgPageNum.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolOrgPageNum.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolOrgPageNum.Image")));
-            this.btnSymbolOrgPageNum.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolOrgPageNum.Name = "btnSymbolOrgPageNum";
-            this.btnSymbolOrgPageNum.Size = new System.Drawing.Size(87, 23);
-            this.btnSymbolOrgPageNum.Tag = "<P>|</P>";
-            this.btnSymbolOrgPageNum.Text = "原書頁碼";
+            btnSymbolOrgPageNum.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolOrgPageNum.Image = (System.Drawing.Image)resources.GetObject("btnSymbolOrgPageNum.Image");
+            btnSymbolOrgPageNum.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolOrgPageNum.Name = "btnSymbolOrgPageNum";
+            btnSymbolOrgPageNum.Size = new System.Drawing.Size(69, 19);
+            btnSymbolOrgPageNum.Tag = "<P>|</P>";
+            btnSymbolOrgPageNum.Text = "原書頁碼";
             // 
             // btnTagBrailleComment
             // 
-            this.btnTagBrailleComment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnTagBrailleComment.Image = ((System.Drawing.Image)(resources.GetObject("btnTagBrailleComment.Image")));
-            this.btnTagBrailleComment.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTagBrailleComment.Name = "btnTagBrailleComment";
-            this.btnTagBrailleComment.Size = new System.Drawing.Size(87, 23);
-            this.btnTagBrailleComment.Tag = "<點譯者註>|</點譯者註>";
-            this.btnTagBrailleComment.Text = "點譯者註";
-            this.btnTagBrailleComment.ToolTipText = "點譯者注釋";
+            btnTagBrailleComment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnTagBrailleComment.Image = (System.Drawing.Image)resources.GetObject("btnTagBrailleComment.Image");
+            btnTagBrailleComment.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnTagBrailleComment.Name = "btnTagBrailleComment";
+            btnTagBrailleComment.Size = new System.Drawing.Size(69, 19);
+            btnTagBrailleComment.Tag = "<點譯者註>|</點譯者註>";
+            btnTagBrailleComment.Text = "點譯者註";
+            btnTagBrailleComment.ToolTipText = "點譯者注釋";
             // 
             // btnSymbolDel
             // 
-            this.btnSymbolDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolDel.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolDel.Image")));
-            this.btnSymbolDel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolDel.Name = "btnSymbolDel";
-            this.btnSymbolDel.Size = new System.Drawing.Size(87, 23);
-            this.btnSymbolDel.Tag = "<刪>|</刪>";
-            this.btnSymbolDel.Text = "刪除文字";
-            this.btnSymbolDel.ToolTipText = "用來表示一段刪除的文字";
+            btnSymbolDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolDel.Image = (System.Drawing.Image)resources.GetObject("btnSymbolDel.Image");
+            btnSymbolDel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolDel.Name = "btnSymbolDel";
+            btnSymbolDel.Size = new System.Drawing.Size(69, 19);
+            btnSymbolDel.Tag = "<刪>|</刪>";
+            btnSymbolDel.Text = "刪除文字";
+            btnSymbolDel.ToolTipText = "用來表示一段刪除的文字";
             // 
             // btnSymbolEndTags
             // 
-            this.btnSymbolEndTags.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolEndTags.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnEndTag1,
-            this.btnEndTag2,
-            this.btnEndTag3});
-            this.btnSymbolEndTags.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolEndTags.Image")));
-            this.btnSymbolEndTags.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolEndTags.Name = "btnSymbolEndTags";
-            this.btnSymbolEndTags.Size = new System.Drawing.Size(87, 23);
-            this.btnSymbolEndTags.Tag = "NA";
-            this.btnSymbolEndTags.Text = "結束";
-            this.btnSymbolEndTags.ToolTipText = "表示段落結束的標籤";
-            this.btnSymbolEndTags.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
+            btnSymbolEndTags.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolEndTags.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { btnEndTag1, btnEndTag2, btnEndTag3 });
+            btnSymbolEndTags.Image = (System.Drawing.Image)resources.GetObject("btnSymbolEndTags.Image");
+            btnSymbolEndTags.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolEndTags.Name = "btnSymbolEndTags";
+            btnSymbolEndTags.Size = new System.Drawing.Size(69, 19);
+            btnSymbolEndTags.Tag = "NA";
+            btnSymbolEndTags.Text = "結束";
+            btnSymbolEndTags.ToolTipText = "表示段落結束的標籤";
+            btnSymbolEndTags.DropDownItemClicked += toolBarSymbol1_ItemClicked;
             // 
             // btnEndTag1
             // 
-            this.btnEndTag1.Name = "btnEndTag1";
-            this.btnEndTag1.Size = new System.Drawing.Size(192, 26);
-            this.btnEndTag1.Tag = "<小題結束></小題結束>\\n";
-            this.btnEndTag1.Text = "&1.小題結束";
+            btnEndTag1.Name = "btnEndTag1";
+            btnEndTag1.Size = new System.Drawing.Size(160, 22);
+            btnEndTag1.Tag = "<小題結束></小題結束>\\n";
+            btnEndTag1.Text = "&1.小題結束";
             // 
             // btnEndTag2
             // 
-            this.btnEndTag2.Name = "btnEndTag2";
-            this.btnEndTag2.Size = new System.Drawing.Size(192, 26);
-            this.btnEndTag2.Tag = "<小單元結束></小單元結束>\\n";
-            this.btnEndTag2.Text = "&2.小單元結束";
+            btnEndTag2.Name = "btnEndTag2";
+            btnEndTag2.Size = new System.Drawing.Size(160, 22);
+            btnEndTag2.Tag = "<小單元結束></小單元結束>\\n";
+            btnEndTag2.Text = "&2.小單元結束";
             // 
             // btnEndTag3
             // 
-            this.btnEndTag3.Name = "btnEndTag3";
-            this.btnEndTag3.Size = new System.Drawing.Size(192, 26);
-            this.btnEndTag3.Tag = "<大單元結束></大單元結束>\\n";
-            this.btnEndTag3.Text = "&3.大單元結束";
+            btnEndTag3.Name = "btnEndTag3";
+            btnEndTag3.Size = new System.Drawing.Size(160, 22);
+            btnEndTag3.Tag = "<大單元結束></大單元結束>\\n";
+            btnEndTag3.Text = "&3.大單元結束";
             // 
             // toolStripSeparator17
             // 
-            this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(87, 6);
+            toolStripSeparator17.Name = "toolStripSeparator17";
+            toolStripSeparator17.Size = new System.Drawing.Size(69, 6);
             // 
             // btnSymbolNumber
             // 
-            this.btnSymbolNumber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolNumber.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolNumber.Image")));
-            this.btnSymbolNumber.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolNumber.Name = "btnSymbolNumber";
-            this.btnSymbolNumber.Size = new System.Drawing.Size(87, 23);
-            this.btnSymbolNumber.Tag = "#";
-            this.btnSymbolNumber.Text = "編號";
-            this.btnSymbolNumber.ToolTipText = "數字編號";
+            btnSymbolNumber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolNumber.Image = (System.Drawing.Image)resources.GetObject("btnSymbolNumber.Image");
+            btnSymbolNumber.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolNumber.Name = "btnSymbolNumber";
+            btnSymbolNumber.Size = new System.Drawing.Size(69, 19);
+            btnSymbolNumber.Tag = "#";
+            btnSymbolNumber.Text = "編號";
+            btnSymbolNumber.ToolTipText = "數字編號";
             // 
             // btnUpperPosition
             // 
-            this.btnUpperPosition.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnUpperPosition.Image = ((System.Drawing.Image)(resources.GetObject("btnUpperPosition.Image")));
-            this.btnUpperPosition.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnUpperPosition.Name = "btnUpperPosition";
-            this.btnUpperPosition.Size = new System.Drawing.Size(87, 23);
-            this.btnUpperPosition.Tag = "<上位點>|</上位點>";
-            this.btnUpperPosition.Text = "上位點";
+            btnUpperPosition.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnUpperPosition.Image = (System.Drawing.Image)resources.GetObject("btnUpperPosition.Image");
+            btnUpperPosition.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnUpperPosition.Name = "btnUpperPosition";
+            btnUpperPosition.Size = new System.Drawing.Size(69, 19);
+            btnUpperPosition.Tag = "<上位點>|</上位點>";
+            btnUpperPosition.Text = "上位點";
             // 
             // btnChoiceDropdownList
             // 
-            this.btnChoiceDropdownList.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnChoiceDropdownList.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnChoiceBo,
-            this.btnChoicePo,
-            this.btnChoiceMo,
-            this.btnChoiceFo});
-            this.btnChoiceDropdownList.Image = ((System.Drawing.Image)(resources.GetObject("btnChoiceDropdownList.Image")));
-            this.btnChoiceDropdownList.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnChoiceDropdownList.Name = "btnChoiceDropdownList";
-            this.btnChoiceDropdownList.Size = new System.Drawing.Size(87, 23);
-            this.btnChoiceDropdownList.Tag = "NA";
-            this.btnChoiceDropdownList.Text = "選項";
-            this.btnChoiceDropdownList.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolBarSymbol1_ItemClicked);
+            btnChoiceDropdownList.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnChoiceDropdownList.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { btnChoiceBo, btnChoicePo, btnChoiceMo, btnChoiceFo });
+            btnChoiceDropdownList.Image = (System.Drawing.Image)resources.GetObject("btnChoiceDropdownList.Image");
+            btnChoiceDropdownList.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnChoiceDropdownList.Name = "btnChoiceDropdownList";
+            btnChoiceDropdownList.Size = new System.Drawing.Size(69, 19);
+            btnChoiceDropdownList.Tag = "NA";
+            btnChoiceDropdownList.Text = "選項";
+            btnChoiceDropdownList.DropDownItemClicked += toolBarSymbol1_ItemClicked;
             // 
             // btnChoiceBo
             // 
-            this.btnChoiceBo.Name = "btnChoiceBo";
-            this.btnChoiceBo.Size = new System.Drawing.Size(107, 26);
-            this.btnChoiceBo.Tag = "<選項>ㄅ.</選項>";
-            this.btnChoiceBo.Text = "ㄅ.";
+            btnChoiceBo.Name = "btnChoiceBo";
+            btnChoiceBo.Size = new System.Drawing.Size(93, 22);
+            btnChoiceBo.Tag = "<選項>ㄅ.</選項>";
+            btnChoiceBo.Text = "ㄅ.";
             // 
             // btnChoicePo
             // 
-            this.btnChoicePo.Name = "btnChoicePo";
-            this.btnChoicePo.Size = new System.Drawing.Size(107, 26);
-            this.btnChoicePo.Tag = "<選項>ㄆ.</選項>";
-            this.btnChoicePo.Text = "ㄆ.";
+            btnChoicePo.Name = "btnChoicePo";
+            btnChoicePo.Size = new System.Drawing.Size(93, 22);
+            btnChoicePo.Tag = "<選項>ㄆ.</選項>";
+            btnChoicePo.Text = "ㄆ.";
             // 
             // btnChoiceMo
             // 
-            this.btnChoiceMo.Name = "btnChoiceMo";
-            this.btnChoiceMo.Size = new System.Drawing.Size(107, 26);
-            this.btnChoiceMo.Tag = "<選項>ㄇ.</選項>";
-            this.btnChoiceMo.Text = "ㄇ.";
+            btnChoiceMo.Name = "btnChoiceMo";
+            btnChoiceMo.Size = new System.Drawing.Size(93, 22);
+            btnChoiceMo.Tag = "<選項>ㄇ.</選項>";
+            btnChoiceMo.Text = "ㄇ.";
             // 
             // btnChoiceFo
             // 
-            this.btnChoiceFo.Name = "btnChoiceFo";
-            this.btnChoiceFo.Size = new System.Drawing.Size(107, 26);
-            this.btnChoiceFo.Tag = "<選項>ㄈ.</選項>";
-            this.btnChoiceFo.Text = "ㄈ.";
+            btnChoiceFo.Name = "btnChoiceFo";
+            btnChoiceFo.Size = new System.Drawing.Size(93, 22);
+            btnChoiceFo.Tag = "<選項>ㄈ.</選項>";
+            btnChoiceFo.Text = "ㄈ.";
             // 
             // btnSymbolName
             // 
-            this.btnSymbolName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolName.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolName.Image")));
-            this.btnSymbolName.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolName.Name = "btnSymbolName";
-            this.btnSymbolName.Size = new System.Drawing.Size(87, 23);
-            this.btnSymbolName.Tag = "<私名號>|</私名號>";
-            this.btnSymbolName.Text = "私名號";
-            this.btnSymbolName.ToolTipText = "私名號";
+            btnSymbolName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolName.Image = (System.Drawing.Image)resources.GetObject("btnSymbolName.Image");
+            btnSymbolName.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolName.Name = "btnSymbolName";
+            btnSymbolName.Size = new System.Drawing.Size(69, 19);
+            btnSymbolName.Tag = "<私名號>|</私名號>";
+            btnSymbolName.Text = "私名號";
+            btnSymbolName.ToolTipText = "私名號";
             // 
             // btnSymbolBookName
             // 
-            this.btnSymbolBookName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolBookName.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolBookName.Image")));
-            this.btnSymbolBookName.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolBookName.Name = "btnSymbolBookName";
-            this.btnSymbolBookName.Size = new System.Drawing.Size(87, 23);
-            this.btnSymbolBookName.Tag = "<書名號>|</書名號>";
-            this.btnSymbolBookName.Text = "書名號";
-            this.btnSymbolBookName.ToolTipText = "書名號 (﹏)";
+            btnSymbolBookName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolBookName.Image = (System.Drawing.Image)resources.GetObject("btnSymbolBookName.Image");
+            btnSymbolBookName.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolBookName.Name = "btnSymbolBookName";
+            btnSymbolBookName.Size = new System.Drawing.Size(69, 19);
+            btnSymbolBookName.Tag = "<書名號>|</書名號>";
+            btnSymbolBookName.Text = "書名號";
+            btnSymbolBookName.ToolTipText = "書名號 (﹏)";
             // 
             // toolStripSeparator12
             // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(87, 6);
+            toolStripSeparator12.Name = "toolStripSeparator12";
+            toolStripSeparator12.Size = new System.Drawing.Size(69, 6);
             // 
             // btnSymbolTime
             // 
-            this.btnSymbolTime.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolTime.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolTime.Image")));
-            this.btnSymbolTime.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolTime.Name = "btnSymbolTime";
-            this.btnSymbolTime.Size = new System.Drawing.Size(87, 23);
-            this.btnSymbolTime.Tag = "<時間>|</時間>";
-            this.btnSymbolTime.Text = "時間";
-            this.btnSymbolTime.ToolTipText = "用來表示時間";
+            btnSymbolTime.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolTime.Image = (System.Drawing.Image)resources.GetObject("btnSymbolTime.Image");
+            btnSymbolTime.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolTime.Name = "btnSymbolTime";
+            btnSymbolTime.Size = new System.Drawing.Size(69, 19);
+            btnSymbolTime.Tag = "<時間>|</時間>";
+            btnSymbolTime.Text = "時間";
+            btnSymbolTime.ToolTipText = "用來表示時間";
             // 
             // btnRatio
             // 
-            this.btnRatio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnRatio.Image = ((System.Drawing.Image)(resources.GetObject("btnRatio.Image")));
-            this.btnRatio.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRatio.Name = "btnRatio";
-            this.btnRatio.Size = new System.Drawing.Size(87, 23);
-            this.btnRatio.Tag = "1:1";
-            this.btnRatio.Text = "比例";
-            this.btnRatio.ToolTipText = "比值符號就是英文半形冒號";
+            btnRatio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnRatio.Image = (System.Drawing.Image)resources.GetObject("btnRatio.Image");
+            btnRatio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnRatio.Name = "btnRatio";
+            btnRatio.Size = new System.Drawing.Size(69, 19);
+            btnRatio.Tag = "1:1";
+            btnRatio.Text = "比例";
+            btnRatio.ToolTipText = "比值符號就是英文半形冒號";
             // 
             // btnSymbolCoord
             // 
-            this.btnSymbolCoord.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSymbolCoord.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolCoord.Image")));
-            this.btnSymbolCoord.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSymbolCoord.Name = "btnSymbolCoord";
-            this.btnSymbolCoord.Size = new System.Drawing.Size(87, 23);
-            this.btnSymbolCoord.Tag = "<座標>(|)</座標>";
-            this.btnSymbolCoord.Text = "座標";
-            this.btnSymbolCoord.ToolTipText = "範例: <座標>(1,2)</座標>";
+            btnSymbolCoord.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnSymbolCoord.Image = (System.Drawing.Image)resources.GetObject("btnSymbolCoord.Image");
+            btnSymbolCoord.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSymbolCoord.Name = "btnSymbolCoord";
+            btnSymbolCoord.Size = new System.Drawing.Size(69, 19);
+            btnSymbolCoord.Tag = "<座標>(|)</座標>";
+            btnSymbolCoord.Text = "座標";
+            btnSymbolCoord.ToolTipText = "範例: <座標>(1,2)</座標>";
             // 
             // btnFraction
             // 
-            this.btnFraction.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnFraction.Image = ((System.Drawing.Image)(resources.GetObject("btnFraction.Image")));
-            this.btnFraction.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnFraction.Name = "btnFraction";
-            this.btnFraction.Size = new System.Drawing.Size(87, 23);
-            this.btnFraction.Tag = "<分數>|</分數>";
-            this.btnFraction.Text = "分數";
-            this.btnFraction.ToolTipText = "範例: 1&2/3 代表一又二分之三";
+            btnFraction.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnFraction.Image = (System.Drawing.Image)resources.GetObject("btnFraction.Image");
+            btnFraction.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnFraction.Name = "btnFraction";
+            btnFraction.Size = new System.Drawing.Size(69, 19);
+            btnFraction.Tag = "<分數>|</分數>";
+            btnFraction.Text = "分數";
+            btnFraction.ToolTipText = "範例: 1&2/3 代表一又二分之三";
             // 
             // btnUrl
             // 
-            this.btnUrl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnUrl.Image = ((System.Drawing.Image)(resources.GetObject("btnUrl.Image")));
-            this.btnUrl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnUrl.Name = "btnUrl";
-            this.btnUrl.Size = new System.Drawing.Size(87, 23);
-            this.btnUrl.Tag = "<URL>|</URL>";
-            this.btnUrl.Text = "網址";
+            btnUrl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            btnUrl.Image = (System.Drawing.Image)resources.GetObject("btnUrl.Image");
+            btnUrl.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnUrl.Name = "btnUrl";
+            btnUrl.Size = new System.Drawing.Size(69, 19);
+            btnUrl.Tag = "<URL>|</URL>";
+            btnUrl.Text = "網址";
             // 
             // toolStripSeparator13
             // 
-            this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(87, 6);
+            toolStripSeparator13.Name = "toolStripSeparator13";
+            toolStripSeparator13.Size = new System.Drawing.Size(69, 6);
             // 
             // toolStripButton2
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(87, 23);
-            this.toolStripButton2.Tag = "[↗]";
-            this.toolStripButton2.Text = "上升語調";
+            toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            toolStripButton2.Image = (System.Drawing.Image)resources.GetObject("toolStripButton2.Image");
+            toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton2.Name = "toolStripButton2";
+            toolStripButton2.Size = new System.Drawing.Size(69, 19);
+            toolStripButton2.Tag = "[↗]";
+            toolStripButton2.Text = "上升語調";
             // 
             // toolStripButton3
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(87, 23);
-            this.toolStripButton3.Tag = "[↘]";
-            this.toolStripButton3.Text = "下降語調";
+            toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            toolStripButton3.Image = (System.Drawing.Image)resources.GetObject("toolStripButton3.Image");
+            toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton3.Name = "toolStripButton3";
+            toolStripButton3.Size = new System.Drawing.Size(69, 19);
+            toolStripButton3.Tag = "[↘]";
+            toolStripButton3.Text = "下降語調";
             // 
             // toolStripSeparator16
             // 
-            this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(87, 6);
+            toolStripSeparator16.Name = "toolStripSeparator16";
+            toolStripSeparator16.Size = new System.Drawing.Size(69, 6);
             // 
             // toolStripButton1
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(87, 23);
-            this.toolStripButton1.Tag = "Phonetic";
-            this.toolStripButton1.Text = "音標";
+            toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            toolStripButton1.Image = (System.Drawing.Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new System.Drawing.Size(69, 19);
+            toolStripButton1.Tag = "Phonetic";
+            toolStripButton1.Text = "音標";
             // 
             // toolStripSeparator18
             // 
-            this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(87, 6);
+            toolStripSeparator18.Name = "toolStripSeparator18";
+            toolStripSeparator18.Size = new System.Drawing.Size(69, 6);
             // 
             // InsertTextForm
             // 
-            this.AcceptButton = this.btnOk;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1217, 734);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.toolBarMath);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.toolBarSymbol1);
-            this.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "InsertTextForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "插入文字";
-            this.Load += new System.EventHandler(this.InsertTextForm_Load);
-            this.Shown += new System.EventHandler(this.InsertTextForm_Shown);
-            this.toolBarSymbol1.ResumeLayout(false);
-            this.toolBarSymbol1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.toolBarMath.ResumeLayout(false);
-            this.toolBarMath.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.toolBarSymbol3.ResumeLayout(false);
-            this.toolBarSymbol3.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AcceptButton = btnOk;
+            AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            CancelButton = btnCancel;
+            ClientSize = new System.Drawing.Size(1369, 775);
+            Controls.Add(panel3);
+            Controls.Add(toolBarMath);
+            Controls.Add(panel2);
+            Controls.Add(toolBarSymbol1);
+            Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            Name = "InsertTextForm";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "插入文字";
+            Load += InsertTextForm_Load;
+            Shown += InsertTextForm_Shown;
+            toolBarSymbol1.ResumeLayout(false);
+            toolBarSymbol1.PerformLayout();
+            panel2.ResumeLayout(false);
+            toolBarMath.ResumeLayout(false);
+            toolBarMath.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            toolBarSymbol3.ResumeLayout(false);
+            toolBarSymbol3.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

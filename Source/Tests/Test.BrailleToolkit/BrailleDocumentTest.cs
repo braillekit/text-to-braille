@@ -61,10 +61,10 @@ namespace Test.BrailleToolkit
                 brDoc.LoadAndConvert(reader);
             }
 
-            Assert.IsTrue(brDoc.PageTitles.Count == 1);
-            Assert.IsTrue(brDoc.LineCount == 5);
-            Assert.IsTrue(brDoc.PageTitles[0].BeginLineIndex == 3);
-            Assert.IsTrue(brDoc.PageTitles[0].BeginLineRef.ToString() == "3");
+            Assert.That(brDoc.PageTitles.Count == 1, Is.True);
+            Assert.That(brDoc.LineCount == 5, Is.True);
+            Assert.That(brDoc.PageTitles[0].BeginLineIndex == 3, Is.True);
+            Assert.That(brDoc.PageTitles[0].BeginLineRef.ToString() == "3", Is.True);
         }
     }
 

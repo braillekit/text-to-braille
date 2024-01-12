@@ -100,12 +100,12 @@ namespace BrailleToolkit.Rules
                 return true;
             }
 
-            if (AppGlobals.Config.Braille.NoSpaceAfterTheseCharacters.IndexOf(lastWord.Text) >= 0)
+            if (AppGlobals.Config.Braille.NoSpaceAfterTheseCharacters.Contains(lastWord.Text, StringComparison.CurrentCulture))
             {
                 return false;
             }
 
-            if (AppGlobals.Config.Braille.NoSpaceBeforeTheseCharacters.IndexOf(currWord.Text) >= 0)
+            if (AppGlobals.Config.Braille.NoSpaceBeforeTheseCharacters.Contains(currWord.Text, StringComparison.CurrentCulture))
             {
                 return false;
             }
@@ -334,7 +334,7 @@ namespace BrailleToolkit.Rules
                 if (digitCount > 0)   // 之前的字元是數字？
                 {
                     // 如果之前出現過數字，那麼碰到這些字元的時候，仍視為連續的數學式子（即後面的數字不用再加數符）。
-                    if (CharactersAsMathFormulaIfDigitHasAppeared.IndexOf(currChar) >= 0)
+                    if (CharactersAsMathFormulaIfDigitHasAppeared.Contains(currChar))
                     {
                         continue;   // 則繼續處理下一個字元。
                     }
@@ -374,7 +374,7 @@ namespace BrailleToolkit.Rules
             if (index > 0)    // 先檢查前一個字元，是否為不需加數符的場合。
             {
                 var prevText = brLine.Words[index - 1].Text;
-                if (NoExtraDigitSymbolAfterTheseCharacters.IndexOf(prevText) >= 0)
+                if (NoExtraDigitSymbolAfterTheseCharacters.Contains(prevText, StringComparison.CurrentCulture))
                 {
                     needDigitSymbol = false;
                 }

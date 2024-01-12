@@ -42,11 +42,11 @@ namespace Test.BrailleToolkit
                 brDoc.LoadAndConvert(reader);
             }
 
-            Assert.AreEqual(brDoc.LineCount, expectedBrailleCells.Length);
+            Assert.That(brDoc.LineCount, Is.EqualTo(expectedBrailleCells.Length));
 
             for (int i = 0; i < brDoc.LineCount; i++)
             {
-                Assert.AreEqual(expectedBrailleCells[i], brDoc.Lines[i].ToPositionNumberString());
+                Assert.That(expectedBrailleCells[i], Is.EqualTo(brDoc.Lines[i].ToPositionNumberString()));
             }
         }
 

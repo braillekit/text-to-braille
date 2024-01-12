@@ -28,107 +28,110 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtCustomerName = new System.Windows.Forms.TextBox();
-            this.btnReg = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.txtLicenseKey = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            txtCustomerName = new System.Windows.Forms.TextBox();
+            btnReg = new System.Windows.Forms.Button();
+            btnClose = new System.Windows.Forms.Button();
+            txtLicenseKey = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.ForeColor = System.Drawing.Color.Maroon;
-            this.label1.Location = new System.Drawing.Point(31, 145);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(384, 30);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "注意：註冊程序需要連接網際網路。";
+            label1.ForeColor = System.Drawing.Color.Maroon;
+            label1.Location = new System.Drawing.Point(32, 143);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(432, 38);
+            label1.TabIndex = 12;
+            label1.Text = "注意：註冊程序需要連接網際網路。";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 19);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "*公司或姓名:";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(32, 42);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(94, 19);
+            label2.TabIndex = 0;
+            label2.Text = "*公司或姓名:";
             // 
             // txtCustomerName
             // 
-            this.txtCustomerName.Location = new System.Drawing.Point(155, 30);
-            this.txtCustomerName.MaxLength = 40;
-            this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Size = new System.Drawing.Size(260, 29);
-            this.txtCustomerName.TabIndex = 1;
+            txtCustomerName.Location = new System.Drawing.Point(132, 39);
+            txtCustomerName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            txtCustomerName.MaxLength = 40;
+            txtCustomerName.Name = "txtCustomerName";
+            txtCustomerName.Size = new System.Drawing.Size(292, 27);
+            txtCustomerName.TabIndex = 1;
             // 
             // btnReg
             // 
-            this.btnReg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReg.Location = new System.Drawing.Point(228, 203);
-            this.btnReg.Name = "btnReg";
-            this.btnReg.Size = new System.Drawing.Size(101, 41);
-            this.btnReg.TabIndex = 13;
-            this.btnReg.Text = "註冊(&R)";
-            this.btnReg.UseVisualStyleBackColor = true;
-            this.btnReg.Click += new System.EventHandler(this.btnReg_Click);
+            btnReg.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnReg.Location = new System.Drawing.Point(231, 203);
+            btnReg.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnReg.Name = "btnReg";
+            btnReg.Size = new System.Drawing.Size(114, 52);
+            btnReg.TabIndex = 13;
+            btnReg.Text = "註冊(&R)";
+            btnReg.UseVisualStyleBackColor = true;
+            btnReg.Click += btnReg_Click;
             // 
             // btnClose
             // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(335, 203);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(101, 41);
-            this.btnClose.TabIndex = 14;
-            this.btnClose.Text = "取消";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnClose.Location = new System.Drawing.Point(351, 203);
+            btnClose.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new System.Drawing.Size(114, 52);
+            btnClose.TabIndex = 14;
+            btnClose.Text = "取消";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
             // 
             // txtLicenseKey
             // 
-            this.txtLicenseKey.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtLicenseKey.Location = new System.Drawing.Point(155, 75);
-            this.txtLicenseKey.MaxLength = 20;
-            this.txtLicenseKey.Name = "txtLicenseKey";
-            this.txtLicenseKey.Size = new System.Drawing.Size(260, 29);
-            this.txtLicenseKey.TabIndex = 11;
+            txtLicenseKey.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtLicenseKey.Location = new System.Drawing.Point(132, 85);
+            txtLicenseKey.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            txtLicenseKey.MaxLength = 20;
+            txtLicenseKey.Name = "txtLicenseKey";
+            txtLicenseKey.Size = new System.Drawing.Size(292, 27);
+            txtLicenseKey.TabIndex = 11;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(88, 78);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 19);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "*序號:";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(77, 88);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(49, 19);
+            label5.TabIndex = 10;
+            label5.Text = "*序號:";
             // 
             // RegForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(457, 256);
-            this.Controls.Add(this.txtLicenseKey);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnReg);
-            this.Controls.Add(this.txtCustomerName);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("PMingLiU", 11F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "RegForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "註冊";
-            this.Load += new System.EventHandler(this.RegForm_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            CancelButton = btnClose;
+            ClientSize = new System.Drawing.Size(477, 268);
+            Controls.Add(txtLicenseKey);
+            Controls.Add(label5);
+            Controls.Add(btnClose);
+            Controls.Add(btnReg);
+            Controls.Add(txtCustomerName);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "RegForm";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "註冊";
+            Load += RegForm_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

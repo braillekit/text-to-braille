@@ -2,6 +2,7 @@
 using BrailleToolkit;
 using BrailleToolkit.Converters;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Test.BrailleToolkit
 {
