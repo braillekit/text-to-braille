@@ -31,211 +31,210 @@ namespace EasyBrailleEdit
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
-            this.btnClose = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lblVersionLicense = new System.Windows.Forms.Label();
-            this.lblExpiredDate = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblCustomerName = new System.Windows.Forms.Label();
-            this.lblLicensedTo = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblProductName = new System.Windows.Forms.Label();
-            this.lblVesion = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnRegister = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.SuspendLayout();
+            btnClose = new Button();
+            panel1 = new Panel();
+            lblVersionLicense = new Label();
+            lblExpiredDate = new Label();
+            label2 = new Label();
+            lblCustomerName = new Label();
+            lblLicensedTo = new Label();
+            label1 = new Label();
+            linkLabel1 = new LinkLabel();
+            pictureBox1 = new PictureBox();
+            lblProductName = new Label();
+            lblVesion = new Label();
+            panel2 = new Panel();
+            btnRegister = new Button();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel2.SuspendLayout();
+            SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnClose.Location = new System.Drawing.Point(311, 10);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(111, 36);
-            this.btnClose.TabIndex = 2;
-            this.btnClose.Text = "關閉(&X)";
-            this.btnClose.UseVisualStyleBackColor = true;
+            btnClose.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnClose.DialogResult = DialogResult.OK;
+            btnClose.Location = new System.Drawing.Point(389, 10);
+            btnClose.Margin = new Padding(4);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new System.Drawing.Size(111, 36);
+            btnClose.TabIndex = 2;
+            btnClose.Text = "關閉(&X)";
+            btnClose.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.lblVersionLicense);
-            this.panel1.Controls.Add(this.lblExpiredDate);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.lblCustomerName);
-            this.panel1.Controls.Add(this.lblLicensedTo);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.linkLabel1);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.lblProductName);
-            this.panel1.Controls.Add(this.lblVesion);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(432, 267);
-            this.panel1.TabIndex = 0;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(lblVersionLicense);
+            panel1.Controls.Add(lblExpiredDate);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(lblCustomerName);
+            panel1.Controls.Add(lblLicensedTo);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(linkLabel1);
+            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(lblProductName);
+            panel1.Controls.Add(lblVesion);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Margin = new Padding(4);
+            panel1.Name = "panel1";
+            panel1.Padding = new Padding(4);
+            panel1.Size = new System.Drawing.Size(510, 267);
+            panel1.TabIndex = 0;
             // 
             // lblVersionLicense
             // 
-            this.lblVersionLicense.AutoSize = true;
-            this.lblVersionLicense.Location = new System.Drawing.Point(189, 15);
-            this.lblVersionLicense.Name = "lblVersionLicense";
-            this.lblVersionLicense.Size = new System.Drawing.Size(61, 23);
-            this.lblVersionLicense.TabIndex = 14;
-            this.lblVersionLicense.Text = "label3";
+            lblVersionLicense.AutoSize = true;
+            lblVersionLicense.Location = new System.Drawing.Point(189, 15);
+            lblVersionLicense.Name = "lblVersionLicense";
+            lblVersionLicense.Size = new System.Drawing.Size(51, 19);
+            lblVersionLicense.TabIndex = 14;
+            lblVersionLicense.Text = "label3";
             // 
             // lblExpiredDate
             // 
-            this.lblExpiredDate.AutoSize = true;
-            this.lblExpiredDate.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblExpiredDate.Location = new System.Drawing.Point(113, 124);
-            this.lblExpiredDate.Name = "lblExpiredDate";
-            this.lblExpiredDate.Size = new System.Drawing.Size(126, 22);
-            this.lblExpiredDate.TabIndex = 13;
-            this.lblExpiredDate.Text = "lblExpiredDate";
+            lblExpiredDate.AutoSize = true;
+            lblExpiredDate.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblExpiredDate.Location = new System.Drawing.Point(96, 124);
+            lblExpiredDate.Name = "lblExpiredDate";
+            lblExpiredDate.Size = new System.Drawing.Size(107, 18);
+            lblExpiredDate.TabIndex = 13;
+            lblExpiredDate.Text = "lblExpiredDate";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(12, 124);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 22);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "使用期限：";
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label2.Location = new System.Drawing.Point(12, 124);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(78, 18);
+            label2.TabIndex = 12;
+            label2.Text = "使用期限：";
             // 
             // lblCustomerName
             // 
-            this.lblCustomerName.AutoSize = true;
-            this.lblCustomerName.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblCustomerName.Location = new System.Drawing.Point(111, 100);
-            this.lblCustomerName.Name = "lblCustomerName";
-            this.lblCustomerName.Size = new System.Drawing.Size(156, 22);
-            this.lblCustomerName.TabIndex = 11;
-            this.lblCustomerName.Text = "lblCustomerName";
+            lblCustomerName.AutoSize = true;
+            lblCustomerName.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblCustomerName.Location = new System.Drawing.Point(96, 100);
+            lblCustomerName.Name = "lblCustomerName";
+            lblCustomerName.Size = new System.Drawing.Size(129, 18);
+            lblCustomerName.TabIndex = 11;
+            lblCustomerName.Text = "lblCustomerName";
             // 
             // lblLicensedTo
             // 
-            this.lblLicensedTo.AutoSize = true;
-            this.lblLicensedTo.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblLicensedTo.Location = new System.Drawing.Point(12, 100);
-            this.lblLicensedTo.Name = "lblLicensedTo";
-            this.lblLicensedTo.Size = new System.Drawing.Size(95, 22);
-            this.lblLicensedTo.TabIndex = 10;
-            this.lblLicensedTo.Text = "授權對象：";
+            lblLicensedTo.AutoSize = true;
+            lblLicensedTo.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblLicensedTo.Location = new System.Drawing.Point(12, 100);
+            lblLicensedTo.Name = "lblLicensedTo";
+            lblLicensedTo.Size = new System.Drawing.Size(78, 18);
+            lblLicensedTo.TabIndex = 10;
+            lblLicensedTo.Text = "授權對象：";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(12, 164);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 23);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "臉書專頁：";
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label1.Location = new System.Drawing.Point(12, 164);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(84, 19);
+            label1.TabIndex = 9;
+            label1.Text = "臉書專頁：";
             // 
             // linkLabel1
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.linkLabel1.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.linkLabel1.Location = new System.Drawing.Point(111, 165);
-            this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(232, 22);
-            this.linkLabel1.TabIndex = 8;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "點此連結開啟 Facebook 專頁";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            linkLabel1.AutoSize = true;
+            linkLabel1.Cursor = Cursors.Hand;
+            linkLabel1.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            linkLabel1.Location = new System.Drawing.Point(96, 164);
+            linkLabel1.Margin = new Padding(4, 0, 4, 0);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new System.Drawing.Size(192, 18);
+            linkLabel1.TabIndex = 8;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "點此連結開啟 Facebook 專頁";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(4, 6);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(66, 64);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
+            pictureBox1.Image = (System.Drawing.Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new System.Drawing.Point(4, 6);
+            pictureBox1.Margin = new Padding(4);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new System.Drawing.Size(66, 64);
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
             // 
             // lblProductName
             // 
-            this.lblProductName.AutoSize = true;
-            this.lblProductName.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblProductName.Location = new System.Drawing.Point(96, 15);
-            this.lblProductName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(82, 23);
-            this.lblProductName.TabIndex = 3;
-            this.lblProductName.Text = "易點雙視";
+            lblProductName.AutoSize = true;
+            lblProductName.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblProductName.Location = new System.Drawing.Point(96, 15);
+            lblProductName.Margin = new Padding(4, 0, 4, 0);
+            lblProductName.Name = "lblProductName";
+            lblProductName.Size = new System.Drawing.Size(69, 19);
+            lblProductName.TabIndex = 3;
+            lblProductName.Text = "易點雙視";
             // 
             // lblVesion
             // 
-            this.lblVesion.AutoSize = true;
-            this.lblVesion.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblVesion.Location = new System.Drawing.Point(96, 50);
-            this.lblVesion.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblVesion.Name = "lblVesion";
-            this.lblVesion.Size = new System.Drawing.Size(122, 23);
-            this.lblVesion.TabIndex = 2;
-            this.lblVesion.Text = "1.0.2008.0103";
+            lblVesion.AutoSize = true;
+            lblVesion.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblVesion.Location = new System.Drawing.Point(96, 50);
+            lblVesion.Margin = new Padding(5, 0, 5, 0);
+            lblVesion.Name = "lblVesion";
+            lblVesion.Size = new System.Drawing.Size(108, 19);
+            lblVesion.TabIndex = 2;
+            lblVesion.Text = "1.0.2008.0103";
             // 
             // panel2
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.btnRegister);
-            this.panel2.Controls.Add(this.btnClose);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 211);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(432, 56);
-            this.panel2.TabIndex = 3;
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(btnRegister);
+            panel2.Controls.Add(btnClose);
+            panel2.Dock = DockStyle.Bottom;
+            panel2.Location = new System.Drawing.Point(0, 211);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(510, 56);
+            panel2.TabIndex = 3;
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(16, 10);
-            this.btnRegister.Margin = new System.Windows.Forms.Padding(4);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(111, 36);
-            this.btnRegister.TabIndex = 3;
-            this.btnRegister.Text = "註冊";
-            this.btnRegister.UseVisualStyleBackColor = true;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            btnRegister.Location = new System.Drawing.Point(16, 10);
+            btnRegister.Margin = new Padding(4);
+            btnRegister.Name = "btnRegister";
+            btnRegister.Size = new System.Drawing.Size(111, 36);
+            btnRegister.TabIndex = 3;
+            btnRegister.Text = "註冊";
+            btnRegister.UseVisualStyleBackColor = true;
+            btnRegister.Click += btnRegister_Click;
             // 
             // AboutForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(432, 267);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(5);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "AboutForm";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "關於 EasyBrailleEdit";
-            this.Load += new System.EventHandler(this.AboutForm_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = btnClose;
+            ClientSize = new System.Drawing.Size(510, 267);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
+            Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(5);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "AboutForm";
+            ShowInTaskbar = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "關於 EasyBrailleEdit";
+            Load += AboutForm_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel2.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion

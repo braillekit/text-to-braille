@@ -5,25 +5,33 @@
 2. 在 main branch 建立 git tag，例如："4.1.0"，並且推送至 git server。
 
    指令範例：git tag 4.1.0
+   
+   Note: tag 名稱只能是版本號碼。如果在版本號碼前面加上 "v，例如 "v4.1.0"，將導致 Flubu
+         建置專案時忽略該 tag。
 
 3. 在專案原始碼的根目錄下執行命令：
 
    flubu compile
   
-4. 執行 output 資料夾底下的 combine.bat。
+   若建置成功，檔案會輸出至以下兩個資料夾：
 
-5. 把 Combined\Release\ 資料夾底下的檔案手動揀選需要的檔案，並複製到 UpdateFiles 資料夾。
+   Output\EasyBrailleEdit\Release\<.NET-target>\
+   Output\Txt2Brl\Release\<.NET-target>\
 
-6. 到 UpdateFiles 資料夾下修改 Update.txt 內容，確保版號正確。
+   檢查上述資料夾中的主程式 EXE 和 DLL 檔案的版本是否與 Step 2 的 tag 一致。
 
-5.把 UpdateFiles 資料夾下的檔案複製到  https://github.com/huanlin/easy-braille-edit.git
+4. 把 Step 3 產生的應用程式檔案手動揀選並複製到 UpdateFiles 資料夾。
+
+5. 到 UpdateFiles 資料夾下修改 Update.txt 內容，確保版號正確。
+
+6.把 UpdateFiles 資料夾下的檔案複製到  https://github.com/huanlin/easy-braille-edit.git
   的 "Update4" 分支的 UpdateFiles 資料夾。  
   repo URL:
   https://github.com/huanlin/easy-braille-edit/tree/Update4
 
-6.在本機測試能否自動更新。
+7.在本機測試能否自動更新。
 
-7. 使用 InnoSetup 製作安裝程式：Setup\InnoSetup\iss。
+8.如果需要打包安裝程式，使用 InnoSetup 製作安裝程式：Setup\InnoSetup\iss。
 
 注意：易點雙視無法在 Windows 11 Sandbox 環境中正常執行，應用程式載入時會發生錯誤：
      「找不到指定的模組。」
