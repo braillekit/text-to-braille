@@ -78,7 +78,7 @@ namespace Test.BrailleToolkit
             Assert.That(expected, Is.EqualTo(actual), msg + line);
             bool isOk = (brLine[0].Cells[0].Value == (byte)BrailleCellCode.Capital) &&
                 (brLine[0].Cells[1].Value == 0x13);
-            Assert.That(isOk, msg + line);
+            Assert.That(isOk, Is.True, msg + line);
 
             // 測試兩個大寫字母。
             line = "ABC";
@@ -90,7 +90,7 @@ namespace Test.BrailleToolkit
                 (brLine[0].Cells[1].Value == (byte)BrailleCellCode.Capital) &&
                 (brLine[0].Cells[2].Value == 0x01) &&   // 'A'
                 (brLine[1].Cells[0].Value == 0x03);     // 'B'
-            Assert.That(isOk, msg + line);
+            Assert.That(isOk, Is.True, msg + line);
 
             // 測試數字。
             line = "123,56 2006-09-29";
@@ -101,7 +101,7 @@ namespace Test.BrailleToolkit
                 (brLine[4].Cells[0].Value != (byte)BrailleCellCode.Capital) &&	// 逗號視為數字的延續，不用額外加數字記號。
                 (brLine[7].Cells[0].Value == (byte)BrailleCellCode.Digit) &&
                 (brLine[12].Cells[0].Value != (byte)BrailleCellCode.Capital);	// 連字號視為數字的延續，不用額外加數字記號。
-            Assert.That(isOk, msg + line);
+            Assert.That(isOk, Is.True, msg + line);
 
             // 測試連續多個空白：保留空白。
             line = "a   b   ";

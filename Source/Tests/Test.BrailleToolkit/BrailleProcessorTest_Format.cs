@@ -130,7 +130,7 @@ namespace Test.BrailleToolkit
             Assert.That(formattedLines.Count == 2 && formattedLines[0].CellCount == expectedCellCountOfLine1 && formattedLines[1].CellCount == expectedCellCountOfLine2);
 
             // 第二行不應該以刪節號開頭。
-            Assert.That(textShouldNotBeginOfLine, !Is.EqualTo(formattedLines[1].Words[0].Text));
+            Assert.That(textShouldNotBeginOfLine, Is.Not.EqualTo(formattedLines[1].Words[0].Text));
         }
 
     }
