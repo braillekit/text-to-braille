@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace BrailleToolkit.Data
 {
-    internal sealed class ChineseBrailleTable : XmlBrailleTable
+    public sealed class ChineseBrailleTable : XmlBrailleTable
     {
         private static ChineseBrailleTable m_Instance = null;
 

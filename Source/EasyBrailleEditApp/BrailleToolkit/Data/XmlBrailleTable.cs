@@ -20,6 +20,11 @@ namespace BrailleToolkit.Data
 		private bool m_Loaded;
 		protected DataTable m_Table;
 
+        public DataTable Table
+        {
+            get { return m_Table; }
+        }
+
 		public XmlBrailleTable()
 		{
 			m_Table = new DataTable();

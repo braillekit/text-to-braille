@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace BrailleToolkit.Data
 {
-    internal sealed class MathBrailleTable : XmlBrailleTable
+    public sealed class MathBrailleTable : XmlBrailleTable
     {
         private static MathBrailleTable m_Instance = null;
 
