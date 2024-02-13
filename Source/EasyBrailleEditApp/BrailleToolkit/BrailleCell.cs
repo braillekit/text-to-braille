@@ -214,5 +214,10 @@ namespace BrailleToolkit
         {
             return BrailleCellHelper.ByteToPositionNumberString(Value);
         }
+
+        public int[] ToPositionNumberArray()
+        {
+            return BrailleCellHelper.HexStringToPositionNumbers(ToHexString());
+        }
     }
 }

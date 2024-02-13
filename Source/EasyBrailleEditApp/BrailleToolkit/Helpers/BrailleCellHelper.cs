@@ -37,9 +37,26 @@ namespace BrailleToolkit.Helpers
             return sb.ToString();
         }
 
-        public static string HexStringToPositionNmberString(string hexStr)
+        public static string HexStringToPositionNumberString(string hexStr)
         {
             return ByteToPositionNumberString(HexStringToByte(hexStr));
+        }
+
+        /// <summary>
+        /// 將十六進制字串轉換成點位數字陣列。
+        /// Example: "25" -> {1, 3, 6}
+        /// </summary>
+        /// <param name="hexStr"></param>
+        /// <returns></returns>
+        public static int[] HexStringToPositionNumbers(string hexStr)
+        {
+            string numString = HexStringToPositionNumberString(hexStr);
+            var result = new int[numString.Length];
+            for (int i = 0; i < numString.Length; i++)
+            {
+                result[i] = Convert.ToInt32(numString[i].ToString());
+            }
+            return result;
         }
 
         /// <summary>
