@@ -1,0 +1,47 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ v5.0.0 ]
+  pull_request:
+    branches: [ v5.0.0 ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+    
+    - name: Display directory structure
+      run: Get-ChildItem -Path . -Recurse -Depth 3 | Where-Object { $_.Name -match "\.(sln|csproj)$" } | ForEach-Object { $_.FullName }
+      shell: pwsh
+    
+    - name: Restore NuGet packages
+      run: dotnet restore "Source\EasyBrailleEditApp\EasyBrailleEditApp.sln"
+      
+    - name: Build solution
+      run: dotnet build "Source\EasyBrailleEditApp\EasyBrailleEditApp.sln" --configuration Release --no-restore
+      
+    - name: Publish EasyBrailleEdit
+      run: dotnet publish "Source\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj" --configuration Release --no-build --output publish\EasyBrailleEdit
+    
+    - name: Publish Txt2Brl
+      run: dotnet publish "Source\EasyBrailleEditApp\Txt2Brl\Txt2Brl.csproj" --configuration Release --no-build --output publish\Txt2Brl
+      
+    - name: Upload EasyBrailleEdit artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: EasyBrailleEdit
+        path: publish\EasyBrailleEdit\
+        
+    - name: Upload Txt2Brl artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Txt2Brl
+        path: publish\Txt2Brl\
