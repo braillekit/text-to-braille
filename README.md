@@ -1,6 +1,6 @@
 # EasyBrailleEdit
 
-[<img src="https://huanlin.visualstudio.com/_apis/public/build/definitions/4ea34b79-924b-4784-aca6-2668f8014439/1/badge" />](https://huanlin.visualstudio.com/Braille/_build/index?definitionId=1})
+![Build Status](https://github.com/yourusername/easy-braille-edit/workflows/Build%20and%20Deploy/badge.svg?branch=v5.0.0)
 
 ## 簡介
 

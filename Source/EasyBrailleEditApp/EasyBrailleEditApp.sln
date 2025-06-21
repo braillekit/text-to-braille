@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{CECA7BC5-3A2
 	ProjectSection(SolutionItems) = preProject
 		ChangeLog-v5.0.0.md = ChangeLog-v5.0.0.md
 		..\..\Doc\ChangeLog.txt = ..\..\Doc\ChangeLog.txt
+		..\..\LICENSE.md = ..\..\LICENSE.md
+		..\..\README.md = ..\..\README.md
 		..\..\Doc\ReleaseNote.txt = ..\..\Doc\ReleaseNote.txt
 		..\..\Doc\技術文件\部署程序.txt = ..\..\Doc\技術文件\部署程序.txt
 	EndProjectSection
