@@ -21,6 +21,7 @@ namespace EasyBrailleEdit.Forms
             InitializeComponent();
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int MaxBufferSize
         {
             get => _maxBufSize;

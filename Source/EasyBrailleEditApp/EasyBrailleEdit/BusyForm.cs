@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace EasyBrailleEdit
@@ -9,6 +10,7 @@ namespace EasyBrailleEdit
             InitializeComponent();
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Message
         {
             set

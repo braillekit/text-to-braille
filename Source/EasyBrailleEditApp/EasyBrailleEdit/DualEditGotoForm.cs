@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace EasyBrailleEdit
 {
@@ -12,22 +13,11 @@ namespace EasyBrailleEdit
             InitializeComponent();
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsGotoLine
         {
             get { return rdoLine.Checked; }
             set { rdoLine.Checked = value; }
-        }
-
-        public int MaxLineNumber
-        {
-            get { return m_MaxLineNumber; }
-            set { m_MaxLineNumber = value; }
-        }
-
-        public int MaxPageNumber
-        {
-            get { return m_MaxPageNumber; }
-            set { m_MaxPageNumber = value; }
         }
 
         public int Position

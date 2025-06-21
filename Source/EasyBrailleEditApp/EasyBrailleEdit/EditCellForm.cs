@@ -41,6 +41,7 @@ namespace EasyBrailleEdit
             Debug.Assert(_chineseConverter != null);
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public EditCellMode Mode
         {
             get
@@ -65,6 +66,7 @@ namespace EasyBrailleEdit
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BrailleWord BrailleWord
         {
             get { return _brWord; }

@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0DA263
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{CECA7BC5-3A2D-474F-9478-D37863ADD2ED}"
 	ProjectSection(SolutionItems) = preProject
+		ChangeLog-v5.0.0.md = ChangeLog-v5.0.0.md
 		..\..\Doc\ChangeLog.txt = ..\..\Doc\ChangeLog.txt
 		..\..\Doc\ReleaseNote.txt = ..\..\Doc\ReleaseNote.txt
 		..\..\Doc\技術文件\部署程序.txt = ..\..\Doc\技術文件\部署程序.txt
@@ -40,8 +41,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build", "..\..\Build\Build.csproj", "{D95DA0AC-382A-4456-AA40-6B399792AFC6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrailleToolkitBenchmark", "..\Tests\BrailleToolkitBenchmark\BrailleToolkitBenchmark.csproj", "{696732E2-7E48-4056-BEB9-FF880EAC89A8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrailleTestbed", "BrailleTestbed\BrailleTestbed.csproj", "{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{1811E6EB-3EED-4703-A530-48FDAFBD540B}"
 EndProject
@@ -140,18 +139,6 @@ Global
 		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Release|x64.Build.0 = Release|Any CPU
 		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Release|x86.ActiveCfg = Release|Any CPU
 		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Release|x86.Build.0 = Release|Any CPU
-		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Debug|x64.Build.0 = Debug|Any CPU
-		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Debug|x86.Build.0 = Debug|Any CPU
-		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Release|x64.ActiveCfg = Release|Any CPU
-		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Release|x64.Build.0 = Release|Any CPU
-		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Release|x86.ActiveCfg = Release|Any CPU
-		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB}.Release|x86.Build.0 = Release|Any CPU
 		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -171,7 +158,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6} = {564D6238-5E27-47A8-82F8-5E924565757A}
 		{696732E2-7E48-4056-BEB9-FF880EAC89A8} = {564D6238-5E27-47A8-82F8-5E924565757A}
-		{90F3E390-D88E-4604-AA4E-6BA23D51D8FB} = {564D6238-5E27-47A8-82F8-5E924565757A}
 		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD} = {1811E6EB-3EED-4703-A530-48FDAFBD540B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

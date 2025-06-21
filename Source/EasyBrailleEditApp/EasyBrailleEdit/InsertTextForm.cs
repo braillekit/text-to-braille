@@ -18,6 +18,7 @@ namespace EasyBrailleEdit
         private TextToBrailleConverter _converter = new TextToBrailleConverter();
         private bool _isUsedForPageTitle;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsUsedForPageTitle
         {
             get => _isUsedForPageTitle;

@@ -79,8 +79,8 @@ namespace EasyBrailleEdit
 			}
 		}
 
-
-		public BrailleDocument Document
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public BrailleDocument Document
 		{
 			get { return m_BrDoc; }
 			set 
@@ -96,31 +96,31 @@ namespace EasyBrailleEdit
 			}
 		}
 
-		public int StartLineIndex
+		private int StartLineIndex
 		{
 			get { return m_StartLineIndex; }
 			set { m_StartLineIndex = value; }
 		}
 
-		public int StartWordIndex
+		private int StartWordIndex
 		{
 			get { return m_StartWordIndex; }
 			set { m_StartWordIndex = value; }
 		}
 
-		public int FoundLineIndex
+		private int FoundLineIndex
 		{
 			get { return m_FoundLineIndex; }
 			set { m_FoundLineIndex = value; }
 		}
 
-		public int FoundWordIndex
+		private int FoundWordIndex
 		{
 			get { return m_FoundWordIndex; }
 			set { m_FoundWordIndex = value; }
 		}
 
-		public bool IsFirstTime
+		private bool IsFirstTime
 		{
 			get { return m_IsFirstTime; }
 			set

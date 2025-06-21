@@ -12,7 +12,7 @@ namespace GenerateYaml
     /// </summary>
     public class BrailleSymbol
     {
-        public string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
         public List<string> Dots { get; set; } = new List<string>();
         //public string? ShortText { get; set; }
         public string? Description { get; set; }         

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using EasyBrailleEdit.Common;
+using Huanlin.Windows.Forms;
+using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Drawing.Text;
 using System.Windows.Forms;
-using EasyBrailleEdit.Common;
-using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
 {
@@ -39,7 +40,8 @@ namespace EasyBrailleEdit
 			}			
 		}
 
-		public string PaperSourceName
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string PaperSourceName
 		{
 			get { return cboPaperSource.Text; }
 			set 
@@ -55,7 +57,8 @@ namespace EasyBrailleEdit
 			}
 		}
 
-		public string PaperName
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string PaperName
 		{
 			get 
 			{
@@ -80,6 +83,7 @@ namespace EasyBrailleEdit
 			}
 		}
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string FontName
         {
             get { return cboFontName.Text; }
@@ -96,6 +100,7 @@ namespace EasyBrailleEdit
 			}
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double FontSize
         {
             get { return (double)numFontSize.Value; }
@@ -105,6 +110,7 @@ namespace EasyBrailleEdit
         /// <summary>
         /// 奇數頁的邊界。
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Margins OddPageMargins
         {
             get 
@@ -128,6 +134,7 @@ namespace EasyBrailleEdit
         /// <summary>
         /// 偶數頁的邊界。
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Margins EvenPageMargins
         {
             get 

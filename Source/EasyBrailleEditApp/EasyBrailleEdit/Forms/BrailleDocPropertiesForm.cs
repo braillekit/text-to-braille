@@ -17,6 +17,7 @@ namespace EasyBrailleEdit.Forms
             InitializeComponent();
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int CellsPerLine
         {
             get { return Convert.ToInt32(lblCellsPerLine.Text); }
@@ -26,6 +27,7 @@ namespace EasyBrailleEdit.Forms
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int StartPageNumber
         {
             get { return (int) numStartPageNumber.Value; }

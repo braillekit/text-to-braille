@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Helpers;
@@ -17,6 +18,7 @@ namespace EasyBrailleEdit
         private DualEditFindForm m_FindForm;
         private UndoBufferForm _undoBufferForm;
 
+        private Timer clearStatusTimer = new Timer();
 
         public BrailleDocument BrailleDoc
         {
@@ -42,14 +44,16 @@ namespace EasyBrailleEdit
             set => statusLabelCurrentLine.Text = value; 
         }
 
-
-        string IBrailleGridForm.StatusText
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string StatusText
         {
-            get => statMessage.Text;
+            get { return statusStrip1.Items[0].Text; }
             set
             {
-                statMessage.Text = value;
+                statusStrip1.Items[0].Text = value;
                 statusStrip1.Refresh();
+                clearStatusTimer.Interval = 4000;
+                clearStatusTimer.Enabled = true;
             }
         }
 
@@ -65,6 +69,7 @@ namespace EasyBrailleEdit
             set { statPageInfo.Text = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ViewMode GridViewMode
         {
             get => _controller.ViewMode;
@@ -97,6 +102,7 @@ namespace EasyBrailleEdit
         /// <summary>
         /// 狀態列的進度表數值。
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int StatusProgress
         {
             get { return statProgressBar.Value; }
@@ -119,10 +125,7 @@ namespace EasyBrailleEdit
             var undoableOperations = (sender as UndoRedoManager).GetUndoableOperations();
             _undoBufferForm.UpdateUI(undoableOperations);
         }
-
-
-        public bool DebugMode { get; set; } = true;
-        
+       
         private void DualEditForm_Load(object sender, EventArgs e)
         {
             cboZoom.SelectedIndex = 2;  // 100%
