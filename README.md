@@ -1,6 +1,6 @@
 # EasyBrailleEdit
 
-![Build Status](https://github.com/yourusername/easy-braille-edit/workflows/Build%20and%20Deploy/badge.svg?branch=v5.0.0)
+![Build Status](https://github.com/huanlin/text-to-braille/actions/workflows/dotnet-desktop.yml/badge.svg)
 
 ## 簡介
 
