@@ -33,8 +33,8 @@
 
   <ItemGroup>
     <PackageReference Include="fernandreu.ScintillaNET" Version="4.2.0" />
-    <PackageReference Include="Huanlin.Common" Version="5.3.0" />
-    <PackageReference Include="Huanlin.Windows" Version="5.3.0" />
+    <PackageReference Include="Huanlin.Common" Version="5.3.3" />
+    <PackageReference Include="Huanlin.Windows" Version="5.3.3" />
     <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -44,7 +44,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="NChinese" Version="1.2.0" />
-    <PackageReference Include="ScintillaNET_FindReplaceDialog-huanlin" Version="1.5.2" />
+    <PackageReference Include="ScintillaNET_FindReplaceDialog-huanlin" Version="1.6.1" />
     <PackageReference Include="Serilog" Version="4.3.0" />
     <PackageReference Include="Serilog.Settings.AppSettings" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
