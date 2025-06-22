@@ -5,9 +5,6 @@ namespace EasyBrailleEdit
 {
     public partial class DualEditGotoForm : Form
     {
-        private int m_MaxLineNumber = 9999;
-        private int m_MaxPageNumber = 999;
-
         public DualEditGotoForm()
         {
             InitializeComponent();
