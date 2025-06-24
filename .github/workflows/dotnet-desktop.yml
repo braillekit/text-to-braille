@@ -94,10 +94,10 @@ jobs:
     - name: Create GitHub Release
       if: startsWith(github.ref, 'refs/tags/')  # Only create a release if this is a tag push
       uses: softprops/action-gh-release@v2
+      # IMPORTANT: the path separator in the `files` input must be `/`, not `\`. Otherwise it will fail.
+      # Refer to the GitHub docs: https://github.com/softprops/action-gh-release#inputs
       with:
         files: |
-          # IMPORTANT: the path separator in the `files` input must be `/`, not `\`. Otherwise it will fail.
-          # Refer to the GitHub docs: https://github.com/softprops/action-gh-release#inputs
           publish/EasyBrailleEdit-v${{ steps.get_version.outputs.VERSION }}.zip
           publish/Txt2Brl-v${{ steps.get_version.outputs.VERSION }}.zip
         name: 易點雙視 v${{ steps.get_version.outputs.VERSION }}
