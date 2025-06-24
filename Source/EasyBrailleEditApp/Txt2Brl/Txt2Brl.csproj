@@ -12,7 +12,7 @@
     <Nullable>disable</Nullable>
     <Description>TxtBrl 是易點雙視（EasyBraillEdit）的命令列工具，用途是將文字檔案轉換成點字檔案。</Description>
     <BaseOutputPath>..\..\..\Output\Txt2Brl</BaseOutputPath>
-    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
