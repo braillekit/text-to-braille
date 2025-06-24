@@ -1,4 +1,4 @@
-# v5.0.0
+﻿# v5.0.0
 
 ## User features
 
@@ -7,7 +7,7 @@
 
 ## Breaking changes
  
-- Windows 7 is not supported anymore. The minimum supported version is Windows 10.
+- The minimum supported version is Windows 10. The application might be able to run on Windows 7, but is not guaranteed to work correctly.
 
 ## Developer features
 

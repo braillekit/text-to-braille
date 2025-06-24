@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0-windows10.0.17763.0</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <Authors>Michael Tsai</Authors>
     <Company>Michael Tsai</Company>
-    <Copyright>Copyright (c) 2008-2022 Michael Tsai (蔡煥麟)</Copyright>
+    <Copyright>Copyright (c) 2008-2025 Michael Tsai (蔡煥麟)</Copyright>
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />

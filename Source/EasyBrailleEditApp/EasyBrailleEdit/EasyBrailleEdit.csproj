@@ -2,23 +2,17 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows10.0.17763.0</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>EasyBrailleEdit</RootNamespace>
     <AssemblyName>EasyBrailleEdit</AssemblyName>
     <Nullable>disable</Nullable>
-    <Copyright>Copyright (c) 2008-2022 Michael Tsai (蔡煥麟)</Copyright>
+    <Copyright>Copyright (c) 2008-2025 Michael Tsai (蔡煥麟)</Copyright>
     <Description>易點雙視（EasyBraillEdit）是一個 Windows 應用程式，主要用途是編輯與列印雙視教材，以供視障朋友摸讀。</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <BaseOutputPath>..\..\..\Output\EasyBrailleEdit</BaseOutputPath>
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="dytdkezs.z4h~" />
-    <None Remove="Forms\w53nmm3a.k1b~" />
-    <None Remove="Printing\fbur2e1r.kva~" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="app.ico" />
