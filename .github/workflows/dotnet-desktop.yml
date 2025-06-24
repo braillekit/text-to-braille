@@ -2,11 +2,11 @@
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, v5.0.0 ]
     tags:
       - '*.*.*'
   pull_request:
-    branches: [ main ]
+    branches: [ main, v5.0.0 ]
 
 jobs:
   build:
