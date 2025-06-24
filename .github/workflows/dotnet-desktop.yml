@@ -46,6 +46,20 @@ jobs:
     
     - name: Publish Txt2Brl
       run: dotnet publish "Source\EasyBrailleEditApp\Txt2Brl\Txt2Brl.csproj" --configuration Release --no-build --output publish\Txt2Brl
+
+    - name: Copy Txt2Brl binaries to EasyBrailleEdit
+      run: |
+        $source = "publish/Txt2Brl"
+        $destination = "publish\EasyBrailleEdit"
+        if (Test-Path $source) {
+          Copy-Item -Path $source/Txt2Brl.* -Destination $destination -Force
+          Copy-Item -Path $source/CommandLine.dll -Destination $destination -Force
+          Copy-Item -Path $source/sample.txt -Destination $destination -Force
+          Write-Host "✅ Copied Txt2Brl binaries to EasyBrailleEdit directory."
+        } else {
+          Write-Error "❌ Txt2Brl executable not found at $source"
+          exit 1
+        }
   
     - name: Upload EasyBrailleEdit artifacts
       uses: actions/upload-artifact@v4
@@ -74,23 +88,7 @@ jobs:
           Write-Error "❌ Zip file not found at: $zipPath"
           exit 1
         }
-      
-    - name: Zip Txt2Brl      
-      if: startsWith(github.ref, 'refs/tags/')  # Only zip if this is a tag push
-      shell: pwsh
-      run: |
-        $sourceFolder = "./publish/Txt2Brl"
-        $zipPath = "./publish/Txt2Brl-v${{ steps.get_version.outputs.VERSION }}.zip"
-        Write-Host "Compressing $sourceFolder/*  to  $zipPath"
-        Compress-Archive -Path "$sourceFolder/*" -DestinationPath $zipPath -Force      
-        # Ensure the zip file is created.
-        if (Test-Path $zipPath) {
-          Write-Host "✅ Zip created at: $zipPath"
-        } else {
-          Write-Error "❌ Zip file not found at: $zipPath"
-          exit 1
-        }
-        
+            
     - name: Create GitHub Release
       if: startsWith(github.ref, 'refs/tags/')  # Only create a release if this is a tag push
       uses: softprops/action-gh-release@v2
@@ -99,7 +97,6 @@ jobs:
       with:
         files: |
           publish/EasyBrailleEdit-v${{ steps.get_version.outputs.VERSION }}.zip
-          publish/Txt2Brl-v${{ steps.get_version.outputs.VERSION }}.zip
         name: 易點雙視 v${{ steps.get_version.outputs.VERSION }}
         body: |
           # 易點雙視 v${{ steps.get_version.outputs.VERSION }}
