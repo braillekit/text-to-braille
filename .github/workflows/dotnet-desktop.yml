@@ -48,7 +48,7 @@ jobs:
       run: dotnet publish "Source\EasyBrailleEditApp\Txt2Brl\Txt2Brl.csproj" --configuration Release --no-build --output publish\Txt2Brl
       
     - name: Zip EasyBrailleEdit
-      run: 
+      run: |
         # Debug current directory and files
         Write-Host "Current directory: $pwd"
         Write-Host "Files in publish directory:"
