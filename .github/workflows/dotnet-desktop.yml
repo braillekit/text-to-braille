@@ -59,6 +59,12 @@ jobs:
         Write-Host "Current directory: $pwd"
         Write-Host "Files in publish directory:"
         Get-ChildItem -Path .\publish | ForEach-Object { $_.FullName }      
+        if (Test-Path $zipPath) {
+          Write-Host "✅ Zip created at: $zipPath"
+        } else {
+          Write-Error "❌ Zip file not found at: $zipPath"
+          exit 1
+        }
       
     - name: Zip Txt2Brl
       run: Compress-Archive -Path .\publish\Txt2Brl\* -DestinationPath .\publish\Txt2Brl-v${{ steps.get_version.outputs.VERSION }}.zip
@@ -81,8 +87,8 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          publish\EasyBrailleEdit-v${{ steps.get_version.outputs.VERSION }}.zip
-          publish\Txt2Brl-v${{ steps.get_version.outputs.VERSION }}.zip
+          publish/EasyBrailleEdit-v${{ steps.get_version.outputs.VERSION }}.zip
+          publish/Txt2Brl-v${{ steps.get_version.outputs.VERSION }}.zip
         name: 易點雙視 v${{ steps.get_version.outputs.VERSION }}
         body: |
           # 易點雙視 v${{ steps.get_version.outputs.VERSION }}
