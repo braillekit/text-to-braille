@@ -48,13 +48,17 @@ jobs:
       run: dotnet publish "Source\EasyBrailleEditApp\Txt2Brl\Txt2Brl.csproj" --configuration Release --no-build --output publish\Txt2Brl
       
     - name: Zip EasyBrailleEdit
+      shell: pwsh
       run: |
-        Compress-Archive -Path .\publish\EasyBrailleEdit\* -DestinationPath .\publish\EasyBrailleEdit-v${{ steps.get_version.outputs.VERSION }}.zip
+        $sourFolder = "$(Resolve-Path ./publish/EasyBrailleEdit)"
+        $zipPath = ".\publish\EasyBrailleEdit-v${{ steps.get_version.outputs.VERSION }}.zip"
+        Write-Host "Source folder: $sourceFolder"
+        Write-Host "Zip path: $zipPath"
+        Compress-Archive -Path "$sourceFolder\*" -DestinationPath $zipPath -Force
         # Debug current directory and files
         Write-Host "Current directory: $pwd"
         Write-Host "Files in publish directory:"
-        Get-ChildItem -Path .\publish | ForEach-Object { $_.FullName }
-      shell: pwsh
+        Get-ChildItem -Path .\publish | ForEach-Object { $_.FullName }      
       
     - name: Zip Txt2Brl
       run: Compress-Archive -Path .\publish\Txt2Brl\* -DestinationPath .\publish\Txt2Brl-v${{ steps.get_version.outputs.VERSION }}.zip
