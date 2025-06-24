@@ -49,11 +49,11 @@ jobs:
       
     - name: Zip EasyBrailleEdit
       run: |
+        Compress-Archive -Path .\publish\EasyBrailleEdit\* -DestinationPath .\publish\EasyBrailleEdit-v${{ steps.get_version.outputs.VERSION }}.zip
         # Debug current directory and files
         Write-Host "Current directory: $pwd"
         Write-Host "Files in publish directory:"
-        Get-ChildItem -Path .\publish -Recurse | ForEach-Object { $_.FullName }
-        Compress-Archive -Path .\publish\EasyBrailleEdit\* -DestinationPath .\publish\EasyBrailleEdit-v${{ steps.get_version.outputs.VERSION }}.zip
+        Get-ChildItem -Path .\publish | ForEach-Object { $_.FullName }
       shell: pwsh
       
     - name: Zip Txt2Brl
@@ -73,7 +73,7 @@ jobs:
         path: publish\Txt2Brl\
         
     - name: Create GitHub Release
-      if: startsWith(github.ref, 'refs/tags/')
+      #if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v2
       with:
         files: |
