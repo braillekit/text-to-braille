@@ -46,37 +46,7 @@ jobs:
     
     - name: Publish Txt2Brl
       run: dotnet publish "Source\EasyBrailleEditApp\Txt2Brl\Txt2Brl.csproj" --configuration Release --no-build --output publish\Txt2Brl
-      
-    - name: Zip EasyBrailleEdit
-      shell: pwsh
-      run: |
-        $sourFolder = "$(Resolve-Path ./publish/EasyBrailleEdit)"
-        $zipPath = ".\publish\EasyBrailleEdit-v${{ steps.get_version.outputs.VERSION }}.zip"
-        Write-Host "Compressing $sourceFolder\*  to  $zipPath"
-        Compress-Archive -Path "$sourceFolder\*" -DestinationPath $zipPath -Force
-        # Ensure the zip file is created.
-        if (Test-Path $zipPath) {
-          Write-Host "✅ Zip created at: $zipPath"
-        } else {
-          Write-Error "❌ Zip file not found at: $zipPath"
-          exit 1
-        }
-      
-    - name: Zip Txt2Brl      
-      shell: pwsh
-      run: |
-        $sourFolder = "$(Resolve-Path ./publish/Txt2Brl"
-        $zipPath = ".\publish\Txt2Brl-v${{ steps.get_version.outputs.VERSION }}.zip"
-        Write-Host "Compressing $sourceFolder\*  to  $zipPath"
-        Compress-Archive -Path .\publish\Txt2Brl\* -DestinationPath $zipPath -Force      
-        # Ensure the zip file is created.
-        if (Test-Path $zipPath) {
-          Write-Host "✅ Zip created at: $zipPath"
-        } else {
-          Write-Error "❌ Zip file not found at: $zipPath"
-          exit 1
-        }
-      
+  
     - name: Upload EasyBrailleEdit artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -88,6 +58,36 @@ jobs:
       with:
         name: Txt2Brl
         path: publish\Txt2Brl\
+
+    - name: Zip EasyBrailleEdit
+      shell: pwsh
+      run: |
+        $sourceFolder = "./publish/EasyBrailleEdit"
+        $zipPath = "./publish/EasyBrailleEdit-v${{ steps.get_version.outputs.VERSION }}.zip"
+        Write-Host "Compressing $sourceFolder/*  to  $zipPath"
+        Compress-Archive -Path "$sourceFolder/*" -DestinationPath $zipPath -Force
+        # Ensure the zip file is created.
+        if (Test-Path $zipPath) {
+          Write-Host "✅ Zip created at: $zipPath"
+        } else {
+          Write-Error "❌ Zip file not found at: $zipPath"
+          exit 1
+        }
+      
+    - name: Zip Txt2Brl      
+      shell: pwsh
+      run: |
+        $sourceFolder = "./publish/Txt2Brl"
+        $zipPath = "./publish/Txt2Brl-v${{ steps.get_version.outputs.VERSION }}.zip"
+        Write-Host "Compressing $sourceFolder/*  to  $zipPath"
+        Compress-Archive -Path "$sourceFolder/*" -DestinationPath $zipPath -Force      
+        # Ensure the zip file is created.
+        if (Test-Path $zipPath) {
+          Write-Host "✅ Zip created at: $zipPath"
+        } else {
+          Write-Error "❌ Zip file not found at: $zipPath"
+          exit 1
+        }
         
     - name: Create GitHub Release
       if: startsWith(github.ref, 'refs/tags/')
