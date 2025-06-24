@@ -33,13 +33,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyBrailleEdit", "EasyBrai
 		{FFAC9544-90F3-4441-B776-24FAF4F325BE} = {FFAC9544-90F3-4441-B776-24FAF4F325BE}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build", "..\..\Build\Build.csproj", "{D95DA0AC-382A-4456-AA40-6B399792AFC6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrailleToolkitBenchmark", "..\Tests\BrailleToolkitBenchmark\BrailleToolkitBenchmark.csproj", "{696732E2-7E48-4056-BEB9-FF880EAC89A8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{1811E6EB-3EED-4703-A530-48FDAFBD540B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateYaml", "..\BrailleDevTools\GenerateYaml\GenerateYaml.csproj", "{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\.github\workflows\dotnet-desktop.yml = ..\..\.github\workflows\dotnet-desktop.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,18 +113,6 @@ Global
 		{82286304-BF2A-4EA2-A322-EC79E4888494}.Release|x64.Build.0 = Release|Any CPU
 		{82286304-BF2A-4EA2-A322-EC79E4888494}.Release|x86.ActiveCfg = Release|Any CPU
 		{82286304-BF2A-4EA2-A322-EC79E4888494}.Release|x86.Build.0 = Release|Any CPU
-		{D95DA0AC-382A-4456-AA40-6B399792AFC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D95DA0AC-382A-4456-AA40-6B399792AFC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D95DA0AC-382A-4456-AA40-6B399792AFC6}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D95DA0AC-382A-4456-AA40-6B399792AFC6}.Debug|x64.Build.0 = Debug|Any CPU
-		{D95DA0AC-382A-4456-AA40-6B399792AFC6}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D95DA0AC-382A-4456-AA40-6B399792AFC6}.Debug|x86.Build.0 = Debug|Any CPU
-		{D95DA0AC-382A-4456-AA40-6B399792AFC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D95DA0AC-382A-4456-AA40-6B399792AFC6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D95DA0AC-382A-4456-AA40-6B399792AFC6}.Release|x64.ActiveCfg = Release|Any CPU
-		{D95DA0AC-382A-4456-AA40-6B399792AFC6}.Release|x64.Build.0 = Release|Any CPU
-		{D95DA0AC-382A-4456-AA40-6B399792AFC6}.Release|x86.ActiveCfg = Release|Any CPU
-		{D95DA0AC-382A-4456-AA40-6B399792AFC6}.Release|x86.Build.0 = Release|Any CPU
 		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Debug|x64.ActiveCfg = Debug|Any CPU

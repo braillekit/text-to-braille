@@ -1,10 +1,10 @@
-name: Build and Release
+ï»¿name: Build and Release
 
 on:
   push:
     branches: [ v5.0.0 ]
     tags:
-      - 'v*.*.*'
+      - '*.*.*'
   pull_request:
     branches: [ v5.0.0 ]
 
@@ -26,7 +26,7 @@ jobs:
       id: get_version
       shell: pwsh
       run: |
-        if ($env:GITHUB_REF -match 'refs/tags/v(.+)') {
+        if ($env:GITHUB_REF -match 'refs/tags/(.+)') {
           $version = $matches[1]
           echo "VERSION=$version" >> $env:GITHUB_OUTPUT
           echo "Creating release for version $version"
@@ -68,24 +68,24 @@ jobs:
         path: publish\Txt2Brl\
         
     - name: Create GitHub Release
-      if: startsWith(github.ref, 'refs/tags/v')
+      if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v2
       with:
         files: |
           publish\EasyBrailleEdit-v${{ steps.get_version.outputs.VERSION }}.zip
           publish\Txt2Brl-v${{ steps.get_version.outputs.VERSION }}.zip
-        name: ©öÂIÂùµø v${{ steps.get_version.outputs.VERSION }}
+        name: æ˜“é»é›™è¦– v${{ steps.get_version.outputs.VERSION }}
         body: |
-          # ©öÂIÂùµø v${{ steps.get_version.outputs.VERSION }}
+          # æ˜“é»é›™è¦– v${{ steps.get_version.outputs.VERSION }}
           
-          ©öÂIÂùµø¡]EasyBrailleEdit¡^¬O¤@­Ó Windows À³¥Îµ{¦¡¡A¥D­n¥Î³~¬O½s¿è»P¦C¦LÂùµø±Ğ§÷¡A¥H¨Ñµø»ÙªB¤ÍºNÅª¡C
+          æ˜“é»é›™è¦–ï¼ˆEasyBrailleEditï¼‰æ˜¯ä¸€å€‹ Windows æ‡‰ç”¨ç¨‹å¼ï¼Œä¸»è¦ç”¨é€”æ˜¯ç·¨è¼¯èˆ‡åˆ—å°é›™è¦–æ•™æï¼Œä»¥ä¾›è¦–éšœæœ‹å‹æ‘¸è®€ã€‚
           
-          ## ¥»ª©§ó·s¤º®e
+          ## æœ¬ç‰ˆæ›´æ–°å…§å®¹
           
-          <!-- ½Ğ¦b³o¸Ì¶ñ¼g§ó·s¤º®e -->
+          <!-- è«‹åœ¨é€™è£¡å¡«å¯«æ›´æ–°å…§å®¹ -->
           
-          ## ¤U¸üÀÉ®×»¡©ú
+          ## ä¸‹è¼‰æª”æ¡ˆèªªæ˜
           
-          - **EasyBrailleEdit-v${{ steps.get_version.outputs.VERSION }}.zip**: ÂùµøÂI¦r½s¿è¾¹¥Dµ{¦¡
-          - **Txt2Brl-v${{ steps.get_version.outputs.VERSION }}.zip**: ¤å¦rÂàÂI¦r©R¥O¦C¤u¨ã
+          - **EasyBrailleEdit-v${{ steps.get_version.outputs.VERSION }}.zip**: é›™è¦–é»å­—ç·¨è¼¯å™¨ä¸»ç¨‹å¼
+          - **Txt2Brl-v${{ steps.get_version.outputs.VERSION }}.zip**: æ–‡å­—è½‰é»å­—å‘½ä»¤åˆ—å·¥å…·
         draft: true
