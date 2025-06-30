@@ -1,9 +1,9 @@
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace BrailleToolkit.Data
 {
     /// <summary>
-    /// �I�r����������¦���O�C
+    /// 點字對應表的基礎類別。
     /// </summary>
     internal abstract class BrailleTableBase
 	{
@@ -17,13 +17,13 @@ namespace BrailleToolkit.Data
 		}
 
 		/// <summary>
-		/// �j�M�Y�Ӥ�r�Ÿ��A�öǦ^�������I�r�X�C
-		/// <b>�`�N�G</b>���j�M��k�O�j�M��ӹ�Ӫ��A��ĳ�ϥΨ�L�������j�M��k�A
-		/// �H�K�����~�����G�C�ר�O�`���Ÿ��M�n�աA�@�w�n���O�I�s
-		/// FindPhonetic �M FindTone�A�_�h�|�]����J���r�꦳���ΪťզӶǦ^���~�����G�C
+		/// 搜尋某個文字符號，並傳回對應的點字碼。
+		/// <b>注意：</b>此搜尋方法是搜尋整個對照表，建議使用其他版本的搜尋方法，
+		/// 以免找到錯誤的結果。尤其是注音符號和聲調，一定要分別呼叫
+		/// FindPhonetic 和 FindTone，否則會因為輸入的字串有全形空白而傳回錯誤的結果。
 		/// </summary>
-		/// <param name="text">���j�M���Ÿ��C</param>
-		/// <returns>�Y�����A�h�Ǧ^�������I�r�X�A�_�h�Ǧ^�Ŧr��C</returns>
+		/// <param name="text">欲搜尋的符號。</param>
+		/// <returns>若有找到，則傳回對應的點字碼，否則傳回空字串。</returns>
 		public abstract string Find(string text);
 	}
 }

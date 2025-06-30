@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
@@ -14,13 +14,13 @@ namespace BrailleToolkit.Data
         {
         }
 
-        // ¤£¶}©ñ³o­Ó method
+        // ä¸é–‹æ”¾é€™å€‹ method
 		private EnglishBrailleTable(string filename) : base(filename)
 		{
 		}
 
         /// <summary>
-        /// ¶Ç¦^ singleton ª«¥ó¡A¨Ã¸ü¤J¸ê·½¡C
+        /// å‚³å› singleton ç‰©ä»¶ï¼Œä¸¦è¼‰å…¥è³‡æºã€‚
         /// </summary>
         /// <returns></returns>
         public static EnglishBrailleTable GetInstance()
@@ -34,10 +34,10 @@ namespace BrailleToolkit.Data
         }
 
 		/// <summary>
-		/// ·j´M¬Y­Ó¦r¥À¡A¨Ã¶Ç¦^¹ïÀ³ªºÂI¦r½X¡C
+		/// æœå°‹æŸå€‹å­—æ¯ï¼Œä¸¦å‚³å›å°æ‡‰çš„é»å­—ç¢¼ã€‚
 		/// </summary>
-		/// <param name="text">±ı·j´Mªº¦r¥À¡C¨Ò¦p¡G'A'¡C</param>
-		/// <returns>­Y¦³§ä¨ì¡A«h¶Ç¦^¹ïÀ³ªºÂI¦r½X¡A§_«h¶Ç¦^ªÅ¦r¦ê¡C</returns>
+		/// <param name="text">æ¬²æœå°‹çš„å­—æ¯ã€‚ä¾‹å¦‚ï¼š'A'ã€‚</param>
+		/// <returns>è‹¥æœ‰æ‰¾åˆ°ï¼Œå‰‡å‚³å›å°æ‡‰çš„é»å­—ç¢¼ï¼Œå¦å‰‡å‚³å›ç©ºå­—ä¸²ã€‚</returns>
 		public string FindLetter(string text)
 		{
 			CheckLoaded();
@@ -50,11 +50,11 @@ namespace BrailleToolkit.Data
 		}
 
 		/// <summary>
-		/// ·j´M¬Y­Ó¼Æ¦r¡A¨Ã¶Ç¦^¹ïÀ³ªºÂI¦r½X¡C
+		/// æœå°‹æŸå€‹æ•¸å­—ï¼Œä¸¦å‚³å›å°æ‡‰çš„é»å­—ç¢¼ã€‚
 		/// </summary>
-		/// <param name="text">±ı·j´Mªº¼Æ¦r¡C¨Ò¦p¡G'9'¡C</param>
-		/// <param name="upper">True/False = ¶Ç¦^¤W¦ìÂI/¤U¦ìÂI¡C</param>
-		/// <returns>­Y¦³§ä¨ì¡A«h¶Ç¦^¹ïÀ³ªºÂI¦r½X¡A§_«h¶Ç¦^ªÅ¦r¦ê¡C</returns>
+		/// <param name="text">æ¬²æœå°‹çš„æ•¸å­—ã€‚ä¾‹å¦‚ï¼š'9'ã€‚</param>
+		/// <param name="upper">True/False = å‚³å›ä¸Šä½é»/ä¸‹ä½é»ã€‚</param>
+		/// <returns>è‹¥æœ‰æ‰¾åˆ°ï¼Œå‰‡å‚³å›å°æ‡‰çš„é»å­—ç¢¼ï¼Œå¦å‰‡å‚³å›ç©ºå­—ä¸²ã€‚</returns>
 		public string FindDigit(string text, bool upper)
 		{
 			CheckLoaded();
@@ -63,7 +63,7 @@ namespace BrailleToolkit.Data
 			DataRow[] rows = m_Table.Select(filter);
 			if (rows.Length > 0)
 			{
-				if (upper)	// ¤W¦ìÂI?
+				if (upper)	// ä¸Šä½é»?
 					return rows[0]["code"].ToString();
 				return rows[0]["code2"].ToString();
 			}

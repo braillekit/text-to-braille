@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
@@ -19,7 +19,7 @@ namespace BrailleToolkit
 
 
     /// <summary>
-    /// ¥Nªí¤@­Ó¤¤¤å¦r¡A¤º§tª`­µ½X»PÂI¦r­È¡C
+    /// ä»£è¡¨ä¸€å€‹ä¸­æ–‡å­—ï¼Œå…§å«æ³¨éŸ³ç¢¼èˆ‡é»å­—å€¼ã€‚
     /// </summary>
     [Serializable]
     [DataContract]
@@ -27,19 +27,19 @@ namespace BrailleToolkit
     {
         public static BrailleWord BlankWord { get; } = NewBlank();
 
-        private List<string> m_PhoneticCodes;   // ©Ò¦³ª`­µ²Õ¦r¦r®Ú¡]¥H¤ä´©¯}­µ¦r¡^¡C
-        private int m_ActivePhoneticIndex;      // ¥Ø«e¨Ï¥Îªºª`­µ²Õ¦r¦r®Ú¯Á¤Ş¡C
+        private List<string> m_PhoneticCodes;   // æ‰€æœ‰æ³¨éŸ³çµ„å­—å­—æ ¹ï¼ˆä»¥æ”¯æ´ç ´éŸ³å­—ï¼‰ã€‚
+        private int m_ActivePhoneticIndex;      // ç›®å‰ä½¿ç”¨çš„æ³¨éŸ³çµ„å­—å­—æ ¹ç´¢å¼•ã€‚
 
         [NonSerialized]
-        private string m_PhoneticCode;          // ª`­µ¦r®Ú¡]£t£u£v£w¡^¡C
+        private string m_PhoneticCode;          // æ³¨éŸ³å­—æ ¹ï¼ˆã„…ã„†ã„‡ã„ˆï¼‰ã€‚
 
         [NonSerialized]
-        private bool m_IsPolyphonic;            // ¬O§_¬°¦h­µ¦r¡C
+        private bool m_IsPolyphonic;            // æ˜¯å¦ç‚ºå¤šéŸ³å­—ã€‚
 
         [NonSerialized]
         private bool m_IsContextTag;
 
-        //private bool m_QuotationResolved;	// ¬O§_¤w¸gÃÑ§O¥X¥ª¥k¤Ş¸¹¡]­^¤åªº³æ¤Ş¸¹©MÂù¤Ş¸¹³£¬O¦P¤@­Ó²Å¸¹¡A¦ıÂI¦r¤£¦P¡^
+        //private bool m_QuotationResolved;	// æ˜¯å¦å·²ç¶“è­˜åˆ¥å‡ºå·¦å³å¼•è™Ÿï¼ˆè‹±æ–‡çš„å–®å¼•è™Ÿå’Œé›™å¼•è™Ÿéƒ½æ˜¯åŒä¸€å€‹ç¬¦è™Ÿï¼Œä½†é»å­—ä¸åŒï¼‰
 
         public BrailleWord(string text)
         {
@@ -102,11 +102,11 @@ namespace BrailleToolkit
                     return false;
             }
 
-            // ¤£¤ñ¹ïª`­µ¡A¦]¬°¤@Án±`±`©M¥ş§ÎªÅ¥Õ·d²V¡C
+            // ä¸æ¯”å°æ³¨éŸ³ï¼Œå› ç‚ºä¸€è²å¸¸å¸¸å’Œå…¨å½¢ç©ºç™½ææ··ã€‚
             //if (m_PhoneticCode != brWord.PhoneticCode)
             //    return false;
 
-            // ¤£¤ñ¹ï¤å¦r¡A¦]¬°¥ş§ÎªÅ¥Õ©M¥b§ÎªÅ¥Õ¨ä¹êÀ³µø¬°¬Ûµ¥¡A¤ñ¸û cells ´N°÷¤F¡C
+            // ä¸æ¯”å°æ–‡å­—ï¼Œå› ç‚ºå…¨å½¢ç©ºç™½å’ŒåŠå½¢ç©ºç™½å…¶å¯¦æ‡‰è¦–ç‚ºç›¸ç­‰ï¼Œæ¯”è¼ƒ cells å°±å¤ äº†ã€‚
             //if (m_Text != brWord.Text)
             //
             //{
@@ -161,15 +161,15 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// Åã¥Ü¤å¦r¡C¥i¯à¬O¤@­Ó­^¼Æ¦r¡B¤¤¤å¦r¡B¥ş§Î¼ĞÂI²Å¸¹¡B©ÎÂù¦r¤¸¼ĞÂI²Å¸¹¡A¨Ò¦p¡G¯}§é¸¹¡C
+        /// é¡¯ç¤ºæ–‡å­—ã€‚å¯èƒ½æ˜¯ä¸€å€‹è‹±æ•¸å­—ã€ä¸­æ–‡å­—ã€å…¨å½¢æ¨™é»ç¬¦è™Ÿã€æˆ–é›™å­—å…ƒæ¨™é»ç¬¦è™Ÿï¼Œä¾‹å¦‚ï¼šç ´æŠ˜è™Ÿã€‚
         /// </summary>
         [DataMember]
         public string Text { get; set; }
 
         /// <summary>
-        /// «O¯d³Ìªìªº¤å¦r¡C
-        /// ¦¹Äİ©Ê¥i¥Î¨Ó§PÂ_·í«eªº BrailleWord ¬O¤£¬O±q context tag ªº°_©l©Îµ²§ô¼ĞÅÒÂà´«¦Ó¦¨¡C
-        /// ¬Æ¦Ü±N¨Ó¥i¯à§Q¥Î¦¹Äİ©Ê±N¤w¸gÂà´«¦nªºÂI¦r¤å¥óÁÙ­ì¦¨¯Â¤å¦r¡C
+        /// ä¿ç•™æœ€åˆçš„æ–‡å­—ã€‚
+        /// æ­¤å±¬æ€§å¯ç”¨ä¾†åˆ¤æ–·ç•¶å‰çš„ BrailleWord æ˜¯ä¸æ˜¯å¾ context tag çš„èµ·å§‹æˆ–çµæŸæ¨™ç±¤è½‰æ›è€Œæˆã€‚
+        /// ç”šè‡³å°‡ä¾†å¯èƒ½åˆ©ç”¨æ­¤å±¬æ€§å°‡å·²ç¶“è½‰æ›å¥½çš„é»å­—æ–‡ä»¶é‚„åŸæˆç´”æ–‡å­—ã€‚
         /// </summary>
         [DataMember]
         public string OriginalText { get; private set; }
@@ -188,7 +188,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ÂI¦r¦ê¦C¡C
+        /// é»å­—ä¸²åˆ—ã€‚
         /// </summary>
         [DataMember]
         public BrailleCellList CellList { get; set; }
@@ -198,9 +198,9 @@ namespace BrailleToolkit
         {
             get
             {
-                if (String.IsNullOrEmpty(m_PhoneticCode))   // ³o¬O¬°¤F¦V¤U¬Û®e¡AÂÂª©¨S¦³ PhoneticCode Äİ©Ê¡C
+                if (String.IsNullOrEmpty(m_PhoneticCode))   // é€™æ˜¯ç‚ºäº†å‘ä¸‹ç›¸å®¹ï¼ŒèˆŠç‰ˆæ²’æœ‰ PhoneticCode å±¬æ€§ã€‚
                 {
-                    // ­Y¨S¦³ª`­µ¦r®Ú¡A«h¶Ç¦^ªÅ¦r¦ê¡C
+                    // è‹¥æ²’æœ‰æ³¨éŸ³å­—æ ¹ï¼Œå‰‡å‚³å›ç©ºå­—ä¸²ã€‚
                     if (m_PhoneticCodes == null || m_PhoneticCodes.Count < 1 || m_ActivePhoneticIndex < 0)
                     {
                         return "";
@@ -215,20 +215,20 @@ namespace BrailleToolkit
                     return;
                 m_PhoneticCode = value;
 /*
-                // ­Y¨S¦³ª`­µ¦r®Ú¡A«h¼W¥[¤@­Ó¡C
+                // è‹¥æ²’æœ‰æ³¨éŸ³å­—æ ¹ï¼Œå‰‡å¢åŠ ä¸€å€‹ã€‚
                 if (m_PhoneticCodes.Count < 1)
                 {
                     m_PhoneticCodes.Add(value);
                     m_ActivePhoneticIndex = 0;
                 }
                 else
-                {   // §_«h³]©w§@¥Î¤¤ªºª`­µ¦r®Ú¯Á¤Ş
+                {   // å¦å‰‡è¨­å®šä½œç”¨ä¸­çš„æ³¨éŸ³å­—æ ¹ç´¢å¼•
                     int i = m_PhoneticCodes.IndexOf(value);
                     if (i < 0)
                     {
                         m_PhoneticCodes.Add(value);
                         i = m_PhoneticCodes.Count - 1;
-                        System.Diagnostics.Trace.WriteLine("«ü©wµ¹ BrailleWord.PhoneticCode ªºª`­µ¦r®Ú¤£¦s¦b! ¤w¦Û°Ê¥[¤J¡C");
+                        System.Diagnostics.Trace.WriteLine("æŒ‡å®šçµ¦ BrailleWord.PhoneticCode çš„æ³¨éŸ³å­—æ ¹ä¸å­˜åœ¨! å·²è‡ªå‹•åŠ å…¥ã€‚");
                     }
                     m_ActivePhoneticIndex = i;
                 }
@@ -241,7 +241,7 @@ namespace BrailleToolkit
         {
             get 
             {
-                if (m_PhoneticCodes != null && m_PhoneticCodes.Count > 1)   // for ¦V¤U¬Û®e.
+                if (m_PhoneticCodes != null && m_PhoneticCodes.Count > 1)   // for å‘ä¸‹ç›¸å®¹.
                 {
                     return true;
                 }
@@ -251,7 +251,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ³]©w/§P§O¦bÂ_¦æ®É¬O§_¯àÂ_¦b³o­Ó¦r¡C
+        /// è¨­å®š/åˆ¤åˆ¥åœ¨æ–·è¡Œæ™‚æ˜¯å¦èƒ½æ–·åœ¨é€™å€‹å­—ã€‚
         /// </summary>
         [DataMember]
         public bool DontBreakLineHere { get; set; }
@@ -283,26 +283,26 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// »y¨¥°ê§O¡C¥Î¨ÓÃÑ§O¬O¤¤¤åÁÙ¬O­^¤å¡C
+        /// èªè¨€åœ‹åˆ¥ã€‚ç”¨ä¾†è­˜åˆ¥æ˜¯ä¸­æ–‡é‚„æ˜¯è‹±æ–‡ã€‚
         /// </summary>
         public BrailleLanguage Language { get; set; }
 
         /// <summary>
-        /// ¥HªÅ¥Õ°Ï¹jªº context ¦WºÙ¡A¤£§t tag ªº¨¤¬A¸¹¡C¨Ò¦p "¼Æ¾Ç ¨p¦W¸¹"¡C
+        /// ä»¥ç©ºç™½å€éš”çš„ context åç¨±ï¼Œä¸å« tag çš„è§’æ‹¬è™Ÿã€‚ä¾‹å¦‚ "æ•¸å­¸ ç§åè™Ÿ"ã€‚
         /// </summary>
         [DataMember]
         public string ContextNames { get; set; } 
 
         /// <summary>
-        /// ContextTag Äİ©Ê·|¥Î¦bÂà´«ÂI¦rªº¹Lµ{¤¤¼È®É«O¯dªº»y¹Ò¼ĞÅÒ¡C
-        /// ³o¨Ç»y¹Ò¼ĞÅÒ¦b¾ã­ÓÂàÂI¦rµ{§Ç§¹¦¨®É³£·|³Q²¾°£¡]©ÎÂà´«¦¨¹ïÀ³ªºÂI¦r¡^¡C
-        /// ¬O§_¥i§Ç¦C¤Æ¡G§_¡C
+        /// ContextTag å±¬æ€§æœƒç”¨åœ¨è½‰æ›é»å­—çš„éç¨‹ä¸­æš«æ™‚ä¿ç•™çš„èªå¢ƒæ¨™ç±¤ã€‚
+        /// é€™äº›èªå¢ƒæ¨™ç±¤åœ¨æ•´å€‹è½‰é»å­—ç¨‹åºå®Œæˆæ™‚éƒ½æœƒè¢«ç§»é™¤ï¼ˆæˆ–è½‰æ›æˆå°æ‡‰çš„é»å­—ï¼‰ã€‚
+        /// æ˜¯å¦å¯åºåˆ—åŒ–ï¼šå¦ã€‚
         /// </summary>
         public IContextTag ContextTag { get; set; }
 
 
         /// <summary>
-        /// ¦bÂàÂI¦r¹Lµ{¤¤¥i¯à»İ­n±oª¾·í«eªº BrailleWord ª«¥ó¬O¤£¬O¬Y context tag ªº°_©l¼ĞÅÒ¡C
+        /// åœ¨è½‰é»å­—éç¨‹ä¸­å¯èƒ½éœ€è¦å¾—çŸ¥ç•¶å‰çš„ BrailleWord ç‰©ä»¶æ˜¯ä¸æ˜¯æŸ context tag çš„èµ·å§‹æ¨™ç±¤ã€‚
         /// </summary>
         public bool IsContextBeginTag()
         {
@@ -310,7 +310,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ¦bÂàÂI¦r¹Lµ{¤¤¥i¯à»İ­n±oª¾·í«eªº BrailleWord ª«¥ó¬O¤£¬O¬Y context tag ªºµ²§ô¼ĞÅÒ¡C
+        /// åœ¨è½‰é»å­—éç¨‹ä¸­å¯èƒ½éœ€è¦å¾—çŸ¥ç•¶å‰çš„ BrailleWord ç‰©ä»¶æ˜¯ä¸æ˜¯æŸ context tag çš„çµæŸæ¨™ç±¤ã€‚
         /// </summary>
         public bool IsContextEndTag()
         {
@@ -318,9 +318,9 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ¦¹ word ¬O§_¦b«ü©wªº»y¹Ò¤¤¡H
+        /// æ­¤ word æ˜¯å¦åœ¨æŒ‡å®šçš„èªå¢ƒä¸­ï¼Ÿ
         /// </summary>
-        /// <param name="contextName">»y¹Ò¼ĞÅÒ¦WºÙ¡C­Y¦³±a¥ª¥k¨¤¬A¸¹¡A·|¦Û°Ê¥h°£¬A¸¹¡C</param>
+        /// <param name="contextName">èªå¢ƒæ¨™ç±¤åç¨±ã€‚è‹¥æœ‰å¸¶å·¦å³è§’æ‹¬è™Ÿï¼Œæœƒè‡ªå‹•å»é™¤æ‹¬è™Ÿã€‚</param>
         /// <returns></returns>
         public bool IsInContext(string contextName)
         {
@@ -357,7 +357,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// «Ø¥ß¤@­Ó·sªº BrailleWord ª«¥ó¡A¨Ã±N¦Û¤vªº¤º®e§¹¾ã½Æ»s¨ì·sªºª«¥ó¡C
+        /// å»ºç«‹ä¸€å€‹æ–°çš„ BrailleWord ç‰©ä»¶ï¼Œä¸¦å°‡è‡ªå·±çš„å…§å®¹å®Œæ•´è¤‡è£½åˆ°æ–°çš„ç‰©ä»¶ã€‚
         /// </summary>
         /// <returns></returns>
         public BrailleWord Copy()
@@ -383,14 +383,14 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ±N«ü©wªº BrailleWord ¤º®e§¹¾ã½Æ»sµ¹¦Û¤v¡C
+        /// å°‡æŒ‡å®šçš„ BrailleWord å…§å®¹å®Œæ•´è¤‡è£½çµ¦è‡ªå·±ã€‚
         /// </summary>
         /// <param name="brWord"></param>
         public void Copy(BrailleWord brWord)
         {
             if (brWord == null)
             {
-                throw new ArgumentNullException("°Ñ¼Æ brWord ¤£¥i¬° null!");
+                throw new ArgumentNullException("åƒæ•¸ brWord ä¸å¯ç‚º null!");
             }
 
             Text = brWord.Text;
@@ -409,7 +409,7 @@ namespace BrailleToolkit
             ContextTag = brWord.ContextTag;
             ContextNames = brWord.ContextNames;
 /*
-            // ½Æ»s©Ò¦³ª`­µ¦r®Ú»PÂI¦r¦ê¦C, for ¦V¤U¬Û®e.
+            // è¤‡è£½æ‰€æœ‰æ³¨éŸ³å­—æ ¹èˆ‡é»å­—ä¸²åˆ—, for å‘ä¸‹ç›¸å®¹.
             if (brWord.PhoneticCodes != null)
             {
                 m_PhoneticCodes.Clear();
@@ -420,9 +420,9 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// §â«ü©wªºÂI¦r¦r¦ê¡]16¶i¦ì¡^Âà¦¨ BrailleCell ª«¥ó¡A¨Ã¥[¤JÂI¦r¦ê¦C¤¤¡C
+        /// æŠŠæŒ‡å®šçš„é»å­—å­—ä¸²ï¼ˆ16é€²ä½ï¼‰è½‰æˆ BrailleCell ç‰©ä»¶ï¼Œä¸¦åŠ å…¥é»å­—ä¸²åˆ—ä¸­ã€‚
         /// </summary>
-        /// <param name="brCodes">±ı¥[¤J¦ê¦CªºÂI¦r½X 16 ¶i¦ì¦r¦ê¡C</param>
+        /// <param name="brCodes">æ¬²åŠ å…¥ä¸²åˆ—çš„é»å­—ç¢¼ 16 é€²ä½å­—ä¸²ã€‚</param>
         public void AddCells(string brCodes)
         {
             if (String.IsNullOrEmpty(brCodes))
@@ -513,8 +513,8 @@ namespace BrailleToolkit
 
 
         /// <summary>
-        /// ¶Ç¦^¦¹ÂI¦r¬O§_¬°¤¤¤å¦r¡]¥H¬O§_¦³ª`­µ¦r®Ú¬°§PÂ_¨Ì¾Ú¡^¡C
-        /// ª`·N¡G¸ò Language Äİ©ÊµLÃö¡ALanguage Äİ©Ê¥]§t¤¤¤å¼ĞÂI²Å¸¹
+        /// å‚³å›æ­¤é»å­—æ˜¯å¦ç‚ºä¸­æ–‡å­—ï¼ˆä»¥æ˜¯å¦æœ‰æ³¨éŸ³å­—æ ¹ç‚ºåˆ¤æ–·ä¾æ“šï¼‰ã€‚
+        /// æ³¨æ„ï¼šè·Ÿ Language å±¬æ€§ç„¡é—œï¼ŒLanguage å±¬æ€§åŒ…å«ä¸­æ–‡æ¨™é»ç¬¦è™Ÿ
         /// </summary>
         /// <returns></returns>
         public bool IsChinese
@@ -534,7 +534,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// «Ø¥ß¤@­Ó·sªºªÅ¤èÂI¦rª«¥ó¡C
+        /// å»ºç«‹ä¸€å€‹æ–°çš„ç©ºæ–¹é»å­—ç‰©ä»¶ã€‚
         /// </summary>
         /// <returns></returns>
         public static BrailleWord NewBlank()
@@ -543,7 +543,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ÀË¬d«ü©wªº BrailleWord ¬O§_¬°ªÅ¤è¡C
+        /// æª¢æŸ¥æŒ‡å®šçš„ BrailleWord æ˜¯å¦ç‚ºç©ºæ–¹ã€‚
         /// </summary>
         /// <param name="brWord"></param>
         /// <returns></returns>
@@ -555,7 +555,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ÀË¬d«ü©wªº BrailleWord ª«¥ó¬O§_¨S¦³¥]§t¥ô¦ó¦³·N¸qªº¸ê®Æ¡]ªÅ¤èºâ¦³·N¸qªº¸ê®Æ¡^¡C
+        /// æª¢æŸ¥æŒ‡å®šçš„ BrailleWord ç‰©ä»¶æ˜¯å¦æ²’æœ‰åŒ…å«ä»»ä½•æœ‰æ„ç¾©çš„è³‡æ–™ï¼ˆç©ºæ–¹ç®—æœ‰æ„ç¾©çš„è³‡æ–™ï¼‰ã€‚
         /// </summary>
         /// <param name="brWord"></param>
         /// <returns></returns>
@@ -563,16 +563,16 @@ namespace BrailleToolkit
         {
             if (StrHelper.IsEmpty(brWord.Text) && brWord.CellCount < 1) 
             {
-                // ¤å¦r¬°ªÅ¦r¦ê¡A¥B¨S¦³¥ô¦óÂI¦rª«¥ó¡A§Yµø¬°ªÅªº BrailleWord ª«¥ó.
+                // æ–‡å­—ç‚ºç©ºå­—ä¸²ï¼Œä¸”æ²’æœ‰ä»»ä½•é»å­—ç‰©ä»¶ï¼Œå³è¦–ç‚ºç©ºçš„ BrailleWord ç‰©ä»¶.
                 return true;
             }
             return false;
         }
 
         /// <summary>
-        /// ¬O§_¬°»y¹Ò¼ĞÅÒ¡C¦¹Äİ©Ê»P ContextNames ¨S¦³µ´¹ïÃö«Y¡C
-        /// ­Y¬° true¡A¥Nªí¦¹ BraillWord ¦b­ì©l¤å¥ó¤¤¬O¤@­Ó»y¹Ò¼ĞÅÒ¡A¦Ó¥B¥Ø«eÁÙ¨S¦³Âà´«¦¨¹ïÀ³ªºÂI¦r¡C
-        /// ­Y¬° false¡A¥Nªí¦¹ BraillWord ¤£¬O»y¹Ò¼ĞÅÒ¡A©ÎªÌ¤w¸g³QÂà´«¦¨¹ïÀ³ªºÂI¦r¡C
+        /// æ˜¯å¦ç‚ºèªå¢ƒæ¨™ç±¤ã€‚æ­¤å±¬æ€§èˆ‡ ContextNames æ²’æœ‰çµ•å°é—œä¿‚ã€‚
+        /// è‹¥ç‚º trueï¼Œä»£è¡¨æ­¤ BraillWord åœ¨åŸå§‹æ–‡ä»¶ä¸­æ˜¯ä¸€å€‹èªå¢ƒæ¨™ç±¤ï¼Œè€Œä¸”ç›®å‰é‚„æ²’æœ‰è½‰æ›æˆå°æ‡‰çš„é»å­—ã€‚
+        /// è‹¥ç‚º falseï¼Œä»£è¡¨æ­¤ BraillWord ä¸æ˜¯èªå¢ƒæ¨™ç±¤ï¼Œæˆ–è€…å·²ç¶“è¢«è½‰æ›æˆå°æ‡‰çš„é»å­—ã€‚
         /// </summary>
         [DataMember]
         public bool IsContextTag
@@ -581,45 +581,45 @@ namespace BrailleToolkit
             set
             {
                 m_IsContextTag = value;
-                if (m_IsContextTag)    // ¦pªG¬O»y¹Ò¼ĞÅÒ¡A´N­n²M°£ÂI¦r¦ê¦C
+                if (m_IsContextTag)    // å¦‚æœæ˜¯èªå¢ƒæ¨™ç±¤ï¼Œå°±è¦æ¸…é™¤é»å­—ä¸²åˆ—
                 {
                     CellList.Clear();
                 }
                 else
                 {
-                    ContextTag = null; // ­Y¤£¬O»y¹Ò¼ĞÅÒ¡AÀ³²M°£ ContextTag °Ñ¦Ò
+                    ContextTag = null; // è‹¥ä¸æ˜¯èªå¢ƒæ¨™ç±¤ï¼Œæ‡‰æ¸…é™¤ ContextTag åƒè€ƒ
                 }
             }
         }
 
         /// <summary>
-        ///  ¦¹ª«¥ó¬O§_¥Ñ context tag ©Ò­l¥Í¡]¤£¬O context tag¡A¦ı¬O¦]¬° context tag ¦ÓÃB¥~¼W¥[ªº¤å¦r¡^¡C
+        ///  æ­¤ç‰©ä»¶æ˜¯å¦ç”± context tag æ‰€è¡ç”Ÿï¼ˆä¸æ˜¯ context tagï¼Œä½†æ˜¯å› ç‚º context tag è€Œé¡å¤–å¢åŠ çš„æ–‡å­—ï¼‰ã€‚
         /// </summary>
         [DataMember]
         public bool IsConvertedFromTag { get; set; }
 
         /// <summary>
-        /// ¬O§_¤£¥[¼Æ²Å¡C
+        /// æ˜¯å¦ä¸åŠ æ•¸ç¬¦ã€‚
         /// </summary>
         public bool NoDigitCell { get; set; }
 
         /// <summary>
-        /// ¬O§_«e«á³£¤£¥[ªÅ¤è¡C
+        /// æ˜¯å¦å‰å¾Œéƒ½ä¸åŠ ç©ºæ–¹ã€‚
         /// </summary>
         public bool NoSpace { get; set; }
 
         /// <summary>
-        /// ¬O§_¤£­n®M¥Î­^¤å¦r¥À¤j¼g³W«h¡C³Ìªì³]­p¥Øªº¬Oµ¹ UrlConverter ¨Ï¥Î¡C
+        /// æ˜¯å¦ä¸è¦å¥—ç”¨è‹±æ–‡å­—æ¯å¤§å¯«è¦å‰‡ã€‚æœ€åˆè¨­è¨ˆç›®çš„æ˜¯çµ¦ UrlConverter ä½¿ç”¨ã€‚
         /// </summary>
         public bool NoCapitalRule { get; set; }
 
         /// <summary>
-        /// ¬O§_¬°­^»y­µ¼Ğ¡]¥Î¨Ó§PÂ_¤£­n¥[ªÅ¤è¡^.
+        /// æ˜¯å¦ç‚ºè‹±èªéŸ³æ¨™ï¼ˆç”¨ä¾†åˆ¤æ–·ä¸è¦åŠ ç©ºæ–¹ï¼‰.
         /// </summary>
         public bool IsEngPhonetic { get; set; }
 
         /// <summary>
-        /// ÀË¬d«ü©wªº BrailleWord ¬O§_¬°¼Æ¦r½s¸¹ªº°_©lÂI¦r¡C¥ç§Y¥H # ¶}ÀYªº¼Æ¦r¡C
+        /// æª¢æŸ¥æŒ‡å®šçš„ BrailleWord æ˜¯å¦ç‚ºæ•¸å­—ç·¨è™Ÿçš„èµ·å§‹é»å­—ã€‚äº¦å³ä»¥ # é–‹é ­çš„æ•¸å­—ã€‚
         /// </summary>
         /// <param name="brWord"></param>
         /// <returns></returns>
@@ -627,11 +627,11 @@ namespace BrailleToolkit
         {
             if (brWord.Cells.Count < 2)
                 return false;
-            if (brWord.Cells[0].Value == (byte)BrailleCellCode.Digit) // ¥H¼Æ¦rÂI¶}ÀY¡H
+            if (brWord.Cells[0].Value == (byte)BrailleCellCode.Digit) // ä»¥æ•¸å­—é»é–‹é ­ï¼Ÿ
             {
-                // ±µµÛ¤ñ¸û²Ä¤G¤è¬O§_¬°¤W¦ìÂI¡Aª`·N³o¸Ìªº¤W¦ìÂI¼Æ­È¨Ã¥¼¨Ï¥Î¬dªí¡A
-                // ¦Ó¬O¼g¦º¦bµ{¦¡¸Ì¡C°Ñ¦Ò: BraillTableEng.xml¡C
-                // TODO: §ï¦¨¬dªí¡C
+                // æ¥è‘—æ¯”è¼ƒç¬¬äºŒæ–¹æ˜¯å¦ç‚ºä¸Šä½é»ï¼Œæ³¨æ„é€™è£¡çš„ä¸Šä½é»æ•¸å€¼ä¸¦æœªä½¿ç”¨æŸ¥è¡¨ï¼Œ
+                // è€Œæ˜¯å¯«æ­»åœ¨ç¨‹å¼è£¡ã€‚åƒè€ƒ: BraillTableEng.xmlã€‚
+                // TODO: æ”¹æˆæŸ¥è¡¨ã€‚
                 byte value = brWord.Cells[1].Value;
                 switch (value) 
                 {
@@ -649,7 +649,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ÀË¬d«ü©wªº BrailleWord ¬O§_¬°°ê»y¼ĞÂI²Å¸¹¡C
+        /// æª¢æŸ¥æŒ‡å®šçš„ BrailleWord æ˜¯å¦ç‚ºåœ‹èªæ¨™é»ç¬¦è™Ÿã€‚
         /// </summary>
         /// <param name="brWord"></param>
         /// <returns></returns>

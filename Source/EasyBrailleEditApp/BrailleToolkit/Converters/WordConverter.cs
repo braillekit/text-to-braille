@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
@@ -21,10 +21,10 @@ namespace BrailleToolkit.Converters
         }
 
         /// <summary>
-        /// ±N¶Ç¤Jªº¦r¦ê¡]¦r¤¸¡^Âà´«¦¨ÂI¦r¡C
+        /// å°‡å‚³å…¥çš„å­—ä¸²ï¼ˆå­—å…ƒï¼‰è½‰æ›æˆé»å­—ã€‚
         /// </summary>
-        /// <param name="text">¦r¦ê¡]¤@­Ó¦r¤¸¡^¡C</param>
-        /// <returns>­Y«ü©wªº¦r¦êÂà´«¦¨¥\¡A«h¶Ç¦^Âà´«¤§«áªºÂI¦rª«¥ó¡A§_«h¶Ç¦^ null¡C</returns>
+        /// <param name="text">å­—ä¸²ï¼ˆä¸€å€‹å­—å…ƒï¼‰ã€‚</param>
+        /// <returns>è‹¥æŒ‡å®šçš„å­—ä¸²è½‰æ›æˆåŠŸï¼Œå‰‡å‚³å›è½‰æ›ä¹‹å¾Œçš„é»å­—ç‰©ä»¶ï¼Œå¦å‰‡å‚³å› nullã€‚</returns>
         protected virtual BrailleWord ConvertToBrailleWord(string text)
         {
             string brCode = BrailleTable.Find(text);
@@ -44,12 +44,12 @@ namespace BrailleToolkit.Converters
                 nextWord, 
                 BrailleGlobals.ChinesePunctuations + "<");
 
-            // µù¡G'<' ¬O context tag ªº°_©l²Å¸¹¡A¸I¨ì¦¹²Å¸¹®É¤]¤£¥[ªÅ¤è¡C
+            // è¨»ï¼š'<' æ˜¯ context tag çš„èµ·å§‹ç¬¦è™Ÿï¼Œç¢°åˆ°æ­¤ç¬¦è™Ÿæ™‚ä¹Ÿä¸åŠ ç©ºæ–¹ã€‚
         }
 
         protected void EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(List<BrailleWord> wordList, string nextWord, string exceptedWords)
         {
-            if (nextWord == " ") return; // ¦pªG¤U¤@­Ó¦r¬OªÅ¥Õ¡A´N¤£¥Î¦h¥[¤F
+            if (nextWord == " ") return; // å¦‚æœä¸‹ä¸€å€‹å­—æ˜¯ç©ºç™½ï¼Œå°±ä¸ç”¨å¤šåŠ äº†
 
             if (exceptedWords.IndexOf(nextWord) < 0)
             {
@@ -59,14 +59,14 @@ namespace BrailleToolkit.Converters
 
         protected void EnsureOneSpaceFollowed(List<BrailleWord> wordList, string nextWord)
         {
-            if (nextWord == " ") return; // ¦pªG¤U¤@­Ó¦r¬OªÅ¥Õ¡A´N¤£¥Î¦h¥[¤F
+            if (nextWord == " ") return; // å¦‚æœä¸‹ä¸€å€‹å­—æ˜¯ç©ºç™½ï¼Œå°±ä¸ç”¨å¤šåŠ äº†
 
             wordList.Add(BrailleWord.NewBlank());
         }
 
         protected bool EnsureOneSpaceBetweenParentheses(List<BrailleWord> wordList, string currentWord, string nextWord)
         {
-            if (currentWord == "¡]" && nextWord == "¡^")
+            if (currentWord == "ï¼ˆ" && nextWord == "ï¼‰")
             {
                 wordList.Add(BrailleWord.NewBlank());
                 return true;

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.Serialization;
@@ -19,15 +19,15 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ±N¤Q¤»¶i¦ìªºÂI¦r½X¦r¦êÂà¦¨¹ïÀ³ªºÂI¦rª«¥ó¡A¨Ã¥[¤JÂI¦r¦ê¦C¡C
+        /// å°‡åå…­é€²ä½çš„é»žå­—ç¢¼å­—ä¸²è½‰æˆå°æ‡‰çš„é»žå­—ç‰©ä»¶ï¼Œä¸¦åŠ å…¥é»žå­—ä¸²åˆ—ã€‚
         /// </summary>
-        /// <param name="brCodes">¤Q¤»¶i¦ìªºÂI¦r½X¦r¦ê¡C¦¹¦r¦êªºªø«×À³¬° 2 ªº­¿¼Æ¡C</param>
+        /// <param name="brCodes">åå…­é€²ä½çš„é»žå­—ç¢¼å­—ä¸²ã€‚æ­¤å­—ä¸²çš„é•·åº¦æ‡‰ç‚º 2 çš„å€æ•¸ã€‚</param>
         /// <returns></returns>
         public void Add(string brCodes)
         {
             if (String.IsNullOrEmpty(brCodes))
             {
-                return; // ©¿²¤ªÅªºÂI¦r½X¡]¦]¬°©I¥sºÝ¥i¯à±`±`·|¶Ç¤JªÅªºÂI¦r½X¡^
+                return; // å¿½ç•¥ç©ºçš„é»žå­—ç¢¼ï¼ˆå› ç‚ºå‘¼å«ç«¯å¯èƒ½å¸¸å¸¸æœƒå‚³å…¥ç©ºçš„é»žå­—ç¢¼ï¼‰
             }
 
             for (int i = 0; i < brCodes.Length; i += 2)
@@ -95,7 +95,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ±N©Ò¦³ÂI¦rÂà¦¨¹ïÀ³ªº¤Q¤»¶i¦ì½X¦r¦ê¡A¨C­Ó 16 ¶i¦ì¦r¦ê¤§¶¡¨S¦³¤À¹j¦r¤¸¡C
+        /// å°‡æ‰€æœ‰é»žå­—è½‰æˆå°æ‡‰çš„åå…­é€²ä½ç¢¼å­—ä¸²ï¼Œæ¯å€‹ 16 é€²ä½å­—ä¸²ä¹‹é–“æ²’æœ‰åˆ†éš”å­—å…ƒã€‚
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -104,9 +104,9 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ±N©Ò¦³ÂI¦rÂà¦¨¹ïÀ³ªº¤Q¤»¶i¦ì½X¦r¦ê¡A¥i«ü©w¨C­Ó 16 ¶i¦ì¦r¦ê¤§¶¡ªº¤À¹j¦r¦ê¡C
+        /// å°‡æ‰€æœ‰é»žå­—è½‰æˆå°æ‡‰çš„åå…­é€²ä½ç¢¼å­—ä¸²ï¼Œå¯æŒ‡å®šæ¯å€‹ 16 é€²ä½å­—ä¸²ä¹‹é–“çš„åˆ†éš”å­—ä¸²ã€‚
         /// </summary>
-        /// <param name="separator">¨C­Ó 16 ¶i¦ì¦r¦ê¤§¶¡ªº¤À¹j¦r¦ê¡C</param>
+        /// <param name="separator">æ¯å€‹ 16 é€²ä½å­—ä¸²ä¹‹é–“çš„åˆ†éš”å­—ä¸²ã€‚</param>
         /// <returns></returns>
         public string ToString(string separator)
         {
@@ -117,7 +117,7 @@ namespace BrailleToolkit
                 if (!String.IsNullOrEmpty(separator))
                     sb.Append(separator);
             }
-            // ¥h±¼¦h¾lªº¤À¹j¦r¤¸
+            // åŽ»æŽ‰å¤šé¤˜çš„åˆ†éš”å­—å…ƒ
             if (!String.IsNullOrEmpty(separator))
             {
                 if (sb.Length >= 2)
@@ -129,7 +129,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ¸ò¶Ç¤JªºÂI¦r¦ê¦C¤ñ¸û¡A¨âªÌªº¤º®e¬O§_¬Û¦P¡C
+        /// è·Ÿå‚³å…¥çš„é»žå­—ä¸²åˆ—æ¯”è¼ƒï¼Œå…©è€…çš„å…§å®¹æ˜¯å¦ç›¸åŒã€‚
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>

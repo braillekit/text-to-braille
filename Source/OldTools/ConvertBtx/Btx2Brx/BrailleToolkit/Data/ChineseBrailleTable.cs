@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
@@ -15,13 +15,13 @@ namespace BrailleToolkit.Data
         {
         }
 
-        // ¤£¶}©ñ³o­Ó method
+        // ä¸é–‹æ”¾é€™å€‹ method
 		private ChineseBrailleTable(string filename) : base(filename)
 		{
 		}
 
         /// <summary>
-        /// ¶Ç¦^ singleton ª«¥ó¡A¨Ã¸ü¤J¸ê·½¡C
+        /// å‚³å› singleton ç‰©ä»¶ï¼Œä¸¦è¼‰å…¥è³‡æºã€‚
         /// </summary>
         /// <returns></returns>
         public static ChineseBrailleTable GetInstance()
@@ -35,10 +35,10 @@ namespace BrailleToolkit.Data
         }
 
 		/// <summary>
-		/// ·j´M¬Y­Óª`­µ²Å¸¹¡A¨Ã¶Ç¦^¹ïÀ³ªºÂI¦r½X¡C
+		/// æœå°‹æŸå€‹æ³¨éŸ³ç¬¦è™Ÿï¼Œä¸¦å‚³å›å°æ‡‰çš„é»å­—ç¢¼ã€‚
 		/// </summary>
-		/// <param name="text">±ı·j´Mªºª`­µ²Å¸¹¡C¨Ò¦p¡G"£t"¡C</param>
-		/// <returns>­Y¦³§ä¨ì¡A«h¶Ç¦^¹ïÀ³ªºÂI¦r½X¡A§_«h¶Ç¦^ªÅ¦r¦ê¡C</returns>
+		/// <param name="text">æ¬²æœå°‹çš„æ³¨éŸ³ç¬¦è™Ÿã€‚ä¾‹å¦‚ï¼š"ã„…"ã€‚</param>
+		/// <returns>è‹¥æœ‰æ‰¾åˆ°ï¼Œå‰‡å‚³å›å°æ‡‰çš„é»å­—ç¢¼ï¼Œå¦å‰‡å‚³å›ç©ºå­—ä¸²ã€‚</returns>
 		public string GetPhoneticCode(string text)
 		{
 			CheckLoaded();
@@ -51,10 +51,10 @@ namespace BrailleToolkit.Data
 		}
 
 		/// <summary>
-		/// ´M§äµ²¦XÃı¡A¨Ã¶Ç¦^¹ïÀ³ªºÂI¦r½X¡C
+		/// å°‹æ‰¾çµåˆéŸ»ï¼Œä¸¦å‚³å›å°æ‡‰çš„é»å­—ç¢¼ã€‚
 		/// </summary>
-		/// <param name="text">µ²¦XÃıªºª`­µ²Å¸¹¡A¤£§tÁn½Õ¡C¨Ò¦p "£¹£¬"¡C</param>
-		/// <returns>­Y¬Oµ²¦XÃı¡A«h¶Ç¦^¹ïÀ³ªºÂI¦r½X¡A§_«h¶Ç¦^ªÅ¦r¦ê¡C</returns>
+		/// <param name="text">çµåˆéŸ»çš„æ³¨éŸ³ç¬¦è™Ÿï¼Œä¸å«è²èª¿ã€‚ä¾‹å¦‚ "ã„¨ã„›"ã€‚</param>
+		/// <returns>è‹¥æ˜¯çµåˆéŸ»ï¼Œå‰‡å‚³å›å°æ‡‰çš„é»å­—ç¢¼ï¼Œå¦å‰‡å‚³å›ç©ºå­—ä¸²ã€‚</returns>
 		public string GetPhoneticJoinedCode(string text)
 		{
 			CheckLoaded();
@@ -67,10 +67,10 @@ namespace BrailleToolkit.Data
 		}
 
 		/// <summary>
-		/// ´M§äª`­µ²Å¸¹ªº¤C­Ó¯S®í³æ­µ¡]£¤¡B£¥¡B£¦¡B£§¡B£¨¡B£©¡B£ª¡^¡C
+		/// å°‹æ‰¾æ³¨éŸ³ç¬¦è™Ÿçš„ä¸ƒå€‹ç‰¹æ®Šå–®éŸ³ï¼ˆã„“ã€ã„”ã€ã„•ã€ã„–ã€ã„—ã€ã„˜ã€ã„™ï¼‰ã€‚
 		/// </summary>
-		/// <param name="text">¬Y­Ó³æ­µª`­µ²Å¸¹¡A¨Ò¦p "£¤"¡C
-		/// <returns>­Y¬O¯S®í³æ­µ¦r¡A«h¶Ç¦^¹ïÀ³ªºÂI¦r½X¡A§_«h¶Ç¦^ªÅ¦r¦ê¡C</returns>
+		/// <param name="text">æŸå€‹å–®éŸ³æ³¨éŸ³ç¬¦è™Ÿï¼Œä¾‹å¦‚ "ã„“"ã€‚
+		/// <returns>è‹¥æ˜¯ç‰¹æ®Šå–®éŸ³å­—ï¼Œå‰‡å‚³å›å°æ‡‰çš„é»å­—ç¢¼ï¼Œå¦å‰‡å‚³å›ç©ºå­—ä¸²ã€‚</returns>
 		public string GetPhoneticMonoCode(string text)
 		{
 			CheckLoaded();
@@ -83,10 +83,10 @@ namespace BrailleToolkit.Data
 		}
 
 		/// <summary>
-		/// ´M§äª`­µªºÁn½Õ²Å¸¹¡C
+		/// å°‹æ‰¾æ³¨éŸ³çš„è²èª¿ç¬¦è™Ÿã€‚
 		/// </summary>
-		/// <param name="text">±ı´M§äªºÁn½Õ²Å¸¹¡A¥ş§ÎªÅ¥Õ¥Nªí¤@Án¡C</param>
-		/// <returns>­Y¦³§ä¨ì¡A«h¶Ç¦^¹ïÀ³ªºÂI¦r½X¡A§_«h¶Ç¦^ªÅ¦r¦ê¡C</returns>
+		/// <param name="text">æ¬²å°‹æ‰¾çš„è²èª¿ç¬¦è™Ÿï¼Œå…¨å½¢ç©ºç™½ä»£è¡¨ä¸€è²ã€‚</param>
+		/// <returns>è‹¥æœ‰æ‰¾åˆ°ï¼Œå‰‡å‚³å›å°æ‡‰çš„é»å­—ç¢¼ï¼Œå¦å‰‡å‚³å›ç©ºå­—ä¸²ã€‚</returns>
 		public string GetPhoneticToneCode(string text)
 		{
 			CheckLoaded();
@@ -99,15 +99,15 @@ namespace BrailleToolkit.Data
 		}
 
 		/// <summary>
-		/// ´M§ä¼ĞÂI²Å¸¹¡C
+		/// å°‹æ‰¾æ¨™é»ç¬¦è™Ÿã€‚
 		/// </summary>
-		/// <param name="text">±ı´M§äªº¼ĞÂI²Å¸¹¡C</param>
-		/// <returns>­Y¦³§ä¨ì¡A«h¶Ç¦^¹ïÀ³ªºÂI¦r½X¡A§_«h¶Ç¦^ªÅ¦r¦ê¡C</returns>
+		/// <param name="text">æ¬²å°‹æ‰¾çš„æ¨™é»ç¬¦è™Ÿã€‚</param>
+		/// <returns>è‹¥æœ‰æ‰¾åˆ°ï¼Œå‰‡å‚³å›å°æ‡‰çš„é»å­—ç¢¼ï¼Œå¦å‰‡å‚³å›ç©ºå­—ä¸²ã€‚</returns>
 		public string GetPunctuationCode(string text)
 		{
 			CheckLoaded();
 
-            // ­×¥¿³æ¤Ş¸¹¡G¦b SQL ¬d¸ß±ø¥ó¤¤ªº³æ¤Ş¸¹¥²¶·³sÄò¨â­Ó
+            // ä¿®æ­£å–®å¼•è™Ÿï¼šåœ¨ SQL æŸ¥è©¢æ¢ä»¶ä¸­çš„å–®å¼•è™Ÿå¿…é ˆé€£çºŒå…©å€‹
             if ("'".Equals(text))
             {
                 text = "''";

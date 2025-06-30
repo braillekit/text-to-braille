@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using BrailleToolkit.Data;
@@ -6,7 +6,7 @@ using BrailleToolkit.Data;
 namespace BrailleToolkit
 {
     /// <summary>
-    /// �@���ܼơC
+    /// 共用變數。
     /// </summary>
     public static class BrailleGlobals
     {
