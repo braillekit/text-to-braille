@@ -1,35 +1,35 @@
-���I���� 2.7 ��
+﻿易點雙視 2.7 版
 
-�@�~���һݨD
+作業環境需求
 
-  - Windows 7�BWindows 8 �]�`�N Windows XP �w�g���䴩!�^
-  - .NET Framework 3.5 �M .NET Framework 4.5.2 �������w�ˡC
-  - �s�`����J�k
+  - Windows 7、Windows 8 （注意 Windows XP 已經不支援!）
+  - .NET Framework 3.5 和 .NET Framework 4.5.2 都必須安裝。
+  - 新注音輸入法
 
-�`�N�G���I������ 32 �줸���ε{���A�� 64 �줸�@�~�t�Υi��L�k���`�������I�r���\��C
+注意：易點雙視為 32 位元應用程式，於 64 位元作業系統可能無法正常執行轉點字的功能。
 
-�w�˵{��
+安裝程序
 
-1.�T�O�w�g�w�ˤF�Ҧ��̷s�� Windows Updates�C
+1.確保已經安裝了所有最新的 Windows Updates。
 
-2.�w�� .NET Framework 3.5 �i�ല�o�M��C
-  �i�ܷL�n�����U���A�ΨϥΥH�U�s���G
+2.安裝 .NET Framework 3.5 可轉散發套件。
+  可至微軟網站下載，或使用以下連結：
   http://pan.baidu.com/s/1bnvRX2f
 
-  �U���᪽���}���ɮקY�i�w�ˡC
+  下載後直接開啟檔案即可安裝。
 
-3.�w�� .NET Framework 4.5.2 �i�ല�o�M��C
-  �i�ܷL�n�����U���A���}�p�U�G  
+3.安裝 .NET Framework 4.5.2 可轉散發套件。
+  可至微軟網站下載，網址如下：  
   https://www.microsoft.com/zh-TW/download/details.aspx?id=42642
   
-  �U���᪽���}���ɮקY�i�w�ˡC
+  下載後直接開啟檔案即可安裝。
   
-4.�w�ˡu���I�����v
+4.安裝「易點雙視」
 
-  ����w�˵{�� setup.exe �Y�i�}�l�w�ˡC
-  �w�]�����ε{���w�˸��|�� C:\EasyBrailleEdit�C
+  執行安裝程式 setup.exe 即可開始安裝。
+  預設的應用程式安裝路徑為 C:\EasyBrailleEdit。
   
-�Ĥ@������  
+第一次執行  
 
-  �Ĥ@������u���I�����v�ݭn�����U�A�ÿ�J���Ī��Ǹ��A���ϥΧ���\��C
+  第一次執行「易點雙視」需要先註冊，並輸入有效的序號，方能使用完整功能。
   

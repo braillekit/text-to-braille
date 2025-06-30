@@ -1,4 +1,4 @@
-
-     brProcessor.SuppressEvents = true;  // Ãö³¬ÂI¦r³B²z¾¹¨Æ¥ó
-     BrailleLine brLine = brProcessor.ConvertLine("´ú¸Õ");
-     brProcessor.SuppressEvents = false; // «ì´_ÂI¦r³B²z¾¹¨Æ¥ó
+ï»¿
+     brProcessor.SuppressEvents = true;  // é—œé–‰é»å­—è™•ç†å™¨äº‹ä»¶
+     BrailleLine brLine = brProcessor.ConvertLine("æ¸¬è©¦");
+     brProcessor.SuppressEvents = false; // æ¢å¾©é»å­—è™•ç†å™¨äº‹ä»¶

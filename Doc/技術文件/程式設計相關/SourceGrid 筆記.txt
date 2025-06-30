@@ -1,24 +1,24 @@
-SourceGrid ���O by ������
-��s����G2007-09-17
+﻿SourceGrid 筆記 by 蔡煥麟
+更新日期：2007-09-17
 
 
-Q: �p��۰ʮھ��x�s�椺�e�վ�]�Y��^�x�s��j�p�H
-A: �i�Ϊ���k�]�A�G
+Q: 如何自動根據儲存格內容調整（縮放）儲存格大小？
+A: 可用的方法包括：
 
-    - Grid �� AutoSizeCells ��k�C����k�|���s�վ�Ҧ��x�s�檺�e�M���C
-    - Grid �� Columns.AutoSizeColumn�C����k�Ƚվ���w����C
-    - Grid �� Columns.AutoSizeView ��k�C�Ƚվ� user �i�ݱo�쪺��C����k�� AutoSizeCells �֫ܦh�A���u���ϥΡI
-    - Grid �� Rows.AutoSizeRow�C����k�Ƚվ���w���C�C
-    - Grid �� Rows.AutoSizeView ��k�C�Ƚվ� user �i�ݱo�쪺�C�C
+    - Grid 的 AutoSizeCells 方法。此方法會重新調整所有儲存格的寬和高。
+    - Grid 的 Columns.AutoSizeColumn。此方法僅調整指定的欄。
+    - Grid 的 Columns.AutoSizeView 方法。僅調整 user 可看得到的欄。此方法比 AutoSizeCells 快很多，應優先使用！
+    - Grid 的 Rows.AutoSizeRow。此方法僅調整指定的列。
+    - Grid 的 Rows.AutoSizeView 方法。僅調整 user 可看得到的列。
     
-Q: �p�����ïS�w���C�H
-A: �ϥ� Rows �ݩʪ� HideRow ��k�C    
+Q: 如何隱藏特定的列？
+A: 使用 Rows 屬性的 HideRow 方法。    
 
-Q: �p��۰ʱN���b����m����S�w���x�s��H
-A: �ϥ� ShowCell ��k�C
+Q: 如何自動將捲軸的位置捲到特定的儲存格？
+A: 使用 ShowCell 方法。
 
-Q: �p��N��J�J�I���ʦܯS�w���x�s��H
-A: �ϥ� Grid �� Selection �ݩʪ� Focus ��k�C
+Q: 如何將輸入焦點移動至特定的儲存格？
+A: 使用 Grid 的 Selection 屬性的 Focus 方法。
 
-Q: �p��H�{������S�w�x�s��H
-A: �ϥ� Grid �� Selection �ݩʪ� SelectCell ��k�C
+Q: 如何以程式選取特定儲存格？
+A: 使用 Grid 的 Selection 屬性的 SelectCell 方法。
