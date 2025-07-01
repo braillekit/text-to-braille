@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Huanlin.Common" Version="5.2.0" />
+    <PackageReference Include="Huanlin.Common" />
   </ItemGroup>
 
 </Project>

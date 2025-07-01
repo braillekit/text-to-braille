@@ -110,9 +110,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Huanlin.Common">
-      <Version>4.5.8</Version>
-    </PackageReference>
+    <PackageReference Include="Huanlin.Common" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BrailleToolkit\Data\BrailleCharTbl.txt" />
