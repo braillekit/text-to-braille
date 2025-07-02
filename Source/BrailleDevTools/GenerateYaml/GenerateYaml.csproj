@@ -11,8 +11,4 @@
     <PackageReference Include="YamlDotNet" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Tests\Test.BrailleToolkit\Test.BrailleToolkit.csproj" />
-  </ItemGroup>
-
 </Project>

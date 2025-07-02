@@ -12,6 +12,7 @@
 ## Developer features
 
 - Use GitHub Actions for CI/CD.
+- 使用 Central Package Management (CPM) 來統一管理相依套件的版本。
 
 ## Release instructions
 

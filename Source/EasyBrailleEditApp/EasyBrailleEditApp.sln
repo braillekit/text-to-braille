@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{CECA7BC5-3A2
 		..\..\Doc\技術文件\部署程序.txt = ..\..\Doc\技術文件\部署程序.txt
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{564D6238-5E27-47A8-82F8-5E924565757A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UpdateFiles", "UpdateFiles", "{3B090672-873A-453F-8F76-3C784E0C893C}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\UpdateFiles\Update.txt = ..\..\UpdateFiles\Update.txt
@@ -26,23 +24,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrailleToolkit", "BrailleTo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyBrailleEdit.Common", "EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj", "{AA5CB6BC-CE6C-4132-B932-32B646584921}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.BrailleToolkit", "..\Tests\Test.BrailleToolkit\Test.BrailleToolkit.csproj", "{D2CC7F61-F67D-4E99-86DA-C08E74900AB6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyBrailleEdit", "EasyBrailleEdit\EasyBrailleEdit.csproj", "{82286304-BF2A-4EA2-A322-EC79E4888494}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FFAC9544-90F3-4441-B776-24FAF4F325BE} = {FFAC9544-90F3-4441-B776-24FAF4F325BE}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrailleToolkitBenchmark", "..\Tests\BrailleToolkitBenchmark\BrailleToolkitBenchmark.csproj", "{696732E2-7E48-4056-BEB9-FF880EAC89A8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{1811E6EB-3EED-4703-A530-48FDAFBD540B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateYaml", "..\BrailleDevTools\GenerateYaml\GenerateYaml.csproj", "{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\.github\workflows\dotnet-desktop.yml = ..\..\.github\workflows\dotnet-desktop.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrailleToolkit.Tests", "BrailleToolkit.Tests\BrailleToolkit.Tests.csproj", "{7979B1E0-E06C-6989-BF85-CA8A59325D54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrailleToolkit.Benchmark", "BrailleToolkit.Benchmark\BrailleToolkit.Benchmark.csproj", "{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,18 +83,6 @@ Global
 		{AA5CB6BC-CE6C-4132-B932-32B646584921}.Release|x64.Build.0 = Release|Any CPU
 		{AA5CB6BC-CE6C-4132-B932-32B646584921}.Release|x86.ActiveCfg = Release|Any CPU
 		{AA5CB6BC-CE6C-4132-B932-32B646584921}.Release|x86.Build.0 = Release|Any CPU
-		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6}.Debug|x64.Build.0 = Debug|Any CPU
-		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6}.Debug|x86.Build.0 = Debug|Any CPU
-		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6}.Release|x64.ActiveCfg = Release|Any CPU
-		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6}.Release|x64.Build.0 = Release|Any CPU
-		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6}.Release|x86.ActiveCfg = Release|Any CPU
-		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6}.Release|x86.Build.0 = Release|Any CPU
 		{82286304-BF2A-4EA2-A322-EC79E4888494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{82286304-BF2A-4EA2-A322-EC79E4888494}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82286304-BF2A-4EA2-A322-EC79E4888494}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -113,38 +95,33 @@ Global
 		{82286304-BF2A-4EA2-A322-EC79E4888494}.Release|x64.Build.0 = Release|Any CPU
 		{82286304-BF2A-4EA2-A322-EC79E4888494}.Release|x86.ActiveCfg = Release|Any CPU
 		{82286304-BF2A-4EA2-A322-EC79E4888494}.Release|x86.Build.0 = Release|Any CPU
-		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Debug|x64.Build.0 = Debug|Any CPU
-		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Debug|x86.Build.0 = Debug|Any CPU
-		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Release|x64.ActiveCfg = Release|Any CPU
-		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Release|x64.Build.0 = Release|Any CPU
-		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Release|x86.ActiveCfg = Release|Any CPU
-		{696732E2-7E48-4056-BEB9-FF880EAC89A8}.Release|x86.Build.0 = Release|Any CPU
-		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Debug|x64.Build.0 = Debug|Any CPU
-		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Debug|x86.Build.0 = Debug|Any CPU
-		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Release|x64.ActiveCfg = Release|Any CPU
-		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Release|x64.Build.0 = Release|Any CPU
-		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Release|x86.ActiveCfg = Release|Any CPU
-		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD}.Release|x86.Build.0 = Release|Any CPU
+		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Debug|x64.Build.0 = Debug|Any CPU
+		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Debug|x86.Build.0 = Debug|Any CPU
+		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Release|x64.ActiveCfg = Release|Any CPU
+		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Release|x64.Build.0 = Release|Any CPU
+		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Release|x86.ActiveCfg = Release|Any CPU
+		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Release|x86.Build.0 = Release|Any CPU
+		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Debug|x64.Build.0 = Debug|Any CPU
+		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Debug|x86.Build.0 = Debug|Any CPU
+		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Release|x64.ActiveCfg = Release|Any CPU
+		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Release|x64.Build.0 = Release|Any CPU
+		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Release|x86.ActiveCfg = Release|Any CPU
+		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D2CC7F61-F67D-4E99-86DA-C08E74900AB6} = {564D6238-5E27-47A8-82F8-5E924565757A}
-		{696732E2-7E48-4056-BEB9-FF880EAC89A8} = {564D6238-5E27-47A8-82F8-5E924565757A}
-		{B7BC6BE8-B8D7-40C2-87E6-C66C539453FD} = {1811E6EB-3EED-4703-A530-48FDAFBD540B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {64A80D6E-27C3-4C07-B706-51A082163D61}
