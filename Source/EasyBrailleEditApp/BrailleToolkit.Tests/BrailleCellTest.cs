@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.BrailleToolkit
+namespace BrailleToolkit.Tests
 {
     [TestFixture]
     public class BrailleCellTest

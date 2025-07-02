@@ -5,7 +5,7 @@ using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
 using NUnit.Framework;
 
-namespace Test.BrailleToolkit
+namespace BrailleToolkit.Tests
 {
     [TestFixture]
     public partial class BrailleProcessorTest

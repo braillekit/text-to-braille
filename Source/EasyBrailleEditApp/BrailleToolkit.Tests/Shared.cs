@@ -1,8 +1,8 @@
-using System.IO;
+﻿using System.IO;
 using NUnit.Framework;
 using Serilog;
 
-namespace Test.BrailleToolkit
+namespace BrailleToolkit.Tests
 {
     internal static class Shared
     {

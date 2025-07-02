@@ -4,7 +4,7 @@ using BrailleToolkit.Converters;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace Test.BrailleToolkit
+namespace BrailleToolkit.Tests
 {
     /// <summary>
     ///This is a test class for BrailleToolkit.EnglishWordConverter and is intended

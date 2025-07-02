@@ -7,7 +7,7 @@ using NUnit.Framework;
 using BrailleToolkit.Data;
 
 
-namespace Test.BrailleToolkit
+namespace BrailleToolkit.Tests
 {
     [TestFixture()]
     public class XmlBrailleTableTest

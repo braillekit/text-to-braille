@@ -12,6 +12,7 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageVersion Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50" />
     <PackageVersion Include="MinVer" Version="6.0.0" />
+    <PackageVersion Include="MSTest.TestFramework" Version="3.9.3" />
     <PackageVersion Include="NChinese" Version="1.2.3" />
     <PackageVersion Include="FlubuCore" Version="9.0.0" />
     <PackageVersion Include="NUnit" Version="4.3.2" />

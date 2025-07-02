@@ -9,7 +9,7 @@ using NChinese.Phonetic;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace Test.BrailleToolkit
+namespace BrailleToolkit.Tests
 {
     /// <summary>
     ///This is a test class for BrailleToolkit.ChineseWordConverter and is intended

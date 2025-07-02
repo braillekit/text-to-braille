@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using BrailleToolkit;
 using NUnit.Framework;
 
-namespace Test.BrailleToolkit
+namespace BrailleToolkit.Tests
 {
     [TestFixture]
     public class TableConverterTest

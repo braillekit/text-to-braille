@@ -4,7 +4,7 @@ using NUnit.Framework;
 using System.IO;
 using System.Text;
 
-namespace Test.BrailleToolkit
+namespace BrailleToolkit.Tests
 {
     /// <summary>
     ///This is a test class for BrailleToolkit.BrailleDocument and is intended
