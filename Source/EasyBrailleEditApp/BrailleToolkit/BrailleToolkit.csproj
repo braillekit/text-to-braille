@@ -19,6 +19,7 @@
     <None Remove="Data\EnglishBrailleTable.xml" />
     <None Remove="Data\MathBrailleTable.xml" />
     <None Remove="Data\PhoneticBrailleTable.xml" />
+    <None Remove="Data\EnglishUebBrailleTable.xml" />
     <None Remove="Data\TableBrailleTable.xml" />
     <None Remove="Data\UrlBrailleTable.xml" />
   </ItemGroup>
@@ -32,6 +33,7 @@
     <EmbeddedResource Include="Data\EnglishBrailleTable.xml" />
     <EmbeddedResource Include="Data\MathBrailleTable.xml" />
     <EmbeddedResource Include="Data\PhoneticBrailleTable.xml" />
+    <EmbeddedResource Include="Data\EnglishUebBrailleTable.xml" />
     <EmbeddedResource Include="Data\TableBrailleTable.xml" />
   </ItemGroup>
 

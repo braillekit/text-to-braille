@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  Unified English Braille (UEB) Code Table (Sample)
+  This is a sample file demonstrating the structure for Grade 2 Braille.
+  A complete implementation would require all official UEB contractions and rules.
+-->
+<Symbols>
+
+  <!-- Grade 1 Letters (same as EBAE) -->
+  <symbol text="a" code="01" type="Letter" />
+  <symbol text="b" code="03" type="Letter" />
+  <symbol text="c" code="09" type="Letter" />
+  <symbol text="d" code="19" type="Letter" />
+  <symbol text="e" code="11" type="Letter" />
+  <symbol text="f" code="0B" type="Letter" />
+  <symbol text="g" code="1B" type="Letter" />
+  <symbol text="h" code="13" type="Letter" />
+  <symbol text="i" code="0A" type="Letter" />
+  <symbol text="j" code="1A" type="Letter" />
+  <symbol text="k" code="05" type="Letter" />
+  <symbol text="l" code="07" type="Letter" />
+  <symbol text="m" code="0D" type="Letter" />
+  <symbol text="n" code="1D" type="Letter" />
+  <symbol text="o" code="0F" type="Letter" />
+  <symbol text="p" code="1F" type="Letter" />
+  <symbol text="q" code="17" type="Letter" />
+  <symbol text="r" code="0E" type="Letter" />
+  <symbol text="s" code="1E" type="Letter" />
+  <symbol text="t" code="1E" type="Letter" />
+  <symbol text="u" code="25" type="Letter" />
+  <symbol text="v" code="27" type="Letter" />
+  <symbol text="w" code="3A" type="Letter" />
+  <symbol text="x" code="2D" type="Letter" />
+  <symbol text="y" code="3D" type="Letter" />
+  <symbol text="z" code="35" type="Letter" />
+
+  <!-- Punctuation (UEB Style) -->
+  <symbol text="." code="32" name="full stop" />
+  <symbol text="," code="02" name="comma" />
+  <symbol text="?" code="26" name="question mark" />
+  <symbol text="'" code="04" name="apostrophe" />
+  <symbol text="(" code="2036" name="opening parenthesis" />
+  <symbol text=")" code="3604" name="closing parenthesis" />
+
+  <!-- Special Marks -->
+  <symbol text="CapitalSign" code="20" type="Mark" />
+  <symbol text="NumberSign" code="3C" type="Mark" />
+
+  <!-- ===================================================== -->
+  <!-- Grade 2 - Alphabetic Wordsigns (Strong Wordsigns)   -->
+  <!-- These stand for common words.                       -->
+  <!-- ===================================================== -->
+  <symbol text="but" code="03" type="WordSign" />
+  <symbol text="can" code="09" type="WordSign" />
+  <symbol text="do" code="19" type="WordSign" />
+  <symbol text="every" code="11" type="WordSign" />
+  <symbol text="from" code="0B" type="WordSign" />
+  <symbol text="go" code="1B" type="WordSign" />
+  <symbol text="have" code="13" type="WordSign" />
+  <symbol text="just" code="1A" type="WordSign" />
+  <symbol text="knowledge" code="05" type="WordSign" />
+  <symbol text="like" code="07" type="WordSign" />
+  <symbol text="more" code="0D" type="WordSign" />
+  <symbol text="not" code="1D" type="WordSign" />
+  <symbol text="people" code="0F" type="WordSign" />
+  <symbol text="quite" code="1F" type="WordSign" />
+  <symbol text="rather" code="17" type="WordSign" />
+  <symbol text="so" code="0E" type="WordSign" />
+  <symbol text="that" code="1E" type="WordSign" />
+  <symbol text="us" code="25" type="WordSign" />
+  <symbol text="very" code="27" type="WordSign" />
+  <symbol text="will" code="3A" type="WordSign" />
+  <symbol text="it" code="2D" type="WordSign" />
+  <symbol text="you" code="3D" type="WordSign" />
+  <symbol text="as" code="35" type="WordSign" />
+
+  <!-- ===================================================== -->
+  <!-- Grade 2 - Strong Groupsigns                         -->
+  <!-- These represent common letter groups.               -->
+  <!-- ===================================================== -->
+  <symbol text="and" code="2F" type="GroupSign" />
+  <symbol text="for" code="3F" type="GroupSign" />
+  <symbol text="of" code="37" type="GroupSign" />
+  <symbol text="the" code="3E" type="GroupSign" />
+  <symbol text="with" code="3F" type="GroupSign" />
+  <symbol text="ch" code="21" type="GroupSign" />
+  <symbol text="gh" code="23" type="GroupSign" />
+  <symbol text="sh" code="29" type="GroupSign" />
+  <symbol text="th" code="2B" type="GroupSign" />
+  <symbol text="wh" code="23" type="GroupSign" />
+  <symbol text="ed" code="2D" type="GroupSign" />
+  <symbol text="er" code="2E" type="GroupSign" />
+  <symbol text="ou" code="31" type="GroupSign" />
+  <symbol text="ow" code="3A" type="GroupSign" />
+  
+  <!-- ===================================================== -->
+  <!-- Grade 2 - Short-form Words                          -->
+  <!-- Commonly used words written in a shortened form.    -->
+  <!-- ===================================================== -->
+  <symbol text="ab" code="0103" type="ShortForm" name="about" />
+  <symbol text="abv" code="010327" type="ShortForm" name="above" />
+  <symbol text="ac" code="0109" type="ShortForm" name="according" />
+  <symbol text="acr" code="010917" type="ShortForm" name="across" />
+  <symbol text="af" code="010B" type="ShortForm" name="after" />
+  <symbol text="aln" code="01071D" type="ShortForm" name="almost" />
+  <symbol text="alr" code="010717" type="ShortForm" name="already" />
+  <symbol text="brl" code="031707" type="ShortForm" name="braille" />
+
+</Symbols>
