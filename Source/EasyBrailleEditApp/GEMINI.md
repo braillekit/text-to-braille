@@ -11,7 +11,7 @@
 ## 主要模組
 
 - **`EasyBrailleEdit/`**: 主要的 Windows Forms 應用程式專案。這很可能是使用者操作的圖形介面。
-- **`BrailleToolkit/`**: 核心類別庫，包含文字到點字轉換的主要邏輯、資料結構��方、行、文件）、格式化規則，以及不同點字標準（中文、英文 UEB、數學等）的資料表。
+- **`BrailleToolkit/`**: 核心類別庫，包含文字到點字轉換的主要邏輯、資料結構（方、行、文件）、格式化規則，以及不同點字標準（中文、英文 UEB、數學等）的資料表。
 - **`BrailleToolkit.Tests/`**: `BrailleToolkit` 的單元測試專案，確保核心轉換和格式化邏輯的正確性。
 - **`Txt2Brl/`**: 一個命令列工具，用於文字到點字的轉換，可能使用了 `BrailleToolkit` 函式庫。
 - **`EasyBrailleEdit.Common/`**: 一個共用函式庫，用於存放共通常數、應用程式全域變數和設定。
@@ -46,7 +46,7 @@
 3.  **具體的轉換器 (Concrete Strategies):**
     *   **`ChineseWordConverter`**: 負責處理中文字、注音及全形標點符號。它會使用 `ZhuyinReverseConverter` 取得中文字的注音碼，並利用智慧型詞彙分析來修正破音字，最後轉換成台灣點字規則的點字。
     *   **`EnglishUebConverter`**: 負責處理英文（UEB - Unified English Braille）。它採用「貪婪演算法」(Greedy Algorithm)，優先匹配最長的縮寫（Contractions），若無匹配，則退回逐字翻譯（Grade 1）。
-    *   **`MathConverter`, `TableConverter`, `UrlConverter` 等**: 這些是針對特定情境的轉換器，只有在對應的標籤（如 `<math>`）被啟用時才會作用。
+    *   **`MathConverter`, `TableConverter`, `UrlConverter` 等**: 這些是針對特定情境的轉換器，只有在對應的標籤���如 `<math>`）被啟用時才會作用。
     *   **`ContextTagConverter`**: 專門用來解析情境控制標籤（如 `<math>`, `</math>`），並更新 `ContextTagManager` 的狀態。它具有最高的處理優先權。
 
 ### 處理流程
@@ -60,7 +60,7 @@
     *   然後，依序嘗試 `ChineseWordConverter` 和 `EnglishUebConverter`。
     *   第一個成功轉換的轉換器會從堆疊中取出其處理過的字元，並傳回 `BrailleWord` 物件串列。
 3.  **後處理與規則套用**: 當整行文字都被轉換成 `BrailleWord` 串列（存於 `BrailleLine` 物件）後，`BrailleProcessor` 會進行一系列的後處理，套用各種點字規則：
-    *   處理私名號、書名號��
+    *   處理私名號、書名號。
     *   套用中文標點符號規則。
     *   套用英文大寫、數字規則。
     *   在中英文之間補上必要的空格。
@@ -106,3 +106,4 @@
 
 *   **多方點字**: 如果 `code` 屬性的長度超過 2 個字元（例如 `code="101010"`），代表此符號由多個點字方組成。每個兩位數的十六進位碼代表一個點字方。
 *   **`dots` 屬性**: 部分 XML 項目使用 `dots` 屬性（如 `dots="126"`）來直接表示點位。在程式載入時，`XmlBrailleTable` 類別會呼叫 `BrailleCellHelper.PositionNumbersToHexString` 方法將 `dots` 屬性的值轉換成對應的 `code` 十六進位碼。
+*   **空方 (Blank Cell)**: 在 `ChineseBrailleTable.xml` 中，全形空白符號 `　` 的 `code` 屬性值為 `"00"`，代表一個沒有任何點的空方。這在處理上需要特別注意，以確保空格能被正確地轉換與呈現。

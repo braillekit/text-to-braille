@@ -62,8 +62,8 @@ namespace BrailleToolkit.Helpers
         /// <summary>
         /// 將點位轉換成 byte 值。
         /// </summary>
-        /// <param name="posNumberString">一方點字的點位。例如 "1356"。</param>
-        /// <returns></returns>
+        /// <param name="posNumberString">一方點字的點位。例如 "1356"。若傳入空字串，則會傳回 0。</param>
+        /// <returns>代表點位元遮罩的 byte 值。</returns>
         public static byte PositionNumberStringToByte(string posNumberString)
         {
             var bits = new BitArray(8, false);
