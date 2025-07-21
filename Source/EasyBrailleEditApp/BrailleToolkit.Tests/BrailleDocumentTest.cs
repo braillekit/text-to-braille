@@ -10,6 +10,7 @@ namespace BrailleToolkit.Tests
     ///This is a test class for BrailleToolkit.BrailleDocument and is intended
     ///to contain all BrailleToolkit.BrailleDocument Unit Tests
     ///</summary>
+    [Collection("Singleton-Sensitive Tests")]
     public class BrailleDocumentTest
 	{
         private BrailleProcessor _processor = BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));

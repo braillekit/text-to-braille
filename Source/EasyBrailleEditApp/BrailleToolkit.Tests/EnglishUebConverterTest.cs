@@ -5,6 +5,7 @@ using Xunit;
 
 namespace BrailleToolkit.Tests
 {
+    [Collection("Singleton-Sensitive Tests")]
     public class EnglishUebConverterTest
     {
         private EnglishUebConverter _converter;

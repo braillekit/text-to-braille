@@ -9,6 +9,7 @@ using Xunit;
 
 namespace BrailleToolkit.Tests
 {
+    [Collection("Singleton-Sensitive Tests")]
     public class TableConverterTest
     {
         [Fact]

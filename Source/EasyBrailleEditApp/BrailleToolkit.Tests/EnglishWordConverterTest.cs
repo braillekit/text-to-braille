@@ -9,6 +9,7 @@ namespace BrailleToolkit.Tests
     ///This is a test class for BrailleToolkit.EnglishWordConverter and is intended
     ///to contain all BrailleToolkit.EnglishWordConverter Unit Tests
     ///</summary>
+    [Collection("Singleton-Sensitive Tests")]
     public class EnglishWordConverterTest
     {
         public EnglishWordConverterTest()

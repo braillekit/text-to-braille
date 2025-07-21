@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace BrailleToolkit.Tests
 {
+    [Collection("Singleton-Sensitive Tests")]
     public class BrailleCellTest
     {
         public BrailleCellTest()

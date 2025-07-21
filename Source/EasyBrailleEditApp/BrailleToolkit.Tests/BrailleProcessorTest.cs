@@ -11,6 +11,7 @@ namespace BrailleToolkit.Tests
     ///This is a test class for BrailleToolkit.BrailleProcesser and is intended
     ///to contain all BrailleToolkit.BrailleProcesser Unit Tests
     ///</summary>
+    [Collection("Singleton-Sensitive Tests")]
     public partial class BrailleProcessorTest
     {
         public BrailleProcessorTest()

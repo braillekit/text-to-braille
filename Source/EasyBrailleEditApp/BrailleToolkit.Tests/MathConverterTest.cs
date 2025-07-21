@@ -8,6 +8,7 @@ using Xunit;
 
 namespace BrailleToolkit.Tests
 {
+    [Collection("Singleton-Sensitive Tests")]
     public class MathConverterTest
     {
         [Theory]

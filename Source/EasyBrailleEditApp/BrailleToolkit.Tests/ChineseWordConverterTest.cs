@@ -14,6 +14,7 @@ namespace BrailleToolkit.Tests
     ///This is a test class for BrailleToolkit.ChineseWordConverter and is intended
     ///to contain all BrailleToolkit.ChineseWordConverter Unit Tests
     ///</summary>
+    [Collection("Singleton-Sensitive Tests")]
     public class ChineseWordConverterTest
 	{
         public ChineseWordConverterTest()

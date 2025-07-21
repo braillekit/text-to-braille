@@ -9,6 +9,7 @@ using BrailleToolkit.Data;
 
 namespace BrailleToolkit.Tests
 {
+    [Collection("Singleton-Sensitive Tests")]
     public class XmlBrailleTableTest
     {
 
