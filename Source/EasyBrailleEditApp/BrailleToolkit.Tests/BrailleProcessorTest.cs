@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Text;
 using BrailleToolkit;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
-using NUnit.Framework;
+using Xunit;
 
 namespace BrailleToolkit.Tests
 {
@@ -11,11 +11,9 @@ namespace BrailleToolkit.Tests
     ///This is a test class for BrailleToolkit.BrailleProcesser and is intended
     ///to contain all BrailleToolkit.BrailleProcesser Unit Tests
     ///</summary>
-    [TestFixture]
     public partial class BrailleProcessorTest
     {
-        [SetUp]
-        public void SetUp()
+        public BrailleProcessorTest()
         {
             Shared.SetupLogger();
         }
@@ -23,7 +21,7 @@ namespace BrailleToolkit.Tests
         /// <summary>
         ///A test for ConvertLine (string)
         ///</summary>
-        [Test]
+        [Fact]
         public void ConvertLineTest()
         {
             BrailleProcessor target = BrailleProcessor.GetInstance();
@@ -35,62 +33,58 @@ namespace BrailleToolkit.Tests
 
         public void ConvertLineTestChinese(BrailleProcessor target)
         {
-            string msg = "BrailleProcesser.ConvertLine 測試失敗: ";
-
             // 測試明眼字內含注音符號、冒號後面跟著"我"、以及引號、句號。
             string line = "ㄅˇ你說：我是誰？　我說：「我是神。」";
             string expected = "ㄅˇ你說： 我是誰？　我說：「我是神。」";
             BrailleLine brLine = target.ConvertLine(line);
             string actual = brLine.ToString();
-            Assert.That(expected, Is.EqualTo(actual), msg + line);
+            Assert.Equal(expected, actual);
 
             // 測試破折號和刪節號。
             line = "第一種破折號：─，第二種破折號：－，連續破折號：──，－－。";
             expected = "第一種破折號：─，第二種破折號：－，連續破折號：──，－－。";
             brLine = target.ConvertLine(line);
             actual = brLine.ToString();
-            Assert.That(expected, Is.EqualTo(actual), msg + line);
+            Assert.Equal(expected, actual);
 
             // 測試刪節號。
             line = "單：…，雙：……";
             expected = "單：…，雙：……";
             brLine = target.ConvertLine(line);
             actual = brLine.ToString();
-            Assert.That(expected, Is.EqualTo(actual), msg + line);
+            Assert.Equal(expected, actual);
 
             // 測試連續多個全形空白：保留空白。
             line = "空　　　白　　　";
             expected = "空　　　白　　　";
             brLine = target.ConvertLine(line);
             actual = brLine.ToString();
-            Assert.That(expected, Is.EqualTo(actual), msg + line);
+            Assert.Equal(expected, actual);
         }
 
         public void ConvertLineTestEnglish(BrailleProcessor target)
         {
-            string msg = "BrailleProcesser.ConvertLine 測試失敗: ";
-
             // 測試一個大寫字母。
             string line = "Hello";
             string expected = "Hello";
             BrailleLine brLine = target.ConvertLine(line);
             string actual = brLine.ToString();
-            Assert.That(expected, Is.EqualTo(actual), msg + line);
+            Assert.Equal(expected, actual);
             bool isOk = (brLine[0].Cells[0].Value == (byte)BrailleCellCode.Capital) &&
                 (brLine[0].Cells[1].Value == 0x13);
-            Assert.That(isOk, Is.True, msg + line);
+            Assert.True(isOk);
 
             // 測試兩個大寫字母。
             line = "ABC";
             expected = "ABC";
             brLine = target.ConvertLine(line);
             actual = brLine.ToString();
-            Assert.That(expected, Is.EqualTo(actual), msg + line);
+            Assert.Equal(expected, actual);
             isOk = (brLine[0].Cells[0].Value == (byte)BrailleCellCode.Capital) &&
                 (brLine[0].Cells[1].Value == (byte)BrailleCellCode.Capital) &&
                 (brLine[0].Cells[2].Value == 0x01) &&   // 'A'
                 (brLine[1].Cells[0].Value == 0x03);     // 'B'
-            Assert.That(isOk, Is.True, msg + line);
+            Assert.True(isOk);
 
             // 測試數字。
             line = "123,56 2006-09-29";
@@ -101,20 +95,20 @@ namespace BrailleToolkit.Tests
                 (brLine[4].Cells[0].Value != (byte)BrailleCellCode.Capital) &&	// 逗號視為數字的延續，不用額外加數字記號。
                 (brLine[7].Cells[0].Value == (byte)BrailleCellCode.Digit) &&
                 (brLine[12].Cells[0].Value != (byte)BrailleCellCode.Capital);	// 連字號視為數字的延續，不用額外加數字記號。
-            Assert.That(isOk, Is.True, msg + line);
+            Assert.True(isOk);
 
             // 測試連續多個空白：保留空白。
             line = "a   b   ";
             expected = "a   b   ";
             brLine = target.ConvertLine(line);
             actual = brLine.ToString();
-            Assert.That(actual, Is.EqualTo(expected), msg + line);
+            Assert.Equal(expected, actual);
         }
 
         /// <summary>
         ///A test for PreprocessTags (string)
         ///</summary>
-        [Test]
+        [Fact]
         public void Should_ConvertPreprocessTags_Succeed()
         {
             BrailleProcessor target = BrailleProcessor.GetInstance();
@@ -123,10 +117,11 @@ namespace BrailleToolkit.Tests
             string expected = new string('ˍ', 20) + "測試";
             string actual = target.ReplaceSimpleTagsWithConvertableText(line);
 
-            Assert.That(actual, Is.EqualTo(expected));
+            Assert.Equal(expected, actual);
         }
 
-        [TestCase(
+        [Theory]
+        [InlineData(
             "小明說：（今天）下雨。",
             "(15 246 4)(134 13456 2)(24 25 3)(25 25)(246)(13 1456 3)(124 2345 3)(135)()(15 23456 5)(1256 4)(36)")]
         public void Should_ConvertString_Succeed(string inputText, string expectedPositionNumbers)
@@ -137,50 +132,53 @@ namespace BrailleToolkit.Tests
             BrailleLine brLine = processor.ConvertLine(inputText);
 
             var actual = brLine.ToPositionNumberString();
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
 
-        [TestCase("）。", "(135)(36)")]
-        [TestCase("），", "(135)(23)")]
-        [TestCase("）；", "(135)(56)")]
-        [TestCase("）：", "(135)(25 25)")]
-        [TestCase("）！", "(135)(123)")]
-        [TestCase("）？", "(135)(135)")]
-        [TestCase("）」", "(135)(36 23)")]
+        [Theory]
+        [InlineData("）。", "(135)(36)")]
+        [InlineData("），", "(135)(23)")]
+        [InlineData("）；", "(135)(56)")]
+        [InlineData("）：", "(135)(25 25)")]
+        [InlineData("）！", "(135)(123)")]
+        [InlineData("）？", "(135)(135)")]
+        [InlineData("）」", "(135)(36 23)")]
         public void Should_NoSpace_BetweenRightParenthesisAndPunctuation(string inputText, string expectedPositionNumbers)
         {
             var processor = BrailleProcessor.GetInstance();
             BrailleLine brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
-        [TestCase("15？", "(3456 2)(26)(135)")]        
-        [TestCase("8-1、", "(3456 236)(36)(2)(6)")]
-        [TestCase("8-1，", "(3456 236)(36)(2)(23)")]
-        [TestCase("8-1。", "(3456 236)(36)(2)(36)")]
-        [TestCase("<數學>15？</數學>", "(3456 2)(26)(456 236)")]
-        [TestCase("<數學>8-1、</數學>", "(3456 236)(36)(2)(6)")]
-        [TestCase("<數學>8-1，</數學>", "(3456 236)(36)(2)(6)")]
-        [TestCase("<數學>8-1。</數學>", "(3456 236)(36)(2)(456 256)")]
+        [Theory]
+        [InlineData("15？", "(3456 2)(26)(135)")]        
+        [InlineData("8-1、", "(3456 236)(36)(2)(6)")]
+        [InlineData("8-1，", "(3456 236)(36)(2)(23)")]
+        [InlineData("8-1。", "(3456 236)(36)(2)(36)")]
+        [InlineData("<數學>15？</數學>", "(3456 2)(26)(456 236)")]
+        [InlineData("<數學>8-1、</數學>", "(3456 236)(36)(2)(6)")]
+        [InlineData("<數學>8-1，</數學>", "(3456 236)(36)(2)(6)")]
+        [InlineData("<數學>8-1。</數學>", "(3456 236)(36)(2)(456 256)")]
         public void Should_NoSpace_BeforeSpecificPunctuation(string inputText, string expectedPositionNumbers)
         {
             var processor = BrailleProcessor.GetInstance();
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
 
-        [TestCase("。我", "(36)()(25 4)")]
-        [TestCase("。「", "(36)()(56 36)")]
-        [TestCase("」我", "(36 23)()(25 4)")]
-        [TestCase("」「", "(36 23)()(56 36)")]
-        [TestCase("！我", "(123)()(25 4)")]
-        [TestCase("！「", "(123)()(56 36)")]
-        [TestCase("？我", "(135)()(25 4)")]
-        [TestCase("？「", "(135)()(56 36)")]
+        [Theory]
+        [InlineData("。我", "(36)()(25 4)")]
+        [InlineData("。「", "(36)()(56 36)")]
+        [InlineData("」我", "(36 23)()(25 4)")]
+        [InlineData("」「", "(36 23)()(56 36)")]
+        [InlineData("！我", "(123)()(25 4)")]
+        [InlineData("！「", "(123)()(56 36)")]
+        [InlineData("？我", "(135)()(25 4)")]
+        [InlineData("？「", "(135)()(56 36)")]
         public void Should_HaveSpace_AfterSpecificPunctuations(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
@@ -189,12 +187,13 @@ namespace BrailleToolkit.Tests
             BrailleLine brLine = processor.ConvertLine(inputText);
 
             var actual = brLine.ToPositionNumberString();
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
 
-        [TestCase("<私名號>台北</私名號>。", "(56 56)(124 2456 2)(135 356 4)(36)")]
-        [TestCase("<書名號>魔戒</書名號>。", "(6 36)(134 126 2)(13 346 5)(36)")]
+        [Theory]
+        [InlineData("<私名號>台北</私名號>。", "(56 56)(124 2456 2)(135 356 4)(36)")]
+        [InlineData("<書名號>魔戒</書名號>。", "(6 36)(134 126 2)(13 346 5)(36)")]
         public void Should_NoSpace_BetweenSpecificNameAndPunctuation(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
@@ -205,12 +204,12 @@ namespace BrailleToolkit.Tests
             var lines = BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var actual = lines[0].ToPositionNumberString();
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
-        //[TestCase("<私名號>台北</私名號>我", "(56 56)(124 2456 2)(135 356 4)()(25 4)")]
-        [TestCase("<書名號>魔戒</書名號>我", "(6 36)(134 126 2)(13 346 5)()(25 4)")]
-
+        [Theory]
+        //[InlineData("<私名號>台北</私名號>我", "(56 56)(124 2456 2)(135 356 4)()(25 4)")]
+        [InlineData("<書名號>魔戒</書名號>我", "(6 36)(134 126 2)(13 346 5)()(25 4)")]
         public void Should_AddSpace_BetweenSpecificNameAndAlphabet(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
@@ -221,10 +220,11 @@ namespace BrailleToolkit.Tests
             var lines = BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var actual = lines[0].ToPositionNumberString();
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
-        [TestCase("<分數>1/2</分數>。", "(1456 2)(34)(23 3456)(36)")]
+        [Theory]
+        [InlineData("<分數>1/2</分數>。", "(1456 2)(34)(23 3456)(36)")]
         public void Should_ConvertFraction_Succeed(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
@@ -233,13 +233,14 @@ namespace BrailleToolkit.Tests
             BrailleLine brLine = processor.ConvertLine(inputText);
 
             var actual = brLine.ToPositionNumberString();
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
-        [TestCase("<點譯者註>台北</點譯者註>。", "(246)(6 3)(124 2456 2)(135 356 4)(135)(36)")]
-        [TestCase("<點譯者註>abc</點譯者註>", "(246)(6 3)(1)(12)(14)(135)")]
-        [TestCase("<點譯者註>123</點譯者註>", "(246)(6 3)(3456 2)(23)(25)(135)")]
-        [TestCase("<點譯者註>：測試？</點譯者註>", "(246)(6 3)(25 25)(245 2346 5)(24 156 5)(135)(135)")]
+        [Theory]
+        [InlineData("<點譯者註>台北</點譯者註>。", "(246)(6 3)(124 2456 2)(135 356 4)(135)(36)")]
+        [InlineData("<點譯者註>abc</點譯者註>", "(246)(6 3)(1)(12)(14)(135)")]
+        [InlineData("<點譯者註>123</點譯者註>", "(246)(6 3)(3456 2)(23)(25)(135)")]
+        [InlineData("<點譯者註>：測試？</點譯者註>", "(246)(6 3)(25 25)(245 2346 5)(24 156 5)(135)(135)")]
         public void Should_NoSpace_InsideBrailleTranslatorNote(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
@@ -250,10 +251,10 @@ namespace BrailleToolkit.Tests
             BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var actual = brLine.ToPositionNumberString();
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
-        [Test]
+        [Fact]
         public void Should_OrgPageNumber_UseUpperPosition_And_NoDigitSymbol()
         {
             BrailleProcessor processor =
@@ -266,10 +267,10 @@ namespace BrailleToolkit.Tests
             BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var actual = brLine.ToPositionNumberString();
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
-        [Test]
+        [Fact]
         public void Should_OrgPageNumber_Accept_RomanNumber()
         {
             BrailleProcessor processor =
@@ -282,10 +283,11 @@ namespace BrailleToolkit.Tests
             BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var actual = brLine.ToPositionNumberString();
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
-        [TestCase("<選項>ㄅ.</選項>", "(135)(6)")]
+        [Theory]
+        [InlineData("<選項>ㄅ.</選項>", "(135)(6)")]
         public void Should_BopomofoAndDotInChoiceTag_NoSpaceAndUse6ForDot(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
@@ -296,10 +298,11 @@ namespace BrailleToolkit.Tests
             BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var actual = brLine.ToPositionNumberString();
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
-        [TestCase("#1-2. 1", "#1-2. 1", "(3456 1)(36)(12)(256)()(3456 2)")] // 編號的數字使用上位點；非編號的數字使用下位點。
+        [Theory]
+        [InlineData("#1-2. 1", "#1-2. 1", "(3456 1)(36)(12)(256)()(3456 2)")] // 編號的數字使用上位點；非編號的數字使用下位點。
         public void Should_DigitNumbers_UseUpperPosition(string input, string expected, string expectedDots)
         {
             var processor = BrailleProcessor.GetInstance();
@@ -307,14 +310,15 @@ namespace BrailleToolkit.Tests
             var brLine = processor.ConvertLine(input);
             var actual = brLine.ToString();
 
-            Assert.That(input, Is.EqualTo(expected));
+            Assert.Equal(expected, input);
 
             var actualDots = brLine.ToPositionNumberString();
-            Assert.That(expectedDots, Is.EqualTo(actualDots));
+            Assert.Equal(expectedDots, actualDots);
         }
 
-        [TestCase("#2012/#06/#12", "(3456 12)(245)(1)(12)(34)(3456 245)(124)(34)(3456 1)(12)")]
-        [TestCase("#2012-#06-#12", "(3456 12)(245)(1)(12)(36)(3456 245)(124)(36)(3456 1)(12)")]
+        [Theory]
+        [InlineData("#2012/#06/#12", "(3456 12)(245)(1)(12)(34)(3456 245)(124)(34)(3456 1)(12)")]
+        [InlineData("#2012-#06-#12", "(3456 12)(245)(1)(12)(36)(3456 245)(124)(36)(3456 1)(12)")]
         public void Should_AddDigitSymbolAndUpperPosition_ForAnyDigitParts(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
@@ -325,27 +329,31 @@ namespace BrailleToolkit.Tests
             BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 
             var result = brLine.ToPositionNumberString();
-            Assert.That(result, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, result);
         }
 
-        [TestCase("<上位點>2012/06/12</上位點>", "(3456 12)(245)(1)(12)(34)(245)(124)(34)(1)(12)")]
-        [TestCase("<上位點>2012-06-12</上位點>", "(3456 12)(245)(1)(12)(36)(245)(124)(36)(1)(12)")]
+        [Theory]
+        [InlineData("<上位點>2012/06/12</上位點>", "(3456 12)(245)(1)(12)(34)(245)(124)(34)(1)(12)")]
+        [InlineData("<上位點>2012-06-12</上位點>", "(3456 12)(245)(1)(12)(36)(245)(124)(36)(1)(12)")]
         public void Should_UseUpperPosition_WhileInContext(string inputText, string expectedPositionNumbers)
         {
             var processor = BrailleProcessor.GetInstance(new ZhuyinReverseConverter());
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
+
+
             var result = brLine.ToPositionNumberString();
-            Assert.That(result, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, result);
         }
 
 
-        [TestCase("「你好」", "(56 36)(1345 16 4)(1235 146 4)(36 23)")]
-        [TestCase("「1+2+3=6」", "(56 36)(3456 2)(346)(23)(346)(25)()(46 13)()(3456 235)(36 23)")]
-        [TestCase("「abc」", "(56 36)(1)(12)(14)(36 23)")]
-        [TestCase("<數學>「1+2+3=6」</數學>", "(236)(3456 2)(346)(23)(346)(25)()(46 13)()(3456 235)(456 356)")]
-        [TestCase("<數學>「abc」</數學>", "(236)(1)(12)(14)(456 356)")]
+        [Theory]
+        [InlineData("「你好」", "(56 36)(1345 16 4)(1235 146 4)(36 23)")]
+        [InlineData("「1+2+3=6」", "(56 36)(3456 2)(346)(23)(346)(25)()(46 13)()(3456 235)(36 23)")]
+        [InlineData("「abc」", "(56 36)(1)(12)(14)(36 23)")]
+        [InlineData("<數學>「1+2+3=6」</數學>", "(236)(3456 2)(346)(23)(346)(25)()(46 13)()(3456 235)(456 356)")]
+        [InlineData("<數學>「abc」</數學>", "(236)(1)(12)(14)(456 356)")]
         public void Should_NoExtraSpaceInQuotationMarks(string inputText, string expectedPositionNumbers)
         {
             var processor = BrailleProcessor.GetInstance();
@@ -353,20 +361,22 @@ namespace BrailleToolkit.Tests
             BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
             var actual = brLine.ToPositionNumberString();
 
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
-        [TestCase("<刪>1？…</刪>", "(246)(2)(135)(5 5 5)(12456)")]
+        [Theory]
+        [InlineData("<刪>1？…</刪>", "(246)(2)(135)(5 5 5)(12456)")]
         public void Should_NoSpaceAndDigitSymbol_InDeleteContext(string inputText, string expectedPositionNumbers)
         {
             var processor = BrailleProcessor.GetInstance();
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
 
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
-        [TestCase(
+        [Theory]
+        [InlineData(
             "<URL>http://@www-dvp.tw/_file/=1/SG/~2/D?.html%</URL>",
             "(125)(2345)(2345)(1234)(156)(34)(34)(4)(2456)(2456)(2456)(36)(145)(1236)(1234)(46)(2345)(2456)(34)(456)(124)(24)(123)(15)(34)(123456)" +
             "(2)(34)(234)(1245)(34)(45)(23)(34)(145)(1456)(46)(125)(2345)(134)(123)(146)")]
@@ -376,7 +386,7 @@ namespace BrailleToolkit.Tests
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
 
-            Assert.That(actual, Is.EqualTo(expectedPositionNumbers));
+            Assert.Equal(expectedPositionNumbers, actual);
         }
 
     }

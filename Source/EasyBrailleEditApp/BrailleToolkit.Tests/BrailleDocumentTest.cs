@@ -1,6 +1,6 @@
-﻿using BrailleToolkit;
+using BrailleToolkit;
 using NChinese.Phonetic;
-using NUnit.Framework;
+using Xunit;
 using System.IO;
 using System.Text;
 
@@ -10,16 +10,14 @@ namespace BrailleToolkit.Tests
     ///This is a test class for BrailleToolkit.BrailleDocument and is intended
     ///to contain all BrailleToolkit.BrailleDocument Unit Tests
     ///</summary>
-    [TestFixture]
-	public class BrailleDocumentTest
+    public class BrailleDocumentTest
 	{
-        [SetUp]
-        public void SetUp()
+        public BrailleDocumentTest()
         {
             Shared.SetupLogger();
         }
 
-        [Test]
+        [Fact]
 		public void Should_LoadFromFileAndConvert_Succeed()
 		{
 			BrailleProcessor processor = 
@@ -31,7 +29,7 @@ namespace BrailleToolkit.Tests
 			brDoc.LoadAndConvert();
 		}
 
-        [Test]
+        [Fact]
         public void Should_ConvertFraction_Succeed()
         {
             BrailleProcessor processor =
@@ -42,7 +40,7 @@ namespace BrailleToolkit.Tests
             brDoc.Convert("<分數>1/2</分數>");
         }
 
-        [Test]
+        [Fact]
         public void Should_FetchPageTitles_Succeed()
         {
             string text =
@@ -61,10 +59,10 @@ namespace BrailleToolkit.Tests
                 brDoc.LoadAndConvert(reader);
             }
 
-            Assert.That(brDoc.PageTitles.Count == 1, Is.True);
-            Assert.That(brDoc.LineCount == 5, Is.True);
-            Assert.That(brDoc.PageTitles[0].BeginLineIndex == 3, Is.True);
-            Assert.That(brDoc.PageTitles[0].BeginLineRef.ToString() == "3", Is.True);
+            Assert.True(brDoc.PageTitles.Count == 1);
+            Assert.True(brDoc.LineCount == 5);
+            Assert.True(brDoc.PageTitles[0].BeginLineIndex == 3);
+            Assert.True(brDoc.PageTitles[0].BeginLineRef.ToString() == "3");
         }
     }
 

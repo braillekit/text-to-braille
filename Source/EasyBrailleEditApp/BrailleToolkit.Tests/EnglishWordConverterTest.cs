@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
+using Xunit;
 
 namespace BrailleToolkit.Tests
 {
@@ -10,11 +9,9 @@ namespace BrailleToolkit.Tests
     ///This is a test class for BrailleToolkit.EnglishWordConverter and is intended
     ///to contain all BrailleToolkit.EnglishWordConverter Unit Tests
     ///</summary>
-    [TestFixture]
     public class EnglishWordConverterTest
     {
-        [SetUp]
-        public void SetUp()
+        public EnglishWordConverterTest()
         {
             Shared.SetupLogger();
         }
@@ -22,11 +19,9 @@ namespace BrailleToolkit.Tests
         /// <summary>
         ///A test for Convert (Stack&lt;char&gt;)
         ///</summary>
-        [Test]
+        [Fact]
         public void Should_ConvertCommonCharacters_Succeed()
         {
-            string msg = "EnglishWordConverter.Convert 測試失敗: ";
-
             var processor = BrailleProcessor.GetInstance();
             var converter = new EnglishWordConverter(processor);
 
@@ -40,7 +35,7 @@ namespace BrailleToolkit.Tests
             expected.Add(brWord);
             List<BrailleWord> actual = converter.Convert(charStack, context);
             
-            CollectionAssert.AreEqual(expected, actual, msg + text);
+            Assert.Equal(expected, actual);
             charStack.Clear();
 
             // 測試左單引號。
@@ -50,7 +45,7 @@ namespace BrailleToolkit.Tests
             expected.Clear();
             expected.Add(brWord);
             actual = converter.Convert(charStack, context);
-            CollectionAssert.AreEqual(expected, actual, msg + text);
+            Assert.Equal(expected, actual);
             charStack.Clear();
 
             // 測試左雙引號。
@@ -60,7 +55,7 @@ namespace BrailleToolkit.Tests
             expected.Clear();
             expected.Add(brWord);
             actual = converter.Convert(charStack, context);
-            CollectionAssert.AreEqual(expected, actual, msg + text);
+            Assert.Equal(expected, actual);
             charStack.Clear();
 
             // 測試大寫字母（不用加大寫記號，因為延後到整行調整時才處理）。
@@ -70,7 +65,7 @@ namespace BrailleToolkit.Tests
             expected.Clear();
             expected.Add(brWord);
             actual = converter.Convert(charStack, context);
-            CollectionAssert.AreEqual(expected, actual, msg + text);
+            Assert.Equal(expected, actual);
             charStack.Clear();  
           
             // 測試數字
@@ -80,7 +75,7 @@ namespace BrailleToolkit.Tests
             expected.Clear();
             expected.Add(brWord);
             actual = converter.Convert(charStack, context);
-            CollectionAssert.AreEqual(expected, actual, msg + text);
+            Assert.Equal(expected, actual);
             charStack.Clear();            
         }
     }

@@ -1,19 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 using BrailleToolkit.Data;
 
 
 namespace BrailleToolkit.Tests
 {
-    [TestFixture()]
     public class XmlBrailleTableTest
     {
 
-        [Test]
+        [Fact]
         public void Should_AutoGenerateCodeFromDots()
         {
             var text = "↔";
@@ -30,7 +29,7 @@ namespace BrailleToolkit.Tests
             xmlTbl.LoadFromXmlString(xml.ToString());
 
             var actualCode = xmlTbl.Find(text);
-            Assert.That(actualCode, Is.EqualTo(expectedCode));
+            Assert.Equal(expectedCode, actualCode);
         }
     }
 }

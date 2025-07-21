@@ -1,17 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using BrailleToolkit.Converters;
-using NUnit.Framework;
+using Xunit;
 
 namespace BrailleToolkit.Tests
 {
-    [TestFixture]
     public class EnglishUebConverterTest
     {
         private EnglishUebConverter _converter;
 
-        [SetUp]
-        public void SetUp()
+        public EnglishUebConverterTest()
         {
             Shared.SetupLogger();
             _converter = new EnglishUebConverter();
@@ -38,74 +36,77 @@ namespace BrailleToolkit.Tests
                 {
                     // If converter returns null or empty, it means it cannot handle the character.
                     // For a robust test, we should probably stop, but here we'll just pop to avoid infinite loops.
-                    charStack.Pop(); 
+                    if (charStack.Count > 0)
+                    {
+                        charStack.Pop();
+                    }
                 }
             }
             return resultWords;
         }
 
-        [Test]
+        [Fact]
         public void Should_ConvertGrade1Word_Correctly()
         {
             var result = ConvertText("cat");
-            Assert.That(result.Count, Is.EqualTo(3));
-            Assert.That(result[0].Text, Is.EqualTo("c"));
-            Assert.That(result[1].Text, Is.EqualTo("a"));
-            Assert.That(result[2].Text, Is.EqualTo("t"));
-            Assert.That(result[0].ToHexSting(), Is.EqualTo("09"));
-            Assert.That(result[1].ToHexSting(), Is.EqualTo("01"));
-            Assert.That(result[2].ToHexSting(), Is.EqualTo("1E"));
+            Assert.Equal(3, result.Count);
+            Assert.Equal("c", result[0].Text);
+            Assert.Equal("a", result[1].Text);
+            Assert.Equal("t", result[2].Text);
+            Assert.Equal("09", result[0].ToHexSting());
+            Assert.Equal("01", result[1].ToHexSting());
+            Assert.Equal("1E", result[2].ToHexSting());
         }
 
-        [Test]
+        [Fact]
         public void Should_ConvertWordSign_AsSingleWord()
         {
             var result = ConvertText("knowledge");
-            Assert.That(result.Count, Is.EqualTo(1));
-            Assert.That(result[0].Text, Is.EqualTo("knowledge"));
-            Assert.That(result[0].ToHexSting(), Is.EqualTo("05"));
+            Assert.Single(result);
+            Assert.Equal("knowledge", result[0].Text);
+            Assert.Equal("05", result[0].ToHexSting());
         }
 
-        [Test]
+        [Fact]
         public void Should_ConvertGroupSign_AsSingleWord()
         {
             var result = ConvertText("and");
-            Assert.That(result.Count, Is.EqualTo(1));
-            Assert.That(result[0].Text, Is.EqualTo("and"));
-            Assert.That(result[0].ToHexSting(), Is.EqualTo("2F"));
+            Assert.Single(result);
+            Assert.Equal("and", result[0].Text);
+            Assert.Equal("2F", result[0].ToHexSting());
         }
 
-        [Test]
+        [Fact]
         public void Should_ConvertMixedSentence_Correctly()
         {
             var result = ConvertText("you like it");
-            Assert.That(result.Count, Is.EqualTo(5), "Should be 5 words including spaces");
+            Assert.Equal(5, result.Count); // Should be 5 words including spaces
 
-            Assert.That(result[0].Text, Is.EqualTo("you"));
-            Assert.That(result[0].ToHexSting(), Is.EqualTo("3D"));
+            Assert.Equal("you", result[0].Text);
+            Assert.Equal("3D", result[0].ToHexSting());
 
-            Assert.That(result[1].IsWhiteSpace, Is.True);
+            Assert.True(result[1].IsWhiteSpace);
 
-            Assert.That(result[2].Text, Is.EqualTo("like"));
-            Assert.That(result[2].ToHexSting(), Is.EqualTo("07"));
+            Assert.Equal("like", result[2].Text);
+            Assert.Equal("07", result[2].ToHexSting());
 
-            Assert.That(result[3].IsWhiteSpace, Is.True);
+            Assert.True(result[3].IsWhiteSpace);
 
-            Assert.That(result[4].Text, Is.EqualTo("it"));
-            Assert.That(result[4].ToHexSting(), Is.EqualTo("2D"));
+            Assert.Equal("it", result[4].Text);
+            Assert.Equal("2D", result[4].ToHexSting());
         }
 
         // This test is expected to FAIL with the current simple greedy algorithm.
         // It demonstrates the need for more advanced rules.
-        [Test]
+        [Fact]
         public void Should_PrioritizeLongerContraction_GreedyTest()
         {
             // "about" is a short-form word, "ab" is its representation.
             // The converter should match "about" not "ab".
             var result = ConvertText("about");
-            Assert.That(result.Count, Is.EqualTo(1));
-            Assert.That(result[0].Text, Is.EqualTo("about"));
-            Assert.That(result[0].ToHexSting(), Is.EqualTo("0103"));
+            Assert.Single(result);
+            Assert.Equal("about", result[0].Text);
+            Assert.Equal("0103", result[0].ToHexSting());
         }
     }
 }

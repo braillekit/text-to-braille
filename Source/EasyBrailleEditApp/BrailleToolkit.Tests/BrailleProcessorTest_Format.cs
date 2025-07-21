@@ -1,23 +1,23 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Text;
 using BrailleToolkit;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
-using NUnit.Framework;
+using Xunit;
 
 namespace BrailleToolkit.Tests
 {
-    [TestFixture]
     public partial class BrailleProcessorTest
     {
         /// <summary>
         ///A test for BreakLine (BrailleLine, int)
         ///</summary>
-        [TestCase(12, "一二三四：我", 2, "一二三四：", " 我")] // 測試斷行：冒號+我。在冒號後面的空方之後斷行。
-        [TestCase(10, "一二三四。", 2, "一二三", "四。")] // 測試斷行：斷在句點時，應把前一個字連同句號斷至下一行。
-        [TestCase(12, "this is a loooooong word.", 3, "this is a", " loooooong")] // 測試斷行：斷在英文字中間要加上連字號。應該把最後一個字連同句號斷至下一行。
-        [TestCase(8, "12345 6789", 2, "12345", " 6789")]  // 測試斷行：連續的數字不可斷開。
-        [TestCase(8, "abc 123,456", 3, "abc", " 123,45")] // 測試斷行：斷在數字中間的逗號。故意斷在逗號處。
+        [Theory]
+        [InlineData(12, "一二三四：我", 2, "一二三四：", " 我")] // 測試斷行：冒號+我。在冒號後面的空方之後斷行。
+        [InlineData(10, "一二三四。", 2, "一二三", "四。")] // 測試斷行：斷在句點時，應把前一個字連同句號斷至下一行。
+        [InlineData(12, "this is a loooooong word.", 3, "this is a", " loooooong")] // 測試斷行：斷在英文字中間要加上連字號。應該把最後一個字連同句號斷至下一行。
+        [InlineData(8, "12345 6789", 2, "12345", " 6789")]  // 測試斷行：連續的數字不可斷開。
+        [InlineData(8, "abc 123,456", 3, "abc", " 123,45")] // 測試斷行：斷在數字中間的逗號。故意斷在逗號處。
         public void Should_BreakLine_Succeed(int cellsPerLine, string input,
             int expectedLineCount, string expectedLine1, string expectedLine2)
         {
@@ -29,26 +29,27 @@ namespace BrailleToolkit.Tests
 
             var brLines = BrailleDocumentFormatter.BreakLine(brLine, cellsPerLine, context);
 
-            Assert.That(expectedLineCount, Is.EqualTo(brLines.Count));
+            Assert.Equal(expectedLineCount, brLines.Count);
 
             string actual = brLines[0].ToString();
-            Assert.That(expectedLine1, Is.EqualTo(actual));
+            Assert.Equal(expectedLine1, actual);
 
             if (expectedLineCount > 1)
             {
                 string actual2 = brLines[1].ToString();
-                Assert.That(expectedLine2, Is.EqualTo(actual2));
+                Assert.Equal(expectedLine2, actual2);
             }
         }
 
-        [TestCase("（", "-------------------------------------（ ）")]
-        [TestCase("〔", "--------------------------------------〔 〕")]
-        [TestCase("「", "-------------------------------------「 」")]
-        [TestCase("『", "-------------------------------------『 』")]
-        [TestCase("｛", "--------------------------------------｛｝")]
-        [TestCase("【", "--------------------------------------【 】")]
-        [TestCase("“", "--------------------------------------“ ”")]
-        [TestCase("‘", "-------------------------------------‘ ’")]
+        [Theory]
+        [InlineData("（", "-------------------------------------（ ）")]
+        [InlineData("〔", "--------------------------------------〔 〕")]
+        [InlineData("「", "-------------------------------------「 」")]
+        [InlineData("『", "-------------------------------------『 』")]
+        [InlineData("｛", "--------------------------------------｛｝")]
+        [InlineData("【", "--------------------------------------【 】")]
+        [InlineData("“", "--------------------------------------“ ”")]
+        [InlineData("‘", "-------------------------------------‘ ’")]
         public void Should_LeftParenthses_NotAtEndOfLine(string leftParenthesis, string inputText)
         {
             var processor = BrailleProcessor.GetInstance();
@@ -58,17 +59,18 @@ namespace BrailleToolkit.Tests
 
             brLine = brLines[0];
 
-            Assert.That(brLine[brLine.WordCount-1].Text != leftParenthesis, Is.True);
+            Assert.True(brLine[brLine.WordCount-1].Text != leftParenthesis);
         }
 
-        [TestCase("）", "-------------------------------------（ ）")]
-        [TestCase("〕", "-------------------------------------〔 〕")]
-        [TestCase("」", "-----------------------------------「 」")]
-        [TestCase("』", "-----------------------------------『 』")]
-        [TestCase("｝", "-------------------------------------｛ ｝")]
-        [TestCase("】", "-------------------------------------【 】")]
-        [TestCase("”", "-------------------------------------“ ”")]
-        [TestCase("’", "------------------------------------‘ ’")]
+        [Theory]
+        [InlineData("）", "-------------------------------------（ ）")]
+        [InlineData("〕", "-------------------------------------〔 〕")]
+        [InlineData("」", "-----------------------------------「 」")]
+        [InlineData("』", "-----------------------------------『 』")]
+        [InlineData("｛", "-------------------------------------｛ ｝")]
+        [InlineData("】", "-------------------------------------【 】")]
+        [InlineData("”", "-------------------------------------“ ”")]
+        [InlineData("’", "------------------------------------‘ ’")]
         public void Should_RightParenthses_NotAtBeginOfLine(string rightParenthesis, string inputText)
         {
             var processor = BrailleProcessor.GetInstance();
@@ -78,11 +80,11 @@ namespace BrailleToolkit.Tests
 
             brLine = brLines[0];
 
-            Assert.That(brLine[0].Text != rightParenthesis, Is.True);
+            Assert.True(brLine[0].Text != rightParenthesis);
         }
 
 
-        [Test]
+        [Fact]
         public void Should_BreakLine_KeepTrailingSpaces()
         {
             string inputText = "<小題結束></小題結束>" + " ";
@@ -90,10 +92,11 @@ namespace BrailleToolkit.Tests
             var processor = BrailleProcessor.GetInstance();
             var line = processor.ConvertLine(inputText);
             var lines = BrailleDocumentFormatter.BreakLine(line, 40, null);
-            Assert.That(lines.Count == 2 && lines[0].CellCount == 40 && lines[1].CellCount == 1, Is.True);
+            Assert.True(lines.Count == 2 && lines[0].CellCount == 40 && lines[1].CellCount == 1);
         }
 
-        [TestCase("0123456789012345678901234567890123456<書名號>哈利波特</書名號>。")]
+        [Theory]
+        [InlineData("0123456789012345678901234567890123456<書名號>哈利波特</書名號>。")]
         public void Should_SpecificName_NotAtEndOfLine(string inputText)
         {
             BrailleProcessor processor =
@@ -104,17 +107,18 @@ namespace BrailleToolkit.Tests
             int cellsPerLine = 40;
             var formattedLines = BrailleDocumentFormatter.FormatLine(brLine, cellsPerLine, new ContextTagManager());
 
-            Assert.That(formattedLines.Count == 2 && formattedLines[0].CellCount == 38 && formattedLines[1].CellCount == 15, Is.True);
+            Assert.True(formattedLines.Count == 2 && formattedLines[0].CellCount == 38 && formattedLines[1].CellCount == 15);
 
             // 第二行應該會以書名號開始，因為書名號單獨出現在行尾時必須折到下一行。
-            Assert.That("<書名號>", Is.EqualTo(formattedLines[1].Words[0].Text));
+            Assert.Equal("<書名號>", formattedLines[1].Words[0].Text);
             string expectedBeginCellsOfSecondLine = "(6 36)";
-            Assert.That(expectedBeginCellsOfSecondLine, Is.EquivalentTo(formattedLines[1].Words[1].ToPositionNumberString(true)));
+            Assert.Equal(expectedBeginCellsOfSecondLine, formattedLines[1].Words[1].ToPositionNumberString(true));
         }
 
-        [TestCase("012345678901234567890123456782測試……的功能", 35, 15, "……")]
-        [TestCase("0123456789012345678901234567823測試──的功能", 36, 14, "──")]
-        [TestCase("0123456789012345678901234567823測試─的功能", 36, 14, "─")]
+        [Theory]
+        [InlineData("012345678901234567890123456782測試……的功能", 35, 15, "……")]
+        [InlineData("0123456789012345678901234567823測試──的功能", 36, 14, "──")]
+        [InlineData("0123456789012345678901234567823測試─的功能", 36, 14, "─")]
         public void Should_EmdashAndEllipsis_NotAtBeginOfLine(string inputText, 
             int expectedCellCountOfLine1, int expectedCellCountOfLine2,
             string textShouldNotBeginOfLine)
@@ -127,10 +131,10 @@ namespace BrailleToolkit.Tests
             int cellsPerLine = 40;
             var formattedLines = BrailleDocumentFormatter.FormatLine(brLine, cellsPerLine, new ContextTagManager());
 
-            Assert.That(formattedLines.Count == 2 && formattedLines[0].CellCount == expectedCellCountOfLine1 && formattedLines[1].CellCount == expectedCellCountOfLine2);
+            Assert.True(formattedLines.Count == 2 && formattedLines[0].CellCount == expectedCellCountOfLine1 && formattedLines[1].CellCount == expectedCellCountOfLine2);
 
             // 第二行不應該以刪節號開頭。
-            Assert.That(textShouldNotBeginOfLine, Is.Not.EqualTo(formattedLines[1].Words[0].Text));
+            Assert.NotEqual(textShouldNotBeginOfLine, formattedLines[1].Words[0].Text);
         }
 
     }

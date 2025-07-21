@@ -1,18 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BrailleToolkit;
-using NUnit.Framework;
+using Xunit;
 
 namespace BrailleToolkit.Tests
 {
-    [TestFixture]
     public class TableConverterTest
     {
-        [Test]
+        [Fact]
         public void Should_ConvertTable_Succeed()
         {
             string lines =
@@ -42,11 +41,11 @@ namespace BrailleToolkit.Tests
                 brDoc.LoadAndConvert(reader);
             }
 
-            Assert.That(brDoc.LineCount, Is.EqualTo(expectedBrailleCells.Length));
+            Assert.Equal(expectedBrailleCells.Length, brDoc.LineCount);
 
             for (int i = 0; i < brDoc.LineCount; i++)
             {
-                Assert.That(expectedBrailleCells[i], Is.EqualTo(brDoc.Lines[i].ToPositionNumberString()));
+                Assert.Equal(expectedBrailleCells[i], brDoc.Lines[i].ToPositionNumberString());
             }
         }
 
