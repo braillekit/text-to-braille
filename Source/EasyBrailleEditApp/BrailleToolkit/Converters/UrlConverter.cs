@@ -19,7 +19,7 @@ namespace BrailleToolkit.Converters
 
         public UrlConverter(BrailleProcessor processor)
         {
-            m_Table = UrlBrailleTable.GetInstance();
+            m_Table = UrlBrailleTable.CreateInstance();
             _processor = processor;
         }
 

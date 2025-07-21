@@ -22,7 +22,7 @@ namespace BrailleToolkit.Tests
         [Fact]
         public void Should_ConvertCommonCharacters_Succeed()
         {
-            var processor = BrailleProcessor.GetInstance();
+            var processor = BrailleProcessor.CreateInstance();
             var converter = new EnglishWordConverter(processor);
 
 			ContextTagManager context = new ContextTagManager();

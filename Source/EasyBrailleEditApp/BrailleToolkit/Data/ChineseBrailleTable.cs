@@ -35,6 +35,17 @@ namespace BrailleToolkit.Data
         }
 
         /// <summary>
+        /// Creates a new instance of ChineseBrailleTable.
+        /// </summary>
+        /// <returns></returns>
+        public static ChineseBrailleTable CreateInstance()
+        {
+            var instance = new ChineseBrailleTable();
+            instance.LoadFromResource();
+            return instance;
+        }
+
+        /// <summary>
         /// 搜尋某個注音符號，並傳回對應的點字碼。
         /// </summary>
         /// <param name="text">欲搜尋的注音符號。例如："ㄅ"。</param>

@@ -32,7 +32,7 @@ namespace BrailleToolkit.Tests
             };
 
 
-            var processor = BrailleProcessor.GetInstance();
+            var processor = BrailleProcessor.CreateInstance();
 
 
             var brDoc = new BrailleDocument(processor, 32);

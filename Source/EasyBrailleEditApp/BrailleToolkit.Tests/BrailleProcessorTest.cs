@@ -24,7 +24,7 @@ namespace BrailleToolkit.Tests
         [Fact]
         public void ConvertLineTest()
         {
-            BrailleProcessor target = BrailleProcessor.GetInstance();
+            BrailleProcessor target = BrailleProcessor.CreateInstance();
 
             ConvertLineTestChinese(target);
 
@@ -111,7 +111,7 @@ namespace BrailleToolkit.Tests
         [Fact]
         public void Should_ConvertPreprocessTags_Succeed()
         {
-            BrailleProcessor target = BrailleProcessor.GetInstance();
+            BrailleProcessor target = BrailleProcessor.CreateInstance();
 
             string line = "<大單元結束>測試</大單元結束>";
             string expected = new string('ˍ', 20) + "測試";
@@ -127,7 +127,7 @@ namespace BrailleToolkit.Tests
         public void Should_ConvertString_Succeed(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+                BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
@@ -146,7 +146,7 @@ namespace BrailleToolkit.Tests
         [InlineData("）」", "(135)(36 23)")]
         public void Should_NoSpace_BetweenRightParenthesisAndPunctuation(string inputText, string expectedPositionNumbers)
         {
-            var processor = BrailleProcessor.GetInstance();
+            var processor = BrailleProcessor.CreateInstance();
             BrailleLine brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
             Assert.Equal(expectedPositionNumbers, actual);
@@ -163,7 +163,7 @@ namespace BrailleToolkit.Tests
         [InlineData("<數學>8-1。</數學>", "(3456 236)(36)(2)(456 256)")]
         public void Should_NoSpace_BeforeSpecificPunctuation(string inputText, string expectedPositionNumbers)
         {
-            var processor = BrailleProcessor.GetInstance();
+            var processor = BrailleProcessor.CreateInstance();
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
             Assert.Equal(expectedPositionNumbers, actual);
@@ -182,7 +182,7 @@ namespace BrailleToolkit.Tests
         public void Should_HaveSpace_AfterSpecificPunctuations(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+                BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
@@ -197,7 +197,7 @@ namespace BrailleToolkit.Tests
         public void Should_NoSpace_BetweenSpecificNameAndPunctuation(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+                BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
             BrailleLine brLine = processor.ConvertLine(inputText);            
 
@@ -213,7 +213,7 @@ namespace BrailleToolkit.Tests
         public void Should_AddSpace_BetweenSpecificNameAndAlphabet(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+                BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
@@ -228,7 +228,7 @@ namespace BrailleToolkit.Tests
         public void Should_ConvertFraction_Succeed(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+                BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
@@ -244,7 +244,7 @@ namespace BrailleToolkit.Tests
         public void Should_NoSpace_InsideBrailleTranslatorNote(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+                BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
@@ -258,7 +258,7 @@ namespace BrailleToolkit.Tests
         public void Should_OrgPageNumber_UseUpperPosition_And_NoDigitSymbol()
         {
             BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+                BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
             string inputText = "<P>14</P>";
             string expectedPositionNumbers = new StringBuilder().Insert(0, "(36)", 36) + "(3456 1)(145)"; // 36 個底線，後面跟著 "14" 的點字（有數符）。
@@ -274,7 +274,7 @@ namespace BrailleToolkit.Tests
         public void Should_OrgPageNumber_Accept_RomanNumber()
         {
             BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+                BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
             string inputText = "<P>xiv</P>"; // page 14
             string expectedPositionNumbers = new StringBuilder().Insert(0, "(36)", 36) + "(1346)(24)(1236)"; // 36 個底線，後面跟著 "xiv" 的點字。
@@ -291,7 +291,7 @@ namespace BrailleToolkit.Tests
         public void Should_BopomofoAndDotInChoiceTag_NoSpaceAndUse6ForDot(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+                BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
@@ -305,7 +305,7 @@ namespace BrailleToolkit.Tests
         [InlineData("#1-2. 1", "#1-2. 1", "(3456 1)(36)(12)(256)()(3456 2)")] // 編號的數字使用上位點；非編號的數字使用下位點。
         public void Should_DigitNumbers_UseUpperPosition(string input, string expected, string expectedDots)
         {
-            var processor = BrailleProcessor.GetInstance();
+            var processor = BrailleProcessor.CreateInstance();
 
             var brLine = processor.ConvertLine(input);
             var actual = brLine.ToString();
@@ -322,7 +322,7 @@ namespace BrailleToolkit.Tests
         public void Should_AddDigitSymbolAndUpperPosition_ForAnyDigitParts(string inputText, string expectedPositionNumbers)
         {
             BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+                BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
@@ -337,7 +337,7 @@ namespace BrailleToolkit.Tests
         [InlineData("<上位點>2012-06-12</上位點>", "(3456 12)(245)(1)(12)(36)(245)(124)(36)(1)(12)")]
         public void Should_UseUpperPosition_WhileInContext(string inputText, string expectedPositionNumbers)
         {
-            var processor = BrailleProcessor.GetInstance(new ZhuyinReverseConverter());
+            var processor = BrailleProcessor.CreateInstance(new ZhuyinReverseConverter());
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
@@ -356,7 +356,7 @@ namespace BrailleToolkit.Tests
         [InlineData("<數學>「abc」</數學>", "(236)(1)(12)(14)(456 356)")]
         public void Should_NoExtraSpaceInQuotationMarks(string inputText, string expectedPositionNumbers)
         {
-            var processor = BrailleProcessor.GetInstance();
+            var processor = BrailleProcessor.CreateInstance();
             var brLine = processor.ConvertLine(inputText);
             BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
             var actual = brLine.ToPositionNumberString();
@@ -368,7 +368,7 @@ namespace BrailleToolkit.Tests
         [InlineData("<刪>1？…</刪>", "(246)(2)(135)(5 5 5)(12456)")]
         public void Should_NoSpaceAndDigitSymbol_InDeleteContext(string inputText, string expectedPositionNumbers)
         {
-            var processor = BrailleProcessor.GetInstance();
+            var processor = BrailleProcessor.CreateInstance();
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
 
@@ -382,7 +382,7 @@ namespace BrailleToolkit.Tests
             "(2)(34)(234)(1245)(34)(45)(23)(34)(145)(1456)(46)(125)(2345)(134)(123)(146)")]
         public void Should_ConvertrUrl(string inputText, string expectedPositionNumbers)
         {
-            var processor = BrailleProcessor.GetInstance();
+            var processor = BrailleProcessor.CreateInstance();
             var brLine = processor.ConvertLine(inputText);
             var actual = brLine.ToPositionNumberString();
 

@@ -1,4 +1,4 @@
-using BrailleToolkit;
+﻿using BrailleToolkit;
 using NChinese.Phonetic;
 using Xunit;
 using System.IO;
@@ -12,6 +12,8 @@ namespace BrailleToolkit.Tests
     ///</summary>
     public class BrailleDocumentTest
 	{
+        private BrailleProcessor _processor = BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
+
         public BrailleDocumentTest()
         {
             Shared.SetupLogger();
@@ -20,11 +22,8 @@ namespace BrailleToolkit.Tests
         [Fact]
 		public void Should_LoadFromFileAndConvert_Succeed()
 		{
-			BrailleProcessor processor = 
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
-
             string filename = Shared.TestDataPath + "TestData_Braille.txt";
-			BrailleDocument brDoc = new BrailleDocument(filename, processor, 32);
+			BrailleDocument brDoc = new BrailleDocument(filename, _processor, 32);
 
 			brDoc.LoadAndConvert();
 		}
@@ -32,10 +31,7 @@ namespace BrailleToolkit.Tests
         [Fact]
         public void Should_ConvertFraction_Succeed()
         {
-            BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
-
-            var brDoc = new BrailleDocument(processor, 32);
+            var brDoc = new BrailleDocument(_processor, 32);
 
             brDoc.Convert("<分數>1/2</分數>");
         }
@@ -50,10 +46,8 @@ namespace BrailleToolkit.Tests
                 "<標題>insert at 3</標題>\n" +
                 "3\n" +
                 "4\n";
-
-            var processor =  BrailleProcessor.GetInstance();
-
-            var brDoc = new BrailleDocument(processor);
+            
+            var brDoc = new BrailleDocument(_processor);
             using (var reader = new StringReader(text))
             {
                 brDoc.LoadAndConvert(reader);

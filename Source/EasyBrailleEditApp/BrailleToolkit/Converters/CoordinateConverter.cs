@@ -12,7 +12,7 @@ namespace BrailleToolkit.Converters
         public CoordinateConverter()
             : base()
         {
-            m_Table = CoordinateBrailleTable.GetInstance();
+            m_Table = CoordinateBrailleTable.CreateInstance();
         }
 
         public override string Convert(string text)

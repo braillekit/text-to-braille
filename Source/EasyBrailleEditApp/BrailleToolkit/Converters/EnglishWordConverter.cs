@@ -19,7 +19,7 @@ namespace BrailleToolkit.Converters
 
         public EnglishWordConverter(BrailleProcessor processor)
         {
-            m_Table = EnglishBrailleTable.GetInstance();
+            m_Table = EnglishBrailleTable.CreateInstance();
             _processor = processor;
         }
 

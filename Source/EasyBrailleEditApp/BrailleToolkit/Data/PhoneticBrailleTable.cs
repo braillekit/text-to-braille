@@ -25,5 +25,16 @@ namespace BrailleToolkit.Data
             }
             return m_Instance;
         }
+
+        /// <summary>
+        /// Creates a new instance of PhoneticBrailleTable.
+        /// </summary>
+        /// <returns></returns>
+        public static PhoneticBrailleTable CreateInstance()
+        {
+            var instance = new PhoneticBrailleTable();
+            instance.LoadFromResource();
+            return instance;
+        }
 	}
 }

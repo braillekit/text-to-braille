@@ -21,7 +21,7 @@ namespace BrailleToolkit.Tests
         public void Should_BreakLine_Succeed(int cellsPerLine, string input,
             int expectedLineCount, string expectedLine1, string expectedLine2)
         {
-            var processor = BrailleProcessor.GetInstance();
+            var processor = BrailleProcessor.CreateInstance();
 
             var context = new ContextTagManager();
 
@@ -52,7 +52,7 @@ namespace BrailleToolkit.Tests
         [InlineData("‘", "-------------------------------------‘ ’")]
         public void Should_LeftParenthses_NotAtEndOfLine(string leftParenthesis, string inputText)
         {
-            var processor = BrailleProcessor.GetInstance();
+            var processor = BrailleProcessor.CreateInstance();
             var brLine = processor.ConvertLine(inputText);
             var context = new ContextTagManager();
             var brLines = BrailleDocumentFormatter.BreakLine(brLine, 40, context);
@@ -73,7 +73,7 @@ namespace BrailleToolkit.Tests
         [InlineData("’", "------------------------------------‘ ’")]
         public void Should_RightParenthses_NotAtBeginOfLine(string rightParenthesis, string inputText)
         {
-            var processor = BrailleProcessor.GetInstance();
+            var processor = BrailleProcessor.CreateInstance();
             var brLine = processor.ConvertLine(inputText);
             var context = new ContextTagManager();
             var brLines = BrailleDocumentFormatter.BreakLine(brLine, 40, context);
@@ -89,7 +89,7 @@ namespace BrailleToolkit.Tests
         {
             string inputText = "<小題結束></小題結束>" + " ";
 
-            var processor = BrailleProcessor.GetInstance();
+            var processor = BrailleProcessor.CreateInstance();
             var line = processor.ConvertLine(inputText);
             var lines = BrailleDocumentFormatter.BreakLine(line, 40, null);
             Assert.True(lines.Count == 2 && lines[0].CellCount == 40 && lines[1].CellCount == 1);
@@ -100,7 +100,7 @@ namespace BrailleToolkit.Tests
         public void Should_SpecificName_NotAtEndOfLine(string inputText)
         {
             BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+                BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
@@ -124,7 +124,7 @@ namespace BrailleToolkit.Tests
             string textShouldNotBeginOfLine)
         {
             BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+                BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 

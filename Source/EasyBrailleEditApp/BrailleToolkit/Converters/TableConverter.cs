@@ -13,7 +13,7 @@ namespace BrailleToolkit.Converters
 		public TableConverter()
             : base()
         {
-            m_Table = TableBrailleTable.GetInstance();
+            m_Table = TableBrailleTable.CreateInstance();
         }
 
         internal override BrailleTableBase BrailleTable

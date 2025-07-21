@@ -26,5 +26,16 @@ namespace BrailleToolkit.Data
             }
             return m_Instance;
         }
+
+        /// <summary>
+        /// Creates a new instance of TableBrailleTable.
+        /// </summary>
+        /// <returns></returns>
+        public static TableBrailleTable CreateInstance()
+        {
+            var instance = new TableBrailleTable();
+            instance.LoadFromResource();
+            return instance;
+        }
 	}
 }

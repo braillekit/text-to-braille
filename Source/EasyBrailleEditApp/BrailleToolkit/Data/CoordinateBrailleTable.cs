@@ -27,5 +27,16 @@ namespace BrailleToolkit.Data
             }
             return m_Instance;
         }
+
+        /// <summary>
+        /// Creates a new instance of CoordinateBrailleTable.
+        /// </summary>
+        /// <returns></returns>
+        public static CoordinateBrailleTable CreateInstance()
+        {
+            var instance = new CoordinateBrailleTable();
+            instance.LoadFromResource();
+            return instance;
+        }
     }
 }
