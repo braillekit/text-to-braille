@@ -21,7 +21,7 @@ namespace BrailleToolkit.Converters
 
         public ChineseWordConverter(BrailleProcessor processor)
         {
-            _brailleTable = ChineseBrailleTable.GetInstance();
+            _brailleTable = ChineseBrailleTable.CreateInstance();
             _processor = processor;
             ZhuyinConverter = processor.ZhuyinConverter;
         }

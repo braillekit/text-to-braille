@@ -1,26 +1,26 @@
-¨C·í¦³·sªº²Å¸¹¡ş¦r¤¸­n¥[¤J®Éªº°ò¥»­×§ï¨BÆJ¡G
+ï»¿æ¯ç•¶æœ‰æ–°çš„ç¬¦è™Ÿï¼å­—å…ƒè¦åŠ å…¥æ™‚çš„åŸºæœ¬ä¿®æ”¹æ­¥é©Ÿï¼š
 
-1.½s¿èÂI¦r²Å¸¹ªí¡C
-  ¦¹ªí®æ¬O¤@­Ó XML ÀÉ®×¡A¨Ò¦p¡GBrailleTableEng.xml ©M BrailleTableCht.xml ¤À§O¬°­^¤å©M¤¤¤åÂI¦r²Å¸¹ªí¡C
-  ª`·N¦¹±M®×¶µ¥Øªº Build Action Äİ©ÊÀ³³]©w¬° Embeded Resource¡C
+1.ç·¨è¼¯é»å­—ç¬¦è™Ÿè¡¨ã€‚
+  æ­¤è¡¨æ ¼æ˜¯ä¸€å€‹ XML æª”æ¡ˆï¼Œä¾‹å¦‚ï¼šBrailleTableEng.xml å’Œ BrailleTableCht.xml åˆ†åˆ¥ç‚ºè‹±æ–‡å’Œä¸­æ–‡é»å­—ç¬¦è™Ÿè¡¨ã€‚
+  æ³¨æ„æ­¤å°ˆæ¡ˆé …ç›®çš„ Build Action å±¬æ€§æ‡‰è¨­å®šç‚º Embeded Resourceã€‚
 
-2.«Ø¥ß»PÂI¦r²Å¸¹ªí¹ïÀ³ªºÃş§O¡A¨Ò¦p¡GMathBrailleTable.cs¡C¦¹Ãş§OÀ³Ä~©Ó¦Û XmlBrailleTable¡C
+2.å»ºç«‹èˆ‡é»å­—ç¬¦è™Ÿè¡¨å°æ‡‰çš„é¡åˆ¥ï¼Œä¾‹å¦‚ï¼šMathBrailleTable.csã€‚æ­¤é¡åˆ¥æ‡‰ç¹¼æ‰¿è‡ª XmlBrailleTableã€‚
 
-3.«Ø¥ß³B²z¸ÓÂI¦r²Å¸¹ªºÂà´«¾¹Ãş§O¡A¨Ò¦p¡GMathConverter.cs¡C
+3.å»ºç«‹è™•ç†è©²é»å­—ç¬¦è™Ÿçš„è½‰æ›å™¨é¡åˆ¥ï¼Œä¾‹å¦‚ï¼šMathConverter.csã€‚
 
-4.¦b BrailleProcessor ¤¤«Ø¥ß¸ÓÂà´«¾¹ªº instance¡A¨Ã¥[¤J¾A·íªº³B²z¡C
+4.åœ¨ BrailleProcessor ä¸­å»ºç«‹è©²è½‰æ›å™¨çš„ instanceï¼Œä¸¦åŠ å…¥é©ç•¶çš„è™•ç†ã€‚
 
-5.¦pªG»İ­n±¡¹Ò¼ĞÅÒ¡A«h»İ¦b ContextTagNames ¤¤©w¸q¸Ó±¡¹Ò¼ĞÅÒªº¦r¦ê±`¼Æ¡C
-  ¨Ò¦p¡Gpublic const string Math= "<¼Æ¾Ç>";
-  ¦Ó¥BÁÙ­n­×§ï ContextTag Ãş§OªºÀRºA«Øºc¤¸¡A¥i¯à¤]­n­×§ï¨ä CreateInstance ¤èªk¡C
+5.å¦‚æœéœ€è¦æƒ…å¢ƒæ¨™ç±¤ï¼Œå‰‡éœ€åœ¨ ContextTagNames ä¸­å®šç¾©è©²æƒ…å¢ƒæ¨™ç±¤çš„å­—ä¸²å¸¸æ•¸ã€‚
+  ä¾‹å¦‚ï¼špublic const string Math= "<æ•¸å­¸>";
+  è€Œä¸”é‚„è¦ä¿®æ”¹ ContextTag é¡åˆ¥çš„éœæ…‹å»ºæ§‹å…ƒï¼Œå¯èƒ½ä¹Ÿè¦ä¿®æ”¹å…¶ CreateInstance æ–¹æ³•ã€‚
 
-6.­Y¸Ó²Å¸¹¦³¯S®íªºÂI¦r³W«h¡]¨Ò¦p¡G«e«á¶·¥[¤@ªÅ¤è¡^¡A«h­n­×§ï 
-  EnglishBrailleRule.cs ©Î ChineseBrailleRule.cs¡C¨Ò¦p¡A¦pªG­n¥[¤Jªº¬O¯S®í
-  ªº¤¤¤å²Å¸¹¡]¡Ô¡^¡A¥B«e«á¶·¥[¤@ªÅ¤è¡A«h­×§ï ChineseBrailleRule ªº 
-  ApplyPunctuationRules ¤èªk¡C
+6.è‹¥è©²ç¬¦è™Ÿæœ‰ç‰¹æ®Šçš„é»å­—è¦å‰‡ï¼ˆä¾‹å¦‚ï¼šå‰å¾Œé ˆåŠ ä¸€ç©ºæ–¹ï¼‰ï¼Œå‰‡è¦ä¿®æ”¹ 
+  EnglishBrailleRule.cs æˆ– ChineseBrailleRule.csã€‚ä¾‹å¦‚ï¼Œå¦‚æœè¦åŠ å…¥çš„æ˜¯ç‰¹æ®Š
+  çš„ä¸­æ–‡ç¬¦è™Ÿï¼ˆâˆšï¼‰ï¼Œä¸”å‰å¾Œé ˆåŠ ä¸€ç©ºæ–¹ï¼Œå‰‡ä¿®æ”¹ ChineseBrailleRule çš„ 
+  ApplyPunctuationRules æ–¹æ³•ã€‚
   
-7.­Y·s¥[¤Jªº²Å¸¹¥]§t¦h­Ó¦r¤¸¡]¨Ò¦p¡G"¡i1¡j"¡B"£¹£¬"¡^¡A«h¥²¶·¦b WordConverter
-  Ãş§O¡]EnglishWordConverter ©Î ChineseWordConverter¡^ªº Convert ¤èªk¤¤¼¶¼g¹ï
-  À³ªº³B²z¡C­Y¬O³æ¤@¦r¤¸¡A«h³q±`¤£»İ­n¡C
+7.è‹¥æ–°åŠ å…¥çš„ç¬¦è™ŸåŒ…å«å¤šå€‹å­—å…ƒï¼ˆä¾‹å¦‚ï¼š"ã€1ã€‘"ã€"ã„¨ã„›"ï¼‰ï¼Œå‰‡å¿…é ˆåœ¨ WordConverter
+  é¡åˆ¥ï¼ˆEnglishWordConverter æˆ– ChineseWordConverterï¼‰çš„ Convert æ–¹æ³•ä¸­æ’°å¯«å°
+  æ‡‰çš„è™•ç†ã€‚è‹¥æ˜¯å–®ä¸€å­—å…ƒï¼Œå‰‡é€šå¸¸ä¸éœ€è¦ã€‚
   
-8.¦bÀ³¥Îµ{¦¡ªº¤u¨ã¦C¤¤´£¨Ñ¿é¤J¸Ó²Å¸¹ªº§Ö³t«ö¶s¡C
+8.åœ¨æ‡‰ç”¨ç¨‹å¼çš„å·¥å…·åˆ—ä¸­æä¾›è¼¸å…¥è©²ç¬¦è™Ÿçš„å¿«é€ŸæŒ‰éˆ•ã€‚

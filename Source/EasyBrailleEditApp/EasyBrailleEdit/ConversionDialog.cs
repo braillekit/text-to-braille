@@ -1,12 +1,13 @@
-﻿using System;
+﻿using EasyBrailleEdit.Common;
+using Huanlin.Common.Helpers;
+using Huanlin.Windows.Forms;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using EasyBrailleEdit.Common;
-using Huanlin.Common.Helpers;
-using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
 {
@@ -17,6 +18,7 @@ namespace EasyBrailleEdit
 
         private bool m_IsConvertingSelectedTet;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsConvertingSelectedText
         {
             get { return m_IsConvertingSelectedTet; }

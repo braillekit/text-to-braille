@@ -12,7 +12,7 @@ namespace BrailleToolkit.Converters
 		public PhoneticConverter()
 			: base()
 		{
-			m_Table = PhoneticBrailleTable.GetInstance();
+			m_Table = PhoneticBrailleTable.CreateInstance();
 		}
 
 		/// <summary>

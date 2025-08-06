@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
 using System.Reflection;
@@ -8,7 +8,7 @@ using BrailleToolkit.Tags;
 namespace BrailleToolkit
 {
     /// <summary>
-    /// ¥Î¨ÓÀx¦s¤@¦CÂI¦r¡C
+    /// ç”¨ä¾†å„²å­˜ä¸€åˆ—é»å­—ã€‚
     /// </summary>
     [Serializable]
     [DataContract]
@@ -71,7 +71,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ¶Ç¦^©Ò¦³ÂI¦rªºÁ`¤è¼Æ¡C
+        /// å‚³å›æ‰€æœ‰é»å­—çš„ç¸½æ–¹æ•¸ã€‚
         /// </summary>
         public int CellCount
         {
@@ -87,7 +87,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ¨ú±o¥»¦ê¦C¤¤ªº©Ò¦³ªº BraillCell ª«¥ó¡C
+        /// å–å¾—æœ¬ä¸²åˆ—ä¸­çš„æ‰€æœ‰çš„ BraillCell ç‰©ä»¶ã€‚
         /// </summary>
         /// <returns></returns>
         public List<BrailleCell> GetBrailleCells()
@@ -101,17 +101,17 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ­pºâÂ_¦æªºÂI¦r¯Á¤Ş¦ì¸m¡C
-        /// ¦¹³B¶È®Ú¾Ú¶Ç¤Jªº³Ì¤j¤è¼Æ¨Ó­pºâ¥iÂ_¦æªºÂI¦r¯Á¤Ş¡A¨Ã¥¼¥[¤J¨ä¥LÂ_¦æ³W«hªº§PÂ_¡C
+        /// è¨ˆç®—æ–·è¡Œçš„é»å­—ç´¢å¼•ä½ç½®ã€‚
+        /// æ­¤è™•åƒ…æ ¹æ“šå‚³å…¥çš„æœ€å¤§æ–¹æ•¸ä¾†è¨ˆç®—å¯æ–·è¡Œçš„é»å­—ç´¢å¼•ï¼Œä¸¦æœªåŠ å…¥å…¶ä»–æ–·è¡Œè¦å‰‡çš„åˆ¤æ–·ã€‚
         /// </summary>
-        /// <param name="cellsPerLine">¤@¦æ¥i¤¹³\¦h¤Ö¤è¼Æ¡C</param>
-        /// <returns>¥iÂ_¦æªºÂI¦r¯Á¤Ş¡C¨Ò¦p¡A­Y¯Á¤Ş½s¸¹²Ä 29 ­Ó¦r¡]0-based¡^¥²¶·§é¨ì¤U¤@¦æ¡A
-        /// ¶Ç¦^­È´N¬O 29¡C­Y¤£»İ­nÂ_¦æ¡A«h¶Ç¦^¾ã¦æªº¦r¼Æ¡C</returns>
+        /// <param name="cellsPerLine">ä¸€è¡Œå¯å…è¨±å¤šå°‘æ–¹æ•¸ã€‚</param>
+        /// <returns>å¯æ–·è¡Œçš„é»å­—ç´¢å¼•ã€‚ä¾‹å¦‚ï¼Œè‹¥ç´¢å¼•ç·¨è™Ÿç¬¬ 29 å€‹å­—ï¼ˆ0-basedï¼‰å¿…é ˆæŠ˜åˆ°ä¸‹ä¸€è¡Œï¼Œ
+        /// å‚³å›å€¼å°±æ˜¯ 29ã€‚è‹¥ä¸éœ€è¦æ–·è¡Œï¼Œå‰‡å‚³å›æ•´è¡Œçš„å­—æ•¸ã€‚</returns>
         public int CalcBreakPoint(int cellsPerLine)
         {
             if (cellsPerLine < 4)
             {
-                throw new ArgumentException("cellsPerLine °Ñ¼Æ­È¤£¥i¤p©ó 4¡C");
+                throw new ArgumentException("cellsPerLine åƒæ•¸å€¼ä¸å¯å°æ–¼ 4ã€‚");
             }
 
             int cellCnt = 0;
@@ -129,11 +129,11 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ±q«ü©wªº°_©l¦ì¸m½Æ»s«ü©w­Ó¼ÆªºÂI¦r (BrailleWord) ¨ì·s«Ø¥ßªºÂI¦r¦ê¦C¡C
+        /// å¾æŒ‡å®šçš„èµ·å§‹ä½ç½®è¤‡è£½æŒ‡å®šå€‹æ•¸çš„é»å­— (BrailleWord) åˆ°æ–°å»ºç«‹çš„é»å­—ä¸²åˆ—ã€‚
         /// </summary>
-        /// <param name="index">°_©l¦ì¸m</param>
-        /// <param name="count">­n½Æ»s´X­ÓÂI¦r¡C</param>
-        /// <returns>·sªºÂI¦r¦ê¦C¡C</returns>
+        /// <param name="index">èµ·å§‹ä½ç½®</param>
+        /// <param name="count">è¦è¤‡è£½å¹¾å€‹é»å­—ã€‚</param>
+        /// <returns>æ–°çš„é»å­—ä¸²åˆ—ã€‚</returns>
         public BrailleLine Copy(int index, int count)
         {
             BrailleLine brLine = new BrailleLine();
@@ -158,7 +158,7 @@ namespace BrailleToolkit
 
         public void RemoveRange(int index, int count)
         {
-            if ((index + count) > Words.Count)    // ¨¾¤î­n¨úªº¼Æ¶q¶W¥XÃä¬É¡C
+            if ((index + count) > Words.Count)    // é˜²æ­¢è¦å–çš„æ•¸é‡è¶…å‡ºé‚Šç•Œã€‚
             {
                 count = Words.Count - index;
             }
@@ -166,7 +166,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ±N«ü©wªºÂI¦r¦Cªş¥[¦Ü¦¹ÂI¦r¦C¡C
+        /// å°‡æŒ‡å®šçš„é»å­—åˆ—é™„åŠ è‡³æ­¤é»å­—åˆ—ã€‚
         /// </summary>
         /// <param name="brLine"></param>
         public void Append(BrailleLine brLine)
@@ -183,7 +183,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ¥h±¼¶}ÀYªºªÅ¥Õ¦r¤¸¡C
+        /// å»æ‰é–‹é ­çš„ç©ºç™½å­—å…ƒã€‚
         /// </summary>
         public void TrimStart()
         {
@@ -200,7 +200,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ¥h±¼µ²§ÀªºªÅ¥Õ¦r¤¸¡C
+        /// å»æ‰çµå°¾çš„ç©ºç™½å­—å…ƒã€‚
         /// </summary>
         public void TrimEnd()
         {
@@ -218,7 +218,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// §âÀY§ÀªºªÅ¥Õ¥h±¼¡C
+        /// æŠŠé ­å°¾çš„ç©ºç™½å»æ‰ã€‚
         /// </summary>
         public void Trim()
         {
@@ -238,7 +238,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ±N¥»¦ê¦C¤¤ªº©Ò¦³ÂI¦rÂà¦¨ 16 ¶i¦ìªº¦r¦ê¡C
+        /// å°‡æœ¬ä¸²åˆ—ä¸­çš„æ‰€æœ‰é»å­—è½‰æˆ 16 é€²ä½çš„å­—ä¸²ã€‚
         /// </summary>
         /// <returns></returns>
         public string ToBrailleCellHexString()
@@ -255,7 +255,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ±N¥»¦ê¦C¤¤ªº©Ò¦³ÂI¦rÂà¦¨¥HÂI¦ì²Õ¦¨ªº¦r¦ê¡C¦UÂI¦r¥H¤@­ÓªÅ¥Õ¦r¤¸¹j¶}¡C
+        /// å°‡æœ¬ä¸²åˆ—ä¸­çš„æ‰€æœ‰é»å­—è½‰æˆä»¥é»ä½çµ„æˆçš„å­—ä¸²ã€‚å„é»å­—ä»¥ä¸€å€‹ç©ºç™½å­—å…ƒéš”é–‹ã€‚
         /// </summary>
         /// <returns></returns>
         public string ToPositionNumberString()
@@ -269,7 +269,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ¬O§_¥]§t¼ĞÃD±¡¹Ò¼ĞÅÒ¡C
+        /// æ˜¯å¦åŒ…å«æ¨™é¡Œæƒ…å¢ƒæ¨™ç±¤ã€‚
         /// </summary>
         /// <returns></returns>
         public bool ContainsTitleTag()
@@ -282,7 +282,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ²¾°£©Ò¦³±¡¹Ò¼ĞÅÒ¡C
+        /// ç§»é™¤æ‰€æœ‰æƒ…å¢ƒæ¨™ç±¤ã€‚
         /// </summary>
         public void RemoveContextTags()
         {
@@ -299,7 +299,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// ¦b¦ê¦C¤¤´M§ä«ü©wªº¦r¦ê¡A±q¦ê¦C¤¤ªº²Ä startIndex ­Ó¦r¶}©l§ä°_¡C
+        /// åœ¨ä¸²åˆ—ä¸­å°‹æ‰¾æŒ‡å®šçš„å­—ä¸²ï¼Œå¾ä¸²åˆ—ä¸­çš„ç¬¬ startIndex å€‹å­—é–‹å§‹æ‰¾èµ·ã€‚
         /// </summary>
         /// <param name="value"></param>
         /// <param name="startIndex"></param>
@@ -325,7 +325,7 @@ namespace BrailleToolkit
                 return -1;
             }
 
-            // ¦³§ä¨ì¡A¦ı³o¬O¦r¤¸¯Á¤Ş¡AÁÙ¥²¶·­×¥¿¬°ÂI¦r¯Á¤Ş¡C
+            // æœ‰æ‰¾åˆ°ï¼Œä½†é€™æ˜¯å­—å…ƒç´¢å¼•ï¼Œé‚„å¿…é ˆä¿®æ­£ç‚ºé»å­—ç´¢å¼•ã€‚
             for (i = startIndex; i < this.WordCount; i++)
             {
                 idx = idx - Words[i].Text.Length + 1;
@@ -337,7 +337,7 @@ namespace BrailleToolkit
         #region ICloneable Members
 
         /// <summary>
-        /// ²`¼h½Æ»s¡C
+        /// æ·±å±¤è¤‡è£½ã€‚
         /// </summary>
         /// <returns></returns>
         public object Clone()

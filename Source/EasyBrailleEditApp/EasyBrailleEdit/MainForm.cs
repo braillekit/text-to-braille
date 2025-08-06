@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BrailleToolkit;
+﻿using BrailleToolkit;
 using BrailleToolkit.Helpers;
 using EasyBrailleEdit.Common;
 using EasyBrailleEdit.Forms;
@@ -17,9 +7,20 @@ using EasyBrailleEdit.Printing;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
 using Huanlin.Windows.Sys;
-using Serilog;
 using ScintillaNET;
 using ScintillaNET_FindReplaceDialog;
+using Serilog;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace EasyBrailleEdit
 {
@@ -712,6 +713,7 @@ namespace EasyBrailleEdit
 
         #region 屬性
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string FileName
         {
             get
@@ -743,6 +745,7 @@ namespace EasyBrailleEdit
             Text = sb.ToString();
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool Modified
         {
             get { return m_Modified; }
@@ -756,6 +759,7 @@ namespace EasyBrailleEdit
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string StatusText
         {
             get { return statusStrip1.Items[0].Text; }

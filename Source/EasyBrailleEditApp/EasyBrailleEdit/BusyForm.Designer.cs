@@ -1,4 +1,4 @@
-namespace EasyBrailleEdit
+Ôªønamespace EasyBrailleEdit
 {
 	partial class BusyForm
 	{
@@ -42,7 +42,7 @@ namespace EasyBrailleEdit
             lblMsg.Name = "lblMsg";
             lblMsg.Size = new System.Drawing.Size(117, 19);
             lblMsg.TabIndex = 0;
-            lblMsg.Text = "•ø¶b∂i¶Ê¬‡¥´......";
+            lblMsg.Text = "Ê≠£Âú®ÈÄ≤Ë°åËΩâÊèõ......";
             lblMsg.UseWaitCursor = true;
             // 
             // pictureBox1
@@ -72,7 +72,7 @@ namespace EasyBrailleEdit
             Name = "BusyForm";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "∞TÆß";
+            Text = "Ë®äÊÅØ";
             TopMost = true;
             UseWaitCursor = true;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

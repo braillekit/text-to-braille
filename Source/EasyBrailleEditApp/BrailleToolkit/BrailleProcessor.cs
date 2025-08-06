@@ -132,6 +132,21 @@ namespace BrailleToolkit
             return s_Processor;
         }
 
+        /// <summary>
+        /// Creates a new instance of BrailleProcessor.
+        /// </summary>
+        /// <returns></returns>
+        public static BrailleProcessor CreateInstance(ZhuyinReverseConverter zhuyinConverter = null)
+        {
+            if (zhuyinConverter == null)
+            {
+                // create default zhuyin reverse converter if not specified.
+                zhuyinConverter = new ZhuyinReverseConverter(new ZhuyinReverseConversionProvider());
+            }
+
+            return new BrailleProcessor(zhuyinConverter);
+        }
+
         #endregion
 
         #region 屬性

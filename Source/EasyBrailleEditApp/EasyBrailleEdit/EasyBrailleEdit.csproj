@@ -2,24 +2,17 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>EasyBrailleEdit</RootNamespace>
     <AssemblyName>EasyBrailleEdit</AssemblyName>
-    <Version></Version>
     <Nullable>disable</Nullable>
-    <Copyright>Copyright (c) 2008-2022 Michael Tsai (蔡煥麟)</Copyright>
+    <Copyright>Copyright (c) 2008-2025 Michael Tsai (蔡煥麟)</Copyright>
     <Description>易點雙視（EasyBraillEdit）是一個 Windows 應用程式，主要用途是編輯與列印雙視教材，以供視障朋友摸讀。</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <BaseOutputPath>..\..\..\Output\EasyBrailleEdit</BaseOutputPath>
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="dytdkezs.z4h~" />
-    <None Remove="Forms\w53nmm3a.k1b~" />
-    <None Remove="Printing\fbur2e1r.kva~" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="app.ico" />
@@ -34,22 +27,22 @@
 
   <ItemGroup>
     <PackageReference Include="fernandreu.ScintillaNET" Version="4.2.0" />
-    <PackageReference Include="Huanlin.Common" Version="5.2.0" />
-    <PackageReference Include="Huanlin.Windows" Version="5.2.0" />
+    <PackageReference Include="Huanlin.Common" Version="5.3.4" />
+    <PackageReference Include="Huanlin.Windows" Version="5.3.4" />
     <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="MinVer" Version="4.3.0">
+    <PackageReference Include="MinVer" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="NChinese" Version="1.1.0" />
-    <PackageReference Include="ScintillaNET_FindReplaceDialog-huanlin" Version="1.5.2" />
-    <PackageReference Include="Serilog" Version="3.1.1" />
-    <PackageReference Include="Serilog.Settings.AppSettings" Version="2.2.2" />
-    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="SourceGrid-huanlin" Version="6.0.10" />
+    <PackageReference Include="NChinese" Version="1.2.3" />
+    <PackageReference Include="ScintillaNET_FindReplaceDialog-huanlin" Version="1.6.1" />
+    <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="Serilog.Settings.AppSettings" Version="3.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+    <PackageReference Include="SourceGrid-huanlin" Version="6.1.1" />
   </ItemGroup>
 
   <ItemGroup>

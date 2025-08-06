@@ -1,12 +1,16 @@
-﻿using System;
+﻿using Huanlin.Windows.Forms;
+using System;
+using System.ComponentModel;
 using System.Windows.Forms;
-using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
 {
     public partial class RegForm : Form
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string LicenseKey { get; set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string CustomerName { get; set; }
 
         public RegForm()

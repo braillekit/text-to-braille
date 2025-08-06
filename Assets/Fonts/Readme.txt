@@ -1,1 +1,1 @@
-�I�r�r���i�H�Q�Τ@�몺 Windows �r���˵��u��d�ݡA�Ҧp�GFontExpert 2007�C
+﻿點字字型可以利用一般的 Windows 字型檢視工具查看，例如：FontExpert 2007。

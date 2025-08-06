@@ -18,6 +18,7 @@ namespace EasyBrailleEdit.Forms
         }
 
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Content
         {
             get

@@ -1,4 +1,4 @@
-namespace EasyBrailleEdit
+ï»¿namespace EasyBrailleEdit
 {
 	partial class ConversionProgressForm
 	{
@@ -42,7 +42,7 @@ namespace EasyBrailleEdit
             this.lblMsg.Name = "lblMsg";
             this.lblMsg.Size = new System.Drawing.Size(121, 15);
             this.lblMsg.TabIndex = 0;
-            this.lblMsg.Text = "¥¿¦b¶i¦æÂà´«......";
+            this.lblMsg.Text = "æ­£åœ¨é€²è¡Œè½‰æ›......";
             this.lblMsg.UseWaitCursor = true;
             // 
             // progressBar1
@@ -64,7 +64,7 @@ namespace EasyBrailleEdit
             this.lblInvalidChar.Name = "lblInvalidChar";
             this.lblInvalidChar.Size = new System.Drawing.Size(127, 15);
             this.lblInvalidChar.TabIndex = 2;
-            this.lblInvalidChar.Text = "µLªkÂà´«ªº¦r¤¸¡G";
+            this.lblInvalidChar.Text = "ç„¡æ³•è½‰æ›çš„å­—å…ƒï¼š";
             this.lblInvalidChar.UseWaitCursor = true;
             // 
             // txtInvalidChar
@@ -96,7 +96,7 @@ namespace EasyBrailleEdit
             this.Name = "ConvertionProgressForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "°T®§";
+            this.Text = "è¨Šæ¯";
             this.TopMost = true;
             this.UseWaitCursor = true;
             this.Load += new System.EventHandler(this.ConvertionProgressForm_Load);

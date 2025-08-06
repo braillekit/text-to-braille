@@ -19,16 +19,8 @@ namespace EasyBrailleEdit
             SimpleMessageForm = false;
 		}
 
-		public string Message
-		{
-			set
-			{
-				lblMsg.Text = value;
-				Application.DoEvents();
-			}
-		}
-
-		public int ProgressValue
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int ProgressValue
 		{
 			get
 			{
@@ -42,18 +34,7 @@ namespace EasyBrailleEdit
 			}
 		}
 
-        public bool ProgressVisible
-        {
-            get
-            {
-                return progressBar1.Visible; 
-            }
-            set
-            {
-                progressBar1.Visible = value;
-            }
-        }
-
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool SimpleMessageForm
         {
             set

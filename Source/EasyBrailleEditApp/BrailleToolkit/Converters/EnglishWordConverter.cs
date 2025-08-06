@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
@@ -10,7 +10,7 @@ using EasyBrailleEdit.Common;
 namespace BrailleToolkit.Converters
 {
     /// <summary>
-    /// ³B²z­^¼Æ¦rªºÂI¦rÂà´«¡C
+    /// è™•ç†è‹±æ•¸å­—çš„é»å­—è½‰æ›ã€‚
     /// </summary>
     public sealed class EnglishWordConverter : WordConverter
     {
@@ -19,7 +19,7 @@ namespace BrailleToolkit.Converters
 
         public EnglishWordConverter(BrailleProcessor processor)
         {
-            m_Table = EnglishBrailleTable.GetInstance();
+            m_Table = EnglishBrailleTable.CreateInstance();
             _processor = processor;
         }
 
@@ -29,41 +29,41 @@ namespace BrailleToolkit.Converters
         }
 
         /// <summary>
-        /// ±q°ïÅ|¤¤Åª¨ú¦r¤¸¡A§â ASCII ¦r¤¸¡]¥b§Îªº­^¼Æ¦r¡^Âà´«¦¨ÂI¦r¡C
+        /// å¾å †ç–Šä¸­è®€å–å­—å…ƒï¼ŒæŠŠ ASCII å­—å…ƒï¼ˆåŠå½¢çš„è‹±æ•¸å­—ï¼‰è½‰æ›æˆé»å­—ã€‚
         /// </summary>
-        /// <param name="charStack">¿é¤Jªº ASCII ¦r¤¸°ïÅ|¡C</param>
-        /// <param name="context">±¡¹Òª«¥ó¡C</param>
-        /// <returns>¶Ç¦^Âà´««áªºÂI¦rª«¥ó¦ê¦C¡A­Y¦ê¦C¬°ªÅ¦ê¦C¡Aªí¥Ü¨S¦³¦¨¥\Âà´«ªº¦r¤¸¡C</returns>
+        /// <param name="charStack">è¼¸å…¥çš„ ASCII å­—å…ƒå †ç–Šã€‚</param>
+        /// <param name="context">æƒ…å¢ƒç‰©ä»¶ã€‚</param>
+        /// <returns>å‚³å›è½‰æ›å¾Œçš„é»å­—ç‰©ä»¶ä¸²åˆ—ï¼Œè‹¥ä¸²åˆ—ç‚ºç©ºä¸²åˆ—ï¼Œè¡¨ç¤ºæ²’æœ‰æˆåŠŸè½‰æ›çš„å­—å…ƒã€‚</returns>
         public override List<BrailleWord> Convert(Stack<char> charStack, ContextTagManager context)
         {
 			if (charStack.Count < 1)
-				throw new ArgumentException("¶Ç¤JªÅªº¦r¤¸°ïÅ|!");
+				throw new ArgumentException("å‚³å…¥ç©ºçš„å­—å…ƒå †ç–Š!");
 
             bool done = false;
             char ch;
 			string currentWord;
-			bool isExtracted;	// ¥Ø«e³B²zªº¦r¤¸¬O§_¤w±q°ïÅ|¤¤²¾¥X¡C
+			bool isExtracted;	// ç›®å‰è™•ç†çš„å­—å…ƒæ˜¯å¦å·²å¾å †ç–Šä¸­ç§»å‡ºã€‚
             BrailleWord brWord;
             List<BrailleWord> brWordList = null;
 
-            const string LeftForMathConverter = "*.:()¡]¡^,¡A";
+            const string LeftForMathConverter = "*.:()ï¼ˆï¼‰,ï¼Œ";
             const string LeftForCoordinateConverter = "(,)";
 
             while (!done && charStack.Count > 0)
             {
-                ch = charStack.Peek();   // ¥uÅª¨ú¦ı¤£±q°ïÅ|²¾¨«¡C
+                ch = charStack.Peek();   // åªè®€å–ä½†ä¸å¾å †ç–Šç§»èµ°ã€‚
                 isExtracted = false;
                
-                // ¦pªG¦b¼Æ¾Ç°Ï¶ô¤¤
+                // å¦‚æœåœ¨æ•¸å­¸å€å¡Šä¸­
                 if (context.IsActive(ContextTagNames.Math))
                 {
                     if (LeftForMathConverter.IndexOf(ch) >= 0)
                     {
-						break;  // ¥H¤W²Å¸¹¶·¥æµ¹ MathConverter ³B²z¡C
+						break;  // ä»¥ä¸Šç¬¦è™Ÿé ˆäº¤çµ¦ MathConverter è™•ç†ã€‚
                     }
                 }
 
-                // ¦pªG¦b®y¼Ğ°Ï¶ô¤¤¡A'('¡B',' ©M ')' ¥²¶·¥æµ¹ CoordinateConverter ³B²z¡C
+                // å¦‚æœåœ¨åº§æ¨™å€å¡Šä¸­ï¼Œ'('ã€',' å’Œ ')' å¿…é ˆäº¤çµ¦ CoordinateConverter è™•ç†ã€‚
                 if (context.IsActive(ContextTagNames.Coordinate))
                 {
                     if (LeftForCoordinateConverter.IndexOf(ch) >= 0)
@@ -72,31 +72,31 @@ namespace BrailleToolkit.Converters
                     }
                 }
 
-                // ¦pªG¬O¥b§Î¤p©ó²Å¸¹¡A¥ıÀË¬d¬O§_¬°±¡¹Ò¼ĞÅÒ¡C
+                // å¦‚æœæ˜¯åŠå½¢å°æ–¼ç¬¦è™Ÿï¼Œå…ˆæª¢æŸ¥æ˜¯å¦ç‚ºæƒ…å¢ƒæ¨™ç±¤ã€‚
                 if (ch == '<')
                 {
                     char[] charBuf = charStack.ToArray();
                     string s = new string(charBuf);
                     if (ContextTagNames.StartsWithContextTag(s))
                     {
-                        break;  // ±¡¹Ò¼ĞÅÒ¥²¶·¥æµ¹ ContextTagConverter ³B²z¡C
+                        break;  // æƒ…å¢ƒæ¨™ç±¤å¿…é ˆäº¤çµ¦ ContextTagConverter è™•ç†ã€‚
                     }
                 }
 
                 currentWord = ch.ToString();
 
-                // ³B²z¯S®í¦r¤¸¡C
+                // è™•ç†ç‰¹æ®Šå­—å…ƒã€‚
                 isExtracted = ProcessSpecialEntity(charStack, ref currentWord);
 
                 if (!isExtracted)
                 {
-                    // ³B²z§R¸`¸¹¡C
+                    // è™•ç†åˆªç¯€è™Ÿã€‚
                     if (ch == '.' && charStack.Count >= 3)
                     {
                         charStack.Pop();
                         char ch2 = charStack.Pop();
                         char ch3 = charStack.Pop();
-                        if (ch2 == '.' && ch3 == '.')	// ³sÄò¤T­ÓÂI: §R¸`¸¹
+                        if (ch2 == '.' && ch3 == '.')	// é€£çºŒä¸‰å€‹é»: åˆªç¯€è™Ÿ
                         {
                             isExtracted = true;
                             currentWord = "...";
@@ -109,7 +109,7 @@ namespace BrailleToolkit.Converters
                             isExtracted = false;
                         }
                     }
-                    // Tab ¦r¤¸µø¬°¤@­ÓªÅ¥Õ¡C
+                    // Tab å­—å…ƒè¦–ç‚ºä¸€å€‹ç©ºç™½ã€‚
                     if (ch == '\t')
                     {
                         currentWord = " ";
@@ -118,7 +118,7 @@ namespace BrailleToolkit.Converters
 
                 if (context.IsMathActive())
                 {
-                    // ¼Æ¾Ç°Ï¶ô¸Ì­±ªº²Å¸¹¡A¥²¶·¯dµ¹ MathConverter ³B²z¡C
+                    // æ•¸å­¸å€å¡Šè£¡é¢çš„ç¬¦è™Ÿï¼Œå¿…é ˆç•™çµ¦ MathConverter è™•ç†ã€‚
                     if (_processor.MathConverter.BrailleTable.Exists(currentWord))
                         break;
                 }
@@ -136,14 +136,14 @@ namespace BrailleToolkit.Converters
                  
                 brWord.Language = BrailleLanguage.English;
 
-                if (context.IsActive(ContextTagNames.Coordinate))   // ­Y³B©ó®y¼Ğ±¡¹Ò¼ĞÅÒ¤º
+                if (context.IsActive(ContextTagNames.Coordinate))   // è‹¥è™•æ–¼åº§æ¨™æƒ…å¢ƒæ¨™ç±¤å…§
                 {
-                    // ¤£¥[¼Æ¦rÂI¦ì¡C
+                    // ä¸åŠ æ•¸å­—é»ä½ã€‚
                     brWord.NoDigitCell = true;
                 }
-				else if (":".Equals(currentWord) && context.IsActive(ContextTagNames.Time))	// ³B²z®É¶¡ªº«_¸¹¡C
+				else if (":".Equals(currentWord) && context.IsActive(ContextTagNames.Time))	// è™•ç†æ™‚é–“çš„å†’è™Ÿã€‚
 				{
-					// ¦b«_¸¹ªºÂI¦r«e­±¥[¤W 456 ÂI¡C
+					// åœ¨å†’è™Ÿçš„é»å­—å‰é¢åŠ ä¸Š 456 é»ã€‚
 					BrailleCell cell = BrailleCell.GetInstance(new int[] { 4, 5, 6 });
 					brWord.Cells.Insert(0, cell);	
 				}
@@ -158,12 +158,12 @@ namespace BrailleToolkit.Converters
         }
         
         /// <summary>
-        /// ³B²z¥H '&' ²Å¸¹¶}ÀYªº¯S®í¦r¤¸¡A¨Ò¦p¡G"&gt;" ©M "&lt;" ¥i¥H¤À§Oªí¥Ü
-        /// ¥b§Îªº¤j©ó¡B¤p©ó²Å¸¹¡C
+        /// è™•ç†ä»¥ '&' ç¬¦è™Ÿé–‹é ­çš„ç‰¹æ®Šå­—å…ƒï¼Œä¾‹å¦‚ï¼š"&gt;" å’Œ "&lt;" å¯ä»¥åˆ†åˆ¥è¡¨ç¤º
+        /// åŠå½¢çš„å¤§æ–¼ã€å°æ–¼ç¬¦è™Ÿã€‚
         /// </summary>
-        /// <param name="charStack">¦r¤¸°ïÅ|¡C</param>
-        /// <param name="text">­Y¶Ç¦^ true¡A«h·|³]©w¦¹°Ñ¼Æ¡C</param>
-        /// <returns>¶Ç¦^ true ªí¥Ü¦³¸I¨ì¯S®í¦r¤¸¡A¨Ã¤w±q charStack ¤¤¨ú¥X¡C</returns>
+        /// <param name="charStack">å­—å…ƒå †ç–Šã€‚</param>
+        /// <param name="text">è‹¥å‚³å› trueï¼Œå‰‡æœƒè¨­å®šæ­¤åƒæ•¸ã€‚</param>
+        /// <returns>å‚³å› true è¡¨ç¤ºæœ‰ç¢°åˆ°ç‰¹æ®Šå­—å…ƒï¼Œä¸¦å·²å¾ charStack ä¸­å–å‡ºã€‚</returns>
         private bool ProcessSpecialEntity(Stack<char> charStack, ref string text)
         {
             if (charStack.Count < 4)
@@ -172,9 +172,9 @@ namespace BrailleToolkit.Converters
             char ch = charStack.Peek();
             bool isExtracted = false;
 
-            if (ch == '&')  // ¯S®í¦r¤¸: &gt; ©M &lt;
+            if (ch == '&')  // ç‰¹æ®Šå­—å…ƒ: &gt; å’Œ &lt;
             {
-                // Åª¤U¤@­Ó¦r¤¸¡A­Y¬O¬Û¦P²Å¸¹¡A«h¥i²¤¹L¡F­Y¤£¦P¡A«h¤U¦¸°j°é¤´»İ³B²z¡C
+                // è®€ä¸‹ä¸€å€‹å­—å…ƒï¼Œè‹¥æ˜¯ç›¸åŒç¬¦è™Ÿï¼Œå‰‡å¯ç•¥éï¼›è‹¥ä¸åŒï¼Œå‰‡ä¸‹æ¬¡è¿´åœˆä»éœ€è™•ç†ã€‚
                 if (charStack.Count >= 4)
                 {
                     charStack.Pop();
@@ -198,7 +198,7 @@ namespace BrailleToolkit.Converters
                     }
                     else
                     {
-                        // §â¤§«e¨ú¥Xªº¦r¤¸©ñ¦^°ïÅ|¡C
+                        // æŠŠä¹‹å‰å–å‡ºçš„å­—å…ƒæ”¾å›å †ç–Šã€‚
                         charStack.Push(ch4);
                         charStack.Push(ch3);
                         charStack.Push(ch2);
@@ -211,10 +211,10 @@ namespace BrailleToolkit.Converters
         }
 
 		/// <summary>
-		/// §â­^¼Æ¦rÂà´«¦¨ÂI¦r¡C
+		/// æŠŠè‹±æ•¸å­—è½‰æ›æˆé»å­—ã€‚
 		/// </summary>
-		/// <param name="text">¤@­Ó­^¼Æ¦r©Î­^¤å¼ĞÂI²Å¸¹¡C</param>
-		/// <returns>­Y«ü©wªº¦r¦ê¬O¤¤¤å¦r¥BÂà´«¦¨¥\¡A«h¶Ç¦^Âà´«¤§«áªºÂI¦rª«¥ó¡A§_«h¶Ç¦^ null¡C</returns>
+		/// <param name="text">ä¸€å€‹è‹±æ•¸å­—æˆ–è‹±æ–‡æ¨™é»ç¬¦è™Ÿã€‚</param>
+		/// <returns>è‹¥æŒ‡å®šçš„å­—ä¸²æ˜¯ä¸­æ–‡å­—ä¸”è½‰æ›æˆåŠŸï¼Œå‰‡å‚³å›è½‰æ›ä¹‹å¾Œçš„é»å­—ç‰©ä»¶ï¼Œå¦å‰‡å‚³å› nullã€‚</returns>
 		private BrailleWord InternalConvert(string text, ContextTagManager context)
 		{
 			if (String.IsNullOrEmpty(text))
@@ -224,7 +224,7 @@ namespace BrailleToolkit.Converters
 
 			string brCode = null;
 
-			// ¦pªG¬O§R¸`¸¹
+			// å¦‚æœæ˜¯åˆªç¯€è™Ÿ
 			if (text == "...")
 			{
 				brCode = m_Table.Find(text);
@@ -232,7 +232,7 @@ namespace BrailleToolkit.Converters
 				return brWord;
 			}
 
-			// ³B²z­^¤å¦r¥À©M¼Æ¦r¡C
+			// è™•ç†è‹±æ–‡å­—æ¯å’Œæ•¸å­—ã€‚
 			if (text.Length == 1)
 			{
 				char ch = text[0];
@@ -243,13 +243,13 @@ namespace BrailleToolkit.Converters
 					{
 						brWord.AddCells(brCode);
 						return brWord;
-						// µù¡G¤j¼g°O¸¹©M³sÄò¤j¼g°O¸¹¦b§¹¦¨¤@¦æ¤§«á¤~³B²z¡C
+						// è¨»ï¼šå¤§å¯«è¨˜è™Ÿå’Œé€£çºŒå¤§å¯«è¨˜è™Ÿåœ¨å®Œæˆä¸€è¡Œä¹‹å¾Œæ‰è™•ç†ã€‚
 					}
-					throw new Exception("§ä¤£¨ì¹ïÀ³ªºÂI¦r: " + text);
+					throw new Exception("æ‰¾ä¸åˆ°å°æ‡‰çš„é»å­—: " + text);
 				}
 				if (CharHelper.IsAsciiDigit(ch))
 				{
-                    bool useUpperPositionDots = false;  // ¤@¯ë¼Æ¦r¨ú¤U¦ìÂI¡C
+                    bool useUpperPositionDots = false;  // ä¸€èˆ¬æ•¸å­—å–ä¸‹ä½é»ã€‚
                     if (AppGlobals.Config.Braille.UseUpperPositionForNumbers || context.IsActive(ContextTagNames.UpperPosition))
                     {
                         useUpperPositionDots = true;
@@ -257,7 +257,7 @@ namespace BrailleToolkit.Converters
 
                     if (AppGlobals.Config.Braille.UseUpperPositionForOrgPageNumber && context.IsOrgPageNumberActive())
                     {
-                        // ­ì®Ñ­¶½X¤@«ß¨Ï¥Î¤W¦ìÂI¡C
+                        // åŸæ›¸é ç¢¼ä¸€å¾‹ä½¿ç”¨ä¸Šä½é»ã€‚
                         useUpperPositionDots = true;
                     }
 
@@ -267,20 +267,20 @@ namespace BrailleToolkit.Converters
 						brWord.AddCells(brCode);
 						return brWord;
 					}
-					throw new Exception("§ä¤£¨ì¹ïÀ³ªºÂI¦r: " + text);
+					throw new Exception("æ‰¾ä¸åˆ°å°æ‡‰çš„é»å­—: " + text);
 				}
 			}
 
-			// ³B²z½s¸¹¡C
+			// è™•ç†ç·¨è™Ÿã€‚
 			if (text == "#")
 			{
-                // # ¨S¦³¹ïÀ³ªºÂI¦r½X¡A¥u¬O¥Î¥¦¨Ó¥Nªí½s¸¹¼Æ¦rªº¶}©l¡A
-                // ¥H«K«áÄò³B²z½s¸¹¥Î¡]±N½s¸¹¼Æ¦rÂà¦¨¤W¦ìÂI¡^¡C
+                // # æ²’æœ‰å°æ‡‰çš„é»å­—ç¢¼ï¼Œåªæ˜¯ç”¨å®ƒä¾†ä»£è¡¨ç·¨è™Ÿæ•¸å­—çš„é–‹å§‹ï¼Œ
+                // ä»¥ä¾¿å¾ŒçºŒè™•ç†ç·¨è™Ÿç”¨ï¼ˆå°‡ç·¨è™Ÿæ•¸å­—è½‰æˆä¸Šä½é»ï¼‰ã€‚
                 brWord.IsContextTag = true;
 				return brWord;
 			}
 
-            // ¤p¼ÆÂI¦b <¿ï¶µ>£t.</¿ï¶µ> ¸Ì­±­n¯S§O³B²z
+            // å°æ•¸é»åœ¨ <é¸é …>ã„….</é¸é …> è£¡é¢è¦ç‰¹åˆ¥è™•ç†
             if (text == "." && context.IsActive(ContextTagNames.Choice))
             {
                 brWord.AddCellsFromPositionNumbers("6");

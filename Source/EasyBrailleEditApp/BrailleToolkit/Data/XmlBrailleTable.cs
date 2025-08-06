@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
@@ -12,7 +12,7 @@ using BrailleToolkit.Helpers;
 namespace BrailleToolkit.Data
 {
 	/// <summary>
-	/// ±q XML ÀÉ®×Åª¨úÂI¦r¹ï·Óªí¡A¨Ã´£¨Ñ·j´M¥\¯à¡C
+	/// å¾ XML æª”æ¡ˆè®€å–é»å­—å°ç…§è¡¨ï¼Œä¸¦æä¾›æœå°‹åŠŸèƒ½ã€‚
 	/// </summary>
 	public class XmlBrailleTable : BrailleTableBase
 	{
@@ -28,7 +28,7 @@ namespace BrailleToolkit.Data
 		public XmlBrailleTable()
 		{
 			m_Table = new DataTable();
-			m_Table.CaseSensitive = true;	// ¥²¶·¬° true¡A§_«h¦³¨Ç¥b§Î¦r¤¸·|©M¥ş§Î²Å¸¹²V²c¡C
+			m_Table.CaseSensitive = true;	// å¿…é ˆç‚º trueï¼Œå¦å‰‡æœ‰äº›åŠå½¢å­—å…ƒæœƒå’Œå…¨å½¢ç¬¦è™Ÿæ··æ·†ã€‚
             m_Table.Locale = CultureInfo.CurrentUICulture;
 			m_FileName = "";
 		}
@@ -45,14 +45,14 @@ namespace BrailleToolkit.Data
 		}
 
 		/// <summary>
-		/// ±q XML ÀÉ®×¸ü¤JÂI¦r¹ï·Óªí¡C
+		/// å¾ XML æª”æ¡ˆè¼‰å…¥é»å­—å°ç…§è¡¨ã€‚
 		/// </summary>
 		/// <param name="filename"></param>
 		public override void Load(string filename)
 		{
 			if (String.IsNullOrEmpty(filename))
 			{
-				throw new ArgumentException("ÀÉ¦W¥¼«ü©w!");
+				throw new ArgumentException("æª”åæœªæŒ‡å®š!");
 			}
 
 			if (m_Loaded && (String.Compare(m_FileName, filename, true, CultureInfo.CurrentUICulture) == 0))
@@ -68,7 +68,7 @@ namespace BrailleToolkit.Data
 		}
 
         /// <summary>
-        /// ±q«ü©w²Õ¥ó¸ê·½¸ü¤JÂI¦r¹ï·Óªí¡C
+        /// å¾æŒ‡å®šçµ„ä»¶è³‡æºè¼‰å…¥é»å­—å°ç…§è¡¨ã€‚
         /// </summary>
         /// <param name="asmb"></param>
         /// <param name="resourceName"></param>
@@ -77,7 +77,7 @@ namespace BrailleToolkit.Data
             Stream stream = asmb.GetManifestResourceStream(resourceName);
             if (stream == null)
             {
-                throw new Exception("XmlBrailleTable.LoadFromResource §ä¤£¨ì¸ê·½: " + resourceName);
+                throw new Exception("XmlBrailleTable.LoadFromResource æ‰¾ä¸åˆ°è³‡æº: " + resourceName);
             }
             using (stream)
             {
@@ -89,12 +89,12 @@ namespace BrailleToolkit.Data
         }
 
         /// <summary>
-        /// ±q¹w³]ªº¸ê·½¦WºÙ¡]§Yª«¥óªºÃş§O¦WºÙ¥[¤W .xml °ÆÀÉ¦W¡^¸ü¤JÂI¦r¹ï·Óªí¡C
+        /// å¾é è¨­çš„è³‡æºåç¨±ï¼ˆå³ç‰©ä»¶çš„é¡åˆ¥åç¨±åŠ ä¸Š .xml å‰¯æª”åï¼‰è¼‰å…¥é»å­—å°ç…§è¡¨ã€‚
         /// </summary>
         public virtual void LoadFromResource()
         {
             Assembly asmb = Assembly.GetExecutingAssembly();
-            string resName = this.GetType().FullName + ".xml"; // Note: ³oºØ¼gªk¥i¥HÁ×§K¼g¦ºªº namsepace¡A¦Ó¥B¥Î©ó obfuscator ®É¤]¯à¥¿±`¹B§@¡C
+            string resName = this.GetType().FullName + ".xml"; // Note: é€™ç¨®å¯«æ³•å¯ä»¥é¿å…å¯«æ­»çš„ namsepaceï¼Œè€Œä¸”ç”¨æ–¼ obfuscator æ™‚ä¹Ÿèƒ½æ­£å¸¸é‹ä½œã€‚
             LoadFromResource(asmb, resName);
         }
 
@@ -105,7 +105,7 @@ namespace BrailleToolkit.Data
                 ds.Locale = CultureInfo.CurrentUICulture;
                 ds.ReadXml(sr);
                 m_Table = ds.Tables[0].Copy();
-                m_Table.CaseSensitive = true;	// ¥²¶·¬° true¡A§_«h¦³¨Ç¥b§Î¦r¤¸·|©M¥ş§Î²Å¸¹²V²c¡C
+                m_Table.CaseSensitive = true;	// å¿…é ˆç‚º trueï¼Œå¦å‰‡æœ‰äº›åŠå½¢å­—å…ƒæœƒå’Œå…¨å½¢ç¬¦è™Ÿæ··æ·†ã€‚
                 m_Table.PrimaryKey = new DataColumn[] { m_Table.Columns["text"] };
 
                 ConvertDotsToCodeForTable();
@@ -115,7 +115,7 @@ namespace BrailleToolkit.Data
         }
 
 		/// <summary>
-		/// ±q XML ¦r¦ê¸ü¤JÂI¦r¹ï·Óªí¡C
+		/// å¾ XML å­—ä¸²è¼‰å…¥é»å­—å°ç…§è¡¨ã€‚
 		/// </summary>
 		/// <param name="xml"></param>
 		public void LoadFromXmlString(string xml)
@@ -150,7 +150,7 @@ namespace BrailleToolkit.Data
                     if (string.IsNullOrWhiteSpace(dots))
                     {
                         var text = row["text"].ToString();
-                        throw new Exception($"¦bÂI¦r¸ê®Æªí¤¤¡A'{text}' ªº code ©M dots ³£¬OªÅ­È¡I");
+                        throw new Exception($"åœ¨é»å­—è³‡æ–™è¡¨ä¸­ï¼Œ'{text}' çš„ code å’Œ dots éƒ½æ˜¯ç©ºå€¼ï¼");
                     }
 
                     row["code"] = BrailleCellHelper.PositionNumbersToHexString(dots.Split(' '));
@@ -160,35 +160,35 @@ namespace BrailleToolkit.Data
         }
 
 		/// <summary>
-		/// ÀË¬dÂI¦r¹ï·Óªí¬O§_¤w¸g¸ü¤J¡A­Y§_¡A«h¥á¥X exception¡C
+		/// æª¢æŸ¥é»å­—å°ç…§è¡¨æ˜¯å¦å·²ç¶“è¼‰å…¥ï¼Œè‹¥å¦ï¼Œå‰‡ä¸Ÿå‡º exceptionã€‚
 		/// </summary>
 		/// <returns></returns>
 		protected void CheckLoaded()
 		{
 			if (!m_Loaded)
 			{
-				throw new Exception("ÂI¦r¹ï·Óªí©|¥¼¸ü¤J¸ê®Æ!");
+				throw new Exception("é»å­—å°ç…§è¡¨å°šæœªè¼‰å…¥è³‡æ–™!");
 			}
 		}
 
 		/// <summary>
-		/// ÀË¬d¬O§_¬°¦XªkªºÂI¦r½X¡C
+		/// æª¢æŸ¥æ˜¯å¦ç‚ºåˆæ³•çš„é»å­—ç¢¼ã€‚
 		/// </summary>
-		/// <param name="code">ÂI¦r½Xªº¤Q¤»¶i¦ì¦r¦ê¡C¨Ò¦p¡G"A0"¡C</param>
+		/// <param name="code">é»å­—ç¢¼çš„åå…­é€²ä½å­—ä¸²ã€‚ä¾‹å¦‚ï¼š"A0"ã€‚</param>
 		protected void CheckCode(string code)
 		{
             if (!string.IsNullOrWhiteSpace(code) && code.Length % 2 != 0)
 			{
-				throw new Exception("ÂI¦r¹ï·Óªíªº¸ê®Æ¤£¥¿½T! code=" + code);
+				throw new Exception("é»å­—å°ç…§è¡¨çš„è³‡æ–™ä¸æ­£ç¢º! code=" + code);
 			}            
 		}
 
 		/// <summary>
-		/// ¯Á¤Ş¤l¡C±q¤å¦r²Å¸¹¨ú±o¹ïÀ³ªºÂI¦r½X¡]16 ¶i¦ì¡^¦r¦ê¡C
+		/// ç´¢å¼•å­ã€‚å¾æ–‡å­—ç¬¦è™Ÿå–å¾—å°æ‡‰çš„é»å­—ç¢¼ï¼ˆ16 é€²ä½ï¼‰å­—ä¸²ã€‚
 		/// </summary>
-		/// <param name="text">¤å¦r²Å¸¹¡A¨Ò¦p¡G£t¡B¡G¡C</param>
-		/// <returns>ÂI¦r½X¦r¦ê¡A­Y§ä¤£¨ì¹ïÀ³ªº²Å¸¹¡A·|¥á¥X¨Ò¥~¡C</returns>
-        /// <remarks>¦pªG§A§Æ±æ§ä¤£¨ì¹ïÀ³ªºÂI¦r½X®É¤£­n¥á¥X¨Ò¥~¡A¦Ó¬O¶Ç¦^ªÅ¦r¦ê¡A½Ğ¨Ï¥Î Find ¤èªk¡C</remarks>
+		/// <param name="text">æ–‡å­—ç¬¦è™Ÿï¼Œä¾‹å¦‚ï¼šã„…ã€ï¼šã€‚</param>
+		/// <returns>é»å­—ç¢¼å­—ä¸²ï¼Œè‹¥æ‰¾ä¸åˆ°å°æ‡‰çš„ç¬¦è™Ÿï¼Œæœƒä¸Ÿå‡ºä¾‹å¤–ã€‚</returns>
+        /// <remarks>å¦‚æœä½ å¸Œæœ›æ‰¾ä¸åˆ°å°æ‡‰çš„é»å­—ç¢¼æ™‚ä¸è¦ä¸Ÿå‡ºä¾‹å¤–ï¼Œè€Œæ˜¯å‚³å›ç©ºå­—ä¸²ï¼Œè«‹ä½¿ç”¨ Find æ–¹æ³•ã€‚</remarks>
 		public override string this[string text]
 		{
 			get 
@@ -196,7 +196,7 @@ namespace BrailleToolkit.Data
 				string brCode = Find(text);
                 if (String.IsNullOrEmpty(brCode))
                 {
-                    throw new Exception("§ä¤£¨ì¹ïÀ³ªºÂI¦r½X: " + text);
+                    throw new Exception("æ‰¾ä¸åˆ°å°æ‡‰çš„é»å­—ç¢¼: " + text);
                 }
                 return brCode;
 			}
@@ -217,12 +217,12 @@ namespace BrailleToolkit.Data
         }
 
         /// <summary>
-        /// ·j´M¬Y­Ó¤å¦r²Å¸¹¡A¨Ã¶Ç¦^¹ïÀ³ªºÂI¦r½X¡C
+        /// æœå°‹æŸå€‹æ–‡å­—ç¬¦è™Ÿï¼Œä¸¦å‚³å›å°æ‡‰çš„é»å­—ç¢¼ã€‚
         /// </summary>
-        /// <param name="text">±ı·j´Mªº²Å¸¹¡C</param>
-        /// <param name="type">­­©w±ı·j´Mªº²Å¸¹Ãş«¬¡C­Y¤£¦PÃş«¬·í¤¤¦s¦b¬Û¦Pªº¤å¦r²Å¸¹¡A«KÀ³«ü©w¦¹°Ñ¼Æ¡A¥H½T«O§ä¨ì¥¿½Tªº²Å¸¹¡C</param>
-        /// <returns>­Y¦³§ä¨ì¡A«h¶Ç¦^¹ïÀ³ªºÂI¦r½X¡A§_«h¶Ç¦^ null¡C</returns>
-        /// <remarks>¦pªG§A§Æ±æ§ä¤£¨ì¹ïÀ³ªºÂI¦r½X®É¥á¥X¨Ò¥~¡A½Ğ¨Ï¥Î¯Á¤Ş¤l¡C</remarks>
+        /// <param name="text">æ¬²æœå°‹çš„ç¬¦è™Ÿã€‚</param>
+        /// <param name="type">é™å®šæ¬²æœå°‹çš„ç¬¦è™Ÿé¡å‹ã€‚è‹¥ä¸åŒé¡å‹ç•¶ä¸­å­˜åœ¨ç›¸åŒçš„æ–‡å­—ç¬¦è™Ÿï¼Œä¾¿æ‡‰æŒ‡å®šæ­¤åƒæ•¸ï¼Œä»¥ç¢ºä¿æ‰¾åˆ°æ­£ç¢ºçš„ç¬¦è™Ÿã€‚</param>
+        /// <returns>è‹¥æœ‰æ‰¾åˆ°ï¼Œå‰‡å‚³å›å°æ‡‰çš„é»å­—ç¢¼ï¼Œå¦å‰‡å‚³å› nullã€‚</returns>
+        /// <remarks>å¦‚æœä½ å¸Œæœ›æ‰¾ä¸åˆ°å°æ‡‰çš„é»å­—ç¢¼æ™‚ä¸Ÿå‡ºä¾‹å¤–ï¼Œè«‹ä½¿ç”¨ç´¢å¼•å­ã€‚</remarks>
         public override string Find(string text, string type=null)
 		{
 			CheckLoaded();
