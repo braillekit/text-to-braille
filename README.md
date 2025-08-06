@@ -21,7 +21,7 @@ Easy Braille Edit（易點雙視）是一套運行於微軟視窗作業系統、
 
 ## See also
 
-AI-generated document: [GEMINI.md](Source\EasyBrailleEditApp\GEMINI.md)
+AI-generated document: [GEMINI.md](Source/EasyBrailleEditApp/GEMINI.md)
 
 ## License
 
