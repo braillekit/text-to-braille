@@ -19,4 +19,8 @@ Easy Braille Edit（易點雙視）是一套運行於微軟視窗作業系統、
 * 自動偵測新版本並自動透過網際網路下載。
 
 
-Copyright (c) 2007-2022 Michael Tsai (蔡煥麟).
+## License
+
+GNU Lesser General Public License v3.0
+
+(Since 2025-08-06)
