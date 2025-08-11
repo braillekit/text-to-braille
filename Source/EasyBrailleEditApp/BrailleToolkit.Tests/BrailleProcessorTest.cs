@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using BrailleToolkit;
 using Huanlin.Common.Helpers;
@@ -32,7 +32,7 @@ namespace BrailleToolkit.Tests
             ConvertLineTestEnglish(target);
         }
 
-        public void ConvertLineTestChinese(BrailleProcessor target)
+        private void ConvertLineTestChinese(BrailleProcessor target)
         {
             // 測試明眼字內含注音符號、冒號後面跟著"我"、以及引號、句號。
             string line = "ㄅˇ你說：我是誰？　我說：「我是神。」";
@@ -63,7 +63,7 @@ namespace BrailleToolkit.Tests
             Assert.Equal(expected, actual);
         }
 
-        public void ConvertLineTestEnglish(BrailleProcessor target)
+        private void ConvertLineTestEnglish(BrailleProcessor target)
         {
             // 測試一個大寫字母。
             string line = "Hello";

@@ -12,8 +12,6 @@ namespace EasyBrailleEdit.Common
         public static string AppPath { get; set;  }
         public static string TempPath { get; } = GetTempPath();
 
-        public static UserLicenseData UserLicense { get; set; } = new UserLicenseData();
-
         // Class constructor.
         static AppGlobals()
         {

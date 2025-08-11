@@ -536,16 +536,8 @@ namespace EasyBrailleEdit.DualEdit
                 int row = FixedRows;
                 int pageCount = 0;
                 int linesPerPage = GetLinesPerPageForGrid();
-                int maxOutputPage = AppGlobals.UserLicense.GetMaxPages();
                 foreach (BrailleLine brLine in brDoc.Lines)
                 {
-                    if (pageCount >= maxOutputPage)
-                    {
-                        busyForm.Close();
-                        MsgBoxHelper.ShowInfo($"您目前使用之版本的頁數限制為 {maxOutputPage} 頁，超出頁數的資料不會顯示或列印出來。");
-                        break;
-                    }
-
                     if (brLine.CellCount < 1)
                     {
                         continue; // 有可能是空的列，例如 <表格> 起始標籤就單獨佔據一列。
