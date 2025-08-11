@@ -32,16 +32,16 @@
   <symbol text="Z" code="35" dots="136" type="Letter" />
 
   <!-- 數字 (code 是上位點，code2 是下位點) -->
-  <symbol text="1" code="01" dots="1" code2="02" type="Digit" />
-  <symbol text="2" code="03" dots="12" code2="06" type="Digit" />
-  <symbol text="3" code="09" dots="14" code2="12" type="Digit" />
-  <symbol text="4" code="19" dots="145" code2="32" type="Digit" />
-  <symbol text="5" code="11" dots="15" code2="22" type="Digit" />
-  <symbol text="6" code="0B" dots="124" code2="16" type="Digit" />
-  <symbol text="7" code="1B" dots="1245" code2="36" type="Digit" />
-  <symbol text="8" code="13" dots="125" code2="26" type="Digit" />
-  <symbol text="9" code="0A" dots="24" code2="14" type="Digit" />  <!-- 2018/4/25 Code 從 4A 改成 0A -->
-  <symbol text="0" code="1A" dots="245" code2="34" type="Digit" />
+  <symbol text="1" code="01" dots="1" code2="02" dots2="2" type="Digit" />
+  <symbol text="2" code="03" dots="12" code2="06" dots2="23" type="Digit" />
+  <symbol text="3" code="09" dots="14" code2="12" dots2="25" type="Digit" />
+  <symbol text="4" code="19" dots="145" code2="32" dots2="256" type="Digit" />
+  <symbol text="5" code="11" dots="15" code2="22" dots2="26" type="Digit" />
+  <symbol text="6" code="0B" dots="124" code2="16" dots2="235" type="Digit" />
+  <symbol text="7" code="1B" dots="1245" code2="36" dots2="2356" type="Digit" />
+  <symbol text="8" code="13" dots="125" code2="26" dots2="236" type="Digit" />
+  <symbol text="9" code="0A" dots="24" code2="14" dots2="35" type="Digit" />  <!-- 2018/4/25 Code 從 4A 改成 0A -->
+  <symbol text="0" code="1A" dots="245" code2="34" dots2="356" type="Digit" />
 
   <!-- 英文標點符號 -->
   <symbol text=","    code="02" dots="2"     type="Punctuation" Description="逗號" />
