@@ -108,7 +108,8 @@ namespace BrailleToolkit.Data
                 m_Table.CaseSensitive = true;	// 必須為 true，否則有些半形字元會和全形符號混淆。
                 m_Table.PrimaryKey = new DataColumn[] { m_Table.Columns["text"] };
 
-                ConvertDotsToCodeForTable();
+                ConvertDotsToCode();
+                ConvertDots2ToCode2();
 
                 m_Loaded = true;
             }
@@ -128,12 +129,13 @@ namespace BrailleToolkit.Data
 			m_Table.PrimaryKey = new DataColumn[] { m_Table.Columns["text"] };
 			sr.Close();
 
-            ConvertDotsToCodeForTable();
+            ConvertDotsToCode();
+            ConvertDots2ToCode2();
 
 			m_Loaded = true;
 		}
 
-        protected virtual void ConvertDotsToCodeForTable()
+        protected virtual void ConvertDotsToCode()
         {
             if (m_Table.Columns.IndexOf("code") < 0)
             {
@@ -143,18 +145,37 @@ namespace BrailleToolkit.Data
             for (int i = 0; i < m_Table.Rows.Count; i++)
             {
                 var row = m_Table.Rows[i];
-                var code = row["code"].ToString();
-                if (string.IsNullOrWhiteSpace(code))
-                {
-                    string dots = row["dots"].ToString();
-                    if (string.IsNullOrWhiteSpace(dots))
-                    {
-                        var text = row["text"].ToString();
-                        throw new Exception($"在點字資料表中，'{text}' 的 code 和 dots 都是空值！");
-                    }
+                string dots = row["dots"].ToString();
 
-                    row["code"] = BrailleCellHelper.PositionNumbersToHexString(dots.Split(' '));
+                if (string.IsNullOrWhiteSpace(dots))
+                {
+                    row["code"] = "00";
+                    continue;
                 }
+                row["code"] = BrailleCellHelper.PositionNumbersToHexString(dots.Split(' '));
+            }
+            m_Table.AcceptChanges();
+        }
+
+        protected virtual void ConvertDots2ToCode2()
+        {
+            if (m_Table.Columns.IndexOf("dots2") < 0)
+                return;
+
+            if (m_Table.Columns.IndexOf("code2") < 0)
+            {
+                m_Table.Columns.Add(new DataColumn("code2", typeof(string)));
+            }
+
+            for (int i = 0; i < m_Table.Rows.Count; i++)
+            {
+                var row = m_Table.Rows[i];
+                string dots2 = row["dots2"].ToString();
+                if (string.IsNullOrWhiteSpace(dots2))
+                {
+                    continue;
+                }
+                row["code2"] = BrailleCellHelper.PositionNumbersToHexString(dots2.Split(' '));
             }
             m_Table.AcceptChanges();
         }
