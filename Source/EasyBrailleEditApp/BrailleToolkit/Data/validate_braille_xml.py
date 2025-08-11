@@ -1,3 +1,8 @@
+# This script validates the braille XML data files in the current directory.
+# It checks if the 'dots' and 'dots2' attributes correctly correspond to the
+# 'code' and 'code2' hex values for each <symbol> element.
+# To run, simply execute `python validate_braille_xml.py` from this directory.
+
 import xml.etree.ElementTree as ET
 import sys
 import os
