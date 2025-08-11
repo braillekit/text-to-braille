@@ -2,7 +2,6 @@
 using BrailleToolkit.Helpers;
 using EasyBrailleEdit.Common;
 using EasyBrailleEdit.Forms;
-using EasyBrailleEdit.License;
 using EasyBrailleEdit.Printing;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
@@ -911,47 +910,6 @@ namespace EasyBrailleEdit
                 return;
             }
             Application.DoEvents();
-
-
-            var userLic = LicenseHelper.GetUserLicenseData();
-            AppGlobals.UserLicense = userLic;
-
-            if (userLic.IsExpired)
-            {                
-                MsgBoxHelper.ShowInfo(Constant.TrialExpiredMessage);
-            }
-
-            bool isLicenseValid = await LicenseHelper.ValidateAndSaveUseLicenseAsync(userLic);
-
-            if (!userLic.ExpiredDate.HasValue && !isLicenseValid)
-            {
-                // 設定預設的試用期限
-                LicenseHelper.SetTrialExpirationDate();
-
-                userLic = LicenseHelper.EnterLicenseData();
-                if (userLic == null)
-                {
-                    MsgBoxHelper.ShowWarning(Constant.TrialVersionMessage);
-                }
-                else
-                {
-                    bool isLicensed = await LicenseHelper.ValidateAndSaveUseLicenseAsync(userLic);
-                    if (isLicensed)
-                    {
-                        LicenseHelper.SaveUserLicenseData(userLic);
-                        MsgBoxHelper.ShowInfo("註冊成功! 版本：" + AppGlobals.UserLicense.GetProductVersionName());
-                    }
-                    else
-                    {
-                        MsgBoxHelper.ShowError("註冊失敗：序號無效！");
-                    }
-                }                
-            }
-
-            if (AppGlobals.UserLicense.IsNearExpiration(beforeDays: 7))
-            {
-                MsgBoxHelper.ShowInfo($"提醒您：試用期限將於 {AppGlobals.UserLicense.ExpiredDate: yyyy/MM/dd} 到期。");
-            }
 
             txtErrors.Visible = false;
 

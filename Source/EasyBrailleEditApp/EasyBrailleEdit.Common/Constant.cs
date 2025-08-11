@@ -3,25 +3,12 @@
 public static class Constant
 {
     public const string AppName = "EasyBrailleEdit";
+    public const string ProductVersionName = "開源社群版";
+    public const string ProjectUrl = "https://github.com/braillekit/text-to-braille";
     public const string FacebookPageUrl = "https://www.facebook.com/easybraille/";
 
     public const string DefaultAutoUpdateRootUrl = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/Update4/";
     public const string DefaultAutoUpdateFilesUrl = DefaultAutoUpdateRootUrl + "UpdateFiles/";
-
-    public const string UsersLicenseFileName = "users.lic";
-    public const string AppRegistryRoot = @"Software\Michael Tsai\EasyBrailleEdit";
-    public const string SerialNumberRegKey = "SerialNumber";
-    public const string CustomerNameRegKey = "Customer";
-    public const string VersionLicenseRegKey = "VersionLicense";
-    public const string ExpiredDateRegKey = "ExpiredDate";
-    public const string LastTimeTrackingUser = "LastTimeTrackingUser";
-
-    public const int HomeVersionMaxPages = 10; // 家用版最多只能列印幾頁，明眼字和點字都是。
-    public const int TrialVersionMaxPages = 5; // 試用版最多只能列印幾頁，明眼字和點字都是。
-    public const int TrialExpiredMaxPages = 1; // 試用版過期之後，最多只能列印幾頁，明眼字和點字都是。
-
-    public static string TrialExpiredMessage => $"試用期限已過，可編輯與列印的頁數會有限制：最多可處理 {TrialExpiredMaxPages} 頁。\r\n如有疑問，可至 {FacebookPageUrl} 留言。謝謝！";
-    public static string TrialVersionMessage => $"試用版的期限為 30 天，而且最多只能處理  {TrialVersionMaxPages} 頁。";
 
     // 預設一行最大方數
     public const int DefaultCellsPerLine = 40;

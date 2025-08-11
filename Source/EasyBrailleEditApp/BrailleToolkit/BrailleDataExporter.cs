@@ -104,8 +104,6 @@ namespace BrailleToolkit
 
             int realLinesPerPage = LinesPerPage;
 
-            int maxPages = AppGlobals.UserLicense.GetMaxPages();
-
             if (NeedPageFooter)  // 如需輸出頁碼，每頁可印列數便少一列。
             {
                 realLinesPerPage--;
@@ -121,11 +119,6 @@ namespace BrailleToolkit
             // 準備輸出至點字印表機的資料
             while (lineIdx < _brDoc.LineCount)
             {
-                if (pageNum >= maxPages) // 試用版的列印限制
-                {
-                    break;
-                }
-
                 brLine = _brDoc.Lines[lineIdx];
                 bool isFirstLineOfCurrentPage = lineCnt % realLinesPerPage == 0;
                 BrailleDocumentHelper.SetBeginEndOrgPageNumber(

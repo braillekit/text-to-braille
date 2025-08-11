@@ -94,7 +94,6 @@ namespace EasyBrailleEdit
         {
             int lineCnt = 0;
             int pageNum = 0;			// 程式內部處理的頁碼
-            int maxOutputPage = AppGlobals.UserLicense.GetMaxPages();
 
             BrailleLine brLine;
             StringBuilder sb = new StringBuilder();
@@ -157,12 +156,6 @@ namespace EasyBrailleEdit
                 }
 
                 lineIdx++;
-
-                // 檢查是否超出此授權版本所能列印的最大頁數。                
-                if (maxOutputPage > 0 && pageNum >= maxOutputPage)
-                {
-                    break;
-                }
             }
 
             // 補印頁碼

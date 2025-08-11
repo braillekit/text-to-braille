@@ -20,15 +20,6 @@ namespace EasyBrailleEdit.DualEdit
 
         public void ViewBraille()
         {
-            if (AppGlobals.UserLicense.IsExpired)
-            {
-                MsgBoxHelper.ShowInfo(Constant.TrialExpiredMessage);
-            }
-            else if (AppGlobals.UserLicense.IsTrial)
-            {
-                MsgBoxHelper.ShowInfo(Constant.TrialVersionMessage);
-            }
-
             var exporter = new BrailleDataExporter(
                 _doc,
                 AppGlobals.Config.Braille.LinesPerPage,

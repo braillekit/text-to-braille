@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Diagnostics;
 using EasyBrailleEdit.Common;
-using EasyBrailleEdit.License;
 using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
@@ -20,7 +19,7 @@ namespace EasyBrailleEdit
             string filename = Assembly.GetExecutingAssembly().Location;
             string fileVer = " v" + FileVersionInfo.GetVersionInfo(filename).FileVersion;
             lblVesion.Text = "版本號碼： " + fileVer;
-            linkLabel1.Text = Constant.FacebookPageUrl;
+            linkLabel1.Text = Constant.ProjectUrl;
 
             UpdateUI();
         }
@@ -43,46 +42,8 @@ namespace EasyBrailleEdit
 
         private void UpdateUI()
         {
-            lblVersionLicense.Text = AppGlobals.UserLicense.GetProductVersionName();
-
-            if (AppGlobals.UserLicense.IsActive)
-            {
-                lblCustomerName.Text = AppGlobals.UserLicense.CustomerName;
-                btnRegister.Text = "重新註冊";
-            }
-            else
-            {
-                lblCustomerName.Text = "(未授權)";
-                btnRegister.Text = "註冊";
-            }
-            DateTime? expDate = LicenseHelper.GetUserLicenseData()?.ExpiredDate;
-            if (expDate?.Year > 2099)
-            {
-                lblExpiredDate.Text = "無期限";
-            }
-            else
-            {
-                lblExpiredDate.Text = expDate?.ToString("yyyy/MM/dd");
-            }            
+            lblVersionLicense.Text = Constant.ProductVersionName;
         }
 
-        private async void btnRegister_Click(object sender, EventArgs e)
-        {
-            var userLic = LicenseHelper.EnterLicenseData();
-            if (userLic != null)
-            {                
-                bool isLicensed = await LicenseHelper.ValidateAndSaveUseLicenseAsync(userLic);
-                if (isLicensed)
-                {
-                    LicenseHelper.SaveUserLicenseData(userLic);
-                    MsgBoxHelper.ShowInfo($"註冊成功! 版本： {AppGlobals.UserLicense.GetProductVersionName()}");
-                }
-                else
-                {
-                    MsgBoxHelper.ShowError("註冊失敗：序號無效！");
-                }
-            }
-            UpdateUI();
-        }
     }
 }
