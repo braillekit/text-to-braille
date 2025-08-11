@@ -22,7 +22,7 @@
   <symbol text="o"  code="15" dots="135"       type="Vowel" />
   <symbol text="ʉ"  code="3425" dots="356 136"     type="Vowel" />
   <symbol text="u"  code="25" dots="136"       type="Vowel" />
-  <symbol text="ʊ"  code="37" dots="1236"       type="Vowel" />
+  <symbol text="ʊ"  code="37" dots="12356"       type="Vowel" />
   <symbol text="ʌ"  code="2C" dots="346"       type="Vowel" />
   <symbol text="ə"  code="22" dots="26"       type="Vowel" />
   <symbol text="ɜ"  code="161C" dots="235 345"     type="Vowel" />
@@ -30,7 +30,7 @@
   <symbol text="ɚ"  code="220217" dots="26 2 1235"   type="Vowel" />
   <symbol text="Y"  code="163D" dots="235 13456"     type="Vowel" />
   <symbol text="y"  code="3D" dots="13456"       type="Vowel" />
-  <symbol text="ɶ"  code="2A" dots="256"       type="Vowel" description="oe"/>
+  <symbol text="ɶ"  code="2A" dots="246"       type="Vowel" description="oe"/>
 
   <!-- 子音 -->
   <symbol text="p" code="0F" dots="1234" type="Consonant"  />
@@ -53,7 +53,7 @@
   <symbol text="ɵ" code="39" dots="1456" type="Consonant" />
   <symbol text="ð" code="3B" dots="12456" type="Consonant" description="The"/>
   <symbol text="s" code="0E" dots="234" type="Consonant" />
-  <symbol text="z" code="35" dots="136" type="Consonant" />
+  <symbol text="z" code="35" dots="1356" type="Consonant" />
   <symbol text="ɹ" code="3C" dots="3456" type="Consonant" />
   <symbol text="ɥ" code="3E" dots="23456" type="Consonant" />
   <symbol text="h" code="13" dots="125" type="Consonant" />

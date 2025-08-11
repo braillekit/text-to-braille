@@ -29,7 +29,7 @@
   <symbol text="W" code="3A" dots="2456" type="Letter" />
   <symbol text="X" code="2D" dots="1346" type="Letter" />
   <symbol text="Y" code="3D" dots="13456" type="Letter" />
-  <symbol text="Z" code="35" dots="136" type="Letter" />
+  <symbol text="Z" code="35" dots="1356" type="Letter" />
 
   <!-- 數字 (code 是上位點，code2 是下位點) -->
   <symbol text="1" code="01" dots="1" code2="02" dots2="2" type="Digit" />

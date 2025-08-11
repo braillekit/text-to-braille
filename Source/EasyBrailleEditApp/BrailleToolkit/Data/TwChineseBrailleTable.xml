@@ -29,11 +29,11 @@
   <symbol text="ㄞ" code="3A" dots="2456" type="Phonetic" />
   <symbol text="ㄟ" code="34" dots="356" type="Phonetic" />
   <symbol text="ㄠ" code="29" dots="146" type="Phonetic" />
-  <symbol text="ㄡ" code="37" dots="1236" type="Phonetic" />
+  <symbol text="ㄡ" code="37" dots="12356" type="Phonetic" />
   <symbol text="ㄢ" code="27" dots="1236" type="Phonetic" />
   <symbol text="ㄣ" code="25" dots="136" type="Phonetic" />
   <symbol text="ㄤ" code="2D" dots="1346" type="Phonetic" />
-  <symbol text="ㄥ" code="35" dots="136" type="Phonetic" />
+  <symbol text="ㄥ" code="35" dots="1356" type="Phonetic" />
   <symbol text="ㄦ" code="31" dots="156" type="Phonetic" />
   <symbol text="ㄧ" code="21" dots="16" type="Phonetic" />
   <symbol text="ㄨ" code="0C" dots="34" type="Phonetic" />
@@ -44,7 +44,7 @@
   <symbol text="ㄧㄛ" code="34" dots="356" type="Phonetic" joined="true" />
   <symbol text="ㄧㄝ" code="2C" dots="346" type="Phonetic" joined="true" />
   <symbol text="ㄧㄞ" code="22" dots="26" type="Phonetic" joined="true" />
-  <symbol text="ㄧㄠ" code="2A" dots="256" type="Phonetic" joined="true" />
+  <symbol text="ㄧㄠ" code="2A" dots="246" type="Phonetic" joined="true" />
   <symbol text="ㄧㄡ" code="0E" dots="234" type="Phonetic" joined="true" />
   <symbol text="ㄧㄢ" code="1E" dots="2345" type="Phonetic" joined="true" />
   <symbol text="ㄧㄣ" code="39" dots="1456" type="Phonetic" joined="true" />
@@ -93,16 +93,16 @@
   <symbol text="‧"   code="24" dots="36"     type="Punctuation" description="音界號" />
   <symbol text="．"   code="24" dots="36"     type="Punctuation" description="音界號（視為音界號）" />
   <symbol text="※"   code="083C" dots="4 3456"   type="Punctuation" description="星標記號" />
-  <symbol text="◎"   code="2A15" dots="256 135"   type="Punctuation" description="精讀記號" />
+  <symbol text="◎"   code="2A15" dots="246 135"   type="Punctuation" description="精讀記號" />
   <symbol text="「"   code="3024" dots="56 36"   type="Punctuation" description="左單引號" />
   <symbol text="」"   code="2406" dots="36 23"   type="Punctuation" description="右單引號" />
   <symbol text="『"   code="2626" dots="236 236"   type="Punctuation" description="左雙引號" />
   <symbol text="』"   code="3434" dots="356 356"   type="Punctuation" description="右雙引號" />
-  <symbol text="（"   code="2A" dots="256"     type="Punctuation" description="左圓括號" />
+  <symbol text="（"   code="2A" dots="246"     type="Punctuation" description="左圓括號" />
   <symbol text="）"   code="15" dots="135"     type="Punctuation" description="右圓括號" />
   <symbol text="〔"   code="2F" dots="12346"     type="Punctuation" description="左方括號" />
   <symbol text="〕"   code="3D" dots="13456"     type="Punctuation" description="右方括號" />
-  <symbol text="【"   code="37" dots="1236"     type="Punctuation" description="左方括號(粗)" />
+  <symbol text="【"   code="37" dots="12356"     type="Punctuation" description="左方括號(粗)" />
   <symbol text="】"   code="3E" dots="23456"     type="Punctuation" description="右方括號(粗)" />
   <symbol text="｛"   code="26" dots="236"     type="Punctuation" description="左大括號" />
   <symbol text="｝"   code="34" dots="356"     type="Punctuation" description="右大括號" />
@@ -113,13 +113,13 @@
 
 
 	<!-- 數學符號 -->
-  <symbol text="←"   code="2A1212" dots="256 25 25"     type="Math" description="箭頭向左" />
+  <symbol text="←"   code="2A1212" dots="246 25 25"     type="Math" description="箭頭向左" />
   <symbol text="→"   code="121215" dots="25 25 135"     type="Math" description="箭頭向右" />
   <symbol text="↑"   code="2B23121215" dots="1246 126 25 25 135" type="Math" description="箭頭向上" />
   <symbol text="↓"   code="2B29121215" dots="1246 146 25 25 135" type="Math" description="箭頭向下" />
-  <symbol text="↖"   code="2B182A1212" dots="1246 45 256 25 25" type="Math" description="箭頭左上" />
+  <symbol text="↖"   code="2B182A1212" dots="1246 45 246 25 25" type="Math" description="箭頭左上" />
   <symbol text="↗"   code="2B181215" dots="1246 45 25 135"   type="Math" description="箭頭右上" />
-  <symbol text="↙"   code="2B302A1212" dots="1246 56 256 25 25" type="Math" description="箭頭左下" />
+  <symbol text="↙"   code="2B302A1212" dots="1246 56 246 25 25" type="Math" description="箭頭左下" />
   <symbol text="↘"   code="2B30121215" dots="1246 56 25 25 135" type="Math" description="箭頭右下" />
   <symbol text="↔"   dots="246 25 25 135"  type="Misc" rule="SpaceAtBothEnds" description="單槓雙向箭頭" />
   <symbol text="∴"   code="2021" dots="6 16"       type="Math" description="所以" />
@@ -132,7 +132,7 @@
   <symbol text="≦"   code="100531" dots="5 13 156"     type="Math" description="小於等於" />
   <symbol text="≧"   code="280231" dots="46 2 156"     type="Math" description="大於等於" />  
   <symbol text="±"    code="2C24" dots="346 36"       type="Math" description="正負符號" />
-  <symbol text="∠"   code="2B2A" dots="1246 256"       type="Math" description="角度符號" />
+  <symbol text="∠"   code="2B2A" dots="1246 246"       type="Math" description="角度符號" />
   <symbol text="⊥"   code="2B0F" dots="1246 1234"       type="Math" description="垂直符號" />
   <symbol text="≒"   code="102805292123213B" dots="5 46 13 146 16 126 16 12456" type="Math" description="近似符號" />
 
@@ -148,9 +148,9 @@
   <symbol text="﹍"     code="1224" dots="25 36"   type="Misc" description="小單元結束" />  
   <symbol text="ˍ"     code="1212" dots="25 25"   type="Misc" description="大單元結束" />
   <symbol text="★"    code="2004" dots="6 3"   type="Misc" description="點譯者註" />
-  <symbol text="（★"   code="2A2004" dots="256 6 3"   type="Misc" description="點譯者註，有外加括弧的寫法。" />
+  <symbol text="（★"   code="2A2004" dots="246 6 3"   type="Misc" description="點譯者註，有外加括弧的寫法。" />
   <symbol text="□"     code="3F" dots="123456"     type="Misc" description="滿點，可用於輔助幼兒辨識點字。" />
-  <symbol text="▲"     code="2A" dots="256"     type="Misc" description="刪除起始" />
+  <symbol text="▲"     code="2A" dots="246"     type="Misc" description="刪除起始" />
   <symbol text="▼"     code="3B" dots="12456"     type="Misc" description="刪除結束" />
   <symbol text="﹒"    code="10" dots="5"      type="Misc" description="目錄虛線的點" />
   <symbol text="△"  dots="1246 2345"      type="Misc" rule="SpaceAtBothEnds" description="" />

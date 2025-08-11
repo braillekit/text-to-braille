@@ -5,9 +5,9 @@
        TwChineseCharConverter 若碰到空白，處理完之後就會緊接著把後續的文字與標點符號
        一併處理掉，使得 MathConverter 沒機會處理這些特殊的標點符號。 -->
   <symbol text="　"    code="00" dots=" "     type="Misc" description="全形空白" />
-  <symbol text="("    code="37" dots="1236"    type="Math" Description="數學半形左括弧" />
+  <symbol text="("    code="37" dots="12356"    type="Math" Description="數學半形左括弧" />
   <symbol text=")"    code="3E" dots="23456"    type="Math" Description="數學半形左括弧" />
-  <symbol text="（"    code="37" dots="1236"    type="Math" Description="數學全形左括弧" />
+  <symbol text="（"    code="37" dots="12356"    type="Math" Description="數學全形左括弧" />
   <symbol text="）"    code="3E" dots="23456"    type="Math" Description="數學全形左括弧" />
   <symbol text=","    code="20" dots="6"    type="Math" Description="半形逗號，第 6 點" />
   <symbol text="，"    code="20" dots="6"    type="Math" Description="全形逗號，第 6 點" />
