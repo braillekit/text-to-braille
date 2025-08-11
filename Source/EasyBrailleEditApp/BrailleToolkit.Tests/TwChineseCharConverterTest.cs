@@ -11,13 +11,13 @@ using Xunit;
 namespace BrailleToolkit.Tests
 {
     /// <summary>
-    ///This is a test class for BrailleToolkit.ChineseWordConverter and is intended
-    ///to contain all BrailleToolkit.ChineseWordConverter Unit Tests
+    ///This is a test class for BrailleToolkit.TwChineseCharConverter and is intended
+    ///to contain all BrailleToolkit.TwChineseCharConverter Unit Tests
     ///</summary>
     [Collection("Singleton-Sensitive Tests")]
-    public class ChineseWordConverterTest
+    public class TwChineseCharConverterTest
 	{
-        public ChineseWordConverterTest()
+        public TwChineseCharConverterTest()
         {
             Shared.SetupLogger();
         }
@@ -35,7 +35,7 @@ namespace BrailleToolkit.Tests
         public void Should_ConvertSingleWord_Succeed(string text, string phCode, string brCode)
 		{
             var processor = BrailleProcessor.CreateInstance();
-            var target = new ChineseWordConverter(processor);
+            var target = new TwChineseCharConverter(processor);
 
 			ContextTagManager context = new ContextTagManager();
 		
@@ -55,7 +55,7 @@ namespace BrailleToolkit.Tests
             ZhuyinPhraseTable.GetInstance().AddPhrase("斜 ㄨㄛˇ");
 
             var processor = BrailleProcessor.CreateInstance();
-            var target = new ChineseWordConverter(processor);
+            var target = new TwChineseCharConverter(processor);
 
             ContextTagManager context = new ContextTagManager();
 
@@ -75,7 +75,7 @@ namespace BrailleToolkit.Tests
         public void Should_ConvertInvalidWord_Fail(string text)
         {
             var processor = BrailleProcessor.CreateInstance();
-            var target = new ChineseWordConverter(processor);
+            var target = new TwChineseCharConverter(processor);
 
             ContextTagManager context = new ContextTagManager();
 
@@ -134,7 +134,7 @@ namespace BrailleToolkit.Tests
         public void Should_NoSpaceBetweenPunctuationAndParenthese(string input, List<BrailleWord> expected)
         {
             var processor = BrailleProcessor.CreateInstance();
-            var target = new ChineseWordConverter(processor);
+            var target = new TwChineseCharConverter(processor);
 
             ContextTagManager context = new ContextTagManager();
             var charStack = new Stack<char>(StrHelper.Reverse(input));
@@ -152,7 +152,7 @@ namespace BrailleToolkit.Tests
         public void Should_ConvertAllKindsOfEmdashes(string inputText)
         {
             var processor = BrailleProcessor.CreateInstance();
-            var target = new ChineseWordConverter(processor);
+            var target = new TwChineseCharConverter(processor);
 
             ContextTagManager context = new ContextTagManager();
 

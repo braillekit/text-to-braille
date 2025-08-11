@@ -92,7 +92,7 @@ namespace BrailleToolkit
 
             ControlTagConverter = new ContextTagConverter();
             ZhuyinConverter = zhuyinConverter;
-            ChineseConverter = new ChineseWordConverter(this);
+            ChineseConverter = new TwChineseCharConverter(this);
             EnglishConverter = new EnglishWordConverter(this);
             MathConverter = new MathConverter();
             _coordConverter = new CoordinateConverter();
@@ -156,7 +156,7 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得或設定中文點字轉換器。
         /// </summary>
-        public ChineseWordConverter ChineseConverter { get; set; }
+        public TwChineseCharConverter ChineseConverter { get; set; }
 
         /// <summary>
         /// 取得或設定英文點字轉換器。
@@ -263,9 +263,9 @@ namespace BrailleToolkit
                 ControlTagConverter = (ContextTagConverter)cvt;
                 return;
             }
-            if (cvt is ChineseWordConverter)
+            if (cvt is TwChineseCharConverter)
             {
-                ChineseConverter = (ChineseWordConverter)cvt;
+                ChineseConverter = (TwChineseCharConverter)cvt;
                 return;
             }
             if (cvt is EnglishWordConverter)
@@ -298,7 +298,7 @@ namespace BrailleToolkit
                 ControlTagConverter = null;
                 return;
             }
-            if (cvt is ChineseWordConverter)
+            if (cvt is TwChineseCharConverter)
             {
                 ChineseConverter = null;
                 return;

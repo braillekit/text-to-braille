@@ -14,7 +14,6 @@
   <ItemGroup>
     <None Remove="Data\BrailleCharTbl.txt" />
     <None Remove="Data\BrailleFontTbl.txt" />
-    <None Remove="Data\ChineseBrailleTable.xml" />
     <None Remove="Data\CoordinateBrailleTable.xml" />
     <None Remove="Data\EnglishBrailleTable.xml" />
     <None Remove="Data\MathBrailleTable.xml" />
@@ -27,7 +26,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Data\BrailleCharTbl.txt" />
     <EmbeddedResource Include="Data\BrailleFontTbl.txt" />
-    <EmbeddedResource Include="Data\ChineseBrailleTable.xml" />
+    <EmbeddedResource Include="Data\TwChineseBrailleTable.xml" />
     <EmbeddedResource Include="Data\CoordinateBrailleTable.xml" />
     <EmbeddedResource Include="Data\UrlBrailleTable.xml" />
     <EmbeddedResource Include="Data\EnglishBrailleTable.xml" />

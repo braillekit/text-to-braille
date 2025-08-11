@@ -12,23 +12,23 @@ namespace BrailleToolkit.Converters
     /// <summary>
     /// 中文點字轉換器。
     /// </summary>
-    public sealed class ChineseWordConverter : WordConverter
+    public sealed class TwChineseCharConverter : WordConverter
     {
-        private ChineseBrailleTable _brailleTable;
+        private TwChineseBrailleTable _brailleTable;
         private BrailleProcessor _processor;
 
         public ZhuyinReverseConverter ZhuyinConverter { get; set; }
 
-        public ChineseWordConverter(BrailleProcessor processor)
+        public TwChineseCharConverter(BrailleProcessor processor)
         {
-            _brailleTable = ChineseBrailleTable.CreateInstance();
+            _brailleTable = TwChineseBrailleTable.CreateInstance();
             _processor = processor;
             ZhuyinConverter = processor.ZhuyinConverter;
         }
 
         /// <summary>
         /// 從堆疊中讀取字元，並轉成點字。
-        /// 只處理 ChineseBrailleTable.xml 裡面有定義的符號，主要是中文字和中文標點符號。
+        /// 只處理 TwChineseBrailleTable.xml 裡面有定義的符號，主要是中文字和中文標點符號。
         /// </summary>
         /// <param name="charStack">字元堆疊。</param>
         /// <param name="context">情境物件。</param>
@@ -431,7 +431,7 @@ namespace BrailleToolkit.Converters
             // Note: use AppGlobals.Config.Braille.[property-name] to access braille configuration items.
 
             /* 秋華 2009-6-22：水平箭頭不用加 1246 點，其他箭頭固定都要。
-             * 所以直接用 ChineseBrailleTable.xml 中定義的就可以了，毋需根據組態檔調整。
+             * 所以直接用 TwChineseBrailleTable.xml 中定義的就可以了，毋需根據組態檔調整。
             if (brWord.Text.Equals("←") || brWord.Text.Equals("→") ||
                 brWord.Text.Equals("↑") || brWord.Text.Equals("↓")) 
             {

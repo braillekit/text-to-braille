@@ -6,7 +6,7 @@
 
         public static class DisplayText
         {
-            // 注意：必須與 Data/ChineseBrailleTable.xml 的內容一致。
+            // 注意：必須與 Data/TwChineseBrailleTable.xml 的內容一致。
 
             public const string SpecificName = "╴╴";
             public const string BookName = "﹏﹏";

@@ -112,7 +112,7 @@
       <FileName>Converters\EnglishWordConverter.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BrailleToolkit.Converters.ChineseWordConverter" Collapsed="true">
+  <Class Name="BrailleToolkit.Converters.TwChineseCharConverter" Collapsed="true">
     <Position X="2.75" Y="3" Width="1.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
@@ -120,7 +120,7 @@
     </Compartments>
     <TypeIdentifier>
       <HashCode>AABAAAAAIAAAAAAAEIAAAAAAAAQAAAAAAAACAQAAAAA=</HashCode>
-      <FileName>Converters\ChineseWordConverter.cs</FileName>
+      <FileName>Converters\TwChineseCharConverter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BrailleToolkit.Data.BrailleTableBase" Collapsed="true">

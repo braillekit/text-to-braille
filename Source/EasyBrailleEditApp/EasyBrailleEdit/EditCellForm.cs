@@ -19,7 +19,7 @@ namespace EasyBrailleEdit
     public partial class EditCellForm : Form
     {
         private BrailleProcessor _brProcessor;
-        private ChineseWordConverter _chineseConverter;
+        private TwChineseCharConverter _chineseConverter;
 
         private EditCellMode _editMode;
         private BrailleWord _brWord;

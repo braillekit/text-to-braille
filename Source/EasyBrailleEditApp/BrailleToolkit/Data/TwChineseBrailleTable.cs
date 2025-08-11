@@ -6,17 +6,17 @@ using System.Reflection;
 
 namespace BrailleToolkit.Data
 {
-    public sealed class ChineseBrailleTable : XmlBrailleTable
+    public sealed class TwChineseBrailleTable : XmlBrailleTable
     {
-        private static ChineseBrailleTable m_Instance = null;
+        private static TwChineseBrailleTable m_Instance = null;
 
-        private ChineseBrailleTable()
+        private TwChineseBrailleTable()
             : base()
         {
         }
 
         // 不開放這個 method
-        private ChineseBrailleTable(string filename) : base(filename)
+        private TwChineseBrailleTable(string filename) : base(filename)
         {
         }
 
@@ -24,23 +24,23 @@ namespace BrailleToolkit.Data
         /// 傳回 singleton 物件，並載入資源。
         /// </summary>
         /// <returns></returns>
-        public static ChineseBrailleTable GetInstance()
+        public static TwChineseBrailleTable GetInstance()
         {
             if (m_Instance == null)
             {
-                m_Instance = new ChineseBrailleTable();
+                m_Instance = new TwChineseBrailleTable();
                 m_Instance.LoadFromResource();
             }
             return m_Instance;
         }
 
         /// <summary>
-        /// Creates a new instance of ChineseBrailleTable.
+        /// Creates a new instance of TwChineseBrailleTable.
         /// </summary>
         /// <returns></returns>
-        public static ChineseBrailleTable CreateInstance()
+        public static TwChineseBrailleTable CreateInstance()
         {
-            var instance = new ChineseBrailleTable();
+            var instance = new TwChineseBrailleTable();
             instance.LoadFromResource();
             return instance;
         }

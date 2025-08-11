@@ -19,7 +19,10 @@ namespace BrailleToolkit
 
 
     /// <summary>
-    /// 代表一個中文字，內含注音碼與點字值。
+    /// 用來代表 BrailleLine 中的每一個元素，通常是一個字元，例如中文的「我」、英文的「A」。
+    /// 也可能是一個控制標籤（context tag），例如 "<數學>"`。
+    /// 當此物件的內容是一個中文字元時，除了其對應的點字之外，還會包含注音碼。
+    /// 備註：基於上述原因，此類別的名稱不是 BrailleChar，而是 BrailleWord。
     /// </summary>
     [Serializable]
     [DataContract]
@@ -655,7 +658,7 @@ namespace BrailleToolkit
         /// <returns></returns>
         public static bool IsChinesePunctuation(BrailleWord brWord)
         {
-            ChineseBrailleTable chtBrlTbl = ChineseBrailleTable.GetInstance();
+            TwChineseBrailleTable chtBrlTbl = TwChineseBrailleTable.GetInstance();
             string brCode = chtBrlTbl.GetPunctuationCode(brWord.Text);
             if (String.IsNullOrEmpty(brCode))
                 return false;
