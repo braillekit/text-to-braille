@@ -24,7 +24,7 @@ EasyBrailleEdit（易點雙視）是一套點字轉譯軟體，可用於製作�
 ## 特色
 
 * 可將一篇編輯好的文件自動轉成點字，並進行雙視編輯。
-* 支援英文一級點字。（TODO: 支援 Unified English Braille）
+* 支援英文一級點字。（**TODO:** [支援 Unified English Braille](https://github.com/braillekit/text-to-braille/issues/29)）
 * 支援台灣的中文點字與排版規則。
 * 支援部分數學點字（小學程度的數學）。
 * 支援音標點字。
