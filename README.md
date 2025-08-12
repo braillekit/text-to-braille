@@ -12,7 +12,7 @@ EasyBrailleEdit（易點雙視）是一套點字轉譯軟體，可用於製作�
 
 ## 使用方法
 
-作業平台：Windows 10 或 Windows 11。
+作業平台：Windows 10 或 Windows 11
 
 以下是使用此軟體來製作雙視文件的大致流程：
 
