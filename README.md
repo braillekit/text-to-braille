@@ -6,7 +6,7 @@
 
 EasyBrailleEdit（易點雙視）是一套點字轉譯軟體，可用於製作雙視教科書或任何雙視文件。
 
-> [!NOTE] In English
+> [!NOTE] English
 > EasyBrailleEdit is a braille transcription software developed by Huan-Lin Tsai to help transcribers provide blind students with braille textbooks.
 
 ## 使用方法
