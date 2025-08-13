@@ -57,13 +57,15 @@ namespace BrailleToolkit.Converters
                     foreach (var symbol in xdoc.Descendants("symbol"))
                     {
                         string text = symbol.Attribute("text")?.Value.ToLower();
-                        string code = symbol.Attribute("code")?.Value;
+                        string dots = symbol.Attribute("dots")?.Value;
                         string type = symbol.Attribute("type")?.Value;
 
-                        if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(code) || string.IsNullOrEmpty(type))
+                        if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(dots) || string.IsNullOrEmpty(type))
                         {
                             continue;
                         }
+
+                        string code = BrailleToolkit.Helpers.BrailleCellHelper.PositionNumbersToHexString(dots.Split(' '));
 
                         string name = symbol.Attribute("name")?.Value.ToLower();
                         if (string.IsNullOrEmpty(name))

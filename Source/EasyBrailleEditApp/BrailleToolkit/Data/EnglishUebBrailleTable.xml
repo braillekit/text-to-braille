@@ -7,103 +7,103 @@
 <Symbols>
 
   <!-- Grade 1 Letters (same as EBAE) -->
-  <symbol text="a" code="01" dots="1" type="Letter" />
-  <symbol text="b" code="03" dots="12" type="Letter" />
-  <symbol text="c" code="09" dots="14" type="Letter" />
-  <symbol text="d" code="19" dots="145" type="Letter" />
-  <symbol text="e" code="11" dots="15" type="Letter" />
-  <symbol text="f" code="0B" dots="124" type="Letter" />
-  <symbol text="g" code="1B" dots="1245" type="Letter" />
-  <symbol text="h" code="13" dots="125" type="Letter" />
-  <symbol text="i" code="0A" dots="24" type="Letter" />
-  <symbol text="j" code="1A" dots="245" type="Letter" />
-  <symbol text="k" code="05" dots="13" type="Letter" />
-  <symbol text="l" code="07" dots="123" type="Letter" />
-  <symbol text="m" code="0D" dots="134" type="Letter" />
-  <symbol text="n" code="1D" dots="1345" type="Letter" />
-  <symbol text="o" code="0F" dots="1234" type="Letter" />
-  <symbol text="p" code="1F" dots="12345" type="Letter" />
-  <symbol text="q" code="17" dots="1235" type="Letter" />
-  <symbol text="r" code="17" dots="1235" type="Letter" />
-  <symbol text="s" code="0E" dots="234" type="Letter" />
-  <symbol text="t" code="1E" dots="2345" type="Letter" />
-  <symbol text="u" code="25" dots="136" type="Letter" />
-  <symbol text="v" code="27" dots="1236" type="Letter" />
-  <symbol text="w" code="3A" dots="2456" type="Letter" />
-  <symbol text="x" code="2D" dots="1346" type="Letter" />
-  <symbol text="y" code="3D" dots="13456" type="Letter" />
-  <symbol text="z" code="35" dots="1356" type="Letter" />
+  <symbol text="a" dots="1" type="Letter" />
+  <symbol text="b" dots="12" type="Letter" />
+  <symbol text="c" dots="14" type="Letter" />
+  <symbol text="d" dots="145" type="Letter" />
+  <symbol text="e" dots="15" type="Letter" />
+  <symbol text="f" dots="124" type="Letter" />
+  <symbol text="g" dots="1245" type="Letter" />
+  <symbol text="h" dots="125" type="Letter" />
+  <symbol text="i" dots="24" type="Letter" />
+  <symbol text="j" dots="245" type="Letter" />
+  <symbol text="k" dots="13" type="Letter" />
+  <symbol text="l" dots="123" type="Letter" />
+  <symbol text="m" dots="134" type="Letter" />
+  <symbol text="n" dots="1345" type="Letter" />
+  <symbol text="o" dots="1234" type="Letter" />
+  <symbol text="p" dots="12345" type="Letter" />
+  <symbol text="q" dots="1235" type="Letter" />
+  <symbol text="r" dots="1235" type="Letter" />
+  <symbol text="s" dots="234" type="Letter" />
+  <symbol text="t" dots="2345" type="Letter" />
+  <symbol text="u" dots="136" type="Letter" />
+  <symbol text="v" dots="1236" type="Letter" />
+  <symbol text="w" dots="2456" type="Letter" />
+  <symbol text="x" dots="1346" type="Letter" />
+  <symbol text="y" dots="13456" type="Letter" />
+  <symbol text="z" dots="1356" type="Letter" />
 
   <!-- Punctuation (UEB Style) -->
-  <symbol text="." code="32" dots="256" name="full stop" />
-  <symbol text="," code="02" dots="2" name="comma" />
-  <symbol text="?" code="26" dots="236" name="question mark" />
-  <symbol text="'" code="04" dots="3" name="apostrophe" />
-  <symbol text="(" code="2036" dots="6 2356" name="opening parenthesis" />
-  <symbol text=")" code="3604" dots="2356 3" name="closing parenthesis" />
+  <symbol text="." dots="256" name="full stop" />
+  <symbol text="," dots="2" name="comma" />
+  <symbol text="?" dots="236" name="question mark" />
+  <symbol text="'" dots="3" name="apostrophe" />
+  <symbol text="(" dots="6 2356" name="opening parenthesis" />
+  <symbol text=")" dots="2356 3" name="closing parenthesis" />
 
   <!-- Special Marks -->
-  <symbol text="CapitalSign" code="20" dots="6" type="Mark" />
-  <symbol text="NumberSign" code="3C" dots="3456" type="Mark" />
+  <symbol text="CapitalSign" dots="6" type="Mark" />
+  <symbol text="NumberSign" dots="3456" type="Mark" />
 
   <!-- ===================================================== -->
   <!-- Grade 2 - Alphabetic Wordsigns (Strong Wordsigns)   -->
   <!-- These stand for common words.                       -->
   <!-- ===================================================== -->
-  <symbol text="but" code="03" dots="12" type="WordSign" />
-  <symbol text="can" code="09" dots="14" type="WordSign" />
-  <symbol text="do" code="19" dots="145" type="WordSign" />
-  <symbol text="every" code="11" dots="15" type="WordSign" />
-  <symbol text="from" code="0B" dots="124" type="WordSign" />
-  <symbol text="go" code="1B" dots="1245" type="WordSign" />
-  <symbol text="have" code="13" dots="125" type="WordSign" />
-  <symbol text="just" code="1A" dots="245" type="WordSign" />
-  <symbol text="knowledge" code="05" dots="13" type="WordSign" />
-  <symbol text="like" code="07" dots="123" type="WordSign" />
-  <symbol text="more" code="0D" dots="134" type="WordSign" />
-  <symbol text="not" code="1D" dots="1345" type="WordSign" />
-  <symbol text="people" code="0F" dots="1234" type="WordSign" />
-  <symbol text="quite" code="1F" dots="12345" type="WordSign" />
-  <symbol text="rather" code="17" dots="1235" type="WordSign" />
-  <symbol text="so" code="0E" dots="234" type="WordSign" />
-  <symbol text="that" code="1E" dots="2345" type="WordSign" />
-  <symbol text="us" code="25" dots="136" type="WordSign" />
-  <symbol text="very" code="27" dots="1236" type="WordSign" />
-  <symbol text="will" code="3A" dots="2456" type="WordSign" />
-  <symbol text="it" code="2D" dots="1346" type="WordSign" />
-  <symbol text="you" code="3D" dots="13456" type="WordSign" />
-  <symbol text="as" code="35" dots="1356" type="WordSign" />
+  <symbol text="but" dots="12" type="WordSign" />
+  <symbol text="can" dots="14" type="WordSign" />
+  <symbol text="do" dots="145" type="WordSign" />
+  <symbol text="every" dots="15" type="WordSign" />
+  <symbol text="from" dots="124" type="WordSign" />
+  <symbol text="go" dots="1245" type="WordSign" />
+  <symbol text="have" dots="125" type="WordSign" />
+  <symbol text="just" dots="245" type="WordSign" />
+  <symbol text="knowledge" dots="13" type="WordSign" />
+  <symbol text="like" dots="123" type="WordSign" />
+  <symbol text="more" dots="134" type="WordSign" />
+  <symbol text="not" dots="1345" type="WordSign" />
+  <symbol text="people" dots="1234" type="WordSign" />
+  <symbol text="quite" dots="12345" type="WordSign" />
+  <symbol text="rather" dots="1235" type="WordSign" />
+  <symbol text="so" dots="234" type="WordSign" />
+  <symbol text="that" dots="2345" type="WordSign" />
+  <symbol text="us" dots="136" type="WordSign" />
+  <symbol text="very" dots="1236" type="WordSign" />
+  <symbol text="will" dots="2456" type="WordSign" />
+  <symbol text="it" dots="1346" type="WordSign" />
+  <symbol text="you" dots="13456" type="WordSign" />
+  <symbol text="as" dots="1356" type="WordSign" />
 
   <!-- ===================================================== -->
   <!-- Grade 2 - Strong Groupsigns                         -->
   <!-- These represent common letter groups.               -->
   <!-- ===================================================== -->
-  <symbol text="and" code="2F" dots="12346" type="GroupSign" />
-  <symbol text="for" code="3F" dots="123456" type="GroupSign" />
-  <symbol text="of" code="37" dots="12356" type="GroupSign" />
-  <symbol text="the" code="3A" dots="2456" type="GroupSign" />
-  <symbol text="with" code="3F" dots="123456" type="GroupSign" />
-  <symbol text="ch" code="21" dots="16" type="GroupSign" />
-  <symbol text="gh" code="23" dots="126" type="GroupSign" />
-  <symbol text="sh" code="29" dots="146" type="GroupSign" />
-  <symbol text="th" code="2B" dots="1246" type="GroupSign" />
-  <symbol text="wh" code="23" dots="126" type="GroupSign" />
-  <symbol text="ed" code="2D" dots="1346" type="GroupSign" />
-  <symbol text="er" code="2E" dots="2346" type="GroupSign" />
-  <symbol text="ou" code="31" dots="156" type="GroupSign" />
-  <symbol text="ow" code="3A" dots="2456" type="GroupSign" />
+  <symbol text="and" dots="12346" type="GroupSign" />
+  <symbol text="for" dots="123456" type="GroupSign" />
+  <symbol text="of" dots="12356" type="GroupSign" />
+  <symbol text="the" dots="2456" type="GroupSign" />
+  <symbol text="with" dots="123456" type="GroupSign" />
+  <symbol text="ch" dots="16" type="GroupSign" />
+  <symbol text="gh" dots="126" type="GroupSign" />
+  <symbol text="sh" dots="146" type="GroupSign" />
+  <symbol text="th" dots="1246" type="GroupSign" />
+  <symbol text="wh" dots="126" type="GroupSign" />
+  <symbol text="ed" dots="1346" type="GroupSign" />
+  <symbol text="er" dots="2346" type="GroupSign" />
+  <symbol text="ou" dots="156" type="GroupSign" />
+  <symbol text="ow" dots="2456" type="GroupSign" />
   
   <!-- ===================================================== -->
   <!-- Grade 2 - Short-form Words                          -->
   <!-- Commonly used words written in a shortened form.    -->
   <!-- ===================================================== -->
-  <symbol text="ab" code="0103" dots="1 12" type="ShortForm" name="about" />
-  <symbol text="abv" code="010327" dots="1 12 1236" type="ShortForm" name="above" />
-  <symbol text="ac" code="0109" dots="1 14" type="ShortForm" name="according" />
-  <symbol text="acr" code="010917" dots="1 14 1235" type="ShortForm" name="across" />
-  <symbol text="af" code="010B" dots="1 124" type="ShortForm" name="after" />
-  <symbol text="aln" code="01071D" dots="1 123 1345" type="ShortForm" name="almost" />
-  <symbol text="alr" code="010717" dots="1 123 1235" type="ShortForm" name="already" />
-  <symbol text="brl" code="031707" dots="12 1235 123" type="ShortForm" name="braille" />
+  <symbol text="ab" dots="1 12" type="ShortForm" name="about" />
+  <symbol text="abv" dots="1 12 1236" type="ShortForm" name="above" />
+  <symbol text="ac" dots="1 14" type="ShortForm" name="according" />
+  <symbol text="acr" dots="1 14 1235" type="ShortForm" name="across" />
+  <symbol text="af" dots="1 124" type="ShortForm" name="after" />
+  <symbol text="aln" dots="1 123 1345" type="ShortForm" name="almost" />
+  <symbol text="alr" dots="1 123 1235" type="ShortForm" name="already" />
+  <symbol text="brl" dots="12 1235 123" type="ShortForm" name="braille" />
 
 </Symbols>
