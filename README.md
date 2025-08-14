@@ -50,5 +50,5 @@ AI-generated document: [GEMINI.md](Source/EasyBrailleEditApp/GEMINI.md)
 
 ## 授權條款
 
-本專案從 2025-08-06 開始開放原始碼，採用之授權條款為 GNU Lesser General Public License v3.0。
+本專案從 2025-08-14 開始開放原始碼，採用之授權條款為 GNU Lesser General Public License v3.0。
 
