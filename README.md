@@ -52,5 +52,8 @@ AI-generated document: [GEMINI.md](Source/EasyBrailleEditApp/GEMINI.md)
 
 ## 授權條款
 
-本專案從 2025-08-14 開始開放原始碼，採用之授權條款為 GNU Lesser General Public License v3.0。
+本專案從 2025 年 8 月 開始開放原始碼，授權條款為 [GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.html) ，簡稱 LGPL v3。簡言之：
+
+- 如果你參考了此專案的原始碼，進行了一些改動之後再發佈，則你的產品必須同樣採用 LGPL v3 的開源授權協定，並於 LGPL 協議當中說明修改了哪些地方。
+- 如果僅是針對此專案的原始碼進行任何調用、連接，而沒有打包在你的產品內，也沒有做任何修改和再利用，則你的產品可以不用開源，也就是可以封閉並作為商業用途。
 
