@@ -4,7 +4,7 @@
 
 ## 簡介
 
-EasyBrailleEdit（易點雙視）是一套點字轉譯軟體，可用於製作雙視教科書或任何雙視文件。
+EasyBrailleEdit（易點雙視）是一套中英文點字轉譯軟體，可用於製作雙視教科書或任何雙視文件。
 
 > **In English**
 >
@@ -52,5 +52,8 @@ AI-generated document: [GEMINI.md](Source/EasyBrailleEditApp/GEMINI.md)
 
 ## 授權條款
 
-本專案從 2025-08-14 開始開放原始碼，採用之授權條款為 GNU Lesser General Public License v3.0。
+本專案從 2025 年 8 月 開始開放原始碼，授權條款為 [GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.html) ，簡稱 LGPL v3。簡言之：
+
+- 若修改並發佈程式碼 → 必須遵循 LGPL v3，亦即同樣必須開放原始碼，且公開修改內容。
+- 若僅是調用或連結原始碼，且沒有將此專案的程式碼和函式庫打包在你的產品內 → 你的產品可以是封閉商業軟體。
 
