@@ -6,6 +6,7 @@ using EasyBrailleEdit.Printing;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
 using Huanlin.Windows.Sys;
+using Microsoft.VisualBasic;
 using ScintillaNET;
 using ScintillaNET_FindReplaceDialog;
 using Serilog;
@@ -818,7 +819,7 @@ namespace EasyBrailleEdit
             {
                 ClientPath = Application.StartupPath,
                 ServerUri = AppGlobals.Config.General.AutoUpdateFilesUrl,
-                ChangeLogFileName = "ChangeLog.txt"
+                ChangeLogFileName = Constant.ChangeLogFileName
             };
 
             // debug using local update feed.
@@ -826,7 +827,7 @@ namespace EasyBrailleEdit
 
             try
             {
-                await updater.GetUpdateListAsync();
+                await updater.GetUpdateListAsync(Constant.DefaultAutoUpdateFileListName);
             }
             catch (Exception ex)
             {

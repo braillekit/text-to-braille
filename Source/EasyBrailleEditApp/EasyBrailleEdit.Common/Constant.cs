@@ -6,9 +6,12 @@ public static class Constant
     public const string ProductVersionName = "開源社群版";
     public const string ProjectUrl = "https://github.com/braillekit/text-to-braille";
     public const string FacebookPageUrl = "https://www.facebook.com/easybraille/";
+    
+    public const string DefaultAutoUpdateRootUrl = "https://raw.githubusercontent.com/braillekit/text-to-braille-updates/refs/heads/main/";
+    public const string DefaultAutoUpdateFilesUrl = DefaultAutoUpdateRootUrl + "Files/";
+    public const string DefaultAutoUpdateFileListName = "_updates.txt";
 
-    public const string DefaultAutoUpdateRootUrl = "https://raw.githubusercontent.com/huanlin/easy-braille-edit/Update4/";
-    public const string DefaultAutoUpdateFilesUrl = DefaultAutoUpdateRootUrl + "UpdateFiles/";
+    public const string ChangeLogFileName = "ChangeLog.md";
 
     // 預設一行最大方數
     public const int DefaultCellsPerLine = 40;

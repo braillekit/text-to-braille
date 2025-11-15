@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.17763.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>EasyBrailleEdit</RootNamespace>
     <AssemblyName>EasyBrailleEdit</AssemblyName>
@@ -12,6 +12,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <BaseOutputPath>..\..\..\Output\EasyBrailleEdit</BaseOutputPath>
     <ApplicationIcon>app.ico</ApplicationIcon>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,8 +28,8 @@
 
   <ItemGroup>
     <PackageReference Include="fernandreu.ScintillaNET" Version="4.2.0" />
-    <PackageReference Include="Huanlin.Common" Version="5.3.4" />
-    <PackageReference Include="Huanlin.Windows" Version="5.3.4" />
+    <PackageReference Include="Huanlin.Common" Version="5.4.1" />
+    <PackageReference Include="Huanlin.Windows" Version="5.4.1" />
     <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -315,6 +316,9 @@
       <TransformOnBuild>true</TransformOnBuild>
     </None>
     <None Update="app.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ChangeLog.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Phrase.phf">

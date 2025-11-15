@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32120.378
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Txt2Brl", "Txt2Brl\Txt2Brl.csproj", "{FFAC9544-90F3-4441-B776-24FAF4F325BE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{CECA7BC5-3A2D-474F-9478-D37863ADD2ED}"
 	ProjectSection(SolutionItems) = preProject
-		ChangeLog-v5.0.0.md = ChangeLog-v5.0.0.md
-		..\..\Doc\ChangeLog.txt = ..\..\Doc\ChangeLog.txt
+		..\..\Doc\ChangeLog-before-v5.txt = ..\..\Doc\ChangeLog-before-v5.txt
 		GEMINI.md = GEMINI.md
+		ChangeLog.md = ChangeLog.md
 		..\..\LICENSE.md = ..\..\LICENSE.md
 		..\..\README.md = ..\..\README.md
 		..\..\Doc\ReleaseNote.txt = ..\..\Doc\ReleaseNote.txt

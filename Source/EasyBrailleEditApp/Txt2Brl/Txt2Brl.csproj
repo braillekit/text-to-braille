@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.17763.0</TargetFramework>
     <Authors>Michael Tsai</Authors>
     <Company>Michael Tsai</Company>
     <Copyright>Copyright (c) 2008-2025 Michael Tsai (蔡煥麟)</Copyright>
@@ -12,7 +12,7 @@
     <Nullable>disable</Nullable>
     <Description>TxtBrl 是易點雙視（EasyBraillEdit）的命令列工具，用途是將文字檔案轉換成點字檔案。</Description>
     <BaseOutputPath>..\..\..\Output\Txt2Brl</BaseOutputPath>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="Huanlin.Common" Version="5.3.4" />
+    <PackageReference Include="Huanlin.Common" Version="5.4.1" />
     <PackageReference Include="MinVer" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
