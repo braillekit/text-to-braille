@@ -1108,7 +1108,8 @@ namespace EasyBrailleEdit
         private void ShowRevisionHistory()
         {
             // 用記事本開啟 ChangeLog.
-            string changeLogFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\ChangeLog.txt";
+            var changeLogFileName = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath)!, Constant.ChangeLogFileName);
+
             if (File.Exists(changeLogFileName))
             {
                 Process.Start("NotePad.exe", changeLogFileName);
