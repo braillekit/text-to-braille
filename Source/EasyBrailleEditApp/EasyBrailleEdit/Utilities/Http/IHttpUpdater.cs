@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Net;
-using System.Net.Http.Handlers;
 using System.Threading.Tasks;
 
-namespace Huanlin.Common.Http
+namespace EasyBrailleEdit.Utilities.Http
 {
     /*
         此介面定義了可透過 HTTP 協定來執行應用程式自動更新檔案的行為。
@@ -86,7 +84,7 @@ namespace Huanlin.Common.Http
 
         event EventHandler<HttpUpdaterFileEventArgs> FileUpdated;
 
-        event EventHandler<HttpProgressEventArgs> DownloadProgressChanged;
+        event EventHandler<DownloadProgress> DownloadProgressChanged;
 
         #endregion 事件
     }

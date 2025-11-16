@@ -6,7 +6,6 @@ using EasyBrailleEdit.Printing;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
 using Huanlin.Windows.Sys;
-using Microsoft.VisualBasic;
 using ScintillaNET;
 using ScintillaNET_FindReplaceDialog;
 using Serilog;
@@ -815,7 +814,7 @@ namespace EasyBrailleEdit
 
         private async Task<bool> DoUpdateAsync(bool autoMode)
         {
-            var updater = new Huanlin.Common.Http.HttpUpdater()
+            var updater = new Utilities.Http.HttpUpdater()
             {
                 ClientPath = Application.StartupPath,
                 ServerUri = AppGlobals.Config.General.AutoUpdateFilesUrl,

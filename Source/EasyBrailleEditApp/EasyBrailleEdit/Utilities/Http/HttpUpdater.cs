@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
+using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Handlers;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Huanlin.Common.Http
+namespace EasyBrailleEdit.Utilities.Http
 {
     /*
         此類別可利用 HTTP 協定檢查以及下載應用程式的更新檔案。若其中有一個檔案下載失敗，就會整批 rollback（把先前下載的檔案刪除）。
@@ -398,7 +395,10 @@ namespace Huanlin.Common.Http
             // execute the following line even for check runs
             List<RollbackItem> rollBackList = new List<RollbackItem>();
 
-            var httpDownloader = new HttpDownloader(OnDownloadProgress, noCache: true);
+            var progress = new Progress<DownloadProgress>(p =>
+            {
+                DownloadProgressChanged?.Invoke(this, p);
+            });
 
             try
             {
@@ -428,7 +428,7 @@ namespace Huanlin.Common.Http
                             // Logger.Debug($"正在下載檔案，來源: {serverFileUrl}，目的： {tempFileName}");
 
                             // 1.下載檔案並存成暫時檔名
-                            await httpDownloader.DownloadAsync(new Uri(serverFileUrl), tempFileName);
+                            await HttpDownloader.DownloadFileAsync(serverFileUrl, tempFileName, progress);
 
                             if (!FileExistsAndNotEmpty(tempFileName))	// 檢查檔案下載是否成功
                             {
@@ -508,15 +508,6 @@ namespace Huanlin.Common.Http
             }
         }
 
-        private void OnDownloadProgress(object sender, HttpProgressEventArgs e)
-        {
-            //Console.WriteLine($"{e.ProgressPercentage}% {e.BytesTransferred} of {e.TotalBytes}");
-            if (DownloadProgressChanged != null)
-            {
-                DownloadProgressChanged(sender, e);
-            }
-        }
-
         protected virtual void OnFileUpdating(HttpUpdaterFileEventArgs e) => FileUpdating?.Invoke(this, e);
 
         protected virtual void OnFileUpdated(HttpUpdaterFileEventArgs e) => FileUpdated?.Invoke(this, e);
@@ -572,7 +563,7 @@ namespace Huanlin.Common.Http
 
         public event EventHandler<HttpUpdaterFileEventArgs> FileUpdated;
 
-        public event EventHandler<HttpProgressEventArgs> DownloadProgressChanged;
+        public event EventHandler<DownloadProgress> DownloadProgressChanged;
 
         #endregion
 
