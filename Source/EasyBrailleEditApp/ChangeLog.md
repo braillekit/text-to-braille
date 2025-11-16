@@ -11,10 +11,11 @@
 - 自動更新的檔案來源改為以下 GitHub 網址（此設定在應用程式目錄下的 AppConfig.ini 檔案中）：
   https://raw.githubusercontent.com/braillekit/text-to-braille-updates/refs/heads/main/Files/
 
-## Developer features
+## Details for developers
 
 - Use GitHub Actions for CI/CD.
 - 使用 Central Package Management (CPM) 來統一管理相依套件的版本。
+- 重構 C# 程式碼以符合最現代 C# 語法和最佳實踐。
 
 ## Release instructions
 
@@ -22,5 +23,5 @@ Tag a specific commit with a version:
 
 ```bash
 git tag v5.0.0
-git push origin v5.0.0
+git push origin v5.0.0 --force
 ```		
