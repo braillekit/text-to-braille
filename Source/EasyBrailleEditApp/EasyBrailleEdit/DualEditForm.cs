@@ -18,7 +18,7 @@ namespace EasyBrailleEdit
         private DualEditFindForm m_FindForm;
         private UndoBufferForm _undoBufferForm;
 
-        private Timer clearStatusTimer = new Timer();
+        private System.Windows.Forms.Timer clearStatusTimer = new System.Windows.Forms.Timer();
 
         public BrailleDocument BrailleDoc
         {

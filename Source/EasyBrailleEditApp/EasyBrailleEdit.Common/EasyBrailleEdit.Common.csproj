@@ -2,14 +2,12 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net10.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <RootNamespace>EasyBrailleEdit.Common</RootNamespace>
     <IsPackable>False</IsPackable>
     <NoWarn>CS0649;CS0169</NoWarn>
     <ApplicationIcon />
     <StartupObject />
-    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

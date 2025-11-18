@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11205.157 d18.0
+VisualStudioVersion = 18.0.11205.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Txt2Brl", "Txt2Brl\Txt2Brl.csproj", "{FFAC9544-90F3-4441-B776-24FAF4F325BE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{CECA7BC5-3A2D-474F-9478-D37863ADD2ED}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\Doc\ChangeLog-before-v5.txt = ..\..\Doc\ChangeLog-before-v5.txt
-		GEMINI.md = GEMINI.md
 		ChangeLog.md = ChangeLog.md
+		GEMINI.md = GEMINI.md
 		..\..\LICENSE.md = ..\..\LICENSE.md
 		..\..\README.md = ..\..\README.md
 		..\..\Doc\ReleaseNote.txt = ..\..\Doc\ReleaseNote.txt
@@ -32,6 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyBrailleEdit", "EasyBrai
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
 		..\..\.github\workflows\dotnet-desktop.yml = ..\..\.github\workflows\dotnet-desktop.yml
 	EndProjectSection
 EndProject
