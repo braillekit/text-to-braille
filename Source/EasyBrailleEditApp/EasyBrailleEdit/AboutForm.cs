@@ -26,18 +26,13 @@ namespace EasyBrailleEdit
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try 
+            var psi = new ProcessStartInfo
             {
-                Process.Start(linkLabel1.Text);
-            }
-            catch 
-            {
-                Process process = new Process();
-                process.StartInfo.FileName = "iexplore.exe";
-                process.StartInfo.Arguments = linkLabel1.Text;
-                process.StartInfo.UseShellExecute = true;
-                process.Start();
-            }
+                FileName = "cmd.exe",
+                Arguments = $"/c start {linkLabel1.Text}",
+                UseShellExecute = true
+            };
+            Process.Start(psi);
         }
 
         private void UpdateUI()
