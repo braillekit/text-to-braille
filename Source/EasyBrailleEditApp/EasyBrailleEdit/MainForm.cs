@@ -3,23 +3,16 @@ using BrailleToolkit.Helpers;
 using EasyBrailleEdit.Common;
 using EasyBrailleEdit.Forms;
 using EasyBrailleEdit.Printing;
+using EasyBrailleEdit.Utilities.Windows;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
-using Huanlin.Windows.Sys;
 using ScintillaNET;
 using ScintillaNET_FindReplaceDialog;
 using Serilog;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.Drawing.Printing;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace EasyBrailleEdit
 {
