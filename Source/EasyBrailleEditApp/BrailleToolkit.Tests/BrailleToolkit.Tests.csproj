@@ -28,4 +28,13 @@
     <ProjectReference Include="..\..\EasyBrailleEditApp\BrailleToolkit\BrailleToolkit.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestData\Thakur-poem.brx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Thakur-poem.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
