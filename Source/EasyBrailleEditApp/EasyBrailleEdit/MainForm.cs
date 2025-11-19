@@ -3,7 +3,7 @@ using BrailleToolkit.Helpers;
 using EasyBrailleEdit.Common;
 using EasyBrailleEdit.Forms;
 using EasyBrailleEdit.Printing;
-using EasyBrailleEdit.Utilities.Windows;
+using EasyBrailleEdit.Common.Utilities.Windows;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
 using ScintillaNET;
@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing.Printing;
 using System.Text;
+using EasyBrailleEdit.Common.Utilities.Http;
 
 namespace EasyBrailleEdit
 {
@@ -801,7 +802,7 @@ namespace EasyBrailleEdit
 
         private async Task<bool> DoUpdateAsync(bool autoMode)
         {
-            var updater = new Utilities.Http.HttpUpdater()
+            var updater = new HttpUpdater()
             {
                 ClientPath = Application.StartupPath,
                 ServerUri = AppGlobals.Config.General.AutoUpdateFilesUrl,

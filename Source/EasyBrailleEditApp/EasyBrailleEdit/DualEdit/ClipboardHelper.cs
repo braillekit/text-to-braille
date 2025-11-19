@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BrailleToolkit;
-using Huanlin.Common.Helpers;
-using SourceGrid;
+﻿using BrailleToolkit;
+using EasyBrailleEdit.Common.Utilities;
 
 namespace EasyBrailleEdit.DualEdit
 {

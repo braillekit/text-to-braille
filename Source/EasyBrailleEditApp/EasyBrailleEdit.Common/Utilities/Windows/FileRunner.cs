@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Text;
 
-namespace EasyBrailleEdit.Utilities.Windows;
+namespace EasyBrailleEdit.Common.Utilities.Windows;
 
 /// <summary>
 /// 此類別可用來執行檔案。

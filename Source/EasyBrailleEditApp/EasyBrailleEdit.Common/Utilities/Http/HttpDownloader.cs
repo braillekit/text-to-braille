@@ -1,10 +1,4 @@
-using System;
-using System.IO;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace EasyBrailleEdit.Utilities.Http
+namespace EasyBrailleEdit.Common.Utilities.Http
 {
     public static class HttpDownloader
     {

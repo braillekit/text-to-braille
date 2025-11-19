@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace EasyBrailleEdit.Utilities.Http
+﻿namespace EasyBrailleEdit.Common.Utilities.Http
 {
     /*
         此介面定義了可透過 HTTP 協定來執行應用程式自動更新檔案的行為。

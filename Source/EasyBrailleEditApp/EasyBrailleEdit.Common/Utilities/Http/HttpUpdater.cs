@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Diagnostics;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 
-namespace EasyBrailleEdit.Utilities.Http
+namespace EasyBrailleEdit.Common.Utilities.Http
 {
     /*
         此類別可利用 HTTP 協定檢查以及下載應用程式的更新檔案。若其中有一個檔案下載失敗，就會整批 rollback（把先前下載的檔案刪除）。

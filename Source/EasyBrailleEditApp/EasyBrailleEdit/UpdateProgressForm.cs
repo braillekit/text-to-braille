@@ -1,4 +1,4 @@
-﻿using EasyBrailleEdit.Utilities.Http;
+﻿using EasyBrailleEdit.Common.Utilities.Http;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;

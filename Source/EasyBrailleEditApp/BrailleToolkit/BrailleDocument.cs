@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
-using BrailleToolkit.Helpers;
+﻿using BrailleToolkit.Helpers;
+using EasyBrailleEdit.Common.Utilities;
 using Huanlin.Common.Helpers;
-using NChinese.Phonetic;
 using Serilog;
+using System.Runtime.Serialization;
+using System.Text;
 
 namespace BrailleToolkit
 {
