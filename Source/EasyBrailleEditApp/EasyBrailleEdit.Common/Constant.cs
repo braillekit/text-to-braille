@@ -26,6 +26,7 @@ public static class Constant
     public static class Files
     {
         public const string DefaultMainBrailleFileExt = ".brx";    // 預設的點字檔副檔名 (v1為 .btx；v2 為 .brlj)
+        public const string DefaultYamlBrailleFileExt = ".byml";   // 雙視檔案 YAML 格式
         public const string DefaultPrintableBrailleFileExt = ".brp"; // p 代表 print
 
         // 暫存檔案
@@ -35,8 +36,8 @@ public static class Constant
         public const string CvtErrorCharFileName = "cvt_errchar.tmp";       // 儲存轉換失敗的字元資訊
         public const string CvtResultFileName = "cvt_result.tmp";   // 儲存成功或失敗的旗號以及錯誤訊息
 
-        public static string MainFileNameFilter = $"雙視檔案 3.x 版 (*{DefaultMainBrailleFileExt})|*{DefaultMainBrailleFileExt}|雙視檔案 2.x 版 (*.brlj)|*.brlj|所有檔案|*.*";
-        public static string SaveAsFileNameFilter = $"雙視檔案 (*{DefaultMainBrailleFileExt})|*{DefaultMainBrailleFileExt}";
+        public static string MainFileNameFilter = $"雙視檔案 3.x 版 (*{DefaultMainBrailleFileExt})|*{DefaultMainBrailleFileExt}|雙視檔案 YAML 格式 (*{DefaultYamlBrailleFileExt})|*{DefaultYamlBrailleFileExt}|雙視檔案 2.x 版 (*.brlj)|*.brlj|所有檔案|*.*";
+        public static string SaveAsFileNameFilter = $"雙視檔案 (*{DefaultMainBrailleFileExt})|*{DefaultMainBrailleFileExt}|雙視檔案 YAML 格式 (*{DefaultYamlBrailleFileExt})|*{DefaultYamlBrailleFileExt}";
 
         public static string SavePrintableBrailleFileNameFilter = $"用於列印的點字檔案(*{DefaultPrintableBrailleFileExt})|*{DefaultPrintableBrailleFileExt}";
     }

@@ -209,6 +209,14 @@ namespace BrailleToolkit
                 throw new FileNotFoundException("檔案不存在: " + filename);
             }
 
+            string ext = Path.GetExtension(filename);
+            if (ext != null && ext.Equals(".byml", StringComparison.OrdinalIgnoreCase))
+            {
+                var doc = BrailleDocumentYamlSerializer.LoadFromYamlFile(filename);
+                FixInvalidLines(doc);
+                return doc;
+            }
+
             string jsonStr = File.ReadAllText(filename);
             BrailleDocument brDoc = JsonHelper.Deserialize<BrailleDocument>(jsonStr);
             FixInvalidLines(brDoc);
@@ -237,6 +245,13 @@ namespace BrailleToolkit
         public void SaveBrailleFile(string filename)
         {
             UpdateTitlesLineIndex();
+
+            string ext = Path.GetExtension(filename);
+            if (ext != null && ext.Equals(".byml", StringComparison.OrdinalIgnoreCase))
+            {
+                BrailleDocumentYamlSerializer.SaveToYamlFile(this, filename);
+                return;
+            }
 
             string jsonStr = JsonHelper.Serialize<BrailleDocument>(this);
             File.WriteAllText(filename, jsonStr);

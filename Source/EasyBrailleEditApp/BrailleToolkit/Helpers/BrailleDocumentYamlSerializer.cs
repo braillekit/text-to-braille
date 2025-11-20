@@ -49,5 +49,21 @@ namespace BrailleToolkit.Helpers
             var deserializer = CreateDeserializer();
             return deserializer.Deserialize<BrailleDocument>(reader);
         }
+
+        public static void SaveToYamlFile(BrailleDocument doc, string filename)
+        {
+            using (var writer = new StreamWriter(filename, false, Encoding.UTF8))
+            {
+                Serialize(doc, writer);
+            }
+        }
+
+        public static BrailleDocument LoadFromYamlFile(string filename)
+        {
+            using (var reader = new StreamReader(filename, Encoding.UTF8))
+            {
+                return Deserialize(reader);
+            }
+        }
     }
 }
