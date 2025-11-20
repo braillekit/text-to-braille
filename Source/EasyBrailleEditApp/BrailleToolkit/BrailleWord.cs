@@ -44,6 +44,14 @@ namespace BrailleToolkit
 
         //private bool m_QuotationResolved;	// 是否已經識別出左右引號（英文的單引號和雙引號都是同一個符號，但點字不同）
 
+        /// <summary>
+        /// 預設建構函式，主要為了支援 System.Text.Json 反序列化。
+        /// 初始化為空字串與空集合，避免 NullReferenceException。
+        /// </summary>
+        public BrailleWord() : this(string.Empty)
+        {
+        }
+
         public BrailleWord(string text)
         {
             Text = text;

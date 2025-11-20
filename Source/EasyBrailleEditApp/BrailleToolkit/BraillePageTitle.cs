@@ -25,7 +25,7 @@ namespace BrailleToolkit
 
         public BrailleLine BeginLineRef { get; private set; }
 
-        private BraillePageTitle()
+        public BraillePageTitle()
         {
             m_TitleLine = null;
             m_BeginLineIndex = -1;
@@ -34,7 +34,6 @@ namespace BrailleToolkit
         public BraillePageTitle(List<BrailleWord> words, int beginLineIdx, BrailleLine beginLine)
         {
             SetTitleLine(words, beginLineIdx, beginLine);
-
         }
 
         public BraillePageTitle(BrailleLine titleLine, int beginLineIdx, BrailleLine beginLine) : this()
@@ -93,7 +92,7 @@ namespace BrailleToolkit
             BeginLineRef = brDoc.Lines[m_BeginLineIndex];
             return true;
         }
-        
+
         public BrailleLine TitleLine
         {
             get { return m_TitleLine; }
@@ -128,20 +127,20 @@ namespace BrailleToolkit
             return text;
         }
 
-		#region ICloneable Members
+        #region ICloneable Members
 
-		/// <summary>
-		/// 深層複製。
-		/// </summary>
-		/// <returns></returns>
-		public object Clone()
-		{
-			var newTitle = new BraillePageTitle();
-			newTitle.TitleLine = (BrailleLine) m_TitleLine.Clone();
-			newTitle.BeginLineIndex = m_BeginLineIndex;
+        /// <summary>
+        /// 深層複製。
+        /// </summary>
+        /// <returns></returns>
+        public object Clone()
+        {
+            var newTitle = new BraillePageTitle();
+            newTitle.TitleLine = (BrailleLine)m_TitleLine.Clone();
+            newTitle.BeginLineIndex = m_BeginLineIndex;
             newTitle.BeginLineRef = BeginLineRef;    // BeginLine 純粹是指標，因此不用深層複製。
             return newTitle;
-		}
+        }
 
         #endregion
 
