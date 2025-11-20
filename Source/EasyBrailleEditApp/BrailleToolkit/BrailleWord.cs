@@ -7,6 +7,7 @@ using BrailleToolkit.Data;
 using BrailleToolkit.Helpers;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
+using YamlDotNet.Serialization;
 
 namespace BrailleToolkit
 {
@@ -103,7 +104,8 @@ namespace BrailleToolkit
             if (base.Equals(obj))
                 return true;
 
-            BrailleWord brWord = (BrailleWord)obj;
+            if (obj is not BrailleWord brWord)
+                return false;
 
             if (CellList.Count != brWord.Cells.Count)
                 return false;
@@ -279,6 +281,7 @@ namespace BrailleToolkit
             }
         }
 
+        [YamlIgnore]
         public int ActivePhoneticIndex
         {
             get

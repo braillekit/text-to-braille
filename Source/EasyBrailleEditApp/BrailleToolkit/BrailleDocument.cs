@@ -544,6 +544,7 @@ namespace BrailleToolkit
         public List<BrailleLine> Lines
         {
             get { return m_Lines; }
+            private set { m_Lines = value; }
         }
 
         public BrailleLine this[int index]
