@@ -1,7 +1,5 @@
 ﻿StartPageNumber: 1
-Processor: 
 CellsPerLine: 40
-FileName: 
 Lines:
 - Words:
   - Text: 夏
@@ -5404,5 +5402,4 @@ Lines:
   Tag: 
   WordCount: 6
   CellCount: 6
-LineCount: 9
 PageTitles: []

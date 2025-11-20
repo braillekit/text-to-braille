@@ -4,6 +4,7 @@ using Huanlin.Common.Helpers;
 using Serilog;
 using System.Runtime.Serialization;
 using System.Text;
+using YamlDotNet.Serialization;
 
 namespace BrailleToolkit
 {
@@ -532,6 +533,7 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得或設定 BrailleProcessor 物件參考。
         /// </summary>
+        [YamlIgnore]
         public BrailleProcessor Processor
         {
             get { return m_Processor; }
@@ -549,7 +551,8 @@ namespace BrailleToolkit
 
         /// <summary>
         /// 取得或設定檔名。
-        /// </summary>
+        /// </summary>        
+        [YamlIgnore]
         public string FileName
         {
             get { return m_FileName; }
@@ -570,6 +573,7 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得總列數。
         /// </summary>
+        [YamlIgnore]
         public int LineCount
         {
             get { return m_Lines.Count; }
