@@ -63,7 +63,7 @@ namespace BrailleToolkit.Tests
         [Fact]
         public void LoadBrailleDocument_ThakurPoem_ShouldDeserializeCorrectly()
         {
-            string filename = Shared.TestDataPath + "Thakur-poem.brx";
+            string filename = Shared.TestDataPath + "poem.brx";
             
             // 確保檔案存在
             Assert.True(File.Exists(filename), $"測試檔案 {filename} 不存在。");
