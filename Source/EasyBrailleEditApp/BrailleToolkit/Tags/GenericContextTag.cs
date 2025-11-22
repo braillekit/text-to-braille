@@ -72,16 +72,25 @@ namespace BrailleToolkit.Tags
         /// </summary>
         public bool RemoveTagOnConversion { get; protected set; }
 
+        /// <summary>
+        /// 重設此語境標籤。
+        /// </summary>
         public virtual void Reset()
         {
             Count = 0;
         }
 
+        /// <summary>
+        /// 進入此語境。
+        /// </summary>
         public virtual void Enter()
         {
             Count++;
         }
 
+        /// <summary>
+        /// 離開此語境。
+        /// </summary>
         public virtual void Leave()
         {
             if (Count > 0)
@@ -90,6 +99,9 @@ namespace BrailleToolkit.Tags
             }
         }
 
+        /// <summary>
+        /// 受保護的建構函式。
+        /// </summary>
         protected GenericContextTag() { }
 
 

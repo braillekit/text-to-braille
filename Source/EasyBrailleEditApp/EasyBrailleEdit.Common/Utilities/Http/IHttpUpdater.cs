@@ -48,6 +48,12 @@
         /// </summary>
         public int Total { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HttpUpdaterFileEventArgs"/> class.
+        /// </summary>
+        /// <param name="filename">The name of the file.</param>
+        /// <param name="number">The file number.</param>
+        /// <param name="total">The total number of files.</param>
         public HttpUpdaterFileEventArgs(string filename, int number, int total)
         {
             FileName = filename;
@@ -56,6 +62,9 @@
         }
     }
 
+    /// <summary>
+    /// 定義 HTTP 更新器的介面。
+    /// </summary>
     public interface IHttpUpdater : IDisposable
     {
         /// <summary>

@@ -117,7 +117,13 @@ public static class Constant
     /// <summary>
     /// 預設明眼字列印邊界
     /// </summary>
+    /// <summary>
+    /// 預設明眼字列印左邊界。
+    /// </summary>
     public const int DefaultPrintTextMarginLeft = 105;
+    /// <summary>
+    /// 預設明眼字列印上邊界。
+    /// </summary>
     public const int DefaultPrintTextMarginTop = 12;
     public const int DefaultPrintTextMarginRight = 150;
     public const int DefaultPrintTextMarginBottom = 100;
@@ -125,11 +131,20 @@ public static class Constant
     /// <summary>
     /// 預設的偶數頁明眼字列印邊界
     /// </summary>
+    /// <summary>
+    /// 預設偶數頁明眼字列印左邊界。
+    /// </summary>
     public const int DefaultPrintTextMarginLeft2 = 105;
+    /// <summary>
+    /// 預設偶數頁明眼字列印上邊界。
+    /// </summary>
     public const int DefaultPrintTextMarginTop2 = 15; 
     public const int DefaultPrintTextMarginRight2 = 150;
     public const int DefaultPrintTextMarginBottom2 = 100;
 
+    /// <summary>
+    /// 預設明眼字字型名稱。
+    /// </summary>
     public const string DefaultPrintTextFontName = "新細明體";
     
     /// <summary>

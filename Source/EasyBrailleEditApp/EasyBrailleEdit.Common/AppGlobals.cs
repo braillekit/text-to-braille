@@ -7,6 +7,9 @@ namespace EasyBrailleEdit.Common
 {
     public static class AppGlobals
     {
+        /// <summary>
+        /// 取得應用程式組態設定。
+        /// </summary>
         public static AppConfig Config { get; } = AppConfig.GetInstance();
 
         /// <summary>
