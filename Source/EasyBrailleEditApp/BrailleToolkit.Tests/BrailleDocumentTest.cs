@@ -56,8 +56,8 @@ namespace BrailleToolkit.Tests
 
             Assert.True(brDoc.PageTitles.Count == 1);
             Assert.True(brDoc.LineCount == 5);
-            Assert.True(brDoc.PageTitles[0].BeginLineIndex == 3);
-            Assert.True(brDoc.PageTitles[0].BeginLineRef.ToString() == "3");
+            Assert.True(brDoc.PageTitles[0].ContentStartLineIndex == 3);
+            Assert.True(brDoc.PageTitles[0].ContentStartLineRef.ToString() == "3");
         }
 
         [Fact]

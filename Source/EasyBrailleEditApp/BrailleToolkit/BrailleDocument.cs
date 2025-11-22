@@ -208,7 +208,7 @@ namespace BrailleToolkit
                 return false;
             var brLine = Lines[lineIdx];
 
-            return PageTitles.FindIndex(p => ReferenceEquals(brLine, p.BeginLineRef)) >= 0;
+            return PageTitles.FindIndex(p => ReferenceEquals(brLine, p.ContentStartLineRef)) >= 0;
         }
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace BrailleToolkit
         /// <returns>The page title if found; otherwise, null.</returns>
         public BraillePageTitle FindPageTitleByBeginLine(BrailleLine brLine)
         {
-            return PageTitles.Find(p => ReferenceEquals(brLine, p.BeginLineRef));
+            return PageTitles.Find(p => ReferenceEquals(brLine, p.ContentStartLineRef));
         }
 
 
@@ -343,7 +343,7 @@ namespace BrailleToolkit
         {
             foreach (var title in PageTitles)
             {
-                if (title.BeginLineIndex == lineIdx)
+                if (title.ContentStartLineIndex == lineIdx)
                     return title;
             }
             return null;
@@ -459,7 +459,7 @@ namespace BrailleToolkit
             {
                 var title = m_PageTitles[i];
 
-                if (title.UpdateLineIndex(this)) // 嘗試更新，這會改變 title 內部的 BeginLineIndex
+                if (title.UpdateLineIndex(this)) // 嘗試更新，這會改變 title 內部的 ContentStartLineIndex
                 {
                     changeCount++;
                 }
@@ -514,7 +514,7 @@ namespace BrailleToolkit
             while (i >= 0)
             {
                 title = m_PageTitles[i];
-                if (lineIdx >= title.BeginLineIndex)
+                if (lineIdx >= title.ContentStartLineIndex)
                 {
                     return title.TitleLine;
                 }

@@ -10,8 +10,8 @@ namespace BrailleToolkit
     /// <summary>
     /// 點字文件的頁標題。
 	/// 此類別包含一個指向標題列的 BrailleLine 物件參考（TitleLine），以及指向標題列下方那一列的
-	/// 列索引（BeginLineIndex）和列物件（BeginLine）。
-	/// BeginLineIndex 和 BeginLine 必須交互確認與修正，以確保能夠取到正確的標題列。
+	/// 列索引（ContentStartLineIndex）和列物件（ContentStartLine）。
+	/// ContentStartLineIndex 和 ContentStartLine 必須交互確認與修正，以確保能夠取到正確的標題列。
     /// </summary>
     [Serializable]
     [DataContract]
@@ -21,12 +21,12 @@ namespace BrailleToolkit
         private BrailleLine m_TitleLine;
 
         [DataMember(Name = "BeginLineIndex")]
-        private int m_BeginLineIndex;
+        private int m_ContentStartLineIndex;
 
         /// <summary>
-        /// 取得標題列下方那一列的列物件參考。
+        /// 取得標題後第一行文件內容的列物件參考（作為定位標題的錨點）。
         /// </summary>
-        public BrailleLine BeginLineRef { get; private set; }
+        public BrailleLine ContentStartLineRef { get; private set; }
 
         /// <summary>
         /// 建構函式。
@@ -34,7 +34,7 @@ namespace BrailleToolkit
         public BraillePageTitle()
         {
             m_TitleLine = null;
-            m_BeginLineIndex = -1;
+            m_ContentStartLineIndex = -1;
         }
 
         /// <summary>
@@ -65,8 +65,8 @@ namespace BrailleToolkit
             TitleLine.Words.AddRange(words);
             TitleLine.Tag = beginLineIdx;
 
-            BeginLineIndex = beginLineIdx;
-            BeginLineRef = beginLine;
+            ContentStartLineIndex = beginLineIdx;
+            ContentStartLineRef = beginLine;
         }
 
         /// <summary>
@@ -79,28 +79,28 @@ namespace BrailleToolkit
         {
             TitleLine = titleLine;
             TitleLine.Tag = beginLineIdx;
-            BeginLineIndex = beginLineIdx;
-            BeginLineRef = beginLine;
+            ContentStartLineIndex = beginLineIdx;
+            ContentStartLineRef = beginLine;
         }
 
         /// <summary>
-        /// 根據頁標題下方第一行的物件參考（BeginLineRef，作為「錨點」），在文件中尋找其目前的索引位置，並更新 BeginLineIndex 屬性。
+        /// 根據標題後第一行內容的物件參考（ContentStartLineRef，作為「錨點」），在文件中尋找其目前的索引位置，並更新 ContentStartLineIndex 屬性。
         /// </summary>
         /// <remarks>
         /// <para><strong>使用情境：</strong></para>
         /// <para>
-        /// 在文件編輯過程中（插入或刪除行），BeginLineRef 所指向的 BrailleLine 物件在 Lines 集合中的索引位置可能會改變。
-        /// 此方法透過「錨點」（BeginLineRef）重新定位該行在集合中的實際位置，確保 BeginLineIndex 與實際索引保持同步。
+        /// 在文件編輯過程中（插入或刪除行），ContentStartLineRef 所指向的 BrailleLine 物件在 Lines 集合中的索引位置可能會改變。
+        /// 此方法透過「錨點」（ContentStartLineRef）重新定位該行在集合中的實際位置，確保 ContentStartLineIndex 與實際索引保持同步。
         /// </para>
         /// 
         /// <para><strong>運作原理：</strong></para>
         /// <list type="number">
-        /// <item><description>檢查「錨點」(BeginLineRef) 是否存在。</description></item>
+        /// <item><description>檢查「錨點」(ContentStartLineRef) 是否存在。</description></item>
         /// <item><description>在文件的 Lines 集合中搜尋該錨點的當前索引。</description></item>
-        /// <item><description>如果找到，更新 BeginLineIndex；如果找不到（可能已被刪除），返回 false。</description></item>
+        /// <item><description>如果找到，更新 ContentStartLineIndex；如果找不到（可能已被刪除），返回 false。</description></item>
         /// </list>
         /// 
-        /// <para><strong>注意：</strong>此方法不會修改 BeginLineRef 本身，因為 IndexOf 找到的物件就是 BeginLineRef 本身。</para>
+        /// <para><strong>注意：</strong>此方法不會修改 ContentStartLineRef 本身，因為 IndexOf 找到的物件就是 ContentStartLineRef 本身。</para>
         /// </remarks>
         /// <param name="brDoc">要從中尋找 BrailleLine 的 BrailleDocument 物件。</param>
         /// <returns>
@@ -109,16 +109,16 @@ namespace BrailleToolkit
         /// </returns>
         public bool UpdateLineIndex(BrailleDocument brDoc)
         {
-            if (BeginLineRef == null)
+            if (ContentStartLineRef == null)
                 return false;
 
-            int idx = brDoc.Lines.IndexOf(BeginLineRef);
+            int idx = brDoc.Lines.IndexOf(ContentStartLineRef);
             if (idx < 0)
             {
                 return false;
             }
-            // 注意：不需要 BeginLineRef = brDoc.Lines[idx]，因為 IndexOf 找到的就是 BeginLineRef 本身
-            BeginLineIndex = idx;
+            // 注意：不需要 ContentStartLineRef = brDoc.Lines[idx]，因為 IndexOf 找到的就是 ContentStartLineRef 本身
+            ContentStartLineIndex = idx;
             return true;
         }
 
@@ -129,10 +129,10 @@ namespace BrailleToolkit
         /// <returns></returns>
         public bool UpdateLineObject(BrailleDocument brDoc)
         {
-            if (m_BeginLineIndex < 0 || m_BeginLineIndex >= brDoc.LineCount)
+            if (m_ContentStartLineIndex < 0 || m_ContentStartLineIndex >= brDoc.LineCount)
                 return false;
 
-            BeginLineRef = brDoc.Lines[m_BeginLineIndex];
+            ContentStartLineRef = brDoc.Lines[m_ContentStartLineIndex];
             return true;
         }
 
@@ -146,14 +146,14 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// 取得起始列索引。
+        /// 取得內容起始列索引（標題後第一行內容在文件中的位置）。
         /// </summary>
-        public int BeginLineIndex
+        public int ContentStartLineIndex
         {
-            get { return m_BeginLineIndex; }
+            get { return m_ContentStartLineIndex; }
             private set
             {
-                m_BeginLineIndex = value;
+                m_ContentStartLineIndex = value;
                 if (TitleLine != null)
                 {
                     TitleLine.Tag = value;
@@ -190,15 +190,15 @@ namespace BrailleToolkit
         {
             var newTitle = new BraillePageTitle();
             newTitle.TitleLine = (BrailleLine)m_TitleLine.Clone();
-            newTitle.BeginLineIndex = m_BeginLineIndex;
-            newTitle.BeginLineRef = BeginLineRef;    // BeginLine 純粹是指標，因此不用深層複製。
+            newTitle.ContentStartLineIndex = m_ContentStartLineIndex;
+            newTitle.ContentStartLineRef = ContentStartLineRef;    // ContentStartLine 純粹是指標，因此不用深層複製。
             return newTitle;
         }
 
         #endregion
 
         /// <summary>
-        /// 比較兩個 BraillePageTitle 物件的順序（依據 BeginLineIndex）。
+        /// 比較兩個 BraillePageTitle 物件的順序（依據 ContentStartLineIndex）。
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -209,7 +209,7 @@ namespace BrailleToolkit
             {
                 return 0;
             }
-            return BeginLineIndex - title2.BeginLineIndex;
+            return ContentStartLineIndex - title2.ContentStartLineIndex;
         }
     }
 }
