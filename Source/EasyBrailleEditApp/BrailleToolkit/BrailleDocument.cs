@@ -35,8 +35,11 @@ namespace BrailleToolkit
         [NonSerialized]
         private BrailleProcessor m_Processor;	// 點字轉換器。
 
+        /// <summary>
+        /// 起始頁碼
+        /// </summary>
         [DataMember]
-        public int StartPageNumber { get; set; }    // 起始頁碼
+        public int StartPageNumber { get; set; }
 
         static BrailleDocument()
         {

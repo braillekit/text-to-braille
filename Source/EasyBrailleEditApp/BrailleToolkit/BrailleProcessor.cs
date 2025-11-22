@@ -16,9 +16,20 @@ namespace BrailleToolkit
 {
     public struct CharPosition
     {
-        public char CharValue { get; set; }     // 字元
-        public int LineNumber { get; set; }     // 第幾列
-        public int CharIndex { get; set; }      // 第幾個字元
+        /// <summary>
+        /// 字元
+        /// </summary>
+        public char CharValue { get; set; }
+        
+        /// <summary>
+        /// 第幾列
+        /// </summary>
+        public int LineNumber { get; set; }
+        
+        /// <summary>
+        /// 第幾個字元
+        /// </summary>
+        public int CharIndex { get; set; }
     }
 
     public sealed class ConversionFailedEventArgs : EventArgs

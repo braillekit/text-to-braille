@@ -14,11 +14,30 @@ namespace BrailleToolkit
     /// </summary>
     public enum BrailleCellCode
     {
-        Blank = 0x00,	// 空方的點字碼的十六進位字串。
-        Capital = 0x20,	// 大寫
-        Digit = 0x3C,	// 數字
-        Italic = 0x28,	// 斜體
-        Hyphen = 0x24	// 連字號 '-'        
+        /// <summary>
+        /// 空方的點字碼的十六進位字串。
+        /// </summary>
+        Blank = 0x00,
+        
+        /// <summary>
+        /// 大寫
+        /// </summary>
+        Capital = 0x20,
+        
+        /// <summary>
+        /// 數字
+        /// </summary>
+        Digit = 0x3C,
+        
+        /// <summary>
+        /// 斜體
+        /// </summary>
+        Italic = 0x28,
+        
+        /// <summary>
+        /// 連字號 '-'
+        /// </summary>
+        Hyphen = 0x24
     }
 
     /// <summary>
