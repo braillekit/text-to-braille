@@ -13,6 +13,9 @@ namespace BrailleToolkit
     {
         private Dictionary<string, IContextTag> _tags;
 
+        /// <summary>
+        /// 初始化 ContextTagManager 類別的新執行個體。
+        /// </summary>
         public ContextTagManager()
         {
             _tags = new Dictionary<string, IContextTag>();
@@ -87,7 +90,7 @@ namespace BrailleToolkit
         /// <returns>若有找到情境標籤，則傳回 ContextTag 物件，並設定 isBeginTag 輸出參數。</returns>
         public IContextTag Parse(string s, out bool isBeginTag)
         {
-            IContextTag result = null;
+            IContextTag? result = null;
 
             string beginTag;
             string endTag;
@@ -130,7 +133,7 @@ namespace BrailleToolkit
         /// <returns></returns>
         public IContextTag Parse(string s, string tagName)
         {
-            IContextTag result = null;
+            IContextTag? result = null;
 
             if (!_tags.ContainsKey(tagName))
                 return null;

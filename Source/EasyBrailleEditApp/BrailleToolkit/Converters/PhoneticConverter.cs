@@ -5,6 +5,9 @@ using BrailleToolkit.Data;
 
 namespace BrailleToolkit.Converters
 {
+    /// <summary>
+    /// 音標符號轉換器。
+    /// </summary>
 	public sealed class PhoneticConverter : WordConverter
 	{
 		private PhoneticBrailleTable m_Table;
@@ -34,7 +37,7 @@ namespace BrailleToolkit.Converters
 			char ch;
 			string text;
 			bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
-			BrailleWord brWord;
+			BrailleWord? brWord;
 			List<BrailleWord> brWordList = null;
 
 			ch = charStack.Peek();   // 只讀取但不從堆疊移走。

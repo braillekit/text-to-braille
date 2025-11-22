@@ -63,7 +63,7 @@ namespace BrailleToolkit.Converters
 
         private static void LoadFromStreamReader(StreamReader sr)
         {
-            string s;
+            string? s;
             string[] values;
             while (true)
             {
@@ -144,7 +144,7 @@ namespace BrailleToolkit.Converters
         /// <returns>對應的點字字元。</returns>
         public static char ToChar(string brailleHexCode)
         {
-            string charCode = ToBrailleCharCode(brailleHexCode);
+            string? charCode = ToBrailleCharCode(brailleHexCode);
             if (String.IsNullOrEmpty(charCode))
                 throw new Exception("找不到對應的點字字型碼: " + brailleHexCode);
            

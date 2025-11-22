@@ -23,7 +23,7 @@ namespace EasyBrailleEdit.Common.Config
         /// </summary>
         public const string IniFileNameDefault = "AppConfig.Default.ini";
 
-        private static AppConfig _instance;
+        private static AppConfig? _instance;
 
         /// <summary>
         /// 取得 AppConfig 的唯一實體。
@@ -36,8 +36,8 @@ namespace EasyBrailleEdit.Common.Config
             return _instance;
         }
 
-        private string _configFileName;
-        private Configuration _config;        
+        private string _configFileName = null!;
+        private Configuration _config = null!;        
 
         /// <summary>
         /// 一般設定區段。
@@ -90,7 +90,7 @@ namespace EasyBrailleEdit.Common.Config
         {
             Assembly asmb = Assembly.GetExecutingAssembly() ?? throw new Exception("Assembly.GetExecutingAssembly() 無法取得組件!");
 
-            string path = Path.GetDirectoryName(asmb.Location);
+            string path = Path.GetDirectoryName(asmb.Location) ?? AppDomain.CurrentDomain.BaseDirectory ?? string.Empty;
             string filename = Path.Combine(path, IniFileName);
 
             if (!File.Exists(filename))

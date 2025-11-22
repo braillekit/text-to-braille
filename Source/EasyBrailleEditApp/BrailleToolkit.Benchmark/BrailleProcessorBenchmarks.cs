@@ -13,10 +13,16 @@ namespace BrailleToolkitBenchmark
     //[SimpleJob(RuntimeMoniker.Net70)]
     [MemoryDiagnoser]
     [UnicodeConsoleLogger]
+    /// <summary>
+    /// BrailleProcessor 效能測試類別。
+    /// </summary>
     public class BrailleProcessorBenchmarks
     {
         BrailleProcessor processor = BrailleProcessor.GetInstance();
 
+        /// <summary>
+        /// 測試中文轉換效能。
+        /// </summary>
         [Benchmark]
         public string ConvertLineTestChinese()
         {

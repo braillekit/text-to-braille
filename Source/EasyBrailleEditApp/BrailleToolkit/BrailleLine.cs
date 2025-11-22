@@ -16,6 +16,9 @@ namespace BrailleToolkit
     [DataContract]
     public class BrailleLine : ICloneable
     {
+        /// <summary>
+        /// 取得或設定組成此行的點字詞串列。
+        /// </summary>
         [DataMember]
         public List<BrailleWord> Words { get; private set; }
 
@@ -23,7 +26,7 @@ namespace BrailleToolkit
         /// 加入 Tag 屬性的最初目的用來記住標題列在雙視文件中的 begin line index，但也可以作為其他用途。
         /// 此屬性不會序列化，不會保存。
         /// </summary>
-        public object Tag { get; set; }
+        public object? Tag { get; set; }
 
 
         /// <summary>
@@ -163,6 +166,10 @@ namespace BrailleToolkit
             return index;
         }
 
+        /// <summary>
+        /// 取得第一個可見點字詞的索引。
+        /// </summary>
+        /// <returns>如果找到，則為第一個可見點字詞的索引；否則為 -1。</returns>
         public int GetFirstVisibleWordIndex()
         {
             for (int i = 0; i < Words.Count; i++)
@@ -175,6 +182,10 @@ namespace BrailleToolkit
             return -1;
         }
 
+        /// <summary>
+        /// 取得第一個可見的點字詞。
+        /// </summary>
+        /// <returns>如果找到，則為第一個可見的 BrailleWord 物件；否則為 null。</returns>
         public BrailleWord GetFirstVisibleWord()
         {
             for (int i = 0; i < Words.Count; i++)
@@ -187,11 +198,20 @@ namespace BrailleToolkit
             return null;
         }
 
+        /// <summary>
+        /// 從點字行中移除指定索引處的點字詞。
+        /// </summary>
+        /// <param name="index">要移除之項目的以零為起始的索引。</param>
         public void RemoveAt(int index)
         {
             Words.RemoveAt(index);
         }
 
+        /// <summary>
+        /// 從點字行移除一定範圍的點字詞。
+        /// </summary>
+        /// <param name="index">要移除之項目範圍的以零為起始的起始索引。</param>
+        /// <param name="count">要移除的項目數。</param>
         public void RemoveRange(int index, int count)
         {
             if ((index + count) > Words.Count)    // 防止要取的數量超出邊界。
@@ -213,6 +233,11 @@ namespace BrailleToolkit
             Words.AddRange(brLine.Words);
         }
 
+        /// <summary>
+        /// 將點字詞插入點字行的指定索引處。
+        /// </summary>
+        /// <param name="index">應插入點字詞的以零為起始的索引。</param>
+        /// <param name="brWord">要插入的點字詞。</param>
         public void Insert(int index, BrailleWord brWord)
         {
             Words.Insert(index, brWord);
@@ -262,6 +287,10 @@ namespace BrailleToolkit
             TrimEnd();
         }
 
+        /// <summary>
+        /// 將點字行轉換為其點字碼的字串表示形式。
+        /// </summary>
+        /// <returns>包含所有點字詞的點字碼的字串。</returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -273,6 +302,10 @@ namespace BrailleToolkit
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 將點字行轉換為其文字表示形式，會包含情境標籤。
+        /// </summary>
+        /// <returns>代表此點字行的文字字串。</returns>
         public string ToTextString()
         {
             StringBuilder sb = new StringBuilder();
@@ -294,6 +327,10 @@ namespace BrailleToolkit
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 將點字行轉換回其原始的明眼文字串。
+        /// </summary>
+        /// <returns>原始的明眼文字串。</returns>
         public string ToOriginalTextString()
         {
             return BrailleWordHelper.ToOriginalTextString(Words);
@@ -330,6 +367,14 @@ namespace BrailleToolkit
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 將點字行轉換為 HTML 表格列的字串表示形式。
+        /// </summary>
+        /// <param name="leadingSpaces">行首的空白字元。</param>
+        /// <param name="cssClassTd">用於儲存格 (td) 的 CSS 類別。</param>
+        /// <param name="cssClassBraille">用於點字區塊 (div) 的 CSS 類別。</param>
+        /// <param name="cssClassText">用於明眼字區塊 (div) 的 CSS 類別。</param>
+        /// <returns>表示此點字行的 HTML 字串。</returns>
         public string ToHtmlString(string leadingSpaces, string cssClassTd, string cssClassBraille, string cssClassText)
         {
             var sb = new StringBuilder();
@@ -359,7 +404,10 @@ namespace BrailleToolkit
             return sb.ToString();
         }
 
-
+        /// <summary>
+        /// 檢查此行是否包含標題標籤。
+        /// </summary>
+        /// <returns>如果包含標題標籤，則為 true；否則為 false。</returns>
         public bool ContainsTitleTag()
         {
             return BrailleWordHelper.ContainsTitleTag(Words);
@@ -382,6 +430,11 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 尋找指定 BrailleWord 物件在此行中的索引。
+        /// </summary>
+        /// <param name="brWord">要尋找的 BrailleWord 物件。</param>
+        /// <returns>如果找到，則為其索引；否則為 -1。</returns>
         public int IndexOf(BrailleWord brWord)
         {
             // 不能用 Words.IndexOf(brWord) 來尋找! 
@@ -472,11 +525,21 @@ namespace BrailleToolkit
             return newLine;
         }
 
+        /// <summary>
+        /// 建立目前 BrailleLine 物件的深層複本。
+        /// </summary>
+        /// <returns>目前執行個體的深層複本。</returns>
         public BrailleLine DeepCopy()
         {
             return DeepCopy(0, WordCount);
         }
 
+        /// <summary>
+        /// 建立目前 BrailleLine 物件一部分的深層複本。
+        /// </summary>
+        /// <param name="index">要複製之範圍的起始索引。</param>
+        /// <param name="count">要複製的項目數。</param>
+        /// <returns>指定範圍的深層複本。</returns>
         public BrailleLine DeepCopy(int index, int count)
         {
             BrailleLine newLine = new BrailleLine();

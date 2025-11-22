@@ -19,35 +19,35 @@ namespace EasyBrailleEdit.DualEdit
         private const float DefaultTextFontSize = 11.25f;
         private const float DefaultPhoneticFontSize = 8.0f;
 
-        private IBrailleGridForm _form;
-        private BrailleDocument _doc;
-        private SourceGrid.Grid _grid;
-        private BrailleGridPositionMapper _positionMapper;
+        private IBrailleGridForm _form = null!;
+        private BrailleDocument _doc = null!;
+        private SourceGrid.Grid _grid = null!;
+        private BrailleGridPositionMapper _positionMapper = null!;
 
-        private string _fileName;
+        private string _fileName = null!;
         private bool _isDirty;   // 檔案內容是否被修改過
 
 
-        private BrailleGridDebugger _debugger;
+        private BrailleGridDebugger _debugger = null!;
         private ViewMode m_ViewMode = ViewMode.All;
 
         private SemaphoreSlim semaphore = new SemaphoreSlim(1, 1); // 用來避免多執行緒重入同一區塊或同時存取同一份資源
 
         #region 供 Grid 使用的物件
 
-        private SourceGrid.Cells.Views.Header m_HeaderView;
-        private SourceGrid.Cells.Views.Header m_HeaderView2;    // for 每一頁的起始列，用以辨別新頁的開始。
-        private SourceGrid.Cells.Views.Cell m_BrView;   // Grid cell view for 點字
-        private SourceGrid.Cells.Views.Cell m_MingView;     // Grid cell view for 明眼字（字型用 Arial Unicode）
-        private SourceGrid.Cells.Views.Cell m_MingViewCJK;  // Grid cell view for 中日韓明眼字（字型用新細明體）
-        private SourceGrid.Cells.Views.Cell m_PhonView; // Grid cell view for 注音符號
-        private SourceGrid.Cells.Views.Cell m_PhonView2; // Grid cell view for 破音字的注音符號
-        private SourceGrid.Cells.Views.Cell m_PhonView3; // Grid cell view for 容易判斷錯誤的破音字注音符號
-        private Font m_MingFont;	// Grid cell 字型 for 一般明眼字
-        private Font m_MingFontCJK; // Grid cell 字型 for 中日韓明眼字
-        private Font m_PhonFont;    // Grid cell 字型 for 注音符號
-        private GridPopupMenuController m_MenuController;
-        private CellClickEvent m_ClickController;
+        private SourceGrid.Cells.Views.Header m_HeaderView = null!;
+        private SourceGrid.Cells.Views.RowHeader m_HeaderView2 = null!;    // for 每一頁的起始列，用以辨別新頁的開始。
+        private SourceGrid.Cells.Views.Cell m_BrView = null!;   // Grid cell view for 點字
+        private SourceGrid.Cells.Views.Cell m_MingView = null!;     // Grid cell view for 明眼字（字型用 Arial Unicode）
+        private SourceGrid.Cells.Views.Cell m_MingViewCJK = null!;  // Grid cell view for 中日韓明眼字（字型用新細明體）
+        private SourceGrid.Cells.Views.Cell m_PhonView = null!; // Grid cell view for 注音符號
+        private SourceGrid.Cells.Views.Cell m_PhonView2 = null!; // Grid cell view for 破音字的注音符號
+        private SourceGrid.Cells.Views.Cell m_PhonView3 = null!; // Grid cell view for 容易判斷錯誤的破音字注音符號
+        private Font m_MingFont = null!;	// Grid cell 字型 for 一般明眼字
+        private Font m_MingFontCJK = null!; // Grid cell 字型 for 中日韓明眼字
+        private Font m_PhonFont = null!;    // Grid cell 字型 for 注音符號
+        private GridPopupMenuController m_MenuController = null!;
+        private CellClickEvent m_ClickController = null!;
 
         #endregion
 

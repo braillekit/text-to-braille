@@ -18,7 +18,7 @@ namespace BrailleToolkit
     public sealed class BraillePageTitle : ICloneable, IComparable
     {
         [DataMember(Name = "TitleLine")]
-        private BrailleLine m_TitleLine;
+        private BrailleLine m_TitleLine = null!;
 
         [DataMember(Name = "BeginLineIndex")]
         private int m_ContentStartLineIndex;
@@ -26,7 +26,7 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得標題後第一行文件內容的列物件參考（作為定位標題的錨點）。
         /// </summary>
-        public BrailleLine ContentStartLineRef { get; private set; }
+        public BrailleLine ContentStartLineRef { get; private set; } = null!;
 
         /// <summary>
         /// 建構函式。

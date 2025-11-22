@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace BrailleToolkit.Helpers
 {
+    /// <summary>
+    /// 文字處理輔助類別。
+    /// </summary>
     public static class TextHelper
     {
+        /// <summary>
+        /// 產生表格文字。
+        /// </summary>
+        /// <param name="rowCount">列數。</param>
+        /// <param name="columnCount">欄數。</param>
+        /// <param name="cellsPerColumn">每欄寬度（字元數）。</param>
+        /// <returns>表格文字。</returns>
         public static string GenerateTable(int rowCount, int columnCount, int cellsPerColumn)
         {
             var sb = new StringBuilder();

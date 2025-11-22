@@ -9,7 +9,7 @@ namespace EasyBrailleEdit.Common.Utilities.Windows;
 public sealed class FileRunner : IDisposable
 {
 	private ProcessStartInfo m_StartInfo;
-	private Process m_Process;
+	private Process? m_Process;
 	private bool m_NeedWait;		// 是否等待應用程式執行結束
 	private TimeSpan m_WaitTime;			// 要等多久，TimeSpan.Zero 表示採用內定值（30分鐘）
 
@@ -18,12 +18,16 @@ public sealed class FileRunner : IDisposable
 	private StringBuilder m_StdOutput;
     private readonly object _lockObject = new object();
 
-    private event DataReceivedEventHandler m_StdOutputReceivedEvent;
+    private event DataReceivedEventHandler? m_StdOutputReceivedEvent;
 
+    /// <summary>
+    /// 初始化 FileRunner 類別的新執行個體。
+    /// </summary>
 	public FileRunner()
 	{
 		m_StdError = new StringBuilder();
 		m_StdOutput = new StringBuilder();
+        m_ErrMsg = string.Empty;
 
 		m_StartInfo = new ProcessStartInfo();
 
@@ -37,6 +41,9 @@ public sealed class FileRunner : IDisposable
 		m_StartInfo.RedirectStandardOutput = false;
 	}
 
+    /// <summary>
+    /// 釋放由 FileRunner 使用的所有資源。
+    /// </summary>
 	public void Dispose()
 	{
 		if (m_Process != null) 
@@ -45,122 +52,128 @@ public sealed class FileRunner : IDisposable
 		}
 	}
 
-        public async Task<int> RunAsync(string filename, string argument)
+    /// <summary>
+    /// 以非同步方式執行指定的檔案。
+    /// </summary>
+    /// <param name="filename">要執行的檔案名稱。</param>
+    /// <param name="argument">傳遞給應用程式的命令列引數。</param>
+    /// <returns>表示非同步作業的 Task，其結果為處理序的結束代碼。</returns>
+    public async Task<int> RunAsync(string filename, string argument)
+    {
+        if (Running)
         {
-            if (Running)
+            throw new InvalidOperationException("先前執行的程式尚未結束!");
+        }
+
+        m_ErrMsg = "";
+        m_StdError.Length = 0;
+        m_StdOutput.Length = 0;
+
+        if (string.IsNullOrEmpty(filename))
+        {
+            throw new ArgumentException("未指定欲執行的檔案名稱!", nameof(filename));
+        }
+
+        if (!string.IsNullOrEmpty(WorkingDirectory) && !Directory.Exists(WorkingDirectory))
+        {
+            throw new DirectoryNotFoundException("指定的工作路徑不存在: " + WorkingDirectory);
+        }
+
+        m_StartInfo.FileName = filename;
+        m_StartInfo.Arguments = argument;
+
+        m_Process = new Process { StartInfo = m_StartInfo, EnableRaisingEvents = true };
+
+        var tcs = new TaskCompletionSource<int>();
+
+        m_Process.Exited += (sender, args) => tcs.TrySetResult(m_Process.ExitCode);
+
+        if (RedirectStandardOutput)
+        {
+            m_Process.OutputDataReceived += Process_OutputDataReceived;
+            m_Process.ErrorDataReceived += Process_ErrorDataReceived;
+        }
+
+        try
+        {
+            if (!m_Process.Start())
             {
-                throw new InvalidOperationException("先前執行的程式尚未結束!");
+                m_Process.Dispose();
+                m_Process = null;
+                throw new InvalidOperationException("沒有啟動新的處理序（可能重複使用既有的處理序）。");
             }
-
-            m_ErrMsg = "";
-            m_StdError.Length = 0;
-            m_StdOutput.Length = 0;
-
-            if (string.IsNullOrEmpty(filename))
-            {
-                throw new ArgumentException("未指定欲執行的檔案名稱!", nameof(filename));
-            }
-
-            if (!string.IsNullOrEmpty(WorkingDirectory) && !Directory.Exists(WorkingDirectory))
-            {
-                throw new DirectoryNotFoundException("指定的工作路徑不存在: " + WorkingDirectory);
-            }
-
-            m_StartInfo.FileName = filename;
-            m_StartInfo.Arguments = argument;
-
-            m_Process = new Process { StartInfo = m_StartInfo, EnableRaisingEvents = true };
-
-            var tcs = new TaskCompletionSource<int>();
-
-            m_Process.Exited += (sender, args) => tcs.TrySetResult(m_Process.ExitCode);
 
             if (RedirectStandardOutput)
             {
-                m_Process.OutputDataReceived += Process_OutputDataReceived;
-                m_Process.ErrorDataReceived += Process_ErrorDataReceived;
+                m_Process.BeginOutputReadLine();
+                m_Process.BeginErrorReadLine();
             }
 
-            try
+            if (!m_NeedWait)
             {
-                if (!m_Process.Start())
+                tcs.TrySetResult(0); // 不需要等待，立即完成 Task
+                return await tcs.Task;
+            }
+
+            var waitDuration = m_WaitTime <= TimeSpan.Zero
+                                ? TimeSpan.FromMinutes(30)  // 預設等待 30 分鐘
+                                : m_WaitTime;
+
+            using (var timeoutCts = new System.Threading.CancellationTokenSource(waitDuration))
+            {
+                using (timeoutCts.Token.Register(() => tcs.TrySetException(new TimeoutException($"執行的應用程式超過指定的等待時間 ({waitDuration.TotalSeconds} 秒) 而被強制終止!"))))
+                {
+                    return await tcs.Task;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            if (ex is TimeoutException)
+            {
+                KillProcess(); // 只有在逾時的時候才強制終止
+            }
+            else
+            {
+                // 對於其他錯誤，確保資源被釋放
+                if (m_Process != null)
                 {
                     m_Process.Dispose();
                     m_Process = null;
-                    throw new InvalidOperationException("沒有啟動新的處理序（可能重複使用既有的處理序）。");
-                }
-
-                if (RedirectStandardOutput)
-                {
-                    m_Process.BeginOutputReadLine();
-                    m_Process.BeginErrorReadLine();
-                }
-
-                if (!m_NeedWait)
-                {
-                    tcs.TrySetResult(0); // 不需要等待，立即完成 Task
-                    return await tcs.Task;
-                }
-
-                var waitDuration = m_WaitTime <= TimeSpan.Zero
-                                    ? TimeSpan.FromMinutes(30)  // 預設等待 30 分鐘
-                                    : m_WaitTime;
-
-                using (var timeoutCts = new System.Threading.CancellationTokenSource(waitDuration))
-                {
-                    using (timeoutCts.Token.Register(() => tcs.TrySetException(new TimeoutException($"執行的應用程式超過指定的等待時間 ({waitDuration.TotalSeconds} 秒) 而被強制終止!"))))
-                    {
-                        return await tcs.Task;
-                    }
                 }
             }
-            catch (Exception ex)
-            {
-                if (ex is TimeoutException)
-                {
-                    KillProcess(); // 只有在逾時的時候才強制終止
-                }
-                else
-                {
-                    // 對於其他錯誤，確保資源被釋放
-                    if (m_Process != null)
-                    {
-                        m_Process.Dispose();
-                        m_Process = null;
-                    }
-                }
-                throw;
-            }
-            finally
-            {
-                if (m_Process != null && RedirectStandardOutput)
-                {
-                    m_Process.OutputDataReceived -= Process_OutputDataReceived;
-                    m_Process.ErrorDataReceived -= Process_ErrorDataReceived;
-                }
-            }
+            throw;
         }
-
-        /// <summary>
-        /// 執行檔案。
-        /// </summary>
-        /// <param name="filename">檔案名稱。</param>
-        /// <param name="argument">檔案執行時帶的參數，可傳空字串。</param>
-        /// <returns>若執行成功則傳回 true，否則傳回 false 並設定 ErrorMsg 屬性。</returns>
-        public bool Run(string filename, string argument)
+        finally
         {
-            try
+            if (m_Process != null && RedirectStandardOutput)
             {
-                // 同步等待非同步版本完成
-                RunAsync(filename, argument).GetAwaiter().GetResult();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                m_ErrMsg = ex.Message;
-                return false;
+                m_Process.OutputDataReceived -= Process_OutputDataReceived;
+                m_Process.ErrorDataReceived -= Process_ErrorDataReceived;
             }
         }
+    }
+
+    /// <summary>
+    /// 執行檔案。
+    /// </summary>
+    /// <param name="filename">檔案名稱。</param>
+    /// <param name="argument">檔案執行時帶的參數，可傳空字串。</param>
+    /// <returns>若執行成功則傳回 true，否則傳回 false 並設定 ErrorMsg 屬性。</returns>
+    public bool Run(string filename, string argument)
+    {
+        try
+        {
+            // 同步等待非同步版本完成
+            RunAsync(filename, argument).GetAwaiter().GetResult();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            m_ErrMsg = ex.Message;
+            return false;
+        }
+    }
 
 	void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
 	{
@@ -216,6 +229,9 @@ public sealed class FileRunner : IDisposable
     }
 	#region 屬性------------------------------
 
+    /// <summary>
+    /// 取得一個值，指出處理序是否仍在執行。
+    /// </summary>
 	public bool Running
 	{
 		get 
@@ -226,12 +242,18 @@ public sealed class FileRunner : IDisposable
 		}
 	}
 
+    /// <summary>
+    /// 取得或設定要執行之處理序的工作目錄。
+    /// </summary>
 	public string WorkingDirectory
 	{
 		get { return m_StartInfo.WorkingDirectory; }
 		set { m_StartInfo.WorkingDirectory = value; }
 	}
 
+    /// <summary>
+    /// 取得或設定一個值，指出是否要使用作業系統 shell 來啟動處理序。
+    /// </summary>
 	public bool UseShellExecute
 	{
 		get { return m_StartInfo.UseShellExecute; }
@@ -245,12 +267,18 @@ public sealed class FileRunner : IDisposable
 		}
 	}
 
+    /// <summary>
+    /// 取得或設定是否顯示處理序的視窗。
+    /// </summary>
 	public bool ShowWindow
 	{
 		get { return !m_StartInfo.CreateNoWindow; }
 		set { m_StartInfo.CreateNoWindow = !value; }
 	}
 
+    /// <summary>
+    /// 取得或設定一個值，指出是否將應用程式的輸出寫入 StandardOutput。
+    /// </summary>
 	public bool RedirectStandardOutput
 	{
 		get { return m_StartInfo.RedirectStandardOutput; }
@@ -266,6 +294,9 @@ public sealed class FileRunner : IDisposable
 		}
 	}
 
+    /// <summary>
+    /// 取得或設定是否等待應用程式執行結束。
+    /// </summary>
 	public bool NeedWait
 	{
 		get { return m_NeedWait; }
@@ -288,11 +319,17 @@ public sealed class FileRunner : IDisposable
 		}
 	}
 
+    /// <summary>
+    /// 取得上次執行發生錯誤時的錯誤訊息。
+    /// </summary>
 	public string ErrorMsg
 	{
 		get { return m_ErrMsg; }
 	}
 
+    /// <summary>
+    /// 取得從執行的應用程式所擷取到的標準輸出。
+    /// </summary>
 	public string StdOutputMsg
 	{
 		get
@@ -301,24 +338,36 @@ public sealed class FileRunner : IDisposable
 		}
 	}
 
+    /// <summary>
+    /// 取得或設定啟動處理序時使用的視窗狀態。
+    /// </summary>
 	public ProcessWindowStyle WindowStyle
 	{
 		get { return m_StartInfo.WindowStyle; }
 		set { m_StartInfo.WindowStyle = value; }
 	}
 
+    /// <summary>
+    /// 取得或設定用於啟動處理序的動詞，例如 "runas"。
+    /// </summary>
 	public string Verb
 	{
 		get { return m_StartInfo.Verb; }
 		set { m_StartInfo.Verb = value; }
 	}
 
+    /// <summary>
+    /// 取得或設定一個值，指出處理序無法啟動時，是否要顯示錯誤對話方塊。
+    /// </summary>
 	public bool ErrorDialog
 	{
 		get { return m_StartInfo.ErrorDialog; }
 		set { m_StartInfo.ErrorDialog = value; }
 	}
 
+    /// <summary>
+    /// 取得處理序已結束執行的結束代碼。
+    /// </summary>
 	public int ExitCode 
 	{
 		get 
@@ -329,6 +378,9 @@ public sealed class FileRunner : IDisposable
 		}
 	}
 
+    /// <summary>
+    /// 取得處理序結束執行的時間。
+    /// </summary>
 	public DateTime ExitTime
 	{
 		get
@@ -343,6 +395,9 @@ public sealed class FileRunner : IDisposable
 
 	#region 事件--------------------------------
 
+    /// <summary>
+    /// 當應用程式將資料寫入其重新導向的 StandardOutput 資料流時發生。
+    /// </summary>
 	public event DataReceivedEventHandler StdOutputReceived
 	{
 		add

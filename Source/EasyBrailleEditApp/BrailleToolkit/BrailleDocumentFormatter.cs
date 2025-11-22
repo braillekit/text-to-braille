@@ -10,6 +10,9 @@ using EasyBrailleEdit.Common;
 
 namespace BrailleToolkit
 {
+    /// <summary>
+    /// 提供格式化點字文件的靜態輔助函式，例如斷行、縮排等。
+    /// </summary>
     public static class BrailleDocumentFormatter
     {
         /// <summary>
@@ -65,7 +68,7 @@ namespace BrailleToolkit
 
             outputLines.Add(brLine);
 
-            var newLines = BreakLine(brLine, cellsPerLine, context);
+            List<BrailleLine>? newLines = BreakLine(brLine, cellsPerLine, context);
 
             if (newLines == null || newLines.Count < 1)   // 沒有斷行？
             {

@@ -6,6 +6,9 @@ using BrailleToolkit.Data;
 
 namespace BrailleToolkit.Converters
 {
+    /// <summary>
+    /// 表格符號轉換器。
+    /// </summary>
 	public sealed class TableConverter : WordConverter
 	{
 		private TableBrailleTable m_Table;
@@ -41,7 +44,7 @@ namespace BrailleToolkit.Converters
 			char ch;
 			string text;
 			bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
-			BrailleWord brWord;
+			BrailleWord? brWord;
 			List<BrailleWord> brWordList = null;
 
 			BarType barType = BarType.Middle;	// 橫線的種類			

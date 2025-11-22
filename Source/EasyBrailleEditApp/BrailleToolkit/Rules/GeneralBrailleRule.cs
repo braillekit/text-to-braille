@@ -193,8 +193,8 @@ namespace BrailleToolkit.Rules
         {
             int wordOffset = 0;
             BrailleWord currWord = brLine[wordIdx]; // 目前的字
-            BrailleWord prevWord = null;            // 上一個字
-            BrailleWord nextWord = null;            // 下一個字
+            BrailleWord? prevWord = null;            // 上一個字
+            BrailleWord? nextWord = null;            // 下一個字
 
             if ((wordIdx - 1) >= 0)
             {
@@ -394,6 +394,10 @@ namespace BrailleToolkit.Rules
             }
         }
 
+        /// <summary>
+        /// 套用不可斷行規則：設定在斷行時不可位於行首的字元。
+        /// </summary>
+        /// <param name="brLine">要套用規則的點字行。</param>
         public static void ApplyDontBreakLineRule(BrailleLine brLine)
         {
             int wordIdx = 0;

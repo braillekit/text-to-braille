@@ -48,6 +48,12 @@
         /// </summary>
         public int Total { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HttpUpdaterFileEventArgs"/> class.
+        /// </summary>
+        /// <param name="filename">The name of the file.</param>
+        /// <param name="number">The file number.</param>
+        /// <param name="total">The total number of files.</param>
         public HttpUpdaterFileEventArgs(string filename, int number, int total)
         {
             FileName = filename;
@@ -56,6 +62,9 @@
         }
     }
 
+    /// <summary>
+    /// 定義 HTTP 更新器的介面。
+    /// </summary>
     public interface IHttpUpdater : IDisposable
     {
         /// <summary>
@@ -71,6 +80,10 @@
         /// </summary>
         Task GetUpdateListAsync(string updateFileName);
 
+        /// <summary>
+        /// 檢查伺服器上是否有可用的更新。
+        /// </summary>
+        /// <returns>如果有更新，則為 true；否則為 false。</returns>
         bool HasUpdates();
 
         /// <summary>
@@ -81,20 +94,38 @@
 
         #region 屬性
 
+        /// <summary>
+        /// 取得或設定用戶端應用程式的本機路徑。
+        /// </summary>
         string ClientPath { get; set; }
 
+        /// <summary>
+        /// 取得或設定遠端更新伺服器的 URI。
+        /// </summary>
         string ServerUri { get; set; }
 
+        /// <summary>
+        /// 取得或設定變更日誌檔案的名稱。
+        /// </summary>
         string ChangeLogFileName { get; set; }
 
         #endregion 屬性
 
         #region 事件
 
+        /// <summary>
+        /// 當檔案開始更新時觸發。
+        /// </summary>
         event EventHandler<HttpUpdaterFileEventArgs> FileUpdating;
 
+        /// <summary>
+        /// 當檔案更新完成時觸發。
+        /// </summary>
         event EventHandler<HttpUpdaterFileEventArgs> FileUpdated;
 
+        /// <summary>
+        /// 當檔案下載進度變更時觸發。
+        /// </summary>
         event EventHandler<DownloadProgress> DownloadProgressChanged;
 
         #endregion 事件
@@ -124,7 +155,7 @@
         /// <summary>
         /// Gets or sets the file name.
         /// </summary>
-        public string FileName { get; set; } = null;
+        public string FileName { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the update operation.
@@ -157,12 +188,12 @@
         /// <returns>True if equal; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            UpdateItem item = obj as UpdateItem;
+            UpdateItem? item = obj as UpdateItem;
 
             if (item == null)
                 return false;
 
-            return item.FileName.Equals(this.FileName, StringComparison.CurrentCultureIgnoreCase);
+            return item.FileName!.Equals(this.FileName, StringComparison.CurrentCultureIgnoreCase);
         }
 
         /// <summary>

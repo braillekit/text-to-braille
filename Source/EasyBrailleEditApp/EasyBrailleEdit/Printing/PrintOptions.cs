@@ -114,9 +114,9 @@ namespace EasyBrailleEdit
 
         public DoubleSideEffect DoubleSideEffect { get; set; }
 
-        public string PrinterName { get; set; }
+        public string PrinterName { get; set; } = null!;
 
-        public string PrinterNameForBraille { get; set; }
+        public string PrinterNameForBraille { get; set; } = null!;
 
         public string PaperSourceName { get; set; }
 

@@ -30,10 +30,10 @@ namespace BrailleToolkit
         private List<BraillePageTitle> m_PageTitles;    // 所有的頁標題。
 
         [NonSerialized]
-        private string m_FileName;
+        private string? m_FileName;
 
         [NonSerialized]
-        private BrailleProcessor m_Processor;	// 點字轉換器。
+        private BrailleProcessor? m_Processor;	// 點字轉換器。
 
         /// <summary>
         /// 起始頁碼
@@ -358,6 +358,11 @@ namespace BrailleToolkit
             m_Lines.Add(brLine);
         }
 
+        /// <summary>
+        /// 在指定的索引處插入多個點字行。
+        /// </summary>
+        /// <param name="index">應插入點字行的以零為起始的索引。</param>
+        /// <param name="lines">要插入的點字行集合。</param>
         public void InsertLines(int index, IEnumerable<BrailleLine> lines)
         {
             m_Lines.InsertRange(index, lines);
@@ -386,6 +391,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 從文件中移除所有的點字行和頁標題。
+        /// </summary>
         public void Clear()
         {
             m_Lines.Clear();
@@ -396,6 +404,10 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 將整個點字文件轉換為其字串表示形式。
+        /// </summary>
+        /// <returns>代表整個文件的字串。</returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -560,7 +572,7 @@ namespace BrailleToolkit
         /// 取得或設定 BrailleProcessor 物件參考。
         /// </summary>
         [YamlIgnore]
-        public BrailleProcessor Processor
+        public BrailleProcessor? Processor
         {
             get { return m_Processor; }
             set { m_Processor = value; }
@@ -579,18 +591,26 @@ namespace BrailleToolkit
         /// 取得或設定檔名。
         /// </summary>        
         [YamlIgnore]
-        public string FileName
+        public string? FileName
         {
             get { return m_FileName; }
             set { m_FileName = value; }
         }
 
+        /// <summary>
+        /// 取得所有點字行。
+        /// </summary>
         public List<BrailleLine> Lines
         {
             get { return m_Lines; }
             private set { m_Lines = value; }
         }
 
+        /// <summary>
+        /// 取得指定索引的點字行。
+        /// </summary>
+        /// <param name="index">索引。</param>
+        /// <returns>點字行。</returns>
         public BrailleLine this[int index]
         {
             get { return m_Lines[index]; }

@@ -12,15 +12,15 @@ namespace EasyBrailleEdit
 {
 	public partial class DualEditFindForm : Form
 	{
-		private BrailleDocument m_BrDoc;
+		private BrailleDocument m_BrDoc = null!;
 		private bool m_IsFirstTime;		// 是否是第一次尋找（以分辨是否為找下一筆）.
 		private int m_StartLineIndex;
 		private int m_StartWordIndex;
 		private bool m_CaseSensitive;
 		private int m_FoundLineIndex;
 		private int m_FoundWordIndex;
-		private event TargetFoundEvent m_TargetFoundEvent;
-		private event DecideStartPositionEvent m_DecideStartPosEvent;
+		private event TargetFoundEvent? m_TargetFoundEvent;
+		private event DecideStartPositionEvent? m_DecideStartPosEvent;
 
 		public DualEditFindForm()
 		{

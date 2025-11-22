@@ -23,8 +23,8 @@ namespace EasyBrailleEdit
 
         private BrailleDocument m_BrDoc;
         private PrintOptions m_PrintOptions;
-        private string m_BeginOrgPageNumber;		// 起始原書頁碼
-        private string m_EndOrgPageNumber;			// 終止原書頁碼
+        private string m_BeginOrgPageNumber = null!;		// 起始原書頁碼
+        private string m_EndOrgPageNumber = null!;			// 終止原書頁碼
 
         private bool m_PreviewOnly;				// 是否只預覽，不列印
 
@@ -35,8 +35,8 @@ namespace EasyBrailleEdit
         private int m_TotalPages;       // 實際資料的總頁數（不是 user 指定列印範圍的頁數）。
         private int m_PageNum;			// 程式內部的頁碼。
         private int m_DisplayedPageNum;	// 實際輸出的頁碼。
-        private SolidBrush m_TextBrush;
-        private Font m_TextFont;
+        private SolidBrush? m_TextBrush;
+        private Font? m_TextFont;
         private double m_TextHeight;
         private double m_LineHeight;
 

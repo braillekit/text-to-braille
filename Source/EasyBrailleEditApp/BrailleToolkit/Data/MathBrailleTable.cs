@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace BrailleToolkit.Data
 {
+    /// <summary>
+    /// 數學符號點字表。
+    /// </summary>
     public sealed class MathBrailleTable : XmlBrailleTable
     {
         private static MathBrailleTable m_Instance = null;

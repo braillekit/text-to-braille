@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace BrailleToolkit.Helpers
 {
+    /// <summary>
+    /// 提供處理點字詞 (BrailleWord) 的靜態輔助函式。
+    /// </summary>
     public static class BrailleWordHelper
     {
 

@@ -5,6 +5,9 @@ using BrailleToolkit.Helpers;
 
 namespace BrailleToolkit.Rules
 {
+    /// <summary>
+    /// 中文點字規則類別。
+    /// </summary>
     public static class ChineseBrailleRule
     {
         const string OpeningSymbols = "「『（【｛＂‘";    // 左開放符號。
@@ -26,7 +29,7 @@ namespace BrailleToolkit.Rules
                 }
 
                 // 持續往下移動，直到碰到此 context name 的結束標籤，然後取出下一個字。                
-                BrailleWord nonContextNeighbor = null;
+                BrailleWord? nonContextNeighbor = null;
                 while (wordIdx < brLine.WordCount)
                 {
                     brWord = brLine[wordIdx];
@@ -54,6 +57,10 @@ namespace BrailleToolkit.Rules
             }
         }
 
+        /// <summary>
+        /// 套用私名號和書名號規則。
+        /// </summary>
+        /// <param name="brLine">點字行。</param>
         public static void ApplySpecificNameAndBookNameRules(BrailleLine brLine)
         {
             AddOneSpaceAfterContext_UnlessNextWordIsPunctuation(ContextTagNames.SpecificName, brLine);

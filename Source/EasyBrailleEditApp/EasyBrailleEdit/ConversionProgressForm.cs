@@ -10,7 +10,7 @@ namespace EasyBrailleEdit
 {
 	public partial class ConversionProgressForm : Form
 	{
-		private StringBuilder m_InvalidChars;
+		private StringBuilder m_InvalidChars = null!;
 
 		public ConversionProgressForm()
 		{

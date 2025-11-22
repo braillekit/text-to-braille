@@ -1,5 +1,8 @@
 ﻿namespace BrailleToolkit
 {
+    /// <summary>
+    /// 提供點字相關的常數。
+    /// </summary>
     public static class BrailleConst
     {
         /// <summary>

@@ -18,6 +18,9 @@ namespace BrailleToolkit.Data
 	{
 		private string m_FileName;
 		private bool m_Loaded;
+		/// <summary>
+		/// 儲存點字對照表的 DataTable。
+		/// </summary>
 		protected DataTable m_Table;
 
         /// <summary>
@@ -148,6 +151,9 @@ namespace BrailleToolkit.Data
 			m_Loaded = true;
 		}
 
+        /// <summary>
+        /// 將點位字串轉換為點字碼。
+        /// </summary>
         protected virtual void ConvertDotsToCode()
         {
             if (m_Table.Columns.IndexOf("code") < 0)
@@ -170,6 +176,9 @@ namespace BrailleToolkit.Data
             m_Table.AcceptChanges();
         }
 
+        /// <summary>
+        /// 將第二方點位字串轉換為點字碼。
+        /// </summary>
         protected virtual void ConvertDots2ToCode2()
         {
             if (m_Table.Columns.IndexOf("dots2") < 0)
@@ -196,7 +205,6 @@ namespace BrailleToolkit.Data
 		/// <summary>
 		/// 檢查點字對照表是否已經載入，若否，則丟出 exception。
 		/// </summary>
-		/// <returns></returns>
 		protected void CheckLoaded()
 		{
 			if (!m_Loaded)
@@ -236,7 +244,13 @@ namespace BrailleToolkit.Data
 			}
 		}
 
-        protected virtual DataRow FindDataRow(string text, string type = null)
+        /// <summary>
+        /// 搜尋對應的 DataRow。
+        /// </summary>
+        /// <param name="text">文字。</param>
+        /// <param name="type">類型。</param>
+        /// <returns>DataRow。</returns>
+        protected virtual DataRow? FindDataRow(string text, string? type = null)
         {
             if (string.IsNullOrWhiteSpace(type))
             {
@@ -257,37 +271,48 @@ namespace BrailleToolkit.Data
         /// <param name="type">限定欲搜尋的符號類型。若不同類型當中存在相同的文字符號，便應指定此參數，以確保找到正確的符號。</param>
         /// <returns>若有找到，則傳回對應的點字碼，否則傳回 null。</returns>
         /// <remarks>如果你希望找不到對應的點字碼時丟出例外，請使用索引子。</remarks>
-        public override string Find(string text, string type=null)
+        public override string? Find(string text, string? type=null)
 		{
 			CheckLoaded();
 
-            DataRow row = FindDataRow(text, type);
+            DataRow? row = FindDataRow(text, type);
 			if (row == null)
 			{
                 return null;
 			}
-			string code = row["code"].ToString();
+			string code = row["code"].ToString() ?? string.Empty;
 
             CheckCode(code);
 			return code;
 		}
 
-        public override string[] GetDots(string text, string type = null)
+        /// <summary>
+        /// 取得點位字串陣列。
+        /// </summary>
+        /// <param name="text">文字。</param>
+        /// <param name="type">類型。</param>
+        /// <returns>點位字串陣列。</returns>
+        public override string[]? GetDots(string text, string? type = null)
         {
             CheckLoaded();
 
-            DataRow row = FindDataRow(text, type);
+            DataRow? row = FindDataRow(text, type);
             if (row == null)
                 return null;
                     
-            return row["dots"].ToString().Split(' ');
+            return row["dots"].ToString()?.Split(' ') ?? Array.Empty<string>();
         }
 
+        /// <summary>
+        /// 檢查文字是否存在於對照表中。
+        /// </summary>
+        /// <param name="text">文字。</param>
+        /// <returns>若存在則傳回 true，否則傳回 false。</returns>
         public override bool Exists(string text)
         {
             CheckLoaded();
 
-            DataRow row = m_Table.Rows.Find(text);
+            DataRow? row = m_Table.Rows.Find(text);
             return row != null;
         }
 	}

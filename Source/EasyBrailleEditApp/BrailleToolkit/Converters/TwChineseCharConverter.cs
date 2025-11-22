@@ -49,7 +49,7 @@ namespace BrailleToolkit.Converters
             char ch;
             string currentWord;
             bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
-            BrailleWord brWord;
+            BrailleWord? brWord;
             List<BrailleWord> brWordList = null;
             int idx = 0;
             int chineseStartIdx = -1;
@@ -295,7 +295,7 @@ namespace BrailleToolkit.Converters
             }
 
             // 嘗試取得該字的注音字根，若可成功取得，則將注音字根轉換成點字碼，並傳回 BrailleWord 物件。
-            string phcode = null;
+            string? phcode = null;
 
             if (text.IsCJK())  // 若是漢字
             {
@@ -321,7 +321,7 @@ namespace BrailleToolkit.Converters
                     // TODO: 以下「將注音字根轉換成點字碼」的處理應可省略，因為 FixPhoneticCodes 會重新修正所有中文字的點字碼。
 
                     // 將注音字根轉換成點字碼
-                    BrailleCellList cellList = CreatePhoneticCellList(phcode);
+                    BrailleCellList? cellList = CreatePhoneticCellList(phcode);
                     if (cellList != null)
                     {
                         brWord.CellList.Assign(cellList);

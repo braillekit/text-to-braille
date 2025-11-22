@@ -37,7 +37,7 @@ namespace EasyBrailleEdit.Common.Utilities
             using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonStr)))
             {
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());
-                obj = (T)serializer.ReadObject(ms);
+                obj = (T)serializer.ReadObject(ms)!;
                 return obj;
             }
         }

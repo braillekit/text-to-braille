@@ -5,14 +5,20 @@ using EasyBrailleEdit.Common.Config;
 
 namespace EasyBrailleEdit.Common
 {
+    /// <summary>
+    /// 提供應用程式全域會用到的變數、常數和公用函式。
+    /// </summary>
     public static class AppGlobals
     {
+        /// <summary>
+        /// 取得應用程式組態設定。
+        /// </summary>
         public static AppConfig Config { get; } = AppConfig.GetInstance();
 
         /// <summary>
         /// 應用程式執行路徑
         /// </summary>
-        public static string AppPath { get; set;  }
+        public static string AppPath { get; set; } = null!;
         
         /// <summary>
         /// 暫存目錄路徑
@@ -76,7 +82,7 @@ namespace EasyBrailleEdit.Common
                 throw new Exception("Assembly.GetExecutingAssembly() 無法取得組件!");
             }
 
-            string dirName = Path.GetDirectoryName(asmb.Location);
+            string dirName = Path.GetDirectoryName(asmb.Location) ?? AppDomain.CurrentDomain.BaseDirectory ?? string.Empty;
             string path = Path.Join(dirName, @"Temp\");
            
 			if (!Directory.Exists(path))

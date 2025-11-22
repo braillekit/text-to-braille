@@ -14,6 +14,9 @@ using BrailleToolkit.Rules;
 
 namespace BrailleToolkit
 {
+    /// <summary>
+    /// 代表一個字元及其在文件中的位置。
+    /// </summary>
     public struct CharPosition
     {
         /// <summary>
@@ -32,12 +35,15 @@ namespace BrailleToolkit
         public int CharIndex { get; set; }
     }
 
+    /// <summary>
+    /// 為轉換失敗事件提供資料。
+    /// </summary>
     public sealed class ConversionFailedEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the original text of the line where the conversion failed.
         /// </summary>
-        public string OriginalText { get; private set; }
+        public string OriginalText { get; private set; } = null!;
 
         /// <summary>
         /// Gets the position and value of the invalid character.
@@ -61,6 +67,9 @@ namespace BrailleToolkit
         }
     }
 
+    /// <summary>
+    /// 為文字轉換成功事件提供資料。
+    /// </summary>
     public sealed class TextConvertedEventArgs : EventArgs
     {
         internal void SetArgValues(int lineNum, string text)
@@ -72,7 +81,7 @@ namespace BrailleToolkit
         /// <summary>
         /// Gets the converted braille text.
         /// </summary>
-        public string Text { get; private set; }
+        public string Text { get; private set; } = null!;
 
         /// <summary>
         /// Gets the line number of the converted text.
@@ -88,7 +97,7 @@ namespace BrailleToolkit
     /// </summary>
     public class BrailleProcessor
     {
-        private static BrailleProcessor s_Processor;
+        private static BrailleProcessor? s_Processor;
 
         private CoordinateConverter _coordConverter;
         private TableConverter _tableConverter;
@@ -100,8 +109,8 @@ namespace BrailleToolkit
 
         private StringBuilder _errorMsg;           // 轉換過程中發生的錯誤訊息。
 
-        private event EventHandler<ConversionFailedEventArgs> _conversionFailedEvent;
-        private event EventHandler<TextConvertedEventArgs> _textConvertedEvent;
+        private event EventHandler<ConversionFailedEventArgs>? _conversionFailedEvent;
+        private event EventHandler<TextConvertedEventArgs>? _textConvertedEvent;
 
         private Dictionary<string, string> _autoReplacedText;
 
@@ -283,6 +292,10 @@ namespace BrailleToolkit
 
         #region 事件方法
 
+        /// <summary>
+        /// 引發 ConvertionFailed 事件。
+        /// </summary>
+        /// <param name="args">包含事件資料的 ConversionFailedEventArgs。</param>
         protected virtual void OnConvertionFailed(ConversionFailedEventArgs args)
         {
             // 將無效字元記錄於內部變數。
@@ -295,6 +308,10 @@ namespace BrailleToolkit
             _conversionFailedEvent?.Invoke(this, args);
         }
 
+        /// <summary>
+        /// 引發 TextConverted 事件。
+        /// </summary>
+        /// <param name="args">包含事件資料的 TextConvertedEventArgs。</param>
         protected virtual void OnTextConverted(TextConvertedEventArgs args)
         {
             if (SuppressEvents)
@@ -416,8 +433,8 @@ namespace BrailleToolkit
         /// 簡單版本的轉換方法：不處理任何標籤額外格式，單純轉換文字符號。
         /// 此方法可用來轉換 context tag 裡面的文字。
         /// </summary>
-        /// <param name="Text"></param>
-        /// <returns></returns>
+        /// <param name="Text">輸入文字。</param>
+        /// <returns>轉換後的點字行。</returns>
         public BrailleLine SimpleConvertText(string Text)
         {
             var outputBrLine = new BrailleLine();
@@ -477,7 +494,6 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="line">輸入的明眼字串。</param>
         /// <param name="lineNumber">字串的行號。此參數只是用來當轉換失敗時，傳給轉換失敗事件處理常式的資訊。</param>
-        /// <param name="isTitle">輸出參數，是否為標題。</param>
         /// <returns>點字串列。若則傳回 null，表示該列不需要轉成點字。</returns>
         public BrailleLine ConvertLine(string line, int lineNumber)
         {
