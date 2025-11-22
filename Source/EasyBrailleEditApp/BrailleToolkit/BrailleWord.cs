@@ -11,10 +11,16 @@ using YamlDotNet.Serialization;
 
 namespace BrailleToolkit
 {
+    /// <summary>
+    /// Specifies the language of braille content.
+    /// </summary>
     public enum BrailleLanguage
     {
+        /// <summary>Neutral language.</summary>
         Neutral = 0,
+        /// <summary>Chinese language.</summary>
         Chinese,
+        /// <summary>English language.</summary>
         English
     };
 
@@ -29,6 +35,9 @@ namespace BrailleToolkit
     [DataContract]
     public sealed class BrailleWord
     {
+        /// <summary>
+        /// Gets a static instance of a blank braille word.
+        /// </summary>
         public static BrailleWord BlankWord { get; } = NewBlank();
 
         private List<string> m_PhoneticCodes;   // 所有注音組字字根（以支援破音字）。

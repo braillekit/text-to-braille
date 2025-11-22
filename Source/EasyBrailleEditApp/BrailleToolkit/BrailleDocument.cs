@@ -48,6 +48,9 @@ namespace BrailleToolkit
 
         #region 建構函式
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BrailleDocument"/> class.
+        /// </summary>
         public BrailleDocument()
         {
             m_Lines = new List<BrailleLine>();
@@ -56,12 +59,23 @@ namespace BrailleToolkit
             StartPageNumber = 1;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BrailleDocument"/> class with a processor and cells per line.
+        /// </summary>
+        /// <param name="processor">The braille processor.</param>
+        /// <param name="cellsPerLine">Number of cells per line.</param>
         public BrailleDocument(BrailleProcessor processor, int cellsPerLine = BrailleConst.DefaultCellsPerLine) : this()
         {
             m_Processor = processor;
             m_CellsPerLine = cellsPerLine;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BrailleDocument"/> class with a filename, processor, and cells per line.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <param name="processor">The braille processor.</param>
+        /// <param name="cellsPerLine">Number of cells per line.</param>
         public BrailleDocument(string filename, BrailleProcessor processor, int cellsPerLine)
             : this()
         {
@@ -72,6 +86,10 @@ namespace BrailleToolkit
 
         #endregion
 
+        /// <summary>
+        /// Creates a deep copy of this document.
+        /// </summary>
+        /// <returns>A new instance with copied content.</returns>
         public BrailleDocument DeepCopy()
         {
             string jsonStr = JsonHelper.Serialize(this);
@@ -118,6 +136,10 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// Converts the given text to braille.
+        /// </summary>
+        /// <param name="text">The text to convert.</param>
         public void Convert(string text)
         {
             using (StringReader sr = new StringReader(text))
@@ -136,6 +158,10 @@ namespace BrailleToolkit
             LoadAndConvert();
         }
 
+        /// <summary>
+        /// Loads and converts text from a TextReader.
+        /// </summary>
+        /// <param name="reader">The text reader.</param>
         public void LoadAndConvert(TextReader reader)
         {
             Log.Debug("BrailleDocument.LoadAndConvert() 開始執行。");
@@ -148,13 +174,17 @@ namespace BrailleToolkit
 
             m_Processor.InitializeForConversion();
 
-            while (true)
+            while ((line = reader.ReadLine()) != null)
             {
-                line = reader.ReadLine();
-                if (line == null)
-                    break;
                 lineNumber++;
-                ProcessLine(line, lineNumber);
+
+                BrailleLine brLine = m_Processor.ConvertLine(line, lineNumber);
+
+                if (brLine != null)
+                {
+                    ProcessLine(brLine);
+                    AddLine(brLine);
+                }
             }
 
             m_Processor.FormatDocument(this);   // 斷行
@@ -164,12 +194,21 @@ namespace BrailleToolkit
             Log.Debug($"BrailleDocument.LoadAndConvert() 執行完畢。頁標題數量為 {titleCount}。");
         }
 
+        /// <summary>
+        /// Adds a page title to the document.
+        /// </summary>
+        /// <param name="title">The page title to add.</param>
         public void AddPageTitle(BraillePageTitle title)
         {
             PageTitles.Add(title);
             SortPageTitles();
         }
 
+        /// <summary>
+        /// Adds a page title at the specified line index.
+        /// </summary>
+        /// <param name="words">The words of the title.</param>
+        /// <param name="lineIdx">The line index.</param>
         public void AddPageTitleAt(List<BrailleWord> words, int lineIdx)
         {
             if (lineIdx >= LineCount)
@@ -181,6 +220,11 @@ namespace BrailleToolkit
             SortPageTitles();
         }
 
+        /// <summary>
+        /// Checks if the specified line index is the beginning of a page title.
+        /// </summary>
+        /// <param name="lineIdx">The line index to check.</param>
+        /// <returns>True if it is a page title beginning; otherwise, false.</returns>
         public bool IsBeginLineOfPageTitle(int lineIdx)
         {
             if (lineIdx < 0 || lineIdx >= LineCount)
@@ -190,6 +234,11 @@ namespace BrailleToolkit
             return PageTitles.FindIndex(p => ReferenceEquals(brLine, p.BeginLineRef)) >= 0;
         }
 
+        /// <summary>
+        /// Finds a page title by its beginning line reference.
+        /// </summary>
+        /// <param name="brLine">The braille line reference.</param>
+        /// <returns>The page title if found; otherwise, null.</returns>
         public BraillePageTitle FindPageTitleByBeginLine(BrailleLine brLine)
         {
             return PageTitles.Find(p => ReferenceEquals(brLine, p.BeginLineRef));
@@ -261,6 +310,10 @@ namespace BrailleToolkit
             File.WriteAllText(filename, jsonStr);
         }
 
+        /// <summary>
+        /// Saves the document as a text file.
+        /// </summary>
+        /// <param name="filename">The filename to save to.</param>
         public void SaveTextFile(string filename)
         {
             var context = new ContextTagManager();
@@ -279,11 +332,20 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// Exports the document to an HTML file asynchronously.
+        /// </summary>
+        /// <param name="outputFileName">The output filename.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
         public async Task ExportToHtmlFileAsync(string outputFileName)
         {
             await BrailleDocumentHelper.ExportToHtmlFileAsync(this, outputFileName);
         }
 
+        /// <summary>
+        /// Gets all text content from the document.
+        /// </summary>
+        /// <returns>The complete text as a string.</returns>
         public string GetAllText()
         {
             var result = new StringBuilder();

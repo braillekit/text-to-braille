@@ -26,21 +26,35 @@ namespace BrailleToolkit
         public object Tag { get; set; }
 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BrailleLine"/> class.
+        /// </summary>
         public BrailleLine()
         {
             Words = new List<BrailleWord>();
         }
 
+        /// <summary>
+        /// Clears all words from this line.
+        /// </summary>
         public void Clear()
         {
             Words.Clear();
         }
 
+        /// <summary>
+        /// Checks if this line is empty.
+        /// </summary>
+        /// <returns>True if empty; otherwise, false.</returns>
         public bool IsEmpty()
         {
             return WordCount < 1;
         }
 
+        /// <summary>
+        /// Checks if this line is empty or contains only whitespace.
+        /// </summary>
+        /// <returns>True if empty or whitespace; otherwise, false.</returns>
         public bool IsEmptyOrWhiteSpace()
         {
             foreach (var word in Words)
@@ -54,6 +68,10 @@ namespace BrailleToolkit
             return true;
         }
 
+        /// <summary>
+        /// Checks if this line is the beginning of a paragraph.
+        /// </summary>
+        /// <returns>True if it is a paragraph beginning; otherwise, false.</returns>
         public bool IsBeginOfParagraph()
         {
             if (WordCount >= 2)
@@ -66,11 +84,19 @@ namespace BrailleToolkit
             return false;
         }
 
+        /// <summary>
+        /// Gets the number of words in this line.
+        /// </summary>
         public int WordCount
         {
             get { return Words.Count; }
         }
 
+        /// <summary>
+        /// Gets the word at the specified index.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns>The BrailleWord at the index.</returns>
         public BrailleWord this[int index]
         {
             get
