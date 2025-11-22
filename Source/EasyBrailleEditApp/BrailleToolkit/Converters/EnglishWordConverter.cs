@@ -17,6 +17,10 @@ namespace BrailleToolkit.Converters
         private EnglishBrailleTable m_Table;
         private BrailleProcessor _processor;
 
+        /// <summary>
+        /// 建構函式。
+        /// </summary>
+        /// <param name="processor">點字處理器。</param>
         public EnglishWordConverter(BrailleProcessor processor)
         {
             m_Table = EnglishBrailleTable.CreateInstance();

@@ -9,6 +9,12 @@ namespace EasyBrailleEdit.Common.Utilities
     /// </summary>
     public class JsonHelper
     {
+        /// <summary>
+        /// 將物件序列化為 JSON 字串。
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static string Serialize<T>(T obj)
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());
@@ -19,6 +25,12 @@ namespace EasyBrailleEdit.Common.Utilities
             return retVal;
         }
 
+        /// <summary>
+        /// 將 JSON 字串反序列化為物件。
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="jsonStr"></param>
+        /// <returns></returns>
         public static T Deserialize<T>(string jsonStr)
         {
             T obj = Activator.CreateInstance<T>();  // 注意: 欲反序列化的類別必須有預設建構元.

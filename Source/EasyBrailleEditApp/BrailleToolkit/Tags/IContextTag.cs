@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BrailleToolkit.Tags
+﻿namespace BrailleToolkit.Tags
 {
     /// <summary>
     /// 語境標籤。用途主要是供 ContextTagManager 記錄某語境標籤在特定時間點的出現次數。
@@ -47,11 +41,20 @@ namespace BrailleToolkit.Tags
         bool IsActive { get; }
 
 
+        /// <summary>
+        /// 重設此語境標籤的狀態。
+        /// </summary>
         void Reset();
 
 
+        /// <summary>
+        /// 進入此語境標籤。
+        /// </summary>
         void Enter();
 
+        /// <summary>
+        /// 離開此語境標籤。
+        /// </summary>
         void Leave();
     }
 }

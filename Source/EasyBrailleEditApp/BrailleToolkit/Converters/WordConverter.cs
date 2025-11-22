@@ -15,6 +15,11 @@ namespace BrailleToolkit.Converters
 
         public abstract List<BrailleWord> Convert(Stack<char> charStack, ContextTagManager context);
 
+        /// <summary>
+        /// 轉換指定的字串。
+        /// </summary>
+        /// <param name="text">欲轉換的字串。</param>
+        /// <returns>轉換後的點字碼。</returns>
         public virtual string Convert(string text)
         {
             return BrailleTable.Find(text);
@@ -37,6 +42,11 @@ namespace BrailleToolkit.Converters
             return null;
         }
 
+        /// <summary>
+        /// 確保目前轉換的字詞後面有一個空方，除非下一個字是標點符號。
+        /// </summary>
+        /// <param name="wordList">目前的點字詞串列。</param>
+        /// <param name="nextWord">下一個字。</param>
         protected void EnsureOneSpaceFollowed_UnlessNextWordIsPunctuation(List<BrailleWord> wordList, string nextWord)
         {
             EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(
@@ -47,6 +57,12 @@ namespace BrailleToolkit.Converters
             // 註：'<' 是 context tag 的起始符號，碰到此符號時也不加空方。
         }
 
+        /// <summary>
+        /// 確保目前轉換的字詞後面有一個空方，除非下一個字是排除的字元。
+        /// </summary>
+        /// <param name="wordList">目前的點字詞串列。</param>
+        /// <param name="nextWord">下一個字。</param>
+        /// <param name="exceptedWords">排除的字元集合。</param>
         protected void EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(List<BrailleWord> wordList, string nextWord, string exceptedWords)
         {
             if (nextWord == " ") return; // 如果下一個字是空白，就不用多加了
@@ -57,6 +73,11 @@ namespace BrailleToolkit.Converters
             }
         }
 
+        /// <summary>
+        /// 確保目前轉換的字詞後面有一個空方。
+        /// </summary>
+        /// <param name="wordList">目前的點字詞串列。</param>
+        /// <param name="nextWord">下一個字。</param>
         protected void EnsureOneSpaceFollowed(List<BrailleWord> wordList, string nextWord)
         {
             if (nextWord == " ") return; // 如果下一個字是空白，就不用多加了
@@ -64,6 +85,13 @@ namespace BrailleToolkit.Converters
             wordList.Add(BrailleWord.NewBlank());
         }
 
+        /// <summary>
+        /// 確保括號之間有一個空方（若括號內無內容）。
+        /// </summary>
+        /// <param name="wordList">目前的點字詞串列。</param>
+        /// <param name="currentWord">目前的字。</param>
+        /// <param name="nextWord">下一個字。</param>
+        /// <returns>若有加入空方則傳回 true。</returns>
         protected bool EnsureOneSpaceBetweenParentheses(List<BrailleWord> wordList, string currentWord, string nextWord)
         {
             if (currentWord == "（" && nextWord == "）")

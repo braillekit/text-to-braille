@@ -17,8 +17,15 @@ namespace BrailleToolkit.Converters
         private TwChineseBrailleTable _brailleTable;
         private BrailleProcessor _processor;
 
+        /// <summary>
+        /// 取得或設定注音反查轉換器。
+        /// </summary>
         public ZhuyinReverseConverter ZhuyinConverter { get; set; }
 
+        /// <summary>
+        /// 建構函式。
+        /// </summary>
+        /// <param name="processor">點字處理器。</param>
         public TwChineseCharConverter(BrailleProcessor processor)
         {
             _brailleTable = TwChineseBrailleTable.CreateInstance();

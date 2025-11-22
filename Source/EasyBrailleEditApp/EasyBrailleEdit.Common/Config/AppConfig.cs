@@ -13,11 +13,22 @@ namespace EasyBrailleEdit.Common.Config
     /// </summary>
     public sealed class AppConfig
     {
+        /// <summary>
+        /// 組態檔名稱。
+        /// </summary>
         public const string IniFileName = "AppConfig.ini";
+        
+        /// <summary>
+        /// 預設組態檔名稱。
+        /// </summary>
         public const string IniFileNameDefault = "AppConfig.Default.ini";
 
         private static AppConfig _instance;
 
+        /// <summary>
+        /// 取得 AppConfig 的唯一實體。
+        /// </summary>
+        /// <returns></returns>
         public static AppConfig GetInstance()
         {
             _instance ??= new AppConfig();
@@ -28,11 +39,29 @@ namespace EasyBrailleEdit.Common.Config
         private string _configFileName;
         private Configuration _config;        
 
+        /// <summary>
+        /// 一般設定區段。
+        /// </summary>
         public GeneralSection General { get; private set; }
+        
+        /// <summary>
+        /// 點字設定區段。
+        /// </summary>
         public BrailleSection Braille { get; private set; }  // 會自動視為區段 [Braille] 的設定
+        
+        /// <summary>
+        /// 點字編輯器設定區段。
+        /// </summary>
         public BrailleEditorSection BrailleEditor { get; private set; }  // 會自動視為區段 [BrailleEditor] 的設定
+        
+        /// <summary>
+        /// 列印設定區段。
+        /// </summary>
         public PrintingSection Printing { get; private set; } // 會自動視為區段 [Printing] 的設定
 
+        /// <summary>
+        /// 建構函式。
+        /// </summary>
         public AppConfig()
         {
             General = new GeneralSection();
@@ -54,6 +83,9 @@ namespace EasyBrailleEdit.Common.Config
             File.WriteAllText(filename, sb.ToString(), Encoding.UTF8);
         }
 
+        /// <summary>
+        /// 載入組態檔。
+        /// </summary>
         public void Load()
         {
             Assembly asmb = Assembly.GetExecutingAssembly() ?? throw new Exception("Assembly.GetExecutingAssembly() 無法取得組件!");
@@ -86,6 +118,9 @@ namespace EasyBrailleEdit.Common.Config
             Printing = _config[PrintingSection.Name].ToObject<PrintingSection>();
         }
 
+        /// <summary>
+        /// 儲存組態檔。
+        /// </summary>
         public void Save()
         {
             _config[GeneralSection.Name].GetValuesFrom(General);

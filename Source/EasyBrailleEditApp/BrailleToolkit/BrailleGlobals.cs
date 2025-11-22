@@ -10,6 +10,9 @@ namespace BrailleToolkit
     /// </summary>
     public static class BrailleGlobals
     {
+        /// <summary>
+        /// 中文標點符號集合。
+        /// </summary>
         public static string ChinesePunctuations = TwChineseBrailleTable.GetInstance().GetAllPunctuations();
     }
 }

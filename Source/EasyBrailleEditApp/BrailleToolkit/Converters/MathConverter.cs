@@ -9,6 +9,9 @@ namespace BrailleToolkit.Converters
     {
         private MathBrailleTable m_Table;
 
+        /// <summary>
+        /// 建構函式。
+        /// </summary>
         public MathConverter()
             : base()
         {

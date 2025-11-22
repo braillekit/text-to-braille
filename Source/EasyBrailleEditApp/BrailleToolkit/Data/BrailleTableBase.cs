@@ -7,10 +7,29 @@ namespace BrailleToolkit.Data
     /// </summary>
     public abstract class BrailleTableBase
     {
+        /// <summary>
+        /// 載入點字對照表。
+        /// </summary>
         public abstract void Load();
+
+        /// <summary>
+        /// 從指定檔案載入點字對照表。
+        /// </summary>
+        /// <param name="filename">檔案名稱。</param>
         public abstract void Load(string filename);
+
+        /// <summary>
+        /// 從資源載入點字對照表。
+        /// </summary>
+        /// <param name="asmb">包含資源的組件。</param>
+        /// <param name="resourceName">資源名稱。</param>
         public abstract void LoadFromResource(Assembly asmb, string resourceName);
 
+        /// <summary>
+        /// 索引子。從文字符號取得對應的點字碼。
+        /// </summary>
+        /// <param name="text">文字符號。</param>
+        /// <returns>點字碼。</returns>
         public abstract string this[string text]
         {
             get;

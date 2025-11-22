@@ -20,11 +20,17 @@ namespace BrailleToolkit.Data
 		private bool m_Loaded;
 		protected DataTable m_Table;
 
+        /// <summary>
+        /// 取得內部的 DataTable 物件。
+        /// </summary>
         public DataTable Table
         {
             get { return m_Table; }
         }
 
+        /// <summary>
+        /// 建構函式。
+        /// </summary>
 		public XmlBrailleTable()
 		{
 			m_Table = new DataTable();
@@ -33,12 +39,19 @@ namespace BrailleToolkit.Data
 			m_FileName = "";
 		}
 
+        /// <summary>
+        /// 建構函式。
+        /// </summary>
+        /// <param name="filename">XML 檔案名稱。</param>
 		public XmlBrailleTable(string filename)
 			: this()
 		{
 			Load(filename);
 		}
 
+        /// <summary>
+        /// 載入點字對照表。
+        /// </summary>
 		public override void Load()
 		{
 			Load(m_FileName);
