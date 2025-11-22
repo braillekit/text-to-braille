@@ -167,20 +167,20 @@ namespace BrailleToolkit
             Log.Debug("BrailleDocument.LoadAndConvert() 開始執行。");
 
             int lineNumber = 0;
-
             string? line;
 
             Clear();
 
             m_Processor.InitializeForConversion();
 
-            while (true)
+            while ((line = reader.ReadLine()) != null)
             {
-                line = reader.ReadLine();
-                if (line == null)
-                    break;
                 lineNumber++;
-                ProcessLine(line, lineNumber);
+                BrailleLine brLine = m_Processor.ConvertLine(line, lineNumber);
+                if (brLine != null)
+                {
+                    AddLine(brLine);
+                }
             }
 
             m_Processor.FormatDocument(this);   // 斷行
@@ -366,15 +366,6 @@ namespace BrailleToolkit
                     return title;
             }
             return null;
-        }
-
-        private void ProcessLine(string line, int lineNumber)
-        {
-            BrailleLine brLine = m_Processor.ConvertLine(line, lineNumber);
-            if (brLine != null)
-            {
-                AddLine(brLine);
-            }
         }
 
         /// <summary>
