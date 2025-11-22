@@ -94,25 +94,6 @@ namespace BrailleToolkit
         {
             string jsonStr = JsonHelper.Serialize(this);
             return JsonHelper.Deserialize<BrailleDocument>(jsonStr);
-
-/* another way to copy
-            var newDoc = new BrailleDocument();
-            newDoc.FileName = FileName;
-            newDoc.CellsPerLine = CellsPerLine;
-            newDoc.Processor = Processor;
-            newDoc.StartPageNumber = StartPageNumber;
-
-            foreach (var brLine in Lines)
-            {
-                newDoc.Lines.Add(brLine.DeepCopy());
-            }
-
-            foreach (var pageTitle in PageTitles)
-            {
-                newDoc.AddPageTitle(pageTitle.Clone() as BraillePageTitle);
-            }          
-            return newDoc;
-*/
         }
 
         /// <summary>
