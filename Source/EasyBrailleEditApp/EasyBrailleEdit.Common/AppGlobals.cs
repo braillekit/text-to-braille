@@ -5,6 +5,9 @@ using EasyBrailleEdit.Common.Config;
 
 namespace EasyBrailleEdit.Common
 {
+    /// <summary>
+    /// 提供應用程式全域會用到的變數、常數和公用函式。
+    /// </summary>
     public static class AppGlobals
     {
         /// <summary>

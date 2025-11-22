@@ -65,6 +65,9 @@ public static class Constant
     /// </summary>
     public const int DefaultMaxUndoLevel = 10;
 
+    /// <summary>
+    /// 提供與檔案相關的常數。
+    /// </summary>
     public static class Files
     {
         /// <summary>
@@ -108,38 +111,60 @@ public static class Constant
         /// </summary>
         public const string CvtResultFileName = "cvt_result.tmp";
 
+        /// <summary>
+        /// 主要的「開啟檔案」對話方塊中使用的檔案過濾器字串。
+        /// </summary>
         public static string MainFileNameFilter = $"雙視檔案 YAML 格式 (*{YamlBrailleFileExt})|*{YamlBrailleFileExt}|雙視檔案 3.x 版 (*{JsonBrailleFileExt})|*{JsonBrailleFileExt}|雙視檔案 2.x 版 (*.brlj)|*.brlj|所有檔案|*.*";
+        
+        /// <summary>
+        /// 「另存新檔」對話方塊中使用的檔案過濾器字串。
+        /// </summary>
         public static string SaveAsFileNameFilter = $"雙視檔案 YAML 格式 (*{YamlBrailleFileExt})|*{YamlBrailleFileExt}|雙視檔案 (*{JsonBrailleFileExt})|*{JsonBrailleFileExt}";
 
+        /// <summary>
+        /// 「儲存可列印點字檔」對話方塊中使用的檔案過濾器字串。
+        /// </summary>
         public static string SavePrintableBrailleFileNameFilter = $"用於列印的點字檔案(*{PrintableBrailleFileExt})|*{PrintableBrailleFileExt}";
     }
 
     /// <summary>
-    /// 預設明眼字列印邊界
-    /// </summary>
-    /// <summary>
-    /// 預設明眼字列印左邊界。
+    /// 預設奇數頁明眼字列印左邊界。
     /// </summary>
     public const int DefaultPrintTextMarginLeft = 105;
-    /// <summary>
-    /// 預設明眼字列印上邊界。
-    /// </summary>
-    public const int DefaultPrintTextMarginTop = 12;
-    public const int DefaultPrintTextMarginRight = 150;
-    public const int DefaultPrintTextMarginBottom = 100;
 
     /// <summary>
-    /// 預設的偶數頁明眼字列印邊界
+    /// 預設奇數頁明眼字列印上邊界。
     /// </summary>
+    public const int DefaultPrintTextMarginTop = 12;
+
+    /// <summary>
+    /// 預設奇數頁明眼字列印右邊界。
+    /// </summary>
+    public const int DefaultPrintTextMarginRight = 150;
+
+    /// <summary>
+    /// 預設奇數頁明眼字列印下邊界。
+    /// </summary>
+    public const int DefaultPrintTextMarginBottom = 100;
+
     /// <summary>
     /// 預設偶數頁明眼字列印左邊界。
     /// </summary>
     public const int DefaultPrintTextMarginLeft2 = 105;
+
     /// <summary>
     /// 預設偶數頁明眼字列印上邊界。
     /// </summary>
     public const int DefaultPrintTextMarginTop2 = 15; 
+
+    /// <summary>
+    /// 預設偶數頁明眼字列印右邊界。
+    /// </summary>
     public const int DefaultPrintTextMarginRight2 = 150;
+
+    /// <summary>
+    /// 預設偶數頁明眼字列印下邊界。
+    /// </summary>
     public const int DefaultPrintTextMarginBottom2 = 100;
 
     /// <summary>
