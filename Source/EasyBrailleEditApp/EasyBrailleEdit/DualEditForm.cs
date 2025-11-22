@@ -122,7 +122,7 @@ namespace EasyBrailleEdit
 
         private void UndoRedo_UndoBufferChanged(object sender, EventArgs e)
         {
-            var undoableOperations = (sender as UndoRedoManager).GetUndoableOperations();
+            var undoableOperations = (sender as UndoRedoManager)!.GetUndoableOperations();
             _undoBufferForm.UpdateUI(undoableOperations);
         }
        
@@ -298,7 +298,7 @@ namespace EasyBrailleEdit
             if (e.ClickedItem.Tag == null)
                 return;
 
-            string s = e.ClickedItem.Tag.ToString();
+            string s = e.ClickedItem.Tag.ToString()!;
 
             switch (s)
             {
@@ -318,7 +318,7 @@ namespace EasyBrailleEdit
         private void miViewMode_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem mi = sender as ToolStripMenuItem;
-            switch (mi.Tag.ToString())
+            switch (mi.Tag!.ToString()!)
             {
                 case "All":
                     _controller.ViewMode = ViewMode.All;
@@ -623,7 +623,7 @@ namespace EasyBrailleEdit
         private void miViewClick(object sender, EventArgs e)
         {
             ToolStripMenuItem mi = sender as ToolStripMenuItem;
-            switch (mi.Tag.ToString())
+            switch (mi.Tag!.ToString()!)
             {
                 case "Refresh":
                     _controller.RefreshView();
@@ -642,7 +642,7 @@ namespace EasyBrailleEdit
 
         private void miToolsClick(object sender, EventArgs e)
         {
-            string s = (string)(sender as ToolStripMenuItem).Tag;
+            string s = ((ToolStripMenuItem)sender!).Tag!.ToString()!;
             switch (s)
             {
                 case "RemoveSharp":

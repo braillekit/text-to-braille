@@ -138,8 +138,8 @@ namespace BrailleToolkit
 
             // 計算起始列索引
             int lineIdx = 0;
-            string beginOrgPageNum = null;
-            string endOrgPageNum = null;
+            string beginOrgPageNum = string.Empty;
+            string endOrgPageNum = string.Empty;
             int displayedPageNum = StartPageNumber;
             endPageNumber = displayedPageNum;
 

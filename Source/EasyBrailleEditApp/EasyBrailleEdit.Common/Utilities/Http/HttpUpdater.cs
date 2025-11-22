@@ -492,7 +492,7 @@ namespace EasyBrailleEdit.Common.Utilities.Http
             catch (Exception)
             {
                 // Rollback 
-                RollbackItem rollback;
+                RollbackItem? rollback;
 
                 for (int i = rollBackList.Count - 1; i >= 0; i--)
                 {

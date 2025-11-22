@@ -29,7 +29,7 @@ namespace BrailleToolkit.Rules
                 }
 
                 // 持續往下移動，直到碰到此 context name 的結束標籤，然後取出下一個字。                
-                BrailleWord nonContextNeighbor = null;
+                BrailleWord? nonContextNeighbor = null;
                 while (wordIdx < brLine.WordCount)
                 {
                     brWord = brLine[wordIdx];

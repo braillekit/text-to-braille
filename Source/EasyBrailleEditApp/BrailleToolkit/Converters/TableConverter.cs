@@ -44,7 +44,7 @@ namespace BrailleToolkit.Converters
 			char ch;
 			string text;
 			bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
-			BrailleWord brWord;
+			BrailleWord? brWord;
 			List<BrailleWord> brWordList = null;
 
 			BarType barType = BarType.Middle;	// 橫線的種類			

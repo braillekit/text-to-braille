@@ -23,7 +23,7 @@ namespace Txt2Brl
                     rollOnFileSizeLimit: true)
                 .CreateLogger();
 
-            string filename = Assembly.GetExecutingAssembly().Location;
+            string filename = Assembly.GetExecutingAssembly().Location!;
             string fileVer = FileVersionInfo.GetVersionInfo(filename).FileVersion;
 
             Console.WriteLine($"Txt2Brl version {fileVer} Copyright(c) 2008-2023 Michael Tsai.\n");
@@ -49,7 +49,7 @@ namespace Txt2Brl
             }
 
             // 若有指定 stdin，則優先以 stdin 為輸入。若沒有輸入，才看有沒有指定輸入檔案。
-            string inputText = string.Empty;
+            string? inputText = string.Empty;
             if (opts.Stdin)
             {
                 if (String.IsNullOrEmpty(opts.OutputFileName))

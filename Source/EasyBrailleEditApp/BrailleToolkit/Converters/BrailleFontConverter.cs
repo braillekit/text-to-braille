@@ -47,11 +47,15 @@ namespace BrailleToolkit.Converters
         /// </summary>
         public static void LoadFromResource()
         {
-            Assembly asmb = Assembly.GetExecutingAssembly();
-            Stream stream = asmb.GetManifestResourceStream("BrailleToolkit.Data.BrailleFontTbl.txt");
+            const string resourceName = "BrailleToolkit.Data.BrailleFontTbl.txt";
+            Assembly asmb = Assembly.GetExecutingAssembly();            
+            Stream? stream = asmb.GetManifestResourceStream(resourceName);
+            if (stream == null)
+                throw new Exception("找不到資源: " + resourceName);
+
             using (stream)
             {
-                using (StreamReader sr = new StreamReader(stream))
+                using (StreamReader sr = new StreamReader(stream!))
                 {
                     LoadFromStreamReader(sr);
                 }
@@ -60,7 +64,7 @@ namespace BrailleToolkit.Converters
 
         private static void LoadFromStreamReader(StreamReader sr)
         {
-            string s;
+            string? s;
             string[] values;
             while (true)
             {

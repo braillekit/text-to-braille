@@ -90,7 +90,7 @@ namespace EasyBrailleEdit.Common.Config
         {
             Assembly asmb = Assembly.GetExecutingAssembly() ?? throw new Exception("Assembly.GetExecutingAssembly() 無法取得組件!");
 
-            string path = Path.GetDirectoryName(asmb.Location);
+            string path = Path.GetDirectoryName(asmb.Location) ?? AppDomain.CurrentDomain.BaseDirectory ?? string.Empty;
             string filename = Path.Combine(path, IniFileName);
 
             if (!File.Exists(filename))

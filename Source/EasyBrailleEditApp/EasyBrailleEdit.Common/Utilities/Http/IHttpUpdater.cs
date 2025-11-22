@@ -155,7 +155,7 @@
         /// <summary>
         /// Gets or sets the file name.
         /// </summary>
-        public string FileName { get; set; } = null;
+        public string FileName { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the update operation.
@@ -188,12 +188,12 @@
         /// <returns>True if equal; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            UpdateItem item = obj as UpdateItem;
+            UpdateItem? item = obj as UpdateItem;
 
             if (item == null)
                 return false;
 
-            return item.FileName.Equals(this.FileName, StringComparison.CurrentCultureIgnoreCase);
+            return item.FileName!.Equals(this.FileName, StringComparison.CurrentCultureIgnoreCase);
         }
 
         /// <summary>

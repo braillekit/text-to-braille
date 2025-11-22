@@ -47,7 +47,7 @@ namespace BrailleToolkit.Converters
             char ch;
 			string currentWord;
 			bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
-            BrailleWord brWord;
+            BrailleWord? brWord;
             List<BrailleWord> brWordList = null;
 
             const string LeftForMathConverter = "*.:()（）,，";
@@ -219,19 +219,20 @@ namespace BrailleToolkit.Converters
 		/// </summary>
 		/// <param name="text">一個英數字或英文標點符號。</param>
 		/// <returns>若指定的字串是中文字且轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
-		private BrailleWord InternalConvert(string text, ContextTagManager context)
+		private BrailleWord? InternalConvert(string text, ContextTagManager context)
 		{
 			if (String.IsNullOrEmpty(text))
 				return null;
 
 			var brWord = new BrailleWord(text);
 
-			string brCode = null;
+			string? brCode = null; // brCode can be null from m_Table.FindLetter
 
 			// 如果是刪節號
 			if (text == "...")
 			{
 				brCode = m_Table.Find(text);
+                if (brCode == null) return null; // Defensive check
 				brWord.AddCells(brCode);
 				return brWord;
 			}

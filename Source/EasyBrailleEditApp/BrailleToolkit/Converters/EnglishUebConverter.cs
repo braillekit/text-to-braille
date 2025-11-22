@@ -127,7 +127,7 @@ namespace BrailleToolkit.Converters
             {
                 if (remainingText.StartsWith(key, System.StringComparison.OrdinalIgnoreCase))
                 {
-                    BrailleWord word = null;
+                    BrailleWord? word = null;
                     bool match = false;
 
                     // Basic rule: check if the match is a whole word for WordSigns

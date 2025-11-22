@@ -68,7 +68,7 @@ namespace BrailleToolkit
 
             outputLines.Add(brLine);
 
-            var newLines = BreakLine(brLine, cellsPerLine, context);
+            List<BrailleLine>? newLines = BreakLine(brLine, cellsPerLine, context);
 
             if (newLines == null || newLines.Count < 1)   // 沒有斷行？
             {

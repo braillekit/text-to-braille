@@ -99,7 +99,7 @@ namespace EasyBrailleEdit.DualEdit
             if (mi != null)
             {
                 SourceGrid.CellContextEventArgs args = new SourceGrid.CellContextEventArgs(m_CellContext);
-                Command = mi.Tag.ToString();
+                Command = mi.Tag.ToString()!;
                 OnPopupMenuClick(args);
             }
         }

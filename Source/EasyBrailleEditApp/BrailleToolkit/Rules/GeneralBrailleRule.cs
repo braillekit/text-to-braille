@@ -193,8 +193,8 @@ namespace BrailleToolkit.Rules
         {
             int wordOffset = 0;
             BrailleWord currWord = brLine[wordIdx]; // 目前的字
-            BrailleWord prevWord = null;            // 上一個字
-            BrailleWord nextWord = null;            // 下一個字
+            BrailleWord? prevWord = null;            // 上一個字
+            BrailleWord? nextWord = null;            // 下一個字
 
             if ((wordIdx - 1) >= 0)
             {

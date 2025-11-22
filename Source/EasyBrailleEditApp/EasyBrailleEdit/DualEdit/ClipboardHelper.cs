@@ -32,24 +32,30 @@ namespace EasyBrailleEdit.DualEdit
             //Clipboard.SetData(ClipboardObjectFormat, brLines);
         }
 
-        public static List<BrailleWord> GetWords()
+        public static List<BrailleWord>? GetWords()
         {
-            List<BrailleWord> result = null;
+            List<BrailleWord>? result = null;
             if (Clipboard.ContainsData(ClipboardObjectFormatForWords))
             {
-                var s = (string) Clipboard.GetData(ClipboardObjectFormatForWords);
-                result = JsonHelper.Deserialize<List<BrailleWord>>(s);
+                var s = (string?) Clipboard.GetData(ClipboardObjectFormatForWords);
+                if (s != null)
+                {
+                    result = JsonHelper.Deserialize<List<BrailleWord>>(s);
+                }
             }
             return result;
         }
 
-        public static List<BrailleLine> GetLines()
+        public static List<BrailleLine>? GetLines()
         {
-            List<BrailleLine> result = null;
+            List<BrailleLine>? result = null;
             if (Clipboard.ContainsData(ClipboardObjectFormatForLines))
             {
-                var s = (string)Clipboard.GetData(ClipboardObjectFormatForLines);
-                result = JsonHelper.Deserialize<List<BrailleLine>>(s);
+                var s = (string?)Clipboard.GetData(ClipboardObjectFormatForLines);
+                if (s != null)
+                {
+                    result = JsonHelper.Deserialize<List<BrailleLine>>(s);
+                }
             }
             return result;
         }

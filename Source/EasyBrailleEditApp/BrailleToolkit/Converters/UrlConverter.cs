@@ -47,7 +47,7 @@ namespace BrailleToolkit.Converters
             char ch;
 			string currentWord;
 			bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
-            BrailleWord brWord;
+            BrailleWord? brWord;
             List<BrailleWord> brWordList = null;
 
             while (!done && charStack.Count > 0)
@@ -161,7 +161,7 @@ namespace BrailleToolkit.Converters
 
 			var brWord = new BrailleWord(text);
 
-			string brCode = null;
+			string? brCode = null;
 
 			// 處理英文字母和數字。
 			if (text.Length == 1)

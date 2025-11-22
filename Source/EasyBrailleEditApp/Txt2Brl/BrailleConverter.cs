@@ -11,7 +11,7 @@ namespace Txt2Brl
 {
     public class BrailleConverter 
 	{
-		BrailleDocument _doc;
+		BrailleDocument _doc = null!;
         ZhuyinReverseConverter _zhuyinConverter;
 
 		string m_OutFileName = null!;
