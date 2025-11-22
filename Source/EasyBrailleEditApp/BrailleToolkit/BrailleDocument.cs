@@ -4,6 +4,7 @@ using Huanlin.Common.Helpers;
 using Serilog;
 using System.Runtime.Serialization;
 using System.Text;
+using YamlDotNet.Serialization;
 
 namespace BrailleToolkit
 {
@@ -209,6 +210,14 @@ namespace BrailleToolkit
                 throw new FileNotFoundException("檔案不存在: " + filename);
             }
 
+            string ext = Path.GetExtension(filename);
+            if (ext != null && ext.Equals(".byml", StringComparison.OrdinalIgnoreCase))
+            {
+                var doc = BrailleDocumentYamlSerializer.LoadFromYamlFile(filename);
+                FixInvalidLines(doc);
+                return doc;
+            }
+
             string jsonStr = File.ReadAllText(filename);
             BrailleDocument brDoc = JsonHelper.Deserialize<BrailleDocument>(jsonStr);
             FixInvalidLines(brDoc);
@@ -237,6 +246,13 @@ namespace BrailleToolkit
         public void SaveBrailleFile(string filename)
         {
             UpdateTitlesLineIndex();
+
+            string ext = Path.GetExtension(filename);
+            if (ext != null && ext.Equals(".byml", StringComparison.OrdinalIgnoreCase))
+            {
+                BrailleDocumentYamlSerializer.SaveToYamlFile(this, filename);
+                return;
+            }
 
             string jsonStr = JsonHelper.Serialize<BrailleDocument>(this);
             File.WriteAllText(filename, jsonStr);
@@ -517,6 +533,7 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得或設定 BrailleProcessor 物件參考。
         /// </summary>
+        [YamlIgnore]
         public BrailleProcessor Processor
         {
             get { return m_Processor; }
@@ -534,7 +551,8 @@ namespace BrailleToolkit
 
         /// <summary>
         /// 取得或設定檔名。
-        /// </summary>
+        /// </summary>        
+        [YamlIgnore]
         public string FileName
         {
             get { return m_FileName; }
@@ -544,6 +562,7 @@ namespace BrailleToolkit
         public List<BrailleLine> Lines
         {
             get { return m_Lines; }
+            private set { m_Lines = value; }
         }
 
         public BrailleLine this[int index]
@@ -554,6 +573,7 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得總列數。
         /// </summary>
+        [YamlIgnore]
         public int LineCount
         {
             get { return m_Lines.Count; }

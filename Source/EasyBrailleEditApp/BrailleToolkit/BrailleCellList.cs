@@ -138,7 +138,8 @@ namespace BrailleToolkit
             if (base.Equals(obj))
                 return true;
 
-            BrailleCellList cells2 = (BrailleCellList)obj;
+            if (obj is not BrailleCellList cells2)
+                return false;
 
             if (this.Count != cells2.Count)
                 return false;

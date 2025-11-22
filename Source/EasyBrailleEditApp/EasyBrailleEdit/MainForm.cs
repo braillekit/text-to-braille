@@ -193,12 +193,14 @@ namespace EasyBrailleEdit
 
             var dlg = new OpenFileDialog
             {
-                Filter = $"文字檔(*.txt)|*.txt|雙視檔案(*{Constant.Files.DefaultMainBrailleFileExt})|*{Constant.Files.DefaultMainBrailleFileExt}|所有檔案|*.*"
+                Filter = $"文字檔(*.txt)|*.txt|雙視檔案 YAML 格式 (*{Constant.Files.YamlBrailleFileExt})|*{Constant.Files.YamlBrailleFileExt}|雙視檔案 JSON 格式 (*{Constant.Files.JsonBrailleFileExt})|*{Constant.Files.JsonBrailleFileExt}|所有檔案|*.*"
             };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 Modified = false;
-                if (dlg.FileName.EndsWith(Constant.Files.DefaultMainBrailleFileExt, StringComparison.CurrentCultureIgnoreCase))
+                string ext = Path.GetExtension(dlg.FileName);
+                if (ext.Equals(Constant.Files.JsonBrailleFileExt, StringComparison.OrdinalIgnoreCase) ||
+                    ext.Equals(Constant.Files.YamlBrailleFileExt, StringComparison.OrdinalIgnoreCase))
                 {                    
                     OpenBrailleFileInEditor(dlg.FileName);
                 }
@@ -227,7 +229,9 @@ namespace EasyBrailleEdit
         /// <param name="filename">點字檔名。有可能是 cvt_out.tmp 或任何 .brx 檔案。</param>
         private void OpenBrailleFileInEditor(string filename)
         {            
-            if (Path.GetExtension(filename).Equals(Constant.Files.DefaultMainBrailleFileExt, StringComparison.OrdinalIgnoreCase))
+            string ext = Path.GetExtension(filename);
+            if (ext.Equals(Constant.Files.JsonBrailleFileExt, StringComparison.OrdinalIgnoreCase) ||
+                ext.Equals(Constant.Files.YamlBrailleFileExt, StringComparison.OrdinalIgnoreCase))
             {
                 if (Modified)
                 {
@@ -422,7 +426,7 @@ namespace EasyBrailleEdit
             else
             {
                 // 若已存在雙視檔案，則詢問是否直接載入。
-                string brxFileName = FileName.Replace(".txt", Constant.Files.DefaultMainBrailleFileExt);
+                string brxFileName = FileName.Replace(".txt", Constant.Files.JsonBrailleFileExt);
                 string brljFileName = FileName.Replace(".txt", ".brlj");
                 if (File.Exists(brxFileName) || File.Exists(brljFileName))
                 {
@@ -909,7 +913,7 @@ namespace EasyBrailleEdit
 
             // 處理來自命令列的參數
             var args = Environment.GetCommandLineArgs();
-            if (args.Length > 1 && args[1].EndsWith(Constant.Files.DefaultMainBrailleFileExt))
+            if (args.Length > 1 && args[1].EndsWith(Constant.Files.JsonBrailleFileExt))
             {
                 if (File.Exists(args[1]))
                 {

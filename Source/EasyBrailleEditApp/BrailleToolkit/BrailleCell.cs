@@ -164,7 +164,9 @@ namespace BrailleToolkit
             if (base.Equals(obj))
                 return true;
 
-            BrailleCell brCell = (BrailleCell)obj;
+            if (obj is not BrailleCell brCell)
+                return false;
+
             if (m_Value != brCell.Value)
                 return false;
             return true;

@@ -17,7 +17,7 @@ namespace BrailleToolkit
     public class BrailleLine : ICloneable
     {
         [DataMember]
-        public List<BrailleWord> Words { get; protected set; }
+        public List<BrailleWord> Words { get; private set; }
 
         /// <summary>
         /// 加入 Tag 屬性的最初目的用來記住標題列在雙視文件中的 begin line index，但也可以作為其他用途。

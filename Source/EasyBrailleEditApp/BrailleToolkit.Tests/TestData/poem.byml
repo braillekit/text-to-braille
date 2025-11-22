@@ -1,0 +1,5405 @@
+﻿StartPageNumber: 1
+CellsPerLine: 40
+Lines:
+- Words:
+  - Text: 夏
+    OriginalText: 夏
+    CellCount: 3
+    Cells:
+    - {Value: 17}
+    - {Value: 62}
+    - {Value: 16}
+    CellList:
+      Items:
+      - {Value: 17}
+      - {Value: 62}
+      - {Value: 16}
+      Count: 3
+    PhoneticCode: ㄒㄧㄚˋ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 天
+    OriginalText: 天
+    CellCount: 3
+    Cells:
+    - {Value: 11}
+    - {Value: 30}
+    - {Value: 4}
+    CellList:
+      Items:
+      - {Value: 11}
+      - {Value: 30}
+      - {Value: 4}
+      Count: 3
+    PhoneticCode: ㄊㄧㄢˉ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 的
+    OriginalText: 的
+    CellCount: 3
+    Cells:
+    - {Value: 25}
+    - {Value: 46}
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 25}
+      - {Value: 46}
+      - {Value: 1}
+      Count: 3
+    PhoneticCode: ㄉ　ㄜ˙
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 飛
+    OriginalText: 飛
+    CellCount: 3
+    Cells:
+    - {Value: 31}
+    - {Value: 52}
+    - {Value: 4}
+    CellList:
+      Items:
+      - {Value: 31}
+      - {Value: 52}
+      - {Value: 4}
+      Count: 3
+    PhoneticCode: ㄈ　ㄟˉ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 鳥
+    OriginalText: 鳥
+    CellCount: 3
+    Cells:
+    - {Value: 29}
+    - {Value: 42}
+    - {Value: 8}
+    CellList:
+      Items:
+      - {Value: 29}
+      - {Value: 42}
+      - {Value: 8}
+      Count: 3
+    PhoneticCode: ㄋㄧㄠˇ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ，
+    OriginalText: ，
+    CellCount: 1
+    Cells:
+    - {Value: 6}
+    CellList:
+      Items:
+      - {Value: 6}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 飛
+    OriginalText: 飛
+    CellCount: 3
+    Cells:
+    - {Value: 31}
+    - {Value: 52}
+    - {Value: 4}
+    CellList:
+      Items:
+      - {Value: 31}
+      - {Value: 52}
+      - {Value: 4}
+      Count: 3
+    PhoneticCode: ㄈ　ㄟˉ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 到
+    OriginalText: 到
+    CellCount: 3
+    Cells:
+    - {Value: 25}
+    - {Value: 41}
+    - {Value: 16}
+    CellList:
+      Items:
+      - {Value: 25}
+      - {Value: 41}
+      - {Value: 16}
+      Count: 3
+    PhoneticCode: ㄉ　ㄠˋ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 我
+    OriginalText: 我
+    CellCount: 2
+    Cells:
+    - {Value: 18}
+    - {Value: 8}
+    CellList:
+      Items:
+      - {Value: 18}
+      - {Value: 8}
+      Count: 2
+    PhoneticCode: 　ㄨㄛˇ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 的
+    OriginalText: 的
+    CellCount: 3
+    Cells:
+    - {Value: 25}
+    - {Value: 46}
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 25}
+      - {Value: 46}
+      - {Value: 1}
+      Count: 3
+    PhoneticCode: ㄉ　ㄜ˙
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 窗
+    OriginalText: 窗
+    CellCount: 3
+    Cells:
+    - {Value: 3}
+    - {Value: 56}
+    - {Value: 4}
+    CellList:
+      Items:
+      - {Value: 3}
+      - {Value: 56}
+      - {Value: 4}
+      Count: 3
+    PhoneticCode: ㄔㄨㄤˉ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 前
+    OriginalText: 前
+    CellCount: 3
+    Cells:
+    - {Value: 26}
+    - {Value: 30}
+    - {Value: 2}
+    CellList:
+      Items:
+      - {Value: 26}
+      - {Value: 30}
+      - {Value: 2}
+      Count: 3
+    PhoneticCode: ㄑㄧㄢˊ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 唱
+    OriginalText: 唱
+    CellCount: 3
+    Cells:
+    - {Value: 3}
+    - {Value: 45}
+    - {Value: 16}
+    CellList:
+      Items:
+      - {Value: 3}
+      - {Value: 45}
+      - {Value: 16}
+      Count: 3
+    PhoneticCode: ㄔ　ㄤˋ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 歌
+    OriginalText: 歌
+    CellCount: 3
+    Cells:
+    - {Value: 5}
+    - {Value: 46}
+    - {Value: 4}
+    CellList:
+      Items:
+      - {Value: 5}
+      - {Value: 46}
+      - {Value: 4}
+      Count: 3
+    PhoneticCode: ㄍ　ㄜˉ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ，
+    OriginalText: ，
+    CellCount: 1
+    Cells:
+    - {Value: 6}
+    CellList:
+      Items:
+      - {Value: 6}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  Tag: 
+  WordCount: 15
+  CellCount: 40
+- Words:
+  - Text: 又
+    OriginalText: 又
+    CellCount: 2
+    Cells:
+    - {Value: 14}
+    - {Value: 16}
+    CellList:
+      Items:
+      - {Value: 14}
+      - {Value: 16}
+      Count: 2
+    PhoneticCode: 　ㄧㄡˋ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 飛
+    OriginalText: 飛
+    CellCount: 3
+    Cells:
+    - {Value: 31}
+    - {Value: 52}
+    - {Value: 4}
+    CellList:
+      Items:
+      - {Value: 31}
+      - {Value: 52}
+      - {Value: 4}
+      Count: 3
+    PhoneticCode: ㄈ　ㄟˉ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 去
+    OriginalText: 去
+    CellCount: 3
+    Cells:
+    - {Value: 26}
+    - {Value: 51}
+    - {Value: 16}
+    CellList:
+      Items:
+      - {Value: 26}
+      - {Value: 51}
+      - {Value: 16}
+      Count: 3
+    PhoneticCode: ㄑㄩ　ˋ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 了
+    OriginalText: 了
+    CellCount: 3
+    Cells:
+    - {Value: 9}
+    - {Value: 46}
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 9}
+      - {Value: 46}
+      - {Value: 1}
+      Count: 3
+    PhoneticCode: ㄌ　ㄜ˙
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 。
+    OriginalText: 。
+    CellCount: 1
+    Cells:
+    - {Value: 36}
+    CellList:
+      Items:
+      - {Value: 36}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  Tag: 
+  WordCount: 5
+  CellCount: 12
+- Words:
+  - Text: 秋
+    OriginalText: 秋
+    CellCount: 3
+    Cells:
+    - {Value: 26}
+    - {Value: 14}
+    - {Value: 4}
+    CellList:
+      Items:
+      - {Value: 26}
+      - {Value: 14}
+      - {Value: 4}
+      Count: 3
+    PhoneticCode: ㄑㄧㄡˉ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 天
+    OriginalText: 天
+    CellCount: 3
+    Cells:
+    - {Value: 11}
+    - {Value: 30}
+    - {Value: 4}
+    CellList:
+      Items:
+      - {Value: 11}
+      - {Value: 30}
+      - {Value: 4}
+      Count: 3
+    PhoneticCode: ㄊㄧㄢˉ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 的
+    OriginalText: 的
+    CellCount: 3
+    Cells:
+    - {Value: 25}
+    - {Value: 46}
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 25}
+      - {Value: 46}
+      - {Value: 1}
+      Count: 3
+    PhoneticCode: ㄉ　ㄜ˙
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 黃
+    OriginalText: 黃
+    CellCount: 3
+    Cells:
+    - {Value: 23}
+    - {Value: 56}
+    - {Value: 2}
+    CellList:
+      Items:
+      - {Value: 23}
+      - {Value: 56}
+      - {Value: 2}
+      Count: 3
+    PhoneticCode: ㄏㄨㄤˊ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 葉
+    OriginalText: 葉
+    CellCount: 2
+    Cells:
+    - {Value: 44}
+    - {Value: 16}
+    CellList:
+      Items:
+      - {Value: 44}
+      - {Value: 16}
+      Count: 2
+    PhoneticCode: 　ㄧㄝˋ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ，
+    OriginalText: ，
+    CellCount: 1
+    Cells:
+    - {Value: 6}
+    CellList:
+      Items:
+      - {Value: 6}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 它
+    OriginalText: 它
+    CellCount: 3
+    Cells:
+    - {Value: 11}
+    - {Value: 28}
+    - {Value: 4}
+    CellList:
+      Items:
+      - {Value: 11}
+      - {Value: 28}
+      - {Value: 4}
+      Count: 3
+    PhoneticCode: ㄊ　ㄚˉ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 們
+    OriginalText: 們
+    CellCount: 3
+    Cells:
+    - {Value: 13}
+    - {Value: 37}
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 13}
+      - {Value: 37}
+      - {Value: 1}
+      Count: 3
+    PhoneticCode: ㄇ　ㄣ˙
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 沒
+    OriginalText: 沒
+    CellCount: 3
+    Cells:
+    - {Value: 13}
+    - {Value: 52}
+    - {Value: 2}
+    CellList:
+      Items:
+      - {Value: 13}
+      - {Value: 52}
+      - {Value: 2}
+      Count: 3
+    PhoneticCode: ㄇ　ㄟˊ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 有
+    OriginalText: 有
+    CellCount: 2
+    Cells:
+    - {Value: 14}
+    - {Value: 8}
+    CellList:
+      Items:
+      - {Value: 14}
+      - {Value: 8}
+      Count: 2
+    PhoneticCode: 　ㄧㄡˇ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 什
+    OriginalText: 什
+    CellCount: 3
+    Cells:
+    - {Value: 10}
+    - {Value: 37}
+    - {Value: 2}
+    CellList:
+      Items:
+      - {Value: 10}
+      - {Value: 37}
+      - {Value: 2}
+      Count: 3
+    PhoneticCode: ㄕ　ㄣˊ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 麼
+    OriginalText: 麼
+    CellCount: 3
+    Cells:
+    - {Value: 13}
+    - {Value: 46}
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 13}
+      - {Value: 46}
+      - {Value: 1}
+      Count: 3
+    PhoneticCode: ㄇ　ㄜ˙
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 可
+    OriginalText: 可
+    CellCount: 3
+    Cells:
+    - {Value: 7}
+    - {Value: 46}
+    - {Value: 8}
+    CellList:
+      Items:
+      - {Value: 7}
+      - {Value: 46}
+      - {Value: 8}
+      Count: 3
+    PhoneticCode: ㄎ　ㄜˇ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 唱
+    OriginalText: 唱
+    CellCount: 3
+    Cells:
+    - {Value: 3}
+    - {Value: 45}
+    - {Value: 16}
+    CellList:
+      Items:
+      - {Value: 3}
+      - {Value: 45}
+      - {Value: 16}
+      Count: 3
+    PhoneticCode: ㄔ　ㄤˋ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ，
+    OriginalText: ，
+    CellCount: 1
+    Cells:
+    - {Value: 6}
+    CellList:
+      Items:
+      - {Value: 6}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  Tag: 
+  WordCount: 15
+  CellCount: 39
+- Words:
+  - Text: 只
+    OriginalText: 只
+    CellCount: 3
+    Cells:
+    - {Value: 1}
+    - {Value: 49}
+    - {Value: 8}
+    CellList:
+      Items:
+      - {Value: 1}
+      - {Value: 49}
+      - {Value: 8}
+      Count: 3
+    PhoneticCode: ㄓ　　ˇ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 歎
+    OriginalText: 歎
+    CellCount: 3
+    Cells:
+    - {Value: 11}
+    - {Value: 39}
+    - {Value: 16}
+    CellList:
+      Items:
+      - {Value: 11}
+      - {Value: 39}
+      - {Value: 16}
+      Count: 3
+    PhoneticCode: ㄊ　ㄢˋ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 息
+    OriginalText: 息
+    CellCount: 3
+    Cells:
+    - {Value: 17}
+    - {Value: 33}
+    - {Value: 2}
+    CellList:
+      Items:
+      - {Value: 17}
+      - {Value: 33}
+      - {Value: 2}
+      Count: 3
+    PhoneticCode: ㄒㄧ　ˊ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 一
+    OriginalText: 一
+    CellCount: 2
+    Cells:
+    - {Value: 33}
+    - {Value: 4}
+    CellList:
+      Items:
+      - {Value: 33}
+      - {Value: 4}
+      Count: 2
+    PhoneticCode: 　ㄧ　ˉ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 聲
+    OriginalText: 聲
+    CellCount: 3
+    Cells:
+    - {Value: 10}
+    - {Value: 53}
+    - {Value: 4}
+    CellList:
+      Items:
+      - {Value: 10}
+      - {Value: 53}
+      - {Value: 4}
+      Count: 3
+    PhoneticCode: ㄕ　ㄥˉ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ，
+    OriginalText: ，
+    CellCount: 1
+    Cells:
+    - {Value: 6}
+    CellList:
+      Items:
+      - {Value: 6}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 飛
+    OriginalText: 飛
+    CellCount: 3
+    Cells:
+    - {Value: 31}
+    - {Value: 52}
+    - {Value: 4}
+    CellList:
+      Items:
+      - {Value: 31}
+      - {Value: 52}
+      - {Value: 4}
+      Count: 3
+    PhoneticCode: ㄈ　ㄟˉ
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 落
+    OriginalText: 落
+    CellCount: 3
+    Cells:
+    - {Value: 9}
+    - {Value: 18}
+    - {Value: 16}
+    CellList:
+      Items:
+      - {Value: 9}
+      - {Value: 18}
+      - {Value: 16}
+      Count: 3
+    PhoneticCode: ㄌㄨㄛˋ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 在
+    OriginalText: 在
+    CellCount: 3
+    Cells:
+    - {Value: 19}
+    - {Value: 58}
+    - {Value: 16}
+    CellList:
+      Items:
+      - {Value: 19}
+      - {Value: 58}
+      - {Value: 16}
+      Count: 3
+    PhoneticCode: ㄗ　ㄞˋ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 那
+    OriginalText: 那
+    CellCount: 3
+    Cells:
+    - {Value: 29}
+    - {Value: 28}
+    - {Value: 16}
+    CellList:
+      Items:
+      - {Value: 29}
+      - {Value: 28}
+      - {Value: 16}
+      Count: 3
+    PhoneticCode: ㄋ　ㄚˋ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 裡
+    OriginalText: 裡
+    CellCount: 3
+    Cells:
+    - {Value: 9}
+    - {Value: 33}
+    - {Value: 8}
+    CellList:
+      Items:
+      - {Value: 9}
+      - {Value: 33}
+      - {Value: 8}
+      Count: 3
+    PhoneticCode: ㄌㄧ　ˇ
+    IsPolyphonic: true
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: true
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: 。
+    OriginalText: 。
+    CellCount: 1
+    Cells:
+    - {Value: 36}
+    CellList:
+      Items:
+      - {Value: 36}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  Tag: 
+  WordCount: 12
+  CellCount: 31
+- Words:
+  - Text: S
+    OriginalText: S
+    CellCount: 2
+    Cells:
+    - {Value: 32}
+    - {Value: 14}
+    CellList:
+      Items:
+      - {Value: 32}
+      - {Value: 14}
+      Count: 2
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: t
+    OriginalText: t
+    CellCount: 1
+    Cells:
+    - {Value: 30}
+    CellList:
+      Items:
+      - {Value: 30}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: r
+    OriginalText: r
+    CellCount: 1
+    Cells:
+    - {Value: 23}
+    CellList:
+      Items:
+      - {Value: 23}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: a
+    OriginalText: a
+    CellCount: 1
+    Cells:
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 1}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: y
+    OriginalText: y
+    CellCount: 1
+    Cells:
+    - {Value: 61}
+    CellList:
+      Items:
+      - {Value: 61}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: b
+    OriginalText: b
+    CellCount: 1
+    Cells:
+    - {Value: 3}
+    CellList:
+      Items:
+      - {Value: 3}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: i
+    OriginalText: i
+    CellCount: 1
+    Cells:
+    - {Value: 10}
+    CellList:
+      Items:
+      - {Value: 10}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: r
+    OriginalText: r
+    CellCount: 1
+    Cells:
+    - {Value: 23}
+    CellList:
+      Items:
+      - {Value: 23}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: d
+    OriginalText: d
+    CellCount: 1
+    Cells:
+    - {Value: 25}
+    CellList:
+      Items:
+      - {Value: 25}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: s
+    OriginalText: s
+    CellCount: 1
+    Cells:
+    - {Value: 14}
+    CellList:
+      Items:
+      - {Value: 14}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: o
+    OriginalText: o
+    CellCount: 1
+    Cells:
+    - {Value: 21}
+    CellList:
+      Items:
+      - {Value: 21}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: f
+    OriginalText: f
+    CellCount: 1
+    Cells:
+    - {Value: 11}
+    CellList:
+      Items:
+      - {Value: 11}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: s
+    OriginalText: s
+    CellCount: 1
+    Cells:
+    - {Value: 14}
+    CellList:
+      Items:
+      - {Value: 14}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: u
+    OriginalText: u
+    CellCount: 1
+    Cells:
+    - {Value: 37}
+    CellList:
+      Items:
+      - {Value: 37}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: m
+    OriginalText: m
+    CellCount: 1
+    Cells:
+    - {Value: 13}
+    CellList:
+      Items:
+      - {Value: 13}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: m
+    OriginalText: m
+    CellCount: 1
+    Cells:
+    - {Value: 13}
+    CellList:
+      Items:
+      - {Value: 13}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: e
+    OriginalText: e
+    CellCount: 1
+    Cells:
+    - {Value: 17}
+    CellList:
+      Items:
+      - {Value: 17}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: r
+    OriginalText: r
+    CellCount: 1
+    Cells:
+    - {Value: 23}
+    CellList:
+      Items:
+      - {Value: 23}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: c
+    OriginalText: c
+    CellCount: 1
+    Cells:
+    - {Value: 9}
+    CellList:
+      Items:
+      - {Value: 9}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: o
+    OriginalText: o
+    CellCount: 1
+    Cells:
+    - {Value: 21}
+    CellList:
+      Items:
+      - {Value: 21}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: m
+    OriginalText: m
+    CellCount: 1
+    Cells:
+    - {Value: 13}
+    CellList:
+      Items:
+      - {Value: 13}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: e
+    OriginalText: e
+    CellCount: 1
+    Cells:
+    - {Value: 17}
+    CellList:
+      Items:
+      - {Value: 17}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: t
+    OriginalText: t
+    CellCount: 1
+    Cells:
+    - {Value: 30}
+    CellList:
+      Items:
+      - {Value: 30}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: o
+    OriginalText: o
+    CellCount: 1
+    Cells:
+    - {Value: 21}
+    CellList:
+      Items:
+      - {Value: 21}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: m
+    OriginalText: m
+    CellCount: 1
+    Cells:
+    - {Value: 13}
+    CellList:
+      Items:
+      - {Value: 13}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: y
+    OriginalText: y
+    CellCount: 1
+    Cells:
+    - {Value: 61}
+    CellList:
+      Items:
+      - {Value: 61}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: w
+    OriginalText: w
+    CellCount: 1
+    Cells:
+    - {Value: 58}
+    CellList:
+      Items:
+      - {Value: 58}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: i
+    OriginalText: i
+    CellCount: 1
+    Cells:
+    - {Value: 10}
+    CellList:
+      Items:
+      - {Value: 10}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: n
+    OriginalText: n
+    CellCount: 1
+    Cells:
+    - {Value: 29}
+    CellList:
+      Items:
+      - {Value: 29}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: d
+    OriginalText: d
+    CellCount: 1
+    Cells:
+    - {Value: 25}
+    CellList:
+      Items:
+      - {Value: 25}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: o
+    OriginalText: o
+    CellCount: 1
+    Cells:
+    - {Value: 21}
+    CellList:
+      Items:
+      - {Value: 21}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: w
+    OriginalText: w
+    CellCount: 1
+    Cells:
+    - {Value: 58}
+    CellList:
+      Items:
+      - {Value: 58}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  Tag: 
+  WordCount: 39
+  CellCount: 40
+- Words:
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: t
+    OriginalText: t
+    CellCount: 1
+    Cells:
+    - {Value: 30}
+    CellList:
+      Items:
+      - {Value: 30}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: o
+    OriginalText: o
+    CellCount: 1
+    Cells:
+    - {Value: 21}
+    CellList:
+      Items:
+      - {Value: 21}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: s
+    OriginalText: s
+    CellCount: 1
+    Cells:
+    - {Value: 14}
+    CellList:
+      Items:
+      - {Value: 14}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: i
+    OriginalText: i
+    CellCount: 1
+    Cells:
+    - {Value: 10}
+    CellList:
+      Items:
+      - {Value: 10}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: n
+    OriginalText: n
+    CellCount: 1
+    Cells:
+    - {Value: 29}
+    CellList:
+      Items:
+      - {Value: 29}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: g
+    OriginalText: g
+    CellCount: 1
+    Cells:
+    - {Value: 27}
+    CellList:
+      Items:
+      - {Value: 27}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: a
+    OriginalText: a
+    CellCount: 1
+    Cells:
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 1}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: n
+    OriginalText: n
+    CellCount: 1
+    Cells:
+    - {Value: 29}
+    CellList:
+      Items:
+      - {Value: 29}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: d
+    OriginalText: d
+    CellCount: 1
+    Cells:
+    - {Value: 25}
+    CellList:
+      Items:
+      - {Value: 25}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: f
+    OriginalText: f
+    CellCount: 1
+    Cells:
+    - {Value: 11}
+    CellList:
+      Items:
+      - {Value: 11}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: l
+    OriginalText: l
+    CellCount: 1
+    Cells:
+    - {Value: 7}
+    CellList:
+      Items:
+      - {Value: 7}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: y
+    OriginalText: y
+    CellCount: 1
+    Cells:
+    - {Value: 61}
+    CellList:
+      Items:
+      - {Value: 61}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: a
+    OriginalText: a
+    CellCount: 1
+    Cells:
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 1}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: w
+    OriginalText: w
+    CellCount: 1
+    Cells:
+    - {Value: 58}
+    CellList:
+      Items:
+      - {Value: 58}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: a
+    OriginalText: a
+    CellCount: 1
+    Cells:
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 1}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: y
+    OriginalText: y
+    CellCount: 1
+    Cells:
+    - {Value: 61}
+    CellList:
+      Items:
+      - {Value: 61}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: .
+    OriginalText: .
+    CellCount: 1
+    Cells:
+    - {Value: 50}
+    CellList:
+      Items:
+      - {Value: 50}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  Tag: 
+  WordCount: 22
+  CellCount: 22
+- Words:
+  - Text: A
+    OriginalText: A
+    CellCount: 2
+    Cells:
+    - {Value: 32}
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 32}
+      - {Value: 1}
+      Count: 2
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: n
+    OriginalText: n
+    CellCount: 1
+    Cells:
+    - {Value: 29}
+    CellList:
+      Items:
+      - {Value: 29}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: d
+    OriginalText: d
+    CellCount: 1
+    Cells:
+    - {Value: 25}
+    CellList:
+      Items:
+      - {Value: 25}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: y
+    OriginalText: y
+    CellCount: 1
+    Cells:
+    - {Value: 61}
+    CellList:
+      Items:
+      - {Value: 61}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: e
+    OriginalText: e
+    CellCount: 1
+    Cells:
+    - {Value: 17}
+    CellList:
+      Items:
+      - {Value: 17}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: l
+    OriginalText: l
+    CellCount: 1
+    Cells:
+    - {Value: 7}
+    CellList:
+      Items:
+      - {Value: 7}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: l
+    OriginalText: l
+    CellCount: 1
+    Cells:
+    - {Value: 7}
+    CellList:
+      Items:
+      - {Value: 7}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: o
+    OriginalText: o
+    CellCount: 1
+    Cells:
+    - {Value: 21}
+    CellList:
+      Items:
+      - {Value: 21}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: w
+    OriginalText: w
+    CellCount: 1
+    Cells:
+    - {Value: 58}
+    CellList:
+      Items:
+      - {Value: 58}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: l
+    OriginalText: l
+    CellCount: 1
+    Cells:
+    - {Value: 7}
+    CellList:
+      Items:
+      - {Value: 7}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: e
+    OriginalText: e
+    CellCount: 1
+    Cells:
+    - {Value: 17}
+    CellList:
+      Items:
+      - {Value: 17}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: a
+    OriginalText: a
+    CellCount: 1
+    Cells:
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 1}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: v
+    OriginalText: v
+    CellCount: 1
+    Cells:
+    - {Value: 39}
+    CellList:
+      Items:
+      - {Value: 39}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: e
+    OriginalText: e
+    CellCount: 1
+    Cells:
+    - {Value: 17}
+    CellList:
+      Items:
+      - {Value: 17}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: s
+    OriginalText: s
+    CellCount: 1
+    Cells:
+    - {Value: 14}
+    CellList:
+      Items:
+      - {Value: 14}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: o
+    OriginalText: o
+    CellCount: 1
+    Cells:
+    - {Value: 21}
+    CellList:
+      Items:
+      - {Value: 21}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: f
+    OriginalText: f
+    CellCount: 1
+    Cells:
+    - {Value: 11}
+    CellList:
+      Items:
+      - {Value: 11}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: a
+    OriginalText: a
+    CellCount: 1
+    Cells:
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 1}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: u
+    OriginalText: u
+    CellCount: 1
+    Cells:
+    - {Value: 37}
+    CellList:
+      Items:
+      - {Value: 37}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: t
+    OriginalText: t
+    CellCount: 1
+    Cells:
+    - {Value: 30}
+    CellList:
+      Items:
+      - {Value: 30}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: u
+    OriginalText: u
+    CellCount: 1
+    Cells:
+    - {Value: 37}
+    CellList:
+      Items:
+      - {Value: 37}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: m
+    OriginalText: m
+    CellCount: 1
+    Cells:
+    - {Value: 13}
+    CellList:
+      Items:
+      - {Value: 13}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: n
+    OriginalText: n
+    CellCount: 1
+    Cells:
+    - {Value: 29}
+    CellList:
+      Items:
+      - {Value: 29}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ','
+    OriginalText: ','
+    CellCount: 1
+    Cells:
+    - {Value: 2}
+    CellList:
+      Items:
+      - {Value: 2}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: w
+    OriginalText: w
+    CellCount: 1
+    Cells:
+    - {Value: 58}
+    CellList:
+      Items:
+      - {Value: 58}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: h
+    OriginalText: h
+    CellCount: 1
+    Cells:
+    - {Value: 19}
+    CellList:
+      Items:
+      - {Value: 19}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: i
+    OriginalText: i
+    CellCount: 1
+    Cells:
+    - {Value: 10}
+    CellList:
+      Items:
+      - {Value: 10}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: c
+    OriginalText: c
+    CellCount: 1
+    Cells:
+    - {Value: 9}
+    CellList:
+      Items:
+      - {Value: 9}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: h
+    OriginalText: h
+    CellCount: 1
+    Cells:
+    - {Value: 19}
+    CellList:
+      Items:
+      - {Value: 19}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: h
+    OriginalText: h
+    CellCount: 1
+    Cells:
+    - {Value: 19}
+    CellList:
+      Items:
+      - {Value: 19}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: a
+    OriginalText: a
+    CellCount: 1
+    Cells:
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 1}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: v
+    OriginalText: v
+    CellCount: 1
+    Cells:
+    - {Value: 39}
+    CellList:
+      Items:
+      - {Value: 39}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: e
+    OriginalText: e
+    CellCount: 1
+    Cells:
+    - {Value: 17}
+    CellList:
+      Items:
+      - {Value: 17}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  Tag: 
+  WordCount: 39
+  CellCount: 40
+- Words:
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: n
+    OriginalText: n
+    CellCount: 1
+    Cells:
+    - {Value: 29}
+    CellList:
+      Items:
+      - {Value: 29}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: o
+    OriginalText: o
+    CellCount: 1
+    Cells:
+    - {Value: 21}
+    CellList:
+      Items:
+      - {Value: 21}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: s
+    OriginalText: s
+    CellCount: 1
+    Cells:
+    - {Value: 14}
+    CellList:
+      Items:
+      - {Value: 14}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: o
+    OriginalText: o
+    CellCount: 1
+    Cells:
+    - {Value: 21}
+    CellList:
+      Items:
+      - {Value: 21}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: n
+    OriginalText: n
+    CellCount: 1
+    Cells:
+    - {Value: 29}
+    CellList:
+      Items:
+      - {Value: 29}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: g
+    OriginalText: g
+    CellCount: 1
+    Cells:
+    - {Value: 27}
+    CellList:
+      Items:
+      - {Value: 27}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: s
+    OriginalText: s
+    CellCount: 1
+    Cells:
+    - {Value: 14}
+    CellList:
+      Items:
+      - {Value: 14}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ','
+    OriginalText: ','
+    CellCount: 1
+    Cells:
+    - {Value: 2}
+    CellList:
+      Items:
+      - {Value: 2}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: f
+    OriginalText: f
+    CellCount: 1
+    Cells:
+    - {Value: 11}
+    CellList:
+      Items:
+      - {Value: 11}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: l
+    OriginalText: l
+    CellCount: 1
+    Cells:
+    - {Value: 7}
+    CellList:
+      Items:
+      - {Value: 7}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: u
+    OriginalText: u
+    CellCount: 1
+    Cells:
+    - {Value: 37}
+    CellList:
+      Items:
+      - {Value: 37}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: t
+    OriginalText: t
+    CellCount: 1
+    Cells:
+    - {Value: 30}
+    CellList:
+      Items:
+      - {Value: 30}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: t
+    OriginalText: t
+    CellCount: 1
+    Cells:
+    - {Value: 30}
+    CellList:
+      Items:
+      - {Value: 30}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: e
+    OriginalText: e
+    CellCount: 1
+    Cells:
+    - {Value: 17}
+    CellList:
+      Items:
+      - {Value: 17}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: r
+    OriginalText: r
+    CellCount: 1
+    Cells:
+    - {Value: 23}
+    CellList:
+      Items:
+      - {Value: 23}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: a
+    OriginalText: a
+    CellCount: 1
+    Cells:
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 1}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: n
+    OriginalText: n
+    CellCount: 1
+    Cells:
+    - {Value: 29}
+    CellList:
+      Items:
+      - {Value: 29}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: d
+    OriginalText: d
+    CellCount: 1
+    Cells:
+    - {Value: 25}
+    CellList:
+      Items:
+      - {Value: 25}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: f
+    OriginalText: f
+    CellCount: 1
+    Cells:
+    - {Value: 11}
+    CellList:
+      Items:
+      - {Value: 11}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: a
+    OriginalText: a
+    CellCount: 1
+    Cells:
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 1}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: l
+    OriginalText: l
+    CellCount: 1
+    Cells:
+    - {Value: 7}
+    CellList:
+      Items:
+      - {Value: 7}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: l
+    OriginalText: l
+    CellCount: 1
+    Cells:
+    - {Value: 7}
+    CellList:
+      Items:
+      - {Value: 7}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: t
+    OriginalText: t
+    CellCount: 1
+    Cells:
+    - {Value: 30}
+    CellList:
+      Items:
+      - {Value: 30}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: h
+    OriginalText: h
+    CellCount: 1
+    Cells:
+    - {Value: 19}
+    CellList:
+      Items:
+      - {Value: 19}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: e
+    OriginalText: e
+    CellCount: 1
+    Cells:
+    - {Value: 17}
+    CellList:
+      Items:
+      - {Value: 17}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: r
+    OriginalText: r
+    CellCount: 1
+    Cells:
+    - {Value: 23}
+    CellList:
+      Items:
+      - {Value: 23}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: e
+    OriginalText: e
+    CellCount: 1
+    Cells:
+    - {Value: 17}
+    CellList:
+      Items:
+      - {Value: 17}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: w
+    OriginalText: w
+    CellCount: 1
+    Cells:
+    - {Value: 58}
+    CellList:
+      Items:
+      - {Value: 58}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: i
+    OriginalText: i
+    CellCount: 1
+    Cells:
+    - {Value: 10}
+    CellList:
+      Items:
+      - {Value: 10}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: t
+    OriginalText: t
+    CellCount: 1
+    Cells:
+    - {Value: 30}
+    CellList:
+      Items:
+      - {Value: 30}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: h
+    OriginalText: h
+    CellCount: 1
+    Cells:
+    - {Value: 19}
+    CellList:
+      Items:
+      - {Value: 19}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: a
+    OriginalText: a
+    CellCount: 1
+    Cells:
+    - {Value: 1}
+    CellList:
+      Items:
+      - {Value: 1}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  Tag: 
+  WordCount: 40
+  CellCount: 40
+- Words:
+  - Text: ' '
+    OriginalText: ' '
+    CellCount: 1
+    Cells:
+    - {Value: 0}
+    CellList:
+      Items:
+      - {Value: 0}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: true
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: s
+    OriginalText: s
+    CellCount: 1
+    Cells:
+    - {Value: 14}
+    CellList:
+      Items:
+      - {Value: 14}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: i
+    OriginalText: i
+    CellCount: 1
+    Cells:
+    - {Value: 10}
+    CellList:
+      Items:
+      - {Value: 10}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: g
+    OriginalText: g
+    CellCount: 1
+    Cells:
+    - {Value: 27}
+    CellList:
+      Items:
+      - {Value: 27}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: n
+    OriginalText: n
+    CellCount: 1
+    Cells:
+    - {Value: 29}
+    CellList:
+      Items:
+      - {Value: 29}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: true
+    IsDigit: false
+    IsLetterOrDigit: true
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  - Text: .
+    OriginalText: .
+    CellCount: 1
+    Cells:
+    - {Value: 50}
+    CellList:
+      Items:
+      - {Value: 50}
+      Count: 1
+    PhoneticCode: ''
+    IsPolyphonic: false
+    DontBreakLineHere: false
+    PhoneticCodes: []
+    Language: Neutral
+    ContextNames: ''
+    ContextTag: 
+    IsWhiteSpace: false
+    IsLetter: false
+    IsDigit: false
+    IsLetterOrDigit: false
+    IsChinese: false
+    IsContextTag: false
+    IsConvertedFromTag: false
+    NoDigitCell: false
+    NoSpace: false
+    NoCapitalRule: false
+    IsEngPhonetic: false
+  Tag: 
+  WordCount: 6
+  CellCount: 6
+PageTitles: []

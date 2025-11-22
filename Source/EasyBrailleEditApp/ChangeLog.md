@@ -4,6 +4,7 @@
 
 - Upgrade .NET Framework from 7.0 to 10.0.
 - Upgrade dependent NuGet packages to latest versions.
+- 新增 YAML 檔案格式 (.byml) 支援，並將其設為預設的存檔格式。此格式具有更好的人眼可讀性與版本控制友善性。**注意：** 只是方便診斷與除錯，若任意修改其內容，可能會導致應用程式無法正常運作。
 
 ## Breaking changes
  
