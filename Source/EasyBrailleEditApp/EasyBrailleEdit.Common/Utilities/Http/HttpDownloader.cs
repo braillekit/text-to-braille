@@ -1,10 +1,21 @@
 namespace EasyBrailleEdit.Common.Utilities.Http
 {
+    /// <summary>
+    /// Provides utility methods for downloading files via HTTP.
+    /// </summary>
     public static class HttpDownloader
     {
         // 讓 HttpClient 成為靜態的，以便在應用程式中重複使用。
         private static readonly HttpClient HttpClient = new HttpClient();
 
+        /// <summary>
+        /// Downloads a file from the specified URL to the destination path.
+        /// </summary>
+        /// <param name="url">The URL to download from.</param>
+        /// <param name="destinationPath">The destination file path.</param>
+        /// <param name="progress">Optional progress reporter.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
         public static async Task DownloadFileAsync(
             string url,
             string destinationPath,
@@ -52,10 +63,24 @@ namespace EasyBrailleEdit.Common.Utilities.Http
         }
     }
 
+    /// <summary>
+    /// Represents the progress of a download operation.
+    /// </summary>
     public class DownloadProgress
     {
+        /// <summary>
+        /// Gets or sets the total bytes to download.
+        /// </summary>
         public long? TotalBytes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the bytes read so far.
+        /// </summary>
         public long BytesRead { get; set; }
+
+        /// <summary>
+        /// Gets the progress percentage.
+        /// </summary>
         public double ProgressPercentage => TotalBytes.HasValue ? (double)BytesRead / TotalBytes.Value * 100.0 : 0;
     }
 }

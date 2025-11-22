@@ -112,6 +112,14 @@ public static class Constant
     public const double DefaultPrintTextLineSpace = 20.9;
 
     // 與轉點字規則有關的常數
-    public const string DefaultNoSpaceAfterTheseCharacters = "「『“‘…";
-    public const string DefaultNoSpaceBeforeTheseCharacters = "，。？！：；、…」』”’）";
+
+    /// <summary>
+    /// Gets the default characters that should not have a space after them.
+    /// </summary>
+    public const string DefaultNoSpaceAfterTheseCharacters = "「『\"'…";
+
+    /// <summary>
+    /// Gets the default characters that should not have a space before them.
+    /// </summary>
+    public const string DefaultNoSpaceBeforeTheseCharacters = "，。？！：；、…」』\"'）";
 }
