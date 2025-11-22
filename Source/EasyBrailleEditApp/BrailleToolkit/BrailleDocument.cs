@@ -585,12 +585,20 @@ namespace BrailleToolkit
             set { m_FileName = value; }
         }
 
+        /// <summary>
+        /// 取得所有點字行。
+        /// </summary>
         public List<BrailleLine> Lines
         {
             get { return m_Lines; }
             private set { m_Lines = value; }
         }
 
+        /// <summary>
+        /// 取得指定索引的點字行。
+        /// </summary>
+        /// <param name="index">索引。</param>
+        /// <returns>點字行。</returns>
         public BrailleLine this[int index]
         {
             get { return m_Lines[index]; }

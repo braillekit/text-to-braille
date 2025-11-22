@@ -9,6 +9,9 @@ using BrailleToolkit.Tags;
 
 namespace BrailleToolkit.Helpers
 {
+    /// <summary>
+    /// BrailleDocument 輔助類別。
+    /// </summary>
     public static class BrailleDocumentHelper
     {
 
@@ -385,6 +388,11 @@ namespace BrailleToolkit.Helpers
             }
         }
 
+        /// <summary>
+        /// 將點字文件匯出為 HTML 檔案。
+        /// </summary>
+        /// <param name="doc">點字文件。</param>
+        /// <param name="outputFileName">輸出檔案名稱。</param>
         public static async Task ExportToHtmlFileAsync(BrailleDocument doc, string outputFileName)
         {
             string cssClassTd = "column";

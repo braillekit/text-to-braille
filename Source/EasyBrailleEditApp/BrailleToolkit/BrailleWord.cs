@@ -258,6 +258,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 取得或設定是否為多音字。
+        /// </summary>
         [DataMember]
         public bool IsPolyphonic
         {
@@ -278,6 +281,9 @@ namespace BrailleToolkit
         [DataMember]
         public bool DontBreakLineHere { get; set; }
 
+        /// <summary>
+        /// 取得所有注音碼清單。
+        /// </summary>
         public List<string> PhoneticCodes
         {
             get
@@ -290,6 +296,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 取得或設定目前使用的注音碼索引。
+        /// </summary>
         [YamlIgnore]
         public int ActivePhoneticIndex
         {

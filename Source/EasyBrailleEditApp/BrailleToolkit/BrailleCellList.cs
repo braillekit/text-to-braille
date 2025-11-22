@@ -7,12 +7,18 @@ using Huanlin.Common.Helpers;
 
 namespace BrailleToolkit
 {
+    /// <summary>
+    /// 點字方塊串列。
+    /// </summary>
     [Serializable]
     [DataContract]
     public sealed class BrailleCellList
     {
         private List<BrailleCell> m_Cells;
 
+        /// <summary>
+        /// 初始化 BrailleCellList 類別的新執行個體。
+        /// </summary>
         public BrailleCellList()
         {
             m_Cells = new List<BrailleCell>();

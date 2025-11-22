@@ -28,6 +28,9 @@ namespace BrailleToolkit.Converters
 
         internal override BrailleTableBase BrailleTable => null; // Not used in this converter
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EnglishUebConverter"/> class.
+        /// </summary>
         public EnglishUebConverter()
         {
             LoadTable();
@@ -95,6 +98,12 @@ namespace BrailleToolkit.Converters
             }
         }
 
+        /// <summary>
+        /// Converts a stack of characters to a list of BrailleWords.
+        /// </summary>
+        /// <param name="charStack">The stack of characters to convert.</param>
+        /// <param name="context">The context tag manager.</param>
+        /// <returns>A list of BrailleWords, or null if no conversion was possible.</returns>
         public override List<BrailleWord> Convert(Stack<char> charStack, ContextTagManager context)
         {
             if (charStack.Count == 0)

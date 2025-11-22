@@ -416,8 +416,8 @@ namespace BrailleToolkit
         /// 簡單版本的轉換方法：不處理任何標籤額外格式，單純轉換文字符號。
         /// 此方法可用來轉換 context tag 裡面的文字。
         /// </summary>
-        /// <param name="Text"></param>
-        /// <returns></returns>
+        /// <param name="Text">輸入文字。</param>
+        /// <returns>轉換後的點字行。</returns>
         public BrailleLine SimpleConvertText(string Text)
         {
             var outputBrLine = new BrailleLine();
@@ -477,7 +477,6 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="line">輸入的明眼字串。</param>
         /// <param name="lineNumber">字串的行號。此參數只是用來當轉換失敗時，傳給轉換失敗事件處理常式的資訊。</param>
-        /// <param name="isTitle">輸出參數，是否為標題。</param>
         /// <returns>點字串列。若則傳回 null，表示該列不需要轉成點字。</returns>
         public BrailleLine ConvertLine(string line, int lineNumber)
         {

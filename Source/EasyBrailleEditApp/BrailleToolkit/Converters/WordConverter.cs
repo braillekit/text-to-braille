@@ -6,6 +6,9 @@ using BrailleToolkit.Data;
 
 namespace BrailleToolkit.Converters
 {
+    /// <summary>
+    /// 字詞轉換器基底類別。
+    /// </summary>
     public abstract class WordConverter
     {
         internal abstract BrailleTableBase BrailleTable
@@ -13,6 +16,12 @@ namespace BrailleToolkit.Converters
             get;
         }
 
+        /// <summary>
+        /// 將字元堆疊轉換為點字詞串列。
+        /// </summary>
+        /// <param name="charStack">字元堆疊。</param>
+        /// <param name="context">情境標籤管理員。</param>
+        /// <returns>點字詞串列。</returns>
         public abstract List<BrailleWord> Convert(Stack<char> charStack, ContextTagManager context);
 
         /// <summary>
