@@ -14,6 +14,9 @@ using BrailleToolkit.Rules;
 
 namespace BrailleToolkit
 {
+    /// <summary>
+    /// 代表一個字元及其在文件中的位置。
+    /// </summary>
     public struct CharPosition
     {
         /// <summary>
@@ -32,6 +35,9 @@ namespace BrailleToolkit
         public int CharIndex { get; set; }
     }
 
+    /// <summary>
+    /// 為轉換失敗事件提供資料。
+    /// </summary>
     public sealed class ConversionFailedEventArgs : EventArgs
     {
         /// <summary>
@@ -61,6 +67,9 @@ namespace BrailleToolkit
         }
     }
 
+    /// <summary>
+    /// 為文字轉換成功事件提供資料。
+    /// </summary>
     public sealed class TextConvertedEventArgs : EventArgs
     {
         internal void SetArgValues(int lineNum, string text)
@@ -283,6 +292,10 @@ namespace BrailleToolkit
 
         #region 事件方法
 
+        /// <summary>
+        /// 引發 ConvertionFailed 事件。
+        /// </summary>
+        /// <param name="args">包含事件資料的 ConversionFailedEventArgs。</param>
         protected virtual void OnConvertionFailed(ConversionFailedEventArgs args)
         {
             // 將無效字元記錄於內部變數。
@@ -295,6 +308,10 @@ namespace BrailleToolkit
             _conversionFailedEvent?.Invoke(this, args);
         }
 
+        /// <summary>
+        /// 引發 TextConverted 事件。
+        /// </summary>
+        /// <param name="args">包含事件資料的 TextConvertedEventArgs。</param>
         protected virtual void OnTextConverted(TextConvertedEventArgs args)
         {
             if (SuppressEvents)

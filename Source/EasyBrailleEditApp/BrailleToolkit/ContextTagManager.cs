@@ -13,6 +13,9 @@ namespace BrailleToolkit
     {
         private Dictionary<string, IContextTag> _tags;
 
+        /// <summary>
+        /// 初始化 ContextTagManager 類別的新執行個體。
+        /// </summary>
         public ContextTagManager()
         {
             _tags = new Dictionary<string, IContextTag>();

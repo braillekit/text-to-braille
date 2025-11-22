@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace BrailleToolkit.Data
 {
+    /// <summary>
+    /// 座標符號點字表。
+    /// </summary>
     public sealed class CoordinateBrailleTable : XmlBrailleTable
     {
         private static CoordinateBrailleTable m_Instance = null;

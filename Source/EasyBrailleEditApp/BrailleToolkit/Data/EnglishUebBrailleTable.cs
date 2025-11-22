@@ -6,6 +6,9 @@ using System.Reflection;
 
 namespace BrailleToolkit.Data
 {
+    /// <summary>
+    /// UEB (Unified English Braille) 點字表。
+    /// </summary>
 	public sealed class EnglishUebBrailleTable : XmlBrailleTable
 	{
         private static EnglishUebBrailleTable m_Instance = null;

@@ -5,6 +5,9 @@ using BrailleToolkit.Data;
 
 namespace BrailleToolkit.Converters
 {
+    /// <summary>
+    /// 音標符號轉換器。
+    /// </summary>
 	public sealed class PhoneticConverter : WordConverter
 	{
 		private PhoneticBrailleTable m_Table;

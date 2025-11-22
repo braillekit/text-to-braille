@@ -10,6 +10,9 @@ using EasyBrailleEdit.Common;
 
 namespace BrailleToolkit
 {
+    /// <summary>
+    /// 提供格式化點字文件的靜態輔助函式，例如斷行、縮排等。
+    /// </summary>
     public static class BrailleDocumentFormatter
     {
         /// <summary>

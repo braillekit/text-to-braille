@@ -6,6 +6,9 @@ using System.Reflection;
 
 namespace BrailleToolkit.Data
 {
+    /// <summary>
+    /// URL 點字表。
+    /// </summary>
 	public sealed class UrlBrailleTable : XmlBrailleTable
 	{
         private static UrlBrailleTable m_Instance = null;

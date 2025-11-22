@@ -5,6 +5,9 @@ using BrailleToolkit.Data;
 
 namespace BrailleToolkit.Converters
 {
+    /// <summary>
+    /// 座標符號轉換器。
+    /// </summary>
     public sealed class CoordinateConverter : WordConverter
     {
         private CoordinateBrailleTable m_Table;

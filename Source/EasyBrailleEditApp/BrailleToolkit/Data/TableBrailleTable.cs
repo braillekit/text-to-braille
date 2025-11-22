@@ -4,6 +4,9 @@ using System.Text;
 
 namespace BrailleToolkit.Data
 {
+    /// <summary>
+    /// 表格符號點字表。
+    /// </summary>
 	public sealed class TableBrailleTable : XmlBrailleTable
 	{
 		private static TableBrailleTable m_Instance = null;

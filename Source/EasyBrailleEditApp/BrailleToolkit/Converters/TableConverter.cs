@@ -6,6 +6,9 @@ using BrailleToolkit.Data;
 
 namespace BrailleToolkit.Converters
 {
+    /// <summary>
+    /// 表格符號轉換器。
+    /// </summary>
 	public sealed class TableConverter : WordConverter
 	{
 		private TableBrailleTable m_Table;

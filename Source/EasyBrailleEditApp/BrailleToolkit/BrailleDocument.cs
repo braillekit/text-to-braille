@@ -358,6 +358,11 @@ namespace BrailleToolkit
             m_Lines.Add(brLine);
         }
 
+        /// <summary>
+        /// 在指定的索引處插入多個點字行。
+        /// </summary>
+        /// <param name="index">應插入點字行的以零為起始的索引。</param>
+        /// <param name="lines">要插入的點字行集合。</param>
         public void InsertLines(int index, IEnumerable<BrailleLine> lines)
         {
             m_Lines.InsertRange(index, lines);
@@ -386,6 +391,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 從文件中移除所有的點字行和頁標題。
+        /// </summary>
         public void Clear()
         {
             m_Lines.Clear();
@@ -396,6 +404,10 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 將整個點字文件轉換為其字串表示形式。
+        /// </summary>
+        /// <returns>代表整個文件的字串。</returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

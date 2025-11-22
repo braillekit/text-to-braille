@@ -62,6 +62,10 @@ namespace BrailleToolkit
         {
         }
 
+        /// <summary>
+        /// 初始化 BrailleWord 類別的新執行個體。
+        /// </summary>
+        /// <param name="text">明眼文字。</param>
         public BrailleWord(string text)
         {
             Text = text;
@@ -81,21 +85,42 @@ namespace BrailleToolkit
             IsEngPhonetic = false;
         }
 
+        /// <summary>
+        /// 初始化 BrailleWord 類別的新執行個體。
+        /// </summary>
+        /// <param name="text">明眼文字。</param>
+        /// <param name="brCode">點字碼。</param>
         public BrailleWord(string text, BrailleCellCode brCode) : this(text)
         {
             CellList.Add(BrailleCell.GetInstance(brCode));
         }
 
+        /// <summary>
+        /// 初始化 BrailleWord 類別的新執行個體。
+        /// </summary>
+        /// <param name="text">明眼文字。</param>
+        /// <param name="brCode">點字碼的十六進位字串。</param>
         public BrailleWord(string text, string brCode) : this(text)
         {
             AddCells(brCode);
         }
 
+        /// <summary>
+        /// 初始化 BrailleWord 類別的新執行個體。
+        /// </summary>
+        /// <param name="text">明眼文字。</param>
+        /// <param name="brCode">點字碼的位元組值。</param>
         public BrailleWord(string text, byte brCode) : this(text)
         {
             CellList.Add(BrailleCell.GetInstance(brCode));
         }
 
+        /// <summary>
+        /// 初始化 BrailleWord 類別的新執行個體。
+        /// </summary>
+        /// <param name="text">明眼文字。</param>
+        /// <param name="phCode">注音碼。</param>
+        /// <param name="brCode">點字碼的十六進位字串。</param>
         public BrailleWord(string text, string phCode, string brCode) : this(text, brCode)
         {
             Language = BrailleLanguage.Chinese;
@@ -103,11 +128,20 @@ namespace BrailleToolkit
             m_ActivePhoneticIndex = 0;
         }
 
+        /// <summary>
+        /// 做為此執行個體的雜湊函式。
+        /// </summary>
+        /// <returns>目前執行個體的雜湊碼。</returns>
         public override int GetHashCode()
         {
             return Text.GetHashCode();
         }
 
+        /// <summary>
+        /// 判斷指定的物件是否等於目前的物件。
+        /// </summary>
+        /// <param name="obj">要與目前物件相比較的物件。</param>
+        /// <returns>如果指定的物件等於目前的物件，則為 true；否則為 false。</returns>
         public override bool Equals(object obj)
         {
             if (base.Equals(obj))
@@ -138,11 +172,20 @@ namespace BrailleToolkit
             return true;
         }
 
+        /// <summary>
+        /// 傳回表示目前物件的字串。
+        /// </summary>
+        /// <returns>表示目前物件的字串。</returns>
         public override string ToString()
         {
             return Text;
         }
 
+        /// <summary>
+        /// 將點字轉換為其點位數字的字串表示形式。
+        /// </summary>
+        /// <param name="useParenthesis">是否在前後加上括號。</param>
+        /// <returns>點位數字字串。</returns>
         public string ToPositionNumberString(bool useParenthesis)
         {
             if (IsContextTag)
@@ -164,6 +207,10 @@ namespace BrailleToolkit
             return result;
         }
 
+        /// <summary>
+        /// 將點字轉換為其十六進位碼的字串表示形式。
+        /// </summary>
+        /// <returns>十六進位碼字串。</returns>
         public string ToHexSting()
         {
             var sb = new StringBuilder();
@@ -174,6 +221,9 @@ namespace BrailleToolkit
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 清除此點字詞的內容。
+        /// </summary>
         public void Clear()
         {
             Text = String.Empty;
@@ -196,11 +246,17 @@ namespace BrailleToolkit
         [DataMember]
         public string OriginalText { get; private set; }
 
+        /// <summary>
+        /// 取得此點字詞包含的點字方數。
+        /// </summary>
         public int CellCount
         {
             get { return CellList.Count; }
         }
         
+        /// <summary>
+        /// 取得組成此點字詞的點字方塊串列。
+        /// </summary>
         public List<BrailleCell> Cells
         {
             get
@@ -215,6 +271,9 @@ namespace BrailleToolkit
         [DataMember]
         public BrailleCellList CellList { get; set; }
 
+        /// <summary>
+        /// 取得或設定目前作用中的注音碼。
+        /// </summary>
         [DataMember]
         public string PhoneticCode
         {
@@ -360,6 +419,10 @@ namespace BrailleToolkit
             return (ContextNames.IndexOf(contextName) >= 0);
         }
 
+        /// <summary>
+        /// 將此點字詞標記為進入指定的語境。
+        /// </summary>
+        /// <param name="contextName">語境名稱。</param>
         public void EnterContext(string contextName)
         {
             contextName = XmlTagHelper.RemoveBracket(contextName);
@@ -368,6 +431,10 @@ namespace BrailleToolkit
             ContextNames = $"{ContextNames} {contextName}";
         }
 
+        /// <summary>
+        /// 將此點字詞標記為離開指定的語境。
+        /// </summary>
+        /// <param name="contextName">語境名稱。</param>
         public void LeaveContext(string contextName)
         {
             contextName = XmlTagHelper.RemoveBracket(contextName);
@@ -382,6 +449,10 @@ namespace BrailleToolkit
             ContextNames = sb.ToString().TrimEnd();
         }
 
+        /// <summary>
+        /// 設定此點字詞的所有可能注音碼。
+        /// </summary>
+        /// <param name="phCodes">注音碼陣列。</param>
         public void SetPhoneticCodes(string[] phCodes)
         {
             m_PhoneticCodes.Clear();
@@ -471,6 +542,10 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 從點位數字字串加入點字方。
+        /// </summary>
+        /// <param name="positionNumberString">以空白分隔的點位數字字串，例如 "135 24"。</param>
         public void AddCellsFromPositionNumbers(string positionNumberString)
         {
             if (String.IsNullOrEmpty(positionNumberString))
@@ -483,6 +558,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 取得一個值，指出此點字詞是否為空白字元。
+        /// </summary>
         public bool IsWhiteSpace
         {
             get
@@ -498,6 +576,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 取得一個值，指出此點字詞是否為 ASCII 字母。
+        /// </summary>
         public bool IsLetter
         {
             get
@@ -513,6 +594,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 取得一個值，指出此點字詞是否為 ASCII 數字。
+        /// </summary>
         public bool IsDigit
         {
             get
@@ -528,6 +612,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 取得一個值，指出此點字詞是否為 ASCII 字母或數字。
+        /// </summary>
         public bool IsLetterOrDigit
         {
             get

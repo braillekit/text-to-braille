@@ -394,6 +394,10 @@ namespace BrailleToolkit.Rules
             }
         }
 
+        /// <summary>
+        /// 套用不可斷行規則：設定在斷行時不可位於行首的字元。
+        /// </summary>
+        /// <param name="brLine">要套用規則的點字行。</param>
         public static void ApplyDontBreakLineRule(BrailleLine brLine)
         {
             int wordIdx = 0;

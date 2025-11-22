@@ -6,6 +6,9 @@ using BrailleToolkit.Helpers;
 
 namespace BrailleToolkit.Tags
 {
+    /// <summary>
+    /// 代表一個通用的語境標籤。
+    /// </summary>
     public class GenericContextTag : IContextTag
     {
         /// <summary>

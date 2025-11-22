@@ -21,6 +21,13 @@ namespace BrailleToolkit
 
         private BrailleDocument _brDoc;
 
+        /// <summary>
+        /// 初始化 BrailleDataExporter 類別的新執行個體。
+        /// </summary>
+        /// <param name="brDoc">要匯出的點字文件。</param>
+        /// <param name="linesPerPage">每頁列數。</param>
+        /// <param name="startPageNum">起始頁碼。</param>
+        /// <param name="needPageFooter">是否需要頁尾。</param>
         public BrailleDataExporter(BrailleDocument brDoc, int linesPerPage, int startPageNum = 1, bool needPageFooter = true)
         {
             _brDoc = brDoc ?? throw new ArgumentNullException(nameof(brDoc));

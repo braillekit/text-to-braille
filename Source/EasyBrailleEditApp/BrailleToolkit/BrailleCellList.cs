@@ -99,6 +99,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 取得或設定內部的點字方塊儲存串列。此屬性主要用於序列化。
+        /// </summary>
         [DataMember]
         public List<BrailleCell> Items
         {
@@ -182,6 +185,10 @@ namespace BrailleToolkit
             return true;
         }
 
+        /// <summary>
+        /// 做為此執行個體的雜湊函式。
+        /// </summary>
+        /// <returns>目前執行個體的雜湊碼。</returns>
         public override int GetHashCode()
         {
             int hash = 0;
