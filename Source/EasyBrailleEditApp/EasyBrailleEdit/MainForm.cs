@@ -823,7 +823,7 @@ namespace EasyBrailleEdit
             catch (Exception ex)
             {
                 // 無法取得檔案更新清單（可能是網際網路無法連線）
-                string msg = "無法取得檔案更新清單: " + ex.Message;
+                string msg = "無法取得檔案更新清單: " + (ex.Message ?? string.Empty); // Fixed CS8600
                 if (autoMode)
                 {
                     StatusText = msg;
@@ -1016,7 +1016,7 @@ namespace EasyBrailleEdit
                 m_TextArea.ReplaceSelection(obj.Text);
                 return;
             }
-            string s = obj.Tag.ToString();
+            string s = obj.Tag.ToString() ?? string.Empty; // Fixed CS8600
             if (String.IsNullOrEmpty(s))
             {
                 m_TextArea.ReplaceSelection(s);

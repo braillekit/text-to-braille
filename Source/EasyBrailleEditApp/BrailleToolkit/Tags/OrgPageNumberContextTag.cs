@@ -32,7 +32,7 @@ namespace BrailleToolkit.Tags
         /// </summary>
         public OrgPageNumberContextTag() : base(ContextTagNames.OrgPageNumber)
         {
-            BrailleWord brWord = null;
+            BrailleWord? brWord = null; // Fixed CS8600
 
             for (int i = 0; i < NumberOfUnderline; i++)
             {

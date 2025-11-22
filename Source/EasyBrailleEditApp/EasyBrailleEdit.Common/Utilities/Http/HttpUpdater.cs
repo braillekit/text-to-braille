@@ -424,7 +424,7 @@ namespace EasyBrailleEdit.Common.Utilities.Http
                     var actualClientPath = Path.GetDirectoryName(clientFileName);
                     if (!Directory.Exists(actualClientPath))
                     {
-                        Directory.CreateDirectory(actualClientPath);
+                        Directory.CreateDirectory(actualClientPath!);
                     }
 
                     // 開始執行更新作業
@@ -497,15 +497,15 @@ namespace EasyBrailleEdit.Common.Utilities.Http
                 for (int i = rollBackList.Count - 1; i >= 0; i--)
                 {
                     rollback = rollBackList[i];
-                    if (rollback.Operation == RollbackAction.Rename)
+                    if (rollback!.Operation == RollbackAction.Rename)
                     {
-                        if (File.Exists(rollback.TargetFileName))
+                        if (File.Exists(rollback!.TargetFileName))
                         {
-                            File.Delete(rollback.TargetFileName);
+                            File.Delete(rollback!.TargetFileName);
                         }
-                        if (File.Exists(rollback.SourceFileName))
+                        if (File.Exists(rollback!.SourceFileName))
                         {
-                            File.Move(rollback.SourceFileName, rollback.TargetFileName);
+                            File.Move(rollback!.SourceFileName, rollback!.TargetFileName);
                         }
                     }
                 }

@@ -368,13 +368,13 @@ namespace EasyBrailleEdit
                 BrailleDoc.PageTitles.Clear();
 
                 // 複製所有標題列。
-                BraillePageTitle newTitle = null;
+                BraillePageTitle? newTitle = null; // Fixed CS8600
                 foreach (BraillePageTitle t in form.Titles)
                 {
                     if (t.TitleLine.CellCount > 0)
                     {
                         newTitle = t.Clone() as BraillePageTitle;
-                        BrailleDoc.PageTitles.Add(newTitle);
+                        BrailleDoc.PageTitles.Add(newTitle!); // Fixed CS8600
                     }
                 }
                 _controller.IsDirty = true;

@@ -57,7 +57,7 @@ namespace BrailleToolkit.Converters
             bool isBeginTag;
 
 			// 剖析字串是否為情境標籤，是則"進入"該情境標籤。
-            IContextTag ctag = context.Parse(s, out isBeginTag);	
+            IContextTag? ctag = context.Parse(s, out isBeginTag);	 // Fixed CS8600
 
             if (ctag != null)
             {

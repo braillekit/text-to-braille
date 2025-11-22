@@ -761,7 +761,7 @@ namespace EasyBrailleEdit.DualEdit
                 return;
             }
 
-            var currentWord = PositionMapper.GetBrailleWordFromGridCell(row, col);
+            BrailleWord? currentWord = PositionMapper.GetBrailleWordFromGridCell(row, col); // Fixed CS8600
 
             if (currentWord == null)
             {

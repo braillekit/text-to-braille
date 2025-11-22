@@ -1156,7 +1156,7 @@ namespace BrailleToolkit
         {
             BrailleLine brLine = brDoc.Lines[lineIndex];
             int wordIdx = 0;
-            IContextTag ctag;
+            IContextTag? ctag; // Fixed CS8600
 
             while (brLine.WordCount > 0)
             {

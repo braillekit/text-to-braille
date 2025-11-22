@@ -105,7 +105,7 @@ namespace EasyBrailleEdit
                 txtInput.SelectedText = item.Text;
                 return;
             }
-            string s = item.Tag.ToString();
+            string s = item.Tag.ToString() ?? string.Empty; // Fixed CS8600
             if (String.IsNullOrEmpty(s))
             {
                 txtInput.SelectedText = s;

@@ -157,11 +157,11 @@ namespace BrailleToolkit.Converters
         /// </summary>
         /// <param name="brCode">點字碼，兩位數16進位字串，例如：4E。</param>
         /// <returns>點字字型碼，兩位數16進位字串。</returns>
-        public static string ToFontCode(string brCode)
+        public static string? ToFontCode(string brCode) // Changed return type to nullable
         {
             if (m_FontTable.Contains(brCode))
             {
-                return m_FontTable[brCode].ToString();
+                return m_FontTable[brCode]?.ToString(); // Fixed CS8602
             }
             return null;
         }
@@ -171,12 +171,12 @@ namespace BrailleToolkit.Converters
         /// </summary>
         /// <param name="fontCode">點字碼，兩位數16進位字串，例如：3F。</param>
         /// <returns>點字碼，兩位數16進位字串。</returns>
-        public static string ToBrailleCode(string fontCode)
+        public static string? ToBrailleCode(string fontCode) // Changed return type to nullable
         {
             foreach (DictionaryEntry de in m_FontTable)
             {
                 if (de.Value.Equals(fontCode))
-                    return de.Key.ToString();
+                    return de.Key?.ToString(); // Fixed CS8602
             }
             return null;
         }

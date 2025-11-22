@@ -111,7 +111,7 @@ namespace BrailleToolkit
             {
                 enc = Encoding.GetEncoding(950); // BIG-5
             }
-            using (StreamReader sr = new StreamReader(m_FileName, enc, true))
+            using (StreamReader sr = new StreamReader(m_FileName!, enc, true)) // Fixed CS8604
             {
                 LoadAndConvert(sr);
             }
@@ -152,7 +152,7 @@ namespace BrailleToolkit
 
             Clear();
 
-            m_Processor.InitializeForConversion();
+            m_Processor!.InitializeForConversion();
 
             while ((line = reader.ReadLine()) != null)
             {
@@ -510,7 +510,7 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="lineIdx"></param>
         /// <returns></returns>
-        public BrailleLine GetPageTitle(int lineIdx)
+        public BrailleLine? GetPageTitle(int lineIdx)
         {
             if (m_PageTitles == null)
             {
@@ -520,15 +520,15 @@ namespace BrailleToolkit
             if (lineIdx < 0)        // 注意：不用比對上限!! 因為在列印時，傳入的 lineIdx 有可能大於等於總列數。
                 return null;
 
-            BraillePageTitle title;
+            BraillePageTitle? title; // Changed to nullable
 
             int i = m_PageTitles.Count - 1; // 必須從底下往上比較
             while (i >= 0)
             {
                 title = m_PageTitles[i];
-                if (lineIdx >= title.ContentStartLineIndex)
+                if (lineIdx >= title!.ContentStartLineIndex)
                 {
-                    return title.TitleLine;
+                    return title!.TitleLine;
                 }
                 i--;
             }
@@ -643,9 +643,9 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得字數最長的 line。
         /// </summary>
-        public BrailleLine GetLongestLine()
+        public BrailleLine? GetLongestLine() // Changed return type to nullable
         {
-            BrailleLine longestLine = null;
+            BrailleLine? longestLine = null; // Fixed CS8600
             int maxCount = -1;
             int curCount;
             foreach (BrailleLine brLine in m_Lines)

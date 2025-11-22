@@ -164,7 +164,7 @@ namespace BrailleToolkit.Data
             for (int i = 0; i < m_Table.Rows.Count; i++)
             {
                 var row = m_Table.Rows[i];
-                string dots = row["dots"].ToString();
+                string dots = row["dots"].ToString() ?? string.Empty; // Fixed CS8600
 
                 if (string.IsNullOrWhiteSpace(dots))
                 {
@@ -192,7 +192,7 @@ namespace BrailleToolkit.Data
             for (int i = 0; i < m_Table.Rows.Count; i++)
             {
                 var row = m_Table.Rows[i];
-                string dots2 = row["dots2"].ToString();
+                string dots2 = row["dots2"].ToString() ?? string.Empty; // Fixed CS8600
                 if (string.IsNullOrWhiteSpace(dots2))
                 {
                     continue;
