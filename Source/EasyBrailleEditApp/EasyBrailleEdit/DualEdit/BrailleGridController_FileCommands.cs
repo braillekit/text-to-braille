@@ -85,7 +85,7 @@ namespace EasyBrailleEdit.DualEdit
         public bool DoSaveFileAs()
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.DefaultExt = Constant.Files.DefaultMainBrailleFileExt;
+            dlg.DefaultExt = Constant.Files.JsonBrailleFileExt;
             dlg.Filter = Constant.Files.SaveAsFileNameFilter;
             dlg.FilterIndex = 1;
 

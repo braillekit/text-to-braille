@@ -124,7 +124,7 @@ namespace EasyBrailleEdit
         {
             var dlg = new SaveFileDialog
             {
-                DefaultExt = Constant.Files.DefaultPrintableBrailleFileExt,
+                DefaultExt = Constant.Files.PrintableBrailleFileExt,
                 CheckFileExists = false,
                 CheckPathExists = true,
                 FileName = txtBrailleFileName.TextBox.Text,

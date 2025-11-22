@@ -77,7 +77,7 @@ namespace Txt2Brl
                 }
                 if (String.IsNullOrEmpty(opts.OutputFileName))
                 {
-                    opts.OutputFileName = Path.ChangeExtension(opts.InputFileName, Constant.Files.DefaultMainBrailleFileExt);
+                    opts.OutputFileName = Path.ChangeExtension(opts.InputFileName, Constant.Files.JsonBrailleFileExt);
                 }
 
                 if (!File.Exists(opts.InputFileName))
