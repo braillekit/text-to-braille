@@ -8,13 +8,26 @@ using BrailleToolkit.Helpers;
 namespace BrailleToolkit.Tags
 {
     // 列舉常數 for 語境標籤的生命週期（何時要移除該語境標籤）
+    /// <summary>
+    /// Defines the lifetime of a context tag.
+    /// </summary>
     public enum ContextLifetime
     {
-        Transient,      // 轉點字過程中的某個時間點會消失。
-        Persistent      // 儲存檔案時會保存。
+        /// <summary>
+        /// The tag is transient and will be removed during conversion.
+        /// </summary>
+        Transient,
+
+        /// <summary>
+        /// The tag is persistent and will be saved.
+        /// </summary>
+        Persistent
     }
 
 
+    /// <summary>
+    /// Factory class for creating context tags.
+    /// </summary>
     public static class ContextTagFactory
     {
         /// <summary>

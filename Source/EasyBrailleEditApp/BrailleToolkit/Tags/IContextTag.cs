@@ -5,12 +5,29 @@
     /// </summary>
     public interface IContextTag
     {
-        string ConvertablePrefix { get; set; }   // 可轉換成點字的前導文字
-        string ConvertablePostfix { get; set; }  // 可轉換成點字的結尾文字
+        /// <summary>
+        /// Gets or sets the text that can be converted to braille as a prefix.
+        /// </summary>
+        string ConvertablePrefix { get; set; }
 
+        /// <summary>
+        /// Gets or sets the text that can be converted to braille as a postfix.
+        /// </summary>
+        string ConvertablePostfix { get; set; }
+
+        /// <summary>
+        /// Gets the list of braille words to be inserted as a prefix.
+        /// </summary>
         List<BrailleWord> PrefixBrailleWords { get; }
+
+        /// <summary>
+        /// Gets the list of braille words to be inserted as a postfix.
+        /// </summary>
         List<BrailleWord> PostfixBrailleWords { get; }
 
+        /// <summary>
+        /// Gets the name of the tag.
+        /// </summary>
         string TagName { get; }
 
         /// <summary>
@@ -23,6 +40,9 @@
         /// </summary>
         bool RemoveTagOnConversion { get; }
 
+        /// <summary>
+        /// Gets the lifetime of the context tag.
+        /// </summary>
         ContextLifetime Lifetime { get; }
 
         /// <summary>

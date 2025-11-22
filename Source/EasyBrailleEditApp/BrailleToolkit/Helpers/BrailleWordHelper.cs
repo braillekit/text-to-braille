@@ -11,6 +11,11 @@ namespace BrailleToolkit.Helpers
     public static class BrailleWordHelper
     {
 
+        /// <summary>
+        /// 判斷是否為中文標點符號。
+        /// </summary>
+        /// <param name="brWord"></param>
+        /// <returns></returns>
         public static bool IsChinesePunctuation(BrailleWord brWord)
         {
             if (brWord == null)
@@ -20,6 +25,11 @@ namespace BrailleToolkit.Helpers
             return (BrailleGlobals.ChinesePunctuations.IndexOf(brWord.Text) >= 0);
         }
 
+        /// <summary>
+        /// 將 BrailleWord 串列轉換成字串表示（包含 Text, PhoneticCode, CellList）。
+        /// </summary>
+        /// <param name="brWordList"></param>
+        /// <returns></returns>
         public static string ToString(List<BrailleWord> brWordList)
         {
             var sb = new StringBuilder();
@@ -38,6 +48,11 @@ namespace BrailleToolkit.Helpers
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 將 BrailleWord 串列轉換成純文字字串。
+        /// </summary>
+        /// <param name="brWordList"></param>
+        /// <returns></returns>
         public static string ToTextString(List<BrailleWord> brWordList)
         {
             var sb = new StringBuilder();
@@ -48,6 +63,11 @@ namespace BrailleToolkit.Helpers
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 將 BrailleWord 串列轉換成點位字串。
+        /// </summary>
+        /// <param name="brWordList"></param>
+        /// <returns></returns>
         public static string ToDotNumberString(List<BrailleWord> brWordList)
         {
             var sb = new StringBuilder();
@@ -92,6 +112,11 @@ namespace BrailleToolkit.Helpers
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 計算 BrailleWord 串列的總方數。
+        /// </summary>
+        /// <param name="brWordList"></param>
+        /// <returns></returns>
         public static int GetCellCount(this List<BrailleWord> brWordList)
         {
             int count = 0;
@@ -115,6 +140,11 @@ namespace BrailleToolkit.Helpers
             return false;
         }
 
+        /// <summary>
+        /// 移除數字記號（數字符號）。
+        /// </summary>
+        /// <param name="brWord"></param>
+        /// <returns>若有移除則傳回 true。</returns>
         public static bool RemoveDigitSymbol(BrailleWord brWord)
         {
             if (brWord.CellCount <= 1)

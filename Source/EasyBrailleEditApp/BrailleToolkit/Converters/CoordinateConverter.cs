@@ -9,12 +9,20 @@ namespace BrailleToolkit.Converters
     {
         private CoordinateBrailleTable m_Table;
 
+        /// <summary>
+        /// 建構函式。
+        /// </summary>
         public CoordinateConverter()
             : base()
         {
             m_Table = CoordinateBrailleTable.CreateInstance();
         }
 
+        /// <summary>
+        /// 轉換指定的字串。
+        /// </summary>
+        /// <param name="text">欲轉換的字串。</param>
+        /// <returns>轉換後的點字碼。</returns>
         public override string Convert(string text)
         {
             return m_Table.Find(text);

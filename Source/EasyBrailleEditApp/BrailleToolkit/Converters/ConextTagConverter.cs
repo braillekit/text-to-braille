@@ -16,16 +16,30 @@ namespace BrailleToolkit.Converters
     /// </summary>
     public sealed class ContextTagConverter : WordConverter
     {
+        /// <summary>
+        /// 建構函式。
+        /// </summary>
         public ContextTagConverter()
             : base()
         {
         }
 
+        /// <summary>
+        /// 轉換指定的字串。
+        /// </summary>
+        /// <param name="text">欲轉換的字串。</param>
+        /// <returns>轉換後的點字碼。</returns>
         public override string Convert(string text)
         {
             throw new Exception("Not Implemented!");
         }
 
+        /// <summary>
+        /// 從堆疊中讀取字元，並轉成點字。
+        /// </summary>
+        /// <param name="charStack">字元堆疊。</param>
+        /// <param name="context">情境物件。</param>
+        /// <returns>傳回轉換後的點字物件串列，若串列為空串列，表示沒有成功轉換的字元。</returns>
         public override List<BrailleWord> Convert(Stack<char> charStack, ContextTagManager context)
         {
             if (charStack.Count < 1)

@@ -6,6 +6,9 @@ using System.Reflection;
 
 namespace BrailleToolkit.Data
 {
+    /// <summary>
+    /// 英文點字對照表。
+    /// </summary>
 	public sealed class EnglishBrailleTable : XmlBrailleTable
 	{
         private static EnglishBrailleTable m_Instance = null;

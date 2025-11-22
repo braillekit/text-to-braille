@@ -10,16 +10,31 @@ namespace BrailleToolkit.Helpers
 {
     public static class BrailleCellHelper
     {
+        /// <summary>
+        /// 將 byte 轉換成兩位數的十六進位字串。
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public static string ByteToHexString(byte code)
         {
             return code.ToString("X2");
         }
 
+        /// <summary>
+        /// 將十六進位字串轉換成 byte。
+        /// </summary>
+        /// <param name="hexStr"></param>
+        /// <returns></returns>
         public static byte HexStringToByte(string hexStr)
         {
             return StrHelper.HexStrToByte(hexStr);
         }
 
+        /// <summary>
+        /// 將 byte 轉換成點位字串。
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns>例如 "1346"。</returns>
         public static string ByteToPositionNumberString(byte code)
         {
             var sb = new StringBuilder();
@@ -37,6 +52,11 @@ namespace BrailleToolkit.Helpers
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 將十六進位字串轉換成點位字串。
+        /// </summary>
+        /// <param name="hexStr"></param>
+        /// <returns>例如 "1346"。</returns>
         public static string HexStringToPositionNumberString(string hexStr)
         {
             return ByteToPositionNumberString(HexStringToByte(hexStr));
@@ -97,7 +117,7 @@ namespace BrailleToolkit.Helpers
 
 
         /// <summary>
-        /// 把陣列中的點位字串轉換成十六進制代碼。
+        /// 把陣列中的點位字串轉換成十六進制代碼陣列。
         /// </summary>
         /// <param name="positionNumbers"></param>
         /// <returns>範例：{"1C", "22"}</returns>

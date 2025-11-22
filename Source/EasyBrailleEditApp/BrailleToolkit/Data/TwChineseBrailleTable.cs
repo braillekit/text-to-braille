@@ -130,6 +130,10 @@ namespace BrailleToolkit.Data
             return null;
         }
 
+        /// <summary>
+        /// 取得所有標點符號。
+        /// </summary>
+        /// <returns>包含所有標點符號的字串。</returns>
         public string GetAllPunctuations()
         {
             CheckLoaded();

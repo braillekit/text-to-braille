@@ -34,10 +34,19 @@ namespace BrailleToolkit
 
     public sealed class ConversionFailedEventArgs : EventArgs
     {
+        /// <summary>
+        /// Gets the original text of the line where the conversion failed.
+        /// </summary>
         public string OriginalText { get; private set; }
 
+        /// <summary>
+        /// Gets the position and value of the invalid character.
+        /// </summary>
         public CharPosition InvalidChar { get; private set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to stop the conversion process.
+        /// </summary>
         public bool Stop { get; set; }
 
         internal void SetArgs(int lineNumber, int charIndex, string line, char ch)
@@ -60,7 +69,14 @@ namespace BrailleToolkit
             LineNumber = lineNum;
         }
 
+        /// <summary>
+        /// Gets the converted braille text.
+        /// </summary>
         public string Text { get; private set; }
+
+        /// <summary>
+        /// Gets the line number of the converted text.
+        /// </summary>
         public int LineNumber { get; private set; }
     }
 
@@ -162,6 +178,9 @@ namespace BrailleToolkit
 
         #region 屬性
 
+        /// <summary>
+        /// Gets or sets the Zhuyin reverse converter.
+        /// </summary>
         public ZhuyinReverseConverter ZhuyinConverter { get; set; }
 
         /// <summary>
@@ -174,8 +193,14 @@ namespace BrailleToolkit
         /// </summary>
         public EnglishWordConverter EnglishConverter { get; set; }
 
+        /// <summary>
+        /// Gets or sets the context tag converter.
+        /// </summary>
         public ContextTagConverter ControlTagConverter { get; set; }
 
+        /// <summary>
+        /// Gets or sets the math converter.
+        /// </summary>
         public MathConverter MathConverter { get; set; }
 
         /// <summary>
@@ -187,8 +212,14 @@ namespace BrailleToolkit
         /// </summary>
         public bool SuppressEvents { get; set; }
 
+        /// <summary>
+        /// Gets the list of invalid characters encountered during conversion.
+        /// </summary>
         public List<CharPosition> InvalidChars { get; }
 
+        /// <summary>
+        /// Gets a value indicating whether any errors occurred during conversion.
+        /// </summary>
         public bool HasError
         {
             get
@@ -201,17 +232,26 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// Gets the error message accumulated during conversion.
+        /// </summary>
         public string ErrorMessage
         {
             get { return _errorMsg.ToString(); }
         }
 
+        /// <summary>
+        /// Gets the context tag manager.
+        /// </summary>
         public ContextTagManager ContextManager { get; private set; }
 
         #endregion
 
         #region 事件
 
+        /// <summary>
+        /// Occurs when a conversion fails.
+        /// </summary>
         public event EventHandler<ConversionFailedEventArgs> ConvertionFailed
         {
             add
@@ -224,6 +264,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// Occurs when text is successfully converted.
+        /// </summary>
         public event EventHandler<TextConvertedEventArgs> TextConverted
         {
             add
@@ -265,6 +308,10 @@ namespace BrailleToolkit
 
         #endregion
 
+        /// <summary>
+        /// Adds a word converter to the processor.
+        /// </summary>
+        /// <param name="cvt">The word converter to add.</param>
         public void AddConverter(WordConverter cvt)
         {
             // 設定已知的轉換器。
@@ -300,6 +347,10 @@ namespace BrailleToolkit
                 _converters.Add(cvt);
         }
 
+        /// <summary>
+        /// Removes a word converter from the processor.
+        /// </summary>
+        /// <param name="cvt">The word converter to remove.</param>
         public void RemoveConverter(WordConverter cvt)
         {
             // 移除已知的轉換器。
@@ -994,6 +1045,11 @@ namespace BrailleToolkit
             return brWordListFraction;
         }
 
+        /// <summary>
+        /// Replaces text defined in the application configuration.
+        /// </summary>
+        /// <param name="line">The input line.</param>
+        /// <returns>The line with replaced text.</returns>
         public string ReplaceTextDefinedInAppConfig(string line)
         {
             var sb = new StringBuilder(line);

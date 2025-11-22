@@ -7,13 +7,29 @@ using BrailleToolkit.Helpers;
 
 namespace BrailleToolkit.Tags
 {
+    /// <summary>
+    /// Context tag for original page number.
+    /// </summary>
     public class OrgPageNumberContextTag : GenericContextTag
     {
+        /// <summary>
+        /// The leading underline character.
+        /// </summary>
         public const string LeadingUnderline = "_";
+
+        /// <summary>
+        /// The number of underline characters.
+        /// </summary>
         public const int NumberOfUnderline = 36;   // 用於表示原書頁次的底線字元數量
 
+        /// <summary>
+        /// The string containing leading underlines.
+        /// </summary>
         public static string LeadingUnderlines = new StringBuilder().Insert(0, LeadingUnderline, NumberOfUnderline).ToString();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrgPageNumberContextTag"/> class.
+        /// </summary>
         public OrgPageNumberContextTag() : base(ContextTagNames.OrgPageNumber)
         {
             BrailleWord brWord = null;

@@ -8,6 +8,9 @@ namespace BrailleToolkit.Data
 	{
 		private static PhoneticBrailleTable m_Instance = null;
 
+		/// <summary>
+		/// 建構函式。
+		/// </summary>
 		private PhoneticBrailleTable() : base()
         {
         }

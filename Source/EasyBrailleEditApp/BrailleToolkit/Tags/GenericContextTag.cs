@@ -8,13 +8,29 @@ namespace BrailleToolkit.Tags
 {
     public class GenericContextTag : IContextTag
     {
-        public string ConvertablePrefix { get; set; }   // 可轉換成點字的前導文字
-        public string ConvertablePostfix { get; set; }  // 可轉換成點字的結尾文字
+        /// <summary>
+        /// Gets or sets the text that can be converted to braille as a prefix.
+        /// </summary>
+        public string ConvertablePrefix { get; set; }
 
+        /// <summary>
+        /// Gets or sets the text that can be converted to braille as a postfix.
+        /// </summary>
+        public string ConvertablePostfix { get; set; }
+
+        /// <summary>
+        /// Gets the list of braille words to be inserted as a prefix.
+        /// </summary>
         public List<BrailleWord> PrefixBrailleWords { get; } = new List<BrailleWord>();
+
+        /// <summary>
+        /// Gets the list of braille words to be inserted as a postfix.
+        /// </summary>
         public List<BrailleWord> PostfixBrailleWords { get; } = new List<BrailleWord>();
 
-
+        /// <summary>
+        /// Gets the name of the tag.
+        /// </summary>
         public string TagName { get; protected set; }
 
         /// <summary>
@@ -22,6 +38,9 @@ namespace BrailleToolkit.Tags
         /// </summary>
         public string EndTagName { get => TagName.Insert(1, "/"); }
 
+        /// <summary>
+        /// Gets the lifetime of the context tag.
+        /// </summary>
         public ContextLifetime Lifetime { get; protected set; }
 
         /// <summary>
@@ -48,6 +67,9 @@ namespace BrailleToolkit.Tags
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether to remove the tag upon conversion.
+        /// </summary>
         public bool RemoveTagOnConversion { get; protected set; }
 
         public virtual void Reset()
@@ -71,6 +93,13 @@ namespace BrailleToolkit.Tags
         protected GenericContextTag() { }
 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GenericContextTag"/> class.
+        /// </summary>
+        /// <param name="tagName">The name of the tag.</param>
+        /// <param name="lifeTime">The lifetime of the tag.</param>
+        /// <param name="removeTagOnConversion">Whether to remove the tag on conversion.</param>
+        /// <param name="singleLine">Whether the tag is a single line tag.</param>
         public GenericContextTag(string tagName,
             ContextLifetime lifeTime = ContextLifetime.Persistent,
             bool removeTagOnConversion = false,

@@ -140,8 +140,8 @@ namespace BrailleToolkit.Converters
         /// <summary>
         /// 將內部點字碼（兩位數16進位字串）轉換成對應的點字字元，以便輸出至點字印表機。
         /// </summary>
-        /// <param name="brCode">點字碼，兩位數16進位字串，例如：4E。</param>
-        /// <returns></returns>
+        /// <param name="brailleHexCode">點字碼，兩位數16進位字串，例如：4E。</param>
+        /// <returns>對應的點字字元。</returns>
         public static char ToChar(string brailleHexCode)
         {
             string charCode = ToBrailleCharCode(brailleHexCode);
@@ -156,7 +156,7 @@ namespace BrailleToolkit.Converters
         /// <summary>
         /// 傳入內部點字碼，傳回對應之標準點字碼（點字印表機和點字觸摸器的點字碼）。
         /// </summary>
-        /// <param name="brCode">內部點字碼，兩位數16進位字串，例如：4E。</param>
+        /// <param name="brailleHexCode">內部點字碼，兩位數16進位字串，例如：4E。</param>
         /// <returns>點字字型碼，兩位數16進位字串。</returns>
         public static string ToBrailleCharCode(string brailleHexCode)
         {
@@ -170,7 +170,7 @@ namespace BrailleToolkit.Converters
         /// <summary>
         /// 傳入點字字元碼，傳回對應的內部點字碼。
         /// </summary>
-        /// <param name="fontCode">點字碼，兩位數16進位字串，例如：3F。</param>
+        /// <param name="brailleCharCode">點字碼，兩位數16進位字串，例如：3F。</param>
         /// <returns>點字碼，兩位數16進位字串。</returns>
         public static string ToBrailleHexCode(string brailleCharCode)
         {
@@ -185,8 +185,9 @@ namespace BrailleToolkit.Converters
         /// <summary>
         /// 傳入數字，傳回對應的點字字元碼。
         /// </summary>
+        /// <param name="number">數字。</param>
         /// <param name="upperPosition">是否採用上位點。</param>
-        /// <returns></returns>
+        /// <returns>對應的點字字元碼。</returns>
         public static string GetDigitCharCode(int number, bool upperPosition)
         {
             string s = number.ToString();

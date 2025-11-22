@@ -10,6 +10,9 @@ namespace BrailleToolkit.Data
 	{
         private static UrlBrailleTable m_Instance = null;
 
+        /// <summary>
+        /// 建構函式。
+        /// </summary>
         private UrlBrailleTable() : base()
         {
         }

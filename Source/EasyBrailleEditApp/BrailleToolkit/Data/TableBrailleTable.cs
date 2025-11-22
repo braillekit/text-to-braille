@@ -8,6 +8,9 @@ namespace BrailleToolkit.Data
 	{
 		private static TableBrailleTable m_Instance = null;
 
+		/// <summary>
+		/// 建構函式。
+		/// </summary>
 		private TableBrailleTable()
             : base()
         {

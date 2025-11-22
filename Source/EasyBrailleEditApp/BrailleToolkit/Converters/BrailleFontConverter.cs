@@ -136,7 +136,7 @@ namespace BrailleToolkit.Converters
         /// 將點字碼（兩位數16進位字串）轉換成對應的點字字型 ASCII 字元，以便顯示於 UI。
         /// </summary>
         /// <param name="brCode">點字碼，兩位數16進位字串，例如：4E。</param>
-        /// <returns></returns>
+        /// <returns>對應的點字字型 ASCII 字元。</returns>
         public static char ToChar(string brCode)
         {
             string fontCode = ToFontCode(brCode);
@@ -180,8 +180,9 @@ namespace BrailleToolkit.Converters
         /// <summary>
         /// 傳入數字，傳回對應的點字字型碼。
         /// </summary>
+        /// <param name="number">數字。</param>
         /// <param name="upperPosition">是否採用上位點。</param>
-        /// <returns></returns>
+        /// <returns>點字字型碼。</returns>
         public static string GetDigitFontCode(int number, bool upperPosition)
         {
             string s = number.ToString();
