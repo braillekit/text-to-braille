@@ -23,19 +23,37 @@ namespace BrailleToolkit
         [DataMember(Name = "BeginLineIndex")]
         private int m_BeginLineIndex;
 
+        /// <summary>
+        /// 取得標題列下方那一列的列物件參考。
+        /// </summary>
         public BrailleLine BeginLineRef { get; private set; }
 
+        /// <summary>
+        /// 建構函式。
+        /// </summary>
         public BraillePageTitle()
         {
             m_TitleLine = null;
             m_BeginLineIndex = -1;
         }
 
+        /// <summary>
+        /// 建構函式。
+        /// </summary>
+        /// <param name="words">標題文字。</param>
+        /// <param name="beginLineIdx">起始列索引。</param>
+        /// <param name="beginLine">起始列物件。</param>
         public BraillePageTitle(List<BrailleWord> words, int beginLineIdx, BrailleLine beginLine)
         {
             SetTitleLine(words, beginLineIdx, beginLine);
         }
 
+        /// <summary>
+        /// 建構函式。
+        /// </summary>
+        /// <param name="titleLine">標題列物件。</param>
+        /// <param name="beginLineIdx">起始列索引。</param>
+        /// <param name="beginLine">起始列物件。</param>
         public BraillePageTitle(BrailleLine titleLine, int beginLineIdx, BrailleLine beginLine) : this()
         {
             SetTitleLine(titleLine, beginLineIdx, beginLine);
@@ -51,6 +69,12 @@ namespace BrailleToolkit
             BeginLineRef = beginLine;
         }
 
+        /// <summary>
+        /// 設定標題列。
+        /// </summary>
+        /// <param name="titleLine">標題列物件。</param>
+        /// <param name="beginLineIdx">起始列索引。</param>
+        /// <param name="beginLine">起始列物件。</param>
         public void SetTitleLine(BrailleLine titleLine, int beginLineIdx, BrailleLine beginLine)
         {
             TitleLine = titleLine;
@@ -93,12 +117,18 @@ namespace BrailleToolkit
             return true;
         }
 
+        /// <summary>
+        /// 取得或設定標題列物件。
+        /// </summary>
         public BrailleLine TitleLine
         {
             get { return m_TitleLine; }
             set { m_TitleLine = value; }
         }
 
+        /// <summary>
+        /// 取得起始列索引。
+        /// </summary>
         public int BeginLineIndex
         {
             get { return m_BeginLineIndex; }
@@ -112,6 +142,10 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 轉回原始文字字串。
+        /// </summary>
+        /// <returns></returns>
         public string ToOriginalTextString()
         {
             if (TitleLine == null || TitleLine.IsEmpty())
@@ -144,6 +178,11 @@ namespace BrailleToolkit
 
         #endregion
 
+        /// <summary>
+        /// 比較兩個 BraillePageTitle 物件的順序（依據 BeginLineIndex）。
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public int CompareTo(object obj)
         {
             var title2 = obj as BraillePageTitle;

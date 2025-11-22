@@ -9,7 +9,14 @@ namespace EasyBrailleEdit.Common
     {
         public static AppConfig Config { get; } = AppConfig.GetInstance();
 
+        /// <summary>
+        /// 應用程式執行路徑
+        /// </summary>
         public static string AppPath { get; set;  }
+        
+        /// <summary>
+        /// 暫存目錄路徑
+        /// </summary>
         public static string TempPath { get; } = GetTempPath();
 
         // Class constructor.
@@ -57,6 +64,10 @@ namespace EasyBrailleEdit.Common
             return page;
         }
 
+        /// <summary>
+        /// 取得暫存目錄路徑
+        /// </summary>
+        /// <returns></returns>
 		public static string GetTempPath()
 		{
             Assembly asmb = Assembly.GetExecutingAssembly();

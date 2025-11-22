@@ -17,9 +17,19 @@ namespace BrailleToolkit
     /// </summary>
     public sealed class TextToBrailleConverter
     {
+        /// <summary>
+        /// 點字處理器。
+        /// </summary>
         public BrailleProcessor Processor { get; }
+        
+        /// <summary>
+        /// 點字文件物件。
+        /// </summary>
         public BrailleDocument Doc { get; }
 
+        /// <summary>
+        /// 建構函式。
+        /// </summary>
         public TextToBrailleConverter()
         {
             Processor = BrailleProcessor.GetInstance();
@@ -61,6 +71,11 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 轉換指定的明眼字串。
+        /// </summary>
+        /// <param name="inputText">明眼字串。</param>
+        /// <returns>轉換後的點字列。</returns>
         public BrailleLine Convert(string inputText)
         {
             Processor.InitializeForConversion();
@@ -68,6 +83,9 @@ namespace BrailleToolkit
         }
 
 
+        /// <summary>
+        /// 是否發生錯誤。
+        /// </summary>
         public bool HasError
         {
             get

@@ -25,8 +25,14 @@ namespace BrailleToolkit
             ContextNames = String.Empty;
         }
 
+        /// <summary>
+        /// 取得目前作用中的情境名稱字串（以空白分隔）。
+        /// </summary>
         public string ContextNames { get; private set; }
 
+        /// <summary>
+        /// 更新 ContextNames 屬性。
+        /// </summary>
         public void UpdateContextNames()
         {
             var sb = new StringBuilder();
@@ -36,7 +42,7 @@ namespace BrailleToolkit
                 {
                     sb.Append($"{XmlTagHelper.RemoveBracket(tag.TagName)} ");
                 }
-}
+            }
             ContextNames = sb.ToString().TrimEnd();
         }
 
@@ -52,12 +58,20 @@ namespace BrailleToolkit
             ContextNames = String.Empty;
         }
 
+        /// <summary>
+        /// 進入指定的情境。
+        /// </summary>
+        /// <param name="tag"></param>
         public void EnterContext(IContextTag tag)
         {
             tag.Enter();
             UpdateContextNames();
         }
 
+        /// <summary>
+        /// 離開指定的情境。
+        /// </summary>
+        /// <param name="tag"></param>
         public void LeaveContext(IContextTag tag)
         {
             tag.Leave();
@@ -155,11 +169,19 @@ namespace BrailleToolkit
             return _tags[tagName].IsActive;
         }
 
+        /// <summary>
+        /// 數學情境是否在作用中。
+        /// </summary>
+        /// <returns></returns>
         public bool IsMathActive()
         {
             return IsActive(ContextTagNames.Math);
         }
 
+        /// <summary>
+        /// 原書頁碼情境是否在作用中。
+        /// </summary>
+        /// <returns></returns>
         public bool IsOrgPageNumberActive()
         {
             return IsActive(ContextTagNames.OrgPageNumber);
@@ -178,6 +200,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 取得所有情境標籤。
+        /// </summary>
         public Dictionary<string, IContextTag> Tags { get; }
     }
 }

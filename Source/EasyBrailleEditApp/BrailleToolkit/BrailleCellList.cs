@@ -39,27 +39,48 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 複製指定的點字串列內容。
+        /// </summary>
+        /// <param name="aCellList"></param>
         public void Assign(BrailleCellList aCellList)
         {
             m_Cells.Clear();
             m_Cells.AddRange(aCellList.m_Cells);
         }
 
+        /// <summary>
+        /// 加入一個點字。
+        /// </summary>
+        /// <param name="cell"></param>
         public void Add(BrailleCell cell)
         {
             m_Cells.Add(cell);
         }
 
+        /// <summary>
+        /// 在指定位置插入一個點字。
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="cell"></param>
         public void Insert(int index, BrailleCell cell)
         {
             m_Cells.Insert(index, cell);
         }
 
+        /// <summary>
+        /// 清除所有點字。
+        /// </summary>
         public void Clear()
         {
             m_Cells.Clear();
         }
 
+        /// <summary>
+        /// 取得或設定指定索引的點字。
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public BrailleCell this[int index]
         {
             get
@@ -86,6 +107,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// 取得點字數量。
+        /// </summary>
         public int Count
         {
             get 

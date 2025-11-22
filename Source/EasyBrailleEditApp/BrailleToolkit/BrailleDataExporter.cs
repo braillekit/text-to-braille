@@ -31,14 +31,29 @@ namespace BrailleToolkit
             UseNewLineForPageBreak = true; // 匯出點字檔時，不要使用跳頁字元，因為超點的「中英文點字編輯器」不認得跳頁符號。
         }
 
+        /// <summary>
+        /// 每頁列數
+        /// </summary>
         public int LinesPerPage { get; }
 
-        public int StartPageNumber { get; } // 起始頁碼
+        /// <summary>
+        /// 起始頁碼
+        /// </summary>
+        public int StartPageNumber { get; }
 
+        /// <summary>
+        /// 是否需要頁尾
+        /// </summary>
         public bool NeedPageFooter { get; }
 
+        /// <summary>
+        /// 是否在檔案末尾加入換頁符號
+        /// </summary>
         public bool AddPageBreakAtEndOfFile { get; }
 
+        /// <summary>
+        /// 是否使用換行符號來換頁（而非 Form Feed）
+        /// </summary>
         public bool UseNewLineForPageBreak { get; }
 
         /// <summary>
@@ -57,6 +72,11 @@ namespace BrailleToolkit
             return endPageNumber;
         }
 
+        /// <summary>
+        /// 取得完整的點字文字內容。
+        /// </summary>
+        /// <param name="endPageNumber">輸出終止頁碼。</param>
+        /// <returns></returns>
         public string GetAllBrailleText(out int endPageNumber)
         {
             // 1.產生用來列印的點字資料。
