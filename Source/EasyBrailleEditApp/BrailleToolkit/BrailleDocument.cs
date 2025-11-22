@@ -168,23 +168,19 @@ namespace BrailleToolkit
 
             int lineNumber = 0;
 
-            string line;
+            string? line;
 
             Clear();
 
             m_Processor.InitializeForConversion();
 
-            while ((line = reader.ReadLine()) != null)
+            while (true)
             {
+                line = reader.ReadLine();
+                if (line == null)
+                    break;
                 lineNumber++;
-
-                BrailleLine brLine = m_Processor.ConvertLine(line, lineNumber);
-
-                if (brLine != null)
-                {
-                    ProcessLine(brLine);
-                    AddLine(brLine);
-                }
+                ProcessLine(line, lineNumber);
             }
 
             m_Processor.FormatDocument(this);   // 斷行
