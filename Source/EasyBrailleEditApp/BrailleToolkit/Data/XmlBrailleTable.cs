@@ -18,6 +18,9 @@ namespace BrailleToolkit.Data
 	{
 		private string m_FileName;
 		private bool m_Loaded;
+		/// <summary>
+		/// 儲存點字對照表的 DataTable。
+		/// </summary>
 		protected DataTable m_Table;
 
         /// <summary>
@@ -148,6 +151,9 @@ namespace BrailleToolkit.Data
 			m_Loaded = true;
 		}
 
+        /// <summary>
+        /// 將點位字串轉換為點字碼。
+        /// </summary>
         protected virtual void ConvertDotsToCode()
         {
             if (m_Table.Columns.IndexOf("code") < 0)
@@ -170,6 +176,9 @@ namespace BrailleToolkit.Data
             m_Table.AcceptChanges();
         }
 
+        /// <summary>
+        /// 將第二方點位字串轉換為點字碼。
+        /// </summary>
         protected virtual void ConvertDots2ToCode2()
         {
             if (m_Table.Columns.IndexOf("dots2") < 0)
@@ -196,7 +205,6 @@ namespace BrailleToolkit.Data
 		/// <summary>
 		/// 檢查點字對照表是否已經載入，若否，則丟出 exception。
 		/// </summary>
-		/// <returns></returns>
 		protected void CheckLoaded()
 		{
 			if (!m_Loaded)
@@ -236,6 +244,12 @@ namespace BrailleToolkit.Data
 			}
 		}
 
+        /// <summary>
+        /// 搜尋對應的 DataRow。
+        /// </summary>
+        /// <param name="text">文字。</param>
+        /// <param name="type">類型。</param>
+        /// <returns>DataRow。</returns>
         protected virtual DataRow FindDataRow(string text, string type = null)
         {
             if (string.IsNullOrWhiteSpace(type))
@@ -272,6 +286,12 @@ namespace BrailleToolkit.Data
 			return code;
 		}
 
+        /// <summary>
+        /// 取得點位字串陣列。
+        /// </summary>
+        /// <param name="text">文字。</param>
+        /// <param name="type">類型。</param>
+        /// <returns>點位字串陣列。</returns>
         public override string[] GetDots(string text, string type = null)
         {
             CheckLoaded();
@@ -283,6 +303,11 @@ namespace BrailleToolkit.Data
             return row["dots"].ToString().Split(' ');
         }
 
+        /// <summary>
+        /// 檢查文字是否存在於對照表中。
+        /// </summary>
+        /// <param name="text">文字。</param>
+        /// <returns>若存在則傳回 true，否則傳回 false。</returns>
         public override bool Exists(string text)
         {
             CheckLoaded();
