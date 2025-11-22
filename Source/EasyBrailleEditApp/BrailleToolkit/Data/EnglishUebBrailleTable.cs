@@ -54,8 +54,8 @@ namespace BrailleToolkit.Data
 		/// 搜尋某個字母，並傳回對應的點字碼。
 		/// </summary>
 		/// <param name="text">欲搜尋的字母。例如：'A'。</param>
-		/// <returns>若有找到，則傳回對應的點字碼，否則傳回空字串。</returns>
-		public string FindLetter(string text)
+		/// <returns>若有找到，則傳回對應的點字碼，否則傳回 null。</returns>
+		public string? FindLetter(string text)
 		{
 			CheckLoaded();
 

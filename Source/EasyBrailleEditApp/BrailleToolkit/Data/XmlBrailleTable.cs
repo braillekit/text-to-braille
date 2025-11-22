@@ -120,9 +120,9 @@ namespace BrailleToolkit.Data
             {
                 ds.Locale = CultureInfo.CurrentUICulture;
                 ds.ReadXml(sr);
-                m_Table = ds.Tables[0].Copy();
+                m_Table = ds.Tables[0]!.Copy();
                 m_Table.CaseSensitive = true;	// 必須為 true，否則有些半形字元會和全形符號混淆。
-                m_Table.PrimaryKey = new DataColumn[] { m_Table.Columns["text"] };
+                m_Table.PrimaryKey = new DataColumn[] { m_Table.Columns["text"]! };
 
                 ConvertDotsToCode();
                 ConvertDots2ToCode2();
@@ -141,8 +141,8 @@ namespace BrailleToolkit.Data
 			DataSet ds = new DataSet();
             ds.Locale = CultureInfo.CurrentUICulture;
 			ds.ReadXml(sr);
-			m_Table = ds.Tables[0].Copy();
-			m_Table.PrimaryKey = new DataColumn[] { m_Table.Columns["text"] };
+			m_Table = ds.Tables[0]!.Copy();
+			m_Table.PrimaryKey = new DataColumn[] { m_Table.Columns["text"]! };
 			sr.Close();
 
             ConvertDotsToCode();

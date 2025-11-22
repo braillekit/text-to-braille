@@ -753,7 +753,7 @@ namespace EasyBrailleEdit
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string StatusText
         {
-            get { return statusStrip1.Items[0].Text; }
+            get { return statusStrip1.Items[0].Text ?? string.Empty; }
             set
             {
                 statusStrip1.Items[0].Text = value;

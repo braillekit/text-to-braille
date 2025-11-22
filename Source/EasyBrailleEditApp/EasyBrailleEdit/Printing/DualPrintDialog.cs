@@ -142,7 +142,7 @@ namespace EasyBrailleEdit
         /// 將目前的列印參數蒐集並集中存入 PrintOptions 物件。
         /// </summary>
         /// <returns></returns>
-        private PrintOptions GetPrintOptions()
+        private PrintOptions? GetPrintOptions()
         {
             PrintOptions prnOpt = new PrintOptions
             {

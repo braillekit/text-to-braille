@@ -31,8 +31,8 @@ namespace BrailleToolkit.Helpers
             StringBuilder sbPageNum = new StringBuilder();
 
             // 標題
-            BrailleLine titleLine = brDoc.GetPageTitle(lineIdx);
-            string title = BrailleCharConverter.ToString(titleLine);
+            BrailleLine? titleLine = brDoc.GetPageTitle(lineIdx); // Fixed CS8600
+            string title = titleLine != null ? BrailleCharConverter.ToString(titleLine) : string.Empty; // Fixed CS8604
 
             // 原書頁碼
             if (!String.IsNullOrEmpty(beginOrgPageNum))

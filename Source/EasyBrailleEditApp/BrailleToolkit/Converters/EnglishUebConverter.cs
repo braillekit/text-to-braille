@@ -153,7 +153,7 @@ namespace BrailleToolkit.Converters
                         {
                             charStack.Pop();
                         }
-                        return new List<BrailleWord> { word };
+                        return new List<BrailleWord> { word! };
                     }
                 }
             }

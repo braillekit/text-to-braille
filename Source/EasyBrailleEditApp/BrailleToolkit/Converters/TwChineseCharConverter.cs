@@ -403,10 +403,10 @@ namespace BrailleToolkit.Converters
                 {
                     throw new Exception("點字對照表中無此符號: ㄦ");
                 }
-                cellList.Add(erBrCode);
+                cellList.Add(erBrCode!);
 
                 // 再加上聲調
-                cellList.Add(toneBrCode);
+                cellList.Add(toneBrCode!);
 
                 return cellList;
             }
@@ -415,17 +415,17 @@ namespace BrailleToolkit.Converters
             string joinedBrCode = _brailleTable.GetPhoneticJoinedCode(joinedPhCode);
             if (!String.IsNullOrEmpty(joinedBrCode))	// 是結合韻？
             {
-                cellList.Add(firstBrCode);	// 加入第一個注音符號
+                cellList.Add(firstBrCode!);	// 加入第一個注音符號
                 cellList.Add(joinedBrCode);	// 加入結合韻					
-                cellList.Add(toneBrCode);	// 加入聲調               
+                cellList.Add(toneBrCode!);	// 加入聲調               
                 return cellList;
             }
 
             // 不是特殊單音字，也不是結合韻：其他注音符號拼法。例如："ㄋㄧ　ˇ"。
-            cellList.Add(firstBrCode);	// 加入第一個注音符號
-            cellList.Add(secondBrCode);	// 加入第二個注音符號
-            cellList.Add(thirdBrCode);	// 加入第三個注音符號
-            cellList.Add(toneBrCode);	// 加入聲調          
+            cellList.Add(firstBrCode!);	// 加入第一個注音符號
+            cellList.Add(secondBrCode!);	// 加入第二個注音符號
+            cellList.Add(thirdBrCode!);	// 加入第三個注音符號
+            cellList.Add(toneBrCode!);	// 加入聲調          
             return cellList;
         }
 

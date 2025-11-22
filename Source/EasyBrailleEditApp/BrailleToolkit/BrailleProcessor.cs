@@ -407,7 +407,7 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="className"></param>
         /// <returns></returns>
-        public WordConverter GetConverter(string className)
+        public WordConverter? GetConverter(string className)
         {
             foreach (WordConverter cvt in _converters)
             {
@@ -495,7 +495,7 @@ namespace BrailleToolkit
         /// <param name="line">輸入的明眼字串。</param>
         /// <param name="lineNumber">字串的行號。此參數只是用來當轉換失敗時，傳給轉換失敗事件處理常式的資訊。</param>
         /// <returns>點字串列。若則傳回 null，表示該列不需要轉成點字。</returns>
-        public BrailleLine ConvertLine(string line, int lineNumber)
+        public BrailleLine? ConvertLine(string line, int lineNumber)
         {
             if (line == null)
                 return null;
@@ -610,7 +610,11 @@ namespace BrailleToolkit
             // 將編號的數字修正成上位點。
             if (EnglishConverter != null)
             {
-                EnglishBrailleRule.FixNumbers(brLine, EnglishConverter.BrailleTable as EnglishBrailleTable);
+                var brTable = EnglishConverter.BrailleTable as EnglishBrailleTable;
+                if (brTable != null)
+                {
+                    EnglishBrailleRule.FixNumbers(brLine, brTable);
+                }
             }
 
             EnglishBrailleRule.ApplyCapitalRule(brLine);    // 套用大寫規則。
@@ -654,7 +658,7 @@ namespace BrailleToolkit
         /// <param name="line"></param>
         /// <returns></returns>
         /// <see cref="BrailleProcessor.ConvertLine(int,string)"/>
-        public BrailleLine ConvertLine(string line)
+        public BrailleLine? ConvertLine(string line)
         {
             return ConvertLine(line, 1);
         }

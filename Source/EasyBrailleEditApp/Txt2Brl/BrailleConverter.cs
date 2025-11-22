@@ -11,7 +11,7 @@ namespace Txt2Brl
 {
     public class BrailleConverter 
 	{
-		BrailleDocument _doc = null!;
+		BrailleDocument? _doc;
         ZhuyinReverseConverter _zhuyinConverter;
 
 		string m_OutFileName = null!;
@@ -93,16 +93,16 @@ namespace Txt2Brl
 
             try
             {
-                _doc.CellsPerLine = cellsPerLine;
+                _doc!.CellsPerLine = cellsPerLine;
 
-                _doc.Convert(inputText);
+                _doc!.Convert(inputText);
 
                 if (!Processor.HasError)   // 轉換過程都沒錯誤才輸出點字檔
                 {
-                    _doc.SaveBrailleFile(outputFile);
+                    _doc!.SaveBrailleFile(outputFile);
                 }
 
-                _doc.Clear();
+                _doc!.Clear();
                 _doc = null;
 
                 WriteInvalidCharsToFile();
@@ -131,16 +131,16 @@ namespace Txt2Brl
 
 			try
 			{
-				_doc.CellsPerLine = cellsPerLine;
+				_doc!.CellsPerLine = cellsPerLine;
 
-				_doc.LoadAndConvert(inFileName);
+				_doc!.LoadAndConvert(inFileName);
 
 				if (!Processor.HasError)	// 轉換過程都沒錯誤才輸出點字檔
 				{
-					_doc.SaveBrailleFile(outFileName);
+					_doc!.SaveBrailleFile(outFileName);
 				}
 
-				_doc.Clear();
+				_doc!.Clear();
 				_doc = null;
 
 				WriteInvalidCharsToFile();

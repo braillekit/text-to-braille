@@ -23,7 +23,7 @@ namespace EasyBrailleEdit.DualEdit
             get => _undoStack.MaxSize;
         } 
 
-        public BrailleEditMemento Undo(BrailleEditMemento currentState)
+        public BrailleEditMemento? Undo(BrailleEditMemento currentState)
         {
             if (CanUndo())
             {
@@ -38,7 +38,7 @@ namespace EasyBrailleEdit.DualEdit
                 return null;
         }
 
-        public BrailleEditMemento Redo(BrailleEditMemento currentState)
+        public BrailleEditMemento? Redo(BrailleEditMemento currentState)
         {
             if (CanRedo())
             {

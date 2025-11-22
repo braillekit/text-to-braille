@@ -20,7 +20,7 @@ namespace EasyBrailleEdit
 
         private System.Windows.Forms.Timer clearStatusTimer = new System.Windows.Forms.Timer();
 
-        public BrailleDocument BrailleDoc
+        public BrailleDocument? BrailleDoc
         {
             get
             {
@@ -34,20 +34,20 @@ namespace EasyBrailleEdit
 
         string IBrailleGridForm.CurrentWordStatusText
         {
-            get => statusLabelCurrentWord.Text; 
+            get => statusLabelCurrentWord.Text ?? string.Empty; 
             set => statusLabelCurrentWord.Text = value;
         }
 
         string IBrailleGridForm.CurrentLineStatusText
         {
-            get => statusLabelCurrentLine.Text;
+            get => statusLabelCurrentLine.Text ?? string.Empty;
             set => statusLabelCurrentLine.Text = value; 
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string StatusText
         {
-            get { return statusStrip1.Items[0].Text; }
+            get { return statusStrip1.Items[0].Text ?? string.Empty; }
             set
             {
                 statusStrip1.Items[0].Text = value;
@@ -59,13 +59,13 @@ namespace EasyBrailleEdit
 
         string IBrailleGridForm.CurrentPageTitleStatusText
         {
-            get => statusLabelPageTitle.Text;
+            get => statusLabelPageTitle.Text ?? string.Empty;
             set => statusLabelPageTitle.Text = value;
         }
 
         string IBrailleGridForm.PageNumberText
         {
-            get { return statPageInfo.Text; }
+            get { return statPageInfo.Text ?? string.Empty; }
             set { statPageInfo.Text = value; }
         }
 

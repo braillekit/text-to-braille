@@ -88,7 +88,7 @@ namespace BrailleToolkit
         /// <param name="s">傳入的字串。</param>
         /// <param name="isBeginTag">傳回的旗號，若為 true，表示找到起始標籤，若為 false，則為結束標籤。</param>
         /// <returns>若有找到情境標籤，則傳回 ContextTag 物件，並設定 isBeginTag 輸出參數。</returns>
-        public IContextTag Parse(string s, out bool isBeginTag)
+        public IContextTag? Parse(string s, out bool isBeginTag)
         {
             IContextTag? result = null;
 
@@ -131,7 +131,7 @@ namespace BrailleToolkit
         /// <param name="s">輸入字串。</param>
         /// <param name="tagName">指定的標籤。</param>
         /// <returns></returns>
-        public IContextTag Parse(string s, string tagName)
+        public IContextTag? Parse(string s, string tagName)
         {
             IContextTag? result = null;
 
