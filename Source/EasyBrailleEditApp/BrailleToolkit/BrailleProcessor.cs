@@ -43,7 +43,7 @@ namespace BrailleToolkit
         /// <summary>
         /// Gets the original text of the line where the conversion failed.
         /// </summary>
-        public string OriginalText { get; private set; }
+        public string OriginalText { get; private set; } = null!;
 
         /// <summary>
         /// Gets the position and value of the invalid character.
@@ -81,7 +81,7 @@ namespace BrailleToolkit
         /// <summary>
         /// Gets the converted braille text.
         /// </summary>
-        public string Text { get; private set; }
+        public string Text { get; private set; } = null!;
 
         /// <summary>
         /// Gets the line number of the converted text.
@@ -97,7 +97,7 @@ namespace BrailleToolkit
     /// </summary>
     public class BrailleProcessor
     {
-        private static BrailleProcessor s_Processor;
+        private static BrailleProcessor? s_Processor;
 
         private CoordinateConverter _coordConverter;
         private TableConverter _tableConverter;
@@ -109,8 +109,8 @@ namespace BrailleToolkit
 
         private StringBuilder _errorMsg;           // 轉換過程中發生的錯誤訊息。
 
-        private event EventHandler<ConversionFailedEventArgs> _conversionFailedEvent;
-        private event EventHandler<TextConvertedEventArgs> _textConvertedEvent;
+        private event EventHandler<ConversionFailedEventArgs>? _conversionFailedEvent;
+        private event EventHandler<TextConvertedEventArgs>? _textConvertedEvent;
 
         private Dictionary<string, string> _autoReplacedText;
 

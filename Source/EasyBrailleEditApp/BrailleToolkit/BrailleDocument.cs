@@ -30,10 +30,10 @@ namespace BrailleToolkit
         private List<BraillePageTitle> m_PageTitles;    // 所有的頁標題。
 
         [NonSerialized]
-        private string m_FileName;
+        private string? m_FileName;
 
         [NonSerialized]
-        private BrailleProcessor m_Processor;	// 點字轉換器。
+        private BrailleProcessor? m_Processor;	// 點字轉換器。
 
         /// <summary>
         /// 起始頁碼
@@ -572,7 +572,7 @@ namespace BrailleToolkit
         /// 取得或設定 BrailleProcessor 物件參考。
         /// </summary>
         [YamlIgnore]
-        public BrailleProcessor Processor
+        public BrailleProcessor? Processor
         {
             get { return m_Processor; }
             set { m_Processor = value; }
@@ -591,7 +591,7 @@ namespace BrailleToolkit
         /// 取得或設定檔名。
         /// </summary>        
         [YamlIgnore]
-        public string FileName
+        public string? FileName
         {
             get { return m_FileName; }
             set { m_FileName = value; }

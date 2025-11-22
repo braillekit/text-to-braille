@@ -14,7 +14,7 @@ namespace Txt2Brl
 		BrailleDocument _doc;
         ZhuyinReverseConverter _zhuyinConverter;
 
-		string m_OutFileName;
+		string m_OutFileName = null!;
 		string m_CvtResultFileName;
 		string m_CvtErrorCharFileName;
 

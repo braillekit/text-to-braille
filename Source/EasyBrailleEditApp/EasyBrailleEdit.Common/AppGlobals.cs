@@ -18,7 +18,7 @@ namespace EasyBrailleEdit.Common
         /// <summary>
         /// 應用程式執行路徑
         /// </summary>
-        public static string AppPath { get; set;  }
+        public static string AppPath { get; set; } = null!;
         
         /// <summary>
         /// 暫存目錄路徑

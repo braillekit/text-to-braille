@@ -8,10 +8,10 @@ namespace EasyBrailleEdit
     public partial class RegForm : Form
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string LicenseKey { get; set; }
+        public string LicenseKey { get; set; } = null!;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string CustomerName { get; set; }
+        public string CustomerName { get; set; } = null!;
 
         public RegForm()
         {

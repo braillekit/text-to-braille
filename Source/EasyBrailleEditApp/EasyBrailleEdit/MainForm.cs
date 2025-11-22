@@ -19,18 +19,18 @@ namespace EasyBrailleEdit
 {
     public partial class MainForm : Form
     {
-        string m_FileName;
+        string m_FileName = null!;
         bool m_Modified;	// 檔案內容是否有修改過。        
 
-        private Scintilla m_TextArea;
+        private Scintilla m_TextArea = null!;
 
-        private InvalidCharForm m_InvalidCharForm;
+        private InvalidCharForm m_InvalidCharForm = null!;
 
-        private ConversionDialog m_ConvertDialog;
+        private ConversionDialog m_ConvertDialog = null!;
 
         private FileRunner m_FileRunner;
 
-        private FindReplace FindReplaceDialog;
+        private FindReplace FindReplaceDialog = null!;
         
         public MainForm()
         {

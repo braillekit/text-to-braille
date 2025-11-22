@@ -51,7 +51,7 @@ namespace EasyBrailleEdit
             }
         }
 
-        private CellClickEvent m_ClickController;
+        private CellClickEvent m_ClickController = null!;
 
         public PickBrailleForm()
         {

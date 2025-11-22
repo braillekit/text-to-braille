@@ -13,10 +13,10 @@ namespace EasyBrailleEdit
 {
     public partial class DualEditForm : Form, IBrailleGridForm
     {
-        private BrailleGridController _controller;
+        private BrailleGridController _controller = null!;
 
-        private DualEditFindForm m_FindForm;
-        private UndoBufferForm _undoBufferForm;
+        private DualEditFindForm m_FindForm = null!;
+        private UndoBufferForm _undoBufferForm = null!;
 
         private System.Windows.Forms.Timer clearStatusTimer = new System.Windows.Forms.Timer();
 

@@ -26,7 +26,7 @@ namespace BrailleToolkit
         /// 加入 Tag 屬性的最初目的用來記住標題列在雙視文件中的 begin line index，但也可以作為其他用途。
         /// 此屬性不會序列化，不會保存。
         /// </summary>
-        public object Tag { get; set; }
+        public object? Tag { get; set; }
 
 
         /// <summary>

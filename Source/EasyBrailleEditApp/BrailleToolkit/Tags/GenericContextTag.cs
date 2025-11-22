@@ -105,7 +105,12 @@ namespace BrailleToolkit.Tags
         /// <summary>
         /// 受保護的建構函式。
         /// </summary>
-        protected GenericContextTag() { }
+        protected GenericContextTag()
+        {
+            TagName = string.Empty;
+            ConvertablePrefix = string.Empty;
+            ConvertablePostfix = string.Empty;
+        }
 
 
         /// <summary>

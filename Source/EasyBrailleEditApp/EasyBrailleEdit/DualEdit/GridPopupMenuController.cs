@@ -121,7 +121,7 @@ namespace EasyBrailleEdit.DualEdit
             }
         }
 
-        public string Command { get; private set; }
+        public string Command { get; private set; } = null!;
     }
 
 }

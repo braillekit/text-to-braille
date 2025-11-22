@@ -84,7 +84,7 @@ namespace EasyBrailleEdit.DualEdit
             return result;
         }
 
-        public event EventHandler<EventArgs> UndoBufferChanged;
+        public event EventHandler<EventArgs>? UndoBufferChanged;
 
         private void OnUndoBufferChanged()
         {

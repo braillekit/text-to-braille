@@ -6,7 +6,7 @@ namespace EasyBrailleEdit
 {
     public partial class InvalidCharForm : Form
     {
-        private MainForm m_MainForm;
+        private MainForm m_MainForm = null!;
 
         private InvalidCharForm()
         {

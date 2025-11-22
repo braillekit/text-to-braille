@@ -9,7 +9,7 @@ namespace EasyBrailleEdit.Common.Utilities.Windows;
 public sealed class FileRunner : IDisposable
 {
 	private ProcessStartInfo m_StartInfo;
-	private Process m_Process;
+	private Process? m_Process;
 	private bool m_NeedWait;		// 是否等待應用程式執行結束
 	private TimeSpan m_WaitTime;			// 要等多久，TimeSpan.Zero 表示採用內定值（30分鐘）
 
@@ -18,7 +18,7 @@ public sealed class FileRunner : IDisposable
 	private StringBuilder m_StdOutput;
     private readonly object _lockObject = new object();
 
-    private event DataReceivedEventHandler m_StdOutputReceivedEvent;
+    private event DataReceivedEventHandler? m_StdOutputReceivedEvent;
 
     /// <summary>
     /// 初始化 FileRunner 類別的新執行個體。
@@ -27,6 +27,7 @@ public sealed class FileRunner : IDisposable
 	{
 		m_StdError = new StringBuilder();
 		m_StdOutput = new StringBuilder();
+        m_ErrMsg = string.Empty;
 
 		m_StartInfo = new ProcessStartInfo();
 

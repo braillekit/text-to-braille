@@ -50,7 +50,7 @@ namespace EasyBrailleEdit.Common.Utilities.Http
         private static HttpClient _httpClient;
 
         private string m_ClientPath;
-        private string m_ServerUri;
+        private string m_ServerUri = null!;
         private string m_ChangeLogFileName;		// 應用程式的變更記錄檔名，若有指定，在進行更新時會自動下載此檔案.
         private List<UpdateItem> m_UpdateItems;
         private readonly object _lockObject = new object();
@@ -589,17 +589,17 @@ namespace EasyBrailleEdit.Common.Utilities.Http
         /// <summary>
         /// Occurs when a file is about to be updated.
         /// </summary>
-        public event EventHandler<HttpUpdaterFileEventArgs> FileUpdating;
+        public event EventHandler<HttpUpdaterFileEventArgs>? FileUpdating;
 
         /// <summary>
         /// Occurs when a file has been updated.
         /// </summary>
-        public event EventHandler<HttpUpdaterFileEventArgs> FileUpdated;
+        public event EventHandler<HttpUpdaterFileEventArgs>? FileUpdated;
 
         /// <summary>
         /// Occurs when download progress changes.
         /// </summary>
-        public event EventHandler<DownloadProgress> DownloadProgressChanged;
+        public event EventHandler<DownloadProgress>? DownloadProgressChanged;
 
         #endregion
 

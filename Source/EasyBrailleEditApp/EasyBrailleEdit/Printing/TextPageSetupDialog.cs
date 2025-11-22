@@ -14,7 +14,7 @@ namespace EasyBrailleEdit
     /// </summary>
     public partial class TextPageSetupDialog : Form
     {
-        private PrintDocument m_PrnDoc;
+        private PrintDocument m_PrnDoc = null!;
 
         private TextPageSetupDialog()
         {

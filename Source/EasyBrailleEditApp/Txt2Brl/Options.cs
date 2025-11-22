@@ -15,10 +15,10 @@ namespace Txt2Brl
         public bool ShowHelp { get; set; }
 
         [Option('i', "input", Required = false, HelpText = "輸入檔案名稱，至少一個。")]
-        public string InputFileName { get; set; }
+        public string InputFileName { get; set; } = null!;
 
         [Option('o', "output", Required = false, HelpText = "輸出檔案名稱。")]
-        public string OutputFileName { get; set; }
+        public string OutputFileName { get; set; } = null!;
 
         [Option("stdin", Required = false, Default = false, HelpText = "從 STDIN 輸入欲轉換的文字。")]
         public bool Stdin { get; set; }

@@ -11,12 +11,12 @@ namespace EasyBrailleEdit
 {
     public partial class DualEditTitleForm : Form, IBrailleGridForm
     {
-        private BrailleDocument m_OrgBrDoc;	// 標題列所屬的 BrailleDocument 物件
-        private BrailleDocument m_TmpBrDoc; // 把所有標題列都丟到這個暫時的 BrailleDocument 物件
+        private BrailleDocument m_OrgBrDoc = null!;	// 標題列所屬的 BrailleDocument 物件
+        private BrailleDocument m_TmpBrDoc = null!; // 把所有標題列都丟到這個暫時的 BrailleDocument 物件
 
-        public List<BraillePageTitle> Titles { get; }
+        public List<BraillePageTitle> Titles { get; } = null!;
 
-        private BrailleGridController Controller { get; }
+        private BrailleGridController Controller { get; } = null!;
 
 
         private DualEditTitleForm()

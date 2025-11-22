@@ -44,7 +44,7 @@ namespace BrailleToolkit
         private int m_ActivePhoneticIndex;      // 目前使用的注音組字字根索引。
 
         [NonSerialized]
-        private string m_PhoneticCode;          // 注音字根（ㄅㄆㄇㄈ）。
+        private string? m_PhoneticCode;          // 注音字根（ㄅㄆㄇㄈ）。
 
         [NonSerialized]
         private bool m_IsPolyphonic;            // 是否為多音字。
@@ -389,7 +389,7 @@ namespace BrailleToolkit
         /// 這些語境標籤在整個轉點字程序完成時都會被移除（或轉換成對應的點字）。
         /// 是否可序列化：否。
         /// </summary>
-        public IContextTag ContextTag { get; set; }
+        public IContextTag? ContextTag { get; set; }
 
 
         /// <summary>

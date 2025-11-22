@@ -7,11 +7,11 @@ namespace EasyBrailleEdit.Printing
 {
     public partial class ConfigTextPrinterPanel : UserControl
     {
-        private string m_PaperSourceName;
-        private string m_PaperName;
-        private Margins m_OddPageMargins;
-        private Margins m_EvenPageMargins;
-        private string m_TextFontName;
+        private string m_PaperSourceName = null!;
+        private string m_PaperName = null!;
+        private Margins m_OddPageMargins = null!;
+        private Margins m_EvenPageMargins = null!;
+        private string m_TextFontName = null!;
         private double m_TextFontSize;
 
         public ConfigTextPrinterPanel()
