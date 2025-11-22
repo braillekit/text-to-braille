@@ -84,10 +84,20 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// 更新頁標題的起始列索引。
+        /// 此方法的目的是同步頁標題 (BraillePageTitle) 的「起始行索引」 (BeginLineIndex)，因為在文件編輯過程中，行的增加或刪除可能會改變原有索引。
+        /// 作法：根據頁標題的起始列物件參考 (BeginLineRef)，在文件中尋找其目前的位置，並更新其行索引 (BeginLineIndex)。
+        /// <br />詳細解釋：<br />
+        /// 每個 BraillePageTitle 物件內部都保存了一個 BeginLineRef，它是一個 BrailleLine 物件的參考，指向標題正下方的第一行內容。這個 BeginLineRef 就像一個「錨點」。
+        /// 由於使用者可能會在文件中插入或刪除內容，這個錨點 BrailleLine 在文件 Lines 集合中的實際索引位置可能會改變。UpdateLineIndex 的職責就是：
+        ///    1. 確認「錨點」(BeginLineRef) 是否還存在於文件中。
+        ///    2. 如果存在，就用它目前的實際位置來更新內部儲存的 BeginLineIndex 屬性。
+        ///    3. 如果「錨點」已經遺失（例如所在的行被刪除了），這個 BraillePageTitle 就會被視為「孤兒」，方法會返回 false。
         /// </summary>
-        /// <param name="brDoc"></param>
-        /// <returns></returns>
+        /// <param name="brDoc">要從中尋找 BrailleLine 的 BrailleDocument 物件。</param>
+        /// <returns>
+        /// 如果成功在文件中找到起始列並更新索引，則返回 <c>true</c>；
+        /// 如果起始列參考為 null 或在文件中找不到該列（可能已被刪除），則返回 <c>false</c>。
+        /// </returns>
         public bool UpdateLineIndex(BrailleDocument brDoc)
         {
             if (BeginLineRef == null)

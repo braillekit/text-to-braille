@@ -448,29 +448,29 @@ namespace BrailleToolkit
         /// </summary>
         public int UpdateTitlesLineIndex()
         {
-            int updatedCount = 0;
-
             if (m_PageTitles == null)
             {
-                return updatedCount;
+                return 0;
             }
 
-            BraillePageTitle title;
-            int idx = 0;
-            while (idx < m_PageTitles.Count)
+            int changeCount = 0; // 用於計算實際變更的數量
+
+            for (int i = m_PageTitles.Count - 1; i >= 0; i--)
             {
-                title = m_PageTitles[idx];
-                if (!title.UpdateLineIndex(this))
+                var title = m_PageTitles[i];
+
+                if (title.UpdateLineIndex(this)) // 嘗試更新，這會改變 title 內部的 BeginLineIndex
                 {
-                    m_PageTitles.RemoveAt(idx);
+                    changeCount++;
                 }
                 else
                 {
-                    idx++;
+                    // 更新失敗，代表此標題要被移除，也是變更
+                    m_PageTitles.RemoveAt(i);
+                    changeCount++;
                 }
-                updatedCount++;
             }
-            return updatedCount;
+            return changeCount; // 返回實際的變更次數
         }
 
         /// <summary>
@@ -484,18 +484,11 @@ namespace BrailleToolkit
                 return;
             }
 
-            BraillePageTitle title;
-            int idx = 0;
-            while (idx < m_PageTitles.Count)
+            for (int i = m_PageTitles.Count - 1; i >= 0; i--)
             {
-                title = m_PageTitles[idx];
-                if (!title.UpdateLineObject(this))
+                if (!m_PageTitles[i].UpdateLineObject(this))
                 {
-                    m_PageTitles.RemoveAt(idx);
-                }
-                else
-                {
-                    idx++;
+                    m_PageTitles.RemoveAt(i);
                 }
             }
         }
