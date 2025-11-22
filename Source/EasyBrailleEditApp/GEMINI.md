@@ -204,3 +204,7 @@
 6.  **流程整合：** `BrailleProcessor` 收到這些 `BrailleWord` 成品後，將它們按順序加入到正在處理的 `BrailleLine`（點字行）中。接著，它會繼續處理下一個字詞，直到整行轉換完畢。
 
 7.  **關於 `BrailleCellHelper`：** 它的主要工作更靠前。當 `EnglishBrailleTable` 從 XML 檔案載入時，如果 XML 中使用的是 `dots="2456"` 這種格式，`BrailleCellHelper.PositionNumbersToHexString` 就會被呼叫，將其轉換為 `code="3A"`，供後續流程高效使用  
+
+## 重構指示
+
+- 除非明確指示，否則重構時不要將程式碼改寫為 LINQ 語法。
