@@ -28,11 +28,25 @@
         Wrtiien by Huan-Lin Tsai. 2008-07-02.
     */
 
+    /// <summary>
+    /// Event arguments for HTTP updater file events.
+    /// </summary>
     public class HttpUpdaterFileEventArgs : EventArgs
     {
-        public readonly string FileName;    // 準備要下載的檔名
-        public readonly int Number;     // 這是第幾個檔案
-        public readonly int Total;      // 總共有幾個檔案
+        /// <summary>
+        /// Gets the file name.
+        /// </summary>
+        public string FileName { get; private set; }
+
+        /// <summary>
+        /// Gets the file number in the update sequence.
+        /// </summary>
+        public int Number { get; private set; }
+
+        /// <summary>
+        /// Gets the total number of files to be updated.
+        /// </summary>
+        public int Total { get; private set; }
 
         public HttpUpdaterFileEventArgs(string filename, int number, int total)
         {
@@ -86,32 +100,61 @@
         #endregion 事件
     }
 
+    /// <summary>
+    /// Specifies the action to perform during an update.
+    /// </summary>
     public enum UpdateAction
     {
+        /// <summary>No action.</summary>
         None,
+        /// <summary>Overwrite the file.</summary>
         Overwrite,
+        /// <summary>Delete the file.</summary>
         Delete
     }
 
     /// <summary>
     /// 更新項目。
     /// </summary>
+    /// <summary>
+    /// Represents an item to be updated.
+    /// </summary>
     public class UpdateItem
     {
+        /// <summary>
+        /// Gets or sets the file name.
+        /// </summary>
         public string FileName { get; set; } = null;
+
+        /// <summary>
+        /// Gets or sets the update operation.
+        /// </summary>
         public UpdateAction Operation { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateItem"/> class.
+        /// </summary>
         public UpdateItem()
         {
             Operation = UpdateAction.None;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateItem"/> class with specified parameters.
+        /// </summary>
+        /// <param name="filename">The file name.</param>
+        /// <param name="updAction">The update action.</param>
         public UpdateItem(string filename, UpdateAction updAction)
         {
             FileName = filename;
             Operation = updAction;
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare.</param>
+        /// <returns>True if equal; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
             UpdateItem item = obj as UpdateItem;
@@ -122,14 +165,22 @@
             return item.FileName.Equals(this.FileName, StringComparison.CurrentCultureIgnoreCase);
         }
 
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code.</returns>
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
     }
 
+    /// <summary>
+    /// Specifies the rollback action.
+    /// </summary>
     public enum RollbackAction
     {
+        /// <summary>Rename the file.</summary>
         Rename
     }
 
@@ -137,14 +188,32 @@
     /// 自動更新的回覆項目。其內容記錄的不是當初執行的更新動作，
     /// 而是在復原時需要執行的補償動作。
     /// </summary>
+    /// <summary>
+    /// Represents a rollback item for automatic updates.
+    /// </summary>
     public class RollbackItem
     {
-        public RollbackAction Operation { get; set; } // 原本執行的操作
+        /// <summary>
+        /// Gets or sets the rollback operation.
+        /// </summary>
+        public RollbackAction Operation { get; set; }
 
+        /// <summary>
+        /// Gets or sets the source file name.
+        /// </summary>
         public string SourceFileName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the target file name.
+        /// </summary>
         public string TargetFileName { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RollbackItem"/> class.
+        /// </summary>
+        /// <param name="original">The original file name.</param>
+        /// <param name="renamed">The renamed file name.</param>
+        /// <param name="operation">The rollback operation.</param>
         public RollbackItem(string original, string renamed, RollbackAction operation)
         {
             SourceFileName = original;

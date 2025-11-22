@@ -3,34 +3,36 @@ using System.Net.Http.Headers;
 
 namespace EasyBrailleEdit.Common.Utilities.Http
 {
-    /*
-        此類別可利用 HTTP 協定檢查以及下載應用程式的更新檔案。若其中有一個檔案下載失敗，就會整批 rollback（把先前下載的檔案刪除）。
-        改寫自 Eduardo Oliveira 的 AutoUpdate.vb，並增加下載進度的事件。
-    
-        此類別有三個公開屬性：
-
-          - ClientPath : 代表用戶端應用程式的所在路徑。例如 "C:\EasyBrailleEdit"。
-
-          - ServerUri : 遠端伺服器上面，存放新版本檔案的 HTTP 路徑。例如: "http://hostname.com/files/ebe/"。
-
-          - ChangeLogFileName : 版本變更說明文件的檔案名稱。例如 "ChangeLog.txt"。
-
-        方法：
-
-          - RetrieveUpdateListAsync() : 取得可更新的檔案清單。此函式不僅會從伺服器端取得更新清單及剖析其內容，還會檢查本地端的檔案是否需要更新或刪除。
-
-          - HasUpdates() : 傳回 True/False，代表伺服器端是否有新版本。
-
-          - UpdateAsync() : 下載並更新。
-
-        與進度有關的事件：
-
-          - FileUpdating
-          - FileUpdated
-          - DownloadProgressChanged
-
-        Wrtiien by Huan-Lin Tsai. 
-    */
+    /// <summary>
+    /// 提供基於 HTTP 協定的應用程式自動更新功能，支援檔案下載失敗時的回復（rollback）機制。
+    /// 若其中有一個檔案下載失敗，就會整批 rollback（把先前下載的檔案刪除）。
+    /// </summary>
+    /// <remarks>
+    /// <para>改寫自 Eduardo Oliveira 的 AutoUpdate.vb，並增加下載進度的事件。</para>
+    /// 
+    /// <para><strong>公開屬性：</strong></para>
+    /// <list type="bullet">
+    /// <item><description><see cref="ClientPath"/> - 代表用戶端應用程式的所在路徑。例如 "C:\EasyBrailleEdit"。</description></item>
+    /// <item><description><see cref="ServerUri"/> - 遠端伺服器上面，存放新版本檔案的 HTTP 路徑。例如: "http://hostname.com/files/ebe/"。</description></item>
+    /// <item><description><see cref="ChangeLogFileName"/> - 版本變更說明文件的檔案名稱。例如 "ChangeLog.txt"。</description></item>
+    /// </list>
+    /// 
+    /// <para><strong>方法：</strong></para>
+    /// <list type="bullet">
+    /// <item><description><see cref="GetUpdateListAsync"/> - 取得可更新的檔案清單。此函式不僅會從伺服器端取得更新清單及剖析其內容，還會檢查本地端的檔案是否需要更新或刪除。</description></item>
+    /// <item><description><see cref="HasUpdates"/> - 傳回 True/False，代表伺服器端是否有新版本。</description></item>
+    /// <item><description><see cref="UpdateAsync"/> - 下載並更新。</description></item>
+    /// </list>
+    /// 
+    /// <para><strong>與進度有關的事件：</strong></para>
+    /// <list type="bullet">
+    /// <item><description><see cref="FileUpdating"/> - 檔案開始更新時觸發。</description></item>
+    /// <item><description><see cref="FileUpdated"/> - 檔案更新完成時觸發。</description></item>
+    /// <item><description><see cref="DownloadProgressChanged"/> - 下載進度變更時觸發。</description></item>
+    /// </list>
+    /// 
+    /// <para>Written by Huan-Lin Tsai.</para>
+    /// </remarks>
     public class HttpUpdater : IHttpUpdater
     {
         private bool m_Disposed = false;
@@ -63,6 +65,9 @@ namespace EasyBrailleEdit.Common.Utilities.Http
         }
 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HttpUpdater"/> class.
+        /// </summary>
         public HttpUpdater()
         {
             m_ClientPath = "";
@@ -71,6 +76,9 @@ namespace EasyBrailleEdit.Common.Utilities.Http
             m_UpdateItems = new List<UpdateItem>();
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
@@ -84,6 +92,10 @@ namespace EasyBrailleEdit.Common.Utilities.Http
         // If disposing equals false, the method has been called by the
         // runtime from inside the finalizer and you should not reference
         // other objects. Only unmanaged resources can be disposed.
+        /// <summary>
+        /// Releases the unmanaged resources used by the HttpUpdater and optionally releases the managed resources.
+        /// </summary>
+        /// <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
@@ -356,6 +368,10 @@ namespace EasyBrailleEdit.Common.Utilities.Http
             //Logger.Debug($"完成獲取更新檔案清單，共 {m_UpdateItems.Count} 個更新項目。");
         }
 
+        /// <summary>
+        /// Determines whether there are updates available.
+        /// </summary>
+        /// <returns>True if updates are available; otherwise, false.</returns>
         public bool HasUpdates()
         {
             return (m_UpdateItems.Count > 0);
@@ -502,13 +518,24 @@ namespace EasyBrailleEdit.Common.Utilities.Http
             }
         }
 
+        /// <summary>
+        /// Raises the FileUpdating event.
+        /// </summary>
+        /// <param name="e">Event arguments.</param>
         protected virtual void OnFileUpdating(HttpUpdaterFileEventArgs e) => FileUpdating?.Invoke(this, e);
 
+        /// <summary>
+        /// Raises the FileUpdated event.
+        /// </summary>
+        /// <param name="e">Event arguments.</param>
         protected virtual void OnFileUpdated(HttpUpdaterFileEventArgs e) => FileUpdated?.Invoke(this, e);
 
 
         #region 屬性
 
+        /// <summary>
+        /// Gets or sets the client application path.
+        /// </summary>
         public string ClientPath
         {
             get { return m_ClientPath; }
@@ -519,13 +546,16 @@ namespace EasyBrailleEdit.Common.Utilities.Http
                     throw new InvalidOperationException(ErrorClientPathEmpty);
                 }
                 m_ClientPath = value;
-                if (!value.EndsWith("\\"))	// 自動附加反斜線
+                if (!value.EndsWith("\\"))	// 自動附加反斯線
                 {
                     m_ClientPath = value + "\\";
                 }
             }
         }
 
+        /// <summary>
+        /// Gets or sets the server URI where update files are located.
+        /// </summary>
         public string ServerUri
         {
             get { return m_ServerUri; }
@@ -536,13 +566,16 @@ namespace EasyBrailleEdit.Common.Utilities.Http
                     throw new InvalidOperationException("AutoUpdate.ServerUri 不可為空字串!");
                 }
                 m_ServerUri = value;
-                if (!value.EndsWith("/"))	// 自動附加斜線
+                if (!value.EndsWith("/"))	// 自動附加斯線
                 {
                     m_ServerUri = value + "/";
                 }
             }
         }
 
+        /// <summary>
+        /// Gets or sets the change log file name.
+        /// </summary>
         public string ChangeLogFileName
         {
             get { return m_ChangeLogFileName; }
@@ -553,10 +586,19 @@ namespace EasyBrailleEdit.Common.Utilities.Http
 
         #region 事件
 
+        /// <summary>
+        /// Occurs when a file is about to be updated.
+        /// </summary>
         public event EventHandler<HttpUpdaterFileEventArgs> FileUpdating;
 
+        /// <summary>
+        /// Occurs when a file has been updated.
+        /// </summary>
         public event EventHandler<HttpUpdaterFileEventArgs> FileUpdated;
 
+        /// <summary>
+        /// Occurs when download progress changes.
+        /// </summary>
         public event EventHandler<DownloadProgress> DownloadProgressChanged;
 
         #endregion

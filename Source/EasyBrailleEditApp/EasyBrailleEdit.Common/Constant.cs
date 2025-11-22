@@ -1,22 +1,58 @@
 ﻿namespace EasyBrailleEdit.Common;
 
+/// <summary>
+/// Provides application-wide constants.
+/// </summary>
 public static class Constant
 {
+    /// <summary>
+    /// Gets the application name.
+    /// </summary>
     public const string AppName = "EasyBrailleEdit";
+
+    /// <summary>
+    /// Gets the product version name.
+    /// </summary>
     public const string ProductVersionName = "開源社群版";
+
+    /// <summary>
+    /// Gets the project URL.
+    /// </summary>
     public const string ProjectUrl = "https://github.com/braillekit/text-to-braille";
+
+    /// <summary>
+    /// Gets the Facebook page URL.
+    /// </summary>
     public const string FacebookPageUrl = "https://www.facebook.com/easybraille/";
     
+    /// <summary>
+    /// Gets the default auto-update root URL.
+    /// </summary>
     public const string DefaultAutoUpdateRootUrl = "https://raw.githubusercontent.com/braillekit/text-to-braille-updates/refs/heads/main/";
+
+    /// <summary>
+    /// Gets the default auto-update files URL.
+    /// </summary>
     public const string DefaultAutoUpdateFilesUrl = DefaultAutoUpdateRootUrl + "Files/";
+
+    /// <summary>
+    /// Gets the default auto-update file list name.
+    /// </summary>
     public const string DefaultAutoUpdateFileListName = "_updates.txt";
 
+    /// <summary>
+    /// Gets the change log file name.
+    /// </summary>
     public const string ChangeLogFileName = "ChangeLog.md";
 
     /// <summary>
     /// 預設一行最大方數
     /// </summary>
     public const int DefaultCellsPerLine = 40;
+
+    /// <summary>
+    /// Gets the default number of lines per page.
+    /// </summary>
     public const int DefaultLinesPerPage = 25;
 
     /// <summary>
