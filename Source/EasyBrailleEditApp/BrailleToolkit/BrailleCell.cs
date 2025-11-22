@@ -68,11 +68,21 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// Gets a BrailleCell instance for the specified braille cell code.
+        /// </summary>
+        /// <param name="code">The braille cell code.</param>
+        /// <returns>The BrailleCell instance.</returns>
         public static BrailleCell GetInstance(BrailleCellCode code)
         {
             return m_AllCells[(int)code];
         }
 
+        /// <summary>
+        /// Gets a BrailleCell instance at the specified index.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns>The BrailleCell instance.</returns>
         public static BrailleCell GetInstance(int index)
         {
             if (index < 0 || index >= m_AllCells.Length)
@@ -80,6 +90,11 @@ namespace BrailleToolkit
             return m_AllCells[index];
         }
 
+        /// <summary>
+        /// Gets a BrailleCell instance from a hexadecimal string.
+        /// </summary>
+        /// <param name="hexStr">The hexadecimal string.</param>
+        /// <returns>The BrailleCell instance.</returns>
         public static BrailleCell GetInstance(string hexStr)
         {
             if (String.IsNullOrEmpty(hexStr) || hexStr.Length > 2)
@@ -97,6 +112,11 @@ namespace BrailleToolkit
             return GetInstance(PositionNumbersToByte(positionNumbers));
         }
 
+        /// <summary>
+        /// Gets a BrailleCell instance from a position number string.
+        /// </summary>
+        /// <param name="positionNumberString">The position number string (e.g., "1356").</param>
+        /// <returns>The BrailleCell instance.</returns>
         public static BrailleCell GetInstanceFromPositionNumberString(string positionNumberString)
         {
             return GetInstance(PositionNumberStringToByte(positionNumberString));
@@ -173,11 +193,20 @@ namespace BrailleToolkit
             m_Value = StrHelper.HexStrToByte(hexStr);
         }
 
+        /// <summary>
+        /// Gets the hash code for this braille cell.
+        /// </summary>
+        /// <returns>The hash code.</returns>
         public override int GetHashCode()
         {
             return m_Value;
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to this braille cell.
+        /// </summary>
+        /// <param name="obj">The object to compare.</param>
+        /// <returns>True if equal; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
             if (base.Equals(obj))
@@ -191,6 +220,9 @@ namespace BrailleToolkit
             return true;
         }
 
+        /// <summary>
+        /// Gets or sets the value of this braille cell.
+        /// </summary>
         [DataMember]
         public byte Value
         {
@@ -204,6 +236,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// Gets a blank braille cell.
+        /// </summary>
         public static BrailleCell Blank
         {
             get
@@ -212,6 +247,9 @@ namespace BrailleToolkit
             }
         }
 
+        /// <summary>
+        /// Gets a capital braille cell.
+        /// </summary>
         public static BrailleCell Capital
         {
             get
@@ -221,21 +259,37 @@ namespace BrailleToolkit
         }
 
 
+        /// <summary>
+        /// Returns a string representation of this braille cell.
+        /// </summary>
+        /// <returns>The hexadecimal string.</returns>
         public override string ToString()
         {
             return ToHexString();
         }
 
+        /// <summary>
+        /// Converts this braille cell to a hexadecimal string.
+        /// </summary>
+        /// <returns>The hexadecimal string.</returns>
         public string ToHexString()
         {
             return BrailleCellHelper.ByteToHexString(m_Value);
         }
 
+        /// <summary>
+        /// Converts this braille cell to a position number string.
+        /// </summary>
+        /// <returns>The position number string.</returns>
         public string ToPositionNumberString()
         {
             return BrailleCellHelper.ByteToPositionNumberString(Value);
         }
 
+        /// <summary>
+        /// Converts this braille cell to an array of position numbers.
+        /// </summary>
+        /// <returns>The position number array.</returns>
         public int[] ToPositionNumberArray()
         {
             return BrailleCellHelper.HexStringToPositionNumbers(ToHexString());

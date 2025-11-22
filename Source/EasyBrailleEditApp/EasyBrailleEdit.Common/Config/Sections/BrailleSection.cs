@@ -11,10 +11,19 @@ namespace EasyBrailleEdit.Common.Config.Sections
     /// </summary>
     public sealed record BrailleSection
     {
+        /// <summary>
+        /// The section name.
+        /// </summary>
         public const string Name = "Braille";
 
+        /// <summary>
+        /// Gets or sets the number of cells per line.
+        /// </summary>
         public int CellsPerLine { get; set; } = Constant.DefaultCellsPerLine;
 
+        /// <summary>
+        /// Gets or sets the number of lines per page.
+        /// </summary>
         public int LinesPerPage { get; set; } = Constant.DefaultLinesPerPage;
 
         /// <summary>

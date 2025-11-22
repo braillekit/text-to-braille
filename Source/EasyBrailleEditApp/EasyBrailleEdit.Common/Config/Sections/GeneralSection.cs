@@ -6,12 +6,24 @@ using System.Threading.Tasks;
 
 namespace EasyBrailleEdit.Common.Config.Sections
 {
+    /// <summary>
+    /// General configuration section.
+    /// </summary>
     public sealed record GeneralSection
     {
+        /// <summary>
+        /// The section name.
+        /// </summary>
         public const string Name = "General";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to enable auto-update.
+        /// </summary>
         public bool AutoUpdate { get; set; } = true;
 
+        /// <summary>
+        /// Gets or sets the URL for auto-update files.
+        /// </summary>
         public string AutoUpdateFilesUrl { get; set; } = Constant.DefaultAutoUpdateFilesUrl;
 
         /// <summary>
