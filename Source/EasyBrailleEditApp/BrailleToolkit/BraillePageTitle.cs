@@ -84,15 +84,24 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// 此方法的目的是同步頁標題 (BraillePageTitle) 的「起始行索引」 (BeginLineIndex)，因為在文件編輯過程中，行的增加或刪除可能會改變原有索引。
-        /// 作法：根據頁標題的起始列物件參考 (BeginLineRef)，在文件中尋找其目前的位置，並更新其行索引 (BeginLineIndex)。
-        /// <br />詳細解釋：<br />
-        /// 每個 BraillePageTitle 物件內部都保存了一個 BeginLineRef，它是一個 BrailleLine 物件的參考，指向標題正下方的第一行內容。這個 BeginLineRef 就像一個「錨點」。
-        /// 由於使用者可能會在文件中插入或刪除內容，這個錨點 BrailleLine 在文件 Lines 集合中的實際索引位置可能會改變。UpdateLineIndex 的職責就是：
-        ///    1. 確認「錨點」(BeginLineRef) 是否還存在於文件中。
-        ///    2. 如果存在，就用它目前的實際位置來更新內部儲存的 BeginLineIndex 屬性。
-        ///    3. 如果「錨點」已經遺失（例如所在的行被刪除了），這個 BraillePageTitle 就會被視為「孤兒」，方法會返回 false。
+        /// 根據頁標題下方第一行的物件參考（BeginLineRef，作為「錨點」），在文件中尋找其目前的索引位置，並更新 BeginLineIndex 屬性。
         /// </summary>
+        /// <remarks>
+        /// <para><strong>使用情境：</strong></para>
+        /// <para>
+        /// 在文件編輯過程中（插入或刪除行），BeginLineRef 所指向的 BrailleLine 物件在 Lines 集合中的索引位置可能會改變。
+        /// 此方法透過「錨點」（BeginLineRef）重新定位該行在集合中的實際位置，確保 BeginLineIndex 與實際索引保持同步。
+        /// </para>
+        /// 
+        /// <para><strong>運作原理：</strong></para>
+        /// <list type="number">
+        /// <item><description>檢查「錨點」(BeginLineRef) 是否存在。</description></item>
+        /// <item><description>在文件的 Lines 集合中搜尋該錨點的當前索引。</description></item>
+        /// <item><description>如果找到，更新 BeginLineIndex；如果找不到（可能已被刪除），返回 false。</description></item>
+        /// </list>
+        /// 
+        /// <para><strong>注意：</strong>此方法不會修改 BeginLineRef 本身，因為 IndexOf 找到的物件就是 BeginLineRef 本身。</para>
+        /// </remarks>
         /// <param name="brDoc">要從中尋找 BrailleLine 的 BrailleDocument 物件。</param>
         /// <returns>
         /// 如果成功在文件中找到起始列並更新索引，則返回 <c>true</c>；
@@ -108,7 +117,7 @@ namespace BrailleToolkit
             {
                 return false;
             }
-            BeginLineRef = brDoc.Lines[idx];
+            // 注意：不需要 BeginLineRef = brDoc.Lines[idx]，因為 IndexOf 找到的就是 BeginLineRef 本身
             BeginLineIndex = idx;
             return true;
         }
