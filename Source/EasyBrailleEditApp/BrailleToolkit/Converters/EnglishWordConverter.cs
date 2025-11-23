@@ -123,7 +123,7 @@ namespace BrailleToolkit.Converters
                 if (context.IsMathActive())
                 {
                     // 數學區塊裡面的符號，必須留給 MathConverter 處理。
-                    if (_processor.MathConverter.BrailleTable.Exists(currentWord))
+                    if (_processor.MathConverter != null && _processor.MathConverter.BrailleTable.Exists(currentWord))
                         break;
                 }
 
