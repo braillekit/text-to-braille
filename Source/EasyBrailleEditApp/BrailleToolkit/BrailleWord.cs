@@ -526,7 +526,7 @@ namespace BrailleToolkit
         /// 把指定的點字字串（16進位）轉成 BrailleCell 物件，並加入點字串列中。
         /// </summary>
         /// <param name="brCodes">欲加入串列的點字碼 16 進位字串。</param>
-        public void AddCells(string brCodes)
+        public void AddCells(string? brCodes)
         {
             if (String.IsNullOrEmpty(brCodes))
             {

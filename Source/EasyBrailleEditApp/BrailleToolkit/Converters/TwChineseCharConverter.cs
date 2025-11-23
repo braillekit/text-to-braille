@@ -20,7 +20,7 @@ namespace BrailleToolkit.Converters
         /// <summary>
         /// 取得或設定注音反查轉換器。
         /// </summary>
-        public ZhuyinReverseConverter ZhuyinConverter { get; set; }
+        public ZhuyinReverseConverter? ZhuyinConverter { get; set; }
 
         /// <summary>
         /// 建構函式。
@@ -202,7 +202,7 @@ namespace BrailleToolkit.Converters
             }
 
             // 處理這段中文字的最後一段連續中文字。
-            if (chineseStartIdx >= 0)
+            if (chineseStartIdx >= 0 && brWordList != null)
             {
                 FixPhoneticCodes(brWordList, chineseStartIdx, chineseEndIdx);
             }
@@ -235,6 +235,7 @@ namespace BrailleToolkit.Converters
             }
 
             // 取得所有中文字的注音字根。
+            if (ZhuyinConverter == null) return;
             string[] allPhCodes = ZhuyinConverter.GetZhuyinWithPhraseTable(sb.ToString()); 
             string phCode;
             BrailleWord brWord;
@@ -267,7 +268,7 @@ namespace BrailleToolkit.Converters
         /// <returns>若指定的字串是中文字且轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
         private BrailleWord? InternalConvert(string text)
         {
-            BrailleWord brWord = new BrailleWord(text);
+            BrailleWord? brWord = new BrailleWord(text);
 
             string? brCode;
 
@@ -302,7 +303,15 @@ namespace BrailleToolkit.Converters
             if (text.IsCJK())  // 若是漢字
             {
                 // 取得注音字根
-                string[] zhuyinCodes = ZhuyinConverter.GetZhuyinWithPhraseTable(text);
+                string[] zhuyinCodes;
+                if (ZhuyinConverter != null)
+                {
+                    zhuyinCodes = ZhuyinConverter.GetZhuyinWithPhraseTable(text);
+                }
+                else
+                {
+                    zhuyinCodes = new string[0];
+                }
 
                 //if (zhuyinCodes == null || zhuyinCodes.Length == 0)
                 //{

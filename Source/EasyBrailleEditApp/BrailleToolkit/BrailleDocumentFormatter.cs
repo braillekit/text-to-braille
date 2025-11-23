@@ -119,7 +119,7 @@ namespace BrailleToolkit
             }
 
             List<BrailleLine> lines = new List<BrailleLine>();
-            BrailleLine newLine = null;
+            BrailleLine? newLine = null;
             int wordIndex = 0;
             int breakIndex = 0;
             bool needHyphen = false;
@@ -161,6 +161,8 @@ namespace BrailleToolkit
                 EnglishBrailleRule.ApplyCapitalRule(brLine);    // 套用大寫規則。
 
                 GeneralBrailleRule.ApplyDigitRule(brLine);		// 套用數字規則。
+
+
 
                 isBroken = true;    // 已經至少折了一行
                 maxCellsInLine = cellsPerLine - indents;  // 下一行開始就要自動縮排，共縮 indents 格。
@@ -240,7 +242,7 @@ namespace BrailleToolkit
             int breakIndex = fixedBreakIndex;
 
             BrailleWord breakWord;
-            BrailleWord leftWord = null;
+            BrailleWord? leftWord = null;
 
             // 必須和前一個字元一起斷至下一行的字元。亦即，只要剛好斷在這些字元，就要改成斷前一個字元。
             char[] joinLeftChars = { ',', '.', '。', '、', '，', '；', '？', '！', '」', '』', '‧' };

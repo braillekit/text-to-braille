@@ -141,7 +141,7 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="separator">每個 16 進位字串之間的分隔字串。</param>
         /// <returns></returns>
-        public string ToString(string separator)
+        public string ToString(string? separator)
         {
             StringBuilder sb = new StringBuilder();
             foreach (BrailleCell cell in m_Cells)

@@ -206,6 +206,6 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得所有情境標籤。
         /// </summary>
-        public Dictionary<string, IContextTag> Tags { get; }
+        public Dictionary<string, IContextTag> Tags => _tags;
     }
 }

@@ -11,7 +11,7 @@ namespace BrailleToolkit.Data
     /// </summary>
     public sealed class TwChineseBrailleTable : XmlBrailleTable
     {
-        private static TwChineseBrailleTable m_Instance = null;
+        private static TwChineseBrailleTable? m_Instance = null;
 
         private TwChineseBrailleTable()
             : base()
