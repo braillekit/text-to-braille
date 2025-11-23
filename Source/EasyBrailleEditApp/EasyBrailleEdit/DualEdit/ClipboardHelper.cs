@@ -35,9 +35,9 @@ namespace EasyBrailleEdit.DualEdit
         public static List<BrailleWord>? GetWords()
         {
             List<BrailleWord>? result = null;
-            if (Clipboard.ContainsData(ClipboardObjectFormatForWords))
+            if (Clipboard.TryGetData(ClipboardObjectFormatForWords, out object? data))
             {
-                var s = (string?) Clipboard.GetData(ClipboardObjectFormatForWords);
+                var s = data as string;
                 if (s != null)
                 {
                     result = JsonHelper.Deserialize<List<BrailleWord>>(s);
@@ -49,9 +49,9 @@ namespace EasyBrailleEdit.DualEdit
         public static List<BrailleLine>? GetLines()
         {
             List<BrailleLine>? result = null;
-            if (Clipboard.ContainsData(ClipboardObjectFormatForLines))
+            if (Clipboard.TryGetData(ClipboardObjectFormatForLines, out object? data))
             {
-                var s = (string?)Clipboard.GetData(ClipboardObjectFormatForLines);
+                var s = data as string;
                 if (s != null)
                 {
                     result = JsonHelper.Deserialize<List<BrailleLine>>(s);
