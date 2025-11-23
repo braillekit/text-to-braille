@@ -6,20 +6,25 @@
 
 ### 🚀 快速開始
 
-- **使用手冊**: [manual/使用手冊/](manual/使用手冊/)
-- **安裝指南**: [manual/安裝手冊/](manual/安裝手冊/)
+- **使用手冊**: [使用手冊.pdf](manual/user-guide/使用手冊.pdf) | [使用手冊.docx](manual/user-guide/使用手冊.docx)
+- **語法說明**: [Syntax.htm](manual/Syntax.htm) | [FAQ](manual/user-guide/FAQ.htm)
 - **最新發行紀錄**: [v5.0.0-alpha.md](v5.0.0-alpha.md)
 - **完整變更歷史**: [CHANGELOG.md](CHANGELOG.md)
 
 ### 📖 使用者文件
 
 - [**manual/**](manual/) - 使用者手冊與安裝指南
-  - [使用手冊/](manual/使用手冊/) - 使用手冊（繁體中文版）
-  - [安裝手冊/](manual/安裝手冊/) - 安裝手冊（繁體中文版）
-  - [user-guide/](manual/user-guide/) - 使用手冊（英文版）
-  - [installation/](manual/installation/) - 安裝手冊（英文版）
+  - [user-guide/](manual/user-guide/) - 使用手冊
+    - [使用手冊.pdf](manual/user-guide/使用手冊.pdf) - 使用手冊 PDF 版
+    - [使用手冊.docx](manual/user-guide/使用手冊.docx) - 使用手冊 DOCX 版
+    - [UserManual.htm](manual/user-guide/UserManual.htm) - 使用手冊 HTML 版
+    - [FAQ.htm](manual/user-guide/FAQ.htm) - 常見問題
+    - [Syntax.htm](manual/user-guide/Syntax.htm) - 語法說明
+    - [archive/](manual/user-guide/archive/) - 歷史版本（v2.7, v3.18）
+  - [installation/](manual/installation/) - 安裝手冊
+    - [archive/](manual/installation/archive/) - 安裝手冊歷史版本（v2.7）
   - [images/](manual/images/) - 手冊圖片資源
-  - [Syntax.htm](manual/Syntax.htm) - 語法說明頁面
+  - [Syntax.htm](manual/Syntax.htm) - 語法說明頁面（快速連結）
 
 ### 🏗️ 設計文件
 
@@ -77,12 +82,10 @@
 
 ## 📝 版本說明
 
-文件結構支援多語言與版本管理：
+文件結構採用版本管理機制：
 
-- **繁體中文文件**: 使用中文目錄名稱（如 `使用手冊/`、`安裝手冊/`）
-- **英文文件**: 使用英文目錄名稱（如 `user-guide/`、`installation/`）
-- 未來可擴充 `current/` 與 `archive/` 子目錄進行版本區分
-
-## 📧 聯絡資訊
-
-如有任何問題或建議，請聯繫：huanlin.tsai@gmail.com
+- **當前版本**: 最新的文件直接放在各目錄根層（如 `manual/user-guide/使用手冊.pdf`）
+- **歷史版本**: 存放在 `archive/` 子目錄（如 `manual/user-guide/archive/`）
+  - 使用手冊歷史版本：v2.7、v3.18
+  - 安裝手冊歷史版本：v2.7
+- **文件格式**: 支援多種格式（PDF、DOCX、HTML）以滿足不同需求
