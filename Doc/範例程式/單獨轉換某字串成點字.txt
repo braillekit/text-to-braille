@@ -1,4 +1,0 @@
-﻿
-     brProcessor.SuppressEvents = true;  // 關閉點字處理器事件
-     BrailleLine brLine = brProcessor.ConvertLine("測試");
-     brProcessor.SuppressEvents = false; // 恢復點字處理器事件
