@@ -43,7 +43,7 @@ namespace BrailleToolkit.Tests
 			List<BrailleWord> expected = new List<BrailleWord>();
             BrailleWord brWord = new BrailleWord(text, phCode, brCode);
             expected.Add(brWord);
-			List<BrailleWord> actual = target.Convert(charStack, context);
+			List<BrailleWord>? actual = target.Convert(charStack, context);
             
 			Assert.Equal(expected, actual);
         }
@@ -63,7 +63,7 @@ namespace BrailleToolkit.Tests
             List<BrailleWord> expected = new List<BrailleWord>();
             BrailleWord brWord = new BrailleWord(text, phCode, brCode);
             expected.Add(brWord);
-            List<BrailleWord> actual = target.Convert(charStack, context);
+            List<BrailleWord>? actual = target.Convert(charStack, context);
 
             Assert.Equal(expected, actual);
         }
@@ -80,7 +80,7 @@ namespace BrailleToolkit.Tests
             ContextTagManager context = new ContextTagManager();
 
             var charStack = new Stack<char>(text);
-            List<BrailleWord> actual = target.Convert(charStack, context);
+            List<BrailleWord>? actual = target.Convert(charStack, context);
             Assert.Null(actual);
         }
 
@@ -138,7 +138,7 @@ namespace BrailleToolkit.Tests
 
             ContextTagManager context = new ContextTagManager();
             var charStack = new Stack<char>(StrHelper.Reverse(input));
-            List<BrailleWord> actual = target.Convert(charStack, context);
+            List<BrailleWord>? actual = target.Convert(charStack, context);
 
             Assert.Equal(expected, actual);
         }
@@ -157,7 +157,7 @@ namespace BrailleToolkit.Tests
             ContextTagManager context = new ContextTagManager();
 
             var charStack = new Stack<char>(inputText);
-            List<BrailleWord> actual = target.Convert(charStack, context);
+            List<BrailleWord>? actual = target.Convert(charStack, context);
             Assert.NotNull(actual);
             Assert.Single(actual);
 

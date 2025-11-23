@@ -24,9 +24,9 @@ namespace Txt2Brl
                 .CreateLogger();
 
             string filename = Assembly.GetExecutingAssembly().Location!;
-            string fileVer = FileVersionInfo.GetVersionInfo(filename).FileVersion;
+            string fileVer = FileVersionInfo.GetVersionInfo(filename).FileVersion ?? "(N/A)";
 
-            Console.WriteLine($"Txt2Brl version {fileVer} Copyright(c) 2008-2023 Michael Tsai.\n");
+            Console.WriteLine($"Txt2Brl version {fileVer} Copyright(c) 2008-2025 Michael Tsai.\n");
 
             for (int i = 0; args != null && i < args.Length; i++)
             {

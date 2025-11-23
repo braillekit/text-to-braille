@@ -64,7 +64,7 @@ namespace BrailleToolkit.Tests
             // Walk up until we find .git or Source folder
             while (!Directory.Exists(Path.Combine(current, "Source")) && Directory.GetParent(current) != null)
             {
-                current = Directory.GetParent(current).FullName;
+                current = Directory.GetParent(current)?.FullName ?? throw new Exception("Project root not found");
             }
             return current;
         }

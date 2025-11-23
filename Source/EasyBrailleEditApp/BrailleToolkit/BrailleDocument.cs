@@ -160,8 +160,8 @@ namespace BrailleToolkit
             while ((line = reader.ReadLine()) != null)
             {
                 lineNumber++;
-                BrailleLine? brLine = m_Processor.ConvertLine(line, lineNumber);
-                if (brLine != null)
+                BrailleLine brLine = m_Processor.ConvertLine(line, lineNumber);
+                if (brLine != null && brLine.WordCount > 0)
                 {
                     AddLine(brLine);
                 }

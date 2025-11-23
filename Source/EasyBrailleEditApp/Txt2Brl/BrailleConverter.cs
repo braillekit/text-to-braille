@@ -22,7 +22,7 @@ namespace Txt2Brl
 
         private ZhuyinReverseConverter CreateZhuyinConverter()
         {
-            IReverseConversionProvider provider = null;
+            IReverseConversionProvider? provider = null;
 /*
             if (preferIFELanguage)
             {

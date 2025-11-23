@@ -73,13 +73,16 @@ namespace EasyBrailleEdit.DualEdit
             _redoStack.Clear();
         }
 
-        public List<string?> GetUndoableOperations()
+        public List<string>? GetUndoableOperations()
         {
-            var result = new List<string?>(_undoStack.Count);
+            var result = new List<string>(_undoStack.Count);
             var undoList = _undoStack.ToList();
             foreach (var item in undoList)
             {
-                result.Add(item.Operation);
+                if (item.Operation != null)
+                {
+                    result.Add(item.Operation);
+                }
             }
             return result;
         }

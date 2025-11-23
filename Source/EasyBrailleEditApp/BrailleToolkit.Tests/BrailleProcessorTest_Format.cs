@@ -29,14 +29,14 @@ namespace BrailleToolkit.Tests
 
             var brLines = BrailleDocumentFormatter.BreakLine(brLine, cellsPerLine, context);
 
-            Assert.Equal(expectedLineCount, brLines.Count);
+            Assert.Equal(expectedLineCount, brLines!.Count);
 
-            string actual = brLines[0].ToString();
+            string actual = brLines![0].ToString();
             Assert.Equal(expectedLine1, actual);
 
             if (expectedLineCount > 1)
             {
-                string actual2 = brLines[1].ToString();
+                string actual2 = brLines![1].ToString();
                 Assert.Equal(expectedLine2, actual2);
             }
         }
@@ -57,7 +57,7 @@ namespace BrailleToolkit.Tests
             var context = new ContextTagManager();
             var brLines = BrailleDocumentFormatter.BreakLine(brLine, 40, context);
 
-            brLine = brLines[0];
+            brLine = brLines![0];
 
             Assert.True(brLine[brLine.WordCount-1].Text != leftParenthesis);
         }
@@ -78,7 +78,7 @@ namespace BrailleToolkit.Tests
             var context = new ContextTagManager();
             var brLines = BrailleDocumentFormatter.BreakLine(brLine, 40, context);
 
-            brLine = brLines[0];
+            brLine = brLines![0];
 
             Assert.True(brLine[0].Text != rightParenthesis);
         }
@@ -92,7 +92,7 @@ namespace BrailleToolkit.Tests
             var processor = BrailleProcessor.CreateInstance();
             var line = processor.ConvertLine(inputText);
             var lines = BrailleDocumentFormatter.BreakLine(line, 40, null);
-            Assert.True(lines.Count == 2 && lines[0].CellCount == 40 && lines[1].CellCount == 1);
+            Assert.True(lines!.Count == 2 && lines[0].CellCount == 40 && lines[1].CellCount == 1);
         }
 
         [Theory]
@@ -132,7 +132,7 @@ namespace BrailleToolkit.Tests
             BrailleProcessor processor =
                 BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
-            BrailleLine brLine = processor.ConvertLine(inputText);
+            BrailleLine? brLine = processor.ConvertLine(inputText);
 
             int cellsPerLine = 40;
             var formattedLines = BrailleDocumentFormatter.FormatLine(brLine, cellsPerLine, new ContextTagManager());

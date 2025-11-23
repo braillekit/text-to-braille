@@ -17,7 +17,7 @@ namespace BrailleToolkit.Tests
         {
             var processor = BrailleProcessor.CreateInstance();
             var brLine = processor.ConvertLine(inputText);
-            var actual = brLine.ToPositionNumberString();
+            var actual = brLine!.ToPositionNumberString();
 
             Assert.Equal(expectedPositionNumbers, actual);
         }
@@ -31,7 +31,7 @@ namespace BrailleToolkit.Tests
         {
             var processor = BrailleProcessor.CreateInstance();
             var brLine = processor.ConvertLine(inputText);
-            var actual = brLine.ToPositionNumberString();
+            var actual = brLine!.ToPositionNumberString();
 
             Assert.Equal(expectedPositionNumbers, actual);
         }
@@ -42,7 +42,7 @@ namespace BrailleToolkit.Tests
         {
             var processor = BrailleProcessor.CreateInstance();
             var brLine = processor.ConvertLine(inputText);
-            var actual = brLine.ToPositionNumberString();
+            var actual = brLine!.ToPositionNumberString();
 
             Assert.Equal(expectedPositionNumbers, actual);
         }
@@ -54,7 +54,7 @@ namespace BrailleToolkit.Tests
         {
             var processor = BrailleProcessor.CreateInstance();
             var brLine = processor.ConvertLine(inputText);
-            var actual = brLine.ToPositionNumberString();
+            var actual = brLine!.ToPositionNumberString();
 
             Assert.Equal(expectedPositionNumbers, actual);
         }
@@ -65,7 +65,7 @@ namespace BrailleToolkit.Tests
         {
             var processor = BrailleProcessor.CreateInstance();
             var brLine = processor.ConvertLine(inputText);
-            var actual = brLine.ToPositionNumberString();
+            var actual = brLine!.ToPositionNumberString();
 
             Assert.Equal(expectedPositionNumbers, actual);
         }
@@ -77,7 +77,7 @@ namespace BrailleToolkit.Tests
         {
             var processor = BrailleProcessor.CreateInstance();
             var brLine = processor.ConvertLine(inputText);
-            var actual = brLine.ToPositionNumberString();
+            var actual = brLine!.ToPositionNumberString();
 
             Assert.Equal(expectedPositionNumbers, actual);
         }

@@ -80,8 +80,8 @@ namespace EasyBrailleEdit.DualEdit
         /// <summary>
         /// 根據 grid 儲存格位置來計算它對應的點字列的哪一個字，即 BrailleLine 的 Words 集合索引。
         /// </summary>
-        /// <param name="gridRowIndex">Grid 列索引。</param>
-        /// <param name="gridColumnIndex">Grid 行索引。</param>
+        /// <param name="row">Grid 列索引。</param>
+        /// <param name="col">Grid 行索引。</param>
         /// <returns></returns>
         public int CellPositionToWordIndex(int row, int col)
         {

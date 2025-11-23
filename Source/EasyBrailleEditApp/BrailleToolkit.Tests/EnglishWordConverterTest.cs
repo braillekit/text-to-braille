@@ -34,7 +34,7 @@ namespace BrailleToolkit.Tests
             List<BrailleWord> expected = new List<BrailleWord>();
             BrailleWord brWord = new BrailleWord(text, "040404");
             expected.Add(brWord);
-            List<BrailleWord> actual = converter.Convert(charStack, context);
+            List<BrailleWord>? actual = converter.Convert(charStack, context);
             
             Assert.Equal(expected, actual);
             charStack.Clear();
