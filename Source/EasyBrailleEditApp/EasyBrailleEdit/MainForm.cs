@@ -137,9 +137,13 @@ namespace EasyBrailleEdit
             }
             else if (e.Control && e.KeyCode == Keys.G)
             {
-                GoTo MyGoTo = new GoTo((Scintilla)sender);
-                MyGoTo.ShowGoToDialog();
-                e.SuppressKeyPress = true;
+                var scintilla = sender as Scintilla;
+                if (scintilla != null)
+                {
+                    GoTo MyGoTo = new GoTo(scintilla);
+                    MyGoTo.ShowGoToDialog();
+                    e.SuppressKeyPress = true;
+                }
             }
 
         }
@@ -924,7 +928,9 @@ namespace EasyBrailleEdit
 
         private void miFileClicked(object? sender, EventArgs e)
         {
-            ToolStripItem obj = (ToolStripItem)sender;
+            var obj = sender as ToolStripItem;
+            if (obj?.Tag == null) return;
+
             switch (obj.Tag.ToString())
             {
                 case "FileNew":
@@ -974,7 +980,9 @@ namespace EasyBrailleEdit
 
         private void miEditClick(object? sender, EventArgs e)
         {
-            ToolStripItem obj = (ToolStripItem)sender;
+            var obj = sender as ToolStripItem;
+            if (obj?.Tag == null) return;
+
             switch (obj.Tag.ToString())
             {
                 case "EditUndo":
@@ -1010,7 +1018,8 @@ namespace EasyBrailleEdit
         {
             // 插入符號
 
-            ToolStripItem obj = (ToolStripItem)sender;
+            var obj = sender as ToolStripItem;
+            if (obj == null) return;
             if (obj.Tag == null)
             {
                 m_TextArea.ReplaceSelection(obj.Text);
@@ -1051,7 +1060,9 @@ namespace EasyBrailleEdit
 
         private void miToolsClick(object? sender, EventArgs e)
         {
-            ToolStripItem obj = (ToolStripItem)sender;
+            var obj = sender as ToolStripItem;
+            if (obj?.Tag == null) return;
+
             switch (obj.Tag.ToString())
             {
                 case "Convert":
@@ -1079,7 +1090,9 @@ namespace EasyBrailleEdit
 
         private async void miHelpClick(object? sender, EventArgs e)
         {
-            ToolStripItem obj = (ToolStripItem)sender;
+            var obj = sender as ToolStripItem;
+            if (obj?.Tag == null) return;
+
             switch (obj.Tag.ToString())
             {
                 case "About":
@@ -1113,7 +1126,9 @@ namespace EasyBrailleEdit
 
         private void miInsertClick(object? sender, EventArgs e)
         {
-            ToolStripItem obj = (ToolStripItem)sender;
+            var obj = sender as ToolStripItem;
+            if (obj?.Tag == null) return;
+
             switch (obj.Tag.ToString())
             {
                 case "Table":

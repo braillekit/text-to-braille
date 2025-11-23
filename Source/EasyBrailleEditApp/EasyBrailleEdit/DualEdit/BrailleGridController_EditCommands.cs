@@ -23,7 +23,7 @@ namespace EasyBrailleEdit.DualEdit
         /// </summary>
         /// <param name="operation">將要執行什麼修改操作。例如："刪除字詞：天"。 </param>
         /// <returns></returns>
-        private BrailleEditMemento CreateMemento(string operation = null)
+        private BrailleEditMemento CreateMemento(string? operation = null)
         {
             return new BrailleEditMemento(operation, BrailleDoc, IsDirty, new BrailleGridState(_grid));
         }
@@ -257,7 +257,7 @@ namespace EasyBrailleEdit.DualEdit
             grid.Selection.SelectRange(range, true);
         }
 
-        private void InsertBrailleWords(List<BrailleWord> wordList, SourceGrid.Grid grid, int row, int col, string operation = null)
+        private void InsertBrailleWords(List<BrailleWord> wordList, SourceGrid.Grid grid, int row, int col, string? operation = null)
         {
             row = _positionMapper.GetBrailleRowIndex(row); // 確保列索引是點字所在的列。
             int wordIdx = _positionMapper.CellPositionToWordIndex(row, col);
@@ -315,7 +315,7 @@ namespace EasyBrailleEdit.DualEdit
             }
         }
 
-        private void AppendBrailleWords(List<BrailleWord> wordList, SourceGrid.Grid grid, int row, string operation = null)
+        private void AppendBrailleWords(List<BrailleWord> wordList, SourceGrid.Grid grid, int row, string? operation = null)
         {
             var activePos = grid.Selection.ActivePosition;
 
@@ -594,7 +594,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="row"></param>
         /// <param name="startCol"></param>
         /// <param name="endCol"></param>
-        public void DeleteMultipleWords(SourceGrid.Grid grid, int row, int startCol, int endCol, string command = null)
+        public void DeleteMultipleWords(SourceGrid.Grid grid, int row, int startCol, int endCol, string? command = null)
         {
             int orgRow = row;
             row = _positionMapper.GetBrailleRowIndex(row);
@@ -853,7 +853,7 @@ namespace EasyBrailleEdit.DualEdit
 
             // 檢查上一列是否還有空間可以容納當前列的第一個字
             int avail = BrailleDoc.CellsPerLine - prevBrLine.CellCount;
-            if (avail < currBrLine.GetFirstVisibleWord().CellCount || !CanBreakLine(currBrLine))
+            if (avail < currBrLine.GetFirstVisibleWord()?.CellCount || !CanBreakLine(currBrLine))
             {
                 // 上一列的空間不夠，就算接上去，還是會在斷行時再度折下來，因此不處理。
                 return 0;
@@ -866,8 +866,7 @@ namespace EasyBrailleEdit.DualEdit
             // 執行附加至上一列的動作。
             prevBrLine.Append(currBrLine);
 
-            // 清除本列
-            BrailleLine brLine = BrailleDoc.Lines[lineIdx];
+            BrailleLine? brLine = BrailleDoc.Lines[lineIdx];
             brLine.Clear();
             brLine = null;
             BrailleDoc.Lines.RemoveAt(lineIdx);
@@ -1008,7 +1007,7 @@ namespace EasyBrailleEdit.DualEdit
             row = _positionMapper.GetBrailleRowIndex(row);  // 確保列索引為點字列。
 
             // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
-            BrailleEditMemento memento = null;
+            BrailleEditMemento? memento = null;
             if (needUndo)
             {
                 memento = CreateMemento($"刪除第 {lineIdx + 1} 行");
@@ -1034,7 +1033,7 @@ namespace EasyBrailleEdit.DualEdit
             GridSelectRow(row, false);
         }
 
-        public void DeleteMultipleLines(Grid grid, int startRow, int endRow, string commandName = null)
+        public void DeleteMultipleLines(Grid grid, int startRow, int endRow, string? commandName = null)
         {
             if (startRow < grid.FixedRows || startRow >= grid.RowsCount || endRow < grid.FixedRows || endRow >= grid.RowsCount || endRow < startRow)
             {
@@ -1387,7 +1386,7 @@ namespace EasyBrailleEdit.DualEdit
             foreach (var line in tableLines)
             {
                 var brLine = processor.ConvertLine(line);
-                if (brLine.CellCount > 0)   // <表格> 標籤必須去除，否則 grid 顯示與操作會出錯!
+                if (brLine != null && brLine.CellCount > 0)   // <表格> 標籤必須去除，否則 grid 顯示與操作會出錯!
                 {
                     brTableLines.Add(brLine);
                     GridInsertRowAt(newRow);
@@ -1434,7 +1433,7 @@ namespace EasyBrailleEdit.DualEdit
                     int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
 
                     int removedCountInLine = 0;
-                    BrailleWord lastWord = null;
+                    BrailleWord? lastWord = null;
                     for (int col = range.Start.Column; col <= range.End.Column; col++)
                     {
                         var currWord = _positionMapper.GetBrailleWordFromGridCell(row, col);

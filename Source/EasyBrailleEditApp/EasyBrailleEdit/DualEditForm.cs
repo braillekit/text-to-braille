@@ -122,8 +122,12 @@ namespace EasyBrailleEdit
 
         private void UndoRedo_UndoBufferChanged(object? sender, EventArgs e)
         {
-            var undoableOperations = (sender as UndoRedoManager)!.GetUndoableOperations();
-            _undoBufferForm.UpdateUI(undoableOperations);
+            var manager = sender as UndoRedoManager;
+            if (manager != null)
+            {
+                var undoableOperations = manager.GetUndoableOperations();
+                _undoBufferForm.UpdateUI(undoableOperations);
+            }
         }
        
         private void DualEditForm_Load(object sender, EventArgs e)
@@ -182,10 +186,11 @@ namespace EasyBrailleEdit
 
         private void Grid_MouseDoubleClick(object? sender, MouseEventArgs e)
         {
-            if (sender == null)
-                return;
-            var grid = (SourceGrid.Grid)sender;
-            _controller.Grid_MouseDoubleClick(grid, e);
+            var grid = sender as SourceGrid.Grid;
+            if (grid != null)
+            {
+                _controller.Grid_MouseDoubleClick(grid, e);
+            }
         }
 
         private void GridSelection_FocusRowEntered(object sender, SourceGrid.RowEventArgs e)
@@ -297,10 +302,11 @@ namespace EasyBrailleEdit
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if (e.ClickedItem.Tag == null)
+            if (e.ClickedItem?.Tag == null)
                 return;
 
-            string s = e.ClickedItem.Tag.ToString()!;
+            string? s = e.ClickedItem.Tag.ToString();
+            if (s == null) return;
 
             switch (s)
             {
@@ -319,8 +325,10 @@ namespace EasyBrailleEdit
 
         private void miViewMode_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem mi = sender as ToolStripMenuItem;
-            switch (mi.Tag!.ToString()!)
+            var mi = sender as ToolStripMenuItem;
+            if (mi?.Tag == null) return;
+
+            switch (mi.Tag.ToString())
             {
                 case "All":
                     _controller.ViewMode = ViewMode.All;
@@ -520,7 +528,10 @@ namespace EasyBrailleEdit
 
         private void miEdit_Click(object sender, EventArgs e)
         {
-            switch ((string)(sender as ToolStripMenuItem).Tag)
+            var mi = sender as ToolStripMenuItem;
+            if (mi?.Tag == null) return;
+
+            switch (mi.Tag.ToString())
             {
                 case "DocProperties":
                     EditDocProperties();
@@ -624,8 +635,10 @@ namespace EasyBrailleEdit
 
         private void miViewClick(object sender, EventArgs e)
         {
-            ToolStripMenuItem mi = sender as ToolStripMenuItem;
-            switch (mi.Tag!.ToString()!)
+            var mi = sender as ToolStripMenuItem;
+            if (mi?.Tag == null) return;
+
+            switch (mi.Tag.ToString())
             {
                 case "Refresh":
                     _controller.RefreshView();
@@ -647,7 +660,11 @@ namespace EasyBrailleEdit
             if (BrailleDoc == null)
                 return;
 
-            string s = ((ToolStripMenuItem)sender!).Tag!.ToString()!;
+            var mi = sender as ToolStripMenuItem;
+            if (mi?.Tag == null) return;
+
+            string? s = mi.Tag.ToString();
+            if (s == null) return;
             switch (s)
             {
                 case "RemoveSharp":
