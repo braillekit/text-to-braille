@@ -42,5 +42,23 @@
     </None>
   </ItemGroup>
 
+  <!-- PostBuild: Copy Txt2Brl output to EasyBrailleEdit output directory for integrated testing -->
+  <Target Name="CopyToEasyBrailleEditOutput" AfterTargets="Build">
+    <PropertyGroup>
+      <EasyBrailleEditOutputPath>$(MSBuildThisFileDirectory)..\..\..\Output\EasyBrailleEdit\$(Configuration)\$(Platform)\</EasyBrailleEditOutputPath>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <Txt2BrlOutputFiles Include="$(OutputPath)**\*.*" />
+    </ItemGroup>
+    
+    <Message Text="Copying Txt2Brl output to: $(EasyBrailleEditOutputPath)" Importance="high" />
+    
+    <Copy SourceFiles="@(Txt2BrlOutputFiles)" 
+          DestinationFolder="$(EasyBrailleEditOutputPath)%(RecursiveDir)" 
+          SkipUnchangedFiles="true"
+          OverwriteReadOnlyFiles="true" />
+  </Target>
+
 </Project>
  
