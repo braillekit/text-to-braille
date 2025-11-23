@@ -40,7 +40,7 @@ namespace BrailleToolkit
         /// </summary>
         public static BrailleWord BlankWord { get; } = NewBlank();
 
-        private List<string> m_PhoneticCodes;   // 所有注音組字字根（以支援破音字）。
+        private List<string>? m_PhoneticCodes;   // 所有注音組字字根（以支援破音字）。
         private int m_ActivePhoneticIndex;      // 目前使用的注音組字字根索引。
 
         [NonSerialized]

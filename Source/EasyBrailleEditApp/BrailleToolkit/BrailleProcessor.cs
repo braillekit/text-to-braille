@@ -97,7 +97,7 @@ namespace BrailleToolkit
     /// </summary>
     public class BrailleProcessor
     {
-        private static BrailleProcessor? s_Processor;
+
 
         private CoordinateConverter _coordConverter;
         private TableConverter _tableConverter;
@@ -116,7 +116,11 @@ namespace BrailleToolkit
 
         #region 建構函式
 
-        private BrailleProcessor(ZhuyinReverseConverter zhuyinConverter)
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="zhuyinConverter"></param>
+        public BrailleProcessor(ZhuyinReverseConverter zhuyinConverter)
         {
             _converters = new List<WordConverter>();
 
@@ -147,26 +151,7 @@ namespace BrailleToolkit
             _autoReplacedText = StrHelper.SplitToDictionary(replacedText, ' ', '=');
         }
 
-        /// <summary>
-        /// Get singleton instance.
-        /// </summary>
-        /// <returns></returns>
-        public static BrailleProcessor GetInstance(ZhuyinReverseConverter? zhuyinConverter = null)
-        {
-            if (s_Processor != null)
-            {
-                return s_Processor;
-            }
 
-            if (zhuyinConverter == null)
-            {
-                // create default zhuyin reverse converter if not specified.
-                zhuyinConverter = new ZhuyinReverseConverter(new ZhuyinReverseConversionProvider());
-            }
-
-            s_Processor = new BrailleProcessor(zhuyinConverter);
-            return s_Processor;
-        }
 
         /// <summary>
         /// Creates a new instance of BrailleProcessor.

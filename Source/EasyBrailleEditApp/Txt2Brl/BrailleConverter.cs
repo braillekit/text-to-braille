@@ -41,7 +41,7 @@ namespace Txt2Brl
         public BrailleConverter()
 		{
             _zhuyinConverter = CreateZhuyinConverter();
-            Processor = BrailleProcessor.GetInstance(_zhuyinConverter);
+            Processor = BrailleProcessor.CreateInstance(_zhuyinConverter);
 			_doc = new BrailleDocument(Processor);
 
 			Processor.ConvertionFailed += BrailleProcessor_ConvertionFailed;

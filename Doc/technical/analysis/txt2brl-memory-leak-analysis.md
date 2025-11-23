@@ -211,4 +211,32 @@ public TwChineseCharConverter(BrailleProcessor processor)
 **驗證結果**：
 
 - 專案建置成功。
+- 專案建置成功。
 - `BrailleToolkit.Tests` 單元測試全數通過 (131/131)，確認無回歸錯誤。
+
+#### 4.5 BrailleProcessor 單例模式移除 (2025-11-23)
+
+移除了 `BrailleProcessor` 的單例模式 (Singleton Pattern)，徹底解決 `Txt2Brl` 的記憶體洩漏問題。
+
+**問題回顧**：
+在 `Txt2Brl` 中，`BrailleConverter` 會訂閱 `BrailleProcessor` 的事件。由於 `BrailleProcessor` 是單例，即使 `BrailleConverter` 執行完畢並應被回收，但單例 `BrailleProcessor` 仍持有對 `BrailleConverter` 的參考（透過事件訂閱），導致 `BrailleConverter` 無法被垃圾回收，造成記憶體洩漏。
+
+**解決方案**：
+1. 移除 `BrailleProcessor` 的單例實作：
+    - 刪除 `s_Processor` 靜態欄位
+    - 刪除 `GetInstance()` 方法
+    - 將建構函式由 `private` 改為 `public`
+
+2. 更新所有呼叫端，將 `GetInstance()` 改為 `CreateInstance()`，確保每次建立新的 `BrailleProcessor` 實例。
+
+**影響範圍**：
+- `BrailleConverter.cs` (Txt2Brl)
+- `TextToBrailleConverter.cs`
+- `EditCellForm.cs`
+- `BrailleGridController_EditCommands.cs`
+- `BrailleProcessorBenchmarks.cs`
+
+**驗證結果**：
+- 專案建置成功。
+- `BrailleToolkit.Tests` 單元測試全數通過 (131/131)。
+- 每個 `BrailleConverter` 現在擁有獨立的 `BrailleProcessor` 實例，可隨 `BrailleConverter` 一起被垃圾回收，記憶體洩漏問題已解決。

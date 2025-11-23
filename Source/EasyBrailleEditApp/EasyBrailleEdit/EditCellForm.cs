@@ -35,7 +35,7 @@ namespace EasyBrailleEdit
             _brWord = new BrailleWord(String.Empty);
 
             // 以下動作不可移到 Form_Load 做，因為某些用到以下變數的事件會比它更早觸發。
-            _brProcessor = BrailleProcessor.GetInstance();
+            _brProcessor = BrailleProcessor.CreateInstance();
 
             _chineseConverter = _brProcessor.ChineseConverter!;
             Debug.Assert(_chineseConverter != null);
