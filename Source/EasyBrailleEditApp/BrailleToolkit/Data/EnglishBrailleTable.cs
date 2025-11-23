@@ -36,16 +36,7 @@ namespace BrailleToolkit.Data
             return m_Instance;
         }
 
-        /// <summary>
-        /// Creates a new instance of EnglishBrailleTable.
-        /// </summary>
-        /// <returns></returns>
-        public static EnglishBrailleTable CreateInstance()
-        {
-            var instance = new EnglishBrailleTable();
-            instance.LoadFromResource();
-            return instance;
-        }
+
 
 		/// <summary>
 		/// 搜尋某個字母，並傳回對應的點字碼。

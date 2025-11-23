@@ -18,7 +18,7 @@ namespace BrailleToolkit.Converters
         public MathConverter()
             : base()
         {
-            m_Table = MathBrailleTable.CreateInstance();
+            m_Table = MathBrailleTable.GetInstance();
         }
 
         /// <summary>

@@ -23,7 +23,7 @@ namespace BrailleToolkit.Converters
         /// <param name="processor">點字處理器。</param>
         public UrlConverter(BrailleProcessor processor)
         {
-            m_Table = UrlBrailleTable.CreateInstance();
+            m_Table = UrlBrailleTable.GetInstance();
             _processor = processor;
         }
 

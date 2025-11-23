@@ -37,16 +37,7 @@ namespace BrailleToolkit.Data
             return m_Instance;
         }
 
-        /// <summary>
-        /// Creates a new instance of TwChineseBrailleTable.
-        /// </summary>
-        /// <returns></returns>
-        public static TwChineseBrailleTable CreateInstance()
-        {
-            var instance = new TwChineseBrailleTable();
-            instance.LoadFromResource();
-            return instance;
-        }
+
 
         /// <summary>
         /// 搜尋某個注音符號，並傳回對應的點字碼。

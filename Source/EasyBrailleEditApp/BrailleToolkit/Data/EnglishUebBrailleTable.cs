@@ -39,16 +39,7 @@ namespace BrailleToolkit.Data
             return m_Instance;
         }
 
-        /// <summary>
-        /// Creates a new instance of EnglishUebBrailleTable.
-        /// </summary>
-        /// <returns></returns>
-        public static EnglishUebBrailleTable CreateInstance()
-        {
-            var instance = new EnglishUebBrailleTable();
-            instance.LoadFromResource();
-            return instance;
-        }
+
 
 		/// <summary>
 		/// 搜尋某個字母，並傳回對應的點字碼。

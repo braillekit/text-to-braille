@@ -39,16 +39,7 @@ namespace BrailleToolkit.Data
             return m_Instance;
         }
 
-        /// <summary>
-        /// Creates a new instance of UrlBrailleTable.
-        /// </summary>
-        /// <returns></returns>
-        public static UrlBrailleTable CreateInstance()
-        {
-            var instance = new UrlBrailleTable();
-            instance.LoadFromResource();
-            return instance;
-        }
+
 
 		/// <summary>
 		/// 搜尋某個字母，並傳回對應的點字碼。

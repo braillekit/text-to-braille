@@ -23,7 +23,7 @@ namespace BrailleToolkit.Converters
         /// <param name="processor">點字處理器。</param>
         public EnglishWordConverter(BrailleProcessor processor)
         {
-            m_Table = EnglishBrailleTable.CreateInstance();
+            m_Table = EnglishBrailleTable.GetInstance();
             _processor = processor;
         }
 

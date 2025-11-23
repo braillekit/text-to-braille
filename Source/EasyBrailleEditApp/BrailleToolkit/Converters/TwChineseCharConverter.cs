@@ -28,7 +28,7 @@ namespace BrailleToolkit.Converters
         /// <param name="processor">點字處理器。</param>
         public TwChineseCharConverter(BrailleProcessor processor)
         {
-            _brailleTable = TwChineseBrailleTable.CreateInstance();
+            _brailleTable = TwChineseBrailleTable.GetInstance();
             _processor = processor;
             ZhuyinConverter = processor.ZhuyinConverter;
         }
