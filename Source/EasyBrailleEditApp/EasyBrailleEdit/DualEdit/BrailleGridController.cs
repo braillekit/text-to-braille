@@ -408,13 +408,17 @@ namespace EasyBrailleEdit.DualEdit
         private void UpdateWindowCaption()
         {
             var aForm = _form as Form;
+            if (aForm == null) return;
+
+            string displayFileName = string.IsNullOrEmpty(_fileName) ? "無標題" : StrHelper.ExtractFileName(_fileName);
+
             if (IsNoName())
             {
-                aForm.Text = "雙視編輯 - 未命名 (" + StrHelper.ExtractFileName(_fileName) + ")";
+                aForm.Text = "雙視編輯 - 未命名 (" + displayFileName + ")";
             }
             else
             {
-                aForm.Text = "雙視編輯 - " + StrHelper.ExtractFileName(_fileName);
+                aForm.Text = "雙視編輯 - " + displayFileName;
             }
 
             if (IsDirty)
@@ -813,7 +817,7 @@ namespace EasyBrailleEdit.DualEdit
         private void UpdateCell(int row, int col, BrailleWord brWord)
         {
             // 處理點字
-            string brFontText = null;
+            string? brFontText = null;
             try
             {
                 if (brWord.IsContextTag)
@@ -859,6 +863,8 @@ namespace EasyBrailleEdit.DualEdit
             row = PositionMapper.GetBrailleRowIndex(row);  // 修正列索引為點字列所在的索引。
 
             int lineIndex = PositionMapper.GridRowToBrailleLineIndex(row);
+            if (BrailleDoc == null) return 0;
+
             int lineCnt = BrailleDocumentFormatter.FormatLine(BrailleDoc, lineIndex, null);
 
             // 換上新列

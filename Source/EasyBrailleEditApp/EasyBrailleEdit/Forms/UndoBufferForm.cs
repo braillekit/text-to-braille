@@ -69,8 +69,11 @@ namespace EasyBrailleEdit.Forms
             {
                 e.Cancel = true;
                 Hide();
-                Owner.Activate();
-                Owner.BringToFront();
+                if (Owner != null)
+                {
+                    Owner.Activate();
+                    Owner.BringToFront();
+                }
             }
         }
 

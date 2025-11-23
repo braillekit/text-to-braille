@@ -19,14 +19,16 @@
 ## 如何建置
 
 此專案是一個 Visual Studio 解決方案 (`.sln`)。要建置此專案，您可以使用以  方法：
-1.  在 Visual Studio 中開啟 `EasyBrailleEditApp.sln` 並建置解決方案。
-2.  從命令列使用 `msbuild`：`msbuild EasyBrailleEditApp.sln`。
+
+1. 在 Visual Studio 中開啟 `EasyBrailleEditApp.sln` 並建置解決方案。
+2. 從命令列使用 `msbuild`：`msbuild EasyBrailleEditApp.sln`。
 
 ## 如何測試
 
 測試位於 `BrailleToolkit.Tests` 專案中。您可以使用以下方式執行它們：
-1.  Visual Studio 中的「測試總管」。
-2.  在 `BrailleToolkit.Tests/` 目錄中執行 `dotnet test` 命令。
+
+1. Visual Studio 中的「測試總管」。
+2. 在 `BrailleToolkit.Tests/` 目錄中執行 `dotnet test` 命令。
 
 ## 點字處理流程與架構
 
@@ -34,44 +36,44 @@
 
 ### 核心元件
 
-1.  **`BrailleProcessor` (主控中心/Context):**
-    *   這是點字轉換的總指揮。它負責接收原始的明眼文字串，並協調各個轉換器（Converter）來完成工作。
-    *   它管理一個 `ContextTagManager` 來追蹤目前的轉換情境（例如，是否在數學模式或表格模式中）。
-    *   在完成初步轉換後，它會套用一系列後處理規則（例如數字規則、大寫規則、標點符號規則）來確保點字的正確性。
+1. **`BrailleProcessor` (主控中心/Context):**
+    - 這是點字轉換的總指揮。它負責接收原始的明眼文字串，並協調各個轉換器（Converter）來完成工作。
+    - 它管理一個 `ContextTagManager` 來追蹤目前的轉換情境（例如，是否在數學模式或表格模式中）。
+    - 在完成初步轉換後，它會套用一系列後處理規則（例如數字規則、大寫規則、標點符號規則）來確保點字的正確性。
 
-2.  **`IWordConverter` (轉換器介面/Strategy Interface):**
-    *   定義了所有具體轉換器都必須實作的標準介面。其核心方法是 `Convert(Stack<char> chars, ContextTagManager context)`。
-    *   這種設計讓 `BrailleProcessor` 無需知道每個轉換器的內部細節，只需呼叫其 `Convert` 方法即可。
+2. **`IWordConverter` (轉換器介面/Strategy Interface):**
+    - 定義了所有具體轉換器都必須實作的標準介面。其核心方法是 `Convert(Stack<char> chars, ContextTagManager context)`。
+    - 這種設計讓 `BrailleProcessor` 無需知道每個轉換器的內部細節，只需呼叫其 `Convert` 方法即可。
 
-3.  **具體的轉換器 (Concrete Strategies):**
-    *   **`TwChineseCharConverter`**: 負責處理中文字、注音及全形標點符號。它會使用 `ZhuyinReverseConverter` 取得中文字的注音碼，並利用智慧型詞彙分析來修正破音字，最後轉換成台灣點字規則的點字。
-    *   **`EnglishUebConverter`**: 負責處理英文（UEB - Unified English Braille）。它採用「貪婪演算法」(Greedy Algorithm)，優先匹配最長的縮寫（Contractions），若無匹配，則退回逐字翻譯（Grade 1）。
-    *   **`MathConverter`, `TableConverter`, `UrlConverter` 等**: 這些是針對特定情境的轉換器，只有在對應的標籤（如 `<math>`）被啟用時才會作用。
-    *   **`ContextTagConverter`**: 專門用來解析情境控制標籤（如 `<math>`, `</math>`），並更新 `ContextTagManager` 的狀態。它具有最高的處理優先權。
+3. **具體的轉換器 (Concrete Strategies):**
+    - **`TwChineseCharConverter`**: 負責處理中文字、注音及全形標點符號。它會使用 `ZhuyinReverseConverter` 取得中文字的注音碼，並利用智慧型詞彙分析來修正破音字，最後轉換成台灣點字規則的點字。
+    - **`EnglishUebConverter`**: 負責處理英文（UEB - Unified English Braille）。它採用「貪婪演算法」(Greedy Algorithm)，優先匹配最長的縮寫（Contractions），若無匹配，則退回逐字翻譯（Grade 1）。
+    - **`MathConverter`, `TableConverter`, `UrlConverter` 等**: 這些是針對特定情境的轉換器，只有在對應的標籤（如 `<math>`）被啟用時才會作用。
+    - **`ContextTagConverter`**: 專門用來解析情境控制標籤（如 `<math>`, `</math>`），並更新 `ContextTagManager` 的狀態。它具有最高的處理優先權。
 
 ### 處理流程
 
 點字轉換的過程可以分為以下幾個主要步驟：
 
-1.  **輸入與預處理**: `BrailleProcessor.ConvertLine` 方法接收一行文字。為了方便處理，文字會被反轉（reverse）並存入一個字元堆疊 (`Stack<char>`)。
-2.  **核心轉換迴圈**: `BrailleProcessor` 逐一讀取堆疊中的字元，並在 `ConvertWord` 方法中依序嘗試使用不同的轉換器：
-    *   首先，`ContextTagConverter` 檢查是否為情境標籤。
-    *   接著，根據當前情境（如數學、表格）呼叫對應的轉換器。
-    *   然後，依序嘗試 `TwChineseCharConverter` 和 `EnglishUebConverter`。
-    *   第一個成功轉換的轉換器會從堆疊中取出其處理過的字元，並傳回 `BrailleWord` 物件串列。
-3.  **後處理與規則套用**: 當整行文字都被轉換成 `BrailleWord` 串列（存於 `BrailleLine` 物件）後，`BrailleProcessor` 會進行一系列的後處理，套用各種點字規則：
-    *   處理私名號、書  號。
-    *   套用中文標點符號規則。
-    *   套用英文大寫、數字規則。
-    *   在中英文之間補上必要的空格。
-4.  **輸出**: 最終產出一個結構化的 `BrailleLine` 物件，其中包含了所有點字方 (cell) 的資訊，可用於後續的排版、編輯和列印。
+1. **輸入與預處理**: `BrailleProcessor.ConvertLine` 方法接收一行文字。為了方便處理，文字會被反轉（reverse）並存入一個字元堆疊 (`Stack<char>`)。
+2. **核心轉換迴圈**: `BrailleProcessor` 逐一讀取堆疊中的字元，並在 `ConvertWord` 方法中依序嘗試使用不同的轉換器：
+    - 首先，`ContextTagConverter` 檢查是否為情境標籤。
+    - 接著，根據當前情境（如數學、表格）呼叫對應的轉換器。
+    - 然後，依序嘗試 `TwChineseCharConverter` 和 `EnglishUebConverter`。
+    - 第一個成功轉換的轉換器會從堆疊中取出其處理過的字元，並傳回 `BrailleWord` 物件串列。
+3. **後處理與規則套用**: 當整行文字都被轉換成 `BrailleWord` 串列（存於 `BrailleLine` 物件）後，`BrailleProcessor` 會進行一系列的後處理，套用各種點字規則：
+    - 處理私名號、書  號。
+    - 套用中文標點符號規則。
+    - 套用英文大寫、數字規則。
+    - 在中英文之間補上必要的空格。
+4. **輸出**: 最終產出一個結構化的 `BrailleLine` 物件，其中包含了所有點字方 (cell) 的資訊，可用於後續的排版、編輯和列印。
 
 ### 資料模型
 
-*   **`BrailleDocument`**: 代表整個點字文件。
-*   **`BrailleLine`**: 代表一行點字。
-*   **`BrailleWord`**: 代表一個邏輯單位，如一個中文字、一個英文字詞或一個標點符號。
-*   **`BrailleCell`**: 代表一個單獨的六點點字方。
+- **`BrailleDocument`**: 代表整個點字文件。
+- **`BrailleLine`**: 代表一行點字。
+- **`BrailleWord`**: 代表一個邏輯單位，如一個中文字、一個英文字詞或一個標點符號。
+- **`BrailleCell`**: 代表一個單獨的六點點字方。
 
 ## 點字碼 (code) 與點位對應規則
 
@@ -98,20 +100,20 @@
 
 以英文字母 **W** 為例，其標準點位為 **2, 4, 5, 6**，若以十六進位表示，則為 `"3A"`。以下步驟可從 "3A" 轉換為點位：
 
-1.  **轉換**: 十六進位值 `3A` 等於十進位的 `58`。
-2.  **分解**: `58 = 32 + 16 + 8 + 2`。
-3.  **對應**:
-    *   `32` -> 點 6
-    *   `16` -> 點 5
-    *   `8` -> 點 4
-    *   `2` -> 點 2
-4.  **結論**: "3A" 正確地表示了點位 2, 4, 5, 6。
+1. **轉換**: 十六進位值 `3A` 等於十進位的 `58`。
+2. **分解**: `58 = 32 + 16 + 8 + 2`。
+3. **對應**:
+    - `32` -> 點 6
+    - `16` -> 點 5
+    - `8` -> 點 4
+    - `2` -> 點 2
+4. **結論**: "3A" 正確地表示了點位 2, 4, 5, 6。
 
 ### 備註
 
-*   **多方點字**: 如果是多方點字，`dots` 屬性值是以一個空白字元分隔的多個數字組成。例如，`dots="135 246"` 代表兩個點字方，第一個方有點位 1、3、5，第二個方有點位 2、4、6。這些數字會被轉換成對應的十六進位碼。  
-*   **`dots` 屬性**: 程式載入 XML 檔案時，`XmlBrailleTable` 類別會呼叫 `BrailleCellHelper.PositionNumbersToHexString` 方法將 `dots` 屬性的值轉換成對應的 `code` 十六進位碼。
-*   **空方 (Blank Cell)**: 在 `TwChineseBrailleTable.xml` 中，全形空白符號 `　` 的 `dots` 屬性值為一個空白字元 `" "`，而其 `code` 屬性值為 `"00"`。這代表一個沒有任何點的空方。這在處理上需要特別注意，以確保空格能被正確地轉換與呈現。  
+- **多方點字**: 如果是多方點字，`dots` 屬性值是以一個空白字元分隔的多個數字組成。例如，`dots="135 246"` 代表兩個點字方，第一個方有點位 1、3、5，第二個方有點位 2、4、6。這些數字會被轉換成對應的十六進位碼。  
+- **`dots` 屬性**: 程式載入 XML 檔案時，`XmlBrailleTable` 類別會呼叫 `BrailleCellHelper.PositionNumbersToHexString` 方法將 `dots` 屬性的值轉換成對應的 `code` 十六進位碼。
+- **空方 (Blank Cell)**: 在 `TwChineseBrailleTable.xml` 中，全形空白符號 `　` 的 `dots` 屬性值為一個空白字元 `" "`，而其 `code` 屬性值為 `"00"`。這代表一個沒有任何點的空方。這在處理上需要特別注意，以確保空格能被正確地轉換與呈現。  
 
 ---
 
@@ -121,25 +123,25 @@
 
 ### 參與的類別與其角色
 
-*   **`BrailleProcessor` (專案經理 / 總指揮):**
-    *   **職責：** 負責整個轉換流程的協調與管理。它接收原始的明眼文字串，但不關心具體的語言轉換細節。它的工作是將任務指派給合適的「語言專家」。
-    *   **比喻：** 就像一個專案經理，他拿到客戶需求（一行文字），然後把它拆解，交給團隊中最適合的專家（`EnglishWordConverter`）去處理。
+- **`BrailleProcessor` (專案經理 / 總指揮):**
+  - **職責：** 負責整個轉換流程的協調與管理。它接收原始的明眼文字串，但不關心具體的語言轉換細節。它的工作是將任務指派給合適的「語言專家」。
+  - **比喻：** 就像一個專案經理，他拿到客戶需求（一行文字），然後把它拆解，交給團隊中最適合的專家（`EnglishWordConverter`）去處理。
 
-*   **`EnglishWordConverter` (英文專家):**
-    *   **職責：** 專門負責處理英文字詞。它實作了 `IWordConverter` 介面，代表它是一個可以被 `BrailleProcessor` 呼叫的「轉換策略」。它知道英文點字的縮寫規則 (contractions)，並採用「貪婪演算法」來找到最長的匹配。
-    *   **比喻：** 這位是團隊裡的英文翻譯專家。當經理交給他 "Work" 這個詞，他知道要查閱專業字典來找出最精簡的點字翻譯，而不是一個字母一個字母地翻。
+- **`EnglishWordConverter` (英文專家):**
+  - **職責：** 專門負責處理英文字詞。它實作了 `IWordConverter` 介面，代表它是一個可以被 `BrailleProcessor` 呼叫的「轉換策略」。它知道英文點字的縮寫規則 (contractions)，並採用「貪婪演算法」來找到最長的匹配。
+  - **比喻：** 這位是團隊裡的英文翻譯專家。當經理交給他 "Work" 這個詞，他知道要查閱專業字典來找出最精簡的點字翻譯，而不是一個字母一個字母地翻。
 
-*   **`EnglishBrailleTable` (英文字典):**
-    *   **職責：** 儲存所有英文單字、縮寫、字母與點字碼 (code) 的對應關係。它在程式啟動時從 `EnglishUebBrailleTable.xml` 檔案載入資料，並提供一個快速查詢的介面。
-    *   **比喻：** 這是英文專家的核心參考資料——一本權威的英英-點字雙向辭典。`EnglishWordConverter` 需要的所有翻譯知識都從這裡來。
+- **`EnglishBrailleTable` (英文字典):**
+  - **職責：** 儲存所有英文單字、縮寫、字母與點字碼 (code) 的對應關係。它在程式啟動時從 `EnglishUebBrailleTable.xml` 檔案載入資料，並提供一個快速查詢的介面。
+  - **比喻：** 這是英文專家的核心參考資料——一本權威的英英-點字雙向辭典。`EnglishWordConverter` 需要的所有翻譯知識都從這裡來。
 
-*   **`BrailleWordHelper` (詞語組裝工匠):**
-    *   **職責：** 提供一系列輔助工具（靜態方法），用於建立和操作 `BrailleWord` 物件。`BrailleWord` 是代表一個邏輯單位的物件，例如一個完整的英文字。
-    *   **比喻：** 這是一位手藝精巧的工匠。當翻譯專家查到 "Work" 的點字碼後，會交給這位工匠，由他將這些點字碼包裝成一個標準化、結構完整的「點字詞語」(`BrailleWord`) 成品。
+- **`BrailleWordHelper` (詞語組裝工匠):**
+  - **職責：** 提供一系列輔助工具（靜態方法），用於建立和操作 `BrailleWord` 物件。`BrailleWord` 是代表一個邏輯單位的物件，例如一個完整的英文字。
+  - **比喻：** 這是一位手藝精巧的工匠。當翻譯專家查到 "Work" 的點字碼後，會交給這位工匠，由他將這些點字碼包裝成一個標準化、結構完整的「點字詞語」(`BrailleWord`) 成品。
 
-*   **`BrailleCellHelper` (點字方製造工匠):**
-    *   **職責：** 提供更底層的輔助工具，專門用來處理最小的點字單位——`BrailleCell`（一個六點方）。它負責將點位數字（如 "2456"）轉換成程式內部使用的十六進位碼（如 "3A"）。
-    *   **比喻：** 這位是負責製造最基本零件（點字方）的工匠。他的工作主要發生在「字典」(`EnglishBrailleTable`) 被編纂（載入）的時候，確保字典裡的每個詞條都對應到標準化的點字零件。
+- **`BrailleCellHelper` (點字方製造工匠):**
+  - **職責：** 提供更底層的輔助工具，專門用來處理最小的點字單位——`BrailleCell`（一個六點方）。它負責將點位數字（如 "2456"）轉換成程式內部使用的十六進位碼（如 "3A"）。
+  - **比喻：** 這位是負責製造最基本零件（點字方）的工匠。他的工作主要發生在「字典」(`EnglishBrailleTable`) 被編纂（載入）的時候，確保字典裡的每個詞條都對應到標準化的點字零件。
 
 ### 協同合作流程
 
@@ -191,20 +193,21 @@
 
 **詳細步驟分解：**
 
-1.  **啟動與指派：** `BrailleProcessor` 接收到包含 "Work" 的一行文字。它會遍歷其下的所有轉換器，並呼叫 `EnglishWordConverter`，因為它能處理英文字。
+1. **啟動與指派：** `BrailleProcessor` 接收到包含 "Work" 的一行文字。它會遍歷其下的所有轉換器，並呼叫 `EnglishWordConverter`，因為它能處理英文字。
 
-2.  **查詢點字碼：** `EnglishWordConverter` 拿到 "Work" 這個詞。它首先會處理大寫。它會先在 `EnglishBrailleTable` 中查找大寫標示符 (capital sign) 的點字碼，然後再查找小寫的 "work"。根據貪婪演算法，它會優先尋找整個單字 "work" 是否存在於 `EnglishBrailleTable` 的縮寫表中。
+2. **查詢點字碼：** `EnglishWordConverter` 拿到 "Work" 這個詞。它首先會處理大寫。它會先在 `EnglishBrailleTable` 中查找大寫標示符 (capital sign) 的點字碼，然後再查找小寫的 "work"。根據貪婪演算法，它會優先尋找整個單字 "work" 是否存在於 `EnglishBrailleTable` 的縮寫表中。
 
-3.  **查閱字典：** `EnglishBrailleTable` 在其內部資料結構（通常是 `Dictionary` 或 `HashMap`）中迅速找到 "work" 的條目，並返回其對應的點字碼（例如，代表點位 2-4-5-6 的十六進位碼 `"3A"`）。
+3. **查閱字典：** `EnglishBrailleTable` 在其內部資料結構（通常是 `Dictionary` 或 `HashMap`）中迅速找到 "work" 的條目，並返回其對應的點字碼（例如，代表點位 2-4-5-6 的十六進位碼 `"3A"`）。
 
-4.  **組裝成品：** `EnglishWordConverter` 取得了大寫標示符和 "work" 的點字碼。它會呼叫 `BrailleWordHelper` 的輔助方法，將這些碼轉換並封裝成兩個結構化的 `BrailleWord` 物件。每個 `BrailleWord` 內部由一個或多個 `BrailleCell` 組成。
+4. **組裝成品：** `EnglishWordConverter` 取得了大寫標示符和 "work" 的點字碼。它會呼叫 `BrailleWordHelper` 的輔助方法，將這些碼轉換並封裝成兩個結構化的 `BrailleWord` 物件。每個 `BrailleWord` 內部由一個或多個 `BrailleCell` 組成。
 
-5.  **回報成果：** `EnglishWordConverter` 將建立好的 `BrailleWord` 物件列表（一個給大寫符號，一個給 "work"）返回給 `BrailleProcessor`。
+5. **回報成果：** `EnglishWordConverter` 將建立好的 `BrailleWord` 物件列表（一個給大寫符號，一個給 "work"）返回給 `BrailleProcessor`。
 
-6.  **流程整合：** `BrailleProcessor` 收到這些 `BrailleWord` 成品後，將它們按順序加入到正在處理的 `BrailleLine`（點字行）中。接著，它會繼續處理下一個字詞，直到整行轉換完畢。
+6. **流程整合：** `BrailleProcessor` 收到這些 `BrailleWord` 成品後，將它們按順序加入到正在處理的 `BrailleLine`（點字行）中。接著，它會繼續處理下一個字詞，直到整行轉換完畢。
 
-7.  **關於 `BrailleCellHelper`：** 它的主要工作更靠前。當 `EnglishBrailleTable` 從 XML 檔案載入時，如果 XML 中使用的是 `dots="2456"` 這種格式，`BrailleCellHelper.PositionNumbersToHexString` 就會被呼叫，將其轉換為 `code="3A"`，供後續流程高效使用  
+7. **關於 `BrailleCellHelper`：** 它的主要工作更靠前。當 `EnglishBrailleTable` 從 XML 檔案載入時，如果 XML 中使用的是 `dots="2456"` 這種格式，`BrailleCellHelper.PositionNumbersToHexString` 就會被呼叫，將其轉換為 `code="3A"`，供後續流程高效使用  
 
 ## 重構指示
 
 - 除非明確指示，否則重構時不要將程式碼改寫為 LINQ 語法。
+- 解決 CS86 系列的 nullable reference 警告時，只要是參考型別，應該優先把 null 視為合法值，也就是把型別標成 nullable（T?）。如果沒有辦法判斷，才使用 `!` 來壓警告。

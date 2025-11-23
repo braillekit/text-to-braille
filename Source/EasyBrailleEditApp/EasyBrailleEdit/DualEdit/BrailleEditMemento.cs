@@ -24,7 +24,7 @@ namespace EasyBrailleEdit.DualEdit
 
     internal class BrailleEditMemento
     {
-        public string Operation { get; set; }
+        public string? Operation { get; set; }
         public BrailleDocument BrailleDoc { get; }
         public bool IsDirty { get; }
         public BrailleGridState GridState { get; }
@@ -36,7 +36,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="doc">BrailleDocument 物件。</param>
         /// <param name="isDirty">文件是否修改過，且尚未儲存。</param>
         /// <param name="gridState">網格狀態。</param>
-        public BrailleEditMemento(string operation, BrailleDocument doc, bool isDirty, BrailleGridState gridState)
+        public BrailleEditMemento(string? operation, BrailleDocument doc, bool isDirty, BrailleGridState gridState)
         {
             Operation = operation;
             BrailleDoc = doc.DeepCopy();

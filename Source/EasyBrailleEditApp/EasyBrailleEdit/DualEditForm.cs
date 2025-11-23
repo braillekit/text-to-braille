@@ -295,7 +295,13 @@ namespace EasyBrailleEdit
         {
             if (cboZoom.SelectedIndex < 0)
                 return;
-            string s = cboZoom.Items[cboZoom.SelectedIndex].ToString();
+            
+            object? item = cboZoom.Items[cboZoom.SelectedIndex];
+            if (item == null) return;
+            
+            string? s = item.ToString();
+            if (s == null) return;
+
             s = s.Substring(0, s.Length - 1);
             _controller.Zoom(Convert.ToInt32(s));
         }
@@ -354,6 +360,8 @@ namespace EasyBrailleEdit
 
         private void EditDocProperties()
         {
+            if (BrailleDoc == null) return;
+
             var form = new BrailleDocPropertiesForm();
             form.CellsPerLine = BrailleDoc.CellsPerLine;
             form.StartPageNumber = BrailleDoc.StartPageNumber;
@@ -366,6 +374,8 @@ namespace EasyBrailleEdit
 
         private void EditPageTitles()
         {
+            if (BrailleDoc == null) return;
+
             if (BrailleDoc.UpdateTitlesLineIndex() > 0)
             {
                 _controller.IsDirty = true;
@@ -381,7 +391,7 @@ namespace EasyBrailleEdit
                 BraillePageTitle? newTitle = null; // Fixed CS8600
                 foreach (BraillePageTitle t in form.Titles)
                 {
-                    if (t.TitleLine.CellCount > 0)
+                    if (t.TitleLine != null && t.TitleLine.CellCount > 0)
                     {
                         newTitle = t.Clone() as BraillePageTitle;
                         BrailleDoc.PageTitles.Add(newTitle!); // Fixed CS8600
@@ -393,6 +403,8 @@ namespace EasyBrailleEdit
 
         private void FetchPageTitles()
         {
+            if (BrailleDoc == null) return;
+
             int addedCount = BrailleDoc.FetchPageTitles();
             if (addedCount > 0)
             {
@@ -413,6 +425,8 @@ namespace EasyBrailleEdit
         /// </summary>
         private void GotoLine(int lineNum)
         {
+            if (BrailleDoc == null) return;
+
             if (lineNum > BrailleDoc.LineCount)
             {
                 lineNum = BrailleDoc.LineCount;
@@ -454,6 +468,8 @@ namespace EasyBrailleEdit
 
         private void Find()
         {
+            if (BrailleDoc == null) return;
+
             m_FindForm.Document = BrailleDoc;
 
             if (m_FindForm.Visible)

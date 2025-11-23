@@ -39,10 +39,10 @@ namespace EasyBrailleEdit
             bool emptyTitleFound = false;
             foreach (BraillePageTitle t in brDoc.PageTitles)
             {
-                if (t.TitleLine.CellCount > 0) // 避免塞進空的頁標題
+                if (t.TitleLine != null && t.TitleLine.CellCount > 0) // 避免塞進空的頁標題
                 {
                     newTitle = t.Clone() as BraillePageTitle;
-                    if (newTitle != null)
+                    if (newTitle != null && newTitle.TitleLine != null)
                     {
                         Titles.Add(newTitle);
 
@@ -68,7 +68,8 @@ namespace EasyBrailleEdit
             int deletedCount = 0;
             for (int i = Titles.Count - 1; i >= 0; i--)
             {
-                if (Titles[i].TitleLine != null && Titles[i].TitleLine.CellCount < 1)
+                var title = Titles[i];
+                if (title.TitleLine != null && title.TitleLine.CellCount < 1)
                 {
                     Titles.RemoveAt(i);
                     deletedCount++;

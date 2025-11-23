@@ -9,13 +9,13 @@ namespace EasyBrailleEdit
 {
     public partial class DualPrintDialog : Form
     {
-        private BrailleDocument m_BrDoc = null!;
+        private BrailleDocument? m_BrDoc = null;
 
-        private string m_PaperSourceName = null!;
-        private string m_PaperName = null!;
+        private string? m_PaperSourceName = null;
+        private string? m_PaperName = null;
         private Margins m_OddPageMargins = null!;
         private Margins m_EvenPageMargins = null!;
-        private string m_TextFontName = null!;
+        private string? m_TextFontName = null;
         private double m_TextFontSize;
 
         private bool m_DontSaveSettings = false;
@@ -50,7 +50,10 @@ namespace EasyBrailleEdit
             txtBrailleFileName.TextBox.Text = cfgPrint.PrintBrailleToFileName;
             chkSendPageBreakAtEof.Checked = cfgPrint.PrintBrailleSendPageBreakAtEndOfDoc;
             lblLinesPerPage.Text = AppGlobals.Config.Braille.LinesPerPage.ToString();
-            lblCellsPerLine.Text = m_BrDoc.CellsPerLine.ToString();
+            if (m_BrDoc != null)
+            {
+                lblCellsPerLine.Text = m_BrDoc.CellsPerLine.ToString();
+            }
 
             m_PaperSourceName = cfgPrint.PrintTextPaperSourceName;
             m_PaperName = cfgPrint.PrintTextPaperName;
@@ -90,8 +93,8 @@ namespace EasyBrailleEdit
             cfgPrint.PrintBrailleToBrailler = chkPrintBraille.Checked;
             cfgPrint.PrintBrailleToFile = chkPrintBrailleToFile.Checked;
             cfgPrint.PrintBrailleToFileName = txtBrailleFileName.TextBox.Text;
-            cfgPrint.PrintTextPaperSourceName = m_PaperSourceName;
-            cfgPrint.PrintTextPaperName = m_PaperName;
+            cfgPrint.PrintTextPaperSourceName = m_PaperSourceName ?? "";
+            cfgPrint.PrintTextPaperName = m_PaperName ?? "";
             cfgPrint.PrintTextMarginLeft = m_OddPageMargins.Left;
             cfgPrint.PrintTextMarginTop = m_OddPageMargins.Top;
             cfgPrint.PrintTextMarginRight = m_OddPageMargins.Right;
@@ -100,7 +103,7 @@ namespace EasyBrailleEdit
             cfgPrint.PrintTextMarginTop2 = m_EvenPageMargins.Top;
             cfgPrint.PrintTextMarginRight2 = m_EvenPageMargins.Right;
             cfgPrint.PrintTextMarginBottom2 = m_EvenPageMargins.Bottom;
-            cfgPrint.PrintTextFontName = m_TextFontName;
+            cfgPrint.PrintTextFontName = m_TextFontName ?? "";
             cfgPrint.PrintTextFontSize = m_TextFontSize;
             cfgPrint.PrintTextLineHeight = Convert.ToDouble(txtTextLineHeight.Text);
 
@@ -127,14 +130,14 @@ namespace EasyBrailleEdit
                 DefaultExt = Constant.Files.PrintableBrailleFileExt,
                 CheckFileExists = false,
                 CheckPathExists = true,
-                FileName = txtBrailleFileName.TextBox.Text,
+                FileName = txtBrailleFileName!.TextBox!.Text,
                 Title = "指定要輸出的檔案名稱",
                 Filter = Constant.Files.SavePrintableBrailleFileNameFilter  // Braille for Print.
             };
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {                
-                txtBrailleFileName.TextBox.Text = dlg.FileName;
+                txtBrailleFileName!.TextBox!.Text = dlg.FileName;
             }
         }
 
@@ -171,7 +174,7 @@ namespace EasyBrailleEdit
                     txtPageRange.Focus();
                     return null;
                 }
-                int totalPages = AppGlobals.CalcTotalPages(m_BrDoc.Lines.Count, prnOpt.LinesPerPage, prnOpt.PrintPageFoot);
+                int totalPages = m_BrDoc != null ? AppGlobals.CalcTotalPages(m_BrDoc.Lines.Count, prnOpt.LinesPerPage, prnOpt.PrintPageFoot) : 0;
                 if (prnOpt.FromPage > totalPages || prnOpt.ToPage > totalPages)
                 {
                     MsgBoxHelper.ShowError("列印範圍無效! 起始頁或終止頁超出總頁數。");
@@ -216,8 +219,8 @@ namespace EasyBrailleEdit
 
             prnOpt.PrinterName = cboPrinters.Text;
             prnOpt.PrinterNameForBraille = cboPrintersForBraille.Text;
-            prnOpt.PaperSourceName = m_PaperSourceName;
-            prnOpt.PaperName = m_PaperName;
+            prnOpt.PaperSourceName = m_PaperSourceName ?? "";
+            prnOpt.PaperName = m_PaperName ?? "";
             prnOpt.OddPageMargins = m_OddPageMargins;
             prnOpt.EvenPageMargins = m_EvenPageMargins;
 
@@ -237,7 +240,7 @@ namespace EasyBrailleEdit
         {
             LoadSettings();	// 載入先前儲存的設定。
 
-            if (m_BrDoc.Lines.Count < 1)
+            if (m_BrDoc == null || m_BrDoc.Lines.Count < 1)
             {
                 MsgBoxHelper.ShowError("沒有資料可供列印!");
                 return;
@@ -252,7 +255,7 @@ namespace EasyBrailleEdit
             m_DontSaveSettings = true;				// 視窗關閉時不要儲存設定
             cboPrintTextManualDoubleSide.SelectedIndex = 0;
 
-            PrintOptions prnOpt = GetPrintOptions();
+            PrintOptions? prnOpt = GetPrintOptions();
             if (prnOpt == null)
                 return;
 
@@ -263,7 +266,7 @@ namespace EasyBrailleEdit
 
         private void btnPrintBraille_Click(object? sender, EventArgs e)
         {
-            if (m_BrDoc.Lines.Count < 1)
+            if (m_BrDoc == null || m_BrDoc.Lines.Count < 1)
             {
                 MsgBoxHelper.ShowError("沒有資料可供列印!");
                 return;
@@ -289,7 +292,7 @@ namespace EasyBrailleEdit
                 }
             }
   
-            PrintOptions prnOpt = GetPrintOptions();
+            PrintOptions? prnOpt = GetPrintOptions();
             if (prnOpt == null)
                 return;
             DualPrintHelper prn = new DualPrintHelper(m_BrDoc, prnOpt);
@@ -298,7 +301,7 @@ namespace EasyBrailleEdit
 
         private void btnPrintText_Click(object? sender, EventArgs e)
         {
-            if (m_BrDoc.Lines.Count < 1)
+            if (m_BrDoc == null || m_BrDoc.Lines.Count < 1)
             {
                 MsgBoxHelper.ShowError("沒有資料可供列印!");
                 return;
@@ -310,7 +313,7 @@ namespace EasyBrailleEdit
                 return;
             }
 
-            PrintOptions prnOpt = GetPrintOptions();
+            PrintOptions? prnOpt = GetPrintOptions();
             if (prnOpt == null)
                 return;
 
@@ -358,9 +361,9 @@ namespace EasyBrailleEdit
                 return;
             }
             TextPageSetupDialog dlg = new TextPageSetupDialog(cboPrinters.Text);
-            dlg.PaperSourceName = m_PaperSourceName;
-            dlg.PaperName = m_PaperName;			
-            dlg.FontName = m_TextFontName;
+            dlg.PaperSourceName = m_PaperSourceName ?? "";
+            dlg.PaperName = m_PaperName ?? "";			
+            dlg.FontName = m_TextFontName ?? "";
             dlg.FontSize = m_TextFontSize;
             dlg.OddPageMargins = m_OddPageMargins;
             dlg.EvenPageMargins = m_EvenPageMargins;

@@ -107,7 +107,9 @@ namespace EasyBrailleEdit
         private void InsertSymbol(ToolStripItem? item)
         {
             // 插入符號
-            if (item?.Tag == null)
+            if (item == null) return;
+
+            if (item.Tag == null)
             {
                 txtInput.SelectedText = item.Text;
                 return;

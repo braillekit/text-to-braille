@@ -26,7 +26,7 @@ namespace BrailleToolkit.Helpers
         /// <returns></returns>
         /// <remarks>注意：點字頁碼的 # 號要固定印在第 37 方的位置（requested by 秋華）</remarks>
         public static string GetBraillePageFoot(BrailleDocument brDoc,
-            int lineIdx, int pageNum, string beginOrgPageNum, string endOrgPageNum)
+            int lineIdx, int pageNum, string? beginOrgPageNum, string? endOrgPageNum)
         {
             StringBuilder sb = new StringBuilder();
             StringBuilder sbPageNum = new StringBuilder();
@@ -170,8 +170,8 @@ namespace BrailleToolkit.Helpers
         public static void SetBeginEndOrgPageNumber(
             BrailleLine brLine, 
             bool isFirstLineOfPage,
-            ref string beginOrgPageNumber, 
-            ref string endOrgPageNumber)
+            ref string? beginOrgPageNumber, 
+            ref string? endOrgPageNumber)
         {
             string line = brLine.ToString();
 

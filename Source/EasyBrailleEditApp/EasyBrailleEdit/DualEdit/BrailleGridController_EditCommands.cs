@@ -986,7 +986,7 @@ namespace EasyBrailleEdit.DualEdit
             int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
             BrailleLine brLine = BrailleDoc.Lines[lineIdx];
             brLine.Clear();
-            brLine = null;
+            // brLine = null;
             BrailleDoc.Lines.RemoveAt(lineIdx);
             IsDirty = true;
 
@@ -1015,7 +1015,7 @@ namespace EasyBrailleEdit.DualEdit
 
             var brLine = BrailleDoc.Lines[lineIdx];
             brLine.Clear();
-            brLine = null;
+            // brLine = null;
             BrailleDoc.Lines.RemoveAt(lineIdx);
             IsDirty = true;
 

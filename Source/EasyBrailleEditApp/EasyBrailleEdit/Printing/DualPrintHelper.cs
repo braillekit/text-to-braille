@@ -23,8 +23,8 @@ namespace EasyBrailleEdit
 
         private BrailleDocument m_BrDoc;
         private PrintOptions m_PrintOptions;
-        private string m_BeginOrgPageNumber = null!;		// 起始原書頁碼
-        private string m_EndOrgPageNumber = null!;			// 終止原書頁碼
+        private string? m_BeginOrgPageNumber = null;		// 起始原書頁碼
+        private string? m_EndOrgPageNumber = null;			// 終止原書頁碼
 
         private bool m_PreviewOnly;				// 是否只預覽，不列印
 
@@ -515,7 +515,7 @@ namespace EasyBrailleEdit
         /// <param name="graphics"></param>
         /// <param name="marginLeft"></param>
         /// <param name="marginTop"></param>
-        private void PrintPageFoot(BrailleLine? title, int pageNum, string beginOrgPageNum, string endOrgPageNum,
+        private void PrintPageFoot(BrailleLine? title, int pageNum, string? beginOrgPageNum, string? endOrgPageNum,
             Graphics? graphics, double marginLeft, double marginTop)
         {
             if (m_TextFont == null || m_TextBrush == null)

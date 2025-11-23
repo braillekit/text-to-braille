@@ -19,7 +19,7 @@ namespace EasyBrailleEdit
 {
     public partial class MainForm : Form
     {
-        string m_FileName = null!;
+        string? m_FileName = null;
         bool m_Modified;	// 檔案內容是否有修改過。        
 
         private Scintilla m_TextArea = null!;
@@ -268,7 +268,7 @@ namespace EasyBrailleEdit
             busyForm.UseWaitCursor = true;
             Enabled = false;
 
-            DualEditForm frm = null;
+            DualEditForm? frm = null;
             try
             {
                 // 直接開啟雙視編輯視窗
@@ -430,8 +430,8 @@ namespace EasyBrailleEdit
             else
             {
                 // 若已存在雙視檔案，則詢問是否直接載入。
-                string brxFileName = FileName.Replace(".txt", Constant.Files.JsonBrailleFileExt);
-                string brljFileName = FileName.Replace(".txt", ".brlj");
+                string brxFileName = (FileName ?? "").Replace(".txt", Constant.Files.JsonBrailleFileExt);
+                string brljFileName = (FileName ?? "").Replace(".txt", ".brlj");
                 if (File.Exists(brxFileName) || File.Exists(brljFileName))
                 {
                     string s = "雙視檔案已經存在，是否重新轉點字?\n[是]: 執行點字轉換\n[否]: 直接載入既有的雙視資料";
@@ -523,7 +523,7 @@ namespace EasyBrailleEdit
             busyForm.UseWaitCursor = true;
             this.Enabled = false;
 
-            DualPrintDialog dlg = null;
+            DualPrintDialog? dlg = null;
             try
             {
                 dlg = new DualPrintDialog(brlFileName);
@@ -538,7 +538,7 @@ namespace EasyBrailleEdit
             {
                 // 一定要讓 main form 變成作用中視窗，否則預覽列印對話窗不會變成 top-level window!!
                 this.Activate();
-                dlg.PreviewText();
+                dlg?.PreviewText();
             }
             finally
             {
@@ -609,7 +609,7 @@ namespace EasyBrailleEdit
 
             using (StreamReader sr = new StreamReader(fname, Encoding.Default))
             {
-                string errFlag = sr.ReadLine();
+                string? errFlag = sr.ReadLine();
                 if (String.IsNullOrEmpty(errFlag))
                 {
                     return false;
@@ -633,7 +633,7 @@ namespace EasyBrailleEdit
 
             using (StreamReader sr = new StreamReader(fname, Encoding.Default))
             {
-                string s;
+                string? s;
                 string[] parts;
 
                 while (true)
@@ -709,7 +709,7 @@ namespace EasyBrailleEdit
         #region 屬性
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string FileName
+        public string? FileName
         {
             get
             {
@@ -885,10 +885,13 @@ namespace EasyBrailleEdit
 
         private async void MainForm_Load(object? sender, EventArgs e)
         {
-            AppGlobals.AppPath = Path.GetDirectoryName(Application.ExecutablePath);
+            AppGlobals.AppPath = Path.GetDirectoryName(Application.ExecutablePath) ?? "";
 
-            Width = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Width * 0.9);
-            Height = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Height * 0.9);
+            if (Screen.PrimaryScreen != null)
+            {
+                Width = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Width * 0.9);
+                Height = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Height * 0.9);
+            }
             CenterToScreen();
 
             InitTextArea();

@@ -18,9 +18,10 @@ namespace EasyBrailleEdit.DualEdit
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void GridMenu_Click(object sender, SourceGrid.CellContextEventArgs e)
+        void GridMenu_Click(object? sender, SourceGrid.CellContextEventArgs e)
         {
-            GridPopupMenuController menuCtrl = (GridPopupMenuController)sender;
+            GridPopupMenuController? menuCtrl = sender as GridPopupMenuController;
+            if (menuCtrl == null) return;
             SourceGrid.CellContext cell = e.CellContext;
             SourceGrid.Grid grid = (SourceGrid.Grid)cell.Grid;
             int row = cell.Position.Row;
@@ -108,7 +109,7 @@ namespace EasyBrailleEdit.DualEdit
             var pageTitle = BrailleDoc.FindPageTitleByBeginLine(brLine);
             if (pageTitle != null)
             {
-                _form.CurrentPageTitleStatusText = $"頁標：{pageTitle.TitleLine.ToString()}";
+                _form.CurrentPageTitleStatusText = $"頁標：{pageTitle.TitleLine?.ToString()}";
             }
             else
             {
