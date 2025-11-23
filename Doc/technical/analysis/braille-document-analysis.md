@@ -85,6 +85,6 @@ public BrailleDocument DeepCopy()
 
 ## 3. 總結與建議行動
 
-1.  **修復 `BrailleCell` 不可變性**：立即將 `Value` setter 設為私有。（高優先級，防止潛在 Bug）
-2.  **優化 `BrailleWord`**：對 `m_PhoneticCodes` 實施延遲初始化。（中優先級，減少記憶體佔用）
-3.  **優化 `DeepCopy`**：重寫 `BrailleDocument.DeepCopy`。（低優先級，視效能需求而定）
+1. **修復 `BrailleCell` 不可變性**：立即將 `Value` setter 設為私有。（高優先級，防止潛在 Bug）
+2. **優化 `BrailleWord`**：對 `m_PhoneticCodes` 實施延遲初始化。（中優先級，減少記憶體佔用）
+3. **優化 `DeepCopy`**：重寫 `BrailleDocument.DeepCopy`。（低優先級，視效能需求而定）
