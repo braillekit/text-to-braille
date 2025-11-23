@@ -230,7 +230,7 @@ namespace BrailleToolkit
             {
                 return m_Value;
             }
-            set
+            private set
             {
                 m_Value = value;
             }

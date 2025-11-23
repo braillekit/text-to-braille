@@ -195,3 +195,20 @@ public TwChineseCharConverter(BrailleProcessor processor)
 2. **移除冗餘代碼**：已移除所有 `BrailleTable` 類別中不再使用的 `CreateInstance()` 方法，確保未來不會誤用。
 
 此變更已大幅降低 `BrailleProcessor` 的初始化成本。下一步將評估移除 `BrailleProcessor` 的單例模式。
+
+#### 4.4 BrailleDocument 記憶體優化 (2025-11-23)
+
+針對 `BrailleDocument` 及其相關類別進行了分析與優化，主要解決了以下問題：
+
+1. **BrailleCell 不可變性 (Immutability)**：
+    - **問題**：`BrailleCell` 使用享元模式 (Flyweight Pattern) 共用實例，但其 `Value` 屬性原本擁有公開的 setter，存在被意外修改的風險，可能導致全域性的資料錯誤。
+    - **解決**：將 `BrailleCell.Value` 的 setter 改為 `private`，確保共用實例不可變。
+
+2. **BrailleWord 記憶體優化**：
+    - **問題**：每個 `BrailleWord` 物件在建構時都會初始化 `m_PhoneticCodes` (List<string>)，但此欄位僅在處理多音字或需校正的中文字時才需要。對於大量的非中文內容或普通中文字，這造成了不必要的記憶體開銷。
+    - **解決**：實作 `PhoneticCodes` 的延遲初始化 (Lazy Initialization)，僅在真正需要時才建立 List 物件。
+
+**驗證結果**：
+
+- 專案建置成功。
+- `BrailleToolkit.Tests` 單元測試全數通過 (131/131)，確認無回歸錯誤。

@@ -74,7 +74,7 @@ namespace BrailleToolkit
             Language = BrailleLanguage.Neutral;
             CellList = new BrailleCellList();
 
-            m_PhoneticCodes = new List<string>();
+            // m_PhoneticCodes = new List<string>(); // Lazy initialization
             m_ActivePhoneticIndex = -1;
 
             DontBreakLineHere = false;
@@ -124,7 +124,7 @@ namespace BrailleToolkit
         public BrailleWord(string text, string phCode, string brCode) : this(text, brCode)
         {
             Language = BrailleLanguage.Chinese;
-            m_PhoneticCodes.Add(phCode);
+            PhoneticCodes.Add(phCode);
             m_ActivePhoneticIndex = 0;
         }
 
@@ -367,7 +367,7 @@ namespace BrailleToolkit
             }
             set
             {
-                if (value >= m_PhoneticCodes.Count)
+                if (m_PhoneticCodes == null || value >= m_PhoneticCodes.Count)
                     throw new ArgumentOutOfRangeException();
                 m_ActivePhoneticIndex = value;
             }
@@ -455,8 +455,8 @@ namespace BrailleToolkit
         /// <param name="phCodes">注音碼陣列。</param>
         public void SetPhoneticCodes(string[] phCodes)
         {
-            m_PhoneticCodes.Clear();
-            m_PhoneticCodes.AddRange(phCodes);
+            PhoneticCodes.Clear();
+            PhoneticCodes.AddRange(phCodes);
         }
 
         /// <summary>
