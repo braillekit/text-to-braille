@@ -18,7 +18,7 @@ namespace BrailleToolkit.Converters
         public CoordinateConverter()
             : base()
         {
-            m_Table = CoordinateBrailleTable.CreateInstance();
+            m_Table = CoordinateBrailleTable.GetInstance();
         }
 
         /// <summary>

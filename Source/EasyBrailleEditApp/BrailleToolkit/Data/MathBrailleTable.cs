@@ -34,15 +34,6 @@ namespace BrailleToolkit.Data
             return m_Instance;
         }
 
-        /// <summary>
-        /// Creates a new instance of MathBrailleTable.
-        /// </summary>
-        /// <returns></returns>
-        public static MathBrailleTable CreateInstance()
-        {
-            var instance = new MathBrailleTable();
-            instance.LoadFromResource();
-            return instance;
-        }
+
     }
 }
