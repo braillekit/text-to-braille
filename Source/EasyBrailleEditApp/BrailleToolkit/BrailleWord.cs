@@ -775,7 +775,7 @@ namespace BrailleToolkit
         public static bool IsChinesePunctuation(BrailleWord brWord)
         {
             TwChineseBrailleTable chtBrlTbl = TwChineseBrailleTable.GetInstance();
-            string brCode = chtBrlTbl.GetPunctuationCode(brWord.Text);
+            string? brCode = chtBrlTbl.GetPunctuationCode(brWord.Text);
             if (String.IsNullOrEmpty(brCode))
                 return false;
             return true;

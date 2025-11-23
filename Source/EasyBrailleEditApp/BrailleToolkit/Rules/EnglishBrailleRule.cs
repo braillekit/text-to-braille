@@ -115,7 +115,7 @@ namespace BrailleToolkit.Rules
 		{
 			BrailleWord brWord;
 			bool isNumberMode = false;
-			string brCode;
+			string? brCode;
 
 			int index = 0;
 			while (index < brLine.WordCount)

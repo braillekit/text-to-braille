@@ -445,7 +445,7 @@ namespace BrailleToolkit
             Stack<char> charStack = new Stack<char>(Text);
 
             char ch;
-            List<BrailleWord> brWordList;
+            List<BrailleWord>? brWordList;
             StringBuilder convertedText = new StringBuilder();
 
             ConversionFailedEventArgs cvtFailedArgs = new ConversionFailedEventArgs();
@@ -530,7 +530,7 @@ namespace BrailleToolkit
             Stack<char> charStack = new Stack<char>(line);
 
             char ch;
-            List<BrailleWord> brWordList;
+            List<BrailleWord>? brWordList;
             StringBuilder text = new StringBuilder();
 
             ConversionFailedEventArgs cvtFailedArgs = new ConversionFailedEventArgs();
@@ -673,7 +673,7 @@ namespace BrailleToolkit
         /// <remarks>若轉換成功，則已轉換的字元會從串流中讀出，否則該字元仍會保留在串流中。</remarks>
         public List<BrailleWord>? ConvertWord(Stack<char> chars)
         {
-            List<BrailleWord> brWordList = null;
+            List<BrailleWord>? brWordList = null;
 
             // Two-pass 處理（因為有些點字必須再交給其它點字轉換器，故需兩次）。
             for (int pass = 0; pass < 2; pass++)
@@ -967,7 +967,7 @@ namespace BrailleToolkit
 
             string temp;
             Stack<char> charStack;
-            List<BrailleWord> brWordList = null;
+            List<BrailleWord>? brWordList = null;
 
             var brWordListIntPart = new List<BrailleWord>();
 

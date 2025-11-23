@@ -39,7 +39,7 @@ namespace BrailleToolkit.Converters
 			string text;
 			bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
 			BrailleWord? brWord;
-			List<BrailleWord> brWordList = null;
+			List<BrailleWord>? brWordList = null;
 
 			ch = charStack.Peek();   // 只讀取但不從堆疊移走。
 			isExtracted = false;
