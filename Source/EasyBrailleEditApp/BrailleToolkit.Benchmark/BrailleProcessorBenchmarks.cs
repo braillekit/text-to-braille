@@ -9,13 +9,13 @@ using BrailleToolkit;
 
 namespace BrailleToolkitBenchmark
 {
+    /// <summary>
+    /// BrailleProcessor 效能測試類別。
+    /// </summary>
     //[SimpleJob(RuntimeMoniker.Net60)]
     //[SimpleJob(RuntimeMoniker.Net70)]
     [MemoryDiagnoser]
     [UnicodeConsoleLogger]
-    /// <summary>
-    /// BrailleProcessor 效能測試類別。
-    /// </summary>
     public class BrailleProcessorBenchmarks
     {
         BrailleProcessor processor = BrailleProcessor.GetInstance();
