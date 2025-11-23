@@ -90,7 +90,7 @@ namespace BrailleToolkit.Data
         /// <param name="resourceName"></param>
         public override void LoadFromResource(Assembly asmb, string resourceName)
         {
-            Stream stream = asmb.GetManifestResourceStream(resourceName);
+            Stream? stream = asmb.GetManifestResourceStream(resourceName);
             if (stream == null)
             {
                 throw new Exception("XmlBrailleTable.LoadFromResource 找不到資源: " + resourceName);
@@ -120,9 +120,9 @@ namespace BrailleToolkit.Data
             {
                 ds.Locale = CultureInfo.CurrentUICulture;
                 ds.ReadXml(sr);
-                m_Table = ds.Tables[0].Copy();
+                m_Table = ds.Tables[0]!.Copy();
                 m_Table.CaseSensitive = true;	// 必須為 true，否則有些半形字元會和全形符號混淆。
-                m_Table.PrimaryKey = new DataColumn[] { m_Table.Columns["text"] };
+                m_Table.PrimaryKey = new DataColumn[] { m_Table.Columns["text"]! };
 
                 ConvertDotsToCode();
                 ConvertDots2ToCode2();
@@ -141,8 +141,8 @@ namespace BrailleToolkit.Data
 			DataSet ds = new DataSet();
             ds.Locale = CultureInfo.CurrentUICulture;
 			ds.ReadXml(sr);
-			m_Table = ds.Tables[0].Copy();
-			m_Table.PrimaryKey = new DataColumn[] { m_Table.Columns["text"] };
+			m_Table = ds.Tables[0]!.Copy();
+			m_Table.PrimaryKey = new DataColumn[] { m_Table.Columns["text"]! };
 			sr.Close();
 
             ConvertDotsToCode();
@@ -164,7 +164,7 @@ namespace BrailleToolkit.Data
             for (int i = 0; i < m_Table.Rows.Count; i++)
             {
                 var row = m_Table.Rows[i];
-                string dots = row["dots"].ToString();
+                string dots = row["dots"].ToString() ?? string.Empty; // Fixed CS8600
 
                 if (string.IsNullOrWhiteSpace(dots))
                 {
@@ -192,7 +192,7 @@ namespace BrailleToolkit.Data
             for (int i = 0; i < m_Table.Rows.Count; i++)
             {
                 var row = m_Table.Rows[i];
-                string dots2 = row["dots2"].ToString();
+                string dots2 = row["dots2"].ToString() ?? string.Empty; // Fixed CS8600
                 if (string.IsNullOrWhiteSpace(dots2))
                 {
                     continue;
@@ -235,7 +235,7 @@ namespace BrailleToolkit.Data
 		{
 			get 
 			{
-				string brCode = Find(text);
+				string? brCode = Find(text);
                 if (String.IsNullOrEmpty(brCode))
                 {
                     throw new Exception("找不到對應的點字碼: " + text);

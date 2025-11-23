@@ -23,7 +23,7 @@ namespace EasyBrailleEdit.DualEdit
             get => _undoStack.MaxSize;
         } 
 
-        public BrailleEditMemento Undo(BrailleEditMemento currentState)
+        public BrailleEditMemento? Undo(BrailleEditMemento currentState)
         {
             if (CanUndo())
             {
@@ -38,7 +38,7 @@ namespace EasyBrailleEdit.DualEdit
                 return null;
         }
 
-        public BrailleEditMemento Redo(BrailleEditMemento currentState)
+        public BrailleEditMemento? Redo(BrailleEditMemento currentState)
         {
             if (CanRedo())
             {
@@ -53,7 +53,7 @@ namespace EasyBrailleEdit.DualEdit
                 return null;
         }
 
-        public void SaveMementoForUndo(BrailleEditMemento memento)
+        public void SaveMementoForUndo(BrailleEditMemento? memento)
         {
             if (memento != null)
             {
@@ -73,9 +73,9 @@ namespace EasyBrailleEdit.DualEdit
             _redoStack.Clear();
         }
 
-        public List<string> GetUndoableOperations()
+        public List<string?> GetUndoableOperations()
         {
-            var result = new List<string>(_undoStack.Count);
+            var result = new List<string?>(_undoStack.Count);
             var undoList = _undoStack.ToList();
             foreach (var item in undoList)
             {

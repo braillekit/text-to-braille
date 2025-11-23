@@ -44,7 +44,7 @@ namespace EasyBrailleEdit
             txtBrailleFileName.Button.Click += SelectBrailleFileNameButton_Click;
         }
 
-        private void SelectBrailleFileNameButton_Click(object sender, EventArgs e)
+        private void SelectBrailleFileNameButton_Click(object? sender, EventArgs e)
         {
             var dlg = new SaveFileDialog
             {

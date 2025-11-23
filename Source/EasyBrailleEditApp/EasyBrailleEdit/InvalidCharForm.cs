@@ -45,7 +45,7 @@ namespace EasyBrailleEdit
         {
             if (lbxInvalidChars.Items.Count < 1 || lbxInvalidChars.SelectedIndex < 0)
                 return;
-            string s = lbxInvalidChars.Items[lbxInvalidChars.SelectedIndex].ToString();
+            string s = lbxInvalidChars.Items[lbxInvalidChars.SelectedIndex].ToString() ?? string.Empty; // Fixed CS8600
 
             s = s.Substring(1, s.IndexOf(')') - 1);
 

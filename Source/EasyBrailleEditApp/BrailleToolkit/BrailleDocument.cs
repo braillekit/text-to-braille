@@ -111,7 +111,7 @@ namespace BrailleToolkit
             {
                 enc = Encoding.GetEncoding(950); // BIG-5
             }
-            using (StreamReader sr = new StreamReader(m_FileName, enc, true))
+            using (StreamReader sr = new StreamReader(m_FileName!, enc, true)) // Fixed CS8604
             {
                 LoadAndConvert(sr);
             }
@@ -152,12 +152,15 @@ namespace BrailleToolkit
 
             Clear();
 
+            if (m_Processor == null)
+                throw new Exception("在呼叫 BrailleDocument.Load 之前，請先指定 BrailleProcessor。");
+
             m_Processor.InitializeForConversion();
 
             while ((line = reader.ReadLine()) != null)
             {
                 lineNumber++;
-                BrailleLine brLine = m_Processor.ConvertLine(line, lineNumber);
+                BrailleLine? brLine = m_Processor.ConvertLine(line, lineNumber);
                 if (brLine != null)
                 {
                     AddLine(brLine);
@@ -216,7 +219,7 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="brLine">The braille line reference.</param>
         /// <returns>The page title if found; otherwise, null.</returns>
-        public BraillePageTitle FindPageTitleByBeginLine(BrailleLine brLine)
+        public BraillePageTitle? FindPageTitleByBeginLine(BrailleLine brLine)
         {
             return PageTitles.Find(p => ReferenceEquals(brLine, p.ContentStartLineRef));
         }
@@ -339,7 +342,7 @@ namespace BrailleToolkit
             return result.ToString();
         }
 
-        private BraillePageTitle FindPageTitle(int lineIdx)
+        private BraillePageTitle? FindPageTitle(int lineIdx)
         {
             foreach (var title in PageTitles)
             {
@@ -510,7 +513,7 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="lineIdx"></param>
         /// <returns></returns>
-        public BrailleLine GetPageTitle(int lineIdx)
+        public BrailleLine? GetPageTitle(int lineIdx)
         {
             if (m_PageTitles == null)
             {
@@ -520,15 +523,15 @@ namespace BrailleToolkit
             if (lineIdx < 0)        // 注意：不用比對上限!! 因為在列印時，傳入的 lineIdx 有可能大於等於總列數。
                 return null;
 
-            BraillePageTitle title;
+            BraillePageTitle? title; // Changed to nullable
 
             int i = m_PageTitles.Count - 1; // 必須從底下往上比較
             while (i >= 0)
             {
                 title = m_PageTitles[i];
-                if (lineIdx >= title.ContentStartLineIndex)
+                if (lineIdx >= title!.ContentStartLineIndex)
                 {
-                    return title.TitleLine;
+                    return title!.TitleLine;
                 }
                 i--;
             }
@@ -544,7 +547,10 @@ namespace BrailleToolkit
             List<BrailleLine> lines = new List<BrailleLine>();
             foreach (BraillePageTitle t in m_PageTitles)
             {
-                lines.Add(t.TitleLine);
+                if (t.TitleLine != null)
+                {
+                    lines.Add(t.TitleLine);
+                }                    
             }
             return lines;
         }
@@ -643,9 +649,9 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得字數最長的 line。
         /// </summary>
-        public BrailleLine GetLongestLine()
+        public BrailleLine? GetLongestLine() // Changed return type to nullable
         {
-            BrailleLine longestLine = null;
+            BrailleLine? longestLine = null; // Fixed CS8600
             int maxCount = -1;
             int curCount;
             foreach (BrailleLine brLine in m_Lines)

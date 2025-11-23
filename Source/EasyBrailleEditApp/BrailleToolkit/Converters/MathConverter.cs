@@ -25,8 +25,9 @@ namespace BrailleToolkit.Converters
         /// 從堆疊中讀取字元，並轉成點字。
         /// </summary>
         /// <param name="charStack">字元堆疊。</param>
+        /// <param name="context">情境標籤管理員。</param>
         /// <returns>傳回轉換後的點字物件串列，若串列為空串列，表示沒有成功轉換的字元。</returns>
-        public override List<BrailleWord> Convert(Stack<char> charStack, ContextTagManager context)
+        public override List<BrailleWord>? Convert(Stack<char> charStack, ContextTagManager context)
         {
             if (charStack.Count < 1)
                 throw new ArgumentException("傳入空的字元堆疊!");
@@ -37,8 +38,8 @@ namespace BrailleToolkit.Converters
             char ch;
             string currentChar;
             bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
-            BrailleWord brWord;
-            List<BrailleWord> brWordList = null;
+            BrailleWord? brWord;
+            List<BrailleWord>? brWordList = null;
 
             ch = charStack.Peek();   // 只讀取但不從堆疊移走。
             isExtracted = false;

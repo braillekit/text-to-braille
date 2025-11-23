@@ -29,21 +29,25 @@ namespace EasyBrailleEdit
         {
             m_OrgBrDoc = brDoc;
 
+            if (brDoc.Processor == null) throw new ArgumentNullException(nameof(brDoc.Processor));
             m_TmpBrDoc = new BrailleDocument(brDoc.Processor, brDoc.CellsPerLine);
 
             Titles = new List<BraillePageTitle>();
 
             // 複製所有標題列，並將標題列塞進暫存文件。
-            BraillePageTitle newTitle = null;
+            BraillePageTitle? newTitle = null;
             bool emptyTitleFound = false;
             foreach (BraillePageTitle t in brDoc.PageTitles)
             {
-                if (t.TitleLine.CellCount > 0) // 避免塞進空的頁標題
+                if (t.TitleLine != null && t.TitleLine.CellCount > 0) // 避免塞進空的頁標題
                 {
                     newTitle = t.Clone() as BraillePageTitle;
-                    Titles.Add(newTitle);
+                    if (newTitle != null && newTitle.TitleLine != null)
+                    {
+                        Titles.Add(newTitle);
 
-                    m_TmpBrDoc.Lines.Add(newTitle.TitleLine);       // 把標題 line 塞進暫存文件。
+                        m_TmpBrDoc.Lines.Add(newTitle.TitleLine);       // 把標題 line 塞進暫存文件。
+                    }
                 }
                 else
                 {
@@ -64,7 +68,8 @@ namespace EasyBrailleEdit
             int deletedCount = 0;
             for (int i = Titles.Count - 1; i >= 0; i--)
             {
-                if (Titles[i].TitleLine.CellCount < 1)
+                var title = Titles[i];
+                if (title.TitleLine != null && title.TitleLine.CellCount < 1)
                 {
                     Titles.RemoveAt(i);
                     deletedCount++;
@@ -153,10 +158,13 @@ namespace EasyBrailleEdit
             Controller.FillGrid();
         }
 
-        private void Grid_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void Grid_MouseDoubleClick(object? sender, MouseEventArgs e)
         {
-            var grid = (SourceGrid.Grid)sender;
-            Controller.Grid_MouseDoubleClick(grid, e);
+            var grid = sender as SourceGrid.Grid;
+            if (grid != null)
+            {
+                Controller.Grid_MouseDoubleClick(grid, e);
+            }
         }
 
         private void GridSelection_FocusRowEntered(object sender, RowEventArgs e)

@@ -105,16 +105,17 @@ namespace BrailleToolkit.Rules
             }
         }
 
-		/// <summary>
-		/// 把編號的數字修正成上位點。
-		/// 注意：此函式會把點字串列中的 # 點字物件刪除。
-		/// </summary>
-		/// <param name="brLine"></param>
-		public static void FixNumbers(BrailleLine brLine, EnglishBrailleTable brTable)
+        /// <summary>
+        /// 把編號的數字修正成上位點。
+        /// 注意：此函式會把點字串列中的 # 點字物件刪除。
+        /// </summary>
+        /// <param name="brLine"></param>
+        /// <param name="brTable"></param>
+        public static void FixNumbers(BrailleLine brLine, EnglishBrailleTable brTable)
 		{
 			BrailleWord brWord;
 			bool isNumberMode = false;
-			string brCode;
+			string? brCode;
 
 			int index = 0;
 			while (index < brLine.WordCount)
@@ -134,14 +135,17 @@ namespace BrailleToolkit.Rules
 					{
 						// 把編號的數字改成上位點。
 						brCode = brTable.FindDigit(brWord.Text, true);
-						if (brWord.Cells.Count > 1)	// 第 0 個 cell 可能是數字記號。
-						{
-							brWord.Cells[1] = BrailleCell.GetInstance(brCode);
-						}
-						else
-						{
-                            brWord.Cells[0] = BrailleCell.GetInstance(brCode);
-						}
+                        if (brCode != null)
+                        {
+                            if (brWord.Cells.Count > 1) // 第 0 個 cell 可能是數字記號。
+                            {
+                                brWord.Cells[1] = BrailleCell.GetInstance(brCode);
+                            }
+                            else
+                            {
+                                brWord.Cells[0] = BrailleCell.GetInstance(brCode);
+                            }
+                        }
 					}
 				}
 				else

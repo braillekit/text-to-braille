@@ -11,7 +11,7 @@ namespace BrailleToolkit.Converters
     /// </summary>
     public abstract class WordConverter
     {
-        internal abstract BrailleTableBase BrailleTable
+        internal abstract BrailleTableBase? BrailleTable
         {
             get;
         }
@@ -22,16 +22,16 @@ namespace BrailleToolkit.Converters
         /// <param name="charStack">字元堆疊。</param>
         /// <param name="context">情境標籤管理員。</param>
         /// <returns>點字詞串列。</returns>
-        public abstract List<BrailleWord> Convert(Stack<char> charStack, ContextTagManager context);
+        public abstract List<BrailleWord>? Convert(Stack<char> charStack, ContextTagManager context);
 
         /// <summary>
         /// 轉換指定的字串。
         /// </summary>
         /// <param name="text">欲轉換的字串。</param>
         /// <returns>轉換後的點字碼。</returns>
-        public virtual string Convert(string text)
+        public virtual string? Convert(string text)
         {
-            return BrailleTable.Find(text);
+            return BrailleTable?.Find(text);
         }
 
         /// <summary>
@@ -39,9 +39,11 @@ namespace BrailleToolkit.Converters
         /// </summary>
         /// <param name="text">字串（一個字元）。</param>
         /// <returns>若指定的字串轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
-        protected virtual BrailleWord ConvertToBrailleWord(string text)
+        protected virtual BrailleWord? ConvertToBrailleWord(string text)
         {
-            string brCode = BrailleTable.Find(text);
+            if (BrailleTable == null)
+                return null;
+            string? brCode = BrailleTable.Find(text);
             if (!String.IsNullOrEmpty(brCode))
             {
                 var brWord = new BrailleWord(text);

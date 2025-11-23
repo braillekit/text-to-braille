@@ -67,7 +67,7 @@ namespace EasyBrailleEdit.DualEdit
             return (gridRowIndex - _grid.FixedRows) / 3;
         }
 
-        public BrailleWord GetBrailleWordFromGridCell(int row, int col)
+        public BrailleWord? GetBrailleWordFromGridCell(int row, int col)
         {
             if (_grid[row, col] == null)
             {

@@ -40,7 +40,7 @@ namespace EasyBrailleEdit
 
 		private void phoneticBtn_Click(object sender, EventArgs e)
 		{
-			ToolStripButton btn = sender as ToolStripButton;
+			ToolStripButton? btn = sender as ToolStripButton;
 			if (btn == null)
 				return;
 

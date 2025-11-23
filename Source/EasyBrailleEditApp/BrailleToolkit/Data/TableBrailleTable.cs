@@ -9,7 +9,7 @@ namespace BrailleToolkit.Data
     /// </summary>
 	public sealed class TableBrailleTable : XmlBrailleTable
 	{
-		private static TableBrailleTable m_Instance = null;
+		private static TableBrailleTable? m_Instance = null;
 
 		/// <summary>
 		/// 建構函式。

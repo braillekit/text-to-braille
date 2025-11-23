@@ -21,11 +21,11 @@ namespace BrailleToolkit.Tests
         public void Should_BreakLine_Succeed(int cellsPerLine, string input,
             int expectedLineCount, string expectedLine1, string expectedLine2)
         {
-            var processor = BrailleProcessor.CreateInstance();
+            BrailleProcessor? processor = BrailleProcessor.CreateInstance();
 
             var context = new ContextTagManager();
 
-            var brLine = processor.ConvertLine(input);	// 冒號後面會加一個空方
+            BrailleLine? brLine = processor.ConvertLine(input);	// 冒號後面會加一個空方
 
             var brLines = BrailleDocumentFormatter.BreakLine(brLine, cellsPerLine, context);
 
@@ -102,7 +102,13 @@ namespace BrailleToolkit.Tests
             BrailleProcessor processor =
                 BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
-            BrailleLine brLine = processor.ConvertLine(inputText);
+            BrailleLine? brLine = processor.ConvertLine(inputText);
+
+            if (brLine == null)
+            {
+                Assert.Fail("ConvertLine returned null.");
+                return;
+            }
 
             int cellsPerLine = 40;
             var formattedLines = BrailleDocumentFormatter.FormatLine(brLine, cellsPerLine, new ContextTagManager());

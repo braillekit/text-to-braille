@@ -19,7 +19,7 @@ namespace EasyBrailleEdit
 {
     public partial class MainForm : Form
     {
-        string m_FileName = null!;
+        string? m_FileName = null;
         bool m_Modified;	// 檔案內容是否有修改過。        
 
         private Scintilla m_TextArea = null!;
@@ -61,7 +61,7 @@ namespace EasyBrailleEdit
             FindReplaceDialog.Window.HighlightMatches = true;
         }
 
-        private void FindReplaceDialog_FindAllResults(object sender, FindResultsEventArgs FindAllResults)
+        private void FindReplaceDialog_FindAllResults(object? sender, FindResultsEventArgs FindAllResults)
         {
             // 沒有用單獨 panel 顯示搜尋結果也沒關係，因為搜尋結果可以直接標示在編輯器中。
             // Pass on find results
@@ -108,7 +108,7 @@ namespace EasyBrailleEdit
             InitFindReplaceDialog(m_TextArea);
         }
 
-        private void TextArea_KeyDown(object sender, KeyEventArgs e)
+        private void TextArea_KeyDown(object? sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.F)
             {
@@ -137,19 +137,23 @@ namespace EasyBrailleEdit
             }
             else if (e.Control && e.KeyCode == Keys.G)
             {
-                GoTo MyGoTo = new GoTo((Scintilla)sender);
-                MyGoTo.ShowGoToDialog();
-                e.SuppressKeyPress = true;
+                var scintilla = sender as Scintilla;
+                if (scintilla != null)
+                {
+                    GoTo MyGoTo = new GoTo(scintilla);
+                    MyGoTo.ShowGoToDialog();
+                    e.SuppressKeyPress = true;
+                }
             }
 
         }
 
-        private void TextArea_TextChanged(object sender, EventArgs e)
+        private void TextArea_TextChanged(object? sender, EventArgs e)
         {
             Modified = true;
         }
 
-        private void TextArea_UpdateUI(object sender, UpdateUIEventArgs e)
+        private void TextArea_UpdateUI(object? sender, UpdateUIEventArgs e)
         {
             UpdateCaretPosition();
         }
@@ -264,7 +268,7 @@ namespace EasyBrailleEdit
             busyForm.UseWaitCursor = true;
             Enabled = false;
 
-            DualEditForm frm = null;
+            DualEditForm? frm = null;
             try
             {
                 // 直接開啟雙視編輯視窗
@@ -426,8 +430,8 @@ namespace EasyBrailleEdit
             else
             {
                 // 若已存在雙視檔案，則詢問是否直接載入。
-                string brxFileName = FileName.Replace(".txt", Constant.Files.JsonBrailleFileExt);
-                string brljFileName = FileName.Replace(".txt", ".brlj");
+                string brxFileName = (FileName ?? "").Replace(".txt", Constant.Files.JsonBrailleFileExt);
+                string brljFileName = (FileName ?? "").Replace(".txt", ".brlj");
                 if (File.Exists(brxFileName) || File.Exists(brljFileName))
                 {
                     string s = "雙視檔案已經存在，是否重新轉點字?\n[是]: 執行點字轉換\n[否]: 直接載入既有的雙視資料";
@@ -519,7 +523,7 @@ namespace EasyBrailleEdit
             busyForm.UseWaitCursor = true;
             this.Enabled = false;
 
-            DualPrintDialog dlg = null;
+            DualPrintDialog? dlg = null;
             try
             {
                 dlg = new DualPrintDialog(brlFileName);
@@ -534,7 +538,7 @@ namespace EasyBrailleEdit
             {
                 // 一定要讓 main form 變成作用中視窗，否則預覽列印對話窗不會變成 top-level window!!
                 this.Activate();
-                dlg.PreviewText();
+                dlg?.PreviewText();
             }
             finally
             {
@@ -605,7 +609,7 @@ namespace EasyBrailleEdit
 
             using (StreamReader sr = new StreamReader(fname, Encoding.Default))
             {
-                string errFlag = sr.ReadLine();
+                string? errFlag = sr.ReadLine();
                 if (String.IsNullOrEmpty(errFlag))
                 {
                     return false;
@@ -629,7 +633,7 @@ namespace EasyBrailleEdit
 
             using (StreamReader sr = new StreamReader(fname, Encoding.Default))
             {
-                string s;
+                string? s;
                 string[] parts;
 
                 while (true)
@@ -705,7 +709,7 @@ namespace EasyBrailleEdit
         #region 屬性
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string FileName
+        public string? FileName
         {
             get
             {
@@ -753,7 +757,7 @@ namespace EasyBrailleEdit
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string StatusText
         {
-            get { return statusStrip1.Items[0].Text; }
+            get { return statusStrip1.Items[0].Text ?? string.Empty; }
             set
             {
                 statusStrip1.Items[0].Text = value;
@@ -823,7 +827,7 @@ namespace EasyBrailleEdit
             catch (Exception ex)
             {
                 // 無法取得檔案更新清單（可能是網際網路無法連線）
-                string msg = "無法取得檔案更新清單: " + ex.Message;
+                string msg = "無法取得檔案更新清單: " + (ex.Message ?? string.Empty); // Fixed CS8600
                 if (autoMode)
                 {
                     StatusText = msg;
@@ -879,12 +883,15 @@ namespace EasyBrailleEdit
             return false;
         }
 
-        private async void MainForm_Load(object sender, EventArgs e)
+        private async void MainForm_Load(object? sender, EventArgs e)
         {
-            AppGlobals.AppPath = Path.GetDirectoryName(Application.ExecutablePath);
+            AppGlobals.AppPath = Path.GetDirectoryName(Application.ExecutablePath) ?? "";
 
-            Width = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Width * 0.9);
-            Height = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Height * 0.9);
+            if (Screen.PrimaryScreen != null)
+            {
+                Width = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Width * 0.9);
+                Height = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Height * 0.9);
+            }
             CenterToScreen();
 
             InitTextArea();
@@ -922,9 +929,11 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void miFileClicked(object sender, EventArgs e)
+        private void miFileClicked(object? sender, EventArgs e)
         {
-            ToolStripItem obj = (ToolStripItem)sender;
+            var obj = sender as ToolStripItem;
+            if (obj?.Tag == null) return;
+
             switch (obj.Tag.ToString())
             {
                 case "FileNew":
@@ -951,7 +960,7 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void MainForm_FormClosing(object? sender, FormClosingEventArgs e)
         {
             e.Cancel = false;
             if (Modified)
@@ -972,9 +981,11 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void miEditClick(object sender, EventArgs e)
+        private void miEditClick(object? sender, EventArgs e)
         {
-            ToolStripItem obj = (ToolStripItem)sender;
+            var obj = sender as ToolStripItem;
+            if (obj?.Tag == null) return;
+
             switch (obj.Tag.ToString())
             {
                 case "EditUndo":
@@ -1006,17 +1017,18 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void btnSymbolClick(object sender, EventArgs e)
+        private void btnSymbolClick(object? sender, EventArgs e)
         {
             // 插入符號
 
-            ToolStripItem obj = (ToolStripItem)sender;
+            var obj = sender as ToolStripItem;
+            if (obj == null) return;
             if (obj.Tag == null)
             {
                 m_TextArea.ReplaceSelection(obj.Text);
                 return;
             }
-            string s = obj.Tag.ToString();
+            string s = obj.Tag.ToString() ?? string.Empty; // Fixed CS8600
             if (String.IsNullOrEmpty(s))
             {
                 m_TextArea.ReplaceSelection(s);
@@ -1049,9 +1061,11 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void miToolsClick(object sender, EventArgs e)
+        private void miToolsClick(object? sender, EventArgs e)
         {
-            ToolStripItem obj = (ToolStripItem)sender;
+            var obj = sender as ToolStripItem;
+            if (obj?.Tag == null) return;
+
             switch (obj.Tag.ToString())
             {
                 case "Convert":
@@ -1063,13 +1077,13 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void clearStatusTimer_Tick(object sender, EventArgs e)
+        private void clearStatusTimer_Tick(object? sender, EventArgs e)
         {
             StatusText = "";
             clearStatusTimer.Enabled = false;
         }
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void MainForm_FormClosed(object? sender, FormClosedEventArgs e)
         {
             if (m_FileRunner != null)
             {
@@ -1077,9 +1091,11 @@ namespace EasyBrailleEdit
             }
         }
 
-        private async void miHelpClick(object sender, EventArgs e)
+        private async void miHelpClick(object? sender, EventArgs e)
         {
-            ToolStripItem obj = (ToolStripItem)sender;
+            var obj = sender as ToolStripItem;
+            if (obj?.Tag == null) return;
+
             switch (obj.Tag.ToString())
             {
                 case "About":
@@ -1111,9 +1127,11 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void miInsertClick(object sender, EventArgs e)
+        private void miInsertClick(object? sender, EventArgs e)
         {
-            ToolStripItem obj = (ToolStripItem)sender;
+            var obj = sender as ToolStripItem;
+            if (obj?.Tag == null) return;
+
             switch (obj.Tag.ToString())
             {
                 case "Table":

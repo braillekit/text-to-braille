@@ -12,14 +12,14 @@ namespace EasyBrailleEdit
             InitializeComponent();
         }
 
-        private void UpdateProgressForm_Load(object sender, EventArgs e)
+        private void UpdateProgressForm_Load(object? sender, EventArgs e)
         {
             this.TopMost = true;
 
             txtMsg.Clear();
         }
 
-        public async void updator_FileUpdating(object sender, HttpUpdaterFileEventArgs args)
+        public async void updator_FileUpdating(object? sender, HttpUpdaterFileEventArgs args)
         {
             await txtMsg.InvokeAsync(() =>
             {
@@ -28,7 +28,7 @@ namespace EasyBrailleEdit
             });
         }
 
-        public async void updator_FileUpdated(object sender, HttpUpdaterFileEventArgs args)
+        public async void updator_FileUpdated(object? sender, HttpUpdaterFileEventArgs args)
         {
             await txtMsg.InvokeAsync(() =>
             {
@@ -38,7 +38,7 @@ namespace EasyBrailleEdit
         }
 
 
-        public async void updator_DownloadProgressChanged(object sender, DownloadProgress e)
+        public async void updator_DownloadProgressChanged(object? sender, DownloadProgress e)
         {
             await progressBar1.InvokeAsync(() =>
             {

@@ -187,7 +187,8 @@ namespace BrailleToolkit.Rules
         /// <summary>
         /// 處理那些需要在左右兩邊加空方的字元。
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="brLine"></param>
+        /// <param name="wordIdx"></param>
         /// <returns></returns>
         private static int AddSpaceForSpecialCharacters(BrailleLine brLine, int wordIdx)
         {

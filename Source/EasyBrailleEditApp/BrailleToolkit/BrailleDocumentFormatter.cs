@@ -20,8 +20,9 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="brDoc">點字文件。</param>
         /// <param name="lineIndex">欲重新編排的列索引。</param>
+        /// <param name="context">情境物件。</param>
         /// <returns>傳回編排後的列數。</returns>
-        public static int FormatLine(BrailleDocument brDoc, int lineIndex, ContextTagManager context)
+        public static int FormatLine(BrailleDocument brDoc, int lineIndex, ContextTagManager? context)
         {
             BrailleLine brLine = brDoc.Lines[lineIndex];
 
@@ -53,10 +54,16 @@ namespace BrailleToolkit
         /// 對指定的 BrailleLine 格式化，包括斷行、移除沒有用的空標籤。
         /// </summary>
         /// <param name="brLine"></param>
+        /// <param name="cellsPerLine">每列幾方。</param>
         /// <param name="context"></param>
         /// <returns>可能是空的串列、經過格式化的單行串列，或者因斷行而產生的多行串列。</returns>
-        public static List<BrailleLine> FormatLine(BrailleLine brLine, int cellsPerLine, ContextTagManager context)
+        public static List<BrailleLine> FormatLine(BrailleLine? brLine, int cellsPerLine, ContextTagManager? context)
         {
+            if (brLine == null)
+            {
+                throw new ArgumentNullException(nameof(brLine));
+            }
+
             var outputLines = new List<BrailleLine>();
 
             BrailleDocumentHelper.RemoveUselessWords(brLine, true, out _);
@@ -85,8 +92,13 @@ namespace BrailleToolkit
         /// <param name="cellsPerLine">每行最大方數。</param>
         /// <param name="context">情境物件。</param>
         /// <returns>斷行之後的多行串列。若為 null 表示無需斷行（指定的點字串列未超過每行最大方數）。</returns>
-        public static List<BrailleLine> BreakLine(BrailleLine brLine, int cellsPerLine, ContextTagManager context)
+        public static List<BrailleLine>? BreakLine(BrailleLine? brLine, int cellsPerLine, ContextTagManager? context)
         {
+            if (brLine == null)
+            {
+                throw new ArgumentNullException(nameof(brLine));
+            }
+
             int maxCellsInLine = cellsPerLine;
             if (context != null && context.IndentCount > 0) // 若目前位於縮排區塊中
             {
@@ -107,7 +119,7 @@ namespace BrailleToolkit
             }
 
             List<BrailleLine> lines = new List<BrailleLine>();
-            BrailleLine newLine = null;
+            BrailleLine? newLine = null;
             int wordIndex = 0;
             int breakIndex = 0;
             bool needHyphen = false;
@@ -149,6 +161,8 @@ namespace BrailleToolkit
                 EnglishBrailleRule.ApplyCapitalRule(brLine);    // 套用大寫規則。
 
                 GeneralBrailleRule.ApplyDigitRule(brLine);		// 套用數字規則。
+
+
 
                 isBroken = true;    // 已經至少折了一行
                 maxCellsInLine = cellsPerLine - indents;  // 下一行開始就要自動縮排，共縮 indents 格。
@@ -228,7 +242,7 @@ namespace BrailleToolkit
             int breakIndex = fixedBreakIndex;
 
             BrailleWord breakWord;
-            BrailleWord leftWord = null;
+            BrailleWord? leftWord = null;
 
             // 必須和前一個字元一起斷至下一行的字元。亦即，只要剛好斷在這些字元，就要改成斷前一個字元。
             char[] joinLeftChars = { ',', '.', '。', '、', '，', '；', '？', '！', '」', '』', '‧' };

@@ -27,7 +27,7 @@ namespace BrailleToolkit
 
     /// <summary>
     /// 用來代表 BrailleLine 中的每一個元素，通常是一個字元，例如中文的「我」、英文的「A」。
-    /// 也可能是一個控制標籤（context tag），例如 "<數學>"`。
+    /// 也可能是一個控制標籤（context tag），例如 "&lt;數學&gt;"。
     /// 當此物件的內容是一個中文字元時，除了其對應的點字之外，還會包含注音碼。
     /// 備註：基於上述原因，此類別的名稱不是 BrailleChar，而是 BrailleWord。
     /// </summary>
@@ -142,7 +142,7 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="obj">要與目前物件相比較的物件。</param>
         /// <returns>如果指定的物件等於目前的物件，則為 true；否則為 false。</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (base.Equals(obj))
                 return true;
@@ -526,7 +526,7 @@ namespace BrailleToolkit
         /// 把指定的點字字串（16進位）轉成 BrailleCell 物件，並加入點字串列中。
         /// </summary>
         /// <param name="brCodes">欲加入串列的點字碼 16 進位字串。</param>
-        public void AddCells(string brCodes)
+        public void AddCells(string? brCodes)
         {
             if (String.IsNullOrEmpty(brCodes))
             {
@@ -775,7 +775,7 @@ namespace BrailleToolkit
         public static bool IsChinesePunctuation(BrailleWord brWord)
         {
             TwChineseBrailleTable chtBrlTbl = TwChineseBrailleTable.GetInstance();
-            string brCode = chtBrlTbl.GetPunctuationCode(brWord.Text);
+            string? brCode = chtBrlTbl.GetPunctuationCode(brWord.Text);
             if (String.IsNullOrEmpty(brCode))
                 return false;
             return true;

@@ -9,7 +9,7 @@ namespace BrailleToolkit.Data
     /// </summary>
 	public sealed class PhoneticBrailleTable : XmlBrailleTable
 	{
-		private static PhoneticBrailleTable m_Instance = null;
+		private static PhoneticBrailleTable? m_Instance = null;
 
 		/// <summary>
 		/// 建構函式。

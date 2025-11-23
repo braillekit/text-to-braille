@@ -44,7 +44,7 @@ namespace BrailleToolkit.Data
         /// <param name="text">欲搜尋的符號。</param>
         /// <param name="type">限定欲搜尋的符號類型。若不同類型當中存在相同的文字符號，便應指定此參數，以確保找到正確的符號。</param>
         /// <returns>若有找到，則傳回對應的點字碼，否則傳回 null。</returns>
-        public abstract string Find(string text, string type=null);
+        public abstract string? Find(string text, string? type=null);
 
         /// <summary>
         /// 搜尋某個文字符號，並傳回對應的點字位置字串。例如: "134 26"。
@@ -52,7 +52,7 @@ namespace BrailleToolkit.Data
         /// <param name="text">欲搜尋的符號。</param>
         /// <param name="type">限定欲搜尋的符號類型。若不同類型當中存在相同的文字符號，便應指定此參數，以確保找到正確的符號。</param>
         /// <returns>範例："24 1345 36"。</returns>
-        public abstract string[] GetDots(string text, string type=null);
+        public abstract string[]? GetDots(string text, string? type=null);
 
         /// <summary>
         /// 單純用來判斷某符號是否存在此點字對照表，不取出點字碼。速度比 Find 快。

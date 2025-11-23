@@ -40,7 +40,7 @@ namespace BrailleToolkit.Converters
         /// <param name="charStack">字元堆疊。</param>
         /// <param name="context">情境物件。</param>
         /// <returns>傳回轉換後的點字物件串列，若串列為空串列，表示沒有成功轉換的字元。</returns>
-        public override List<BrailleWord> Convert(Stack<char> charStack, ContextTagManager context)
+        public override List<BrailleWord>? Convert(Stack<char> charStack, ContextTagManager context)
         {
             if (charStack.Count < 1)
                 throw new ArgumentException("傳入空的字元堆疊!");
@@ -50,14 +50,14 @@ namespace BrailleToolkit.Converters
             if (ch != '<')
                 return null;
 
-            List<BrailleWord> brWordList = null; 
+            List<BrailleWord>? brWordList = null; 
 
             char[] charBuf = charStack.ToArray();
             string s = new string(charBuf);
             bool isBeginTag;
 
 			// 剖析字串是否為情境標籤，是則"進入"該情境標籤。
-            IContextTag ctag = context.Parse(s, out isBeginTag);	
+            IContextTag? ctag = context.Parse(s, out isBeginTag);	 // Fixed CS8600
 
             if (ctag != null)
             {

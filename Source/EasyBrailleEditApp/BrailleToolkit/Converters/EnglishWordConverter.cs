@@ -38,7 +38,7 @@ namespace BrailleToolkit.Converters
         /// <param name="charStack">輸入的 ASCII 字元堆疊。</param>
         /// <param name="context">情境物件。</param>
         /// <returns>傳回轉換後的點字物件串列，若串列為空串列，表示沒有成功轉換的字元。</returns>
-        public override List<BrailleWord> Convert(Stack<char> charStack, ContextTagManager context)
+        public override List<BrailleWord>? Convert(Stack<char> charStack, ContextTagManager context)
         {
 			if (charStack.Count < 1)
 				throw new ArgumentException("傳入空的字元堆疊!");
@@ -48,7 +48,7 @@ namespace BrailleToolkit.Converters
 			string currentWord;
 			bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
             BrailleWord? brWord;
-            List<BrailleWord> brWordList = null;
+            List<BrailleWord>? brWordList = null;
 
             const string LeftForMathConverter = "*.:()（）,，";
             const string LeftForCoordinateConverter = "(,)";
@@ -123,7 +123,7 @@ namespace BrailleToolkit.Converters
                 if (context.IsMathActive())
                 {
                     // 數學區塊裡面的符號，必須留給 MathConverter 處理。
-                    if (_processor.MathConverter.BrailleTable.Exists(currentWord))
+                    if (_processor.MathConverter != null && _processor.MathConverter.BrailleTable.Exists(currentWord))
                         break;
                 }
 
@@ -162,7 +162,7 @@ namespace BrailleToolkit.Converters
         }
         
         /// <summary>
-        /// 處理以 '&' 符號開頭的特殊字元，例如："&gt;" 和 "&lt;" 可以分別表示
+        /// 處理以 ampersand (&amp;) 符號開頭的特殊字元，例如："&gt;" 和 "&lt;" 可以分別表示
         /// 半形的大於、小於符號。
         /// </summary>
         /// <param name="charStack">字元堆疊。</param>
@@ -214,12 +214,13 @@ namespace BrailleToolkit.Converters
             return isExtracted;
         }
 
-		/// <summary>
-		/// 把英數字轉換成點字。
-		/// </summary>
-		/// <param name="text">一個英數字或英文標點符號。</param>
-		/// <returns>若指定的字串是中文字且轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
-		private BrailleWord? InternalConvert(string text, ContextTagManager context)
+        /// <summary>
+        /// 把英數字轉換成點字。
+        /// </summary>
+        /// <param name="text">一個英數字或英文標點符號。</param>
+        /// <param name="context">情境標籤管理員。</param>
+        /// <returns>若指定的字串是中文字且轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
+        private BrailleWord? InternalConvert(string text, ContextTagManager context)
 		{
 			if (String.IsNullOrEmpty(text))
 				return null;

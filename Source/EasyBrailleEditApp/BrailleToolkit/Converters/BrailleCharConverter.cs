@@ -49,7 +49,7 @@ namespace BrailleToolkit.Converters
         {
             Assembly asmb = Assembly.GetExecutingAssembly();
             string resourceName = "BrailleToolkit.Data.BrailleFontTbl.txt";
-            Stream stream = asmb.GetManifestResourceStream(resourceName);
+            Stream? stream = asmb.GetManifestResourceStream(resourceName);
             if (stream == null)
                 throw new Exception("找不到資源: " + resourceName);
             using (stream)
@@ -158,7 +158,7 @@ namespace BrailleToolkit.Converters
         /// </summary>
         /// <param name="brailleHexCode">內部點字碼，兩位數16進位字串，例如：4E。</param>
         /// <returns>點字字型碼，兩位數16進位字串。</returns>
-        public static string ToBrailleCharCode(string brailleHexCode)
+        public static string? ToBrailleCharCode(string brailleHexCode)
         {
             if (m_CharTable.ContainsKey(brailleHexCode))
             {
@@ -172,7 +172,7 @@ namespace BrailleToolkit.Converters
         /// </summary>
         /// <param name="brailleCharCode">點字碼，兩位數16進位字串，例如：3F。</param>
         /// <returns>點字碼，兩位數16進位字串。</returns>
-        public static string ToBrailleHexCode(string brailleCharCode)
+        public static string? ToBrailleHexCode(string brailleCharCode)
         {
             foreach (var item in m_CharTable)
             {

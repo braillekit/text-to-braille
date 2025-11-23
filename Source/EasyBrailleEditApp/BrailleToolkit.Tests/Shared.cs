@@ -9,7 +9,7 @@ namespace BrailleToolkit.Tests
         private static string GetAssemblyDirectory()
         {
             string codeBase = Assembly.GetExecutingAssembly().Location;
-            return Path.GetDirectoryName(codeBase);
+            return Path.GetDirectoryName(codeBase) ?? string.Empty;
         }
 
         private static string testDataPath = Path.Combine(GetAssemblyDirectory(), @"TestData\");

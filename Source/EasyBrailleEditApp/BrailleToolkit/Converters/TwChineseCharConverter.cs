@@ -20,7 +20,7 @@ namespace BrailleToolkit.Converters
         /// <summary>
         /// 取得或設定注音反查轉換器。
         /// </summary>
-        public ZhuyinReverseConverter ZhuyinConverter { get; set; }
+        public ZhuyinReverseConverter? ZhuyinConverter { get; set; }
 
         /// <summary>
         /// 建構函式。
@@ -40,7 +40,7 @@ namespace BrailleToolkit.Converters
         /// <param name="charStack">字元堆疊。</param>
         /// <param name="context">情境物件。</param>
         /// <returns>傳回轉換後的點字物件串列，若串列為空串列，表示沒有成功轉換的字元。</returns>
-        public override List<BrailleWord> Convert(Stack<char> charStack, ContextTagManager context)
+        public override List<BrailleWord>? Convert(Stack<char> charStack, ContextTagManager context)
         {
             if (charStack.Count < 1)
                 throw new ArgumentException("傳入空的字元堆疊!");
@@ -50,7 +50,7 @@ namespace BrailleToolkit.Converters
             string currentWord;
             bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
             BrailleWord? brWord;
-            List<BrailleWord> brWordList = null;
+            List<BrailleWord>? brWordList = null;
             int idx = 0;
             int chineseStartIdx = -1;
             int chineseEndIdx = -1;
@@ -131,12 +131,14 @@ namespace BrailleToolkit.Converters
                     }
                 }
 
+
                 if (context.IsMathActive())
                 {
                     // 數學區塊裡面的符號，必須留給 MathConverter 處理。
-                    if (_processor.MathConverter.BrailleTable.Exists(currentWord))
+                    if (_processor.MathConverter != null && _processor.MathConverter.BrailleTable.Exists(currentWord))
                         break;
                 }
+
 
                 brWord = InternalConvert(currentWord);
                 if (brWord == null)
@@ -200,7 +202,7 @@ namespace BrailleToolkit.Converters
             }
 
             // 處理這段中文字的最後一段連續中文字。
-            if (chineseStartIdx >= 0)
+            if (chineseStartIdx >= 0 && brWordList != null)
             {
                 FixPhoneticCodes(brWordList, chineseStartIdx, chineseEndIdx);
             }
@@ -233,6 +235,7 @@ namespace BrailleToolkit.Converters
             }
 
             // 取得所有中文字的注音字根。
+            if (ZhuyinConverter == null) return;
             string[] allPhCodes = ZhuyinConverter.GetZhuyinWithPhraseTable(sb.ToString()); 
             string phCode;
             BrailleWord brWord;
@@ -249,7 +252,7 @@ namespace BrailleToolkit.Converters
                     continue;
 
                 // 將注音字根轉換成點字碼
-                BrailleCellList cellList = CreatePhoneticCellList(phCode);
+                BrailleCellList? cellList = CreatePhoneticCellList(phCode);
                 if (cellList != null)
                 {
                     brWord.CellList.Assign(cellList);
@@ -263,11 +266,11 @@ namespace BrailleToolkit.Converters
         /// </summary>
         /// <param name="text">一個中文字或標點符號。</param>
         /// <returns>若指定的字串是中文字且轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
-        private BrailleWord InternalConvert(string text)
+        private BrailleWord? InternalConvert(string text)
         {
-            BrailleWord brWord = new BrailleWord(text);
+            BrailleWord? brWord = new BrailleWord(text);
 
-            string brCode;
+            string? brCode;
 
             if (text.Length == 1)
             {
@@ -300,7 +303,15 @@ namespace BrailleToolkit.Converters
             if (text.IsCJK())  // 若是漢字
             {
                 // 取得注音字根
-                string[] zhuyinCodes = ZhuyinConverter.GetZhuyinWithPhraseTable(text);
+                string[] zhuyinCodes;
+                if (ZhuyinConverter != null)
+                {
+                    zhuyinCodes = ZhuyinConverter.GetZhuyinWithPhraseTable(text);
+                }
+                else
+                {
+                    zhuyinCodes = new string[0];
+                }
 
                 //if (zhuyinCodes == null || zhuyinCodes.Length == 0)
                 //{
@@ -334,7 +345,7 @@ namespace BrailleToolkit.Converters
             // 不是中文字，或者無法取得注音字根.
 
             // 處理標點符號
-            string puncBrCode = _brailleTable.GetPunctuationCode(text);
+            string? puncBrCode = _brailleTable.GetPunctuationCode(text);
             if (!String.IsNullOrEmpty(puncBrCode))
             {
                 brWord.AddCells(puncBrCode);
@@ -359,9 +370,8 @@ namespace BrailleToolkit.Converters
         /// 注意：若轉換成功，會同時加入注音碼和點字碼。
         /// </summary>
         /// <param name="phcode">一個中文字的注音組字字根碼</param>
-        /// <param name="brWord">欲加入點字的 BrailleWord 物件</param>
         /// <returns>成功傳回 true，失敗傳回 false。</returns>
-        public BrailleCellList CreatePhoneticCellList(string phcode)
+        public BrailleCellList? CreatePhoneticCellList(string phcode)
         {
             if (StrHelper.IsEmpty(phcode) || phcode.Length < 4)
                 return null;   // 不是中文字
@@ -375,10 +385,10 @@ namespace BrailleToolkit.Converters
             string tonePhCode = phcode.Substring(3, 1);		// 音調
 
             // 取出注音符號各部份的點字碼。
-            string firstBrCode = _brailleTable.GetPhoneticCode(firstPhCode);
-            string secondBrCode = _brailleTable.GetPhoneticCode(secondPhCode);
-            string thirdBrCode = _brailleTable.GetPhoneticCode(thirdPhCode);
-            string toneBrCode = _brailleTable.GetPhoneticToneCode(tonePhCode);
+            string? firstBrCode = _brailleTable.GetPhoneticCode(firstPhCode);
+            string? secondBrCode = _brailleTable.GetPhoneticCode(secondPhCode);
+            string? thirdBrCode = _brailleTable.GetPhoneticCode(thirdPhCode);
+            string? toneBrCode = _brailleTable.GetPhoneticToneCode(tonePhCode);
 
             if (firstBrCode == null && secondBrCode == null && thirdBrCode == null)
             {
@@ -390,7 +400,7 @@ namespace BrailleToolkit.Converters
             // 處理特殊的單音字。
             if (StrHelper.IsEmpty(secondPhCode) && StrHelper.IsEmpty(thirdPhCode))
             {
-                string monoBrCode = _brailleTable.GetPhoneticMonoCode(firstPhCode);
+                string? monoBrCode = _brailleTable.GetPhoneticMonoCode(firstPhCode);
                 if (String.IsNullOrEmpty(monoBrCode))
                 {
                     throw new Exception("無效的注音符號: " + phcode);
@@ -398,34 +408,34 @@ namespace BrailleToolkit.Converters
                 cellList.Add(monoBrCode);
 
                 // 特殊單音字要附加 'ㄦ'
-                string erBrCode = _brailleTable.GetPhoneticCode("ㄦ");
+                string? erBrCode = _brailleTable.GetPhoneticCode("ㄦ");
                 if (String.IsNullOrEmpty(erBrCode))
                 {
                     throw new Exception("點字對照表中無此符號: ㄦ");
                 }
-                cellList.Add(erBrCode);
+                cellList.Add(erBrCode!);
 
                 // 再加上聲調
-                cellList.Add(toneBrCode);
+                cellList.Add(toneBrCode!);
 
                 return cellList;
             }
 
             // 處理結合韻。				
-            string joinedBrCode = _brailleTable.GetPhoneticJoinedCode(joinedPhCode);
+            string? joinedBrCode = _brailleTable.GetPhoneticJoinedCode(joinedPhCode);
             if (!String.IsNullOrEmpty(joinedBrCode))	// 是結合韻？
             {
-                cellList.Add(firstBrCode);	// 加入第一個注音符號
+                cellList.Add(firstBrCode!);	// 加入第一個注音符號
                 cellList.Add(joinedBrCode);	// 加入結合韻					
-                cellList.Add(toneBrCode);	// 加入聲調               
+                cellList.Add(toneBrCode!);	// 加入聲調               
                 return cellList;
             }
 
             // 不是特殊單音字，也不是結合韻：其他注音符號拼法。例如："ㄋㄧ　ˇ"。
-            cellList.Add(firstBrCode);	// 加入第一個注音符號
-            cellList.Add(secondBrCode);	// 加入第二個注音符號
-            cellList.Add(thirdBrCode);	// 加入第三個注音符號
-            cellList.Add(toneBrCode);	// 加入聲調          
+            cellList.Add(firstBrCode!);	// 加入第一個注音符號
+            cellList.Add(secondBrCode!);	// 加入第二個注音符號
+            cellList.Add(thirdBrCode!);	// 加入第三個注音符號
+            cellList.Add(toneBrCode!);	// 加入聲調          
             return cellList;
         }
 

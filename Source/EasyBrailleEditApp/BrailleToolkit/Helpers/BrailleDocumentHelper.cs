@@ -18,6 +18,7 @@ namespace BrailleToolkit.Helpers
         /// <summary>
         /// 傳回點字頁尾。內容包括：頁標題、點字頁碼、原書頁碼。
         /// </summary>
+        /// <param name="brDoc">點字文件。</param>
         /// <param name="lineIdx">目前列印的列索引。用來計算頁尾的文件標題。</param>
         /// <param name="pageNum">頁碼。</param>
         /// <param name="beginOrgPageNum">起始原書頁碼。</param>
@@ -25,14 +26,14 @@ namespace BrailleToolkit.Helpers
         /// <returns></returns>
         /// <remarks>注意：點字頁碼的 # 號要固定印在第 37 方的位置（requested by 秋華）</remarks>
         public static string GetBraillePageFoot(BrailleDocument brDoc,
-            int lineIdx, int pageNum, string beginOrgPageNum, string endOrgPageNum)
+            int lineIdx, int pageNum, string? beginOrgPageNum, string? endOrgPageNum)
         {
             StringBuilder sb = new StringBuilder();
             StringBuilder sbPageNum = new StringBuilder();
 
             // 標題
-            BrailleLine titleLine = brDoc.GetPageTitle(lineIdx);
-            string title = BrailleCharConverter.ToString(titleLine);
+            BrailleLine? titleLine = brDoc.GetPageTitle(lineIdx); // Fixed CS8600
+            string title = titleLine != null ? BrailleCharConverter.ToString(titleLine) : string.Empty; // Fixed CS8604
 
             // 原書頁碼
             if (!String.IsNullOrEmpty(beginOrgPageNum))
@@ -117,6 +118,7 @@ namespace BrailleToolkit.Helpers
         /// 從傳入的字串中取出原書頁碼。
         /// </summary>
         /// <param name="line"></param>
+        /// <param name="orgPageNumber">傳出參數，原書頁碼。</param>
         /// <returns>若傳入的字串不是原書頁碼，則傳回空字串。否則傳回原書頁碼的文字（必須是字串，因為頁碼可能是羅馬數字）。</returns>
         public static bool GetOrgPageNumber(string line, out string orgPageNumber)
         {
@@ -168,8 +170,8 @@ namespace BrailleToolkit.Helpers
         public static void SetBeginEndOrgPageNumber(
             BrailleLine brLine, 
             bool isFirstLineOfPage,
-            ref string beginOrgPageNumber, 
-            ref string endOrgPageNumber)
+            ref string? beginOrgPageNumber, 
+            ref string? endOrgPageNumber)
         {
             string line = brLine.ToString();
 
@@ -274,7 +276,6 @@ namespace BrailleToolkit.Helpers
         /// </summary>
         /// <param name="brLine"></param>
         /// <param name="doRemove"></param>
-        /// <param name="emptyLinesCount"></param>
         /// <param name="emptyTagsCount"></param>
         public static void RemoveUselessWords(BrailleLine brLine, bool doRemove, out int emptyTagsCount)
         {

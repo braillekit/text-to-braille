@@ -37,7 +37,7 @@ namespace BrailleToolkit.Tests
             // 測試明眼字內含注音符號、冒號後面跟著"我"、以及引號、句號。
             string line = "ㄅˇ你說：我是誰？　我說：「我是神。」";
             string expected = "ㄅˇ你說： 我是誰？　我說：「我是神。」";
-            BrailleLine brLine = target.ConvertLine(line);
+            BrailleLine? brLine = target.ConvertLine(line);
             string actual = brLine.ToString();
             Assert.Equal(expected, actual);
 
@@ -200,7 +200,7 @@ namespace BrailleToolkit.Tests
             BrailleProcessor processor =
                 BrailleProcessor.CreateInstance(new ZhuyinReverseConverter(null));
 
-            BrailleLine brLine = processor.ConvertLine(inputText);            
+            BrailleLine? brLine = processor.ConvertLine(inputText);            
 
             var lines = BrailleDocumentFormatter.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
 

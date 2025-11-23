@@ -111,7 +111,7 @@ namespace EasyBrailleEdit.Common.Utilities.Http
                     DownloadProgressChanged = null;
 
                     m_UpdateItems.Clear();
-                    m_UpdateItems = null;
+                    m_UpdateItems = null!;
 
                     m_Disposed = true;
                 }
@@ -220,7 +220,7 @@ namespace EasyBrailleEdit.Common.Utilities.Http
             using (var stream = await _httpClient.GetStreamAsync(m_ServerUri + updateFileName))
             using (var reader = new StreamReader(stream))
             {
-                string line;
+                string? line;
                 while ((line = await reader.ReadLineAsync()) != null)
                 {
                     lines.Add(line);
@@ -313,7 +313,7 @@ namespace EasyBrailleEdit.Common.Utilities.Http
                     // 第二個參數若以 '=' 字元開始，表示只有 local 跟遠端的檔案版本不同就要更新
                     fileVerInfo = FileVersionInfo.GetVersionInfo(clientFileName);
                     verRemote = new Version(infoParam.Substring(1, infoParam.Length - 1));
-                    verLocal = new Version(fileVerInfo.FileVersion.Split(' ')[0]);
+                    verLocal = new Version(fileVerInfo.FileVersion!.Split(' ')[0]);
 
                     if (verRemote != verLocal)
                     {
@@ -424,7 +424,7 @@ namespace EasyBrailleEdit.Common.Utilities.Http
                     var actualClientPath = Path.GetDirectoryName(clientFileName);
                     if (!Directory.Exists(actualClientPath))
                     {
-                        Directory.CreateDirectory(actualClientPath);
+                        Directory.CreateDirectory(actualClientPath!);
                     }
 
                     // 開始執行更新作業
@@ -497,15 +497,15 @@ namespace EasyBrailleEdit.Common.Utilities.Http
                 for (int i = rollBackList.Count - 1; i >= 0; i--)
                 {
                     rollback = rollBackList[i];
-                    if (rollback.Operation == RollbackAction.Rename)
+                    if (rollback!.Operation == RollbackAction.Rename)
                     {
-                        if (File.Exists(rollback.TargetFileName))
+                        if (File.Exists(rollback!.TargetFileName))
                         {
-                            File.Delete(rollback.TargetFileName);
+                            File.Delete(rollback!.TargetFileName);
                         }
-                        if (File.Exists(rollback.SourceFileName))
+                        if (File.Exists(rollback!.SourceFileName))
                         {
-                            File.Move(rollback.SourceFileName, rollback.TargetFileName);
+                            File.Move(rollback!.SourceFileName, rollback!.TargetFileName);
                         }
                     }
                 }

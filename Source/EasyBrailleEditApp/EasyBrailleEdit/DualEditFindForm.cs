@@ -238,8 +238,11 @@ namespace EasyBrailleEdit
 			{
 				e.Cancel = true;
 				this.Hide();
-				Owner.Activate();
-				Owner.BringToFront();
+				if (Owner != null)
+				{
+					Owner.Activate();
+					Owner.BringToFront();
+				}
 			}
 		}
 

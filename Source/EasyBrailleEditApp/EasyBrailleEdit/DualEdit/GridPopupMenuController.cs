@@ -17,7 +17,7 @@ namespace EasyBrailleEdit.DualEdit
         private ContextMenuStrip m_Menu = new ContextMenuStrip();
         private SourceGrid.CellContext m_CellContext;
 
-        private event SourceGrid.CellContextEventHandler m_PopupMenuClick = null;
+        private event SourceGrid.CellContextEventHandler? m_PopupMenuClick = null;
 
         public GridPopupMenuController()
         {
@@ -55,7 +55,7 @@ namespace EasyBrailleEdit.DualEdit
                 string[] def = s.Split(sep);
                 mi = new ToolStripMenuItem(def[0]);
                 mi.Tag = def[1];
-                if (!mi.Text.Equals("-"))
+                if (mi.Text != "-")
                 {
                     mi.Click += clickHandler;
                 }
@@ -75,7 +75,7 @@ namespace EasyBrailleEdit.DualEdit
         {
             foreach (ToolStripMenuItem item in m_Menu.Items)
             {
-                if (tag.Equals((string)item.Tag, StringComparison.CurrentCultureIgnoreCase))
+                if (tag.Equals(item.Tag as string, StringComparison.CurrentCultureIgnoreCase))
                 {
                     item.Visible = false;
                 }
@@ -93,14 +93,17 @@ namespace EasyBrailleEdit.DualEdit
             }
         }
 
-        private void GridPopupMenuItem_Click(object sender, EventArgs e)
+        private void GridPopupMenuItem_Click(object? sender, EventArgs e)
         {
-            var mi = (ToolStripMenuItem)sender;
+            var mi = sender as ToolStripMenuItem;
             if (mi != null)
             {
                 SourceGrid.CellContextEventArgs args = new SourceGrid.CellContextEventArgs(m_CellContext);
-                Command = mi.Tag.ToString()!;
-                OnPopupMenuClick(args);
+                if (mi.Tag != null)
+                {
+                    Command = mi.Tag.ToString()!;
+                    OnPopupMenuClick(args);
+                }
             }
         }
 

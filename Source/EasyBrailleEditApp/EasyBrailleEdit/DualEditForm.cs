@@ -20,7 +20,7 @@ namespace EasyBrailleEdit
 
         private System.Windows.Forms.Timer clearStatusTimer = new System.Windows.Forms.Timer();
 
-        public BrailleDocument BrailleDoc
+        public BrailleDocument? BrailleDoc
         {
             get
             {
@@ -34,20 +34,20 @@ namespace EasyBrailleEdit
 
         string IBrailleGridForm.CurrentWordStatusText
         {
-            get => statusLabelCurrentWord.Text; 
+            get => statusLabelCurrentWord.Text ?? string.Empty; 
             set => statusLabelCurrentWord.Text = value;
         }
 
         string IBrailleGridForm.CurrentLineStatusText
         {
-            get => statusLabelCurrentLine.Text;
+            get => statusLabelCurrentLine.Text ?? string.Empty;
             set => statusLabelCurrentLine.Text = value; 
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string StatusText
         {
-            get { return statusStrip1.Items[0].Text; }
+            get { return statusStrip1.Items[0].Text ?? string.Empty; }
             set
             {
                 statusStrip1.Items[0].Text = value;
@@ -59,13 +59,13 @@ namespace EasyBrailleEdit
 
         string IBrailleGridForm.CurrentPageTitleStatusText
         {
-            get => statusLabelPageTitle.Text;
+            get => statusLabelPageTitle.Text ?? string.Empty;
             set => statusLabelPageTitle.Text = value;
         }
 
         string IBrailleGridForm.PageNumberText
         {
-            get { return statPageInfo.Text; }
+            get { return statPageInfo.Text ?? string.Empty; }
             set { statPageInfo.Text = value; }
         }
 
@@ -120,10 +120,14 @@ namespace EasyBrailleEdit
             _controller.UndoRedo.UndoBufferChanged += UndoRedo_UndoBufferChanged;
         }
 
-        private void UndoRedo_UndoBufferChanged(object sender, EventArgs e)
+        private void UndoRedo_UndoBufferChanged(object? sender, EventArgs e)
         {
-            var undoableOperations = (sender as UndoRedoManager)!.GetUndoableOperations();
-            _undoBufferForm.UpdateUI(undoableOperations);
+            var manager = sender as UndoRedoManager;
+            if (manager != null)
+            {
+                var undoableOperations = manager.GetUndoableOperations();
+                _undoBufferForm.UpdateUI(undoableOperations);
+            }
         }
        
         private void DualEditForm_Load(object sender, EventArgs e)
@@ -180,10 +184,13 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void Grid_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void Grid_MouseDoubleClick(object? sender, MouseEventArgs e)
         {
-            var grid = (SourceGrid.Grid)sender;
-            _controller.Grid_MouseDoubleClick(grid, e);
+            var grid = sender as SourceGrid.Grid;
+            if (grid != null)
+            {
+                _controller.Grid_MouseDoubleClick(grid, e);
+            }
         }
 
         private void GridSelection_FocusRowEntered(object sender, SourceGrid.RowEventArgs e)
@@ -288,17 +295,24 @@ namespace EasyBrailleEdit
         {
             if (cboZoom.SelectedIndex < 0)
                 return;
-            string s = cboZoom.Items[cboZoom.SelectedIndex].ToString();
+            
+            object? item = cboZoom.Items[cboZoom.SelectedIndex];
+            if (item == null) return;
+            
+            string? s = item.ToString();
+            if (s == null) return;
+
             s = s.Substring(0, s.Length - 1);
             _controller.Zoom(Convert.ToInt32(s));
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if (e.ClickedItem.Tag == null)
+            if (e.ClickedItem?.Tag == null)
                 return;
 
-            string s = e.ClickedItem.Tag.ToString()!;
+            string? s = e.ClickedItem.Tag.ToString();
+            if (s == null) return;
 
             switch (s)
             {
@@ -317,8 +331,10 @@ namespace EasyBrailleEdit
 
         private void miViewMode_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem mi = sender as ToolStripMenuItem;
-            switch (mi.Tag!.ToString()!)
+            var mi = sender as ToolStripMenuItem;
+            if (mi?.Tag == null) return;
+
+            switch (mi.Tag.ToString())
             {
                 case "All":
                     _controller.ViewMode = ViewMode.All;
@@ -344,6 +360,8 @@ namespace EasyBrailleEdit
 
         private void EditDocProperties()
         {
+            if (BrailleDoc == null) return;
+
             var form = new BrailleDocPropertiesForm();
             form.CellsPerLine = BrailleDoc.CellsPerLine;
             form.StartPageNumber = BrailleDoc.StartPageNumber;
@@ -356,6 +374,8 @@ namespace EasyBrailleEdit
 
         private void EditPageTitles()
         {
+            if (BrailleDoc == null) return;
+
             if (BrailleDoc.UpdateTitlesLineIndex() > 0)
             {
                 _controller.IsDirty = true;
@@ -368,13 +388,13 @@ namespace EasyBrailleEdit
                 BrailleDoc.PageTitles.Clear();
 
                 // 複製所有標題列。
-                BraillePageTitle newTitle = null;
+                BraillePageTitle? newTitle = null; // Fixed CS8600
                 foreach (BraillePageTitle t in form.Titles)
                 {
-                    if (t.TitleLine.CellCount > 0)
+                    if (t.TitleLine != null && t.TitleLine.CellCount > 0)
                     {
                         newTitle = t.Clone() as BraillePageTitle;
-                        BrailleDoc.PageTitles.Add(newTitle);
+                        BrailleDoc.PageTitles.Add(newTitle!); // Fixed CS8600
                     }
                 }
                 _controller.IsDirty = true;
@@ -383,6 +403,8 @@ namespace EasyBrailleEdit
 
         private void FetchPageTitles()
         {
+            if (BrailleDoc == null) return;
+
             int addedCount = BrailleDoc.FetchPageTitles();
             if (addedCount > 0)
             {
@@ -403,6 +425,8 @@ namespace EasyBrailleEdit
         /// </summary>
         private void GotoLine(int lineNum)
         {
+            if (BrailleDoc == null) return;
+
             if (lineNum > BrailleDoc.LineCount)
             {
                 lineNum = BrailleDoc.LineCount;
@@ -444,6 +468,8 @@ namespace EasyBrailleEdit
 
         private void Find()
         {
+            if (BrailleDoc == null) return;
+
             m_FindForm.Document = BrailleDoc;
 
             if (m_FindForm.Visible)
@@ -518,7 +544,10 @@ namespace EasyBrailleEdit
 
         private void miEdit_Click(object sender, EventArgs e)
         {
-            switch ((string)(sender as ToolStripMenuItem).Tag)
+            var mi = sender as ToolStripMenuItem;
+            if (mi?.Tag == null) return;
+
+            switch (mi.Tag.ToString())
             {
                 case "DocProperties":
                     EditDocProperties();
@@ -622,8 +651,10 @@ namespace EasyBrailleEdit
 
         private void miViewClick(object sender, EventArgs e)
         {
-            ToolStripMenuItem mi = sender as ToolStripMenuItem;
-            switch (mi.Tag!.ToString()!)
+            var mi = sender as ToolStripMenuItem;
+            if (mi?.Tag == null) return;
+
+            switch (mi.Tag.ToString())
             {
                 case "Refresh":
                     _controller.RefreshView();
@@ -642,7 +673,14 @@ namespace EasyBrailleEdit
 
         private void miToolsClick(object sender, EventArgs e)
         {
-            string s = ((ToolStripMenuItem)sender!).Tag!.ToString()!;
+            if (BrailleDoc == null)
+                return;
+
+            var mi = sender as ToolStripMenuItem;
+            if (mi?.Tag == null) return;
+
+            string? s = mi.Tag.ToString();
+            if (s == null) return;
             switch (s)
             {
                 case "RemoveSharp":

@@ -19,7 +19,7 @@ namespace EasyBrailleEdit.Common.Utilities.Http
         public static async Task DownloadFileAsync(
             string url,
             string destinationPath,
-            IProgress<DownloadProgress> progress = null,
+            IProgress<DownloadProgress>? progress = null,
             CancellationToken cancellationToken = default)
         {
             using (var response = await HttpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken))

@@ -37,7 +37,7 @@ namespace EasyBrailleEdit
             // 以下動作不可移到 Form_Load 做，因為某些用到以下變數的事件會比它更早觸發。
             _brProcessor = BrailleProcessor.GetInstance();
 
-            _chineseConverter = _brProcessor.ChineseConverter;
+            _chineseConverter = _brProcessor.ChineseConverter!;
             Debug.Assert(_chineseConverter != null);
         }
 
@@ -123,10 +123,15 @@ namespace EasyBrailleEdit
             {                
                 _brWord.CellList.Clear();                
 
-                string brCode;
+                string? brCode;
                 for (int i = 0; i < fontStr.Length; i += 2)
                 {
                     brCode = BrailleFontConverter.ToBrailleCode(fontStr.Substring(i, 2));
+                    if (brCode == null)
+                    {
+                        MsgBoxHelper.ShowError("點字碼有誤: " + fontStr.Substring(i, 2));
+                        return;
+                    }
                     _brWord.CellList.Add(brCode);
                 }
             }
@@ -156,7 +161,7 @@ namespace EasyBrailleEdit
 
             string word = txtChar.Text;
             Stack<char> charStack = new Stack<char>(word);
-            List<BrailleWord> brWordList = _brProcessor.ConvertWord(charStack);
+            List<BrailleWord>? brWordList = _brProcessor.ConvertWord(charStack);
             if (brWordList != null && brWordList.Count > 0)
             {
                 // 成功轉換成點字，字元會從串流中取出
@@ -182,9 +187,12 @@ namespace EasyBrailleEdit
                 return;
 
             _brWord.PhoneticCode = cboPhCode.Text;
-            BrailleCellList cellList = _chineseConverter.CreatePhoneticCellList(_brWord.PhoneticCode);
-            _brWord.CellList.Assign(cellList);
-            txtBraille.Text = BrailleFontConverter.ToString(cellList);
+            BrailleCellList? cellList = _chineseConverter.CreatePhoneticCellList(_brWord.PhoneticCode);
+            if (cellList != null)
+            {
+                _brWord.CellList.Assign(cellList);
+                txtBraille.Text = BrailleFontConverter.ToString(cellList);
+            }
         }
 
         private void txtBraille_TextChanged(object sender, EventArgs e)

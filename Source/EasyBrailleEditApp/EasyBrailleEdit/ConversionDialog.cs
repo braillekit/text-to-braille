@@ -182,7 +182,9 @@ namespace EasyBrailleEdit
             if (clbPhraseTbl.SelectedIndex < 1)
                 return;
 
-            string s = clbPhraseTbl.Items[clbPhraseTbl.SelectedIndex].ToString();
+            string? s = clbPhraseTbl.Items[clbPhraseTbl.SelectedIndex].ToString();
+            if (s == null)
+                return;
             clbPhraseTbl.Items.RemoveAt(clbPhraseTbl.SelectedIndex);
             clbPhraseTbl.Items.Insert(clbPhraseTbl.SelectedIndex - 1, s);
         }
@@ -192,7 +194,9 @@ namespace EasyBrailleEdit
             if (clbPhraseTbl.SelectedIndex >= clbPhraseTbl.Items.Count-1)
                 return;
 
-            string s = clbPhraseTbl.Items[clbPhraseTbl.SelectedIndex].ToString();
+            string? s = clbPhraseTbl.Items[clbPhraseTbl.SelectedIndex].ToString();
+            if (s == null)
+                return;
             clbPhraseTbl.Items.RemoveAt(clbPhraseTbl.SelectedIndex);
             clbPhraseTbl.Items.Insert(clbPhraseTbl.SelectedIndex + 1, s);
         }
