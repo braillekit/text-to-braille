@@ -186,3 +186,12 @@ public TwChineseCharConverter(BrailleProcessor processor)
 
 **結論：**
 建議優先採用此重構方案。它不僅解決了記憶體洩漏，也讓物件職責更清晰（資源管理歸資源類別，邏輯處理歸處理器類別）。
+
+#### 4.3.3 實作狀態更新 (2025-11-23)
+
+已完成第一階段重構：
+
+1. **共用實例**：已修改所有 Converter (`TwChineseCharConverter`, `EnglishWordConverter`, `UrlConverter`, `TableConverter`, `PhoneticConverter`, `MathConverter`, `CoordinateConverter`) 改用 `BrailleTable.GetInstance()` 取得共用的點字對照表單例。
+2. **移除冗餘代碼**：已移除所有 `BrailleTable` 類別中不再使用的 `CreateInstance()` 方法，確保未來不會誤用。
+
+此變更已大幅降低 `BrailleProcessor` 的初始化成本。下一步將評估移除 `BrailleProcessor` 的單例模式。
