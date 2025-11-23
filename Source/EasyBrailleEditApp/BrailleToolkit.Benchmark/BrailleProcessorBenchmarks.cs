@@ -18,7 +18,7 @@ namespace BrailleToolkitBenchmark
     [UnicodeConsoleLogger]
     public class BrailleProcessorBenchmarks
     {
-        BrailleProcessor processor = BrailleProcessor.GetInstance();
+        BrailleProcessor processor = BrailleProcessor.CreateInstance();
 
         /// <summary>
         /// 測試中文轉換效能。

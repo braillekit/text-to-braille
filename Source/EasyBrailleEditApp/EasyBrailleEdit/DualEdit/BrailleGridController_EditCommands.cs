@@ -1383,7 +1383,7 @@ namespace EasyBrailleEdit.DualEdit
 
             int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
 
-            var processor = BrailleDoc.Processor ?? BrailleProcessor.GetInstance();
+            var processor = BrailleDoc.Processor ?? BrailleProcessor.CreateInstance();
             var brTableLines = new List<BrailleLine>();
 
             int newRow = row;

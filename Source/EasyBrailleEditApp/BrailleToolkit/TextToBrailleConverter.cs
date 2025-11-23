@@ -32,7 +32,7 @@ namespace BrailleToolkit
         /// </summary>
         public TextToBrailleConverter()
         {
-            Processor = BrailleProcessor.GetInstance();
+            Processor = BrailleProcessor.CreateInstance();
             Doc = new BrailleDocument(Processor);
 
             Processor.ConvertionFailed += BrailleProcessor_ConvertionFailed;
