@@ -6,8 +6,8 @@
 
 ### 🚀 快速開始
 
-- **使用手冊**: [使用手冊.pdf](manual/user-guide/使用手冊.pdf) | [使用手冊.docx](manual/user-guide/使用手冊.docx)
-- **語法說明**: [Syntax.htm](manual/Syntax.htm) | [FAQ](manual/user-guide/FAQ.htm)
+- **使用手冊**: [線上閱讀](manual/user-guide/v4/index.md) | [PDF 下載](manual/user-guide/v4/使用手冊.pdf)
+- **語法說明**: [Syntax.md](manual/syntax.md)
 - **最新發行紀錄**: [v5.0.0-alpha.md](v5.0.0-alpha.md)
 - **完整變更歷史**: [CHANGELOG.md](CHANGELOG.md)
 
@@ -15,16 +15,16 @@
 
 - [**manual/**](manual/) - 使用者手冊與安裝指南
   - [user-guide/](manual/user-guide/) - 使用手冊
-    - [使用手冊.pdf](manual/user-guide/使用手冊.pdf) - 使用手冊 PDF 版
-    - [使用手冊.docx](manual/user-guide/使用手冊.docx) - 使用手冊 DOCX 版
-    - [UserManual.htm](manual/user-guide/UserManual.htm) - 使用手冊 HTML 版
-    - [FAQ.htm](manual/user-guide/FAQ.htm) - 常見問題
-    - [Syntax.htm](manual/user-guide/Syntax.htm) - 語法說明
+    - [v4/](manual/user-guide/v4/) - 最新版使用手冊（v4.1）
+      - [index.md](manual/user-guide/v4/index.md) - 線上閱讀版
+      - [使用手冊.pdf](manual/user-guide/v4/使用手冊.pdf) - PDF 版
+      - [使用手冊.docx](manual/user-guide/v4/使用手冊.docx) - Word 版
     - [archive/](manual/user-guide/archive/) - 歷史版本（v2.7, v3.18）
+    - [to-be-decided/](manual/user-guide/to-be-decided/) - 待整理資源
   - [installation/](manual/installation/) - 安裝手冊
     - [archive/](manual/installation/archive/) - 安裝手冊歷史版本（v2.7）
   - [images/](manual/images/) - 手冊圖片資源
-  - [Syntax.htm](manual/Syntax.htm) - 語法說明頁面（快速連結）
+  - [syntax.md](manual/syntax.md) - 語法說明文件
 
 ### 🏗️ 設計文件
 
@@ -46,8 +46,8 @@
   - [development/](technical/development/) - 開發相關文件
     - [auto-updater.md](technical/development/auto-updater.md) - 自動更新機制
     - [build-output-merge.md](technical/development/build-output-merge.md) - 建置輸出合併
+    - [context-tags.md](technical/development/context-tags.md) - 情境標籤技術文件
     - [新符號加入時的修改步驟.md](technical/development/新符號加入時的修改步驟.md) - 新增符號指南
-    - [Context Tags.docx](technical/development/Context%20Tags.docx) - 情境標籤技術文件
     - [SourceGrid 筆記.txt](technical/development/SourceGrid%20筆記.txt) - SourceGrid 元件使用筆記
   - [braille-rules/](technical/braille-rules/) - 點字規則參考
     - [國語點字自學手冊/](technical/braille-rules/國語點字自學手冊/) - 中文點字學習資源
