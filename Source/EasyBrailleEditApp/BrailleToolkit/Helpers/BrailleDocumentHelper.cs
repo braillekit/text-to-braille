@@ -170,8 +170,8 @@ namespace BrailleToolkit.Helpers
         public static void SetBeginEndOrgPageNumber(
             BrailleLine brLine, 
             bool isFirstLineOfPage,
-            ref string beginOrgPageNumber, 
-            ref string endOrgPageNumber)
+            ref string? beginOrgPageNumber, 
+            ref string? endOrgPageNumber)
         {
             string line = brLine.ToString();
 
