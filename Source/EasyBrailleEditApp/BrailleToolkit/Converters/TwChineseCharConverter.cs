@@ -40,7 +40,7 @@ namespace BrailleToolkit.Converters
         /// <param name="charStack">字元堆疊。</param>
         /// <param name="context">情境物件。</param>
         /// <returns>傳回轉換後的點字物件串列，若串列為空串列，表示沒有成功轉換的字元。</returns>
-        public override List<BrailleWord> Convert(Stack<char> charStack, ContextTagManager context)
+        public override List<BrailleWord>? Convert(Stack<char> charStack, ContextTagManager context)
         {
             if (charStack.Count < 1)
                 throw new ArgumentException("傳入空的字元堆疊!");
@@ -263,7 +263,7 @@ namespace BrailleToolkit.Converters
         /// </summary>
         /// <param name="text">一個中文字或標點符號。</param>
         /// <returns>若指定的字串是中文字且轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
-        private BrailleWord InternalConvert(string text)
+        private BrailleWord? InternalConvert(string text)
         {
             BrailleWord brWord = new BrailleWord(text);
 
@@ -359,9 +359,8 @@ namespace BrailleToolkit.Converters
         /// 注意：若轉換成功，會同時加入注音碼和點字碼。
         /// </summary>
         /// <param name="phcode">一個中文字的注音組字字根碼</param>
-        /// <param name="brWord">欲加入點字的 BrailleWord 物件</param>
         /// <returns>成功傳回 true，失敗傳回 false。</returns>
-        public BrailleCellList CreatePhoneticCellList(string phcode)
+        public BrailleCellList? CreatePhoneticCellList(string phcode)
         {
             if (StrHelper.IsEmpty(phcode) || phcode.Length < 4)
                 return null;   // 不是中文字

@@ -27,7 +27,7 @@ namespace BrailleToolkit
 
     /// <summary>
     /// 用來代表 BrailleLine 中的每一個元素，通常是一個字元，例如中文的「我」、英文的「A」。
-    /// 也可能是一個控制標籤（context tag），例如 "<數學>"`。
+    /// 也可能是一個控制標籤（context tag），例如 "&lt;數學&gt;"。
     /// 當此物件的內容是一個中文字元時，除了其對應的點字之外，還會包含注音碼。
     /// 備註：基於上述原因，此類別的名稱不是 BrailleChar，而是 BrailleWord。
     /// </summary>
@@ -142,7 +142,7 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="obj">要與目前物件相比較的物件。</param>
         /// <returns>如果指定的物件等於目前的物件，則為 true；否則為 false。</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (base.Equals(obj))
                 return true;

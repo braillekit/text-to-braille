@@ -38,14 +38,14 @@ namespace EasyBrailleEdit
             InitializeComponent();
         }
 
-        private void InsertTextForm_Load(object sender, EventArgs e)
+        private void InsertTextForm_Load(object? sender, EventArgs e)
         {
             lblErrorTitle.Visible = false;
             lblError.Visible = false;
             lblError.Text = "";
         }
 
-        private void txtInput_TextChanged(object sender, EventArgs e)
+        private void txtInput_TextChanged(object? sender, EventArgs e)
         {
             DoConvert();
         }
@@ -54,6 +54,13 @@ namespace EasyBrailleEdit
         private void DoConvert()
         {         
             var brLine = _converter.Convert(txtInput.Text);
+            if (brLine == null)
+            {
+                MsgBoxHelper.ShowError("轉換點字失敗: 結果為 null!");
+                OutputLine = null!;
+                return;
+            }
+
             UpdateUI(brLine);
 
             OutputLine = brLine;
@@ -80,7 +87,7 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void btnOk_Click(object sender, EventArgs e)
+        private void btnOk_Click(object? sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(txtInput.Text))
             {
@@ -97,10 +104,10 @@ namespace EasyBrailleEdit
         }
 
 
-        private void InsertSymbol(ToolStripItem item)
+        private void InsertSymbol(ToolStripItem? item)
         {
             // 插入符號
-            if (item.Tag == null)
+            if (item?.Tag == null)
             {
                 txtInput.SelectedText = item.Text;
                 return;
@@ -141,17 +148,17 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void toolBarSymbol1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void toolBarSymbol1_ItemClicked(object? sender, ToolStripItemClickedEventArgs e)
         {
             InsertSymbol(e.ClickedItem);
         }
 
-        private void InsertTextForm_Shown(object sender, EventArgs e)
+        private void InsertTextForm_Shown(object? sender, EventArgs e)
         {
             txtInput.Focus();
         }
 
-        private void toolBarMath_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void toolBarMath_ItemClicked(object? sender, ToolStripItemClickedEventArgs e)
         {
             InsertSymbol(e.ClickedItem);
         }

@@ -18,7 +18,7 @@ namespace BrailleToolkit
     public sealed class BraillePageTitle : ICloneable, IComparable
     {
         [DataMember(Name = "TitleLine")]
-        private BrailleLine m_TitleLine = null!;
+        private BrailleLine? m_TitleLine = null!;
 
         [DataMember(Name = "BeginLineIndex")]
         private int m_ContentStartLineIndex;
@@ -139,7 +139,7 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得或設定標題列物件。
         /// </summary>
-        public BrailleLine TitleLine
+        public BrailleLine? TitleLine
         {
             get { return m_TitleLine; }
             set { m_TitleLine = value; }
@@ -188,6 +188,10 @@ namespace BrailleToolkit
         /// <returns></returns>
         public object Clone()
         {
+            if (m_TitleLine == null)
+            {
+                throw new InvalidOperationException("無法複製 BraillePageTitle，因為 TitleLine 為 null。");
+            }
             var newTitle = new BraillePageTitle();
             newTitle.TitleLine = (BrailleLine)m_TitleLine.Clone();
             newTitle.ContentStartLineIndex = m_ContentStartLineIndex;
@@ -202,7 +206,7 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public int CompareTo(object obj)
+        public int CompareTo(object? obj)
         {
             var title2 = obj as BraillePageTitle;
             if (title2 == null)

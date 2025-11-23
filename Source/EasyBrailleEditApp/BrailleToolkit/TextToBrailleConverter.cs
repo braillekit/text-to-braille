@@ -76,7 +76,7 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="inputText">明眼字串。</param>
         /// <returns>轉換後的點字列。</returns>
-        public BrailleLine Convert(string inputText)
+        public BrailleLine? Convert(string inputText)
         {
             Processor.InitializeForConversion();
             return Processor.ConvertLine(inputText);
@@ -112,12 +112,12 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void BrailleProcessor_ConvertionFailed(object sender, ConversionFailedEventArgs args)
+        private void BrailleProcessor_ConvertionFailed(object? sender, ConversionFailedEventArgs args)
         {
             Log.Information("無法轉換: " + args.InvalidChar.CharValue);
         }
 
-        private void BrailleProcessor_TextConverted(object sender, TextConvertedEventArgs e)
+        private void BrailleProcessor_TextConverted(object? sender, TextConvertedEventArgs e)
         {
         }
     }

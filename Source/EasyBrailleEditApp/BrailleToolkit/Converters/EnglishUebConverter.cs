@@ -26,7 +26,7 @@ namespace BrailleToolkit.Converters
         // A combined list, sorted by length descending, for greedy matching
         private readonly List<string> _sortedKeys;
 
-        internal override BrailleTableBase BrailleTable => null; // Not used in this converter
+        internal override BrailleTableBase? BrailleTable => null; // Not used in this converter
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EnglishUebConverter"/> class.
@@ -59,9 +59,9 @@ namespace BrailleToolkit.Converters
                     var xdoc = XDocument.Load(reader);
                     foreach (var symbol in xdoc.Descendants("symbol"))
                     {
-                        string text = symbol.Attribute("text")?.Value.ToLower();
-                        string dots = symbol.Attribute("dots")?.Value;
-                        string type = symbol.Attribute("type")?.Value;
+                        string? text = symbol.Attribute("text")?.Value.ToLower();
+                        string? dots = symbol.Attribute("dots")?.Value;
+                        string? type = symbol.Attribute("type")?.Value;
 
                         if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(dots) || string.IsNullOrEmpty(type))
                         {
@@ -70,7 +70,7 @@ namespace BrailleToolkit.Converters
 
                         string code = BrailleToolkit.Helpers.BrailleCellHelper.PositionNumbersToHexString(dots.Split(' '));
 
-                        string name = symbol.Attribute("name")?.Value.ToLower();
+                        string? name = symbol.Attribute("name")?.Value.ToLower();
                         if (string.IsNullOrEmpty(name))
                         {
                             name = text;
@@ -104,7 +104,7 @@ namespace BrailleToolkit.Converters
         /// <param name="charStack">The stack of characters to convert.</param>
         /// <param name="context">The context tag manager.</param>
         /// <returns>A list of BrailleWords, or null if no conversion was possible.</returns>
-        public override List<BrailleWord> Convert(Stack<char> charStack, ContextTagManager context)
+        public override List<BrailleWord>? Convert(Stack<char> charStack, ContextTagManager context)
         {
             if (charStack.Count == 0)
             {

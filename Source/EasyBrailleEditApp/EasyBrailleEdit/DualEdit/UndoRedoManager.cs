@@ -53,7 +53,7 @@ namespace EasyBrailleEdit.DualEdit
                 return null;
         }
 
-        public void SaveMementoForUndo(BrailleEditMemento memento)
+        public void SaveMementoForUndo(BrailleEditMemento? memento)
         {
             if (memento != null)
             {

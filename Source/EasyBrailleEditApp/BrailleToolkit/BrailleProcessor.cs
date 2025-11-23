@@ -101,7 +101,7 @@ namespace BrailleToolkit
 
         private CoordinateConverter _coordConverter;
         private TableConverter _tableConverter;
-        private PhoneticConverter _phoneticConverter;
+        private PhoneticConverter? _phoneticConverter;
         private UrlConverter _urlConverter;
 
         // Extended converters
@@ -151,7 +151,7 @@ namespace BrailleToolkit
         /// Get singleton instance.
         /// </summary>
         /// <returns></returns>
-        public static BrailleProcessor GetInstance(ZhuyinReverseConverter zhuyinConverter = null)
+        public static BrailleProcessor GetInstance(ZhuyinReverseConverter? zhuyinConverter = null)
         {
             if (s_Processor != null)
             {
@@ -172,7 +172,7 @@ namespace BrailleToolkit
         /// Creates a new instance of BrailleProcessor.
         /// </summary>
         /// <returns></returns>
-        public static BrailleProcessor CreateInstance(ZhuyinReverseConverter zhuyinConverter = null)
+        public static BrailleProcessor CreateInstance(ZhuyinReverseConverter? zhuyinConverter = null)
         {
             if (zhuyinConverter == null)
             {
@@ -190,27 +190,27 @@ namespace BrailleToolkit
         /// <summary>
         /// Gets or sets the Zhuyin reverse converter.
         /// </summary>
-        public ZhuyinReverseConverter ZhuyinConverter { get; set; }
+        public ZhuyinReverseConverter? ZhuyinConverter { get; set; }
 
         /// <summary>
         /// 取得或設定中文點字轉換器。
         /// </summary>
-        public TwChineseCharConverter ChineseConverter { get; set; }
+        public TwChineseCharConverter? ChineseConverter { get; set; }
 
         /// <summary>
         /// 取得或設定英文點字轉換器。
         /// </summary>
-        public EnglishWordConverter EnglishConverter { get; set; }
+        public EnglishWordConverter? EnglishConverter { get; set; }
 
         /// <summary>
         /// Gets or sets the context tag converter.
         /// </summary>
-        public ContextTagConverter ControlTagConverter { get; set; }
+        public ContextTagConverter? ControlTagConverter { get; set; }
 
         /// <summary>
         /// Gets or sets the math converter.
         /// </summary>
-        public MathConverter MathConverter { get; set; }
+        public MathConverter? MathConverter { get; set; }
 
         /// <summary>
         /// 是否抑制點字轉換的回饋事件。
@@ -657,7 +657,7 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="line"></param>
         /// <returns></returns>
-        /// <see cref="BrailleProcessor.ConvertLine(int,string)"/>
+        /// <see cref="BrailleProcessor.ConvertLine(string, int)"/>
         public BrailleLine? ConvertLine(string line)
         {
             return ConvertLine(line, 1);
@@ -668,10 +668,10 @@ namespace BrailleToolkit
         /// 原則上，能夠在這裡處理掉點字特殊規則的，就盡量在這裡處理掉，
         /// 特別是不可斷行分開的點字，例如：一個中文字的所有點字碼、特殊單音字附加的「ㄦ」等等。
         /// </summary>
-        /// <param name="reader">字串流。</param>
+        /// <param name="chars">字元堆疊。</param>
         /// <returns>若成功轉換成點字，則傳回已轉換的點字 BrailleWord 物件串列，否則傳回 null。</returns>
         /// <remarks>若轉換成功，則已轉換的字元會從串流中讀出，否則該字元仍會保留在串流中。</remarks>
-        public List<BrailleWord> ConvertWord(Stack<char> chars)
+        public List<BrailleWord>? ConvertWord(Stack<char> chars)
         {
             List<BrailleWord> brWordList = null;
 
@@ -770,7 +770,7 @@ namespace BrailleToolkit
 
         /// <summary>
         /// 剖析分數格式的字串，分別取出整數部份、分子、以及分母。
-        /// 分數格式範例： 三又五分之一的分數字串表示為： 3&1/5。
+        /// 分數格式範例： 三又五分之一的分數字串表示為： 3&amp;1/5。
         /// </summary>
         /// <param name="s"></param>
         /// <param name="intPart"></param>

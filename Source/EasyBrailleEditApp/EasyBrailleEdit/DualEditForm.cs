@@ -120,7 +120,7 @@ namespace EasyBrailleEdit
             _controller.UndoRedo.UndoBufferChanged += UndoRedo_UndoBufferChanged;
         }
 
-        private void UndoRedo_UndoBufferChanged(object sender, EventArgs e)
+        private void UndoRedo_UndoBufferChanged(object? sender, EventArgs e)
         {
             var undoableOperations = (sender as UndoRedoManager)!.GetUndoableOperations();
             _undoBufferForm.UpdateUI(undoableOperations);
@@ -180,8 +180,10 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void Grid_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void Grid_MouseDoubleClick(object? sender, MouseEventArgs e)
         {
+            if (sender == null)
+                return;
             var grid = (SourceGrid.Grid)sender;
             _controller.Grid_MouseDoubleClick(grid, e);
         }
@@ -642,6 +644,9 @@ namespace EasyBrailleEdit
 
         private void miToolsClick(object sender, EventArgs e)
         {
+            if (BrailleDoc == null)
+                return;
+
             string s = ((ToolStripMenuItem)sender!).Tag!.ToString()!;
             switch (s)
             {

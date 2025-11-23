@@ -28,7 +28,7 @@ namespace EasyBrailleEdit.DualEdit
             return new BrailleEditMemento(operation, BrailleDoc, IsDirty, new BrailleGridState(_grid));
         }
 
-        private void ApplyMemento(BrailleEditMemento memento)
+        private void ApplyMemento(BrailleEditMemento? memento)
         {
             if (memento != null)
             {

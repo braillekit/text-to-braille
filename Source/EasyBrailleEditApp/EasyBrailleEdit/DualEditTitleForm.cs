@@ -153,7 +153,7 @@ namespace EasyBrailleEdit
             Controller.FillGrid();
         }
 
-        private void Grid_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void Grid_MouseDoubleClick(object? sender, MouseEventArgs e)
         {
             var grid = (SourceGrid.Grid)sender;
             Controller.Grid_MouseDoubleClick(grid, e);

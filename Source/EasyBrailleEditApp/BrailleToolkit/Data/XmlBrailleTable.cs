@@ -90,7 +90,7 @@ namespace BrailleToolkit.Data
         /// <param name="resourceName"></param>
         public override void LoadFromResource(Assembly asmb, string resourceName)
         {
-            Stream stream = asmb.GetManifestResourceStream(resourceName);
+            Stream? stream = asmb.GetManifestResourceStream(resourceName);
             if (stream == null)
             {
                 throw new Exception("XmlBrailleTable.LoadFromResource 找不到資源: " + resourceName);
@@ -235,7 +235,7 @@ namespace BrailleToolkit.Data
 		{
 			get 
 			{
-				string brCode = Find(text);
+				string? brCode = Find(text);
                 if (String.IsNullOrEmpty(brCode))
                 {
                     throw new Exception("找不到對應的點字碼: " + text);

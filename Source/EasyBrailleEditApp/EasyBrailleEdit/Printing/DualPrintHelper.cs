@@ -330,7 +330,7 @@ namespace EasyBrailleEdit
         }
 
         // 每次列印一頁時觸發此事件。
-        void BrailleText_PrintPage(object sender, PrintPageEventArgs e)
+        void BrailleText_PrintPage(object? sender, PrintPageEventArgs e)
         {
             e.HasMorePages = true;
 
@@ -478,10 +478,10 @@ namespace EasyBrailleEdit
         /// <param name="marginLeft">紙張的左邊界。</param>
         /// <param name="y">輸出的 y 軸座標。</param>
         /// <param name="maxCells">最大輸出幾方。</param>
-        private void PrintLine(BrailleLine brLine, Graphics graphics, 
+        private void PrintLine(BrailleLine? brLine, Graphics? graphics, 
             double marginLeft, double y, int maxCells)
         {
-            if (brLine == null)
+            if (brLine == null || graphics == null || m_TextFont == null || m_TextBrush == null)
                 return;
 
             BrailleWord brWord;
@@ -515,9 +515,14 @@ namespace EasyBrailleEdit
         /// <param name="graphics"></param>
         /// <param name="marginLeft"></param>
         /// <param name="marginTop"></param>
-        private void PrintPageFoot(BrailleLine title, int pageNum, string beginOrgPageNum, string endOrgPageNum,
-            Graphics graphics, double marginLeft, double marginTop)
+        private void PrintPageFoot(BrailleLine? title, int pageNum, string beginOrgPageNum, string endOrgPageNum,
+            Graphics? graphics, double marginLeft, double marginTop)
         {
+            if (m_TextFont == null || m_TextBrush == null)
+                throw new InvalidOperationException("Text font or brush is not initialized.");
+            if (graphics == null)
+                throw new ArgumentNullException(nameof(graphics));
+
             int cellCnt;
             double x;
             double y = (m_PrintOptions.LinesPerPage - 1) * m_LineHeight + marginTop;

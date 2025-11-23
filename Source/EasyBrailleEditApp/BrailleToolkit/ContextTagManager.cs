@@ -160,7 +160,7 @@ namespace BrailleToolkit
         /// <summary>
         /// 傳回指定的情境標籤目前是否在作用中。
         /// </summary>
-        /// <param name="tag"></param>
+        /// <param name="tagName">情境標籤名稱</param>
         /// <returns></returns>
         public bool IsActive(string tagName)
         {

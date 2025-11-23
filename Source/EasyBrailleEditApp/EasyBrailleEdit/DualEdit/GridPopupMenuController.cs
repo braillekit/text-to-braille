@@ -93,7 +93,7 @@ namespace EasyBrailleEdit.DualEdit
             }
         }
 
-        private void GridPopupMenuItem_Click(object sender, EventArgs e)
+        private void GridPopupMenuItem_Click(object? sender, EventArgs e)
         {
             var mi = (ToolStripMenuItem)sender;
             if (mi != null)

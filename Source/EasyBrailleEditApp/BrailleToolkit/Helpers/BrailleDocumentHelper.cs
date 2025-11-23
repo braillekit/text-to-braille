@@ -18,6 +18,7 @@ namespace BrailleToolkit.Helpers
         /// <summary>
         /// 傳回點字頁尾。內容包括：頁標題、點字頁碼、原書頁碼。
         /// </summary>
+        /// <param name="brDoc">點字文件。</param>
         /// <param name="lineIdx">目前列印的列索引。用來計算頁尾的文件標題。</param>
         /// <param name="pageNum">頁碼。</param>
         /// <param name="beginOrgPageNum">起始原書頁碼。</param>
@@ -117,6 +118,7 @@ namespace BrailleToolkit.Helpers
         /// 從傳入的字串中取出原書頁碼。
         /// </summary>
         /// <param name="line"></param>
+        /// <param name="orgPageNumber">傳出參數，原書頁碼。</param>
         /// <returns>若傳入的字串不是原書頁碼，則傳回空字串。否則傳回原書頁碼的文字（必須是字串，因為頁碼可能是羅馬數字）。</returns>
         public static bool GetOrgPageNumber(string line, out string orgPageNumber)
         {
@@ -274,7 +276,6 @@ namespace BrailleToolkit.Helpers
         /// </summary>
         /// <param name="brLine"></param>
         /// <param name="doRemove"></param>
-        /// <param name="emptyLinesCount"></param>
         /// <param name="emptyTagsCount"></param>
         public static void RemoveUselessWords(BrailleLine brLine, bool doRemove, out int emptyTagsCount)
         {

@@ -186,7 +186,7 @@ namespace BrailleToolkit
         /// 取得第一個可見的點字詞。
         /// </summary>
         /// <returns>如果找到，則為第一個可見的 BrailleWord 物件；否則為 null。</returns>
-        public BrailleWord GetFirstVisibleWord()
+        public BrailleWord? GetFirstVisibleWord()
         {
             for (int i = 0; i < Words.Count; i++)
             {
@@ -511,7 +511,7 @@ namespace BrailleToolkit
         public BrailleLine ShallowCopy(int index, int count)
         {
             BrailleLine newLine = new BrailleLine();
-            BrailleWord newWord = null;
+            BrailleWord? newWord = null;
             while (index < Words.Count && count > 0)
             {
                 newWord = Words[index];
@@ -543,7 +543,7 @@ namespace BrailleToolkit
         public BrailleLine DeepCopy(int index, int count)
         {
             BrailleLine newLine = new BrailleLine();
-            BrailleWord newWord = null;
+            BrailleWord? newWord = null;
             while (index < Words.Count && count > 0)
             {
                 newWord = Words[index].Copy();
@@ -566,7 +566,7 @@ namespace BrailleToolkit
         public object Clone()
         {
             BrailleLine newLine = new BrailleLine();
-            BrailleWord newWord = null;
+            BrailleWord? newWord = null;
 
             foreach (BrailleWord brWord in Words)
             {

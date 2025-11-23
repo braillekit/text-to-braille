@@ -105,12 +105,13 @@ namespace BrailleToolkit.Rules
             }
         }
 
-		/// <summary>
-		/// 把編號的數字修正成上位點。
-		/// 注意：此函式會把點字串列中的 # 點字物件刪除。
-		/// </summary>
-		/// <param name="brLine"></param>
-		public static void FixNumbers(BrailleLine brLine, EnglishBrailleTable brTable)
+        /// <summary>
+        /// 把編號的數字修正成上位點。
+        /// 注意：此函式會把點字串列中的 # 點字物件刪除。
+        /// </summary>
+        /// <param name="brLine"></param>
+        /// <param name="brTable"></param>
+        public static void FixNumbers(BrailleLine brLine, EnglishBrailleTable brTable)
 		{
 			BrailleWord brWord;
 			bool isNumberMode = false;

@@ -51,8 +51,10 @@ namespace BrailleToolkit.Helpers
         /// <summary>
         /// 將物件寫入 YAML。
         /// </summary>
-        public void WriteYaml(IEmitter emitter, object value, Type type, ObjectSerializer serializer)
+        public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer)
         {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
             var cell = (BrailleCell)value;
             
             emitter.Emit(new MappingStart(null, null, false, MappingStyle.Flow));

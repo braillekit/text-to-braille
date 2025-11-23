@@ -20,6 +20,7 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="brDoc">點字文件。</param>
         /// <param name="lineIndex">欲重新編排的列索引。</param>
+        /// <param name="context">情境物件。</param>
         /// <returns>傳回編排後的列數。</returns>
         public static int FormatLine(BrailleDocument brDoc, int lineIndex, ContextTagManager context)
         {
@@ -53,10 +54,16 @@ namespace BrailleToolkit
         /// 對指定的 BrailleLine 格式化，包括斷行、移除沒有用的空標籤。
         /// </summary>
         /// <param name="brLine"></param>
+        /// <param name="cellsPerLine">每列幾方。</param>
         /// <param name="context"></param>
         /// <returns>可能是空的串列、經過格式化的單行串列，或者因斷行而產生的多行串列。</returns>
-        public static List<BrailleLine> FormatLine(BrailleLine brLine, int cellsPerLine, ContextTagManager context)
+        public static List<BrailleLine> FormatLine(BrailleLine? brLine, int cellsPerLine, ContextTagManager context)
         {
+            if (brLine == null)
+            {
+                throw new ArgumentNullException(nameof(brLine));
+            }
+
             var outputLines = new List<BrailleLine>();
 
             BrailleDocumentHelper.RemoveUselessWords(brLine, true, out _);
@@ -85,8 +92,13 @@ namespace BrailleToolkit
         /// <param name="cellsPerLine">每行最大方數。</param>
         /// <param name="context">情境物件。</param>
         /// <returns>斷行之後的多行串列。若為 null 表示無需斷行（指定的點字串列未超過每行最大方數）。</returns>
-        public static List<BrailleLine> BreakLine(BrailleLine brLine, int cellsPerLine, ContextTagManager context)
+        public static List<BrailleLine>? BreakLine(BrailleLine? brLine, int cellsPerLine, ContextTagManager context)
         {
+            if (brLine == null)
+            {
+                throw new ArgumentNullException(nameof(brLine));
+            }
+
             int maxCellsInLine = cellsPerLine;
             if (context != null && context.IndentCount > 0) // 若目前位於縮排區塊中
             {

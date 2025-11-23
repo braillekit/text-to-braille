@@ -11,7 +11,7 @@ namespace BrailleToolkit.Data
     /// </summary>
 	public sealed class EnglishUebBrailleTable : XmlBrailleTable
 	{
-        private static EnglishUebBrailleTable m_Instance = null;
+        private static EnglishUebBrailleTable? m_Instance = null;
 
         /// <summary>
         /// 建構函式。

@@ -111,7 +111,7 @@ namespace EasyBrailleEdit.Common.Utilities.Http
                     DownloadProgressChanged = null;
 
                     m_UpdateItems.Clear();
-                    m_UpdateItems = null;
+                    m_UpdateItems = null!;
 
                     m_Disposed = true;
                 }
@@ -220,7 +220,7 @@ namespace EasyBrailleEdit.Common.Utilities.Http
             using (var stream = await _httpClient.GetStreamAsync(m_ServerUri + updateFileName))
             using (var reader = new StreamReader(stream))
             {
-                string line;
+                string? line;
                 while ((line = await reader.ReadLineAsync()) != null)
                 {
                     lines.Add(line);
@@ -313,7 +313,7 @@ namespace EasyBrailleEdit.Common.Utilities.Http
                     // 第二個參數若以 '=' 字元開始，表示只有 local 跟遠端的檔案版本不同就要更新
                     fileVerInfo = FileVersionInfo.GetVersionInfo(clientFileName);
                     verRemote = new Version(infoParam.Substring(1, infoParam.Length - 1));
-                    verLocal = new Version(fileVerInfo.FileVersion.Split(' ')[0]);
+                    verLocal = new Version(fileVerInfo.FileVersion!.Split(' ')[0]);
 
                     if (verRemote != verLocal)
                     {

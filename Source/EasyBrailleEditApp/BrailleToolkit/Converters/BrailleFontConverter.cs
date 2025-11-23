@@ -106,7 +106,7 @@ namespace BrailleToolkit.Converters
         /// Note: 如果你需要轉換破音字的其他注音字根的點字，請呼叫另一個 ToString 版本：
         /// public string ToString(BrailleCellList cellList)
         /// </summary>
-        /// <param name="brCell"></param>
+        /// <param name="brWord"></param>
         /// <returns></returns>
         public static string ToString(BrailleWord brWord)
         {
@@ -143,7 +143,7 @@ namespace BrailleToolkit.Converters
         /// <returns>對應的點字字型 ASCII 字元。</returns>
         public static char ToChar(string brCode)
         {
-            string fontCode = ToFontCode(brCode);
+            string? fontCode = ToFontCode(brCode);
             if (String.IsNullOrEmpty(fontCode))
                 throw new Exception("找不到對應的點字字型碼: " + brCode);
            
@@ -175,6 +175,8 @@ namespace BrailleToolkit.Converters
         {
             foreach (DictionaryEntry de in m_FontTable)
             {
+                if (de.Value == null)
+                    continue;
                 if (de.Value.Equals(fontCode))
                     return de.Key?.ToString(); // Fixed CS8602
             }

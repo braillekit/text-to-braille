@@ -10,7 +10,7 @@ namespace BrailleToolkit.Data
     /// </summary>
     public sealed class CoordinateBrailleTable : XmlBrailleTable
     {
-        private static CoordinateBrailleTable m_Instance = null;
+        private static CoordinateBrailleTable? m_Instance = null;
 
         private CoordinateBrailleTable()
             : base()

@@ -330,7 +330,7 @@ namespace BrailleToolkit.Rules
         /// </summary>
         /// <param name="brLine"></param>
         /// <param name="index"></param>
-        /// <param name="exceptCharacters"></param>
+        /// <param name="exceptedWords"></param>
         /// <returns></returns>
         private static int EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(BrailleLine brLine, int index, string exceptedWords)
         {

@@ -35,7 +35,7 @@ namespace BrailleToolkit.Converters
 		/// <remarks>由於上、中、下的橫線在明眼字都是以相同的符號表示，可是點字卻不同，因此程式要特別處理：
 		/// 每當碰到表格左邊的特定符號時，就設定橫線類型的旗號。</remarks>
 		/// <returns></returns>
-		public override List<BrailleWord> Convert(Stack<char> charStack, ContextTagManager context)
+		public override List<BrailleWord>? Convert(Stack<char> charStack, ContextTagManager context)
 		{
 			if (charStack.Count < 1)
 				throw new ArgumentException("傳入空的字元堆疊!");
@@ -45,7 +45,7 @@ namespace BrailleToolkit.Converters
 			string text;
 			bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
 			BrailleWord? brWord;
-			List<BrailleWord> brWordList = null;
+			List<BrailleWord>? brWordList = null;
 
 			BarType barType = BarType.Middle;	// 橫線的種類			
 

@@ -152,12 +152,15 @@ namespace BrailleToolkit
 
             Clear();
 
-            m_Processor!.InitializeForConversion();
+            if (m_Processor == null)
+                throw new Exception("在呼叫 BrailleDocument.Load 之前，請先指定 BrailleProcessor。");
+
+            m_Processor.InitializeForConversion();
 
             while ((line = reader.ReadLine()) != null)
             {
                 lineNumber++;
-                BrailleLine brLine = m_Processor.ConvertLine(line, lineNumber);
+                BrailleLine? brLine = m_Processor.ConvertLine(line, lineNumber);
                 if (brLine != null)
                 {
                     AddLine(brLine);
@@ -216,7 +219,7 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="brLine">The braille line reference.</param>
         /// <returns>The page title if found; otherwise, null.</returns>
-        public BraillePageTitle FindPageTitleByBeginLine(BrailleLine brLine)
+        public BraillePageTitle? FindPageTitleByBeginLine(BrailleLine brLine)
         {
             return PageTitles.Find(p => ReferenceEquals(brLine, p.ContentStartLineRef));
         }
@@ -339,7 +342,7 @@ namespace BrailleToolkit
             return result.ToString();
         }
 
-        private BraillePageTitle FindPageTitle(int lineIdx)
+        private BraillePageTitle? FindPageTitle(int lineIdx)
         {
             foreach (var title in PageTitles)
             {
@@ -544,7 +547,10 @@ namespace BrailleToolkit
             List<BrailleLine> lines = new List<BrailleLine>();
             foreach (BraillePageTitle t in m_PageTitles)
             {
-                lines.Add(t.TitleLine);
+                if (t.TitleLine != null)
+                {
+                    lines.Add(t.TitleLine);
+                }                    
             }
             return lines;
         }

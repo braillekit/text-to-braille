@@ -61,7 +61,7 @@ namespace EasyBrailleEdit
             FindReplaceDialog.Window.HighlightMatches = true;
         }
 
-        private void FindReplaceDialog_FindAllResults(object sender, FindResultsEventArgs FindAllResults)
+        private void FindReplaceDialog_FindAllResults(object? sender, FindResultsEventArgs FindAllResults)
         {
             // 沒有用單獨 panel 顯示搜尋結果也沒關係，因為搜尋結果可以直接標示在編輯器中。
             // Pass on find results
@@ -108,7 +108,7 @@ namespace EasyBrailleEdit
             InitFindReplaceDialog(m_TextArea);
         }
 
-        private void TextArea_KeyDown(object sender, KeyEventArgs e)
+        private void TextArea_KeyDown(object? sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.F)
             {
@@ -144,12 +144,12 @@ namespace EasyBrailleEdit
 
         }
 
-        private void TextArea_TextChanged(object sender, EventArgs e)
+        private void TextArea_TextChanged(object? sender, EventArgs e)
         {
             Modified = true;
         }
 
-        private void TextArea_UpdateUI(object sender, UpdateUIEventArgs e)
+        private void TextArea_UpdateUI(object? sender, UpdateUIEventArgs e)
         {
             UpdateCaretPosition();
         }
@@ -879,7 +879,7 @@ namespace EasyBrailleEdit
             return false;
         }
 
-        private async void MainForm_Load(object sender, EventArgs e)
+        private async void MainForm_Load(object? sender, EventArgs e)
         {
             AppGlobals.AppPath = Path.GetDirectoryName(Application.ExecutablePath);
 
@@ -922,7 +922,7 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void miFileClicked(object sender, EventArgs e)
+        private void miFileClicked(object? sender, EventArgs e)
         {
             ToolStripItem obj = (ToolStripItem)sender;
             switch (obj.Tag.ToString())
@@ -951,7 +951,7 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void MainForm_FormClosing(object? sender, FormClosingEventArgs e)
         {
             e.Cancel = false;
             if (Modified)
@@ -972,7 +972,7 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void miEditClick(object sender, EventArgs e)
+        private void miEditClick(object? sender, EventArgs e)
         {
             ToolStripItem obj = (ToolStripItem)sender;
             switch (obj.Tag.ToString())
@@ -1006,7 +1006,7 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void btnSymbolClick(object sender, EventArgs e)
+        private void btnSymbolClick(object? sender, EventArgs e)
         {
             // 插入符號
 
@@ -1049,7 +1049,7 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void miToolsClick(object sender, EventArgs e)
+        private void miToolsClick(object? sender, EventArgs e)
         {
             ToolStripItem obj = (ToolStripItem)sender;
             switch (obj.Tag.ToString())
@@ -1063,13 +1063,13 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void clearStatusTimer_Tick(object sender, EventArgs e)
+        private void clearStatusTimer_Tick(object? sender, EventArgs e)
         {
             StatusText = "";
             clearStatusTimer.Enabled = false;
         }
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void MainForm_FormClosed(object? sender, FormClosedEventArgs e)
         {
             if (m_FileRunner != null)
             {
@@ -1077,7 +1077,7 @@ namespace EasyBrailleEdit
             }
         }
 
-        private async void miHelpClick(object sender, EventArgs e)
+        private async void miHelpClick(object? sender, EventArgs e)
         {
             ToolStripItem obj = (ToolStripItem)sender;
             switch (obj.Tag.ToString())
@@ -1111,7 +1111,7 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void miInsertClick(object sender, EventArgs e)
+        private void miInsertClick(object? sender, EventArgs e)
         {
             ToolStripItem obj = (ToolStripItem)sender;
             switch (obj.Tag.ToString())

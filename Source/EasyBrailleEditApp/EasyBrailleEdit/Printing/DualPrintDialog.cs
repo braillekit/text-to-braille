@@ -110,7 +110,7 @@ namespace EasyBrailleEdit
             AppGlobals.Config.Save();
         }
 
-        private void DualPrintDialog_Load(object sender, EventArgs e)
+        private void DualPrintDialog_Load(object? sender, EventArgs e)
         {
             LoadSettings();		// 載入上次的設定。
 
@@ -120,7 +120,7 @@ namespace EasyBrailleEdit
             chkPrintBraille_CheckedChanged(chkPrintBraille, EventArgs.Empty);
         }
 
-        void SelectBrailleFileNameButton_Click(object sender, EventArgs e)
+        void SelectBrailleFileNameButton_Click(object? sender, EventArgs e)
         {
             var dlg = new SaveFileDialog
             {
@@ -261,7 +261,7 @@ namespace EasyBrailleEdit
             prn.PrintText(true);
         }
 
-        private void btnPrintBraille_Click(object sender, EventArgs e)
+        private void btnPrintBraille_Click(object? sender, EventArgs e)
         {
             if (m_BrDoc.Lines.Count < 1)
             {
@@ -296,7 +296,7 @@ namespace EasyBrailleEdit
             prn.PrintBraille(chkPrintBraille.Checked, chkPrintBrailleToFile.Checked, fileName);
         }
 
-        private void btnPrintText_Click(object sender, EventArgs e)
+        private void btnPrintText_Click(object? sender, EventArgs e)
         {
             if (m_BrDoc.Lines.Count < 1)
             {
@@ -319,29 +319,29 @@ namespace EasyBrailleEdit
             prn.PrintText(false);
         }
 
-        private void chkPrintPageNumber_CheckStateChanged(object sender, EventArgs e)
+        private void chkPrintPageNumber_CheckStateChanged(object? sender, EventArgs e)
         {
             chkChangeStartPageNum.Enabled = chkPrintPageFoot.Checked;
             txtStartPageNumber.Enabled = chkPrintPageFoot.Checked;
         }
 
-        private void rdoPrintRange_CheckedChanged(object sender, EventArgs e)
+        private void rdoPrintRange_CheckedChanged(object? sender, EventArgs e)
         {
             txtPageRange.Enabled = rdoPrintRange.Checked;
         }
 
-        private void chkPrintBrailleToFile_CheckedChanged(object sender, EventArgs e)
+        private void chkPrintBrailleToFile_CheckedChanged(object? sender, EventArgs e)
         {
             txtBrailleFileName.Enabled = chkPrintBrailleToFile.Checked;
             btnPrintBraille.Enabled = chkPrintBrailleToFile.Checked || chkPrintBraille.Checked;
         }
 
-        private void chkPrintBraille_CheckedChanged(object sender, EventArgs e)
+        private void chkPrintBraille_CheckedChanged(object? sender, EventArgs e)
         {
             btnPrintBraille.Enabled = chkPrintBrailleToFile.Checked || chkPrintBraille.Checked;
         }
 
-        private void DualPrintDialog_FormClosing(object sender, FormClosingEventArgs e)
+        private void DualPrintDialog_FormClosing(object? sender, FormClosingEventArgs e)
         {
             // 記住這次的設定。
             if (chkRememberOptions.Checked && m_DontSaveSettings == false)
@@ -350,7 +350,7 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void btnPageSetup_Click(object sender, EventArgs e)
+        private void btnPageSetup_Click(object? sender, EventArgs e)
         {
             if (String.IsNullOrWhiteSpace(cboPrinters.Text))
             {
@@ -376,23 +376,23 @@ namespace EasyBrailleEdit
             }			
         }
 
-        private void chkChangeStartPageNum_CheckStateChanged(object sender, EventArgs e)
+        private void chkChangeStartPageNum_CheckStateChanged(object? sender, EventArgs e)
         {
             txtStartPageNumber.Enabled = chkChangeStartPageNum.Enabled && chkChangeStartPageNum.Checked;
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void btnClose_Click(object? sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
-        private void btnToDefaultBrailleWidth_Click(object sender, EventArgs e)
+        private void btnToDefaultBrailleWidth_Click(object? sender, EventArgs e)
         {
             txtBrailleCellWdith.Text = Constant.DefaultBrailleWidth.ToString();
         }
 
-        private void btnToDefaultTextLineHeight_Click(object sender, EventArgs e)
+        private void btnToDefaultTextLineHeight_Click(object? sender, EventArgs e)
         {
             txtTextLineHeight.Text = Constant.DefaultPrintTextLineHeight.ToString();
         }

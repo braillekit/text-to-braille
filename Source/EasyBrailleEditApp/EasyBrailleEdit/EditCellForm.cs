@@ -123,10 +123,15 @@ namespace EasyBrailleEdit
             {                
                 _brWord.CellList.Clear();                
 
-                string brCode;
+                string? brCode;
                 for (int i = 0; i < fontStr.Length; i += 2)
                 {
                     brCode = BrailleFontConverter.ToBrailleCode(fontStr.Substring(i, 2));
+                    if (brCode == null)
+                    {
+                        MsgBoxHelper.ShowError("點字碼有誤: " + fontStr.Substring(i, 2));
+                        return;
+                    }
                     _brWord.CellList.Add(brCode);
                 }
             }
