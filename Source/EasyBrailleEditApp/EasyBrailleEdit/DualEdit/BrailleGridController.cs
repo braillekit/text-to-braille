@@ -856,6 +856,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <summary>
         ///  重新編排 grid 中的某一列。此方法會自動視需要斷行，讓指定的列拆成兩列。
         /// </summary>
+        /// <param name="grid">Grid 物件。</param>
         /// <param name="row">Grid 列索引。</param>
         /// <returns>傳回重新編排後的列數。如果大於 1，則代表此列經過重新編排之後有發生斷行。</returns>
         private int ReformatRow(SourceGrid.Grid grid, int row)

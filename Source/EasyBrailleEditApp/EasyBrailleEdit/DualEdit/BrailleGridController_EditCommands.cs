@@ -142,6 +142,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="row">指定之儲存格的列索引。</param>
         /// <param name="col">指定之儲存格的行索引。</param>
         /// <param name="brWord">欲填入儲存格的 BrailleWord 物件。</param>
+        /// <param name="chgType">儲存格內容變更的類型。</param>
         private void GridCellChanged(int row, int col, BrailleWord brWord, CellChangedType chgType)
         {
             if (chgType == CellChangedType.None)
@@ -594,6 +595,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <param name="row"></param>
         /// <param name="startCol"></param>
         /// <param name="endCol"></param>
+        /// <param name="command"></param>
         public void DeleteMultipleWords(SourceGrid.Grid grid, int row, int startCol, int endCol, string? command = null)
         {
             int orgRow = row;
@@ -831,6 +833,8 @@ namespace EasyBrailleEdit.DualEdit
         /// 將 A 列附加至 B 列。如果 B 列的剩餘空間不足以容納 A，則不做任何處理，並返回 false。
         /// </summary>
         /// <param name="row"></param>
+        /// <param name="joinedToLineIndex">傳回附加至的列索引。</param>
+        /// <param name="joinedToWordIdx">傳回附加至的列中的字的索引。</param>
         /// <returns>成功則傳回 true，否則傳回 false。</returns>
         private int JoinToPreviousRow(int row, out int joinedToLineIndex, out int joinedToWordIdx)
         {

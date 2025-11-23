@@ -32,7 +32,7 @@ namespace EasyBrailleEdit.DualEdit
         /// <summary>
         /// 此建構子會把傳入的 BrailleDocument 複製成一份新的 instance，保存於內部。
         /// </summary>
-        /// <param name="command">為了執行甚麼命令而建立此 memento 物件。</param>
+        /// <param name="operation">為了執行甚麼命令而建立此 memento 物件。</param>
         /// <param name="doc">BrailleDocument 物件。</param>
         /// <param name="isDirty">文件是否修改過，且尚未儲存。</param>
         /// <param name="gridState">網格狀態。</param>

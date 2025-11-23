@@ -126,7 +126,10 @@ namespace EasyBrailleEdit
             if (manager != null)
             {
                 var undoableOperations = manager.GetUndoableOperations();
-                _undoBufferForm.UpdateUI(undoableOperations);
+                if (undoableOperations != null)
+                {
+                    _undoBufferForm.UpdateUI(undoableOperations);
+                }
             }
         }
        
@@ -421,7 +424,7 @@ namespace EasyBrailleEdit
 
         /// <summary>
         /// 到指定的列。
-        /// <param name="lineNumber">列號</param>
+        /// <param name="lineNum">列號</param>
         /// </summary>
         private void GotoLine(int lineNum)
         {
