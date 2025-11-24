@@ -1,13 +1,9 @@
 ﻿
 using BenchmarkDotNet.Running;
-using BenchmarkDotNet.Configs;
-using BrailleToolkitBenchmark;
-using BenchmarkDotNet.Loggers;
+using BrailleToolkit.Benchmark;
 
-BenchmarkRunner.Run<BrailleProcessorBenchmarks>();
+// 執行點字轉換器效能比較測試
+BenchmarkRunner.Run<BrailleConverterBenchmarks>();
 
-/*
-var bm = new BrailleProcessorBenchmarks();
-var s = bm.ConvertLineTestChinese();
-Console.WriteLine(s);
-*/
+// 如需執行 BrailleProcessor 測試，取消註解以下行：
+// BenchmarkRunner.Run<BrailleProcessorBenchmarks>();
