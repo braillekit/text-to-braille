@@ -35,12 +35,11 @@ namespace EasyBrailleEdit.DualEdit
         public static List<BrailleWord>? GetWords()
         {
             List<BrailleWord>? result = null;
-            if (Clipboard.TryGetData(ClipboardObjectFormatForWords, out object? data))
+            if (Clipboard.TryGetData(ClipboardObjectFormatForWords, out string? data))
             {
-                var s = data as string;
-                if (s != null)
+                if (data != null)
                 {
-                    result = JsonHelper.Deserialize<List<BrailleWord>>(s);
+                    result = JsonHelper.Deserialize<List<BrailleWord>>(data);
                 }
             }
             return result;
@@ -49,12 +48,11 @@ namespace EasyBrailleEdit.DualEdit
         public static List<BrailleLine>? GetLines()
         {
             List<BrailleLine>? result = null;
-            if (Clipboard.TryGetData(ClipboardObjectFormatForLines, out object? data))
+            if (Clipboard.TryGetData(ClipboardObjectFormatForLines, out string? data))
             {
-                var s = data as string;
-                if (s != null)
+                if (data != null)
                 {
-                    result = JsonHelper.Deserialize<List<BrailleLine>>(s);
+                    result = JsonHelper.Deserialize<List<BrailleLine>>(data);
                 }
             }
             return result;
