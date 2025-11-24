@@ -1,0 +1,48 @@
+D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug\net10.0-windows10.0.17763.0\EasyBrailleEdit.Tests.dll ?葫閰血???(.NETCoreApp,Version=v10.0)
+VSTest ? 18.0.1 (x64)
+
+甇???皜祈岫?瑁?嚗?蝔?..
+蝮賢??1 ?葫閰行?獢????芋撘蝚艾?
+D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug\net10.0-windows10.0.17763.0\EasyBrailleEdit.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.0)
+[xUnit.net 00:00:00.18]   Discovering: EasyBrailleEdit.Tests
+[xUnit.net 00:00:00.41]   Discovered:  EasyBrailleEdit.Tests
+[xUnit.net 00:00:00.68]   Starting:    EasyBrailleEdit.Tests
+[xUnit.net 00:00:02.72]     EasyBrailleEdit.Tests.Services.MemoryLeakTests.LargeDocumentConversion_ShouldReleaseMemory [FAIL]
+[xUnit.net 00:00:02.72]       閮擃甇?Ⅱ?: 49 MB (?迂: 5 MB)
+[xUnit.net 00:00:02.72]       Stack Trace:
+[xUnit.net 00:00:02.72]         D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\Services\MemoryLeakTests.cs(149,0): at EasyBrailleEdit.Tests.Services.MemoryLeakTests.LargeDocumentConversion_ShouldReleaseMemory()
+[xUnit.net 00:00:02.72]         --- End of stack trace from previous location ---
+  憭望? EasyBrailleEdit.Tests.Services.MemoryLeakTests.LargeDocumentConversion_ShouldReleaseMemory [2 s]
+  ?航炊閮:
+   閮擃甇?Ⅱ?: 49 MB (?迂: 5 MB)
+  ??餈質馱:
+     at EasyBrailleEdit.Tests.Services.MemoryLeakTests.LargeDocumentConversion_ShouldReleaseMemory() in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\Services\MemoryLeakTests.cs:line 149
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:03.35]     EasyBrailleEdit.Tests.Services.MemoryLeakTests.ParallelConversion_ShouldNotLeakMemory [FAIL]
+[xUnit.net 00:00:03.35]       System.IO.IOException : The process cannot access the file 'D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug\net10.0-windows10.0.17763.0\Temp\cvt_out.tmp' because it is being used by another process.
+[xUnit.net 00:00:03.35]       Stack Trace:
+[xUnit.net 00:00:03.36]            at System.IO.FileSystem.DeleteFile(String fullPath)
+[xUnit.net 00:00:03.36]         D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\Services\MemoryLeakTests.cs(202,0): at EasyBrailleEdit.Tests.Services.MemoryLeakTests.<>c__DisplayClass4_0.<<ParallelConversion_ShouldNotLeakMemory>b__0>d.MoveNext()
+[xUnit.net 00:00:03.36]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:03.36]         D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\Services\MemoryLeakTests.cs(207,0): at EasyBrailleEdit.Tests.Services.MemoryLeakTests.ParallelConversion_ShouldNotLeakMemory()
+[xUnit.net 00:00:03.36]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:03.37]   Finished:    EasyBrailleEdit.Tests (ID = '0115677722e70c7bb3198228cbbd6921978c897fd879661605945f934040468f')
+  撌脤? EasyBrailleEdit.Tests.Services.MemoryLeakTests.RepeatedConverterCreation_ShouldNotLeakMemory [302 ms]
+  撌脤? EasyBrailleEdit.Tests.Services.MemoryLeakTests.RepeatedConversion_WithSameConverter_ShouldNotLeakMemory [223 ms]
+  撌脤? EasyBrailleEdit.Tests.Services.MemoryLeakTests.Converter_ShouldImplementIDisposable [< 1 ms]
+  憭望? EasyBrailleEdit.Tests.Services.MemoryLeakTests.ParallelConversion_ShouldNotLeakMemory [93 ms]
+  ?航炊閮:
+   System.IO.IOException : The process cannot access the file 'D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug\net10.0-windows10.0.17763.0\Temp\cvt_out.tmp' because it is being used by another process.
+  ??餈質馱:
+     at System.IO.FileSystem.DeleteFile(String fullPath)
+   at EasyBrailleEdit.Tests.Services.MemoryLeakTests.<>c__DisplayClass4_0.<<ParallelConversion_ShouldNotLeakMemory>b__0>d.MoveNext() in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\Services\MemoryLeakTests.cs:line 202
+--- End of stack trace from previous location ---
+   at EasyBrailleEdit.Tests.Services.MemoryLeakTests.ParallelConversion_ShouldNotLeakMemory() in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\Services\MemoryLeakTests.cs:line 207
+--- End of stack trace from previous location ---
+
+皜祈岫??憭望???
+皜祈岫?貊蜇閮? 5
+     ??: 3
+     憭望?: 2
+ ??蝮質?: 3.8286 蝘?

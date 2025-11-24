@@ -82,6 +82,15 @@ namespace EasyBrailleEdit.Services
                 
                 return result;
             }
+            catch (Exception ex)
+            {
+                return new BrailleConversionResult
+                {
+                    Success = false,
+                    ErrorMessage = $"轉換過程發生未預期的錯誤: {ex.Message}",
+                    OutputFilePath = null
+                };
+            }
             finally
             {
                 // 確保資源釋放

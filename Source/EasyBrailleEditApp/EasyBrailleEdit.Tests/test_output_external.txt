@@ -1,0 +1,23 @@
+D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug\net10.0-windows10.0.17763.0\EasyBrailleEdit.Tests.dll 的測試回合 (.NETCoreApp,Version=v10.0)
+VSTest 版本 18.0.1 (x64)
+
+正在啟動測試執行，請稍候...
+總共有 1 個測試檔案與指定的模式相符。
+  失敗 EasyBrailleEdit.Tests.Services.ExternalBrailleConverterTests.ConvertAsync_WithValidText_ShouldSucceed [76 ms]
+  錯誤訊息:
+   System.Exception : 轉點字過程發生錯誤 (Exit Code: -2147450726)!
+  堆疊追蹤:
+     at EasyBrailleEdit.Services.ExternalBrailleConverter.InvokeTxt2BrlAsync(String inFileName, String outFileName, Int32 cellsPerLine) in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit\Services\ExternalBrailleConverter.cs:line 57
+   at EasyBrailleEdit.Services.ExternalBrailleConverter.ConvertAsync(String content, Int32 cellsPerLine, String[] phraseFiles, IProgress`1 progress) in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit\Services\ExternalBrailleConverter.cs:line 35
+   at EasyBrailleEdit.Tests.Services.ExternalBrailleConverterTests.ConvertAsync_WithValidText_ShouldSucceed() in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\Services\ExternalBrailleConverterTests.cs:line 62
+--- End of stack trace from previous location ---
+  失敗 EasyBrailleEdit.Tests.Services.ExternalBrailleConverterTests.ConvertAsync_WithInvalidChar_ShouldReportError [26 ms]
+  錯誤訊息:
+   System.Exception : 轉點字過程發生錯誤 (Exit Code: -2147450726)!
+  堆疊追蹤:
+     at EasyBrailleEdit.Services.ExternalBrailleConverter.InvokeTxt2BrlAsync(String inFileName, String outFileName, Int32 cellsPerLine) in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit\Services\ExternalBrailleConverter.cs:line 57
+   at EasyBrailleEdit.Services.ExternalBrailleConverter.ConvertAsync(String content, Int32 cellsPerLine, String[] phraseFiles, IProgress`1 progress) in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit\Services\ExternalBrailleConverter.cs:line 35
+   at EasyBrailleEdit.Tests.Services.ExternalBrailleConverterTests.ConvertAsync_WithInvalidChar_ShouldReportError() in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\Services\ExternalBrailleConverterTests.cs:line 91
+--- End of stack trace from previous location ---
+
+失敗!  - 失敗:     2，通過:     0，略過:     0，總計:     2，持續時間: 131 ms - EasyBrailleEdit.Tests.dll (net10.0)
