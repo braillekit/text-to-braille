@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EasyBrailleEdit\EasyBrailleEdit.csproj" />
     <ProjectReference Include="..\BrailleToolkit\BrailleToolkit.csproj" />
+    <ProjectReference Include="..\Txt2Brl\Txt2Brl.csproj" />
   </ItemGroup>
 
 </Project>

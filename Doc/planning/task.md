@@ -42,9 +42,9 @@
 
 ## 階段四：測試驗證
 
-- [/] 單元測試（兩種模式）
+- [x] 單元測試（兩種模式）
   - [x] InProcessBrailleConverter 測試（4 個測試通過）
-  - [/] ExternalBrailleConverter 測試（需要完整 Txt2Brl.exe 環境）
+  - [x] ExternalBrailleConverter 測試（2 個測試通過）
 - [x] 整合測試
   - [x] BrailleConverterFactory 測試（3 個測試通過）
 - [x] 記憶體洩漏測試
