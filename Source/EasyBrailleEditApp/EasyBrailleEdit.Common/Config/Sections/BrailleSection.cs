@@ -55,6 +55,11 @@ namespace EasyBrailleEdit.Common.Config.Sections
         /// 數字一律使用上位點。v4.2.1 (2023-9-1) 之後開始支援此選項。
         /// </summary>
         public bool UseUpperPositionForNumbers {  get; set; } = false;
+
+        /// <summary>
+        /// 是否使用內建轉換（預設 true）
+        /// </summary>
+        public bool UseInProcessConversion { get; set; } = true;
     }
 
 }

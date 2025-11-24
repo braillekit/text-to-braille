@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.Drawing.Printing;
 using System.Text;
 using EasyBrailleEdit.Common.Utilities.Http;
+using EasyBrailleEdit.Services;
 
 namespace EasyBrailleEdit
 {
@@ -329,65 +330,27 @@ namespace EasyBrailleEdit
         }
 
 
-        /// <summary>
-        /// 呼叫 Txt2Brl.exe 進行轉檔。
-        /// </summary>
-        /// <param name="inFileName">輸入檔名。</param>
-        /// <param name="outFileName">輸出檔名。</param>
-        private async Task InvokeTxt2BrlAsync(string inFileName, string outFileName)
-        {
-            StringBuilder arg = new StringBuilder();
 
-            arg.Append($" -i {inFileName} -o {outFileName} ");
-
-            // switches
-            arg.Append($"-c{AppGlobals.Config.Braille.CellsPerLine} ");
-
-            m_FileRunner.NeedWait = true;
-            m_FileRunner.ShowWindow = false; // 在背景執行，不要顯示視窗
-            m_FileRunner.UseShellExecute = false;
-            m_FileRunner.RedirectStandardOutput = true; // 必須重導向才能避免死結
-
-            string cmd = Path.Combine(Application.StartupPath, "txt2brl.exe");
-            try
-            {
-                int exitCode = await m_FileRunner.RunAsync(cmd, arg.ToString());
-                if (exitCode != 0)
-                {
-                    throw new Exception($"轉點字過程發生錯誤 (Exit Code: {exitCode})!\r\n{m_FileRunner.StdOutputMsg}");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("轉點字過程發生錯誤!", ex);
-            }
-        }
 
         /// <summary>
-        /// 把輸入的文字存成暫存檔，並呼叫 Txt2Brl.exe 進行轉檔。
+        /// 執行點字轉換。
         /// </summary>
-        private async Task<string> DoConvertAsync(string content)
+        private async Task<BrailleConversionResult> DoConvertAsync(string content)
         {
-            string inFileName = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtInputTempFileName);
-            string outFileName = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtOutputTempFileName);
-            string phraseFileName = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtInputPhraseListFileName);
-
-            // 建立輸入檔案
-            await File.WriteAllTextAsync(inFileName, content, Encoding.UTF8);
-
-            // 建立輸入的詞庫設定檔
-            string[] fileNames = m_ConvertDialog.SelectedPhraseFileNames;
-            await File.WriteAllLinesAsync(phraseFileName, fileNames, Encoding.UTF8);
-
-            // 刪除輸出檔案
-            if (File.Exists(outFileName))
+            using var converter = BrailleConverterFactory.CreateConverter();
+            
+            string[] phraseFiles = m_ConvertDialog.SelectedPhraseFileNames;
+            
+            var progress = new Progress<ConversionProgress>(p => 
             {
-                File.Delete(outFileName);
-            }
-
-            await InvokeTxt2BrlAsync("\"" + inFileName + "\"", "\"" + outFileName + "\"");
-
-            return outFileName;
+                // 可以在這裡更新 UI 進度（未來擴充）
+            });
+            
+            return await converter.ConvertAsync(
+                content, 
+                AppGlobals.Config.Braille.CellsPerLine,
+                phraseFiles,
+                progress);
         }
 
         private void PrepareForConversion()
@@ -465,16 +428,16 @@ namespace EasyBrailleEdit
             txtErrors.Visible = true;
 
             // 執行轉換
-            string outFileName = await DoConvertAsync(content);
+            var result = await DoConvertAsync(content);
 
             Enabled = true;
 
-            if (!HandleConvertionError())
+            if (!HandleConversionResult(result))
             {
                 return;
             }
 
-            OpenBrailleFileInEditor(outFileName);
+            OpenBrailleFileInEditor(result.OutputFilePath!);
         }
 
         private bool SetDefaultPreviewPrinter()
@@ -553,32 +516,25 @@ namespace EasyBrailleEdit
         /// 處理／顯示轉換點字時的錯誤。
         /// </summary>
         /// <returns>若轉點字過程有發生錯誤（無法轉換的字元）則傳回 false；若無錯誤則傳回 true。</returns>
-        private bool HandleConvertionError()
+        private bool HandleConversionResult(BrailleConversionResult result)
         {
-            // 取得錯誤資訊
-            List<CharPosition> invalidChars = new List<CharPosition>();
-            string errMsg = "";
-            bool hasError = GetCvtErrors(ref errMsg, ref invalidChars);
-
-            // 處理錯誤
-            if (hasError)	// 若轉換過程中發生錯誤
+            if (result.HasError)
             {
-                if (invalidChars.Count > 0)		// 無效的字元
+                if (result.InvalidChars.Count > 0)
                 {
                     int cnt = 0;
-                    foreach (CharPosition charPos in invalidChars)
+                    foreach (var charPos in result.InvalidChars)
                     {
                         m_InvalidCharForm.Add(charPos);
                         cnt++;
-                        if (cnt >= 100)	// 最多顯示 100 個錯誤字元。
+                        if (cnt >= 100)
                             break;
                     }
-
-                    ShowInvlaidCharForm(invalidChars.Count);
+                    ShowInvlaidCharForm(result.InvalidChars.Count);
                 }
-                else if (!String.IsNullOrEmpty(errMsg))	// 錯誤訊息
+                else if (!string.IsNullOrEmpty(result.ErrorMessage))
                 {
-                    txtErrors.Text = errMsg;
+                    txtErrors.Text = result.ErrorMessage;
                     txtErrors.Visible = true;
                     MsgBoxHelper.ShowError("轉換過程中發生錯誤!\r\n請檢視並修正錯誤（顯示於編輯區域下方），再執行轉換程序。");
                 }
@@ -587,81 +543,7 @@ namespace EasyBrailleEdit
             return true;
         }
 
-        /// <summary>
-        /// 取得 Txt2Brl.exe 轉點字時輸出的錯誤資訊。
-        /// </summary>
-        /// <param name="errMsg"></param>
-        /// <param name="invalidChars"></param>
-        /// <returns></returns>
-        private bool GetCvtErrors(ref string errMsg, ref List<CharPosition> invalidChars)
-        {
-            bool hasError = false;
-            string fname;
 
-            errMsg = "";
-            invalidChars.Clear();
-
-            // 取得結果旗號以及錯誤訊息（如果有的話）
-            fname = AppGlobals.GetTempPath() + Constant.Files.CvtResultFileName;
-
-            if (!File.Exists(fname))
-                return false;
-
-            using (StreamReader sr = new StreamReader(fname, Encoding.Default))
-            {
-                string? errFlag = sr.ReadLine();
-                if (String.IsNullOrEmpty(errFlag))
-                {
-                    return false;
-                }
-                if (errFlag.Equals("1"))
-                {
-                    hasError = true;
-                    errMsg = sr.ReadToEnd();
-                }
-                sr.Close();
-            }
-
-            if (!hasError)
-                return false;
-
-            // 取得所有轉換失敗的字元
-            fname = AppGlobals.GetTempPath() + Constant.Files.CvtErrorCharFileName;
-
-            if (!File.Exists(fname))
-                return hasError;
-
-            using (StreamReader sr = new StreamReader(fname, Encoding.Default))
-            {
-                string? s;
-                string[] parts;
-
-                while (true)
-                {
-                    s = sr.ReadLine();
-                    if (String.IsNullOrEmpty(s))
-                    {
-                        break;
-                    }
-                    parts = s.Split(' ');
-                    if (parts.Length != 3)
-                    {
-                        throw new Exception("檔案格式不正確: " + fname);
-                    }
-                    CharPosition ch = new CharPosition
-                    {
-                        LineNumber = Convert.ToInt32(parts[0]),
-                        CharIndex = Convert.ToInt32(parts[1]),
-                        CharValue = parts[2][0]
-                    };
-
-                    invalidChars.Add(ch);
-                }
-                sr.Close();
-            }
-
-            return hasError;
-        }
 
         /// <summary>
         /// 顯示無法轉換的字元。
@@ -692,12 +574,12 @@ namespace EasyBrailleEdit
             txtErrors.Visible = true;
 
             // 執行轉換
-            string outFileName = await DoConvertAsync(content);
+            var result = await DoConvertAsync(content);
 
             this.Enabled = true;
 
-            bool success = HandleConvertionError();
-            return (success, outFileName);
+            bool success = HandleConversionResult(result);
+            return (success, result.OutputFilePath!);
         }
 
         private void ShowOptionsDialog()
