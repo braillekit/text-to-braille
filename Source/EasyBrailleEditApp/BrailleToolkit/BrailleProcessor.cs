@@ -426,8 +426,12 @@ namespace BrailleToolkit
 
             string orgLine = Text;	// 保存原始的字串。
 
-            Text = StrHelper.Reverse(Text);
-            Stack<char> charStack = new Stack<char>(Text);
+            // 直接從原字串倒序建立 Stack，避免 Reverse 操作建立臨時字串。
+            Stack<char> charStack = new Stack<char>(Text.Length);
+            for (int i = Text.Length - 1; i >= 0; i--)
+            {
+                charStack.Push(Text[i]);
+            }
 
             char ch;
             List<BrailleWord>? brWordList;
@@ -511,8 +515,12 @@ namespace BrailleToolkit
             if (line == null)
                 return brLine;
 
-            line = StrHelper.Reverse(line);
-            Stack<char> charStack = new Stack<char>(line);
+            // 直接從原字串倒序建立 Stack，避免 Reverse 操作建立臨時字串。
+            Stack<char> charStack = new Stack<char>(line.Length);
+            for (int idx = line.Length - 1; idx >= 0; idx--)
+            {
+                charStack.Push(line[idx]);
+            }
 
             char ch;
             List<BrailleWord>? brWordList;

@@ -176,7 +176,7 @@ namespace BrailleToolkit.Converters
             char ch = charStack.Peek();
             bool isExtracted = false;
 
-            if (ch == '&')  // 特殊字元: &gt; 和 &lt;
+            if (ch == '&')  // 特殊字元: "&gt;" 表示 '>' 和 "&lt;" 表示 '<'
             {
                 // 讀下一個字元，若是相同符號，則可略過；若不同，則下次迴圈仍需處理。
                 if (charStack.Count >= 4)
@@ -185,17 +185,14 @@ namespace BrailleToolkit.Converters
                     char ch2 = charStack.Pop();
                     char ch3 = charStack.Pop();
                     char ch4 = charStack.Pop();
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append(ch);
-                    sb.Append(ch2);
-                    sb.Append(ch3);
-                    sb.Append(ch4);
-                    if (sb.ToString().Equals("&gt;"))
+                    
+                    // 直接比對字元，不需要 StringBuilder。
+                    if (ch == '&' && ch2 == 'g' && ch3 == 't' && ch4 == ';')
                     {
                         text = ">";
                         isExtracted = true;
                     }
-                    else if (sb.ToString().Equals("&lt;"))
+                    else if (ch == '&' && ch2 == 'l' && ch3 == 't' && ch4 == ';')
                     {
                         text = "<";
                         isExtracted = true;
