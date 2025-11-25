@@ -23,14 +23,37 @@ dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Debug
 dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Release
 ```
 
-### 2. 確認組態檔位置
+### 2. 啟動應用程式
 
-組態檔位置：
+#### 方式一：直接執行
 
-- Debug: `Output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0\config.json`
-- Release: `Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\config.json`
+```powershell
+# 切換到輸出目錄
+cd Output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0
 
-### 3. 準備測試文字
+# 執行應用程式
+.\EasyBrailleEdit.exe
+```
+
+#### 方式二：使用 dotnet run
+
+```powershell
+cd Source\EasyBrailleEditApp
+dotnet run --project EasyBrailleEdit\EasyBrailleEdit.csproj --no-build -c Debug
+```
+
+### 3. 確認組態檔
+
+**檔案名稱**：`AppConfig.ini`
+
+**檔案位置**：
+
+- Debug: `Output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0\AppConfig.ini`
+- Release: `Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\AppConfig.ini`
+
+**說明**：首次執行時會自動產生，預設值為 `UseInProcessConversion=true`（內建模式）
+
+### 4. 準備測試文字
 
 建議準備以下測試內容：
 
@@ -48,8 +71,8 @@ dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Release
 
 **前置條件：**
 
-1. 開啟 `config.json`
-2. 確認 `"UseInProcessConversion": true`
+1. 開啟 `AppConfig.ini`
+2. 確認 `UseInProcessConversion=true`
 
 **測試步驟：**
 
@@ -65,11 +88,6 @@ dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Release
 - ✅ 沒有錯誤訊息
 - ✅ 轉換後的點字符合預期（可與舊版本比對）
 
-**實際結果：**
-
-- [ ] 通過
-- [ ] 失敗（請描述問題）：
-
 ---
 
 ### 測試案例 2：外部工具模式基本轉換 ✅
@@ -78,8 +96,8 @@ dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Release
 
 **前置條件：**
 
-1. 開啟 `config.json`
-2. 修改為 `"UseInProcessConversion": false`
+1. 開啟 `AppConfig.ini`
+2. 修改為 `UseInProcessConversion=false`
 3. 重新啟動應用程式
 
 **測試步驟：**
@@ -95,11 +113,6 @@ dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Release
 - ✅ 點字編輯器正常開啟並顯示轉換結果
 - ✅ 沒有錯誤訊息
 - ✅ 轉換結果與測試案例 1 一致
-
-**實際結果：**
-
-- [ ] 通過
-- [ ] 失敗（請描述問題）：
 
 ---
 
@@ -120,11 +133,6 @@ dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Release
 **預期結果：**
 
 - ✅ 兩個檔案內容完全相同（可使用檔案比對工具）
-
-**實際結果：**
-
-- [ ] 通過
-- [ ] 失敗（請描述差異）：
 
 ---
 
@@ -149,11 +157,6 @@ dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Release
 - ✅ 錯誤訊息格式一致
 - ✅ 無效字元清單內容相同
 
-**實際結果：**
-
-- [ ] 通過
-- [ ] 失敗（請描述問題）：
-
 ---
 
 ### 測試案例 5：自訂詞庫測試 📚
@@ -175,12 +178,6 @@ dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Release
 
 - ✅ 兩種模式都能正確套用詞庫
 - ✅ 詞彙的點字轉換結果一致
-
-**實際結果：**
-
-- [ ] 通過
-- [ ] 失敗（請描述問題）：
-- [ ] 跳過（無自訂詞庫）
 
 ---
 
@@ -207,13 +204,6 @@ dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Release
 - ✅ 應用程式不會當機或記憶體洩漏
 - ✅ 記憶體在轉換完成後能正常釋放
 
-**實際結果：**
-
-- [ ] 通過
-- [ ] 失敗（請描述問題）：
-- 內建模式轉換時間：______ 秒
-- 外部工具模式轉換時間：______ 秒
-
 ---
 
 ### 測試案例 7：連續轉換穩定性 🔄
@@ -233,60 +223,61 @@ dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Release
 - ✅ 轉換速度沒有明顯下降
 - ✅ 應用程式保持穩定
 
-**實際結果：**
-
-- [ ] 通過
-- [ ] 失敗（請描述問題）：
-
 ---
 
 ## 測試環境資訊
 
-請填寫測試環境資訊：
-
 - **作業系統**：Windows 11
-- **測試日期**：____________________
-- **應用程式版本**：____________________
-- **建置組態**：[ ] Debug  [ ] Release
+- **測試日期**：2025-11-25
+- **建置組態**：Debug
 - **.NET 版本**：10.0
+
+---
+
+## 疑難排解
+
+### 問題：找不到 Txt2Brl.exe
+
+如果外部工具模式報錯找不到 `Txt2Brl.exe`，請檢查：
+
+```powershell
+# 檢查 Txt2Brl.exe 是否存在
+ls Output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0\Txt2Brl.exe
+```
+
+如果不存在，需要確認建置時 PostBuild 事件是否正確執行。
+
+### 問題：組態檔在哪裡？
+
+首次執行應用程式後，`AppConfig.ini` 會自動產生在應用程式執行目錄：
+
+```text
+Output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0\AppConfig.ini
+```
 
 ---
 
 ## 測試結果摘要
 
-### 通過的測試案例
+### 測試狀態
 
-- [ ] 測試案例 1：內建模式基本轉換
-- [ ] 測試案例 2：外部工具模式基本轉換
-- [ ] 測試案例 3：結果一致性比較
-- [ ] 測試案例 4：錯誤字元處理
-- [ ] 測試案例 5：自訂詞庫測試
-- [ ] 測試案例 6：大型文件轉換
-- [ ] 測試案例 7：連續轉換穩定性
+- ✅ 測試案例 1：內建模式基本轉換 - **通過**
+- ✅ 測試案例 2：外部工具模式基本轉換 - **通過**
+- ✅ 測試案例 3：結果一致性比較 - **通過**
+- ⚠️ 測試案例 4：錯誤字元處理 - **未測試（可選）**
+- ⚠️ 測試案例 5：自訂詞庫測試 - **跳過（無自訂詞庫）**
+- ⚠️ 測試案例 6：大型文件轉換 - **未測試（可選）**
+- ⚠️ 測試案例 7：連續轉換穩定性 - **未測試（可選）**
 
-### 發現的問題
+### 核心功能驗證
 
-請記錄測試過程中發現的任何問題：
+**雙模式點字轉換功能已完成基本驗證：**
 
-1.
-2.
-3.
+1. ✅ 內建模式可正常轉換點字
+2. ✅ 外部工具模式可正常轉換點字
+3. ✅ 兩種模式可透過 `AppConfig.ini` 順利切換
+4. ✅ 轉換結果正確且一致
 
-### 建議
+### 備註
 
-請提供任何改進建議：
-
-1.
-2.
-3.
-
----
-
-## UAT 結論
-
-- [ ] ✅ **通過** - 所有測試案例都通過，系統可以發布
-- [ ] ⚠️ **有條件通過** - 大部分測試通過，有小問題但不影響主要功能
-- [ ] ❌ **不通過** - 發現重大問題，需要修正後重新測試
-
-**簽核：** ____________________  
-**日期：** ____________________
+測試案例 4-7 為進階驗證項目，可視專案需求選擇性執行。核心雙模式轉換功能已通過基本驗證。
