@@ -29,7 +29,7 @@ namespace EasyBrailleEdit
 
         private ConversionDialog m_ConvertDialog = null!;
 
-        private FileRunner m_FileRunner;
+        private PreviewConversionForm m_PreviewConversionForm = null!;
 
         private FindReplace FindReplaceDialog = null!;
         
@@ -41,8 +41,6 @@ namespace EasyBrailleEdit
                 .ReadFrom.AppSettings()
                 .WriteTo.File(@"Logs\log-main-.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
-
-            m_FileRunner = new FileRunner();
 
             m_Modified = false;
         }
@@ -306,7 +304,51 @@ namespace EasyBrailleEdit
             File.WriteAllText(m_FileName, m_TextArea.Text, Encoding.UTF8);
             Modified = false;
             StatusText = "檔案儲存成功。";
+            
+            // 觸發即時預覽
+            if (m_PreviewConversionForm != null && m_PreviewConversionForm.Visible)
+            {
+                UpdatePreviewAsync();
+            }
+
             return true;
+        }
+
+        private async void UpdatePreviewAsync()
+        {
+            try
+            {
+                // 1. 計算範圍 (前後 5 行)
+                int currentLine = m_TextArea.CurrentLine;
+                int startLine = Math.Max(0, currentLine - 5);
+                int endLine = Math.Min(m_TextArea.Lines.Count - 1, currentLine + 5);
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = startLine; i <= endLine; i++)
+                {
+                    sb.AppendLine(m_TextArea.Lines[i].Text);
+                }
+                string content = sb.ToString();
+
+                // 2. 執行轉換 (不鎖定 UI)
+                // 注意：這裡直接呼叫 DoConvertAsync，它會建立新的 Converter 實例
+                // 我們需要確保不會干擾主執行緒太久
+                var result = await DoConvertAsync(content);
+
+                if (result.Success && !string.IsNullOrEmpty(result.OutputFilePath))
+                {
+                    // 3. 讀取結果
+                    var doc = BrailleDocument.LoadBrailleFile(result.OutputFilePath);
+                    
+                    // 4. 更新預覽視窗
+                    m_PreviewConversionForm.UpdatePreview(doc.Lines);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "UpdatePreviewAsync failed");
+                // 預覽失敗不應干擾使用者，只記錄 Log
+            }
         }
 
         private bool SaveFileAs()
@@ -800,6 +842,8 @@ namespace EasyBrailleEdit
             m_ConvertDialog = new ConversionDialog();
 
             m_InvalidCharForm = new InvalidCharForm(this);
+
+            EnablePreviewConversion(false);
             
             m_TextArea.BringToFront();
 
@@ -811,6 +855,32 @@ namespace EasyBrailleEdit
                 {
                     OpenBrailleFileInEditor(args[1]);
                 }      
+            }
+        }
+
+        private void EnablePreviewConversion(bool enable)
+        {
+            if (enable)
+            {
+                if (m_PreviewConversionForm == null || m_PreviewConversionForm.IsDisposed)
+                {
+                    m_PreviewConversionForm = new PreviewConversionForm();
+                    m_PreviewConversionForm.TopMost = true;
+                }
+
+                m_PreviewConversionForm.Show();
+                m_PreviewConversionForm.BringToFront();
+                m_PreviewConversionForm.Activate();
+
+                btnPreviewConversion.Text = "關閉即時預覽";
+                btnPreviewConversion.ToolTipText = "關閉即時預覽（目前已開啟）";
+            }
+            else
+            {
+                // 使用 Hide 來避免 Dispose
+                m_PreviewConversionForm?.Hide();
+                btnPreviewConversion.Text = "啟用即時預覽";
+                btnPreviewConversion.ToolTipText = "啟用即時預覽（目前未開啟）";
             }
         }
 
@@ -962,6 +1032,9 @@ namespace EasyBrailleEdit
                 case "Options":
                     ShowOptionsDialog();
                     break;
+                case "PreviewConversion":
+                    PreviewConversion();
+                    break; 
             }
         }
 
@@ -973,10 +1046,6 @@ namespace EasyBrailleEdit
 
         private void MainForm_FormClosed(object? sender, FormClosedEventArgs e)
         {
-            if (m_FileRunner != null)
-            {
-                m_FileRunner.Dispose();
-            }
         }
 
         private async void miHelpClick(object? sender, EventArgs e)
@@ -999,6 +1068,19 @@ namespace EasyBrailleEdit
             }
         }
 
+        private void PreviewConversion()
+        {
+            if (btnPreviewConversion.Text!.StartsWith("關閉"))
+            {
+                EnablePreviewConversion(false);
+            }
+            else
+            {
+                EnablePreviewConversion(true);
+            }
+            
+            //m_PreviewConversionForm.SetTextToConvert(m_TextArea.Text);
+        }
 
         private void ShowRevisionHistory()
         {
