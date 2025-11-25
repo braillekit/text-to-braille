@@ -1,0 +1,46 @@
+D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug\net10.0-windows10.0.17763.0\EasyBrailleEdit.Tests.dll ?葫閰血???(.NETCoreApp,Version=v10.0)
+VSTest ? 18.0.1 (x64)
+
+甇???皜祈岫?瑁?嚗?蝔?..
+蝮賢??1 ?葫閰行?獢????芋撘蝚艾?
+D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug\net10.0-windows10.0.17763.0\EasyBrailleEdit.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.0)
+[xUnit.net 00:00:00.17]   Discovering: EasyBrailleEdit.Tests
+[xUnit.net 00:00:00.38]   Discovered:  EasyBrailleEdit.Tests
+[xUnit.net 00:00:00.69]   Starting:    EasyBrailleEdit.Tests
+[xUnit.net 00:00:00.75]     EasyBrailleEdit.Tests.Services.ExternalBrailleConverterTests.ConvertAsync_WithValidText_ShouldSucceed [FAIL]
+[xUnit.net 00:00:00.75]       System.Exception : 頧?摮?蝔?隤?(Exit Code: -2147450726)!
+[xUnit.net 00:00:00.75]       Stack Trace:
+[xUnit.net 00:00:00.75]         D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit\Services\ExternalBrailleConverter.cs(57,0): at EasyBrailleEdit.Services.ExternalBrailleConverter.InvokeTxt2BrlAsync(String inFileName, String outFileName, Int32 cellsPerLine)
+[xUnit.net 00:00:00.75]         D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit\Services\ExternalBrailleConverter.cs(35,0): at EasyBrailleEdit.Services.ExternalBrailleConverter.ConvertAsync(String content, Int32 cellsPerLine, String[] phraseFiles, IProgress`1 progress)
+[xUnit.net 00:00:00.75]         D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\Services\ExternalBrailleConverterTests.cs(60,0): at EasyBrailleEdit.Tests.Services.ExternalBrailleConverterTests.ConvertAsync_WithValidText_ShouldSucceed()
+[xUnit.net 00:00:00.75]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.79]     EasyBrailleEdit.Tests.Services.ExternalBrailleConverterTests.ConvertAsync_WithInvalidChar_ShouldReportError [FAIL]
+[xUnit.net 00:00:00.79]       System.Exception : 頧?摮?蝔?隤?(Exit Code: -2147450726)!
+[xUnit.net 00:00:00.79]       Stack Trace:
+[xUnit.net 00:00:00.79]         D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit\Services\ExternalBrailleConverter.cs(57,0): at EasyBrailleEdit.Services.ExternalBrailleConverter.InvokeTxt2BrlAsync(String inFileName, String outFileName, Int32 cellsPerLine)
+[xUnit.net 00:00:00.79]         D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit\Services\ExternalBrailleConverter.cs(35,0): at EasyBrailleEdit.Services.ExternalBrailleConverter.ConvertAsync(String content, Int32 cellsPerLine, String[] phraseFiles, IProgress`1 progress)
+[xUnit.net 00:00:00.79]         D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\Services\ExternalBrailleConverterTests.cs(90,0): at EasyBrailleEdit.Tests.Services.ExternalBrailleConverterTests.ConvertAsync_WithInvalidChar_ShouldReportError()
+[xUnit.net 00:00:00.79]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.80]   Finished:    EasyBrailleEdit.Tests (ID = '0115677722e70c7bb3198228cbbd6921978c897fd879661605945f934040468f')
+  憭望? EasyBrailleEdit.Tests.Services.ExternalBrailleConverterTests.ConvertAsync_WithValidText_ShouldSucceed [84 ms]
+  ?航炊閮:
+   System.Exception : 頧?摮?蝔?隤?(Exit Code: -2147450726)!
+  ??餈質馱:
+     at EasyBrailleEdit.Services.ExternalBrailleConverter.InvokeTxt2BrlAsync(String inFileName, String outFileName, Int32 cellsPerLine) in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit\Services\ExternalBrailleConverter.cs:line 57
+   at EasyBrailleEdit.Services.ExternalBrailleConverter.ConvertAsync(String content, Int32 cellsPerLine, String[] phraseFiles, IProgress`1 progress) in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit\Services\ExternalBrailleConverter.cs:line 35
+   at EasyBrailleEdit.Tests.Services.ExternalBrailleConverterTests.ConvertAsync_WithValidText_ShouldSucceed() in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\Services\ExternalBrailleConverterTests.cs:line 60
+--- End of stack trace from previous location ---
+  憭望? EasyBrailleEdit.Tests.Services.ExternalBrailleConverterTests.ConvertAsync_WithInvalidChar_ShouldReportError [29 ms]
+  ?航炊閮:
+   System.Exception : 頧?摮?蝔?隤?(Exit Code: -2147450726)!
+  ??餈質馱:
+     at EasyBrailleEdit.Services.ExternalBrailleConverter.InvokeTxt2BrlAsync(String inFileName, String outFileName, Int32 cellsPerLine) in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit\Services\ExternalBrailleConverter.cs:line 57
+   at EasyBrailleEdit.Services.ExternalBrailleConverter.ConvertAsync(String content, Int32 cellsPerLine, String[] phraseFiles, IProgress`1 progress) in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit\Services\ExternalBrailleConverter.cs:line 35
+   at EasyBrailleEdit.Tests.Services.ExternalBrailleConverterTests.ConvertAsync_WithInvalidChar_ShouldReportError() in D:\Projects\BrailleKit\text-to-braille\Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\Services\ExternalBrailleConverterTests.cs:line 90
+--- End of stack trace from previous location ---
+
+皜祈岫??憭望???
+皜祈岫?貊蜇閮? 2
+     憭望?: 2
+ ??蝮質?: 1.3162 蝘?
