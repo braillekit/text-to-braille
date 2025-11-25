@@ -126,12 +126,6 @@
     <Compile Update="Forms\InsertTableForm.Designer.cs">
       <DependentUpon>InsertTableForm.cs</DependentUpon>
     </Compile>
-    <Compile Update="Forms\RegForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\RegForm.designer.cs">
-      <DependentUpon>RegForm.cs</DependentUpon>
-    </Compile>
     <Compile Update="Forms\UndoBufferForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,10 +250,6 @@
     <EmbeddedResource Update="Forms\InsertTableForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>InsertTableForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Forms\RegForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>RegForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Forms\UndoBufferForm.resx">
       <SubType>Designer</SubType>
