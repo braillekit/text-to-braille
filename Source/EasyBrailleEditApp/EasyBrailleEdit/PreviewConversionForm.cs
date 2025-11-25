@@ -37,57 +37,51 @@ namespace EasyBrailleEdit
                 sb.Append("<table>");
                 
                 // Row 1: Text
-                sb.Append("<tr><td><div class='text'>");
+                sb.Append("<tr>");
                 foreach (var word in line.Words)
                 {
+                    sb.Append("<td><div class='text'>");
                     sb.Append(System.Net.WebUtility.HtmlEncode(word.Text));
+                    sb.Append("</div></td>");
                 }
-                sb.Append("</div>");
+                sb.Append("</tr>");
 
                 // Row 2: Phonetic
-                sb.Append("<div class='phonetic'>");
+                sb.Append("<tr>");
                 foreach (var word in line.Words)
                 {
-                    // Assuming PhoneticCode is available. If not, we might need to adjust.
-                    // BrailleWord has PhoneticCode property.
+                    sb.Append("<td><div class='phonetic'>");
                     string ph = word.PhoneticCode;
                     if (string.IsNullOrEmpty(ph) && word.IsChinese)
                     {
-                        // Fallback or empty
                         ph = " "; 
                     }
                     else if (string.IsNullOrEmpty(ph))
                     {
-                        ph = " "; // Spacer for alignment if needed, or just empty
+                        ph = " ";
                     }
-                    // For better alignment, we might need a table per word, but let's start with line-based.
-                    // Actually, line-based phonetic string might be hard to align with text if we just dump them.
-                    // But the user request asked for "Text, Phonetic, Braille" elements.
-                    // Let's try to output them as a sequence.
-                    sb.Append(System.Net.WebUtility.HtmlEncode(ph) + " ");
+                    sb.Append(System.Net.WebUtility.HtmlEncode(ph));
+                    sb.Append("</div></td>");
                 }
-                sb.Append("</div>");
+                sb.Append("</tr>");
 
                 // Row 3: Braille
-                sb.Append("<div class='braille'>");
+                sb.Append("<tr>");
                 foreach (var word in line.Words)
                 {
-                    // Braille representation. 
-                    // We can use the Braille ASCII or Unicode. 
-                    // Let's use the hex string or position string for now, or if there is a font.
-                    // The requirement says "corresponding Braille". 
-                    // Let's use the dots representation (e.g. ⠓⠁⠧⠑) if possible, or just the cell values.
-                    // BrailleToolkit doesn't seem to have a direct "ToUnicode" method in BrailleWord based on my read.
-                    // But it has `ToPositionNumberString`.
-                    // Let's try to construct Unicode braille characters from cell values.
-                    
+                    sb.Append("<td><div class='braille'>");
                     foreach (var cell in word.Cells)
                     {
                         sb.Append(GetBrailleUnicode(cell.Value));
                     }
-                    sb.Append(" "); // Space between words
+                    if (word.Cells.Count == 0)
+                    {
+                         sb.Append("&nbsp;");
+                    }
+                    sb.Append("</div></td>");
                 }
-                sb.Append("</div></td></tr>");
+                sb.Append("</tr>");
+
                 sb.Append("</table>");
             }
 
