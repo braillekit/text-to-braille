@@ -37,8 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{02EA681E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrailleToolkit.Tests", "BrailleToolkit.Tests\BrailleToolkit.Tests.csproj", "{7979B1E0-E06C-6989-BF85-CA8A59325D54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrailleToolkit.Benchmark", "BrailleToolkit.Benchmark\BrailleToolkit.Benchmark.csproj", "{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}"
-EndProject
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyBrailleEdit.Tests", "EasyBrailleEdit.Tests\EasyBrailleEdit.Tests.csproj", "{C3DA50FE-2854-4C31-B96D-C9B2224B2D51}"
 EndProject
 Global
@@ -110,18 +109,7 @@ Global
 		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Release|x64.Build.0 = Release|Any CPU
 		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Release|x86.ActiveCfg = Release|Any CPU
 		{7979B1E0-E06C-6989-BF85-CA8A59325D54}.Release|x86.Build.0 = Release|Any CPU
-		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Debug|x64.Build.0 = Debug|Any CPU
-		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Debug|x86.Build.0 = Debug|Any CPU
-		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Release|x64.ActiveCfg = Release|Any CPU
-		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Release|x64.Build.0 = Release|Any CPU
-		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Release|x86.ActiveCfg = Release|Any CPU
-		{16F03A32-FE33-20ED-583E-3A3F2A48E5D9}.Release|x86.Build.0 = Release|Any CPU
+
 		{C3DA50FE-2854-4C31-B96D-C9B2224B2D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C3DA50FE-2854-4C31-B96D-C9B2224B2D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3DA50FE-2854-4C31-B96D-C9B2224B2D51}.Debug|x64.ActiveCfg = Debug|Any CPU
