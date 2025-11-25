@@ -366,7 +366,7 @@ namespace EasyBrailleEdit
         /// <summary>
         /// 轉換點字並開啟編輯器。
         /// </summary>
-        private async void ConvertAndShowEditor()
+        private async void ConvertAndShowEditor(bool showDialog)
         {
             if (m_ConvertDialog == null)
             {
@@ -376,9 +376,12 @@ namespace EasyBrailleEdit
 
             m_ConvertDialog.IsConvertingSelectedText = !string.IsNullOrEmpty(m_TextArea.SelectedText);
 
-            if (m_ConvertDialog.ShowDialog() != DialogResult.OK)
+            if (showDialog)
             {
-                return;
+                if (m_ConvertDialog.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
             }
 
             PrepareForConversion();
@@ -951,7 +954,10 @@ namespace EasyBrailleEdit
             switch (obj.Tag.ToString())
             {
                 case "Convert":
-                    ConvertAndShowEditor();
+                    ConvertAndShowEditor(showDialog: true);
+                    break;
+                case "QuickConvert":
+                    ConvertAndShowEditor(showDialog: false);
                     break;
                 case "Options":
                     ShowOptionsDialog();
