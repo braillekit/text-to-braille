@@ -36,5 +36,9 @@ namespace EasyBrailleEdit.Common.Config.Sections
         /// </summary>
         public string AutoReplacedText { get; set; } = String.Empty;
 
+        /// <summary>
+        /// 是否使用全形輸入法（預設 false）。
+        /// </summary>
+        public bool UseFullWidthIme { get; set; } = false;
     }
 }

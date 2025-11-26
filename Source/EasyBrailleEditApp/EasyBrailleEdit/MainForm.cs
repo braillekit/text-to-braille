@@ -95,7 +95,14 @@ namespace EasyBrailleEdit
             //panFill.Controls.Add(m_TextArea); // Moved to SplitContainer
 
             m_TextArea.Dock = DockStyle.Fill;
-            m_TextArea.ImeMode = ImeMode.On;
+            if (AppGlobals.Config.General.UseFullWidthIme)
+            {
+                m_TextArea.ImeMode = ImeMode.On;
+            }
+            else
+            {
+                m_TextArea.ImeMode = ImeMode.OnHalf;
+            }
             m_TextArea.WrapMode = WrapMode.Char;
             m_TextArea.Margin = new Padding(3);
 
