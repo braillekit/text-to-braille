@@ -255,6 +255,10 @@ type MyData.BRP > LPT1
 
 示範影片：[https://www.youtube.com/watch?v=JdedDtOr5ro](https://www.youtube.com/watch?v=JdedDtOr5ro)
 
+### 即時點字預覽
+
+EasyBrailleEdit v5.0 新增了即時點字預覽功能，讓您在編輯明眼字時就能即時看到點字轉換結果。詳細說明請參閱：[即時點字預覽](instant-braille-preview.md)
+
 ## 雙視編輯的相關功能
 
 ### 複製與貼上點字
