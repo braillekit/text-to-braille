@@ -32,6 +32,8 @@ namespace EasyBrailleEdit
         private PreviewConversionForm m_PreviewConversionForm = null!;
 
         private FindReplace FindReplaceDialog = null!;
+
+        private System.Windows.Forms.Timer m_PreviewUpdateTimer = null!;
         
         public MainForm()
         {
@@ -43,6 +45,23 @@ namespace EasyBrailleEdit
                 .CreateLogger();
 
             m_Modified = false;
+
+            m_PreviewUpdateTimer = new System.Windows.Forms.Timer();
+            // 讀取設定，若無設定則預設 1500ms
+            int delay = AppGlobals.Config.Braille.AutoPreviewDelay;
+            if (delay < 1500) delay = 1500;
+            if (delay > 5000) delay = 5000;
+            m_PreviewUpdateTimer.Interval = delay;
+            m_PreviewUpdateTimer.Tick += PreviewUpdateTimer_Tick;
+        }
+
+        private void PreviewUpdateTimer_Tick(object? sender, EventArgs e)
+        {
+            m_PreviewUpdateTimer.Stop();
+            if (m_PreviewConversionForm != null && m_PreviewConversionForm.Visible)
+            {
+                UpdatePreviewAsync();
+            }
         }
 
         #region 方法
@@ -150,6 +169,13 @@ namespace EasyBrailleEdit
         private void TextArea_TextChanged(object? sender, EventArgs e)
         {
             Modified = true;
+
+            // Debounce: 每次打字就重置 Timer
+            if (m_PreviewConversionForm != null && m_PreviewConversionForm.Visible)
+            {
+                m_PreviewUpdateTimer.Stop();
+                m_PreviewUpdateTimer.Start();
+            }
         }
 
         private void TextArea_UpdateUI(object? sender, UpdateUIEventArgs e)
@@ -306,8 +332,11 @@ namespace EasyBrailleEdit
             StatusText = "檔案儲存成功。";
             
             // 觸發即時預覽
+            // 觸發即時預覽
             if (m_PreviewConversionForm != null && m_PreviewConversionForm.Visible)
             {
+                // 儲存時立即更新，並停止等待中的 Timer
+                m_PreviewUpdateTimer.Stop();
                 UpdatePreviewAsync();
             }
 
