@@ -43,9 +43,18 @@ We have implemented an automatic update mechanism for the Braille Preview using 
 
 1. Close EasyBrailleEdit.
 2. Open `AppConfig.ini` in a text editor.
-3. Find or add `AutoPreviewDelay=3000` under `[Braille]`.
+3. Find or add the following keys under `[Braille]`:
+   - `AutoPreviewDelay=3000` (Delay in ms)
+   - `EnableInstantPreview=true` (Enable by default)
+   - `PreviewContextLines=3` (Number of context lines)
 4. Save and restart EasyBrailleEdit.
-5. **Verify**: The auto-update now takes 3 seconds to trigger.
+5. **Verify**: The auto-update now takes 3 seconds to trigger, and the preview shows 3 lines before/after the cursor.
+
+### 6. Placeholder Message
+
+1. Clear all text in the editor or open a new file.
+2. **Verify**: The preview panel displays a helpful message explaining how the instant preview works.
+3. **Verify**: The message mentions that it converts text near the cursor position.
 
 ## Technical Details
 

@@ -70,6 +70,11 @@ namespace EasyBrailleEdit.Common.Config.Sections
         /// 是否預設啟用即時預覽（預設 true）。
         /// </summary>
         public bool EnableInstantPreview { get; set; } = true;
+
+        /// <summary>
+        /// 即時預覽時，要顯示游標所在位置前後幾行的內容（預設 3 行）。
+        /// </summary>
+        public int PreviewContextLines { get; set; } = 3;
     }
 
 }

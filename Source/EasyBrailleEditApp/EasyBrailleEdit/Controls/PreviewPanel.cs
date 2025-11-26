@@ -13,6 +13,7 @@ namespace EasyBrailleEdit.Controls
         public PreviewPanel()
         {
             InitializeComponent();
+            UpdatePreview(null);
         }
 
         private void InitializeComponent()
@@ -40,7 +41,22 @@ namespace EasyBrailleEdit.Controls
         {
             if (lines == null || lines.Count == 0)
             {
-                webBrowser1.DocumentText = "<html><body></body></html>";
+                webBrowser1.DocumentText = @"
+<html>
+<head>
+<style>
+    body { font-family: 'Microsoft JhengHei', sans-serif; padding: 20px; color: #666; line-height: 1.6; }
+    .info { background-color: #f9f9f9; border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
+    .note { color: #d9534f; font-weight: bold; margin-top: 10px; }
+</style>
+</head>
+<body>
+    <div class='info'>
+        <p>這是顯示即時轉換點字結果的預覽面板。當你在左邊文字編輯區有修改內容，停止敲鍵盤約 1.5 秒之後，這裡就會顯示游標所在位置附近文字的點字轉換結果。</p>
+        <p class='note'>注意：不是全文轉換，而僅針對游標所在位置附近的文字進行轉換。</p>
+    </div>
+</body>
+</html>";
                 return;
             }
 
@@ -65,7 +81,7 @@ namespace EasyBrailleEdit.Controls
 
                 if (isBlank)
                 {
-                    sb.Append("<table><tr><td class='blank-td'>�]�Ŧ�^</td></tr></table>");
+                    sb.Append("<table><tr><td class='blank-td'>（空行）</td></tr></table>");
                     sb.Append("<div class='separator'></div>");
                     continue;
                 }

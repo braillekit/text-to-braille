@@ -384,10 +384,11 @@ namespace EasyBrailleEdit
         {
             try
             {
-                // 1. 計算範圍 (前後 5 行)
+                // 1. 計算範圍 (前後 N 行)
+                int contextLines = AppGlobals.Config.Braille.PreviewContextLines;
                 int currentLine = m_TextArea.CurrentLine;
-                int startLine = Math.Max(0, currentLine - 5);
-                int endLine = Math.Min(m_TextArea.Lines.Count - 1, currentLine + 5);
+                int startLine = Math.Max(0, currentLine - contextLines);
+                int endLine = Math.Min(m_TextArea.Lines.Count - 1, currentLine + contextLines);
 
                 StringBuilder sb = new StringBuilder();
                 for (int i = startLine; i <= endLine; i++)
