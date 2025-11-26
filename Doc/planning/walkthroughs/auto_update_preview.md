@@ -16,7 +16,7 @@ We have implemented an automatic update mechanism for the Braille Preview using 
 
 1. Open **EasyBrailleEdit**.
 2. Click the **"啟用即時預覽"** (Enable Instant Preview) button on the toolbar.
-3. **Verify**: The main window splits into two panes. The editor is on the left (approx. 30%) and the preview panel appears on the right (approx. 70%).
+3. **Verify**: The main window splits into two panes. The editor is on the left (approx. 35%) and the preview panel appears on the right (approx. 65%).
 4. **Verify**: You can drag the vertical separator to adjust the width of the panels.
 
 ### 2. Test Unsaved File (New!)

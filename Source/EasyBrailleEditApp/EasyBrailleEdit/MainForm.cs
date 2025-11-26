@@ -124,7 +124,7 @@ namespace EasyBrailleEdit
             // Initial state: Preview hidden (Panel2 collapsed)
             m_SplitContainer.Panel2Collapsed = true;
 
-            // Set initial splitter distance (30% for TextArea, 70% for Preview)
+            // Set initial splitter distance (35% for TextArea, 65% for Preview)
             // Note: We need to do this after the form is shown or use a fixed width if possible.
             // But since we are in InitTextArea, the form size might not be final.
             // We can set it roughly or handle Resize event.
@@ -132,7 +132,7 @@ namespace EasyBrailleEdit
             int width = panFill.Width;
             if (width > 0)
             {
-                m_SplitContainer.SplitterDistance = (int)(width * 0.3);
+                m_SplitContainer.SplitterDistance = (int)(width * 0.35);
             }
 
             // Styling
@@ -390,7 +390,7 @@ namespace EasyBrailleEdit
                 StringBuilder sb = new StringBuilder();
                 for (int i = startLine; i <= endLine; i++)
                 {
-                    sb.AppendLine(m_TextArea.Lines[i].Text);
+                    sb.Append(m_TextArea.Lines[i].Text); // .Text 屬性已經包含換行符號，故這裡不可用 AppendLine 方法!
                 }
                 string content = sb.ToString();
 

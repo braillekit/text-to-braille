@@ -100,7 +100,7 @@
   - [x] 修改 MainForm 加入 SplitContainer
   - [x] 移除 PreviewConversionForm
 - [x] 測試驗證
-  - [x] 驗證版面配置 (30%/70%)
+  - [x] 驗證版面配置 (35%/65%)
   - [x] 驗證預覽功能正常
   - [x] 驗證開關預覽功能正常
 

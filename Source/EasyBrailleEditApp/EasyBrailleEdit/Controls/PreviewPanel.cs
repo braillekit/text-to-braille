@@ -47,7 +47,9 @@ namespace EasyBrailleEdit.Controls
             var sb = new StringBuilder();
             sb.Append("<html><head><style>");
             sb.Append("body { font-family: 'Microsoft JhengHei', sans-serif; padding: 10px; }");
-            sb.Append("table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }");
+            sb.Append("table { border-collapse: collapse; width: 100%; margin-bottom: 0px; }");
+            sb.Append(".separator { height: 10px; }");
+            sb.Append(".blank-td { height: 15px; background-color: #f5f5f5; padding: 0; }");
             sb.Append("td { border: 1px solid #ddd; padding: 8px; vertical-align: top; }");
             sb.Append(".text { font-weight: bold; color: #333; margin-bottom: 4px; }");
             sb.Append(".phonetic { color: #666; font-size: 0.9em; margin-bottom: 4px; }");
@@ -56,6 +58,18 @@ namespace EasyBrailleEdit.Controls
 
             foreach (var line in lines)
             {
+                // Check if line is blank
+                bool isBlank = false;
+                if (line.Words.Count == 0) isBlank = true;
+                else if (line.Words.Count == 1 && BrailleWord.IsBlank(line.Words[0])) isBlank = true;
+
+                if (isBlank)
+                {
+                    sb.Append("<table><tr><td class='blank-td'>¡]ªÅ¦æ¡^</td></tr></table>");
+                    sb.Append("<div class='separator'></div>");
+                    continue;
+                }
+
                 sb.Append("<table>");
                 
                 // Row 1: Text
@@ -105,6 +119,7 @@ namespace EasyBrailleEdit.Controls
                 sb.Append("</tr>");
 
                 sb.Append("</table>");
+                sb.Append("<div class='separator'></div>");
             }
 
             sb.Append("</body></html>");

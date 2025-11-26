@@ -7,7 +7,7 @@ Embed the "Instant Braille Preview" directly into the main application window in
 ## User Review Required
 >
 > [!NOTE]
-> **Layout**: The editor will be on the left (30% width) and the preview on the right (70% width), separated by a movable splitter.
+> **Layout**: The editor will be on the left (35% width) and the preview on the right (65% width), separated by a movable splitter.
 > **Technology**: We will use a `SplitContainer` control. The `PreviewConversionForm` will be replaced by a `PreviewPanel` UserControl.
 
 ## Proposed Changes
@@ -27,7 +27,7 @@ Embed the "Instant Braille Preview" directly into the main application window in
   - Dock `m_SplitContainer` to Fill in `panFill`.
   - Add `m_TextArea` to `m_SplitContainer.Panel1`.
   - Add `m_PreviewPanel` to `m_SplitContainer.Panel2`.
-  - Set initial `SplitterDistance` to achieve 30%/70% ratio.
+  - Set initial `SplitterDistance` to achieve 35%/65% ratio.
 - **EnablePreviewConversion**:
   - Toggle `m_SplitContainer.Panel2Collapsed` instead of showing/hiding a form.
 - **UpdatePreviewAsync**:
@@ -45,7 +45,7 @@ Embed the "Instant Braille Preview" directly into the main application window in
 1. **Layout Test**:
    - Open EasyBrailleEdit.
    - Enable Instant Preview.
-   - Verify the editor is on the left (approx 30%) and preview on the right (approx 70%).
+   - Verify the editor is on the left (approx 35%) and preview on the right (approx 65%).
    - Verify the splitter can be moved.
 2. **Functionality Test**:
    - Type text and verify the preview updates (using the existing auto-update logic).
