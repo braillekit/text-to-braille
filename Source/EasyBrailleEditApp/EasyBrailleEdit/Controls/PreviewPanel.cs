@@ -8,7 +8,7 @@ namespace EasyBrailleEdit.Controls
 {
     public class PreviewPanel : UserControl
     {
-        private WebBrowser webBrowser1;
+        private WebBrowser webBrowser1 = null!;
 
         public PreviewPanel()
         {
@@ -37,7 +37,7 @@ namespace EasyBrailleEdit.Controls
             this.ResumeLayout(false);
         }
 
-        public void UpdatePreview(List<BrailleLine> lines)
+        public void UpdatePreview(List<BrailleLine>? lines)
         {
             if (lines == null || lines.Count == 0)
             {
