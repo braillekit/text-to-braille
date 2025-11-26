@@ -65,6 +65,11 @@ namespace EasyBrailleEdit.Common.Config.Sections
         /// 即時預覽的自動更新延遲時間（毫秒），預設 1500ms。
         /// </summary>
         public int AutoPreviewDelay { get; set; } = 1500;
+
+        /// <summary>
+        /// 是否預設啟用即時預覽（預設 true）。
+        /// </summary>
+        public bool EnableInstantPreview { get; set; } = true;
     }
 
 }

@@ -122,7 +122,9 @@ namespace EasyBrailleEdit
             m_SplitContainer.Panel2.Controls.Add(m_PreviewPanel);
             
             // Initial state: Preview hidden (Panel2 collapsed)
-            m_SplitContainer.Panel2Collapsed = true;
+            //m_SplitContainer.Panel2Collapsed = true;
+            bool enablePreview = AppGlobals.Config.Braille.EnableInstantPreview;
+            EnablePreviewConversion(enablePreview);
 
             // Set initial splitter distance (35% for TextArea, 65% for Preview)
             // Note: We need to do this after the form is shown or use a fixed width if possible.
@@ -907,7 +909,7 @@ namespace EasyBrailleEdit
 
             m_InvalidCharForm = new InvalidCharForm(this);
 
-            EnablePreviewConversion(false);
+
             
             m_TextArea.BringToFront();
 
