@@ -1,20 +1,42 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using BrailleToolkit;
 
-namespace EasyBrailleEdit
+namespace EasyBrailleEdit.Controls
 {
-    public partial class PreviewConversionForm : Form
+    public class PreviewPanel : UserControl
     {
-        public PreviewConversionForm()
+        private WebBrowser webBrowser1;
+
+        public PreviewPanel()
         {
             InitializeComponent();
         }
-        public void UpdatePreview(List<BrailleToolkit.BrailleLine> lines)
+
+        private void InitializeComponent()
+        {
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.SuspendLayout();
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(150, 150);
+            this.webBrowser1.TabIndex = 0;
+            // 
+            // PreviewPanel
+            // 
+            this.Controls.Add(this.webBrowser1);
+            this.Name = "PreviewPanel";
+            this.ResumeLayout(false);
+        }
+
+        public void UpdatePreview(List<BrailleLine> lines)
         {
             if (lines == null || lines.Count == 0)
             {
@@ -91,26 +113,6 @@ namespace EasyBrailleEdit
 
         private string GetBrailleUnicode(byte value)
         {
-            // Braille Unicode block starts at U+2800 (hex)
-            // The bit mapping in BrailleToolkit is:
-            // Bit 0: Dot 1
-            // Bit 1: Dot 2
-            // Bit 2: Dot 3
-            // Bit 3: Dot 4
-            // Bit 4: Dot 5
-            // Bit 5: Dot 6
-            // 
-            // Unicode Braille Pattern dots mapping:
-            // U+2800 + 
-            // Dot 1: +1
-            // Dot 2: +2
-            // Dot 3: +4
-            // Dot 4: +8
-            // Dot 5: +16
-            // Dot 6: +32
-            // 
-            // It seems the mapping is identical!
-            
             int code = 0x2800 + value;
             return ((char)code).ToString();
         }

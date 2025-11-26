@@ -93,3 +93,14 @@
   - [x] 驗證停止打字後自動更新
   - [x] 驗證未儲存檔案（新檔案）可正常預覽
 
+## 階段八：內嵌即時預覽視窗
+
+- [x] 設計與實作
+  - [x] 建立 PreviewPanel UserControl
+  - [x] 修改 MainForm 加入 SplitContainer
+  - [x] 移除 PreviewConversionForm
+- [x] 測試驗證
+  - [x] 驗證版面配置 (30%/70%)
+  - [x] 驗證預覽功能正常
+  - [x] 驗證開關預覽功能正常
+

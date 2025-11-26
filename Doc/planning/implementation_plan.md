@@ -1,24 +1,54 @@
-# Refine Instant Preview: Support Unsaved Files
+# Embedded Instant Preview
 
 ## Goal Description
-Confirm and ensure that the "Instant Braille Preview" feature works for new, unsaved files. The user noted that previously they had to save to trigger the preview. With the new auto-update (debounce) mechanism, this requirement should theoretically be gone. We will verify this and update the documentation.
+
+Embed the "Instant Braille Preview" directly into the main application window instead of using a separate popup window. This will provide a more integrated user experience.
 
 ## User Review Required
+>
 > [!NOTE]
-> **No Code Changes Expected**: Based on code analysis, the current implementation already supports converting unsaved content because it streams text directly from the editor to the converter and uses a temporary file for output. This plan focuses on verification and documentation updates.
+> **Layout**: The editor will be on the left (30% width) and the preview on the right (70% width), separated by a movable splitter.
+> **Technology**: We will use a `SplitContainer` control. The `PreviewConversionForm` will be replaced by a `PreviewPanel` UserControl.
 
 ## Proposed Changes
 
-### Documentation
-#### [MODIFY] [walkthroughs/auto_update_preview.md](file:///d:/Projects/BrailleKit/text-to-braille/Doc/planning/walkthroughs/auto_update_preview.md)
-- Add a verification step to explicitly test with a "New File" (unsaved).
+### EasyBrailleEdit
+
+#### [NEW] [Controls/PreviewPanel.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/Controls/PreviewPanel.cs)
+
+- Create a new `UserControl` named `PreviewPanel`.
+- Add a `WebBrowser` control docked to Fill.
+- Implement `UpdatePreview(List<BrailleLine> lines)` method (logic moved from `PreviewConversionForm`).
+
+#### [MODIFY] [MainForm.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs)
+
+- **InitTextArea**:
+  - Create `SplitContainer` (`m_SplitContainer`).
+  - Dock `m_SplitContainer` to Fill in `panFill`.
+  - Add `m_TextArea` to `m_SplitContainer.Panel1`.
+  - Add `m_PreviewPanel` to `m_SplitContainer.Panel2`.
+  - Set initial `SplitterDistance` to achieve 30%/70% ratio.
+- **EnablePreviewConversion**:
+  - Toggle `m_SplitContainer.Panel2Collapsed` instead of showing/hiding a form.
+- **UpdatePreviewAsync**:
+  - Call `m_PreviewPanel.UpdatePreview` instead of the form's method.
+- **Remove** references to `PreviewConversionForm`.
+
+#### [DELETE] [PreviewConversionForm.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/PreviewConversionForm.cs)
+
+- Remove the obsolete form.
 
 ## Verification Plan
 
 ### Manual Verification
-1. **Unsaved File Test**:
+
+1. **Layout Test**:
    - Open EasyBrailleEdit.
-   - Do **NOT** save the file (title should be "未命名").
-   - Enable "Instant Preview".
-   - Type text.
-   - Verify preview updates automatically.
+   - Enable Instant Preview.
+   - Verify the editor is on the left (approx 30%) and preview on the right (approx 70%).
+   - Verify the splitter can be moved.
+2. **Functionality Test**:
+   - Type text and verify the preview updates (using the existing auto-update logic).
+3. **Toggle Test**:
+   - Disable Instant Preview. Verify the preview panel disappears and the editor takes up the full width (or returns to previous state).
+   - Enable again and verify it restores.

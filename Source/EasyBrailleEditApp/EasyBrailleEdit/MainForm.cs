@@ -15,6 +15,7 @@ using System.Drawing.Printing;
 using System.Text;
 using EasyBrailleEdit.Common.Utilities.Http;
 using EasyBrailleEdit.Services;
+using EasyBrailleEdit.Controls;
 
 namespace EasyBrailleEdit
 {
@@ -29,7 +30,9 @@ namespace EasyBrailleEdit
 
         private ConversionDialog m_ConvertDialog = null!;
 
-        private PreviewConversionForm m_PreviewConversionForm = null!;
+        //private PreviewConversionForm m_PreviewConversionForm = null!;
+        private SplitContainer m_SplitContainer = null!;
+        private PreviewPanel m_PreviewPanel = null!;
 
         private FindReplace FindReplaceDialog = null!;
 
@@ -58,7 +61,7 @@ namespace EasyBrailleEdit
         private void PreviewUpdateTimer_Tick(object? sender, EventArgs e)
         {
             m_PreviewUpdateTimer.Stop();
-            if (m_PreviewConversionForm != null && m_PreviewConversionForm.Visible)
+            if (!m_SplitContainer.Panel2Collapsed)
             {
                 UpdatePreviewAsync();
             }
@@ -89,7 +92,7 @@ namespace EasyBrailleEdit
         private void InitTextArea()
         {
             m_TextArea = new Scintilla();
-            panFill.Controls.Add(m_TextArea);
+            //panFill.Controls.Add(m_TextArea); // Moved to SplitContainer
 
             m_TextArea.Dock = DockStyle.Fill;
             m_TextArea.ImeMode = ImeMode.On;
@@ -99,6 +102,38 @@ namespace EasyBrailleEdit
             // Line numbers
             m_TextArea.Margins[0].Type = MarginType.Number;
             m_TextArea.Margins[0].Width = 35;
+
+            // SplitContainer & PreviewPanel
+            m_SplitContainer = new SplitContainer();
+            m_SplitContainer.Dock = DockStyle.Fill;
+            m_SplitContainer.Orientation = Orientation.Vertical;
+            panFill.Controls.Add(m_SplitContainer);
+            m_SplitContainer.BringToFront();
+
+            m_PreviewPanel = new PreviewPanel();
+            m_PreviewPanel.Dock = DockStyle.Fill;
+            
+            // Panel1: TextArea, Panel2: PreviewPanel
+            m_TextArea.Dock = DockStyle.None;
+            m_TextArea.Margin = new Padding(0);
+            m_SplitContainer.Panel1.Controls.Add(m_TextArea);
+            m_TextArea.Dock = DockStyle.Fill;
+
+            m_SplitContainer.Panel2.Controls.Add(m_PreviewPanel);
+            
+            // Initial state: Preview hidden (Panel2 collapsed)
+            m_SplitContainer.Panel2Collapsed = true;
+
+            // Set initial splitter distance (30% for TextArea, 70% for Preview)
+            // Note: We need to do this after the form is shown or use a fixed width if possible.
+            // But since we are in InitTextArea, the form size might not be final.
+            // We can set it roughly or handle Resize event.
+            // For now, let's try to set it based on current panFill width.
+            int width = panFill.Width;
+            if (width > 0)
+            {
+                m_SplitContainer.SplitterDistance = (int)(width * 0.3);
+            }
 
             // Styling
             m_TextArea.Lexer = Lexer.Xml;
@@ -171,7 +206,7 @@ namespace EasyBrailleEdit
             Modified = true;
 
             // Debounce: 每次打字就重置 Timer
-            if (m_PreviewConversionForm != null && m_PreviewConversionForm.Visible)
+            if (!m_SplitContainer.Panel2Collapsed)
             {
                 m_PreviewUpdateTimer.Stop();
                 m_PreviewUpdateTimer.Start();
@@ -333,7 +368,7 @@ namespace EasyBrailleEdit
             
             // 觸發即時預覽
             // 觸發即時預覽
-            if (m_PreviewConversionForm != null && m_PreviewConversionForm.Visible)
+            if (!m_SplitContainer.Panel2Collapsed)
             {
                 // 儲存時立即更新，並停止等待中的 Timer
                 m_PreviewUpdateTimer.Stop();
@@ -370,7 +405,7 @@ namespace EasyBrailleEdit
                     var doc = BrailleDocument.LoadBrailleFile(result.OutputFilePath);
                     
                     // 4. 更新預覽視窗
-                    m_PreviewConversionForm.UpdatePreview(doc.Lines);
+                    m_PreviewPanel.UpdatePreview(doc.Lines);
                 }
             }
             catch (Exception ex)
@@ -891,23 +926,20 @@ namespace EasyBrailleEdit
         {
             if (enable)
             {
-                if (m_PreviewConversionForm == null || m_PreviewConversionForm.IsDisposed)
+                m_SplitContainer.Panel2Collapsed = false;
+                
+                // Ensure 30/70 ratio when enabled
+                if (m_SplitContainer.Width > 0)
                 {
-                    m_PreviewConversionForm = new PreviewConversionForm();
-                    m_PreviewConversionForm.TopMost = true;
+                     m_SplitContainer.SplitterDistance = (int)(m_SplitContainer.Width * 0.3);
                 }
-
-                m_PreviewConversionForm.Show();
-                m_PreviewConversionForm.BringToFront();
-                m_PreviewConversionForm.Activate();
 
                 btnPreviewConversion.Text = "關閉即時預覽";
                 btnPreviewConversion.ToolTipText = "關閉即時預覽（目前已開啟）";
             }
             else
             {
-                // 使用 Hide 來避免 Dispose
-                m_PreviewConversionForm?.Hide();
+                m_SplitContainer.Panel2Collapsed = true;
                 btnPreviewConversion.Text = "啟用即時預覽";
                 btnPreviewConversion.ToolTipText = "啟用即時預覽（目前未開啟）";
             }
