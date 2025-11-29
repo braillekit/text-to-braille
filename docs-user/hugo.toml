@@ -4,6 +4,17 @@ title = 'EasyBrailleEdit 使用手冊'
 
 contentDir = 'content'
 
+# Set type to 'docs' if you want to render page outside of configured section or if you render section other than 'docs'
+type = 'docs'
+
+# (Optional) Set this to true to enable 'Last Modified by' date and git author
+#  information on 'doc' type pages.
+enableGitInfo = true
+
+# (Optional) Theme is intended for documentation use, therefore it doesn't render taxonomy.
+# You can remove related files with config below
+disableKinds = ['taxonomy']
+
 [params]
   BookTheme = 'auto'
   BookSection = '*'
@@ -19,7 +30,7 @@ contentDir = 'content'
 
 [menu]
   [[menu.main]]
-    name = "易點雙視使用手冊"
+    name = "易點雙視"
     url = "/"
     weight = 10
 

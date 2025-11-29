@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+
+/*
+  You can add custom styles here.
+  It could be plugins:
+    @import "plugins/numbered";
+    @import "plugins/scrollbars";
+  Or custom styles:
+    body { background: white; }
+  Or even theme mixins:
+    @mixin theme-light {
+      --body-background: white;
+      --body-font-color: black;
+      ...
+    }
+*/
+:root {
+  --font-size: 1.2rem;
+  --font-size-smaller: 1rem;
+  --font-size-smallest: 0.85rem;
+}
+
+body {
+  font-family:
+    'Microsoft JhengHei',
+    '微軟正黑體',
+    'Noto Sans TC',
+    system-ui,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji';
+}
+
+/* Center images in markdown content */
+.markdown img {
+  display: block;
+  margin: 2rem auto;
+}

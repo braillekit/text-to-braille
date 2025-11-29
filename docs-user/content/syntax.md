@@ -1,6 +1,9 @@
-# EasyBrailleEdit 語法參考手冊
+---
+title: "語法參考手冊"
+weight: 8
+---
 
-**Contributors:** 蔡煥麟
+# 語法參考手冊
 
 ## 原書頁碼
 
