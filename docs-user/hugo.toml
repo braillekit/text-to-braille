@@ -1,6 +1,6 @@
 baseURL = 'https://braillekit.github.io/text-to-braille/'
 languageCode = 'zh-tw'
-title = 'EasyBrailleEdit 使用手冊'
+title = 'EasyBrailleEdit'
 
 contentDir = 'content'
 

@@ -21,9 +21,3 @@
 - 可標示原書頁碼，並可自動計算與列印點字頁碼。
 
 ---
-
-## 聯繫與支援
-
-有關本軟體的最新消息或其他教學文件，可以查看部落格：[http://innoobj.blogspot.com/](http://innoobj.blogspot.com/)
-
-也可以追蹤臉書專頁，以便隨時獲得最新消息：[https://www.facebook.com/easybraille/](https://www.facebook.com/easybraille/)
