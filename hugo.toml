@@ -1,0 +1,22 @@
+baseURL = 'https://braillekit.github.io/text-to-braille/'
+languageCode = 'zh-tw'
+title = 'EasyBrailleEdit 使用手冊'
+theme = 'hugo-book'
+contentDir = 'docs-user/content'
+
+[params]
+  BookTheme = 'auto'
+  BookSection = '*'
+  BookRepo = 'https://github.com/braillekit/text-to-braille'
+  BookDateFormat = '2006年1月2日'
+
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = "0.110.0"
+
+[menu]
+  [[menu.main]]
+    name = "使用手冊"
+    url = "/docs/"
+    weight = 10
