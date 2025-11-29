@@ -31,7 +31,7 @@
   <ItemGroup>
     <PackageReference Include="fernandreu.ScintillaNET" Version="4.2.0" />
     <PackageReference Include="Huanlin.Common" Version="5.5.1" />
-    <PackageReference Include="Huanlin.Windows" Version="5.5.0" />
+    <PackageReference Include="Huanlin.Windows" Version="5.5.1" />
     <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
