@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>EasyBrailleEdit 使用手冊</title><link>https://braillekit.github.io/text-to-braille/</link><description>Recent content on EasyBrailleEdit 使用手冊</description><generator>Hugo</generator><language>zh-tw</language><atom:link href="https://braillekit.github.io/text-to-braille/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://braillekit.github.io/text-to-braille/docs/app-config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/docs/app-config/</guid><description>&lt;h1 id="應用程式組態檔說明"&gt;應用程式組態檔說明&lt;a class="anchor" href="#%e6%87%89%e7%94%a8%e7%a8%8b%e5%bc%8f%e7%b5%84%e6%85%8b%e6%aa%94%e8%aa%aa%e6%98%8e"&gt;#&lt;/a&gt;&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>EasyBrailleEdit 使用手冊</title><link>https://braillekit.github.io/text-to-braille/</link><description>Recent content on EasyBrailleEdit 使用手冊</description><generator>Hugo</generator><language>zh-tw</language><atom:link href="https://braillekit.github.io/text-to-braille/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://braillekit.github.io/text-to-braille/app-config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/app-config/</guid><description>&lt;h1 id="應用程式組態檔說明"&gt;應用程式組態檔說明&lt;a class="anchor" href="#%e6%87%89%e7%94%a8%e7%a8%8b%e5%bc%8f%e7%b5%84%e6%85%8b%e6%aa%94%e8%aa%aa%e6%98%8e"&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;EasyBrailleEdit 的許多行為可以透過修改安裝目錄下的 &lt;code&gt;AppConfig.ini&lt;/code&gt; 檔案來調整。此檔案是一個標準的 INI 格式文字檔，您可以使用記事本或其他純文字編輯器進行修改。&lt;/p&gt;
 &lt;h2 id="general-一般設定"&gt;[General] 一般設定&lt;a class="anchor" href="#general-%e4%b8%80%e8%88%ac%e8%a8%ad%e5%ae%9a"&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;此區段包含應用程式的一般性設定。&lt;/p&gt;
@@ -112,7 +112,7 @@
  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id="brailleeditor-雙視編輯器設定"&gt;[BrailleEditor] 雙視編輯器設定&lt;a class="anchor" href="#brailleeditor-%e9%9b%99%e8%a6%96%e7%b7%a8%e8%bc%af%e5%99%a8%e8%a8%ad%e5%ae%9a"&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;此區段設定雙視編輯視窗的行為。&lt;/p&gt;</description></item><item><title/><link>https://braillekit.github.io/text-to-braille/docs/dual-mode-conversion/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/docs/dual-mode-conversion/</guid><description>&lt;h1 id="雙模式點字轉換"&gt;雙模式點字轉換&lt;a class="anchor" href="#%e9%9b%99%e6%a8%a1%e5%bc%8f%e9%bb%9e%e5%ad%97%e8%bd%89%e6%8f%9b"&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;此區段設定雙視編輯視窗的行為。&lt;/p&gt;</description></item><item><title/><link>https://braillekit.github.io/text-to-braille/dual-mode-conversion/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/dual-mode-conversion/</guid><description>&lt;h1 id="雙模式點字轉換"&gt;雙模式點字轉換&lt;a class="anchor" href="#%e9%9b%99%e6%a8%a1%e5%bc%8f%e9%bb%9e%e5%ad%97%e8%bd%89%e6%8f%9b"&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;從 v5.0 版本開始，EasyBrailleEdit 引入了「雙模式點字轉換」架構，提供更穩定且彈性的點字轉換服務。&lt;/p&gt;
 &lt;h2 id="什麼是雙模式轉換"&gt;什麼是雙模式轉換？&lt;a class="anchor" href="#%e4%bb%80%e9%ba%bc%e6%98%af%e9%9b%99%e6%a8%a1%e5%bc%8f%e8%bd%89%e6%8f%9b"&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;本系統現在支援兩種點字轉換模式：&lt;/p&gt;
@@ -163,7 +163,7 @@
 &lt;h3 id="為什麼需要兩種模式"&gt;為什麼需要兩種模式？&lt;a class="anchor" href="#%e7%82%ba%e4%bb%80%e9%ba%bc%e9%9c%80%e8%a6%81%e5%85%a9%e7%a8%ae%e6%a8%a1%e5%bc%8f"&gt;#&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;雖然內建模式經過嚴格測試且效能更好，但為了確保在任何情況下使用者都能順利完成工作，我們保留了舊版的外部工具模式作為「安全網」。如果您在使用內建模式時遇到任何異常（例如轉換結果不正確或程式不穩定），可以暫時切換回外部工具模式，並回報問題給開發團隊。&lt;/p&gt;
 &lt;h3 id="如何確認目前使用哪種模式"&gt;如何確認目前使用哪種模式？&lt;a class="anchor" href="#%e5%a6%82%e4%bd%95%e7%a2%ba%e8%aa%8d%e7%9b%ae%e5%89%8d%e4%bd%bf%e7%94%a8%e5%93%aa%e7%a8%ae%e6%a8%a1%e5%bc%8f"&gt;#&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;目前介面上不會直接顯示當前模式，但您可以查看 &lt;code&gt;AppConfig.ini&lt;/code&gt; 的設定值。未來版本可能會在「關於」或「設定」視窗中顯示此資訊。&lt;/p&gt;</description></item><item><title/><link>https://braillekit.github.io/text-to-braille/docs/instant-braille-preview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/docs/instant-braille-preview/</guid><description>&lt;h1 id="即時點字預覽"&gt;即時點字預覽&lt;a class="anchor" href="#%e5%8d%b3%e6%99%82%e9%bb%9e%e5%ad%97%e9%a0%90%e8%a6%bd"&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;目前介面上不會直接顯示當前模式，但您可以查看 &lt;code&gt;AppConfig.ini&lt;/code&gt; 的設定值。未來版本可能會在「關於」或「設定」視窗中顯示此資訊。&lt;/p&gt;</description></item><item><title/><link>https://braillekit.github.io/text-to-braille/instant-braille-preview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/instant-braille-preview/</guid><description>&lt;h1 id="即時點字預覽"&gt;即時點字預覽&lt;a class="anchor" href="#%e5%8d%b3%e6%99%82%e9%bb%9e%e5%ad%97%e9%a0%90%e8%a6%bd"&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;EasyBrailleEdit v5.0 新增了「即時點字預覽」功能，讓您在編輯明眼字時，能夠即時看到游標所在位置附近的點字轉換結果，無需頻繁切換到雙視編輯模式。&lt;/p&gt;
 &lt;h2 id="功能簡介"&gt;功能簡介&lt;a class="anchor" href="#%e5%8a%9f%e8%83%bd%e7%b0%a1%e4%bb%8b"&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
@@ -231,7 +231,7 @@
 &lt;li&gt;設定預覽範圍。例如設定為 &lt;code&gt;3&lt;/code&gt;，表示顯示游標所在行，加上前 3 行與後 3 行，共約 7 行的內容。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://braillekit.github.io/text-to-braille/docs/syntax/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/docs/syntax/</guid><description>&lt;h1 id="easybrailleedit-語法參考手冊"&gt;EasyBrailleEdit 語法參考手冊&lt;a class="anchor" href="#easybrailleedit-%e8%aa%9e%e6%b3%95%e5%8f%83%e8%80%83%e6%89%8b%e5%86%8a"&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://braillekit.github.io/text-to-braille/syntax/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/syntax/</guid><description>&lt;h1 id="easybrailleedit-語法參考手冊"&gt;EasyBrailleEdit 語法參考手冊&lt;a class="anchor" href="#easybrailleedit-%e8%aa%9e%e6%b3%95%e5%8f%83%e8%80%83%e6%89%8b%e5%86%8a"&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;Contributors:&lt;/strong&gt; 蔡煥麟&lt;/p&gt;
 &lt;h2 id="原書頁碼"&gt;原書頁碼&lt;a class="anchor" href="#%e5%8e%9f%e6%9b%b8%e9%a0%81%e7%a2%bc"&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;用途：&lt;/strong&gt; 標示原書頁碼。&lt;/p&gt;
