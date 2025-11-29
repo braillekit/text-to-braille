@@ -19,8 +19,8 @@ contentDir = 'content'
 
 [menu]
   [[menu.main]]
-    name = "使用手冊"
-    url = "/docs/"
+    name = "易點雙視使用手冊"
+    url = "/"
     weight = 10
 
 [markup]
