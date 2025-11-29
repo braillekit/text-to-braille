@@ -1,6 +1,6 @@
 {
-  "name": "EasyBrailleEdit 使用手冊",
-  "short_name": "EasyBrailleEdit 使用手冊",
+  "name": "EasyBrailleEdit",
+  "short_name": "EasyBrailleEdit",
   "start_url": "/text-to-braille/",
   "scope": "/text-to-braille/",
   "display": "standalone",
