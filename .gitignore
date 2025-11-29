@@ -292,4 +292,8 @@ __pycache__/
 *.btp.cs
 *.btm.cs
 *.odx.cs
-*.xsd.cs
+
+# Hugo
+.hugo_build.lock
+docs-user/public/
+docs-user/resources/
