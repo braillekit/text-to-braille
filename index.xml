@@ -1,5 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>易點雙視-文件中心</title><link>https://braillekit.github.io/text-to-braille/</link><description>Recent content on 易點雙視-文件中心</description><generator>Hugo</generator><language>zh-tw</language><atom:link href="https://braillekit.github.io/text-to-braille/index.xml" rel="self" type="application/rss+xml"/><item><title>安裝</title><link>https://braillekit.github.io/text-to-braille/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/installation/</guid><description>&lt;p&gt;本文說明如何安裝「易點雙視」。&lt;/p&gt;
-&lt;p&gt;適用作業系統：Windows 10、Windows 11。&lt;/p&gt;</description></item><item><title>步驟 1：編輯明眼字</title><link>https://braillekit.github.io/text-to-braille/get-started/step1-edit-text/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/get-started/step1-edit-text/</guid><description>&lt;h1 id="步驟-1編輯明眼字"&gt;步驟 1：編輯明眼字&lt;a class="anchor" href="#%e6%ad%a5%e9%a9%9f-1%e7%b7%a8%e8%bc%af%e6%98%8e%e7%9c%bc%e5%ad%97"&gt;#&lt;/a&gt;&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>易點雙視-文件中心</title><link>https://braillekit.github.io/text-to-braille/</link><description>Recent content on 易點雙視-文件中心</description><generator>Hugo</generator><language>zh-tw</language><atom:link href="https://braillekit.github.io/text-to-braille/index.xml" rel="self" type="application/rss+xml"/><item><title>安裝</title><link>https://braillekit.github.io/text-to-braille/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/installation/</guid><description>&lt;p&gt;&lt;strong&gt;摘要：&lt;/strong&gt; 本文件將說明安裝易點雙視（EasyBrailleEdit）的軟硬體基本需求以及安裝步驟。&lt;/p&gt;
+&lt;p&gt;適用作業系統：Windows 10、Windows 11。&lt;/p&gt;
+&lt;h2 id="環境需求"&gt;環境需求&lt;a class="anchor" href="#%e7%92%b0%e5%a2%83%e9%9c%80%e6%b1%82"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="軟體"&gt;軟體&lt;a class="anchor" href="#%e8%bb%9f%e9%ab%94"&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows 10、Windows 11&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="硬體"&gt;硬體&lt;a class="anchor" href="#%e7%a1%ac%e9%ab%94"&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;個人電腦／筆電：記憶體至少 8GB。&lt;/li&gt;
+&lt;li&gt;顯示器：建議尺寸為 20 吋以上。&lt;/li&gt;
+&lt;li&gt;點矩陣式印表機。只要支援 Windows 作業系統，列印寬度可達 132 行（可列印至少 13 英吋寬的紙張）的印表機均可。最好是可以列印三聯以上的複寫紙（這是因為點字紙比較厚，有些點矩陣印表機在捲動時會因為紙張太厚而卡紙，若印表機支援列印三聯以上的複寫紙，通常就不會有這個問題）。參考廠牌型號：Epson LQ-2180（LQ-2180C）。&lt;/li&gt;
+&lt;li&gt;點字印表機。目前已實測過的點字印表機如下：
+&lt;ul&gt;
+&lt;li&gt;Enabling Technologis 公司的雙面點字印表機，型號為 ET 或 Juliet Classic/Juliet Pro。&lt;/li&gt;
+&lt;li&gt;Impacto Texto&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果不確定您的點字印表機是否相容，可以先&lt;a href="../contact"&gt;提出問題&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id="安裝步驟"&gt;安裝步驟&lt;a class="anchor" href="#%e5%ae%89%e8%a3%9d%e6%ad%a5%e9%a9%9f"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="步驟-1安裝-net-10"&gt;步驟 1：安裝 .NET 10&lt;a class="anchor" href="#%e6%ad%a5%e9%a9%9f-1%e5%ae%89%e8%a3%9d-net-10"&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;用瀏覽器開啟以下連結：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://dotnet.microsoft.com/zh-tw/download/dotnet/10.0"&gt;https://dotnet.microsoft.com/zh-tw/download/dotnet/10.0&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;網頁開啟後，應該能看到多個不同作業平台的 .NET SDK 10.x 的下載連結。目前大多電腦都是 x64 架構，故選擇 Windows x64 的下載連結。如下圖：&lt;/p&gt;
+&lt;p&gt;&lt;img src="dotnet-10.png" alt="" /&gt;&lt;/p&gt;
+&lt;blockquote class='book-hint '&gt;
+&lt;p&gt;如果您的電腦是 32 位元的 x86 架構，則點擊 x86 的下載連結。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;h3 id="步驟-2安裝-easybrailleedit"&gt;步驟 2：安裝 EasyBrailleEdit&lt;a class="anchor" href="#%e6%ad%a5%e9%a9%9f-2%e5%ae%89%e8%a3%9d-easybrailleedit"&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;下載易點雙視的安裝程式，然後執行安裝程式即可。&lt;/p&gt;
+&lt;p&gt;預設安裝目錄： &lt;code&gt;C:\EasyBrailleEdit5&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;安裝完成後，應可在 Windows 桌面找到易點雙視的捷徑圖示。雙擊捷徑圖示即可啟動易點雙視。&lt;/p&gt;</description></item><item><title>步驟 1：編輯明眼字</title><link>https://braillekit.github.io/text-to-braille/get-started/step1-edit-text/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/get-started/step1-edit-text/</guid><description>&lt;h1 id="步驟-1編輯明眼字"&gt;步驟 1：編輯明眼字&lt;a class="anchor" href="#%e6%ad%a5%e9%a9%9f-1%e7%b7%a8%e8%bc%af%e6%98%8e%e7%9c%bc%e5%ad%97"&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;依平常的打字習慣輸入，並利用本軟體提供的特殊控制標籤，便能夠完成一篇同時包含中文、英文、數學等各種文字符號的文件。&lt;/p&gt;
 &lt;p&gt;一邊輸入明眼字時，可在「即時預覽」面板中即時預覽轉換後的點字，如下圖：&lt;/p&gt;
 &lt;p&gt;&lt;img src="images/first-doc.png" alt="" /&gt;&lt;/p&gt;
@@ -446,4 +476,9 @@
 &lt;li&gt;&lt;a href="https://github.com/braillekit/text-to-braille/issues/new/choose"&gt;至 GitHub 平台提出問題或建議&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;查看 &lt;a href="http://innoobj.blogspot.com/"&gt;部落格&lt;/a&gt;(&lt;a href="http://innoobj.blogspot.com/"&gt;http://innoobj.blogspot.com/&lt;/a&gt;) 以瞭解最新消息&lt;/li&gt;
 &lt;li&gt;追蹤 &lt;a href="https://www.facebook.com/easybraille/"&gt;臉書專頁&lt;/a&gt; 以便隨時獲得最新消息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果是點字印表機等硬體設備問題，以下是已知的台灣廠商：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.iusee.com.tw/"&gt;聯郃國際視覺輔具中心&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.u-tran.com/"&gt;宇崝企業有限公司&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item></channel></rss>
