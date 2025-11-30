@@ -1,6 +1,6 @@
 baseURL = 'https://braillekit.github.io/text-to-braille/'
 languageCode = 'zh-tw'
-title = 'EasyBrailleEdit'
+title = '易點雙視-文件中心'
 
 contentDir = 'content'
 
@@ -16,25 +16,25 @@ enableGitInfo = true
 disableKinds = ['taxonomy']
 
 [params]
-  BookTheme = 'auto'
-  BookSection = '*'
-  BookRepo = 'https://github.com/braillekit/text-to-braille'
-  BookDateFormat = '2006年1月2日'
+BookTheme = 'auto'
+BookSection = '*'
+BookRepo = 'https://github.com/braillekit/text-to-braille'
+BookDateFormat = '2006年1月2日'
 
 [module]
-  [[module.imports]]
-    path = "github.com/alex-shpak/hugo-book"
-  [module.hugoVersion]
-    extended = false
-    min = "0.110.0"
+[[module.imports]]
+path = "github.com/alex-shpak/hugo-book"
+[module.hugoVersion]
+extended = false
+min = "0.110.0"
 
 [menu]
-  [[menu.main]]
-    name = "易點雙視"
-    url = "/"
-    weight = 10
+[[menu.main]]
+name = "易點雙視"
+url = "/"
+weight = 10
 
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
