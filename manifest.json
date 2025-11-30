@@ -1,6 +1,6 @@
 {
-  "name": "EasyBrailleEdit",
-  "short_name": "EasyBrailleEdit",
+  "name": "易點雙視-文件中心",
+  "short_name": "易點雙視-文件中心",
   "start_url": "/text-to-braille/",
   "scope": "/text-to-braille/",
   "display": "standalone",
