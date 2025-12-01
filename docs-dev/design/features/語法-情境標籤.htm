@@ -1,0 +1,188 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-tw">
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<title>情境標籤</title>
+<style>
+<!--
+pre          { font-family: Courier New; color: #008080 }
+li           { margin-bottom: 10 }
+-->
+</style>
+</head>
+
+<body style="font-family: Verdana">
+
+<h2>情境標籤（Context Tags）</h2>
+<p>　</p>
+<h3>1. 用途</h3>
+<p>將特定效果或點字規則套用置特定的文字區塊或點字區塊。例如：</p>
+<blockquote>
+	<pre><font size="3">&lt;數學&gt;1+2=3&lt;/數學&gt;
+&lt;縮排&gt;
+    (1) 蘋果
+    (2) 香蕉
+&lt;/縮排&gt;</font></pre>
+</blockquote>
+<p>注意：情境標籤的起始和結束標籤可以不在同一列。</p>
+<h3>2. 情境標籤列表</h3>
+<table border="1" width="97%" id="table1" cellspacing="0" style="border-collapse: collapse" cellpadding="6">
+	<tr>
+		<td width="78"><b>標籤名稱</b></td>
+		<td width="409"><b>用途</b></td>
+		<td width="114"><b>生命週期</b></td>
+		<td width="100"><b>內容型態</b></td>
+		<td width="53"><b>有點字</b></td>
+		<td><b>單列</b></td>
+	</tr>
+	<tr>
+		<td width="78">&lt;數學&gt;</td>
+		<td width="409">指定某明眼字區塊內的文字優先使用數學點字轉換器進行轉換工作。</td>
+		<td width="114">DuringConvertion</td>
+		<td width="100">數字（次數）</td>
+		<td width="53">False</td>
+		<td>False</td>
+	</tr>
+	<tr>
+		<td width="78">&lt;縮排&gt;</td>
+		<td width="409">指定某區塊內的文字要縮排一次。</td>
+		<td width="114">DuringConvertion</td>
+		<td width="100">數字（次數）</td>
+		<td width="53">False</td>
+		<td>False</td>
+	</tr>
+	<tr>
+		<td width="78">&lt;標題&gt;</td>
+		<td width="409">指定從這個標籤開始的頁標題。</td>
+		<td width="114">Forever</td>
+		<td width="100">文字</td>
+		<td width="53">True</td>
+		<td>True</td>
+	</tr>
+	<tr>
+		<td width="78">&lt;標題&gt;</td>
+		<td width="409">指定從這個標籤開始的頁標題。</td>
+		<td width="114">Forever</td>
+		<td width="100">文字</td>
+		<td width="53">True</td>
+		<td>True</td>
+	</tr>
+	<tr>
+		<td width="78">&lt;座標&gt;</td>
+		<td width="409">　</td>
+		<td width="114">DuringConvertion</td>
+		<td width="100">文字</td>
+		<td width="53">True</td>
+		<td>False</td>
+	</tr>
+	<tr>
+		<td width="78">&lt;分數&gt;</td>
+		<td width="409">　</td>
+		<td width="114">DuringConvertion</td>
+		<td width="100">文字</td>
+		<td width="53">True</td>
+		<td>False</td>
+	</tr>
+	<tr>
+		<td width="78">&lt;時間&gt;</td>
+		<td width="409">　</td>
+		<td width="114">DuringConvertion</td>
+		<td width="100">文字</td>
+		<td width="53">True</td>
+		<td>False</td>
+	</tr>
+	<tr>
+		<td width="78">&lt;表格&gt;</td>
+		<td width="409">　</td>
+		<td width="114">DuringConvertion</td>
+		<td width="100">文字</td>
+		<td width="53">True</td>
+		<td>False</td>
+	</tr>
+	<tr>
+		<td width="78">&lt;刪&gt;</td>
+		<td width="409">表示一段刪除的文字。例如: &lt;刪&gt;▲abc▼&lt;/刪&gt;。<br>
+		特別注意此標籤有附帶額外的實心正反三角形各一，因為刪除的起時與結束都有不同的點字來表示，因此選擇正反時先三角形來作為轉點字的對應符號。</td>
+		<td width="114">DuringConvertion</td>
+		<td width="100">文字</td>
+		<td width="53">True</td>
+		<td>False</td>
+	</tr>
+</table>
+<p>
+其中「單列」代表該標籤只能單獨出現在一列，亦即該標簽必須出現在列首，且後面不能接任何文字。不像其他情境標籤的有效範圍是包在起始標籤與結束標籤之間，單列情境標籤（例如：&lt;標題&gt;）的有效範圍會一直持續，直到下一個相同的單列情境標籤出現。</p>
+<p>注意：所有生命週期是 <i>Forever</i> 的標籤，其「單列」屬性都必須為 True。理由在於方便點字的顯示及計算處理：如果情境標籤如果會出現在 
+BrailleDocument 中，而且是某 BrailleLine 的第一個 BrailleWord，且後面沒有其他點字，這樣在處理該 BrailleLine 
+時就很單純，對於計算頁碼或顯示上也比較容易。</p>
+<p>各種生命週期的意義為：</p>
+<ul>
+	<li>BeforeConvertion: 在進入點字轉換程序之前就已經處理掉。</li>
+	<li>DuringConvertion: 只存在點字轉換過程中，點字轉換完成後就消失。</li>
+	<li>Forever: 點字轉換過程中、轉換完成後均存在，而且會保留於點字文件中。</li>
+</ul>
+<p>說明：</p>
+<ul>
+	<li>內容型態為「數字（次數）」者，每次碰到該標籤的起始標籤時，就會將該標籤的計數值加一（遞增），碰到結束標籤時則遞減。此規則主要是用在像 &lt;縮排&gt; 
+	這類可以連續出現的巢狀式標籤。</li>
+</ul>
+<p>範例：</p>
+<blockquote>
+	<pre><font size="3">&lt;標題&gt;這是範例&lt;/標題&gt;</font></pre>
+	<pre><font size="3">&lt;數學&gt;1+2=3&lt;/數學&gt;</font></pre>
+	<pre><font size="3">&lt;縮排&gt;
+(1) 蘋果
+&lt;縮排&gt;
+ a.富士蘋果
+ b.華盛頓蘋果
+&lt;/縮排&gt;
+(2) 香蕉
+&lt;/縮排&gt;</font></pre>
+</blockquote>
+<h3>3. 處理要點</h3>
+<ul>
+	<li>編輯明眼字時要有情境標籤，轉成點字之後，有些情境標籤也必須存在，因為有些情境必須等到點字轉換的後期階段才能進行後置處理及調整。</li>
+	<li><font color="#800000">將明眼字轉成點字的最後一個步驟，就是套用情境標籤來做最後的調整。點字轉換完畢之後，必須將情境標籤從 
+	BrailleDocument 中清除，但生命週期屬於 Forever 的情境標籤除外。清除的作法是找到每個屬於情境標籤的 
+	BrailleWord，並移除之。注意：如果不清除這些物件，在雙視編輯視窗中的顯示及斷行處理都會有問題。</font></li>
+</ul>
+<h3>4. 設計</h3>
+<h3>ContextTag 類別</h3>
+<p>　</p>
+<h4>ContextManager 類別</h4>
+<p>描述：</p>
+<blockquote>
+	<p>用來記錄目前出現的所有情境標籤及其內容（出現的次數或文字）。</p>
+</blockquote>
+<p>屬性：</p>
+<ul>
+	<li>MathCount：數學標籤的數量。若大於 1，表示目前處於數學情境標籤中。</li>
+	<li>IndentCount：縮排數量。若為 0，表示無需縮排。若大於 1，則其值代表縮排的數量。</li>
+	<li>PageTitle：頁標題。</li>
+</ul>
+<h4>注意事項</h4>
+<ul>
+	<li>BrailleProcessor 在轉換點字時，要設定 BrailleContext 
+	物件，並傳入給各轉換函式，以玆判斷。在整份文件的轉換過程中，所有轉換器和轉換函式都是共用同一個 BrailleContext 物件。</li>
+</ul>
+<p>　</p>
+<h3>5. 標題標籤的處理</h3>
+<p>標題標籤是等到整份文件的點字轉換程序（包括轉換及斷行）完成之後，才從 BrailleDocument 
+中逐一走訪每列，將包含&lt;標題&gt;的列取出，並移出至標題串列（BraillePageTitles）。</p>
+<p>　</p>
+
+<h3>6. 增加情境標籤的步驟</h3>
+<ol>
+	<li>在 Huanlin.Braille.ContextTagNames 類別中加入新的情境標籤字串常數，並修改 
+	Huanlin.Braille.ContextTag 類別的靜態建構函式，將此情境標籤名稱加入 AllTagNames 成員。</li>
+	<li>
+	有的情境標籤需要單獨的轉換器類別來處理，有的則只需要在別的轉換器中處理。若新增的情境標籤需要單獨的轉換器（通常是因為此情境標籤內涵的明眼字符號與現有的其他符號衝突），則必須在 
+	Huanlin.Braille.Data 命名空間中新增對應的 BailleTable 子類別以及 XML 
+	點字對應表（例如：MathBrailleTable.cs 與 MathBrailleTable.xml），並且在 Huanlin.Converters 
+	命名空間中增加對應的轉換器類別（如 MathConverter.cs）。</li>
+</ol>
+<p>　</p>
+
+</body>
+
+</html>
