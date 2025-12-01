@@ -11,7 +11,7 @@ weight: 2
 
 點字文件的製作流程如下圖：
 
-![](images/conversion-process.png)
+![](images/conversion-workflow.png)
 
 整個製作流程包含四大步驟：
 
@@ -26,14 +26,4 @@ weight: 2
 - [步驟 2：轉換成點字](step2-convert-to-braille/)
 - [步驟 3：編輯點字](step3-edit-braille/)
 - [步驟 4：列印點字](step4-print-braille/)
-
-
-
-### 雙模式點字轉換設定
-
-從 v5.0 開始，系統支援「內建模式」與「外部工具模式」兩種轉換核心。若您需要切換轉換模式（例如遇到轉換異常時），請參閱：[雙模式點字轉換說明](dual-mode-conversion.md)
-
-### 應用程式組態檔
-
-EasyBrailleEdit 提供了豐富的設定選項，讓您可以根據需求調整程式的行為。完整的組態檔參數說明請參閱：[應用程式組態檔](../app-config/)
 
