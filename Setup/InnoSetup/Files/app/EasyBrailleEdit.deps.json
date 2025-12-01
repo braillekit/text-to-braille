@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "EasyBrailleEdit/4.9.5-alpha.0.120": {
+      "EasyBrailleEdit/5.0.0": {
         "dependencies": {
           "BrailleToolkit": "1.0.0",
           "EasyBrailleEdit.Common": "1.0.0",
@@ -832,8 +832,8 @@
         },
         "runtime": {
           "BrailleToolkit.dll": {
-            "assemblyVersion": "4.0.0.0",
-            "fileVersion": "4.9.5.0"
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.0.0"
           }
         }
       },
@@ -843,15 +843,15 @@
         },
         "runtime": {
           "EasyBrailleEdit.Common.dll": {
-            "assemblyVersion": "4.0.0.0",
-            "fileVersion": "4.9.5.0"
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.0.0"
           }
         }
       }
     }
   },
   "libraries": {
-    "EasyBrailleEdit/4.9.5-alpha.0.120": {
+    "EasyBrailleEdit/5.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
