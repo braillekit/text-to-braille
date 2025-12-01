@@ -1,0 +1,3407 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BrailleToolkit</name>
+    </assembly>
+    <members>
+        <member name="T:BrailleToolkit.BrailleCellCode">
+            <summary>
+            點字碼列舉常數。
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleCellCode.Blank">
+            <summary>
+            空方的點字碼的十六進位字串。
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleCellCode.Capital">
+            <summary>
+            大寫
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleCellCode.Digit">
+            <summary>
+            數字
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleCellCode.Italic">
+            <summary>
+            斜體
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleCellCode.Hyphen">
+            <summary>
+            連字號 '-'
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.BrailleCell">
+            <summary>
+            代表點字的一方 (Braille Cell Dimension)。
+            NOTE: 每一個 BrailleCell 物件是預先建立且共用的，因此 
+                  BrailleCell 的 Value 屬性絕對不可讓外界修改!!
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.GetInstance(BrailleToolkit.BrailleCellCode)">
+            <summary>
+            Gets a BrailleCell instance for the specified braille cell code.
+            </summary>
+            <param name="code">The braille cell code.</param>
+            <returns>The BrailleCell instance.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.GetInstance(System.Int32)">
+            <summary>
+            Gets a BrailleCell instance at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>The BrailleCell instance.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.GetInstance(System.String)">
+            <summary>
+            Gets a BrailleCell instance from a hexadecimal string.
+            </summary>
+            <param name="hexStr">The hexadecimal string.</param>
+            <returns>The BrailleCell instance.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.GetInstance(System.Int32[])">
+            <summary>
+            以指定點位的方式傳回 BrailleCell 物件。
+            </summary>
+            <param name="positionNumbers">點位陣列，例如：3、6 點則為 new int[] {3, 6}。</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.GetInstanceFromPositionNumberString(System.String)">
+            <summary>
+            Gets a BrailleCell instance from a position number string.
+            </summary>
+            <param name="positionNumberString">The position number string (e.g., "1356").</param>
+            <returns>The BrailleCell instance.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.PositionNumbersToByte(System.Int32[])">
+            <summary>
+            將點位轉換成 byte 值。
+            </summary>
+            <param name="posNumbers">點位</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.PositionNumberStringToByte(System.String)">
+            <summary>
+            將點位轉換成 byte 值。
+            </summary>
+            <param name="posNumberString">一方點字的點位。例如 "1356"。</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.PositionNumbersToHexString(System.String[])">
+            <summary>
+            把陣列中的點位字串轉換成十六進制代碼。
+            </summary>
+            <param name="positionNumbers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.#ctor(System.String)">
+            <summary>
+            建構函式。
+            </summary>
+            <param name="hexStr">十六進位的字串，不可加 '0x' 或 'H'。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.GetHashCode">
+            <summary>
+            Gets the hash code for this braille cell.
+            </summary>
+            <returns>The hash code.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to this braille cell.
+            </summary>
+            <param name="obj">The object to compare.</param>
+            <returns>True if equal; otherwise, false.</returns>
+        </member>
+        <member name="P:BrailleToolkit.BrailleCell.Value">
+            <summary>
+            Gets or sets the value of this braille cell.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleCell.Blank">
+            <summary>
+            Gets a blank braille cell.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleCell.Capital">
+            <summary>
+            Gets a capital braille cell.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.ToString">
+            <summary>
+            Returns a string representation of this braille cell.
+            </summary>
+            <returns>The hexadecimal string.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.ToHexString">
+            <summary>
+            Converts this braille cell to a hexadecimal string.
+            </summary>
+            <returns>The hexadecimal string.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.ToPositionNumberString">
+            <summary>
+            Converts this braille cell to a position number string.
+            </summary>
+            <returns>The position number string.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCell.ToPositionNumberArray">
+            <summary>
+            Converts this braille cell to an array of position numbers.
+            </summary>
+            <returns>The position number array.</returns>
+        </member>
+        <member name="T:BrailleToolkit.BrailleCellList">
+            <summary>
+            點字方塊串列。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCellList.#ctor">
+            <summary>
+            初始化 BrailleCellList 類別的新執行個體。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCellList.Add(System.String)">
+            <summary>
+            將十六進位的點字碼字串轉成對應的點字物件，並加入點字串列。
+            </summary>
+            <param name="brCodes">十六進位的點字碼字串。此字串的長度應為 2 的倍數。</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCellList.Assign(BrailleToolkit.BrailleCellList)">
+            <summary>
+            複製指定的點字串列內容。
+            </summary>
+            <param name="aCellList"></param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCellList.Add(BrailleToolkit.BrailleCell)">
+            <summary>
+            加入一個點字。
+            </summary>
+            <param name="cell"></param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCellList.Insert(System.Int32,BrailleToolkit.BrailleCell)">
+            <summary>
+            在指定位置插入一個點字。
+            </summary>
+            <param name="index"></param>
+            <param name="cell"></param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCellList.Clear">
+            <summary>
+            清除所有點字。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleCellList.Item(System.Int32)">
+            <summary>
+            取得或設定指定索引的點字。
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrailleToolkit.BrailleCellList.Items">
+            <summary>
+            取得或設定內部的點字方塊儲存串列。此屬性主要用於序列化。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleCellList.Count">
+            <summary>
+            取得點字數量。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCellList.ToString">
+            <summary>
+            將所有點字轉成對應的十六進位碼字串，每個 16 進位字串之間沒有分隔字元。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCellList.ToString(System.String)">
+            <summary>
+            將所有點字轉成對應的十六進位碼字串，可指定每個 16 進位字串之間的分隔字串。
+            </summary>
+            <param name="separator">每個 16 進位字串之間的分隔字串。</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCellList.Equals(System.Object)">
+            <summary>
+            跟傳入的點字串列比較，兩者的內容是否相同。
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleCellList.GetHashCode">
+            <summary>
+            做為此執行個體的雜湊函式。
+            </summary>
+            <returns>目前執行個體的雜湊碼。</returns>
+        </member>
+        <member name="T:BrailleToolkit.BrailleConst">
+            <summary>
+            提供點字相關的常數。
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleConst.DefaultCellsPerLine">
+            <summary>
+            預設每列方數。
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.BrailleConst.DisplayText">
+            <summary>
+            顯示文字常數。
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleConst.DisplayText.SpecificName">
+            <summary>
+            私名號
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleConst.DisplayText.BookName">
+            <summary>
+            書名號
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleConst.DisplayText.BrailleTranslatorNotePrefix">
+            <summary>
+            點字翻譯者註解前置詞
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleConst.DisplayText.BrailleTranslatorNotePostfix">
+            <summary>
+            點字翻譯者註解後置詞
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleConst.DisplayText.DeleteBegin">
+            <summary>
+            刪除開始
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleConst.DisplayText.DeleteEnd">
+            <summary>
+            刪除結束
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.BrailleDataExporter">
+            <summary>
+            此類別的程式碼，最初是從 DualPrintHelper_Braille.cs 中複製過來，因為匯出點字檔跟
+            列印點字的處理方式很接近，只有某些字元需要替換掉（參閱 FixBrailleDataForWCBE 方法）。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDataExporter.#ctor(BrailleToolkit.BrailleDocument,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            初始化 BrailleDataExporter 類別的新執行個體。
+            </summary>
+            <param name="brDoc">要匯出的點字文件。</param>
+            <param name="linesPerPage">每頁列數。</param>
+            <param name="startPageNum">起始頁碼。</param>
+            <param name="needPageFooter">是否需要頁尾。</param>
+        </member>
+        <member name="P:BrailleToolkit.BrailleDataExporter.LinesPerPage">
+            <summary>
+            每頁列數
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleDataExporter.StartPageNumber">
+            <summary>
+            起始頁碼
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleDataExporter.NeedPageFooter">
+            <summary>
+            是否需要頁尾
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleDataExporter.AddPageBreakAtEndOfFile">
+            <summary>
+            是否在檔案末尾加入換頁符號
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleDataExporter.UseNewLineForPageBreak">
+            <summary>
+            是否使用換行符號來換頁（而非 Form Feed）
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDataExporter.SaveBrailleFile(System.String)">
+            <summary>
+            匯出點字檔（副檔名為 .BRL）。可供列印或者給超點的 WCBE（中英文點字編輯器）讀取。
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDataExporter.GetAllBrailleText(System.Int32@)">
+            <summary>
+            取得完整的點字文字內容。
+            </summary>
+            <param name="endPageNumber">輸出終止頁碼。</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDataExporter.FixBrailleDataForPrint(System.Text.StringBuilder@)">
+            <summary>
+                  1.全部的英文改成小寫(  A B C D  改成  a b c d)。
+                  2.  ^  符號改成 ~ 符號。
+                  3.  @  符號改成 ` 符號。
+                  4.  [  符號改成 { 符號。
+                  5.  ]  符號改成 } 符號。
+                  6.  \  符號改成 | 符號。 
+            </summary>
+            <param name="brailleData">可列印的點字資料。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDataExporter.GetBrailleDataForPrint(System.Int32@)">
+            <summary>
+            產生給點字打印機的點字資料。
+            此方法是修改自 DualPrintHelper_Braille.cs 中的 GenerateOutputData 方法。
+            </summary>
+            <param name="endPageNumber">輸出終止頁碼。</param>
+            <returns></returns>
+        </member>
+        <member name="T:BrailleToolkit.BrailleDocument">
+            <summary>
+            代表一份點字文件。
+            注意：編寫明眼字文件時，不要自行斷行，就按照應有的段落內容輸入；斷行的部分由程式來處理。
+            因為程式是以一行為轉換的基本單位，句子裡面的引號必須成對，若自行斷行，
+            可能會造成程式無法在一行裡面找對應的右引號。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleDocument.StartPageNumber">
+            <summary>
+            起始頁碼
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BrailleToolkit.BrailleDocument"/> class.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.#ctor(BrailleToolkit.BrailleProcessor,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BrailleToolkit.BrailleDocument"/> class with a processor and cells per line.
+            </summary>
+            <param name="processor">The braille processor.</param>
+            <param name="cellsPerLine">Number of cells per line.</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.#ctor(System.String,BrailleToolkit.BrailleProcessor,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BrailleToolkit.BrailleDocument"/> class with a filename, processor, and cells per line.
+            </summary>
+            <param name="filename">The filename.</param>
+            <param name="processor">The braille processor.</param>
+            <param name="cellsPerLine">Number of cells per line.</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.DeepCopy">
+            <summary>
+            Creates a deep copy of this document.
+            </summary>
+            <returns>A new instance with copied content.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.LoadAndConvert">
+            <summary>
+            載入明眼字文件並轉換成點字。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.Convert(System.String)">
+            <summary>
+            Converts the given text to braille.
+            </summary>
+            <param name="text">The text to convert.</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.LoadAndConvert(System.String)">
+            <summary>
+            載入明眼字文件並轉換成點字。
+            </summary>
+            <param name="filename">明眼字檔名。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.LoadAndConvert(System.IO.TextReader)">
+            <summary>
+            Loads and converts text from a TextReader.
+            </summary>
+            <param name="reader">The text reader.</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.AddPageTitle(BrailleToolkit.BraillePageTitle)">
+            <summary>
+            Adds a page title to the document.
+            </summary>
+            <param name="title">The page title to add.</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.AddPageTitleAt(System.Collections.Generic.List{BrailleToolkit.BrailleWord},System.Int32)">
+            <summary>
+            Adds a page title at the specified line index.
+            </summary>
+            <param name="words">The words of the title.</param>
+            <param name="lineIdx">The line index.</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.IsBeginLineOfPageTitle(System.Int32)">
+            <summary>
+            Checks if the specified line index is the beginning of a page title.
+            </summary>
+            <param name="lineIdx">The line index to check.</param>
+            <returns>True if it is a page title beginning; otherwise, false.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.FindPageTitleByBeginLine(BrailleToolkit.BrailleLine)">
+            <summary>
+            Finds a page title by its beginning line reference.
+            </summary>
+            <param name="brLine">The braille line reference.</param>
+            <returns>The page title if found; otherwise, null.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.LoadBrailleFile(System.String)">
+            <summary>
+            從現存的雙視點字檔案載入（反序列化）成新的 BailleDocument 物件。
+            </summary>
+            <param name="filename">檔名</param>
+            <returns>新的 BailleDocument 物件</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.FixInvalidLines(BrailleToolkit.BrailleDocument)">
+            <summary>
+            修正雙視文件：把沒有點字的 lines 替換成一個空方。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.SaveBrailleFile(System.String)">
+            <summary>
+            儲存到檔案（序列化）。
+            </summary>
+            <param name="filename">檔名</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.SaveTextFile(System.String)">
+            <summary>
+            Saves the document as a text file.
+            </summary>
+            <param name="filename">The filename to save to.</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.ExportToHtmlFileAsync(System.String)">
+            <summary>
+            Exports the document to an HTML file asynchronously.
+            </summary>
+            <param name="outputFileName">The output filename.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.GetAllText">
+            <summary>
+            Gets all text content from the document.
+            </summary>
+            <returns>The complete text as a string.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.AddLine(BrailleToolkit.BrailleLine)">
+            <summary>
+            加入一列。
+            </summary>
+            <param name="brLine"></param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.InsertLines(System.Int32,System.Collections.Generic.IEnumerable{BrailleToolkit.BrailleLine})">
+            <summary>
+            在指定的索引處插入多個點字行。
+            </summary>
+            <param name="index">應插入點字行的以零為起始的索引。</param>
+            <param name="lines">要插入的點字行集合。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.RemoveLine(System.Int32)">
+            <summary>
+            移除指定的列。注意：只做移除列的動作，不可清除列的內容物件!!
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.EnsureAtLeastOneWord">
+            <summary>
+            確保至少有一個字。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.Clear">
+            <summary>
+            從文件中移除所有的點字行和頁標題。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.ToString">
+            <summary>
+            將整個點字文件轉換為其字串表示形式。
+            </summary>
+            <returns>代表整個文件的字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.FetchPageTitles">
+            <summary>
+            從 Lines 集合中取出頁標題，並將標題列自文件中移除。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.UpdateTitlesLineIndex">
+            <summary>
+            更新所有頁標題的起始列索引。
+            使用時機：BrailleDocument 存檔前、列印前。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.UpdateTitlesLineObject">
+            <summary>
+            根據每個頁標題的起始列索引更新其對應的 BrailleLine 物件。
+            使用時機：BrailleDocument 從檔案載入完畢時。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.GetPageTitle(System.Int32)">
+            <summary>
+            根據指定的列索引判斷該列所在位置的頁標題為何，並傳回頁標題的 BrailleLine 物件。
+            </summary>
+            <param name="lineIdx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.GetPageTitleLines">
+            <summary>
+            傳回所有頁標題的 BrailleLine 物件串列。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BrailleToolkit.BrailleDocument.Processor">
+            <summary>
+            取得或設定 BrailleProcessor 物件參考。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleDocument.CellsPerLine">
+            <summary>
+            取得或設定每列最大方數。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleDocument.FileName">
+            <summary>
+            取得或設定檔名。
+            </summary>        
+        </member>
+        <member name="P:BrailleToolkit.BrailleDocument.Lines">
+            <summary>
+            取得所有點字行。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleDocument.Item(System.Int32)">
+            <summary>
+            取得指定索引的點字行。
+            </summary>
+            <param name="index">索引。</param>
+            <returns>點字行。</returns>
+        </member>
+        <member name="P:BrailleToolkit.BrailleDocument.LineCount">
+            <summary>
+            取得總列數。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.GetVisibleLineCount">
+            <summary>
+             取得可顯示在畫面上的列的總數。有的列是空的，例如某些 context tag 會單獨占據一列。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocument.GetLongestLine">
+            <summary>
+            取得字數最長的 line。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleDocument.PageTitles">
+            <summary>
+            取得或設定頁標題串列。
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.BrailleDocumentFormatter">
+            <summary>
+            提供格式化點字文件的靜態輔助函式，例如斷行、縮排等。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocumentFormatter.FormatLine(BrailleToolkit.BrailleDocument,System.Int32,BrailleToolkit.ContextTagManager)">
+            <summary>
+            編排指定的列。此函式會將指定的列斷行，並移除沒有用的空標籤。
+            </summary>
+            <param name="brDoc">點字文件。</param>
+            <param name="lineIndex">欲重新編排的列索引。</param>
+            <param name="context">情境物件。</param>
+            <returns>傳回編排後的列數。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocumentFormatter.FormatLine(BrailleToolkit.BrailleLine,System.Int32,BrailleToolkit.ContextTagManager)">
+            <summary>
+            對指定的 BrailleLine 格式化，包括斷行、移除沒有用的空標籤。
+            </summary>
+            <param name="brLine"></param>
+            <param name="cellsPerLine">每列幾方。</param>
+            <param name="context"></param>
+            <returns>可能是空的串列、經過格式化的單行串列，或者因斷行而產生的多行串列。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocumentFormatter.BreakLine(BrailleToolkit.BrailleLine,System.Int32,BrailleToolkit.ContextTagManager)">
+            <summary>
+            將一行點字串列斷成多行。
+            </summary>
+            <param name="brLine">來源點字串列。</param>
+            <param name="cellsPerLine">每行最大方數。</param>
+            <param name="context">情境物件。</param>
+            <returns>斷行之後的多行串列。若為 null 表示無需斷行（指定的點字串列未超過每行最大方數）。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocumentFormatter.CalcNewLineIndents(BrailleToolkit.BrailleLine)">
+            <summary>
+            計算折行之後的縮排格數。
+            </summary>
+            <param name="brLine"></param>
+            <returns>縮排格數。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleDocumentFormatter.FindBreakPoint(BrailleToolkit.BrailleLine,System.Int32,System.Boolean@)">
+            <summary>
+            尋找合適的斷行位置。
+            </summary>
+            <param name="brLine">點字串列。</param>
+            <param name="cellsPerLine">每行最大允許幾方。</param>
+            <param name="needHyphen">是否在斷行處附加一個連字號 '-'。</param>
+            <returns>傳回可斷行的點字索引。</returns>
+        </member>
+        <member name="T:BrailleToolkit.BrailleGlobals">
+            <summary>
+            共用變數。
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleGlobals.ChinesePunctuations">
+            <summary>
+            中文標點符號集合。
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.BrailleLine">
+            <summary>
+            用來儲存一列點字。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleLine.Words">
+            <summary>
+            取得或設定組成此行的點字詞串列。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleLine.Tag">
+            <summary>
+            加入 Tag 屬性的最初目的用來記住標題列在雙視文件中的 begin line index，但也可以作為其他用途。
+            此屬性不會序列化，不會保存。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BrailleToolkit.BrailleLine"/> class.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.Clear">
+            <summary>
+            Clears all words from this line.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.IsEmpty">
+            <summary>
+            Checks if this line is empty.
+            </summary>
+            <returns>True if empty; otherwise, false.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.IsEmptyOrWhiteSpace">
+            <summary>
+            Checks if this line is empty or contains only whitespace.
+            </summary>
+            <returns>True if empty or whitespace; otherwise, false.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.IsBeginOfParagraph">
+            <summary>
+            Checks if this line is the beginning of a paragraph.
+            </summary>
+            <returns>True if it is a paragraph beginning; otherwise, false.</returns>
+        </member>
+        <member name="P:BrailleToolkit.BrailleLine.WordCount">
+            <summary>
+            Gets the number of words in this line.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleLine.Item(System.Int32)">
+            <summary>
+            Gets the word at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>The BrailleWord at the index.</returns>
+        </member>
+        <member name="P:BrailleToolkit.BrailleLine.CellCount">
+            <summary>
+            傳回所有點字的總方數。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.GetBrailleCells">
+            <summary>
+            取得本串列中的所有的 BraillCell 物件。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.CalcBreakPoint(System.Int32)">
+            <summary>
+            計算斷行的點字索引位置。
+            此處僅根據傳入的最大方數來計算可斷行的點字索引，並未加入其他斷行規則的判斷。
+            </summary>
+            <param name="cellsPerLine">一行可允許多少方數。</param>
+            <returns>可斷行的點字索引。例如，若索引編號第 29 個字（0-based）必須折到下一行，
+            傳回值就是 29。若不需要斷行，則傳回整行的字數。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.GetFirstVisibleWordIndex">
+            <summary>
+            取得第一個可見點字詞的索引。
+            </summary>
+            <returns>如果找到，則為第一個可見點字詞的索引；否則為 -1。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.GetFirstVisibleWord">
+            <summary>
+            取得第一個可見的點字詞。
+            </summary>
+            <returns>如果找到，則為第一個可見的 BrailleWord 物件；否則為 null。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.RemoveAt(System.Int32)">
+            <summary>
+            從點字行中移除指定索引處的點字詞。
+            </summary>
+            <param name="index">要移除之項目的以零為起始的索引。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.RemoveRange(System.Int32,System.Int32)">
+            <summary>
+            從點字行移除一定範圍的點字詞。
+            </summary>
+            <param name="index">要移除之項目範圍的以零為起始的起始索引。</param>
+            <param name="count">要移除的項目數。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.Append(BrailleToolkit.BrailleLine)">
+            <summary>
+            將指定的點字列附加至此點字列。
+            </summary>
+            <param name="brLine"></param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.Insert(System.Int32,BrailleToolkit.BrailleWord)">
+            <summary>
+            將點字詞插入點字行的指定索引處。
+            </summary>
+            <param name="index">應插入點字詞的以零為起始的索引。</param>
+            <param name="brWord">要插入的點字詞。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.TrimStart">
+            <summary>
+            去掉開頭的空白字元。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.TrimEnd">
+            <summary>
+            去掉結尾的空白字元。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.Trim">
+            <summary>
+            把頭尾的空白去掉。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.ToString">
+            <summary>
+            將點字行轉換為其點字碼的字串表示形式。
+            </summary>
+            <returns>包含所有點字詞的點字碼的字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.ToTextString">
+            <summary>
+            將點字行轉換為其文字表示形式，會包含情境標籤。
+            </summary>
+            <returns>代表此點字行的文字字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.ToOriginalTextString">
+            <summary>
+            將點字行轉換回其原始的明眼文字串。
+            </summary>
+            <returns>原始的明眼文字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.ToBrailleCellHexString">
+            <summary>
+            將本串列中的所有點字轉成 16 進位的字串。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.ToPositionNumberString">
+            <summary>
+            將本串列中的所有點字轉成以點位組成的字串。各點字以一個空白字元隔開。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.ToHtmlString(System.String,System.String,System.String,System.String)">
+            <summary>
+            將點字行轉換為 HTML 表格列的字串表示形式。
+            </summary>
+            <param name="leadingSpaces">行首的空白字元。</param>
+            <param name="cssClassTd">用於儲存格 (td) 的 CSS 類別。</param>
+            <param name="cssClassBraille">用於點字區塊 (div) 的 CSS 類別。</param>
+            <param name="cssClassText">用於明眼字區塊 (div) 的 CSS 類別。</param>
+            <returns>表示此點字行的 HTML 字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.ContainsTitleTag">
+            <summary>
+            檢查此行是否包含標題標籤。
+            </summary>
+            <returns>如果包含標題標籤，則為 true；否則為 false。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.RemoveContextTags">
+            <summary>
+            移除所有情境標籤。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.IndexOf(BrailleToolkit.BrailleWord)">
+            <summary>
+            尋找指定 BrailleWord 物件在此行中的索引。
+            </summary>
+            <param name="brWord">要尋找的 BrailleWord 物件。</param>
+            <returns>如果找到，則為其索引；否則為 -1。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.IndexOf(System.String,System.Int32,System.StringComparison)">
+            <summary>
+            在串列中尋找指定的字串，從串列中的第 startIndex 個字開始找起。
+            尋找過程中，會略過 cell count 為 0 的 BrailleWord 物件。
+            </summary>
+            <param name="value"></param>
+            <param name="startIndex"></param>
+            <param name="comparisonType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.ShallowCopy(System.Int32,System.Int32)">
+            <summary>
+            從指定的起始位置複製指定個數的點字 (BrailleWord) 到新建立的點字串列。
+            注意：這是 shallow copy，新的串列中包含既有的元素參考，而非建立新元素。
+            </summary>
+            <param name="index">起始位置</param>
+            <param name="count">要複製幾個點字。</param>
+            <returns>新的點字串列。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.DeepCopy">
+            <summary>
+            建立目前 BrailleLine 物件的深層複本。
+            </summary>
+            <returns>目前執行個體的深層複本。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.DeepCopy(System.Int32,System.Int32)">
+            <summary>
+            建立目前 BrailleLine 物件一部分的深層複本。
+            </summary>
+            <param name="index">要複製之範圍的起始索引。</param>
+            <param name="count">要複製的項目數。</param>
+            <returns>指定範圍的深層複本。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleLine.Clone">
+            <summary>
+            深層複製。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BrailleToolkit.BraillePageTitle">
+            <summary>
+            點字文件的頁標題。
+            此類別包含一個指向標題列的 BrailleLine 物件參考（TitleLine），以及指向標題列下方那一列的
+            列索引（ContentStartLineIndex）和列物件（ContentStartLine）。
+            ContentStartLineIndex 和 ContentStartLine 必須交互確認與修正，以確保能夠取到正確的標題列。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BraillePageTitle.ContentStartLineRef">
+            <summary>
+            取得標題後第一行文件內容的列物件參考（作為定位標題的錨點）。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BraillePageTitle.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BraillePageTitle.#ctor(System.Collections.Generic.List{BrailleToolkit.BrailleWord},System.Int32,BrailleToolkit.BrailleLine)">
+            <summary>
+            建構函式。
+            </summary>
+            <param name="words">標題文字。</param>
+            <param name="beginLineIdx">起始列索引。</param>
+            <param name="beginLine">起始列物件。</param>
+        </member>
+        <member name="M:BrailleToolkit.BraillePageTitle.#ctor(BrailleToolkit.BrailleLine,System.Int32,BrailleToolkit.BrailleLine)">
+            <summary>
+            建構函式。
+            </summary>
+            <param name="titleLine">標題列物件。</param>
+            <param name="beginLineIdx">起始列索引。</param>
+            <param name="beginLine">起始列物件。</param>
+        </member>
+        <member name="M:BrailleToolkit.BraillePageTitle.SetTitleLine(BrailleToolkit.BrailleLine,System.Int32,BrailleToolkit.BrailleLine)">
+            <summary>
+            設定標題列。
+            </summary>
+            <param name="titleLine">標題列物件。</param>
+            <param name="beginLineIdx">起始列索引。</param>
+            <param name="beginLine">起始列物件。</param>
+        </member>
+        <member name="M:BrailleToolkit.BraillePageTitle.UpdateLineIndex(BrailleToolkit.BrailleDocument)">
+            <summary>
+            根據標題後第一行內容的物件參考（ContentStartLineRef，作為「錨點」），在文件中尋找其目前的索引位置，並更新 ContentStartLineIndex 屬性。
+            </summary>
+            <remarks>
+            <para><strong>使用情境：</strong></para>
+            <para>
+            在文件編輯過程中（插入或刪除行），ContentStartLineRef 所指向的 BrailleLine 物件在 Lines 集合中的索引位置可能會改變。
+            此方法透過「錨點」（ContentStartLineRef）重新定位該行在集合中的實際位置，確保 ContentStartLineIndex 與實際索引保持同步。
+            </para>
+            
+            <para><strong>運作原理：</strong></para>
+            <list type="number">
+            <item><description>檢查「錨點」(ContentStartLineRef) 是否存在。</description></item>
+            <item><description>在文件的 Lines 集合中搜尋該錨點的當前索引。</description></item>
+            <item><description>如果找到，更新 ContentStartLineIndex；如果找不到（可能已被刪除），返回 false。</description></item>
+            </list>
+            
+            <para><strong>注意：</strong>此方法不會修改 ContentStartLineRef 本身，因為 IndexOf 找到的物件就是 ContentStartLineRef 本身。</para>
+            </remarks>
+            <param name="brDoc">要從中尋找 BrailleLine 的 BrailleDocument 物件。</param>
+            <returns>
+            如果成功在文件中找到起始列並更新索引，則返回 <c>true</c>；
+            如果起始列參考為 null 或在文件中找不到該列（可能已被刪除），則返回 <c>false</c>。
+            </returns>
+        </member>
+        <member name="M:BrailleToolkit.BraillePageTitle.UpdateLineObject(BrailleToolkit.BrailleDocument)">
+            <summary>
+            根據起始列索引更新起始的 BrailleLine 物件。
+            </summary>
+            <param name="brDoc"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrailleToolkit.BraillePageTitle.TitleLine">
+            <summary>
+            取得或設定標題列物件。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BraillePageTitle.ContentStartLineIndex">
+            <summary>
+            取得內容起始列索引（標題後第一行內容在文件中的位置）。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BraillePageTitle.ToOriginalTextString">
+            <summary>
+            轉回原始文字字串。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BraillePageTitle.Clone">
+            <summary>
+            深層複製。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BraillePageTitle.CompareTo(System.Object)">
+            <summary>
+            比較兩個 BraillePageTitle 物件的順序（依據 ContentStartLineIndex）。
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrailleToolkit.CharPosition">
+            <summary>
+            代表一個字元及其在文件中的位置。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.CharPosition.CharValue">
+            <summary>
+            字元
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.CharPosition.LineNumber">
+            <summary>
+            第幾列
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.CharPosition.CharIndex">
+            <summary>
+            第幾個字元
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.ConversionFailedEventArgs">
+            <summary>
+            為轉換失敗事件提供資料。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.ConversionFailedEventArgs.OriginalText">
+            <summary>
+            Gets the original text of the line where the conversion failed.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.ConversionFailedEventArgs.InvalidChar">
+            <summary>
+            Gets the position and value of the invalid character.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.ConversionFailedEventArgs.Stop">
+            <summary>
+            Gets or sets a value indicating whether to stop the conversion process.
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.TextConvertedEventArgs">
+            <summary>
+            為文字轉換成功事件提供資料。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.TextConvertedEventArgs.Text">
+            <summary>
+            Gets the converted braille text.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.TextConvertedEventArgs.LineNumber">
+            <summary>
+            Gets the line number of the converted text.
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.BrailleProcessor">
+            <summary>
+            此類別可用來將明眼字轉換成點字。可處理一個字、一行、或者多行。
+            錯誤處理機制：
+            1. 所有 exception 訊息會存入 ErrorMessage 屬性。
+            2. 所有無法轉換的字元會丟到 InvalidChars 屬性。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.#ctor(NChinese.Phonetic.ZhuyinReverseConverter)">
+            <summary>
+            ctor
+            </summary>
+            <param name="zhuyinConverter"></param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.CreateInstance(NChinese.Phonetic.ZhuyinReverseConverter)">
+            <summary>
+            Creates a new instance of BrailleProcessor.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BrailleToolkit.BrailleProcessor.ZhuyinConverter">
+            <summary>
+            Gets or sets the Zhuyin reverse converter.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleProcessor.ChineseConverter">
+            <summary>
+            取得或設定中文點字轉換器。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleProcessor.EnglishConverter">
+            <summary>
+            取得或設定英文點字轉換器。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleProcessor.ControlTagConverter">
+            <summary>
+            Gets or sets the context tag converter.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleProcessor.MathConverter">
+            <summary>
+            Gets or sets the math converter.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleProcessor.SuppressEvents">
+            <summary>
+            是否抑制點字轉換的回饋事件。
+            範例：
+                brProcessor.SuppressEvents = true;  // 關閉點字處理器事件
+                BrailleLine brLine = brProcessor.ConvertLine("測試");
+                brProcessor.SuppressEvents = false; // 恢復點字處理器事件
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleProcessor.InvalidChars">
+            <summary>
+            Gets the list of invalid characters encountered during conversion.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleProcessor.HasError">
+            <summary>
+            Gets a value indicating whether any errors occurred during conversion.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleProcessor.ErrorMessage">
+            <summary>
+            Gets the error message accumulated during conversion.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleProcessor.ContextManager">
+            <summary>
+            Gets the context tag manager.
+            </summary>
+        </member>
+        <member name="E:BrailleToolkit.BrailleProcessor.ConvertionFailed">
+            <summary>
+            Occurs when a conversion fails.
+            </summary>
+        </member>
+        <member name="E:BrailleToolkit.BrailleProcessor.TextConverted">
+            <summary>
+            Occurs when text is successfully converted.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.OnConvertionFailed(BrailleToolkit.ConversionFailedEventArgs)">
+            <summary>
+            引發 ConvertionFailed 事件。
+            </summary>
+            <param name="args">包含事件資料的 ConversionFailedEventArgs。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.OnTextConverted(BrailleToolkit.TextConvertedEventArgs)">
+            <summary>
+            引發 TextConverted 事件。
+            </summary>
+            <param name="args">包含事件資料的 TextConvertedEventArgs。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.AddConverter(BrailleToolkit.Converters.WordConverter)">
+            <summary>
+            Adds a word converter to the processor.
+            </summary>
+            <param name="cvt">The word converter to add.</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.RemoveConverter(BrailleToolkit.Converters.WordConverter)">
+            <summary>
+            Removes a word converter from the processor.
+            </summary>
+            <param name="cvt">The word converter to remove.</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.GetConverter(System.String)">
+            <summary>
+            根據指定的類別名稱傳回對應之 word converter 物件。
+            主要是用在需要單獨轉換一個中文字的時候。
+            </summary>
+            <param name="className"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.InitializeForConversion">
+            <summary>
+            在開始轉換文件之前，先呼叫此函式以進行初始化。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.SimpleConvertText(System.String)">
+            <summary>
+            簡單版本的轉換方法：不處理任何標籤額外格式，單純轉換文字符號。
+            此方法可用來轉換 context tag 裡面的文字。
+            </summary>
+            <param name="Text">輸入文字。</param>
+            <returns>轉換後的點字行。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.ConvertLine(System.String,System.Int32)">
+            <summary>
+            把一行明眼字串轉換成點字串列。
+            此時不考慮一行幾方和斷行的問題，只進行單純的轉換。
+            斷行由其他函式負責處理，因為有些點字規則必須在斷行時才能處理。
+            </summary>
+            <param name="line">輸入的明眼字串。</param>
+            <param name="lineNumber">字串的行號。此參數只是用來當轉換失敗時，傳給轉換失敗事件處理常式的資訊。</param>
+            <returns>點字串列。若則傳回 null，表示該列不需要轉成點字。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.ConvertLine(System.String)">
+            <summary>
+            把一行明眼字串轉換成點字串列。
+            </summary>
+            <param name="line"></param>
+            <returns></returns>
+            <see cref="M:BrailleToolkit.BrailleProcessor.ConvertLine(System.String,System.Int32)"/>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.ConvertWord(System.Collections.Generic.Stack{System.Char})">
+            <summary>
+            把一個明眼字元轉換成點字（BrailleWord）。
+            原則上，能夠在這裡處理掉點字特殊規則的，就盡量在這裡處理掉，
+            特別是不可斷行分開的點字，例如：一個中文字的所有點字碼、特殊單音字附加的「ㄦ」等等。
+            </summary>
+            <param name="chars">字元堆疊。</param>
+            <returns>若成功轉換成點字，則傳回已轉換的點字 BrailleWord 物件串列，否則傳回 null。</returns>
+            <remarks>若轉換成功，則已轉換的字元會從串流中讀出，否則該字元仍會保留在串流中。</remarks>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.ParseFraction(System.String,System.String@,System.String@,System.String@)">
+            <summary>
+            剖析分數格式的字串，分別取出整數部份、分子、以及分母。
+            分數格式範例： 三又五分之一的分數字串表示為： 3&amp;1/5。
+            </summary>
+            <param name="s"></param>
+            <param name="intPart"></param>
+            <param name="numerator"></param>
+            <param name="denumerator"></param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.ConvertContextTags(BrailleToolkit.BrailleLine)">
+            <summary>
+            對上一個階段所轉換出來的 BrailleLine 物件逐一找出尚未處理的語境標籤，並轉換成對應的點字。
+            </summary>
+            <param name="brLine"></param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.ConvertFraction(System.Int32,System.Collections.Generic.Stack{System.Char})">
+            <summary>
+            轉換分數。
+            </summary>
+            <param name="lineNumber"></param>
+            <param name="chars"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.ReplaceTextDefinedInAppConfig(System.String)">
+            <summary>
+            Replaces text defined in the application configuration.
+            </summary>
+            <param name="line">The input line.</param>
+            <returns>The line with replaced text.</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.ReplaceSimpleTagsWithConvertableText(System.String)">
+            <summary>
+            在進行轉換之前預先處理一列中的所有特殊標籤，將這些標籤替換成特定字元。
+            </summary>
+            <param name="line"></param>
+            <returns>傳回置換過的字串。若傳回 null，表示這行不要轉換成點字。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.OnMatchedTagFound(System.Text.RegularExpressions.Match)">
+            <summary>
+            每當有找到匹配字串時觸發此事件。
+            </summary>
+            <param name="token"></param>
+            <returns>傳回用來把這次找到的 token 置換掉的字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.FormatDocument(BrailleToolkit.BrailleDocument)">
+            <summary>
+            編排點字文件，包括斷行、移除所有語境標籤。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleProcessor.ProcessIndentTags(BrailleToolkit.BrailleDocument,System.Int32,BrailleToolkit.ContextTagManager)">
+            <summary>
+            處理縮排語境標籤：碰到縮排標籤時，將縮排次數更新至 ContextTagManager 物件，並移除此縮排標籤。
+            
+            NOTE: 縮排標籤必須位於列首，一列可有多個連續縮排標籤，例如：＜縮排＞＜縮排＞。
+            </summary>
+            <param name="brDoc"></param>
+            <param name="lineIndex"></param>
+            <param name="context">情境物件。</param>
+            <returns></returns>
+        </member>
+        <member name="T:BrailleToolkit.BrailleLanguage">
+            <summary>
+            Specifies the language of braille content.
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleLanguage.Neutral">
+            <summary>Neutral language.</summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleLanguage.Chinese">
+            <summary>Chinese language.</summary>
+        </member>
+        <member name="F:BrailleToolkit.BrailleLanguage.English">
+            <summary>English language.</summary>
+        </member>
+        <member name="T:BrailleToolkit.BrailleWord">
+            <summary>
+            用來代表 BrailleLine 中的每一個元素，通常是一個字元，例如中文的「我」、英文的「A」。
+            也可能是一個控制標籤（context tag），例如 "&lt;數學&gt;"。
+            當此物件的內容是一個中文字元時，除了其對應的點字之外，還會包含注音碼。
+            備註：基於上述原因，此類別的名稱不是 BrailleChar，而是 BrailleWord。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.BlankWord">
+            <summary>
+            Gets a static instance of a blank braille word.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.#ctor">
+            <summary>
+            預設建構函式，主要為了支援 System.Text.Json 反序列化。
+            初始化為空字串與空集合，避免 NullReferenceException。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.#ctor(System.String)">
+            <summary>
+            初始化 BrailleWord 類別的新執行個體。
+            </summary>
+            <param name="text">明眼文字。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.#ctor(System.String,BrailleToolkit.BrailleCellCode)">
+            <summary>
+            初始化 BrailleWord 類別的新執行個體。
+            </summary>
+            <param name="text">明眼文字。</param>
+            <param name="brCode">點字碼。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.#ctor(System.String,System.String)">
+            <summary>
+            初始化 BrailleWord 類別的新執行個體。
+            </summary>
+            <param name="text">明眼文字。</param>
+            <param name="brCode">點字碼的十六進位字串。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.#ctor(System.String,System.Byte)">
+            <summary>
+            初始化 BrailleWord 類別的新執行個體。
+            </summary>
+            <param name="text">明眼文字。</param>
+            <param name="brCode">點字碼的位元組值。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.#ctor(System.String,System.String,System.String)">
+            <summary>
+            初始化 BrailleWord 類別的新執行個體。
+            </summary>
+            <param name="text">明眼文字。</param>
+            <param name="phCode">注音碼。</param>
+            <param name="brCode">點字碼的十六進位字串。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.GetHashCode">
+            <summary>
+            做為此執行個體的雜湊函式。
+            </summary>
+            <returns>目前執行個體的雜湊碼。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.Equals(System.Object)">
+            <summary>
+            判斷指定的物件是否等於目前的物件。
+            </summary>
+            <param name="obj">要與目前物件相比較的物件。</param>
+            <returns>如果指定的物件等於目前的物件，則為 true；否則為 false。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.ToString">
+            <summary>
+            傳回表示目前物件的字串。
+            </summary>
+            <returns>表示目前物件的字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.ToPositionNumberString(System.Boolean)">
+            <summary>
+            將點字轉換為其點位數字的字串表示形式。
+            </summary>
+            <param name="useParenthesis">是否在前後加上括號。</param>
+            <returns>點位數字字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.ToHexSting">
+            <summary>
+            將點字轉換為其十六進位碼的字串表示形式。
+            </summary>
+            <returns>十六進位碼字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.Clear">
+            <summary>
+            清除此點字詞的內容。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.Text">
+            <summary>
+            顯示文字。可能是一個英數字、中文字、全形標點符號、或雙字元標點符號，例如：破折號。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.OriginalText">
+            <summary>
+            保留最初的文字。
+            此屬性可用來判斷當前的 BrailleWord 是不是從 context tag 的起始或結束標籤轉換而成。
+            甚至將來可能利用此屬性將已經轉換好的點字文件還原成純文字。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.CellCount">
+            <summary>
+            取得此點字詞包含的點字方數。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.Cells">
+            <summary>
+            取得組成此點字詞的點字方塊串列。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.CellList">
+            <summary>
+            點字串列。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.PhoneticCode">
+            <summary>
+            取得或設定目前作用中的注音碼。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.IsPolyphonic">
+            <summary>
+            取得或設定是否為多音字。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.DontBreakLineHere">
+            <summary>
+            設定/判別在斷行時是否能斷在這個字。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.PhoneticCodes">
+            <summary>
+            取得所有注音碼清單。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.ActivePhoneticIndex">
+            <summary>
+            取得或設定目前使用的注音碼索引。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.Language">
+            <summary>
+            語言國別。用來識別是中文還是英文。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.ContextNames">
+            <summary>
+            以空白區隔的 context 名稱，不含 tag 的角括號。例如 "數學 私名號"。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.ContextTag">
+            <summary>
+            ContextTag 屬性會用在轉換點字的過程中暫時保留的語境標籤。
+            這些語境標籤在整個轉點字程序完成時都會被移除（或轉換成對應的點字）。
+            是否可序列化：否。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.IsContextBeginTag">
+            <summary>
+            在轉點字過程中可能需要得知當前的 BrailleWord 物件是不是某 context tag 的起始標籤。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.IsContextEndTag">
+            <summary>
+            在轉點字過程中可能需要得知當前的 BrailleWord 物件是不是某 context tag 的結束標籤。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.IsInContext(System.String)">
+            <summary>
+            此 word 是否在指定的語境中？
+            </summary>
+            <param name="contextName">語境標籤名稱。若有帶左右角括號，會自動去除括號。</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.EnterContext(System.String)">
+            <summary>
+            將此點字詞標記為進入指定的語境。
+            </summary>
+            <param name="contextName">語境名稱。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.LeaveContext(System.String)">
+            <summary>
+            將此點字詞標記為離開指定的語境。
+            </summary>
+            <param name="contextName">語境名稱。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.SetPhoneticCodes(System.String[])">
+            <summary>
+            設定此點字詞的所有可能注音碼。
+            </summary>
+            <param name="phCodes">注音碼陣列。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.Copy">
+            <summary>
+            建立一個新的 BrailleWord 物件，並將自己的內容完整複製到新的物件。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.Copy(BrailleToolkit.BrailleWord)">
+            <summary>
+            將指定的 BrailleWord 內容完整複製給自己。
+            </summary>
+            <param name="brWord"></param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.AddCells(System.String)">
+            <summary>
+            把指定的點字字串（16進位）轉成 BrailleCell 物件，並加入點字串列中。
+            </summary>
+            <param name="brCodes">欲加入串列的點字碼 16 進位字串。</param>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.AddCellsFromPositionNumbers(System.String)">
+            <summary>
+            從點位數字字串加入點字方。
+            </summary>
+            <param name="positionNumberString">以空白分隔的點位數字字串，例如 "135 24"。</param>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.IsWhiteSpace">
+            <summary>
+            取得一個值，指出此點字詞是否為空白字元。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.IsLetter">
+            <summary>
+            取得一個值，指出此點字詞是否為 ASCII 字母。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.IsDigit">
+            <summary>
+            取得一個值，指出此點字詞是否為 ASCII 數字。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.IsLetterOrDigit">
+            <summary>
+            取得一個值，指出此點字詞是否為 ASCII 字母或數字。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.IsChinese">
+            <summary>
+            傳回此點字是否為中文字（以是否有注音字根為判斷依據）。
+            注意：跟 Language 屬性無關，Language 屬性包含中文標點符號
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.NewBlank">
+            <summary>
+            建立一個新的空方點字物件。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.IsBlank(BrailleToolkit.BrailleWord)">
+            <summary>
+            檢查指定的 BrailleWord 是否為空方。
+            </summary>
+            <param name="brWord"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.IsEmpty(BrailleToolkit.BrailleWord)">
+            <summary>
+            檢查指定的 BrailleWord 物件是否沒有包含任何有意義的資料（空方算有意義的資料）。
+            </summary>
+            <param name="brWord"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.IsContextTag">
+            <summary>
+            是否為語境標籤。此屬性與 ContextNames 沒有絕對關係。
+            若為 true，代表此 BraillWord 在原始文件中是一個語境標籤，而且目前還沒有轉換成對應的點字。
+            若為 false，代表此 BraillWord 不是語境標籤，或者已經被轉換成對應的點字。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.IsConvertedFromTag">
+            <summary>
+             此物件是否由 context tag 所衍生（不是 context tag，但是因為 context tag 而額外增加的文字）。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.NoDigitCell">
+            <summary>
+            是否不加數符。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.NoSpace">
+            <summary>
+            是否前後都不加空方。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.NoCapitalRule">
+            <summary>
+            是否不要套用英文字母大寫規則。最初設計目的是給 UrlConverter 使用。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.BrailleWord.IsEngPhonetic">
+            <summary>
+            是否為英語音標（用來判斷不要加空方）.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.IsOrderedListItem(BrailleToolkit.BrailleWord)">
+            <summary>
+            檢查指定的 BrailleWord 是否為數字編號的起始點字。亦即以 # 開頭的數字。
+            </summary>
+            <param name="brWord"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.BrailleWord.IsChinesePunctuation(BrailleToolkit.BrailleWord)">
+            <summary>
+            檢查指定的 BrailleWord 是否為國語標點符號。
+            </summary>
+            <param name="brWord"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrailleToolkit.ContextTagManager">
+            <summary>
+            情境標籤管理員。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.ContextTagManager.#ctor">
+            <summary>
+            初始化 ContextTagManager 類別的新執行個體。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.ContextTagManager.ContextNames">
+            <summary>
+            取得目前作用中的情境名稱字串（以空白分隔）。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.ContextTagManager.UpdateContextNames">
+            <summary>
+            更新 ContextNames 屬性。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.ContextTagManager.Reset">
+            <summary>
+            重設所有情境標籤的狀態。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.ContextTagManager.EnterContext(BrailleToolkit.Tags.IContextTag)">
+            <summary>
+            進入指定的情境。
+            </summary>
+            <param name="tag"></param>
+        </member>
+        <member name="M:BrailleToolkit.ContextTagManager.LeaveContext(BrailleToolkit.Tags.IContextTag)">
+            <summary>
+            離開指定的情境。
+            </summary>
+            <param name="tag"></param>
+        </member>
+        <member name="M:BrailleToolkit.ContextTagManager.Parse(System.String,System.Boolean@)">
+            <summary>
+            剖析傳入的字串，如果是以情境標籤開頭，就遞增或遞減
+            該情境標籤的計數值（根據它是起始還是結束標籤而定）。
+            </summary>
+            <param name="s">傳入的字串。</param>
+            <param name="isBeginTag">傳回的旗號，若為 true，表示找到起始標籤，若為 false，則為結束標籤。</param>
+            <returns>若有找到情境標籤，則傳回 ContextTag 物件，並設定 isBeginTag 輸出參數。</returns>
+        </member>
+        <member name="M:BrailleToolkit.ContextTagManager.Parse(System.String,System.String)">
+            <summary>
+            剖析傳入的字串，如果是以指定的標籤開頭，就遞增或遞減
+            該情境標籤的計數值（根據它是起始還是結束標籤而定）。
+            </summary>
+            <param name="s">輸入字串。</param>
+            <param name="tagName">指定的標籤。</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.ContextTagManager.IsActive(System.String)">
+            <summary>
+            傳回指定的情境標籤目前是否在作用中。
+            </summary>
+            <param name="tagName">情境標籤名稱</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.ContextTagManager.IsMathActive">
+            <summary>
+            數學情境是否在作用中。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.ContextTagManager.IsOrgPageNumberActive">
+            <summary>
+            原書頁碼情境是否在作用中。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BrailleToolkit.ContextTagManager.IndentCount">
+            <summary>
+            傳回縮排的數量。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.ContextTagManager.Tags">
+            <summary>
+            取得所有情境標籤。
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.Converters.BrailleCharConverter">
+            <summary>
+            點字碼轉換器。用來將點字碼轉換成可輸出至點字印表機和「超點」點字觸摸器的 ASCII 字元。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleCharConverter.Load(System.String)">
+            <summary>
+            載入點字字元對應表。
+            檔案內容的每一列格式為 xx=yy，其中 xx 為點字碼，yy 為對應之點字碼，兩者皆為 16 進制，例如：1C=3E。
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleCharConverter.LoadFromResource">
+            <summary>
+            從組件的資源中載入。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleCharConverter.ToString(BrailleToolkit.BrailleLine)">
+            <summary>
+            將一列點字轉成可對應的點字 ASCII 字串，以便輸出至點字印表機。
+            </summary>
+            <param name="brLine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleCharConverter.ToString(BrailleToolkit.BrailleWord)">
+            <summary>
+            將一個 BraillWord 物件轉換成對應的點字 ASCII 字串，以便輸出至點字印表機。
+            Note: 如果你需要轉換破音字的其他注音字根的點字，請呼叫另一個 ToString 版本：
+            public string ToString(BrailleCellList cellList)
+            </summary>
+            <param name="brWord"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleCharConverter.ToString(BrailleToolkit.BrailleCellList)">
+            <summary>
+            將 BrailleCellList 串列轉成對應的點字 ASCII 字串，以便輸出至點字印表機。
+            範例：
+            string s = brFontConvert.ToString(brWord.CandidatePhoneticCellLists);
+            </summary>
+            <param name="cellList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleCharConverter.ToChar(System.String)">
+            <summary>
+            將內部點字碼（兩位數16進位字串）轉換成對應的點字字元，以便輸出至點字印表機。
+            </summary>
+            <param name="brailleHexCode">點字碼，兩位數16進位字串，例如：4E。</param>
+            <returns>對應的點字字元。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleCharConverter.ToBrailleCharCode(System.String)">
+            <summary>
+            傳入內部點字碼，傳回對應之標準點字碼（點字印表機和點字觸摸器的點字碼）。
+            </summary>
+            <param name="brailleHexCode">內部點字碼，兩位數16進位字串，例如：4E。</param>
+            <returns>點字字型碼，兩位數16進位字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleCharConverter.ToBrailleHexCode(System.String)">
+            <summary>
+            傳入點字字元碼，傳回對應的內部點字碼。
+            </summary>
+            <param name="brailleCharCode">點字碼，兩位數16進位字串，例如：3F。</param>
+            <returns>點字碼，兩位數16進位字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleCharConverter.GetDigitCharCode(System.Int32,System.Boolean)">
+            <summary>
+            傳入數字，傳回對應的點字字元碼。
+            </summary>
+            <param name="number">數字。</param>
+            <param name="upperPosition">是否採用上位點。</param>
+            <returns>對應的點字字元碼。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Converters.BrailleFontConverter">
+            <summary>
+            點字字型轉換器。用來將點字碼轉換成點字字型對應的 ASCII 字元。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleFontConverter.Load(System.String)">
+            <summary>
+            載入字型對應表。
+            檔案內容的每一列格式為 xx=yy，其中 xx 為點字碼，yy 為對應之字型碼，兩者皆為 16 進制，例如：1C=3E。
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleFontConverter.LoadFromResource">
+            <summary>
+            從組件的資源中載入。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleFontConverter.ToString(BrailleToolkit.BrailleLine)">
+            <summary>
+            將一列點字轉成對應的點字字型 ASCII 字串，以便顯示於螢幕上。
+            </summary>
+            <param name="brLine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleFontConverter.ToString(BrailleToolkit.BrailleWord)">
+            <summary>
+            將一個 BraillWord 物件轉換可對應的點字字型 ASCII 字串，以便顯示於螢幕上。
+            Note: 如果你需要轉換破音字的其他注音字根的點字，請呼叫另一個 ToString 版本：
+            public string ToString(BrailleCellList cellList)
+            </summary>
+            <param name="brWord"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleFontConverter.ToString(BrailleToolkit.BrailleCellList)">
+            <summary>
+            將 BrailleCellList 串列轉成對應的點字字型 ASCII 字串，以便顯示於螢幕上。
+            範例：
+            string s = brFontConvert.ToString(brWord.CandidatePhoneticCellLists);
+            </summary>
+            <param name="cellList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleFontConverter.ToChar(System.String)">
+            <summary>
+            將點字碼（兩位數16進位字串）轉換成對應的點字字型 ASCII 字元，以便顯示於 UI。
+            </summary>
+            <param name="brCode">點字碼，兩位數16進位字串，例如：4E。</param>
+            <returns>對應的點字字型 ASCII 字元。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleFontConverter.ToFontCode(System.String)">
+            <summary>
+            傳回指定點字碼所對應之點字字型碼。
+            </summary>
+            <param name="brCode">點字碼，兩位數16進位字串，例如：4E。</param>
+            <returns>點字字型碼，兩位數16進位字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleFontConverter.ToBrailleCode(System.String)">
+            <summary>
+            傳入點字字型碼，傳回對應的點字碼。
+            </summary>
+            <param name="fontCode">點字碼，兩位數16進位字串，例如：3F。</param>
+            <returns>點字碼，兩位數16進位字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.BrailleFontConverter.GetDigitFontCode(System.Int32,System.Boolean)">
+            <summary>
+            傳入數字，傳回對應的點字字型碼。
+            </summary>
+            <param name="number">數字。</param>
+            <param name="upperPosition">是否採用上位點。</param>
+            <returns>點字字型碼。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Converters.ContextTagConverter">
+            <summary>
+            情境標籤轉換器。
+            
+            NOTE: 此轉換器必須是第一個呼叫的轉換器。因為它會把情境標籤先處理掉，
+            這樣的話，後續的轉換器在碰到半形的小於、大於符號時，就可以當作是一般的
+            字元處理（由 EnglishBrailleConverter 處理）。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.ContextTagConverter.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.ContextTagConverter.Convert(System.String)">
+            <summary>
+            轉換指定的字串。
+            </summary>
+            <param name="text">欲轉換的字串。</param>
+            <returns>轉換後的點字碼。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.ContextTagConverter.Convert(System.Collections.Generic.Stack{System.Char},BrailleToolkit.ContextTagManager)">
+            <summary>
+            從堆疊中讀取字元，並轉成點字。
+            </summary>
+            <param name="charStack">字元堆疊。</param>
+            <param name="context">情境物件。</param>
+            <returns>傳回轉換後的點字物件串列，若串列為空串列，表示沒有成功轉換的字元。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Converters.CoordinateConverter">
+            <summary>
+            座標符號轉換器。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.CoordinateConverter.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.CoordinateConverter.Convert(System.String)">
+            <summary>
+            轉換指定的字串。
+            </summary>
+            <param name="text">欲轉換的字串。</param>
+            <returns>轉換後的點字碼。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.CoordinateConverter.Convert(System.Collections.Generic.Stack{System.Char},BrailleToolkit.ContextTagManager)">
+            <summary>
+            從堆疊中讀取字元，並轉成點字。
+            </summary>
+            <param name="charStack">字元堆疊。</param>
+            <param name="context">情境標籤管理員。</param>
+            <returns>傳回轉換後的點字物件串列，若串列為空串列，表示沒有成功轉換的字元。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Converters.EnglishUebConverter">
+            <summary>
+            Converts English text to BrailleWords based on Unified English Braille (UEB) rules.
+            This is a prototype implementation focusing on a greedy matching algorithm for Grade 2 contractions.
+            A full implementation would require a much more sophisticated rule engine.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.EnglishUebConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BrailleToolkit.Converters.EnglishUebConverter"/> class.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.EnglishUebConverter.Convert(System.Collections.Generic.Stack{System.Char},BrailleToolkit.ContextTagManager)">
+            <summary>
+            Converts a stack of characters to a list of BrailleWords.
+            </summary>
+            <param name="charStack">The stack of characters to convert.</param>
+            <param name="context">The context tag manager.</param>
+            <returns>A list of BrailleWords, or null if no conversion was possible.</returns>
+        </member>
+        <member name="T:BrailleToolkit.Converters.EnglishWordConverter">
+            <summary>
+            處理英數字的點字轉換。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.EnglishWordConverter.#ctor(BrailleToolkit.BrailleProcessor)">
+            <summary>
+            建構函式。
+            </summary>
+            <param name="processor">點字處理器。</param>
+        </member>
+        <member name="M:BrailleToolkit.Converters.EnglishWordConverter.Convert(System.Collections.Generic.Stack{System.Char},BrailleToolkit.ContextTagManager)">
+            <summary>
+            從堆疊中讀取字元，把 ASCII 字元（半形的英數字）轉換成點字。
+            </summary>
+            <param name="charStack">輸入的 ASCII 字元堆疊。</param>
+            <param name="context">情境物件。</param>
+            <returns>傳回轉換後的點字物件串列，若串列為空串列，表示沒有成功轉換的字元。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.EnglishWordConverter.ProcessSpecialEntity(System.Collections.Generic.Stack{System.Char},System.String@)">
+            <summary>
+            處理以 ampersand (&amp;) 符號開頭的特殊字元，例如："&gt;" 和 "&lt;" 可以分別表示
+            半形的大於、小於符號。
+            </summary>
+            <param name="charStack">字元堆疊。</param>
+            <param name="text">若傳回 true，則會設定此參數。</param>
+            <returns>傳回 true 表示有碰到特殊字元，並已從 charStack 中取出。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.EnglishWordConverter.InternalConvert(System.String,BrailleToolkit.ContextTagManager)">
+            <summary>
+            把英數字轉換成點字。
+            </summary>
+            <param name="text">一個英數字或英文標點符號。</param>
+            <param name="context">情境標籤管理員。</param>
+            <returns>若指定的字串是中文字且轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Converters.IWordConverter">
+            <summary>
+            Defines a common interface for all word-to-braille converters.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.IWordConverter.Convert(System.Collections.Generic.Stack{System.Char},BrailleToolkit.ContextTagManager)">
+            <summary>
+            Tries to convert a segment of text from a character stack into a BrailleWord.
+            </summary>
+            <param name="chars">The stack of characters to process. The converter should pop characters if it successfully converts them.</param>
+            <param name="context">The current context manager to check for active tags (e.g., Math, Table).</param>
+            <returns>A list of BrailleWord objects if conversion is successful; otherwise, null.</returns>
+        </member>
+        <member name="T:BrailleToolkit.Converters.MathConverter">
+            <summary>
+            數學符號轉換器。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.MathConverter.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.MathConverter.Convert(System.Collections.Generic.Stack{System.Char},BrailleToolkit.ContextTagManager)">
+            <summary>
+            從堆疊中讀取字元，並轉成點字。
+            </summary>
+            <param name="charStack">字元堆疊。</param>
+            <param name="context">情境標籤管理員。</param>
+            <returns>傳回轉換後的點字物件串列，若串列為空串列，表示沒有成功轉換的字元。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Converters.PhoneticConverter">
+            <summary>
+            音標符號轉換器。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.PhoneticConverter.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.PhoneticConverter.Convert(System.Collections.Generic.Stack{System.Char},BrailleToolkit.ContextTagManager)">
+            <summary>
+            從堆疊中讀取字元，並轉成點字。
+            </summary>
+            <param name="charStack">字元堆疊。</param>
+            <param name="context">情境標籤管理員。</param>
+            <returns>傳回轉換後的點字物件串列，若串列為空串列，表示沒有成功轉換的字元。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Converters.TableConverter">
+            <summary>
+            表格符號轉換器。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.TableConverter.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.TableConverter.Convert(System.Collections.Generic.Stack{System.Char},BrailleToolkit.ContextTagManager)">
+            <summary>
+            轉換表格字元。
+            </summary>
+            <param name="charStack"></param>
+            <param name="context"></param>
+            <remarks>由於上、中、下的橫線在明眼字都是以相同的符號表示，可是點字卻不同，因此程式要特別處理：
+            每當碰到表格左邊的特定符號時，就設定橫線類型的旗號。</remarks>
+            <returns></returns>
+        </member>
+        <member name="T:BrailleToolkit.Converters.TwChineseCharConverter">
+            <summary>
+            中文點字轉換器。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Converters.TwChineseCharConverter.ZhuyinConverter">
+            <summary>
+            取得或設定注音反查轉換器。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.TwChineseCharConverter.#ctor(BrailleToolkit.BrailleProcessor)">
+            <summary>
+            建構函式。
+            </summary>
+            <param name="processor">點字處理器。</param>
+        </member>
+        <member name="M:BrailleToolkit.Converters.TwChineseCharConverter.Convert(System.Collections.Generic.Stack{System.Char},BrailleToolkit.ContextTagManager)">
+            <summary>
+            從堆疊中讀取字元，並轉成點字。
+            只處理 TwChineseBrailleTable.xml 裡面有定義的符號，主要是中文字和中文標點符號。
+            </summary>
+            <param name="charStack">字元堆疊。</param>
+            <param name="context">情境物件。</param>
+            <returns>傳回轉換後的點字物件串列，若串列為空串列，表示沒有成功轉換的字元。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.TwChineseCharConverter.FixPhoneticCodes(System.Collections.Generic.List{BrailleToolkit.BrailleWord},System.Int32,System.Int32)">
+            <summary>
+            修正一串連續中文字的注音字根。
+            這裡是利用新注音的智慧型詞彙判斷功能，以修正特定破音字的注音字根。
+            </summary>
+            <param name="brWordList">點字串列。</param>
+            <param name="startIdx">起始索引。</param>
+            <param name="endIdx">終止索引。</param>
+        </member>
+        <member name="M:BrailleToolkit.Converters.TwChineseCharConverter.InternalConvert(System.String)">
+            <summary>
+            把一個字元轉換成點字。
+            </summary>
+            <param name="text">一個中文字或標點符號。</param>
+            <returns>若指定的字串是中文字且轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.TwChineseCharConverter.CreatePhoneticCellList(System.String)">
+            <summary>
+            將一個中文字的注音組字字根碼轉換成點字碼串列，並加入指定的 BrailleWord 物件。
+            注意：若轉換成功，會同時加入注音碼和點字碼。
+            </summary>
+            <param name="phcode">一個中文字的注音組字字根碼</param>
+            <returns>成功傳回 true，失敗傳回 false。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.TwChineseCharConverter.ApplyBrailleConfig(BrailleToolkit.BrailleWord)">
+            <summary>
+            根據組態檔的設定調整點字轉換結果。
+            </summary>
+            <param name="brWord"></param>
+        </member>
+        <member name="T:BrailleToolkit.Converters.UrlConverter">
+            <summary>
+            處理英數字的點字轉換。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.UrlConverter.#ctor(BrailleToolkit.BrailleProcessor)">
+            <summary>
+            建構函式。
+            </summary>
+            <param name="processor">點字處理器。</param>
+        </member>
+        <member name="M:BrailleToolkit.Converters.UrlConverter.Convert(System.Collections.Generic.Stack{System.Char},BrailleToolkit.ContextTagManager)">
+            <summary>
+            從堆疊中讀取字元，把 ASCII 字元（半形的英數字）轉換成點字。
+            </summary>
+            <param name="charStack">輸入的 ASCII 字元堆疊。</param>
+            <param name="context">情境物件。</param>
+            <returns>傳回轉換後的點字物件串列，若串列為空串列，表示沒有成功轉換的字元。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.UrlConverter.ProcessSpecialEntity(System.Collections.Generic.Stack{System.Char},System.String@)">
+            <summary>
+            處理以 ampersand (&amp;) 符號開頭的特殊字元，例如："&gt;" 和 "&lt;" 可以分別表示
+            半形的大於、小於符號。
+            </summary>
+            <param name="charStack">字元堆疊。</param>
+            <param name="text">若傳回 true，則會設定此參數。</param>
+            <returns>傳回 true 表示有碰到特殊字元，並已從 charStack 中取出。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.UrlConverter.InternalConvert(System.String,BrailleToolkit.ContextTagManager)">
+            <summary>
+            把英數字轉換成點字。
+            </summary>
+            <param name="text">一個英數字或英文標點符號。</param>
+            <param name="context">情境標籤管理員。</param>
+            <returns>若指定的字串是中文字且轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Converters.WordConverter">
+            <summary>
+            字詞轉換器基底類別。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Converters.WordConverter.Convert(System.Collections.Generic.Stack{System.Char},BrailleToolkit.ContextTagManager)">
+            <summary>
+            將字元堆疊轉換為點字詞串列。
+            </summary>
+            <param name="charStack">字元堆疊。</param>
+            <param name="context">情境標籤管理員。</param>
+            <returns>點字詞串列。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.WordConverter.Convert(System.String)">
+            <summary>
+            轉換指定的字串。
+            </summary>
+            <param name="text">欲轉換的字串。</param>
+            <returns>轉換後的點字碼。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.WordConverter.ConvertToBrailleWord(System.String)">
+            <summary>
+            將傳入的字串（字元）轉換成點字。
+            </summary>
+            <param name="text">字串（一個字元）。</param>
+            <returns>若指定的字串轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Converters.WordConverter.EnsureOneSpaceFollowed_UnlessNextWordIsPunctuation(System.Collections.Generic.List{BrailleToolkit.BrailleWord},System.String)">
+            <summary>
+            確保目前轉換的字詞後面有一個空方，除非下一個字是標點符號。
+            </summary>
+            <param name="wordList">目前的點字詞串列。</param>
+            <param name="nextWord">下一個字。</param>
+        </member>
+        <member name="M:BrailleToolkit.Converters.WordConverter.EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(System.Collections.Generic.List{BrailleToolkit.BrailleWord},System.String,System.String)">
+            <summary>
+            確保目前轉換的字詞後面有一個空方，除非下一個字是排除的字元。
+            </summary>
+            <param name="wordList">目前的點字詞串列。</param>
+            <param name="nextWord">下一個字。</param>
+            <param name="exceptedWords">排除的字元集合。</param>
+        </member>
+        <member name="M:BrailleToolkit.Converters.WordConverter.EnsureOneSpaceFollowed(System.Collections.Generic.List{BrailleToolkit.BrailleWord},System.String)">
+            <summary>
+            確保目前轉換的字詞後面有一個空方。
+            </summary>
+            <param name="wordList">目前的點字詞串列。</param>
+            <param name="nextWord">下一個字。</param>
+        </member>
+        <member name="M:BrailleToolkit.Converters.WordConverter.EnsureOneSpaceBetweenParentheses(System.Collections.Generic.List{BrailleToolkit.BrailleWord},System.String,System.String)">
+            <summary>
+            確保括號之間有一個空方（若括號內無內容）。
+            </summary>
+            <param name="wordList">目前的點字詞串列。</param>
+            <param name="currentWord">目前的字。</param>
+            <param name="nextWord">下一個字。</param>
+            <returns>若有加入空方則傳回 true。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Data.BrailleTableBase">
+            <summary>
+            點字對應表的基礎類別。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.BrailleTableBase.Load">
+            <summary>
+            載入點字對照表。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.BrailleTableBase.Load(System.String)">
+            <summary>
+            從指定檔案載入點字對照表。
+            </summary>
+            <param name="filename">檔案名稱。</param>
+        </member>
+        <member name="M:BrailleToolkit.Data.BrailleTableBase.LoadFromResource(System.Reflection.Assembly,System.String)">
+            <summary>
+            從資源載入點字對照表。
+            </summary>
+            <param name="asmb">包含資源的組件。</param>
+            <param name="resourceName">資源名稱。</param>
+        </member>
+        <member name="P:BrailleToolkit.Data.BrailleTableBase.Item(System.String)">
+            <summary>
+            索引子。從文字符號取得對應的點字碼。
+            </summary>
+            <param name="text">文字符號。</param>
+            <returns>點字碼。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.BrailleTableBase.Find(System.String,System.String)">
+            <summary>
+            搜尋某個文字符號，並傳回對應的點字碼。
+            <b>注意：</b>此搜尋方法是搜尋整個對照表，建議使用其他版本的搜尋方法，
+            以免找到錯誤的結果。尤其是注音符號和聲調，一定要分別呼叫
+            FindPhonetic 和 FindTone，否則會因為輸入的字串有全形空白而傳回錯誤的結果。
+            </summary>
+            <param name="text">欲搜尋的符號。</param>
+            <param name="type">限定欲搜尋的符號類型。若不同類型當中存在相同的文字符號，便應指定此參數，以確保找到正確的符號。</param>
+            <returns>若有找到，則傳回對應的點字碼，否則傳回 null。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.BrailleTableBase.GetDots(System.String,System.String)">
+            <summary>
+            搜尋某個文字符號，並傳回對應的點字位置字串。例如: "134 26"。
+            </summary>
+            <param name="text">欲搜尋的符號。</param>
+            <param name="type">限定欲搜尋的符號類型。若不同類型當中存在相同的文字符號，便應指定此參數，以確保找到正確的符號。</param>
+            <returns>範例："24 1345 36"。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.BrailleTableBase.Exists(System.String)">
+            <summary>
+            單純用來判斷某符號是否存在此點字對照表，不取出點字碼。速度比 Find 快。
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrailleToolkit.Data.CoordinateBrailleTable">
+            <summary>
+            座標符號點字表。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.CoordinateBrailleTable.GetInstance">
+            <summary>
+            傳回 singleton 物件，並載入資源。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BrailleToolkit.Data.EnglishBrailleTable">
+            <summary>
+            英文點字對照表。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.EnglishBrailleTable.GetInstance">
+            <summary>
+            傳回 singleton 物件，並載入資源。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.EnglishBrailleTable.FindLetter(System.String)">
+            <summary>
+            搜尋某個字母，並傳回對應的點字碼。
+            </summary>
+            <param name="text">欲搜尋的字母。例如：'A'。</param>
+            <returns>若有找到，則傳回對應的點字碼，否則傳回空字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.EnglishBrailleTable.FindDigit(System.String,System.Boolean)">
+            <summary>
+            搜尋某個數字，並傳回對應的點字碼。
+            </summary>
+            <param name="text">欲搜尋的數字。例如：'9'。</param>
+            <param name="upper">True/False = 傳回上位點/下位點。</param>
+            <returns>若有找到，則傳回對應的點字碼，否則傳回空字串。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Data.EnglishUebBrailleTable">
+            <summary>
+            UEB (Unified English Braille) 點字表。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.EnglishUebBrailleTable.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.EnglishUebBrailleTable.GetInstance">
+            <summary>
+            傳回 singleton 物件，並載入資源。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.EnglishUebBrailleTable.FindLetter(System.String)">
+            <summary>
+            搜尋某個字母，並傳回對應的點字碼。
+            </summary>
+            <param name="text">欲搜尋的字母。例如：'A'。</param>
+            <returns>若有找到，則傳回對應的點字碼，否則傳回 null。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Data.MathBrailleTable">
+            <summary>
+            數學符號點字表。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.MathBrailleTable.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.MathBrailleTable.GetInstance">
+            <summary>
+            傳回 singleton 物件，並載入資源。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BrailleToolkit.Data.PhoneticBrailleTable">
+            <summary>
+            音標符號點字表。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.PhoneticBrailleTable.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.PhoneticBrailleTable.GetInstance">
+            <summary>
+            傳回 singleton 物件，並載入資源。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BrailleToolkit.Data.TableBrailleTable">
+            <summary>
+            表格符號點字表。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.TableBrailleTable.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.TableBrailleTable.GetInstance">
+            <summary>
+            傳回 singleton 物件，並載入資源。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BrailleToolkit.Data.TwChineseBrailleTable">
+            <summary>
+            台灣中文點字表。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.TwChineseBrailleTable.GetInstance">
+            <summary>
+            傳回 singleton 物件，並載入資源。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.TwChineseBrailleTable.GetPhoneticCode(System.String)">
+            <summary>
+            搜尋某個注音符號，並傳回對應的點字碼。
+            </summary>
+            <param name="text">欲搜尋的注音符號。例如："ㄅ"。</param>
+            <returns>若有找到，則傳回對應的點字碼，否則傳回 null。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.TwChineseBrailleTable.GetPhoneticJoinedCode(System.String)">
+            <summary>
+            尋找結合韻，並傳回對應的點字碼。
+            </summary>
+            <param name="text">結合韻的注音符號，不含聲調。例如 "ㄨㄛ"。</param>
+            <returns>若是結合韻，則傳回對應的點字碼，否則傳回 null。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.TwChineseBrailleTable.GetPhoneticMonoCode(System.String)">
+            <summary>
+            尋找注音符號的七個特殊單音（ㄓ、ㄔ、ㄕ、ㄖ、ㄗ、ㄘ、ㄙ）。
+            </summary>
+            <param name="text">某個單音注音符號，例如 "ㄓ"。</param>
+            <returns>若是特殊單音字，則傳回對應的點字碼，否則傳回空字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.TwChineseBrailleTable.GetPhoneticToneCode(System.String)">
+            <summary>
+            尋找注音的聲調符號。
+            </summary>
+            <param name="text">欲尋找的聲調符號，全形空白代表一聲。</param>
+            <returns>若有找到，則傳回對應的點字碼，否則傳回 null。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.TwChineseBrailleTable.GetPunctuationCode(System.String)">
+            <summary>
+            尋找標點符號。
+            </summary>
+            <param name="text">欲尋找的標點符號。</param>
+            <returns>若有找到，則傳回對應的點字碼，否則傳回 null。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.TwChineseBrailleTable.GetAllPunctuations">
+            <summary>
+            取得所有標點符號。
+            </summary>
+            <returns>包含所有標點符號的字串。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Data.UrlBrailleTable">
+            <summary>
+            URL 點字表。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.UrlBrailleTable.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.UrlBrailleTable.GetInstance">
+            <summary>
+            傳回 singleton 物件，並載入資源。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.UrlBrailleTable.FindLetter(System.String)">
+            <summary>
+            搜尋某個字母，並傳回對應的點字碼。
+            </summary>
+            <param name="text">欲搜尋的字母。例如：'A'。</param>
+            <returns>若有找到，則傳回對應的點字碼，否則傳回空字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.UrlBrailleTable.FindDigit(System.String,System.Boolean)">
+            <summary>
+            搜尋某個數字，並傳回對應的點字碼。
+            </summary>
+            <param name="text">欲搜尋的數字。例如：'9'。</param>
+            <param name="upper">True/False = 傳回上位點/下位點。</param>
+            <returns>若有找到，則傳回對應的點字碼，否則傳回空字串。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Data.XmlBrailleTable">
+            <summary>
+            從 XML 檔案讀取點字對照表，並提供搜尋功能。
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.Data.XmlBrailleTable.m_Table">
+            <summary>
+            儲存點字對照表的 DataTable。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Data.XmlBrailleTable.Table">
+            <summary>
+            取得內部的 DataTable 物件。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.#ctor(System.String)">
+            <summary>
+            建構函式。
+            </summary>
+            <param name="filename">XML 檔案名稱。</param>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.Load">
+            <summary>
+            載入點字對照表。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.Load(System.String)">
+            <summary>
+            從 XML 檔案載入點字對照表。
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.LoadFromResource(System.Reflection.Assembly,System.String)">
+            <summary>
+            從指定組件資源載入點字對照表。
+            </summary>
+            <param name="asmb"></param>
+            <param name="resourceName"></param>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.LoadFromResource">
+            <summary>
+            從預設的資源名稱（即物件的類別名稱加上 .xml 副檔名）載入點字對照表。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.LoadFromXmlString(System.String)">
+            <summary>
+            從 XML 字串載入點字對照表。
+            </summary>
+            <param name="xml"></param>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.ConvertDotsToCode">
+            <summary>
+            將點位字串轉換為點字碼。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.ConvertDots2ToCode2">
+            <summary>
+            將第二方點位字串轉換為點字碼。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.CheckLoaded">
+            <summary>
+            檢查點字對照表是否已經載入，若否，則丟出 exception。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.CheckCode(System.String)">
+            <summary>
+            檢查是否為合法的點字碼。
+            </summary>
+            <param name="code">點字碼的十六進位字串。例如："A0"。</param>
+        </member>
+        <member name="P:BrailleToolkit.Data.XmlBrailleTable.Item(System.String)">
+            <summary>
+            索引子。從文字符號取得對應的點字碼（16 進位）字串。
+            </summary>
+            <param name="text">文字符號，例如：ㄅ、：。</param>
+            <returns>點字碼字串，若找不到對應的符號，會丟出例外。</returns>
+            <remarks>如果你希望找不到對應的點字碼時不要丟出例外，而是傳回空字串，請使用 Find 方法。</remarks>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.FindDataRow(System.String,System.String)">
+            <summary>
+            搜尋對應的 DataRow。
+            </summary>
+            <param name="text">文字。</param>
+            <param name="type">類型。</param>
+            <returns>DataRow。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.Find(System.String,System.String)">
+            <summary>
+            搜尋某個文字符號，並傳回對應的點字碼。
+            </summary>
+            <param name="text">欲搜尋的符號。</param>
+            <param name="type">限定欲搜尋的符號類型。若不同類型當中存在相同的文字符號，便應指定此參數，以確保找到正確的符號。</param>
+            <returns>若有找到，則傳回對應的點字碼，否則傳回 null。</returns>
+            <remarks>如果你希望找不到對應的點字碼時丟出例外，請使用索引子。</remarks>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.GetDots(System.String,System.String)">
+            <summary>
+            取得點位字串陣列。
+            </summary>
+            <param name="text">文字。</param>
+            <param name="type">類型。</param>
+            <returns>點位字串陣列。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Data.XmlBrailleTable.Exists(System.String)">
+            <summary>
+            檢查文字是否存在於對照表中。
+            </summary>
+            <param name="text">文字。</param>
+            <returns>若存在則傳回 true，否則傳回 false。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Helpers.BrailleCellHelper">
+            <summary>
+            提供處理點字方 (BrailleCell) 的靜態輔助函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleCellHelper.ByteToHexString(System.Byte)">
+            <summary>
+            將 byte 轉換成兩位數的十六進位字串。
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleCellHelper.HexStringToByte(System.String)">
+            <summary>
+            將十六進位字串轉換成 byte。
+            </summary>
+            <param name="hexStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleCellHelper.ByteToPositionNumberString(System.Byte)">
+            <summary>
+            將 byte 轉換成點位字串。
+            </summary>
+            <param name="code"></param>
+            <returns>例如 "1346"。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleCellHelper.HexStringToPositionNumberString(System.String)">
+            <summary>
+            將十六進位字串轉換成點位字串。
+            </summary>
+            <param name="hexStr"></param>
+            <returns>例如 "1346"。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleCellHelper.HexStringToPositionNumbers(System.String)">
+            <summary>
+            將十六進制字串轉換成點位數字陣列。
+            Example: "25" -> {1, 3, 6}
+            </summary>
+            <param name="hexStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleCellHelper.PositionNumberStringToByte(System.String)">
+            <summary>
+            將點位轉換成 byte 值。
+            </summary>
+            <param name="posNumberString">一方點字的點位。例如 "1356"。若傳入空字串，則會傳回 0。</param>
+            <returns>代表點位元遮罩的 byte 值。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleCellHelper.PositionNumbersToHexString(System.String[])">
+            <summary>
+            把陣列中的點位字串轉換成十六進制代碼。
+            </summary>
+            <param name="positionNumbers"></param>
+            <returns>範例：{"1C", "22"}</returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleCellHelper.PositionNumbersToHexStringArray(System.String[])">
+            <summary>
+            把陣列中的點位字串轉換成十六進制代碼陣列。
+            </summary>
+            <param name="positionNumbers"></param>
+            <returns>範例：{"1C", "22"}</returns>
+        </member>
+        <member name="T:BrailleToolkit.Helpers.BrailleCellYamlTypeConverter">
+            <summary>
+            為 YamlDotNet 提供 BrailleCell 型別的自訂序列化和反序列化邏輯。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleCellYamlTypeConverter.Accepts(System.Type)">
+            <summary>
+            判斷此轉換器是否可以處理指定的型別。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleCellYamlTypeConverter.ReadYaml(YamlDotNet.Core.IParser,System.Type,YamlDotNet.Serialization.ObjectDeserializer)">
+            <summary>
+            從 YAML 讀取物件。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleCellYamlTypeConverter.WriteYaml(YamlDotNet.Core.IEmitter,System.Object,System.Type,YamlDotNet.Serialization.ObjectSerializer)">
+            <summary>
+            將物件寫入 YAML。
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.Helpers.BrailleDocumentHelper">
+            <summary>
+            BrailleDocument 輔助類別。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentHelper.GetBraillePageFoot(BrailleToolkit.BrailleDocument,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            傳回點字頁尾。內容包括：頁標題、點字頁碼、原書頁碼。
+            </summary>
+            <param name="brDoc">點字文件。</param>
+            <param name="lineIdx">目前列印的列索引。用來計算頁尾的文件標題。</param>
+            <param name="pageNum">頁碼。</param>
+            <param name="beginOrgPageNum">起始原書頁碼。</param>
+            <param name="endOrgPageNum">終止原書頁碼。</param>
+            <returns></returns>
+            <remarks>注意：點字頁碼的 # 號要固定印在第 37 方的位置（requested by 秋華）</remarks>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentHelper.GetOrgPageNumber(System.String,System.String@)">
+            <summary>
+            從傳入的字串中取出原書頁碼。
+            </summary>
+            <param name="line"></param>
+            <param name="orgPageNumber">傳出參數，原書頁碼。</param>
+            <returns>若傳入的字串不是原書頁碼，則傳回空字串。否則傳回原書頁碼的文字（必須是字串，因為頁碼可能是羅馬數字）。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentHelper.SetBeginEndOrgPageNumber(BrailleToolkit.BrailleLine,System.Boolean,System.String@,System.String@)">
+            <summary>
+            判斷傳入的列是否為原書頁碼，如果是，則設定起始或（與）終止原書頁碼。
+            </summary>
+            <param name="brLine"></param>
+            <param name="isFirstLineOfPage">是否為該頁的第一列。</param>
+            <param name="beginOrgPageNumber">若有發現原書頁碼，而且 beginOrgPageNumber 尚未設定過，便會設定此參數值。</param>
+            <param name="endOrgPageNumber">若有發現原書頁碼，便會設定此參數值。
+            也就是說，所以反覆呼叫此方法時，endOrgPageNumber 是會持續變動的；而 beginOrgPageNumber 只會設定一次。</param>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentHelper.RemoveSharpSymbolFromPageNumbers(BrailleToolkit.BrailleDocument)">
+            <summary>
+            刪除雙視文件中所有原書頁碼標籤裡面的 # 號。
+            </summary>
+            <param name="doc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentHelper.RemoveDigitCell(BrailleToolkit.BrailleLine,System.Int32,System.Int32)">
+            <summary>
+            移除代表數字的點位。
+            </summary>
+            <param name="brLine"></param>
+            <param name="beginIdx"></param>
+            <param name="endIdx"></param>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentHelper.RemoveUselessWords(BrailleToolkit.BrailleLine,System.Boolean,System.Int32@)">
+            <summary>
+            移除點字數量為 0 的 lines，以及一些空標籤。
+            </summary>
+            <param name="brLine"></param>
+            <param name="doRemove"></param>
+            <param name="emptyTagsCount"></param>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentHelper.RemoveUselessLines(BrailleToolkit.BrailleDocument,System.Boolean,System.Int32@,System.Int32@)">
+            <summary>
+            移除點字數量為 0 的 lines，以及一些空標籤。
+            </summary>
+            <param name="doc"></param>
+            <param name="doRemove"></param>
+            <param name="emptyLinesCount"></param>
+            <param name="emptyTagsCount"></param>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentHelper.ExportToHtmlFileAsync(BrailleToolkit.BrailleDocument,System.String)">
+            <summary>
+            將點字文件匯出為 HTML 檔案。
+            </summary>
+            <param name="doc">點字文件。</param>
+            <param name="outputFileName">輸出檔案名稱。</param>
+        </member>
+        <member name="T:BrailleToolkit.Helpers.BrailleDocumentYamlSerializer">
+            <summary>
+            提供將 BrailleDocument 物件序列化為 YAML 格式或從中反序列化的靜態輔助函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentYamlSerializer.Serialize(BrailleToolkit.BrailleDocument)">
+            <summary>
+            將 BrailleDocument 物件序列化為 YAML 字串。
+            </summary>
+            <param name="doc">要序列化的 BrailleDocument 物件。</param>
+            <returns>表示文件的 YAML 字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentYamlSerializer.Serialize(BrailleToolkit.BrailleDocument,System.IO.TextWriter)">
+            <summary>
+            將 BrailleDocument 物件序列化至指定的 TextWriter。
+            </summary>
+            <param name="doc">要序列化的 BrailleDocument 物件。</param>
+            <param name="writer">要寫入 YAML 的 TextWriter。</param>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentYamlSerializer.Deserialize(System.String)">
+            <summary>
+            從 YAML 字串反序列化為 BrailleDocument 物件。
+            </summary>
+            <param name="yaml">包含 YAML 資料的字串。</param>
+            <returns>反序列化後的 BrailleDocument 物件。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentYamlSerializer.Deserialize(System.IO.TextReader)">
+            <summary>
+            從指定的 TextReader 反序列化為 BrailleDocument 物件。
+            </summary>
+            <param name="reader">要從中讀取 YAML 的 TextReader。</param>
+            <returns>反序列化後的 BrailleDocument 物件。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentYamlSerializer.SaveToYamlFile(BrailleToolkit.BrailleDocument,System.String)">
+            <summary>
+            將 BrailleDocument 物件儲存至 YAML 檔案。
+            </summary>
+            <param name="doc">要儲存的 BrailleDocument 物件。</param>
+            <param name="filename">目標檔案的完整路徑。</param>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleDocumentYamlSerializer.LoadFromYamlFile(System.String)">
+            <summary>
+            從 YAML 檔案載入 BrailleDocument 物件。
+            </summary>
+            <param name="filename">來源檔案的完整路徑。</param>
+            <returns>從檔案載入的 BrailleDocument 物件。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Helpers.BraillePageTitleHelper">
+            <summary>
+            提供處理點字頁標題 (BraillePageTitle) 的靜態輔助函式。
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.Helpers.BrailleWordHelper">
+            <summary>
+            提供處理點字詞 (BrailleWord) 的靜態輔助函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleWordHelper.IsChinesePunctuation(BrailleToolkit.BrailleWord)">
+            <summary>
+            判斷是否為中文標點符號。
+            </summary>
+            <param name="brWord"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleWordHelper.ToString(System.Collections.Generic.List{BrailleToolkit.BrailleWord})">
+            <summary>
+            將 BrailleWord 串列轉換成字串表示（包含 Text, PhoneticCode, CellList）。
+            </summary>
+            <param name="brWordList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleWordHelper.ToTextString(System.Collections.Generic.List{BrailleToolkit.BrailleWord})">
+            <summary>
+            將 BrailleWord 串列轉換成純文字字串。
+            </summary>
+            <param name="brWordList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleWordHelper.ToDotNumberString(System.Collections.Generic.List{BrailleToolkit.BrailleWord})">
+            <summary>
+            將 BrailleWord 串列轉換成點位字串。
+            </summary>
+            <param name="brWordList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleWordHelper.ToOriginalTextString(System.Collections.Generic.List{BrailleToolkit.BrailleWord})">
+            <summary>
+            注意：此函式其實無法完全呈現原始的明眼字，因為有些標籤是在轉成點字之後就被刪除了。
+            </summary>
+            <param name="words"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleWordHelper.GetCellCount(System.Collections.Generic.List{BrailleToolkit.BrailleWord})">
+            <summary>
+            計算 BrailleWord 串列的總方數。
+            </summary>
+            <param name="brWordList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleWordHelper.ContainsTitleTag(System.Collections.Generic.List{BrailleToolkit.BrailleWord})">
+            <summary>
+            是否包含標題情境標籤。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.BrailleWordHelper.RemoveDigitSymbol(BrailleToolkit.BrailleWord)">
+            <summary>
+            移除數字記號（數字符號）。
+            </summary>
+            <param name="brWord"></param>
+            <returns>若有移除則傳回 true。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Helpers.TextHelper">
+            <summary>
+            文字處理輔助類別。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.TextHelper.GenerateTable(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            產生表格文字。
+            </summary>
+            <param name="rowCount">列數。</param>
+            <param name="columnCount">欄數。</param>
+            <param name="cellsPerColumn">每欄寬度（字元數）。</param>
+            <returns>表格文字。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Helpers.XmlTagHelper">
+            <summary>
+            提供處理 XML/HTML 標籤的靜態輔助函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.XmlTagHelper.IsBeginTag(System.String)">
+            <summary>
+            判斷指定的字串是否為起始標籤。
+            </summary>
+            <param name="s">要檢查的字串。</param>
+            <returns>如果是起始標籤，則為 true；否則為 false。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.XmlTagHelper.IsEndTag(System.String)">
+            <summary>
+            判斷指定的字串是否為結束標籤。
+            </summary>
+            <param name="s">要檢查的字串。</param>
+            <returns>如果是結束標籤，則為 true；否則為 false。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.XmlTagHelper.IsEmptyTag(System.String)">
+            <summary>
+            判斷指定的字串是否為空元素標籤。
+            </summary>
+            <param name="s">要檢查的字串。</param>
+            <returns>如果是空元素標籤，則為 true；否則為 false。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.XmlTagHelper.IsTag(System.String,System.String)">
+            <summary>
+            比對傳入的字串是否為特定的標籤。
+            </summary>
+            <param name="value"></param>
+            <param name="tagName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.XmlTagHelper.GetBeginTagName(System.String)">
+            <summary>
+            取得起始標籤字串。
+            </summary>
+            <param name="tagName">標籤名稱。</param>
+            <returns>包含角括號的起始標籤字串。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.XmlTagHelper.GetEndTagName(System.String)">
+            <summary>
+            傳回結束標籤字串。
+            </summary>
+            <param name="tagName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.XmlTagHelper.RemoveBracket(System.String)">
+            <summary>
+            從標籤字串中移除角括號和斜線。
+            </summary>
+            <param name="tagName">要處理的標籤字串。</param>
+            <returns>不含角括號和斜線的標籤名稱。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Helpers.XmlTagHelper.EncloseWithTag(System.String,System.String)">
+            <summary>
+            使用指定的標籤將文字包圍起來。
+            </summary>
+            <param name="text">要包圍的文字。</param>
+            <param name="tagName">標籤名稱。</param>
+            <returns>被標籤包圍的完整字串。</returns>
+        </member>
+        <member name="T:BrailleToolkit.Rules.ChineseBrailleRule">
+            <summary>
+            中文點字規則類別。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Rules.ChineseBrailleRule.ApplySpecificNameAndBookNameRules(BrailleToolkit.BrailleLine)">
+            <summary>
+            套用私名號和書名號規則。
+            </summary>
+            <param name="brLine">點字行。</param>
+        </member>
+        <member name="M:BrailleToolkit.Rules.ChineseBrailleRule.ApplyPunctuationRules(BrailleToolkit.BrailleLine)">
+            <summary>
+            根據標點符號規則調整一整行點字。
+            </summary>
+            <param name="brLine"></param>
+        </member>
+        <member name="M:BrailleToolkit.Rules.ChineseBrailleRule.EncloseBlankCells(BrailleToolkit.BrailleLine,System.Int32)">
+            <summary>
+            在指定位置的左邊及右邊各加一個空方。若該位置已經有空方，則不做任何處理。
+            </summary>
+            <param name="brLine"></param>
+            <param name="index"></param>
+            <returns>這次調整一共增加或刪除了幾個 word。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Rules.ChineseBrailleRule.PrefixBlankCell(BrailleToolkit.BrailleLine,System.Int32)">
+            <summary>
+            在指定的位置左邊附加一個空方，若該位置已經有空方，則不做任何處理。
+            </summary>
+            <param name="brLine"></param>
+            <param name="index"></param>
+            <returns>這次調整一共增加或刪除了幾個 word。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Rules.ChineseBrailleRule.PostfixBlankCell(BrailleToolkit.BrailleLine,System.Int32)">
+            <summary>
+            在指定的位置右邊附加一個空方，若該位置已經有空方，則不做任何處理。
+            </summary>
+            <param name="brLine"></param>
+            <param name="index"></param>
+            <returns>這次調整一共增加或刪除了幾個 word。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Rules.ChineseBrailleRule.ApplyPeriodRule(BrailleToolkit.BrailleLine,System.Int32)">
+            <summary>
+            套用句號規則：
+            1.在同一點字行中，句號之後，須空一方，再點寫下文；
+              如在行末不夠點寫句號時，須將原句最末一字與句號移至次一行連書，
+              然後空方接寫下文；如句號恰在一行之最末一方，下文換行點寫時，次行之首無須空方。 
+            2.句號可與後引號（包括後單或雙引號）、刪節號、後括弧
+              （包括後圓括弧、後方括弧、後大括弧）、後夾註號連書，但不得單獨書於一行之首）。
+            </summary>
+            <param name="brLine"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Rules.ChineseBrailleRule.EnsureOneSpaceFollowed_ExceptNextWordIsClosingSymbol(BrailleToolkit.BrailleLine,System.Int32)">
+            <summary>
+            如果下一個字元不是下引號、右括弧，則加一空方。
+            適用於：當前字元是問號、驚嘆號。
+            </summary>
+            <param name="brLine"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Rules.ChineseBrailleRule.EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(BrailleToolkit.BrailleLine,System.Int32,System.String)">
+            <summary>
+            確保下一個字是空方，除非下一個字元是指定排除的字元。
+            </summary>
+            <param name="brLine"></param>
+            <param name="index"></param>
+            <param name="exceptedWords"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Rules.ChineseBrailleRule.ApplyColonRule(BrailleToolkit.BrailleLine,System.Int32)">
+            <summary>
+            根據中文點字的冒號規則修正傳入的點字行。
+            規則：冒號之後若是 "我" 字，必須加一空方。
+            </summary>
+            <param name="brLine"></param>
+            <param name="index"></param>
+            <returns>這次調整一共增加或刪除了幾個 word。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Rules.ChineseBrailleRule.ShrinkSpaces(BrailleToolkit.BrailleLine)">
+            <summary>
+            把多個連續全形空白刪到只剩一個。
+            </summary>
+            <param name="brLine"></param>
+        </member>
+        <member name="M:BrailleToolkit.Rules.ChineseBrailleRule.EnsureNoDigitSymbolInBrackets(BrailleToolkit.BrailleLine)">
+            <summary>
+            處理包著數字的中括號，例如：【12】。
+            </summary>
+            <param name="brLine"></param>
+        </member>
+        <member name="M:BrailleToolkit.Rules.EnglishBrailleRule.ApplyCapitalRule(BrailleToolkit.BrailleLine)">
+            <summary>
+            根據英文點字的大寫規則調整一行點字。
+            </summary>
+            <param name="brLine">點字串列。</param>
+        </member>
+        <member name="M:BrailleToolkit.Rules.EnglishBrailleRule.AddCapitalCell(BrailleToolkit.BrailleWord,System.Int32)">
+            <summary>
+            加入大寫點。
+            </summary>
+            <param name="brWord">點字物件</param>
+            <param name="count">要加幾個大寫點。</param>
+        </member>
+        <member name="M:BrailleToolkit.Rules.EnglishBrailleRule.FixNumbers(BrailleToolkit.BrailleLine,BrailleToolkit.Data.EnglishBrailleTable)">
+            <summary>
+            把編號的數字修正成上位點。
+            注意：此函式會把點字串列中的 # 點字物件刪除。
+            </summary>
+            <param name="brLine"></param>
+            <param name="brTable"></param>
+        </member>
+        <member name="M:BrailleToolkit.Rules.EnglishBrailleRule.ShrinkSpaces(BrailleToolkit.BrailleLine)">
+            <summary>
+            把多個連續空白刪到只剩一個。
+            </summary>
+            <param name="brLine"></param>
+        </member>
+        <member name="T:BrailleToolkit.Rules.GeneralBrailleRule">
+            <summary>
+            此類別包含了無論中英文點字還是數學點字都適用的規則。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Rules.GeneralBrailleRule.AddSpaces(BrailleToolkit.BrailleLine)">
+            <summary>
+            補加必要的空白：在英數字母和中文字之間補上空白。
+            </summary>
+            <param name="brLine"></param>
+        </member>
+        <member name="M:BrailleToolkit.Rules.GeneralBrailleRule.NeedSpace(BrailleToolkit.BrailleWord,BrailleToolkit.BrailleWord)">
+            <summary>
+            根據前後鄰近的字元判斷中間是否需要加一個空方。
+            </summary>
+            <param name="lastWord">前一個字。</param>
+            <param name="currWord">目前的字。</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Rules.GeneralBrailleRule.AddSpaceForSpecialCharacters(BrailleToolkit.BrailleLine,System.Int32)">
+            <summary>
+            處理那些需要在左右兩邊加空方的字元。
+            </summary>
+            <param name="brLine"></param>
+            <param name="wordIdx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrailleToolkit.Rules.GeneralBrailleRule.EncloseBlankCells(BrailleToolkit.BrailleLine,System.Int32)">
+            <summary>
+            在指定位置的左邊及右邊各加一個空方。若該位置已經有空方，則不做任何處理。
+            </summary>
+            <param name="brLine"></param>
+            <param name="index"></param>
+            <returns>這次調整一共增加或刪除了幾個 word。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Rules.GeneralBrailleRule.PrefixBlankCell(BrailleToolkit.BrailleLine,System.Int32)">
+            <summary>
+            在指定的位置左邊附加一個空方，若該位置已經有空方，則不做任何處理。
+            </summary>
+            <param name="brLine"></param>
+            <param name="index"></param>
+            <returns>這次調整一共增加或刪除了幾個 word。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Rules.GeneralBrailleRule.PostfixBlankCell(BrailleToolkit.BrailleLine,System.Int32)">
+            <summary>
+            在指定的位置右邊附加一個空方，若該位置已經有空方，則不做任何處理。
+            </summary>
+            <param name="brLine"></param>
+            <param name="index"></param>
+            <returns>這次調整一共增加或刪除了幾個 word。</returns>
+        </member>
+        <member name="M:BrailleToolkit.Rules.GeneralBrailleRule.ApplyDigitRule(BrailleToolkit.BrailleLine)">
+            <summary>
+            套用數字規則：數字前面要加數字符號。
+            由於數字符號和數字不可分割，因此加在第一個數字的 Cells 裡面。
+            </summary>
+            <param name="brLine"></param>
+        </member>
+        <member name="M:BrailleToolkit.Rules.GeneralBrailleRule.AddDigitSymbol(BrailleToolkit.BrailleLine,System.Int32)">
+            <summary>
+            在指定的索引處的 BrailleWord 物件中加入數符。
+            此函式會自動判斷是否有不需加入數符的例外狀況，例如：次方。
+            </summary>
+            <param name="brLine"></param>
+            <param name="index"></param>
+        </member>
+        <member name="M:BrailleToolkit.Rules.GeneralBrailleRule.ApplyDontBreakLineRule(BrailleToolkit.BrailleLine)">
+            <summary>
+            套用不可斷行規則：設定在斷行時不可位於行首的字元。
+            </summary>
+            <param name="brLine">要套用規則的點字行。</param>
+        </member>
+        <member name="T:BrailleToolkit.Tags.ContextLifetime">
+            <summary>
+            Defines the lifetime of a context tag.
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextLifetime.Transient">
+            <summary>
+            The tag is transient and will be removed during conversion.
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextLifetime.Persistent">
+            <summary>
+            The tag is persistent and will be saved.
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.Tags.ContextTagFactory">
+            <summary>
+            Factory class for creating context tags.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Tags.ContextTagFactory.CreateInstance(System.String)">
+            <summary>
+            根據標籤名稱建立對應的 ContextTag 物件。
+            </summary>
+            <param name="tagName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrailleToolkit.Tags.ContextTagNames">
+            <summary>
+            Defines the names of context tags used in the application.
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.Title">
+            <summary>Title tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.Indent">
+            <summary>Indent tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.Math">
+            <summary>Math tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.Coordinate">
+            <summary>Coordinate tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.Fraction">
+            <summary>Fraction tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.Table">
+            <summary>Table tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.TableTopLine1">
+            <summary>Table top line 1 tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.TableBottomLine1">
+            <summary>Table bottom line 1 tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.TableTopLine2">
+            <summary>Table top line 2 tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.TableBottomLine2">
+            <summary>Table bottom line 2 tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.Time">
+            <summary>Time tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.Delete">
+            <summary>Delete tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.Phonetic">
+            <summary>Phonetic tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.SpecificName">
+            <summary>Specific name tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.BookName">
+            <summary>Book name tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.BrailleTranslatorNote">
+            <summary>Braille translator note tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.OrgPageNumber">
+            <summary>Original page number tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.Choice">
+            <summary>Choice tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.UpperPosition">
+            <summary>Upper position tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.Url">
+            <summary>URL tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.QuotationMark1">
+            <summary>Quotation mark 1 tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.QuotationMark2">
+            <summary>Quotation mark 2 tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.SeparatorLine">
+            <summary>Separator line tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.NoDigitSymbol">
+            <summary>No digit symbol tag.</summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.ContextTagNames.Collection">
+            <summary>
+            Gets the collection of all context tag names.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Tags.ContextTagNames.IsTitleTag(System.String)">
+            <summary>
+            Checks if the given string is a title tag.
+            </summary>
+            <param name="s">The string to check.</param>
+            <returns>True if it is a title tag; otherwise, false.</returns>
+        </member>
+        <member name="M:BrailleToolkit.Tags.ContextTagNames.StartsWithContextTag(System.String)">
+            <summary>
+            檢查傳入的字串是否是以語境標籤（含起始及結束標籤）開頭。
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BrailleToolkit.Tags.GenericContextTag">
+            <summary>
+            代表一個通用的語境標籤。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.GenericContextTag.ConvertablePrefix">
+            <summary>
+            Gets or sets the text that can be converted to braille as a prefix.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.GenericContextTag.ConvertablePostfix">
+            <summary>
+            Gets or sets the text that can be converted to braille as a postfix.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.GenericContextTag.PrefixBrailleWords">
+            <summary>
+            Gets the list of braille words to be inserted as a prefix.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.GenericContextTag.PostfixBrailleWords">
+            <summary>
+            Gets the list of braille words to be inserted as a postfix.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.GenericContextTag.TagName">
+            <summary>
+            Gets the name of the tag.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.GenericContextTag.EndTagName">
+            <summary>
+            傳回結束標籤名稱。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.GenericContextTag.Lifetime">
+            <summary>
+            Gets the lifetime of the context tag.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.GenericContextTag.IsSingleLine">
+            <summary>
+            是否為單列標籤（整列只能有此標籤，不能包含其他標籤）
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.GenericContextTag.Count">
+            <summary>
+            // 出現的次數
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.GenericContextTag.IsActive">
+            <summary>
+            傳回此語境標籤目前是否在作用中。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.GenericContextTag.RemoveTagOnConversion">
+            <summary>
+            Gets a value indicating whether to remove the tag upon conversion.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Tags.GenericContextTag.Reset">
+            <summary>
+            重設此語境標籤。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Tags.GenericContextTag.Enter">
+            <summary>
+            進入此語境。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Tags.GenericContextTag.Leave">
+            <summary>
+            離開此語境。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Tags.GenericContextTag.#ctor">
+            <summary>
+            受保護的建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Tags.GenericContextTag.#ctor(System.String,BrailleToolkit.Tags.ContextLifetime,System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BrailleToolkit.Tags.GenericContextTag"/> class.
+            </summary>
+            <param name="tagName">The name of the tag.</param>
+            <param name="lifeTime">The lifetime of the tag.</param>
+            <param name="removeTagOnConversion">Whether to remove the tag on conversion.</param>
+            <param name="singleLine">Whether the tag is a single line tag.</param>
+        </member>
+        <member name="T:BrailleToolkit.Tags.IContextTag">
+            <summary>
+            語境標籤。用途主要是供 ContextTagManager 記錄某語境標籤在特定時間點的出現次數。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.IContextTag.ConvertablePrefix">
+            <summary>
+            Gets or sets the text that can be converted to braille as a prefix.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.IContextTag.ConvertablePostfix">
+            <summary>
+            Gets or sets the text that can be converted to braille as a postfix.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.IContextTag.PrefixBrailleWords">
+            <summary>
+            Gets the list of braille words to be inserted as a prefix.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.IContextTag.PostfixBrailleWords">
+            <summary>
+            Gets the list of braille words to be inserted as a postfix.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.IContextTag.TagName">
+            <summary>
+            Gets the name of the tag.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.IContextTag.EndTagName">
+            <summary>
+            結束標籤名稱。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.IContextTag.RemoveTagOnConversion">
+            <summary>
+            是否在轉換點字的時候一併把標籤移除（作用等同於把標籤替換成特定文字與點字）。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.IContextTag.Lifetime">
+            <summary>
+            Gets the lifetime of the context tag.
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.IContextTag.IsSingleLine">
+            <summary>
+            是否為單列標籤（整列只能有此標籤，不能包含其他標籤）
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.IContextTag.Count">
+            <summary>
+            // 出現的次數
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.Tags.IContextTag.IsActive">
+            <summary>
+            傳回此語境標籤目前是否在作用中。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Tags.IContextTag.Reset">
+            <summary>
+            重設此語境標籤的狀態。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Tags.IContextTag.Enter">
+            <summary>
+            進入此語境標籤。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Tags.IContextTag.Leave">
+            <summary>
+            離開此語境標籤。
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.Tags.OrgPageNumberContextTag">
+            <summary>
+            Context tag for original page number.
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.OrgPageNumberContextTag.LeadingUnderline">
+            <summary>
+            The leading underline character.
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.OrgPageNumberContextTag.NumberOfUnderline">
+            <summary>
+            The number of underline characters.
+            </summary>
+        </member>
+        <member name="F:BrailleToolkit.Tags.OrgPageNumberContextTag.LeadingUnderlines">
+            <summary>
+            The string containing leading underlines.
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.Tags.OrgPageNumberContextTag.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BrailleToolkit.Tags.OrgPageNumberContextTag"/> class.
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.Tags.SimpleTag">
+            <summary>
+            簡單標籤，會在轉點字過程中的預先處理階段就把標籤文字替換成對應的、可轉換成點字的文字或符號。
+            </summary>
+        </member>
+        <member name="T:BrailleToolkit.TextToBrailleConverter">
+            <summary>
+            此類別可用來將一串明眼字轉換成點字，並保存於 BrailleLine 物件中。
+            此類別不做格式化（斷行、段落編排），僅適用於單行字串的轉換，而不適合用來轉換包含多行文字的文件。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.TextToBrailleConverter.Processor">
+            <summary>
+            點字處理器。
+            </summary>
+        </member>
+        <member name="P:BrailleToolkit.TextToBrailleConverter.Doc">
+            <summary>
+            點字文件物件。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.TextToBrailleConverter.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.TextToBrailleConverter.LoadPhraseFiles">
+            <summary>
+            載入使用者自訂詞庫。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.TextToBrailleConverter.Convert(System.String)">
+            <summary>
+            轉換指定的明眼字串。
+            </summary>
+            <param name="inputText">明眼字串。</param>
+            <returns>轉換後的點字列。</returns>
+        </member>
+        <member name="P:BrailleToolkit.TextToBrailleConverter.HasError">
+            <summary>
+            是否發生錯誤。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.TextToBrailleConverter.GetInvalidChars">
+            <summary>
+            取得所有轉換失敗的字元。
+            </summary>
+        </member>
+        <member name="M:BrailleToolkit.TextToBrailleConverter.BrailleProcessor_ConvertionFailed(System.Object,BrailleToolkit.ConversionFailedEventArgs)">
+            <summary>
+            碰到無法轉換的字元時觸發此事件。
+            </summary>
+            <param name="sender"></param>
+            <param name="args"></param>
+        </member>
+    </members>
+</doc>

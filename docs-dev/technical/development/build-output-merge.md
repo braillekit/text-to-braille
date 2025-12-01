@@ -30,6 +30,7 @@
 ## 複製的檔案
 
 以下檔案會被自動複製：
+
 - `Txt2Brl.exe` - 主要執行檔
 - `Txt2Brl.dll` - 程式庫
 - `Txt2Brl.pdb` - 偵錯符號檔
@@ -43,16 +44,19 @@
 ## 使用方式
 
 ### 建置單一專案
+
 ```powershell
 dotnet build Source\EasyBrailleEditApp\Txt2Brl\Txt2Brl.csproj /p:Platform=x86
 ```
 
 建置完成後，Txt2Brl 的輸出會自動複製到：
-```
+
+```text
 Output\EasyBrailleEdit\Debug\x86\
 ```
 
 ### 建置整個解決方案
+
 ```powershell
 dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln /p:Platform=x86
 ```

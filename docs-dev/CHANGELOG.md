@@ -1,10 +1,12 @@
 ﻿# 易點雙視版本發布說明
 
-## v5.0.0-alpha (2025-11-23)
+## v5.0.0 (2025-12-01)
 
+- 新增：線上使用手冊，網址為 <https://braillekit.github.io/text-to-braille/>。
+- 新增：即時預覽功能，可以在編輯時即時預覽轉換點字的結果。
 - 新增：`Ctrl+F5` 直接轉點字（不顯示選項對話窗）。[#69](https://github.com/braillekit/text-to-braille/issues/69)
 - 新增：雙模轉點字，預設採用 in-process 模式，速度更快。[#66](https://github.com/braillekit/text-to-braille/issues/66)
-- 改善：記憶體洩漏問題。
+- 改善：效能提升、記憶體洩漏問題。
 - 作業系統：不再支援 Windows 8 或更舊的作業系統，請使用 Windows 10。
 - 執行環境：.NET 10。
 

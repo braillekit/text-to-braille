@@ -1,0 +1,1077 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EasyBrailleEdit</name>
+    </assembly>
+    <members>
+        <member name="F:EasyBrailleEdit.AboutForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.AboutForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.AboutForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.BusyForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.BusyForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.BusyForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.ConversionDialog.SelectedPhraseFileNames">
+            <summary>
+            傳回使用者勾選的詞庫檔名清單。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.ConversionDialog.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.ConversionDialog.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.ConversionDialog.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.ConversionProgressForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.ConversionProgressForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.ConversionProgressForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEditFindForm.FindNext">
+            <summary>
+            找下一個符合的字串。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:EasyBrailleEdit.DualEditFindForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEditFindForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEditFindForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.DualEditForm.StatusProgress">
+            <summary>
+            狀態列的進度表數值。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEditForm.PhoneticComboBox_DropDown(System.Object,System.EventArgs)">
+            <summary>
+            當注音碼的 ComboBox 下拉時觸發此事件。
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEditForm.GotoLine(System.Int32)">
+            <summary>
+            到指定的列。
+            <param name="lineNum">列號</param>
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEditForm.GotoPage(System.Int32)">
+            <summary>
+            到指定的頁。
+            <param name="pageNum">頁號</param>
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.DualEditForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEditForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEditForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.DualEditGotoForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEditGotoForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEditGotoForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEditTitleForm.GridMenu_Click(System.Object,SourceGrid.CellContextEventArgs)">
+            <summary>
+            Grid popup menu 點擊事件處裡常式。
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:EasyBrailleEdit.DualEditTitleForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEditTitleForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEditTitleForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleEditMemento.#ctor(System.String,BrailleToolkit.BrailleDocument,System.Boolean,EasyBrailleEdit.DualEdit.BrailleGridState)">
+            <summary>
+            此建構子會把傳入的 BrailleDocument 複製成一份新的 instance，保存於內部。
+            </summary>
+            <param name="operation">為了執行甚麼命令而建立此 memento 物件。</param>
+            <param name="doc">BrailleDocument 物件。</param>
+            <param name="isDirty">文件是否修改過，且尚未儲存。</param>
+            <param name="gridState">網格狀態。</param>
+        </member>
+        <member name="T:EasyBrailleEdit.DualEdit.BrailleGridController">
+            <summary>
+            DualEditForm 局部類別: 編輯功能相關 methods。
+            </summary>
+            <summary>
+            局部類別: 檔案處理相關 methods。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.OnBrailleDocPropertyChanged">
+            <summary>
+            每當 BrailleDoc 屬性改變時要做的事。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.DualEdit.BrailleGridController.IsBusy">
+            <summary>
+            是否正忙著更新內部點字物件或更新 UI。
+            如果是的話，就不接受鍵盤操作，以免產生奇怪的狀況：BrailleLine 裡面找不到儲存格所關聯的 BrailleWord 物件。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.CreateFixedArea">
+            <summary>
+            建立固定儲存格的內容，包括：標題列、標題行。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.RefreshRowNumbers">
+            <summary>
+            重新填列號。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.IsNoName">
+            <summary>
+            判斷是否尚未命名.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.Zoom(System.Int32)">
+            <summary>
+            縮放顯示比例。
+            </summary>
+            <param name="ratio"></param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.FillGrid(BrailleToolkit.BrailleDocument)">
+            <summary>
+            將 BrailleDocument 文件內容填入 grid。
+            </summary>
+            <param name="brDoc">BrailleDocument 文件。</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.ResizeCells">
+            <summary>
+            調整所有儲存格大小。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.FillRow(BrailleToolkit.BrailleLine,System.Int32,System.Boolean)">
+            <summary>
+            把一列點字填入指定的 grid 列（影響三列）。
+            </summary>
+            <param name="brLine">點字串列。</param>
+            <param name="row">欲填入 grid 中的哪一列。</param>
+            <param name="autoSize">填完之後，是否要自動重新調整儲存格大小。</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.CheckCellPosition(System.Int32,System.Int32)">
+            <summary>
+            檢查儲存格位置是否有效。
+            </summary>
+            <param name="row"></param>
+            <param name="col"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.GridFocusCell(SourceGrid.Position,System.Boolean)">
+            <summary>
+            設定某個儲存格為 active cell。
+            </summary>
+            <param name="pos">儲存格位置。</param>
+            <param name="resetSelection">是否清除選取範圍。</param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.GridSelectRow(System.Int32,System.Boolean)">
+            <summary>
+            選取/取消選取指定的列
+            </summary>
+            <param name="row">列索引。</param>
+            <param name="select">是否選取。</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.UpdateCell(System.Int32,System.Int32,BrailleToolkit.BrailleWord)">
+            <summary>
+            更新指定的點字方格。
+            </summary>
+            <param name="row"></param>
+            <param name="col"></param>
+            <param name="brWord"></param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.ReformatRow(SourceGrid.Grid,System.Int32)">
+            <summary>
+             重新編排 grid 中的某一列。此方法會自動視需要斷行，讓指定的列拆成兩列。
+            </summary>
+            <param name="grid">Grid 物件。</param>
+            <param name="row">Grid 列索引。</param>
+            <returns>傳回重新編排後的列數。如果大於 1，則代表此列經過重新編排之後有發生斷行。</returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.GridInsertRowAt(System.Int32)">
+            <summary>
+            在指定的列索引新增一列（實際上是三列）。
+            </summary>
+            <param name="row"></param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.RecreateRow(System.Int32)">
+            <summary>
+            將指定的列刪除，然後重新增加（插入）一列。
+            </summary>
+            <param name="row">列索引。</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.CreateMemento(System.String)">
+            <summary>
+            執行任何會修改 BrailleDocument 內容的操作之前，應呼叫此方法來建立文件當前的內容與編輯狀態，以便稍後存入 undo buffer。
+            </summary>
+            <param name="operation">將要執行什麼修改操作。例如："刪除字詞：天"。 </param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.EditWord(SourceGrid.Grid,System.Int32,System.Int32)">
+            <summary>
+            修改儲存格。
+            </summary>
+            <param name="grid">來源 grid。</param>
+            <param name="row">儲存格的列索引。</param>
+            <param name="col">儲存格的行索引。</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.GridCellChanged(System.Int32,System.Int32,BrailleToolkit.BrailleWord,EasyBrailleEdit.DualEdit.CellChangedType)">
+            <summary>
+            將指定的 BrailleWord 物件的資料填入指定的儲存格。
+            </summary>
+            <param name="row">指定之儲存格的列索引。</param>
+            <param name="col">指定之儲存格的行索引。</param>
+            <param name="brWord">欲填入儲存格的 BrailleWord 物件。</param>
+            <param name="chgType">儲存格內容變更的類型。</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.InsertWord(SourceGrid.Grid,System.Int32,System.Int32)">
+            <summary>
+            新增點字。
+            </summary>
+            <param name="grid">來源 grid。</param>
+            <param name="row">儲存格的列索引。</param>
+            <param name="col">儲存格的行索引。</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.InsertText(SourceGrid.Grid,System.Int32,System.Int32)">
+            <summary>
+            新增一串文字。
+            </summary>
+            <param name="grid">來源 grid。</param>
+            <param name="row">儲存格的列索引。</param>
+            <param name="col">儲存格的行索引。</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.AppendWord(SourceGrid.Grid,System.Int32,System.Int32)">
+            <summary>
+            在行尾附加點字。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.InsertBlankCell(SourceGrid.Grid,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            插入一個空方。
+            </summary>
+            <param name="grid"></param>
+            <param name="row"></param>
+            <param name="col"></param>
+            <param name="count">插入幾個空方。</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.InsertLine(SourceGrid.Grid,System.Int32,System.Int32)">
+            <summary>
+            在指定的列之前插入一列。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.AddLine(SourceGrid.Grid,System.Int32,System.Int32)">
+            <summary>
+            在指定的列之後加入一列。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.DeleteWord(SourceGrid.Grid,System.Int32,System.Int32)">
+            <summary>
+            刪除一個儲存格的點字。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.DeleteMultipleWords(SourceGrid.Grid,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+             刪除同一列中的多個字。
+            </summary>
+            <param name="grid"></param>
+            <param name="row"></param>
+            <param name="startCol"></param>
+            <param name="endCol"></param>
+            <param name="command"></param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.BackspaceCell(SourceGrid.Grid,System.Int32,System.Int32)">
+            <summary>
+            倒退刪除一個儲存格的點字。若在列首的位置執行此動作，則會將該列附加至上一列。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.JoinToPreviousRow(System.Int32,System.Int32@,System.Int32@)">
+            <summary>
+            將 A 列附加至 B 列。如果 B 列的剩餘空間不足以容納 A，則不做任何處理，並返回 false。
+            </summary>
+            <param name="row"></param>
+            <param name="joinedToLineIndex">傳回附加至的列索引。</param>
+            <param name="joinedToWordIdx">傳回附加至的列中的字的索引。</param>
+            <returns>成功則傳回 true，否則傳回 false。</returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.BreakLine(SourceGrid.Grid,System.Int32,System.Int32)">
+            <summary>
+            在指定處斷行。
+            </summary>
+            <param name="grid"></param>
+            <param name="row"></param>
+            <param name="col"></param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.PasteFromClipboard(SourceGrid.Grid,System.Int32,System.Int32)">
+            <summary>
+            將剪貼簿中的內容以插入文字的方式貼到指定的儲存格。
+            </summary>
+            <param name="grid"></param>
+            <param name="row">目標儲存格的橫列索引。</param>
+            <param name="col">目標儲存格的直欄索引</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.GridMenu_Click(System.Object,SourceGrid.CellContextEventArgs)">
+            <summary>
+            Grid popup menu 點擊事件處裡常式。
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.DoSaveFile">
+            <summary>
+            存檔。
+            </summary>
+            <returns>True=儲存成功；False=儲存失敗或取消存檔動作。</returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.DoSaveFileAs">
+            <summary>
+            另存新檔。
+            </summary>
+            <returns>True=儲存成功；False=儲存失敗或取消存檔動作。</returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.ViewBrailleOnly">
+            <summary>
+            檢視模式：只顯示點字。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.ViewTextAndZhuyin">
+            <summary>
+            檢視模式：顯示明眼字及注音。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridController.ViewAll">
+            <summary>
+            檢視模式：顯示全部。
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.DualEdit.BrailleGridPositionMapper">
+            <summary>
+            此類別提供 _document 物件中的元素與 Grid 儲存格之間的位置相互對應。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridPositionMapper.GetBrailleRowIndex(System.Int32)">
+            <summary>
+            根據指定的 grid 列索引計算出該列的點字列的列索引。
+            由於每個點字在顯示時佔三列（點字、明眼字、注音碼），此方法可從 grid 的列索引推算點字列的列索引。
+            註：grid 的第 0 列是標題列。
+            </summary>
+            <param name="gridRowIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridPositionMapper.GridRowToBrailleLineIndex(System.Int32)">
+            <summary>
+            根據 grid 列索引計算出該列屬於點字文件的哪一列，即 _document 的 Lines 集合索引。
+            註：grid 的第 0 列是標題列。
+            </summary>
+            <param name="gridRowIndex">Grid 列索引。</param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridPositionMapper.CellPositionToWordIndex(System.Int32,System.Int32)">
+            <summary>
+            根據 grid 儲存格位置來計算它對應的點字列的哪一個字，即 BrailleLine 的 Words 集合索引。
+            </summary>
+            <param name="row">Grid 列索引。</param>
+            <param name="col">Grid 行索引。</param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridPositionMapper.LineIndexToGridBrailleRow(System.Int32)">
+            <summary>
+            根據傳入的點字文件列索引取得對應的 Grid 點字列索引。
+            </summary>
+            <param name="lineIdx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridPositionMapper.LineIndexToGridTextRow(System.Int32)">
+            <summary>
+            根據傳入的點字文件列索引取得對應的 Grid 明眼字的列索引。
+            </summary>
+            <param name="lineIdx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.BrailleGridPositionMapper.WordIndexToGridColumn(System.Int32,System.Int32)">
+            <summary>
+            根據傳入的點字文件列索引和字索引，取得對應的 Grid 欄索引。
+            </summary>
+            <param name="lineIdx"></param>
+            <param name="wordIdx"></param>
+            <returns></returns>
+        </member>
+        <member name="T:EasyBrailleEdit.DualEdit.GridPopupMenuController">
+            <summary>
+            當使用者在 Grid 儲存格上點右鍵時顯示的 popup menu 類別。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualEdit.GridPopupMenuController.HideMenuItem(System.String)">
+            <summary>
+            根據 tag 字串值尋找對應的選單項目，並令其隱藏或顯示。
+            </summary>
+            <param name="tag"></param>
+        </member>
+        <member name="T:EasyBrailleEdit.DualEdit.CellChangedType">
+            <summary>
+            儲存格內容修改的情況。
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.EditCellForm">
+            <summary>
+            編輯一個中英文點字。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.EditCellForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.EditCellForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.EditCellForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.ExportBrailleForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.ExportBrailleForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.ExportBrailleForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Forms.BrailleDocPropertiesForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Forms.BrailleDocPropertiesForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.Forms.BrailleDocPropertiesForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Forms.InsertTableForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Forms.InsertTableForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.Forms.InsertTableForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Forms.UndoBufferForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Forms.UndoBufferForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.Forms.UndoBufferForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Forms.ViewTextForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Forms.ViewTextForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.Forms.ViewTextForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.InsertTextForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.InsertTextForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.InsertTextForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.InvalidCharForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.InvalidCharForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.InvalidCharForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.MainForm.OpenBrailleFileInEditor(System.String)">
+            <summary>
+            載入雙視檔案，並開啟雙視編輯視窗。
+            </summary>
+            <param name="filename">點字檔名。有可能是 cvt_out.tmp 或任何 .brx 檔案。</param>
+        </member>
+        <member name="M:EasyBrailleEdit.MainForm.DoConvertAsync(System.String)">
+            <summary>
+            執行點字轉換。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.MainForm.ConvertAndShowEditor(System.Boolean)">
+            <summary>
+            轉換點字並開啟編輯器。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.MainForm.ConvertAndPrintPreview">
+            <summary>
+            轉點字並預覽明眼字列印結果（只能預覽，不真的印出）。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.MainForm.HandleConversionResult(EasyBrailleEdit.Services.BrailleConversionResult)">
+            <summary>
+            處理／顯示轉換點字時的錯誤。
+            </summary>
+            <returns>若轉點字過程有發生錯誤（無法轉換的字元）則傳回 false；若無錯誤則傳回 true。</returns>
+        </member>
+        <member name="M:EasyBrailleEdit.MainForm.ShowInvlaidCharForm(System.Int32)">
+            <summary>
+            顯示無法轉換的字元。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.MainForm.AutoUpdateAsync">
+            <summary>
+            自動更新。
+            </summary>
+            <returns>傳回 true 表示更新成功，必須結束程式。</returns>
+        </member>
+        <member name="M:EasyBrailleEdit.MainForm.UpdateBrailleSettingsLabel">
+            <summary>
+            更新狀態列的點字設定顯示。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.MainForm.SelectChar(System.Int32,System.Int32)">
+            <summary>
+            選取指定位置的字元。
+            </summary>
+            <param name="lineIdx">第幾列。</param>
+            <param name="charIdx">該列的第幾個字元。</param>
+        </member>
+        <member name="F:EasyBrailleEdit.MainForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.MainForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.MainForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.PhoneticForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.PhoneticForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.PhoneticForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.PickBrailleForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.PickBrailleForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.PickBrailleForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Printing.ConfigTextPrinterForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Printing.ConfigTextPrinterForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.Printing.ConfigTextPrinterForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Printing.ConfigTextPrinterPanel.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Printing.ConfigTextPrinterPanel.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.Printing.ConfigTextPrinterPanel.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintDialog.GetPrintOptions">
+            <summary>
+            將目前的列印參數蒐集並集中存入 PrintOptions 物件。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintDialog.PreviewText">
+            <summary>
+            直接預覽明眼字，而不顯示列印對話窗。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.DualPrintDialog.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintDialog.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintDialog.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.DualPrintHelper">
+            <summary>
+            雙視列印。
+            </summary>
+            <summary>
+            局部類別：處理點字的列印。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintHelper.InitializePrintParameters">
+            <summary>
+            在執行列印前必須進行的初始化參數工作。明眼字及點字於列印之前都必須呼叫此方法。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintHelper.PrintText(System.Boolean)">
+            <summary>
+            列印明眼字。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintHelper.IsPrintingOddPage">
+            <summary>
+            傳回目前列印的頁次是否為奇數頁。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintHelper.CalcTextLineIndex(System.Int32)">
+            <summary>
+            計算指定頁次的起始列索引。
+            </summary>
+            <param name="pageNum">頁次（zero-based）。</param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintHelper.SkipCurrentPage(System.Drawing.Printing.PrintPageEventArgs)">
+            <summary>
+            略過目前的頁。
+            注意：雖然目前這頁不印出，但仍要處理其內容，因為其中還要讀取原書頁碼。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintHelper.SetBeginOrgPageNumberForNewPage">
+            <summary>
+            為每一個新的列印頁初始化起始原書頁碼。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintHelper.PrintLine(BrailleToolkit.BrailleLine,System.Drawing.Graphics,System.Double,System.Double,System.Int32)">
+            <summary>
+            輸出一列。
+            </summary>
+            <param name="brLine">點字列。</param>
+            <param name="graphics">圖形物件。</param>
+            <param name="marginLeft">紙張的左邊界。</param>
+            <param name="y">輸出的 y 軸座標。</param>
+            <param name="maxCells">最大輸出幾方。</param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintHelper.PrintPageFoot(BrailleToolkit.BrailleLine,System.Int32,System.String,System.String,System.Drawing.Graphics,System.Double,System.Double)">
+            <summary>
+            列印頁尾。
+            </summary>
+            <param name="title">文件標題點字列。</param>
+            <param name="pageNum">頁碼。</param>
+            <param name="beginOrgPageNum">起始原書頁碼。</param>
+            <param name="endOrgPageNum">終止原書頁碼。</param>
+            <param name="graphics"></param>
+            <param name="marginLeft"></param>
+            <param name="marginTop"></param>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintHelper.PrintBraille(System.Boolean,System.Boolean,System.String)">
+            <summary>
+            列印點字。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.DualPrintHelper.GenerateOutputData">
+            <summary>
+            產生輸出的點字資料。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:EasyBrailleEdit.PrintOptions">
+            <summary>
+            列印選項。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.PrintOptions.FromPage">
+            <summary>
+            起始頁數。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.PrintOptions.ToPage">
+            <summary>
+            終止頁數。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.PrintOptions.CheckRange">
+            <summary>
+            檢查列印範圍是否有效。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.PrintOptions.BrSendPageBreakAtEndOfDoc">
+            <summary>
+            列印點字時，是否在最後輸出一個跳頁符號。default: false。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.PrintOptions.BrUseNewLineForPageBreak">
+            <summary>
+            列印點字時，是否用一個換行符號來取代跳頁符號（這是舊版的行為，新版本預設都使用跳頁符號）。
+            2016-11-02: 新版本的行為是根據 ET Trident 打印機來修改，比較合理。舊版本用換行符號來迫使印表機跳頁的作法不好。
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.TextPageSetupDialog">
+            <summary>
+            明眼字紙張設定對話窗。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.TextPageSetupDialog.OddPageMargins">
+            <summary>
+            奇數頁的邊界。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.TextPageSetupDialog.EvenPageMargins">
+            <summary>
+            偶數頁的邊界。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.TextPageSetupDialog.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.TextPageSetupDialog.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.TextPageSetupDialog.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Program.Main">
+            <summary>
+             The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Properties.Resources.busy">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Properties.Resources.owl21">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Properties.Resources.PickBraille">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Services.BrailleConversionResult">
+            <summary>
+            點字轉換結果
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Services.BrailleConversionResult.Success">
+            <summary>
+            是否成功（無錯誤）
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Services.BrailleConversionResult.OutputFilePath">
+            <summary>
+            輸出的點字檔案路徑
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Services.BrailleConversionResult.HasError">
+            <summary>
+            是否有錯誤
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Services.BrailleConversionResult.ErrorMessage">
+            <summary>
+            錯誤訊息
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Services.BrailleConversionResult.InvalidChars">
+            <summary>
+            無法轉換的字元清單
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Services.ConversionProgress">
+            <summary>
+            轉換進度資訊
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Services.BrailleConverterFactory">
+            <summary>
+            點字轉換器工廠，根據組態建立適當的轉換器
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Services.ExternalBrailleConverter">
+            <summary>
+            外部工具點字轉換服務（呼叫 Txt2Brl.exe）
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Services.IBrailleConverter">
+            <summary>
+            點字轉換介面，支援不同的轉換實作
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Services.IBrailleConverter.ConvertAsync(System.String,System.Int32,System.String[],System.IProgress{EasyBrailleEdit.Services.ConversionProgress})">
+            <summary>
+            執行點字轉換
+            </summary>
+            <param name="content">要轉換的文字內容</param>
+            <param name="cellsPerLine">每列最大方數</param>
+            <param name="phraseFiles">使用者自訂詞庫檔案</param>
+            <param name="progress">進度回報</param>
+            <returns>轉換結果</returns>
+        </member>
+        <member name="T:EasyBrailleEdit.Services.InProcessBrailleConverter">
+            <summary>
+            內建點字轉換服務（在主程式內執行）
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.UpdateProgressForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.UpdateProgressForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.UpdateProgressForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+    </members>
+</doc>
