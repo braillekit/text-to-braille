@@ -37,70 +37,10 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "Files\LICENSE.md"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\ReleaseNote.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\app.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\ChangeLog.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\AppConfig.Default.ini"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\zh-Hant\System.Web.Services.Description.resources.dll"; DestDir: "{app}\zh-Hant"; Flags: ignoreversion
-Source: "Files\app\zh-Hant\System.Private.ServiceModel.resources.dll"; DestDir: "{app}\zh-Hant"; Flags: ignoreversion
-Source: "Files\app\zh-Hant\ScintillaNET_FindReplaceDialog.resources.dll"; DestDir: "{app}\zh-Hant"; Flags: ignoreversion
-Source: "Files\app\Txt2Brl.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Txt2Brl.dll.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Txt2Brl.deps.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Txt2Brl.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Txt2Brl.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.Web.Services.Description.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.Speech.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.ServiceProcess.ServiceController.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.ServiceModel.Syndication.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.ServiceModel.Security.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.ServiceModel.Primitives.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.ServiceModel.NetTcp.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.ServiceModel.Http.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.ServiceModel.Duplex.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.ServiceModel.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.Security.Cryptography.ProtectedData.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.Runtime.Caching.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.Reflection.Context.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.Private.ServiceModel.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.Net.Http.Formatting.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.Management.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.IO.Ports.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.DirectoryServices.Protocols.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.DirectoryServices.AccountManagement.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.Data.SqlClient.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.Data.OleDb.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.Data.Odbc.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.Configuration.ConfigurationManager.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.ComponentModel.Composition.Registration.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\System.ComponentModel.Composition.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\SourceGrid.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\SharpConfig.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Serilog.Sinks.File.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Serilog.Settings.AppSettings.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Serilog.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\ScintillaNET_FindReplaceDialog.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\ScintillaNET.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\sample.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Phrase.phf"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Newtonsoft.Json.Bson.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\NChinese.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Microsoft.Extensions.ObjectPool.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Microsoft.Bcl.AsyncInterfaces.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Huanlin.Windows.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\Huanlin.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\EasyBrailleEdit.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\EasyBrailleEdit.dll.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\EasyBrailleEdit.deps.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\EasyBrailleEdit.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\EasyBrailleEdit.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\EasyBrailleEdit.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\CommandLine.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\app\BrailleToolkit.dll"; DestDir: "{app}"; Flags: ignoreversion
+
+Source: "Files\app\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: "Fonts\simbrl.ttf"; DestDir: "{fonts}"; Flags: onlyifdoesntexist uninsneveruninstall; FontInstall: "SimBraille"
-Source: "Files\使用手冊.pdf"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
