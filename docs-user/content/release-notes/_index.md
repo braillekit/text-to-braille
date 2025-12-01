@@ -13,7 +13,7 @@ weight: 100
 
 ## 先前版本
 
-- [before-v5](before-v5/) 
+- [v5.0 之前的版本變更紀錄](before-v5/) 
 
 ---
 
