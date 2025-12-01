@@ -20,7 +20,7 @@ EasyBrailleEdit（易點雙視）是一套中英文點字轉譯軟體，可用�
 
 ## 如何貢獻
 
-請參閱 [貢獻手冊](docs-user/content/contribution.md)。
+請參閱線上文件：[如何貢獻](https://braillekit.github.io/text-to-braille/contribution/)。
 
 ---
 
