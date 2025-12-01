@@ -33,6 +33,7 @@
 &lt;p&gt;依平常的打字習慣輸入，並利用本軟體提供的特殊控制標籤，便能夠完成一篇同時包含中文、英文、數學等各種文字符號的文件。&lt;/p&gt;
 &lt;p&gt;一邊輸入明眼字時，可在「即時預覽」面板中即時預覽轉換後的點字，如下圖：&lt;/p&gt;
 &lt;p&gt;&lt;img src="images/first-doc.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;即時預覽面板會呈現轉換後的點字，並依照紙張版面的設定自動斷行（例如每列最大方數為 40 方，則在第 40 方時自動折行）。&lt;/p&gt;
 &lt;p&gt;關於即時預覽功能的詳細說明，請參閱：&lt;a href="../../features/instant-braille-preview/"&gt;即時點字預覽&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -63,6 +64,7 @@
 &lt;h2 id="下一步"&gt;下一步&lt;a class="anchor" href="#%e4%b8%8b%e4%b8%80%e6%ad%a5"&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;完成明眼字編輯後，便可進行下一步：&lt;a href="../step2-convert/"&gt;轉換成點字&lt;/a&gt;。&lt;/p&gt;</description></item><item><title>即時點字預覽</title><link>https://braillekit.github.io/text-to-braille/features/instant-braille-preview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/features/instant-braille-preview/</guid><description>&lt;h1 id="即時點字預覽"&gt;即時點字預覽&lt;a class="anchor" href="#%e5%8d%b3%e6%99%82%e9%bb%9e%e5%ad%97%e9%a0%90%e8%a6%bd"&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;從 v5.0 開始，新增了「即時點字預覽」功能，讓您在編輯明眼字時，能夠即時看到游標所在位置附近的點字轉換結果，無需頻繁切換到雙視編輯模式。&lt;/p&gt;
+&lt;p&gt;即時預覽面板會呈現轉換後的點字，並依照紙張版面的設定自動斷行（例如每列最大方數為 40 方，則在第 40 方時自動折行）。&lt;/p&gt;
 &lt;h2 id="功能概要"&gt;功能概要&lt;a class="anchor" href="#%e5%8a%9f%e8%83%bd%e6%a6%82%e8%a6%81"&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;如下圖：&lt;/p&gt;
 &lt;p&gt;&lt;img src="images/preview.png" alt="" /&gt;&lt;/p&gt;

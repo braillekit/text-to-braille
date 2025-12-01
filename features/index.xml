@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>功能詳述 on 易點雙視-文件中心</title><link>https://braillekit.github.io/text-to-braille/features/</link><description>Recent content in 功能詳述 on 易點雙視-文件中心</description><generator>Hugo</generator><language>zh-tw</language><atom:link href="https://braillekit.github.io/text-to-braille/features/index.xml" rel="self" type="application/rss+xml"/><item><title>即時點字預覽</title><link>https://braillekit.github.io/text-to-braille/features/instant-braille-preview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/features/instant-braille-preview/</guid><description>&lt;h1 id="即時點字預覽"&gt;即時點字預覽&lt;a class="anchor" href="#%e5%8d%b3%e6%99%82%e9%bb%9e%e5%ad%97%e9%a0%90%e8%a6%bd"&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;從 v5.0 開始，新增了「即時點字預覽」功能，讓您在編輯明眼字時，能夠即時看到游標所在位置附近的點字轉換結果，無需頻繁切換到雙視編輯模式。&lt;/p&gt;
+&lt;p&gt;即時預覽面板會呈現轉換後的點字，並依照紙張版面的設定自動斷行（例如每列最大方數為 40 方，則在第 40 方時自動折行）。&lt;/p&gt;
 &lt;h2 id="功能概要"&gt;功能概要&lt;a class="anchor" href="#%e5%8a%9f%e8%83%bd%e6%a6%82%e8%a6%81"&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;如下圖：&lt;/p&gt;
 &lt;p&gt;&lt;img src="images/preview.png" alt="" /&gt;&lt;/p&gt;

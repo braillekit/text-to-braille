@@ -2,6 +2,7 @@
 &lt;p&gt;依平常的打字習慣輸入，並利用本軟體提供的特殊控制標籤，便能夠完成一篇同時包含中文、英文、數學等各種文字符號的文件。&lt;/p&gt;
 &lt;p&gt;一邊輸入明眼字時，可在「即時預覽」面板中即時預覽轉換後的點字，如下圖：&lt;/p&gt;
 &lt;p&gt;&lt;img src="images/first-doc.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;即時預覽面板會呈現轉換後的點字，並依照紙張版面的設定自動斷行（例如每列最大方數為 40 方，則在第 40 方時自動折行）。&lt;/p&gt;
 &lt;p&gt;關於即時預覽功能的詳細說明，請參閱：&lt;a href="../../features/instant-braille-preview/"&gt;即時點字預覽&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
