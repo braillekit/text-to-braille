@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>版本發行記錄 on 易點雙視-文件中心</title><link>https://braillekit.github.io/text-to-braille/release-notes/</link><description>Recent content in 版本發行記錄 on 易點雙視-文件中心</description><generator>Hugo</generator><language>zh-tw</language><atom:link href="https://braillekit.github.io/text-to-braille/release-notes/index.xml" rel="self" type="application/rss+xml"/><item><title>v5.0.0 發行說明</title><link>https://braillekit.github.io/text-to-braille/release-notes/v5.0.0/</link><pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/release-notes/v5.0.0/</guid><description>&lt;h1 id="v500-發行說明"&gt;v5.0.0 發行說明&lt;a class="anchor" href="#v500-%e7%99%bc%e8%a1%8c%e8%aa%aa%e6%98%8e"&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;發布日期&lt;/strong&gt;：2025 年 12 月 1 日&lt;/p&gt;
+&lt;h2 id="-主要新功能"&gt;🎉 主要新功能&lt;a class="anchor" href="#-%e4%b8%bb%e8%a6%81%e6%96%b0%e5%8a%9f%e8%83%bd"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="即時點字預覽"&gt;即時點字預覽&lt;a class="anchor" href="#%e5%8d%b3%e6%99%82%e9%bb%9e%e5%ad%97%e9%a0%90%e8%a6%bd"&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;全新的「即時點字預覽」功能，讓您可以一邊輸入明眼字，一邊即時看到轉換後的點字。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;主要特色&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✨ 輸入文字時自動顯示對應的點字&lt;/li&gt;
+&lt;li&gt;📝 同時顯示注音符號，方便檢查&lt;/li&gt;
+&lt;li&gt;⚡ 高效能處理，即使長篇文章也能流暢運作&lt;/li&gt;
+&lt;li&gt;🎯 可設定預覽範圍（目前行的前後各幾行）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;詳細說明請參閱：&lt;a href="../features/instant-braille-preview/"&gt;即時點字預覽功能&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="雙模式點字轉換"&gt;雙模式點字轉換&lt;a class="anchor" href="#%e9%9b%99%e6%a8%a1%e5%bc%8f%e9%bb%9e%e5%ad%97%e8%bd%89%e6%8f%9b"&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;新增雙模式點字轉換架構，提供更穩定的轉換體驗：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;🔄 內建轉換模式（預設）：快速、穩定&lt;/li&gt;
+&lt;li&gt;🛡️ 外部工具模式（備用）：隔離運作，更安全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-改進項目"&gt;🔧 改進項目&lt;a class="anchor" href="#-%e6%94%b9%e9%80%b2%e9%a0%85%e7%9b%ae"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="效能優化"&gt;效能優化&lt;a class="anchor" href="#%e6%95%88%e8%83%bd%e5%84%aa%e5%8c%96"&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;改善記憶體管理，減少記憶體洩漏&lt;/li&gt;
+&lt;li&gt;優化字串處理效能&lt;/li&gt;
+&lt;li&gt;加快大型文件的轉換速度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="使用者介面"&gt;使用者介面&lt;a class="anchor" href="#%e4%bd%bf%e7%94%a8%e8%80%85%e4%bb%8b%e9%9d%a2"&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;更新預覽面板設計&lt;/li&gt;
+&lt;li&gt;改善設定對話框的易用性&lt;/li&gt;
+&lt;li&gt;優化點字編輯器的回應速度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="建置與部署"&gt;建置與部署&lt;a class="anchor" href="#%e5%bb%ba%e7%bd%ae%e8%88%87%e9%83%a8%e7%bd%b2"&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;升級至 .NET 10&lt;/li&gt;
+&lt;li&gt;改用 SDK-style 專案格式&lt;/li&gt;
+&lt;li&gt;新增自動化打包腳本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-修正問題"&gt;🐛 修正問題&lt;a class="anchor" href="#-%e4%bf%ae%e6%ad%a3%e5%95%8f%e9%a1%8c"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;修正剪貼簿操作相關的警告&lt;/li&gt;
+&lt;li&gt;修正 BrailleToolkit 記憶體洩漏問題&lt;/li&gt;
+&lt;li&gt;修正編譯器警告（CS86xx、WFDEV005）&lt;/li&gt;
+&lt;li&gt;改善例外處理機制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-文件更新"&gt;📚 文件更新&lt;a class="anchor" href="#-%e6%96%87%e4%bb%b6%e6%9b%b4%e6%96%b0"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;全新的&lt;a href="../../"&gt;線上使用手冊&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;新增&lt;a href="../get-started/"&gt;快速開始教學&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;完整的&lt;a href="../features/"&gt;功能說明文件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;詳細的技術開發文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-升級說明"&gt;🔄 升級說明&lt;a class="anchor" href="#-%e5%8d%87%e7%b4%9a%e8%aa%aa%e6%98%8e"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="從-v4x-升級"&gt;從 v4.x 升級&lt;a class="anchor" href="#%e5%be%9e-v4x-%e5%8d%87%e7%b4%9a"&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;備份資料&lt;/strong&gt;：升級前請先備份您的點字文件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;移除舊版&lt;/strong&gt;：建議完整移除舊版本後再安裝新版&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;設定檔&lt;/strong&gt;：第一次執行時會自動產生新的設定檔&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="相容性"&gt;相容性&lt;a class="anchor" href="#%e7%9b%b8%e5%ae%b9%e6%80%a7"&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ 可開啟 v4.x 版本建立的點字文件&lt;/li&gt;
+&lt;li&gt;✅ 保留您的自訂詞庫設定&lt;/li&gt;
+&lt;li&gt;⚠️ 部分設定項目的名稱有變更，請重新檢查設定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-下載"&gt;📦 下載&lt;a class="anchor" href="#-%e4%b8%8b%e8%bc%89"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/braillekit/text-to-braille/releases/tag/5.0.0"&gt;Windows 安裝程式&lt;/a&gt;（setup.exe）&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/braillekit/text-to-braille/archive/refs/tags/5.0.0.zip"&gt;原始碼&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-致謝"&gt;🙏 致謝&lt;a class="anchor" href="#-%e8%87%b4%e8%ac%9d"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;感謝所有使用者的回饋與建議，讓「易點雙視」持續進步！&lt;/p&gt;</description></item><item><title>v5.0 之前的版本變更紀錄</title><link>https://braillekit.github.io/text-to-braille/release-notes/before-v5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/release-notes/before-v5/</guid><description>&lt;h1 id="v50-之前的版本變更紀錄"&gt;v5.0 之前的版本變更紀錄&lt;a class="anchor" href="#v50-%e4%b9%8b%e5%89%8d%e7%9a%84%e7%89%88%e6%9c%ac%e8%ae%8a%e6%9b%b4%e7%b4%80%e9%8c%84"&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="v424-2024-01-12"&gt;v4.2.4 (2024-01-12)&lt;a class="anchor" href="#v424-2024-01-12"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;修正：印表機名稱沒有自動保存於設定檔，導致每次列印時都要選擇印表機。&lt;/li&gt;
+&lt;li&gt;改進：使用介面的字型從原本的 新細明體 改為 微軟正黑體。&lt;/li&gt;
+&lt;li&gt;升級第三方套件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v423-2023-08-29"&gt;v4.2.3 (2023-08-29)&lt;a class="anchor" href="#v423-2023-08-29"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;AppConfig.ini 的 [Braille] 區段增加一個參數：&lt;/p&gt;
+&lt;p&gt;UseUpperPositionForNumbers = false ; 數字一律使用上位點。v4.2.1 (2023-9-1) 之後開始支援此選項。
+把參數值改為 true 即可在轉點字時，令數字一律使用上位點。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;新增中文標點符號：《 》轉譯為 (126-126 345-345) ，〈 〉轉譯為 (126 345)。
+注意事項：你如果有在 AppConfig.ini 中把 《 》 重新對應為 &amp;lt;書名號&amp;gt;，則會優先採用你的設定。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;更新相依套件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;Microsoft.VisualStudio.SlowCheetah&amp;rdquo; Version=&amp;ldquo;4.0.50&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;MinVer&amp;rdquo; Version=&amp;ldquo;4.3.0&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Serilog&amp;rdquo; Version=&amp;ldquo;3.0.1&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v420-2022-10-10"&gt;v4.2.0 (2022-10-10)&lt;a class="anchor" href="#v420-2022-10-10"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;從 .NET 6 升級至 .NET 7。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v414-2022-3-18"&gt;v4.1.4 (2022-3-18)&lt;a class="anchor" href="#v414-2022-3-18"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;放寬試用版的限制：
+從這個版本開始，試用期間可以處理最多 5 頁的文字，列印的頁數限制也是 5 頁。
+一旦超過試用期，則只能處理 1 頁的文字。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v410-2022-2-7"&gt;v4.1.0 (2022-2-7)&lt;a class="anchor" href="#v410-2022-2-7"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;重要！開啟雙視檔案時，不再支援 v1.0 時期的 .BTX 二進位格式。&lt;/li&gt;
+&lt;li&gt;技術變更：升級至 .NET 6.0。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v400-beta-2021-1-24"&gt;v4.0.0-beta (2021-1-24)&lt;a class="anchor" href="#v400-beta-2021-1-24"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;技術變更：升級至 .NET 5.0。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3180-2019-12-3"&gt;v3.18.0 (2019-12-3)&lt;a class="anchor" href="#v3180-2019-12-3"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;列印對話窗增加參數：「每一方點字的列印寬度」，預設值為 24。
+此參數會用來計算每個明眼字的字寬（會影響字距），因為列印時，明眼字和點字
+必須對齊。&lt;/li&gt;
+&lt;li&gt;列印對話窗增加參數：「每一列明眼字的高度」，預設值為 40.0975。
+此參數可用來調整每一列明眼字所佔據紙張的高度（即字高加上列距）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3160-2019-08-26"&gt;v3.16.0 (2019-08-26)&lt;a class="anchor" href="#v3160-2019-08-26"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;修正問題 #4：在雙視編輯視窗修改點字之後，開啟［檢視 &amp;gt; 明眼字］顯示的
+內容卻是舊的。&lt;/li&gt;
+&lt;li&gt;更新第三方函式庫至新版本。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3159-2019-01-23"&gt;v3.15.9 (2019-01-23)&lt;a class="anchor" href="#v3159-2019-01-23"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;更新第三方函式庫至新版本。&lt;/li&gt;
+&lt;li&gt;調整版本授權檢查規則。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3157-2018-12-26"&gt;v3.15.7 (2018-12-26)&lt;a class="anchor" href="#v3157-2018-12-26"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;修正：按住 Ctrl+X 或者 Ctrl+Delete 不放，快速產生一連串剪下或刪除的操作，
+會造成 &amp;ldquo;索引超出範圍&amp;rdquo; 的錯誤。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3156-2018-12-21"&gt;v3.15.6 (2018-12-21)&lt;a class="anchor" href="#v3156-2018-12-21"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;增加符號：△ （1246 2345 點）
+點字規則：前後均空方。&lt;/li&gt;
+&lt;li&gt;增加符號：↔ （246 25 25 135 點）
+點字規則：前後均空方。&lt;/li&gt;
+&lt;li&gt;雙視編輯視窗現在可以按 Ctrl+Shift+V 把剪貼簿的點字貼上至行尾（或者在儲存
+格上點滑鼠右鍵，也可以在選單中找到此功能）。&lt;/li&gt;
+&lt;li&gt;列印明眼字時，現在可以指定列印份數。（列印點字的功能則仍只能列印一份）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3153-2018-12-17"&gt;v3.15.3 (2018-12-17)&lt;a class="anchor" href="#v3153-2018-12-17"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;雙視編輯視窗的插入文字視窗，現在也可以將標籤套用至選取文字。&lt;/li&gt;
+&lt;li&gt;雙視編輯時，滑鼠左鍵點擊兩下後，即可修改字(即F4功能)。編輯頁標題時也是。&lt;/li&gt;
+&lt;li&gt;編輯頁標題時，現在也可以使用剪貼簿的功能，包括：複製（Ctrl+C）、剪下
+（Ctrl+X）、貼上（Ctrl+V）。但由於每一列頁標題都是關聯至正文的特定位置，
+所以不可複製和貼上多列，而只能複製同一列中的文字。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3152-2018-12-14"&gt;v3.15.2 (2018-12-14)&lt;a class="anchor" href="#v3152-2018-12-14"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;明眼字編輯視窗增加搜尋和取代功能。
+搜尋：Ctrl+F （可一次顯示所有符合的字串）
+取代：Ctrl+H&lt;/li&gt;
+&lt;li&gt;開啟明眼字檔案時，現在一律使用 UTF-8 編碼。&lt;/li&gt;
+&lt;li&gt;製作新的安裝程式。使用此新版安裝程式便可以透過雙擊 .brx 檔案來直接開啟
+易點雙視。&lt;/li&gt;
+&lt;li&gt;修改授權註冊方式，加入試用期限 30 天。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3146-2018-12-13"&gt;v3.14.6 (2018-12-13)&lt;a class="anchor" href="#v3146-2018-12-13"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;應用程式核心元件更新。
+注意：必須更新，否則後續版本在更新時可能會因為無法處理子目錄檔案而失敗。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3144-2018-12-11"&gt;v3.14.4 (2018-12-11)&lt;a class="anchor" href="#v3144-2018-12-11"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;修正：在雙視編輯視窗按 WinKey+D 回到 Windows 桌面，或將視窗縮到最小，再
+切回雙視編輯視窗時，垂直卷軸的位置會跑到最頂端。修正後，按 WinKey+D 時已
+經會記住卷軸位置。&lt;/li&gt;
+&lt;li&gt;明眼字編輯視窗增加「復原」與「重做」功能，快捷鍵分別是 Ctrl+Z 和 Ctrl+Y。&lt;/li&gt;
+&lt;li&gt;明眼字編輯視窗左方增加行號（列號），游標加粗並以藍色顯示。&lt;/li&gt;
+&lt;li&gt;明眼字編輯視窗的 &amp;lt;&amp;gt; 標籤文字改以加粗的標楷體顯示，以便和一般文字區分。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3140-2018-11-28"&gt;v3.14.0 (2018-11-28)&lt;a class="anchor" href="#v3140-2018-11-28"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;在明眼字編輯視窗中，若先選取了一些文字，然後點擊成對的標籤或符號按鈕
+（例如私名號、書名號、引號等等），以往會以標籤文字或符號取代原先選取
+的文字，現在則會以成對的標籤符號將選取的文字包住。
+示範影片：&lt;a href="https://youtu.be/hfz-OWbCOSQ"&gt;https://youtu.be/hfz-OWbCOSQ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;雙視編輯視窗增加了「全選」功能。
+操作方式：按 Ctrl+A 或在儲存格上面點滑鼠右鍵，然後點［全選］。&lt;/li&gt;
+&lt;li&gt;[技術規格] .NET Framework 版本從 4.7.1 改為 4.7.2。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3131-2018-10-12"&gt;v3.13.1 (2018-10-12)&lt;a class="anchor" href="#v3131-2018-10-12"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;修正：自訂片語（phrase.phf）如果是定義一個中文字的注音，會沒有作用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3130-2018-10-11"&gt;v3.13.0 (2018-10-11)&lt;a class="anchor" href="#v3130-2018-10-11"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;.NET Framework 版本從 4.5.2 升級至 4.7.1。&lt;/li&gt;
+&lt;li&gt;修正：只要明眼字有包含 &amp;ldquo;電波&amp;rdquo;，轉點字時就會出現應用程式錯誤（異常結束）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3123-2018-08-10"&gt;v3.12.3 (2018-08-10)&lt;a class="anchor" href="#v3123-2018-08-10"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;修正：版本更新時，若本機的版本號碼包含非數字的字串，會造成無法更新。&lt;/li&gt;
+&lt;li&gt;修正：版本更新之後不用再重新註冊。&lt;/li&gt;
+&lt;li&gt;為主程式補上圖示（桌面的捷徑才會有貓頭鷹圖示）。&lt;/li&gt;
+&lt;li&gt;更新安裝程式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3120-2018-07-11"&gt;v3.12.0 (2018-07-11)&lt;a class="anchor" href="#v3120-2018-07-11"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;修正：［插入一串文字］視窗的工具列的［箭頭］按鈕沒作用。&lt;/li&gt;
+&lt;li&gt;加入軟體註冊機制。若沒有註冊，將無法列印和輸出雙視文件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v31143-2018-06-23"&gt;v3.11.43 (2018-06-23)&lt;a class="anchor" href="#v31143-2018-06-23"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;新增：把雙視文件另存為 HTML 網頁的功能。
+操作方式：從雙視編輯視窗的主選單點「檔案 &amp;gt; 匯出為網頁」。&lt;/p&gt;</description></item></channel></rss>
