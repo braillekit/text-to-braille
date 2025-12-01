@@ -898,6 +898,7 @@ namespace EasyBrailleEdit
             InitTextArea();
 
             StatusText = "";
+            UpdateBrailleSettingsLabel();
 
             NewFile();
 
@@ -1213,6 +1214,15 @@ namespace EasyBrailleEdit
             int line = m_TextArea.CurrentLine;
             int col = m_TextArea.CurrentPosition - m_TextArea.Lines[line].Position;
             statLabelCaretPos.Text = $"列:{line+1}, 行:{col+1}";
+        }
+
+        /// <summary>
+        /// 更新狀態列的點字設定顯示。
+        /// </summary>
+        private void UpdateBrailleSettingsLabel()
+        {
+            int cellsPerLine = AppGlobals.Config.Braille.CellsPerLine;
+            statLabelBrailleSettings.Text = $"每列 {cellsPerLine} 方";
         }
 
         /// <summary>
