@@ -9,7 +9,8 @@ weight: 98
 
 如果您願意貢獻心力來改進這套軟體，可以考慮以下方式：
 
-- 提供建議或反映問題，請至 [此開源專案的 GitHub Issues 頁面](https://github.com/braillekit/text-to-braille/issues/)。
+- 在 GitHub 網站上幫這個專案點個星星，讓更多人容易找到它。方法是前往[此專案的 GitHub 頁面](https://github.com/braillekit/text-to-braille)，點擊右上角的星星符號按鈕。
+- 提供建議或反映問題，請至 [此專案的 GitHub Issues 頁面](https://github.com/braillekit/text-to-braille/issues/)。
 - 改善文件，例如使用者手冊有寫不清楚的地方，可直接動手修改。（需要懂 Markdown 語法和基礎的 git 版控操作。）
 - 修改程式碼，包括新功能的開發、已知問題的修正、程式碼優化等等。需要熟悉 .NET 平台、C# 程式語言、git 版控操作、GitHub Pull Request 等等。
 
