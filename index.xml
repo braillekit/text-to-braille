@@ -381,7 +381,9 @@
 &lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;
 如果您要製作雙視文件──亦即同時在紙上印出點字和對應的明眼字，那麼點字就必須列印在明眼字的上方或下方，但由於明眼字和點字是分別由不同的印表機印出來，二者的位置很可能不會剛好對準。因此，將列印環境設定完成後，必須接著進行雙視文件的列印測試，並根據列印出來的結果調整明眼字的列印參數，或印表機的上下邊界、列距等設定。&lt;/p&gt;
 &lt;/blockquote&gt;</description></item><item><title>語法參考手冊</title><link>https://braillekit.github.io/text-to-braille/syntax/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/syntax/</guid><description>&lt;h1 id="語法參考手冊"&gt;語法參考手冊&lt;a class="anchor" href="#%e8%aa%9e%e6%b3%95%e5%8f%83%e8%80%83%e6%89%8b%e5%86%8a"&gt;#&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="原書頁碼"&gt;原書頁碼&lt;a class="anchor" href="#%e5%8e%9f%e6%9b%b8%e9%a0%81%e7%a2%bc"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;blockquote class='book-hint '&gt;
+&lt;p&gt;此文件尚未完成。（歡迎協助補完 🙏）&lt;/p&gt;
+&lt;/blockquote&gt;&lt;h2 id="原書頁碼"&gt;原書頁碼&lt;a class="anchor" href="#%e5%8e%9f%e6%9b%b8%e9%a0%81%e7%a2%bc"&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;用途：&lt;/strong&gt; 標示原書頁碼。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;語法：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-xml" data-lang="xml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;&amp;lt;P&amp;gt;&lt;/span&gt;n&lt;span style="color:#f92672"&gt;&amp;lt;/P&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中 n 為數字。&lt;/p&gt;
