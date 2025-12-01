@@ -16,19 +16,19 @@ EasyBrailleEdit（易點雙視）是一套中英文點字轉譯軟體，可用�
 
 請至 [易點雙視文件中心](https://braillekit.github.io/text-to-braille/)。
 
-## 回報問題與建議
-
 如果您在使用本軟體時發現錯誤（bug）或有功能建議，請至本專案的 [Issues](../../issues) 頁面提交您的回報或建議。
+
+## 如何貢獻
+
+請參閱 [貢獻手冊](docs-user/content/contribution.md)。
+
+---
 
 ## 開發與致謝
 
 本程式由 蔡煥麟 開發。
 
 開發過程中，感謝 [台北市視障者家長協會](https://www.forblind.org.tw/) 提供點字規則資料並協助測試，以及 [聯郃國際視覺輔具中心](https://www.iusee.com.tw/) 提供點字印表機作為開發與測試之用，謹此致謝。
-
-## 如何貢獻
-
-請參閱 [貢獻手冊](docs-user/content/contribution.md)。
 
 ## 開發與設計文件
 
