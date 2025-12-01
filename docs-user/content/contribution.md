@@ -7,7 +7,7 @@ weight: 98
 
 易點雙視 為開源專案，可完全免費使用。原始碼托管於 [GitHub](https://github.com/braillekit/text-to-braille)。
 
-> 點開 [此專案的 GitHub 頁面](https://github.com/braillekit/text-to-braille) 之後，如果方便的話，可以順手幫忙按一下右上角的星星（⭐ Star）。這會讓更多人發現這個專案。🙏
+> 點開 [此專案的 GitHub 頁面](https://github.com/braillekit/text-to-braille) 之後，如果方便的話，可以順手幫忙按一下右上角的星星（⭐ Star），讓開發者知道有人關注，也能讓更多人發現這個專案。🙏
 
 如果您願意貢獻心力來改進這套軟體，可以考慮以下方式：
 
