@@ -40,7 +40,9 @@ weight: 1
 
 ### 步驟 2：安裝 EasyBrailleEdit
 
-下載易點雙視的安裝程式，然後執行安裝程式即可。
+點擊以下連結來下載易點雙視的安裝程式，然後執行安裝程式。
+
+<https://github.com/braillekit/text-to-braille/releases/download/5.0.0/v5.0.0-setup.exe>
 
 預設安裝目錄： `C:\EasyBrailleEdit5`
 
