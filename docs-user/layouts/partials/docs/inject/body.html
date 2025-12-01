@@ -1,0 +1,45 @@
+<!-- Lightbox Modal -->
+<div id="lightbox-modal" class="lightbox-modal">
+    <span class="close-btn">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+    <div id="caption"></div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = document.getElementById("lightbox-modal");
+        var modalImg = document.getElementById("lightbox-img");
+        var captionText = document.getElementById("caption");
+        var closeBtn = document.getElementsByClassName("close-btn")[0];
+
+        // Get all images with class 'lightbox-trigger'
+        var images = document.querySelectorAll('.lightbox-trigger');
+
+        images.forEach(function (img) {
+            img.onclick = function () {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+        });
+
+        // Close the modal
+        closeBtn.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // Close when clicking outside the image
+        modal.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape" && modal.style.display === "block") {
+                modal.style.display = "none";
+            }
+        });
+    });
+</script>

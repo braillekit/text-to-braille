@@ -1,0 +1,10 @@
+{{- $u := .Destination -}}
+{{- $text := .Text -}}
+{{- $title := .Title -}}
+
+<img src="{{ $u | safeURL }}"
+     alt="{{ $text }}"
+     {{ with $title }} title="{{ . }}" {{ end }}
+     class="lightbox-trigger"
+     style="cursor: pointer;"
+/>
