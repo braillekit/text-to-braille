@@ -1,6 +1,5 @@
 ---
 title: "vX.Y.Z 發行說明"
-date: YYYY-MM-DD
 weight: -XYZ
 draft: true
 ---
@@ -16,6 +15,7 @@ draft: true
 功能描述...
 
 **主要特色**：
+
 - ✨ 特色 1
 - 📝 特色 2
 - ⚡ 特色 3
