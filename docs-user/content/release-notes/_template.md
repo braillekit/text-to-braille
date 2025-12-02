@@ -1,5 +1,6 @@
 ---
 title: "vX.Y.Z 發行說明"
+date: 2000-01-01
 weight: -XYZ
 draft: true
 ---

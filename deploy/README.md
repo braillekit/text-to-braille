@@ -16,7 +16,7 @@
 
 2. 確認建置輸出存在於：
 
-   ```
+   ```text
    output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\
    ```
 
