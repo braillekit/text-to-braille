@@ -36,16 +36,16 @@ jobs:
         }
     
     - name: Restore NuGet packages
-      run: dotnet restore "Source\EasyBrailleEditApp\EasyBrailleEditApp.sln"
+      run: dotnet restore "src\EasyBrailleEditApp\EasyBrailleEditApp.sln"
       
     - name: Build solution
-      run: dotnet build "Source\EasyBrailleEditApp\EasyBrailleEditApp.sln" --configuration Release --no-restore
+      run: dotnet build "src\EasyBrailleEditApp\EasyBrailleEditApp.sln" --configuration Release --no-restore
       
     - name: Publish EasyBrailleEdit
-      run: dotnet publish "Source\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj" --configuration Release --no-build --output publish\EasyBrailleEdit
+      run: dotnet publish "src\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj" --configuration Release --no-build --output publish\EasyBrailleEdit
     
     - name: Publish Txt2Brl
-      run: dotnet publish "Source\EasyBrailleEditApp\Txt2Brl\Txt2Brl.csproj" --configuration Release --no-build --output publish\Txt2Brl
+      run: dotnet publish "src\EasyBrailleEditApp\Txt2Brl\Txt2Brl.csproj" --configuration Release --no-build --output publish\Txt2Brl
 
     - name: Copy Txt2Brl binaries to EasyBrailleEdit
       run: |

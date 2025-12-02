@@ -11,7 +11,7 @@
 ```xml
 <Target Name="CopyToEasyBrailleEditOutput" AfterTargets="Build">
   <PropertyGroup>
-    <EasyBrailleEditOutputPath>$(MSBuildThisFileDirectory)..\..\..\Output\EasyBrailleEdit\$(Configuration)\$(Platform)\</EasyBrailleEditOutputPath>
+    <EasyBrailleEditOutputPath>$(MSBuildThisFileDirectory)..\..\..\output\EasyBrailleEdit\$(Configuration)\$(Platform)\</EasyBrailleEditOutputPath>
   </PropertyGroup>
   
   <ItemGroup>
@@ -46,19 +46,19 @@
 ### 建置單一專案
 
 ```powershell
-dotnet build Source\EasyBrailleEditApp\Txt2Brl\Txt2Brl.csproj /p:Platform=x86
+dotnet build src\EasyBrailleEditApp\Txt2Brl\Txt2Brl.csproj /p:Platform=x86
 ```
 
 建置完成後，Txt2Brl 的輸出會自動複製到：
 
 ```text
-Output\EasyBrailleEdit\Debug\x86\
+output\EasyBrailleEdit\Debug\x86\
 ```
 
 ### 建置整個解決方案
 
 ```powershell
-dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln /p:Platform=x86
+dotnet build src\EasyBrailleEditApp\EasyBrailleEditApp.sln /p:Platform=x86
 ```
 
 ## 整合測試
@@ -66,7 +66,7 @@ dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln /p:Platform=x86
 建置完成後，可以在 EasyBrailleEdit 的輸出目錄中直接執行 Txt2Brl：
 
 ```powershell
-cd Output\EasyBrailleEdit\Debug\x86
+cd output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0
 .\Txt2Brl.exe --help
 ```
 

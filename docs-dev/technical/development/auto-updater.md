@@ -279,8 +279,8 @@ updater.ServerUri = "https://raw.githubusercontent.com/huanlin/easy-braille-edit
 
 ## 相關檔案
 
-- `Source\EasyBrailleEditApp\EasyBrailleEdit.Common\Utilities\Http\HttpUpdater.cs` - 核心實作
-- `Source\EasyBrailleEditApp\EasyBrailleEdit\MainForm.cs` - `DoUpdateAsync`, `AutoUpdateAsync`, `CheckUpdateAsync`
-- `Source\EasyBrailleEditApp\EasyBrailleEdit\UpdateProgressForm.cs` - 進度視窗
+- `src\EasyBrailleEditApp\EasyBrailleEdit.Common\Utilities\Http\HttpUpdater.cs` - 核心實作
+- `src\EasyBrailleEditApp\EasyBrailleEdit\MainForm.cs` - `DoUpdateAsync`, `AutoUpdateAsync`, `CheckUpdateAsync`
+- `src\EasyBrailleEditApp\EasyBrailleEdit\UpdateProgressForm.cs` - 進度視窗
 - `UpdateFiles\Update.txt` - 伺服器端更新清單（GitHub）
 - `UpdateFiles\ChangeLog.txt` - 版本變更記錄（GitHub）

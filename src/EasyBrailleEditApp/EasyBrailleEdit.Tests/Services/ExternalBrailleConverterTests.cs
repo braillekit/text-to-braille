@@ -20,15 +20,15 @@ namespace EasyBrailleEdit.Tests.Services
             if (File.Exists(targetPath)) return;
 
             // Try to locate Txt2Brl.exe in the build output directory
-            // We are in Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug\net10.0-windows10.0.17763.0
-            // We want to go to Output\Txt2Brl\Debug\net10.0-windows10.0.17763.0\Txt2Brl.exe
+            // We are in src\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug\net10.0-windows10.0.17763.0
+            // We want to go to output\Txt2Brl\Debug\net10.0-windows10.0.17763.0\Txt2Brl.exe
             
-            // Go up 5 levels to root (Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug\net10.0-windows10.0.17763.0 -> Source\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug -> ... -> Source)
+            // Go up 5 levels to root (src\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug\net10.0-windows10.0.17763.0 -> src\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug -> ... -> src)
             // Actually, let's just search for it or use a known relative path.
             // Root is d:\Projects\BrailleKit\text-to-braille
             
             string rootDir = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\..\..\..\..\"));
-            string sourcePath = Path.Combine(rootDir, @"Output\Txt2Brl\Debug\net10.0-windows10.0.17763.0\Txt2Brl.exe");
+            string sourcePath = Path.Combine(rootDir, @"output\Txt2Brl\Debug\net10.0-windows10.0.17763.0\Txt2Brl.exe");
 
             if (File.Exists(sourcePath))
             {

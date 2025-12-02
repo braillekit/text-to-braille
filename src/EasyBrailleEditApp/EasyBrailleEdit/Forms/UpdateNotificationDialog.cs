@@ -10,10 +10,10 @@ namespace EasyBrailleEdit.Forms
     /// </summary>
     public class UpdateNotificationDialog : Form
     {
-        private Label lblMessage;
-        private LinkLabel linkReleaseNotes;
-        private Button btnYes;
-        private Button btnNo;
+        private Label? lblMessage;
+        private LinkLabel? linkReleaseNotes;
+        private Button? btnYes;
+        private Button? btnNo;
 
         public UpdateNotificationDialog()
         {

@@ -44,13 +44,13 @@
 在專案根目錄執行：
 
 ```powershell
-dotnet build .\Source\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj -c Release
+dotnet build .\src\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj -c Release
 ```
 
 **建置輸出位置**：
 
 ```text
-Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\
+output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\
 ```
 
 **預期結果**：
@@ -65,7 +65,7 @@ Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\
 執行自動化打包腳本：
 
 ```powershell
-.\Setup\Prepare-Release.ps1
+.\deploy\Prepare-Release.ps1
 ```
 
 #### 腳本功能詳細說明
@@ -73,11 +73,11 @@ Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\
 `Prepare-Release.ps1` 腳本提供以下自動化功能：
 
 1. **前置條件檢查**
-   - 驗證建置輸出目錄 `Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0` 存在
+   - 驗證建置輸出目錄 `output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0` 存在
    - 確認必要檔案（`EasyBrailleEdit.exe`、`Txt2Brl.exe`）存在
 
 2. **目標目錄清理**
-   - 清空 `Setup/InnoSetup/Files/app` 目錄
+   - 清空 `deploy\InnoSetup\Files/app` 目錄
    - 保留手動維護的檔案（`LICENSE.md`、`ReleaseNote.txt`）
 
 3. **智慧型檔案複製**
@@ -98,8 +98,8 @@ Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\
 #### 預期輸出
 
 ```text
-來源目錄: Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0
-目標目錄: Setup\InnoSetup\Files\app
+來源目錄: output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0
+目標目錄: deploy\InnoSetup\Files\app
 檔案總數: 105
 目錄總數: 26
 總大小: 43.21 MB
@@ -126,7 +126,7 @@ Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\
 1. **開啟 Inno Setup Compiler**
 
 2. **載入腳本**
-   - 開啟檔案：`Setup\InnoSetup\Setup.iss`
+   - 開啟檔案：`deploy\InnoSetup\Setup.iss`
 
 3. **編譯安裝程式**
    - 點選「Compile」或按 `Ctrl+F9`
@@ -135,7 +135,7 @@ Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\
 4. **安裝程式位置**
 
    ```text
-   Setup\InnoSetup\setup.exe
+   deploy\InnoSetup\setup.exe
    ```
 
 ### 步驟 5：測試安裝程式
@@ -145,7 +145,7 @@ Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\
 1. **執行安裝程式**
 
    ```powershell
-   .\Setup\InnoSetup\setup.exe
+   .\deploy\InnoSetup\setup.exe
    ```
 
 2. **驗證安裝**
@@ -230,7 +230,7 @@ A: 可以，但不建議。手動複製容易遺漏檔案或包含不必要的�
 A: 執行腳本後，檢查以下關鍵檔案是否存在：
 
 ```powershell
-# 在 Setup\InnoSetup\Files\x86 目錄下
+# 在 deploy\InnoSetup\Files\x86 目錄下
 Test-Path EasyBrailleEdit.exe  # 應為 True
 Test-Path Txt2Brl.exe          # 應為 True
 Test-Path BrailleToolkit.dll   # 應為 True
@@ -247,7 +247,7 @@ Get-ChildItem -Filter *.pdb -Recurse  # 應無結果
 
 | 特點 | 說明 |
 |------|------|
-| **執行方式** | 手動執行 `.\Setup\Prepare-Release.ps1` |
+| **執行方式** | 手動執行 `.\deploy\Prepare-Release.ps1` |
 | **優點** | 完全掌控執行時機、易於除錯、不干擾正常開發流程 |
 | **檔案篩選** | 排除 `.pdb` 除錯符號檔案 |
 | **平台篩選** | 只保留 Windows 平台的 runtimes |
@@ -258,7 +258,7 @@ Get-ChildItem -Filter *.pdb -Recurse  # 應無結果
 打包完成後的目錄結構如下：
 
 ```text
-Setup/
+deploy/
 ├── Prepare-Release.ps1        # 自動化打包腳本
 ├── README.md                   # 腳本使用說明
 └── InnoSetup/
@@ -288,7 +288,7 @@ Setup/
 ## 參考資料
 
 - [部署流程完整說明](deployment-procedure.md)
-- [Prepare-Release.ps1 使用說明](../../../Setup/README.md)
+- [Prepare-Release.ps1 使用說明](../../../deploy/README.md)
 - [建置輸出合併說明](../development/build-output-merge.md)
 - [Inno Setup 官方文件](https://jrsoftware.org/isinfo.php)
 

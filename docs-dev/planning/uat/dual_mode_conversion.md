@@ -17,10 +17,10 @@
 
 ```powershell
 # 建置 Debug 版本
-dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Debug
+dotnet build src\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Debug
 
 # 或建置 Release 版本
-dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Release
+dotnet build src\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Release
 ```
 
 ### 2. 啟動應用程式
@@ -29,7 +29,7 @@ dotnet build Source\EasyBrailleEditApp\EasyBrailleEditApp.sln -c Release
 
 ```powershell
 # 切換到輸出目錄
-cd Output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0
+cd output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0
 
 # 執行應用程式
 .\EasyBrailleEdit.exe
@@ -38,7 +38,7 @@ cd Output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0
 #### 方式二：使用 dotnet run
 
 ```powershell
-cd Source\EasyBrailleEditApp
+cd src\EasyBrailleEditApp
 dotnet run --project EasyBrailleEdit\EasyBrailleEdit.csproj --no-build -c Debug
 ```
 
@@ -48,8 +48,8 @@ dotnet run --project EasyBrailleEdit\EasyBrailleEdit.csproj --no-build -c Debug
 
 **檔案位置**：
 
-- Debug: `Output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0\AppConfig.ini`
-- Release: `Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\AppConfig.ini`
+- Debug: `output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0\AppConfig.ini`
+- Release: `output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\AppConfig.ini`
 
 **說明**：首次執行時會自動產生，預設值為 `UseInProcessConversion=true`（內建模式）
 
@@ -242,7 +242,7 @@ dotnet run --project EasyBrailleEdit\EasyBrailleEdit.csproj --no-build -c Debug
 
 ```powershell
 # 檢查 Txt2Brl.exe 是否存在
-ls Output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0\Txt2Brl.exe
+ls output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0\Txt2Brl.exe
 ```
 
 如果不存在，需要確認建置時 PostBuild 事件是否正確執行。
@@ -252,7 +252,7 @@ ls Output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0\Txt2Brl.exe
 首次執行應用程式後，`AppConfig.ini` 會自動產生在應用程式執行目錄：
 
 ```text
-Output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0\AppConfig.ini
+output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0\AppConfig.ini
 ```
 
 ---

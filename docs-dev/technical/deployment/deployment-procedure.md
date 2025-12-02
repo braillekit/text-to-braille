@@ -33,13 +33,13 @@ git push origin 4.1.0
 建置 Release 版本：
 
 ```powershell
-dotnet build .\Source\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj -c Release
+dotnet build .\src\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj -c Release
 ```
 
 **建置輸出位置**：
 
 ```text
-Output\EasyBrailleEdit\Release\<.NET-target>\
+output\EasyBrailleEdit\Release\<.NET-target>\
 ```
 
 **驗證步驟**：
@@ -55,11 +55,12 @@ Output\EasyBrailleEdit\Release\<.NET-target>\
 使用自動化腳本準備發布檔案：
 
 ```powershell
-.\Setup\Prepare-Release.ps1
+.\deploy\Prepare-Release.ps1
 ```
 
 此腳本會：
-- 複製所有必要檔案到 `Setup/InnoSetup/Files/app/`
+
+- 複製所有必要檔案到 `deploy/InnoSetup/Files/app/`
 - 自動排除除錯符號檔案（`.pdb`）
 - 只保留 Windows 平台的 runtimes
 - 保留手動維護的文件（LICENSE.md、ReleaseNote.txt）
@@ -70,9 +71,9 @@ Output\EasyBrailleEdit\Release\<.NET-target>\
 
 如果需要打包安裝程式：
 
-1. 使用 Inno Setup Compiler 開啟 `Setup\InnoSetup\Setup.iss`
+1. 使用 Inno Setup Compiler 開啟 `deploy\InnoSetup\Setup.iss`
 2. 編譯安裝程式（`Ctrl+F9`）
-3. 產生的 `setup.exe` 會在 `Setup\InnoSetup\` 目錄
+3. 產生的 `setup.exe` 會在 `deploy\InnoSetup\` 目錄
 
 ### 步驟 6：部署自動更新檔案
 
@@ -81,6 +82,7 @@ Output\EasyBrailleEdit\Release\<.NET-target>\
 **目標位置**：[text-to-braille-updates](https://github.com/braillekit/text-to-braille-updates/tree/main/Files)
 
 **檔案選擇**：
+
 - 從步驟 3 的建置輸出中選擇必要的執行檔和 DLL
 - 不包含 `.pdb` 除錯符號檔案
 - 不包含 `AppConfig.ini`（除非需要預設設定）
@@ -122,30 +124,36 @@ Output\EasyBrailleEdit\Release\<.NET-target>\
 在正式發布前，確認以下事項：
 
 ### 版本準備
+
 - [ ] ChangeLog.md 已更新
 - [ ] Git tag 已建立並推送
 - [ ] Tag 命名符合規則（無 `v` 前綴）
 
 ### 建置驗證
+
 - [ ] Release 建置成功
 - [ ] 執行檔版本號正確
 - [ ] Txt2Brl.exe 已包含
 
 ### 檔案準備
+
 - [ ] 執行 Prepare-Release.ps1 成功
 - [ ] 確認打包目錄包含所有必要檔案
 - [ ] 確認沒有 .pdb 檔案被打包
 
 ### 安裝程式（如有）
+
 - [ ] Inno Setup 編譯成功
 - [ ] 安裝程式測試通過
 
 ### 自動更新
+
 - [ ] _update.txt 版本號正確
 - [ ] 更新檔案已上傳
 - [ ] 本機測試自動更新成功
 
 ### 發布確認
+
 - [ ] 線上使用手冊已更新
 - [ ] 下載連結正確
 - [ ] 發布公告已準備
@@ -163,6 +171,7 @@ A: 在建置輸出目錄中，右鍵點擊 `EasyBrailleEdit.exe`，選擇「內�
 ### Q: 自動更新測試失敗怎麼辦？
 
 A: 常見原因：
+
 - `_update.txt` 版本號格式不正確
 - 檔案路徑或 URL 錯誤
 - 檔案權限問題

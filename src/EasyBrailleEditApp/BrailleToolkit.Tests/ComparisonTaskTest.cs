@@ -24,8 +24,8 @@ namespace BrailleToolkit.Tests
             // Paths relative to the solution root (assuming test runs from bin/... or we can find the source root)
             // We will try to locate the files.
             string baseDir = FindProjectRoot();
-            string bymlPath = Path.Combine(baseDir, @"Source\EasyBrailleEditApp\BrailleToolkit.Tests\TestData\poem.byml");
-            string jsonPath = Path.Combine(baseDir, @"Source\EasyBrailleEditApp\BrailleToolkit.Tests\TestData\poem.brx");
+            string bymlPath = Path.Combine(baseDir, @"src\EasyBrailleEditApp\BrailleToolkit.Tests\TestData\poem.byml");
+            string jsonPath = Path.Combine(baseDir, @"src\EasyBrailleEditApp\BrailleToolkit.Tests\TestData\poem.brx");
 
             Assert.True(File.Exists(bymlPath), $"File not found: {bymlPath}");
             Assert.True(File.Exists(jsonPath), $"File not found: {jsonPath}");
@@ -62,7 +62,7 @@ namespace BrailleToolkit.Tests
         {
             string current = Directory.GetCurrentDirectory();
             // Walk up until we find .git or Source folder
-            while (!Directory.Exists(Path.Combine(current, "Source")) && Directory.GetParent(current) != null)
+            while (!Directory.Exists(Path.Combine(current, "src")) && Directory.GetParent(current) != null)
             {
                 current = Directory.GetParent(current)?.FullName ?? throw new Exception("Project root not found");
             }
