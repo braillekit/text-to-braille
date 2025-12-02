@@ -10,6 +10,8 @@
 
 `EasyBrailleEditApp` 是一個 C#/.NET 專案，用於編輯文字並將其轉換為點字。它是一個功能豐富的 Windows Forms 應用程式，主要的功能是讓使用者輸入一般文字之後，透過點字轉換功能將一般明眼人閱讀的文字轉換成視障者使用的點字。將一般文字轉換成點字時，中文字和全形標點符號是採用台灣的點字規則，英文字母和半形標點符號則是採用 UEB。轉換成點字之後，此應用程式提供了一個編輯器來讓使用者進一步對轉換後的點字文件進行編輯和排版，並提供列印功能，可以列印一般文字的部分，也能將點字的部分輸出至點字印表機。
 
+從 v5.0 開始（2025 年 12 月），新增了雙模式點字轉換（Dual-mode Conversion）、即時點字預覽（Instant Braille Preview）以及自動更新（Auto-Updater）等功能。
+
 目前所有 .csproj 都已經升級成 SDK-style 的專案格式。目標 .NET 框架為 .NET 10。
 
 ## 主要模組
@@ -40,16 +42,22 @@
 
 ### 核心元件
 
-1. **`BrailleProcessor` (主控中心/Context):**
-    - 這是點字轉換的總指揮。它負責接收原始的明眼文字串，並協調各個轉換器（Converter）來完成工作。
+1. **`BrailleConverterFactory` (轉換器工廠):**
+    - 負責根據應用程式設定（`AppGlobals.Config.Braille.UseInProcessConversion`）來建立適當的點字轉換器實體。
+    - 支援兩種模式：
+        - **`InProcessBrailleConverter`**: 直接使用 `BrailleToolkit` 函式庫在目前的處理程序中進行轉換。這是預設且建議的模式。
+        - **`ExternalBrailleConverter`**: 呼叫外部的 `Txt2Brl.exe` 命令列工具進行轉換。這主要是為了相容性或除錯目的而保留。
+
+2. **`BrailleProcessor` (主控中心/Context):**
+    - 這是 `BrailleToolkit` 內部的點字轉換總指揮。它負責接收原始的明眼文字串，並協調各個轉換器（Converter）來完成工作。
     - 它管理一個 `ContextTagManager` 來追蹤目前的轉換情境（例如，是否在數學模式或表格模式中）。
     - 在完成初步轉換後，它會套用一系列後處理規則（例如數字規則、大寫規則、標點符號規則）來確保點字的正確性。
 
-2. **`IWordConverter` (轉換器介面/Strategy Interface):**
+3. **`IWordConverter` (轉換器介面/Strategy Interface):**
     - 定義了所有具體轉換器都必須實作的標準介面。其核心方法是 `Convert(Stack<char> chars, ContextTagManager context)`。
     - 這種設計讓 `BrailleProcessor` 無需知道每個轉換器的內部細節，只需呼叫其 `Convert` 方法即可。
 
-3. **具體的轉換器 (Concrete Strategies):**
+4. **具體的轉換器 (Concrete Strategies):**
     - **`TwChineseCharConverter`**: 負責處理中文字、注音及全形標點符號。它會使用 `ZhuyinReverseConverter` 取得中文字的注音碼，並利用智慧型詞彙分析來修正破音字，最後轉換成台灣點字規則的點字。
     - **`EnglishUebConverter`**: 負責處理英文（UEB - Unified English Braille）。它採用「貪婪演算法」(Greedy Algorithm)，優先匹配最長的縮寫（Contractions），若無匹配，則退回逐字翻譯（Grade 1）。
     - **`MathConverter`, `TableConverter`, `UrlConverter` 等**: 這些是針對特定情境的轉換器，只有在對應的標籤（如 `<math>`）被啟用時才會作用。
@@ -119,6 +127,25 @@
 - **`dots` 屬性**: 程式載入 XML 檔案時，`XmlBrailleTable` 類別會呼叫 `BrailleCellHelper.PositionNumbersToHexString` 方法將 `dots` 屬性的值轉換成對應的 `code` 十六進位碼。
 - **空方 (Blank Cell)**: 在 `TwChineseBrailleTable.xml` 中，全形空白符號 `　` 的 `dots` 屬性值為一個空白字元 `" "`，而其 `code` 屬性值為 `"00"`。這代表一個沒有任何點的空方。這在處理上需要特別注意，以確保空格能被正確地轉換與呈現。  
 
+## 即時點字預覽 (Instant Braille Preview)
+
+為了讓使用者在編輯文字時能即時看到點字轉換的結果，應用程式實作了即時預覽功能。
+
+- **`PreviewPanel`**: 這是顯示預覽結果的 UI 控制項，內部使用 `WebBrowser` 元件來呈現內容。
+- **呈現方式**: 使用 HTML 表格來排版，將每一行文字分為三列顯示：
+    1. **文字列**: 顯示原始文字。
+    2. **注音列**: 顯示中文字的注音符號（若有）。
+    3. **點字列**: 顯示轉換後的點字（使用 Unicode 點字字元）。
+- **觸發機制**: 當使用者在編輯器中停止輸入約 1.5 秒後，會自動觸發預覽更新。為了效能考量，僅轉換游標所在位置前後數行的文字。
+
+## 自動更新 (Auto-Updater)
+
+應用程式內建了自動更新機制，確保使用者能取得最新的功能與修正。
+
+- **`HttpUpdater`**: 負責檢查伺服器上是否有新版本，並下載更新檔。
+- **`UpdateProgressForm`**: 顯示下載進度，並在下載完成後提示使用者重新啟動應用程式以套用更新。
+- **流程**: 應用程式啟動時（或使用者手動檢查時），會向伺服器請求版本資訊。若發現新版本，則下載安裝檔並執行更新程序。
+
 ---
 
 ## 附錄：英文轉換流程範例
@@ -149,7 +176,7 @@
 
 ### 協同合作流程
 
-```
+```text
 [使用者輸入: "Work"]
        |
        v
