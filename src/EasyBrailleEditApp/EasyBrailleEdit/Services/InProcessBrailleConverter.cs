@@ -14,6 +14,9 @@ namespace EasyBrailleEdit.Services
     /// </summary>
     public class InProcessBrailleConverter : IBrailleConverter, IDisposable
     {
+        private static ZhuyinReverseConversionProvider? _sharedProvider;
+        private static readonly object _syncLock = new object();
+
         private BrailleDocument? _doc;
         private BrailleProcessor? _processor;
         private ZhuyinReverseConverter? _zhuyinConverter;
@@ -36,8 +39,18 @@ namespace EasyBrailleEdit.Services
             try
             {
                 // 初始化轉換器
-                var provider = new ZhuyinReverseConversionProvider();
-                _zhuyinConverter = new ZhuyinReverseConverter(provider);
+                if (_sharedProvider == null)
+                {
+                    lock (_syncLock)
+                    {
+                        if (_sharedProvider == null)
+                        {
+                            _sharedProvider = new ZhuyinReverseConversionProvider();
+                        }
+                    }
+                }
+
+                _zhuyinConverter = new ZhuyinReverseConverter(_sharedProvider);
                 _processor = BrailleProcessor.CreateInstance(_zhuyinConverter);
                 _doc = new BrailleDocument(_processor);
                 
