@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Symbols>
-  <!-- 座標符號 -->
-  <symbol text="("     dots="12356"     type="座標" Description="左括弧" />
-  <symbol text=")"     dots="23456"     type="座標" Description="右括弧" />
-  <symbol text=","     dots="6"     type="座標" Description="數學逗號" />
-</Symbols>
