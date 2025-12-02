@@ -1,6 +1,6 @@
-﻿# Gemini 專案：EasyBrailleEditApp
+﻿# AI Agent Context: EasyBrailleEditApp
 
-此檔案提供 Gemini AI 助理理解和操作此專案所需的背景資訊。
+此檔案提供 AI Agent 理解和操作此專案所需的背景資訊。
 
 ## AI agent 互動規則
 
