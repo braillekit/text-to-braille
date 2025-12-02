@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>易點雙視-文件中心</title><link>https://braillekit.github.io/text-to-braille/</link><description>Recent content on 易點雙視-文件中心</description><generator>Hugo</generator><language>zh-tw</language><atom:link href="https://braillekit.github.io/text-to-braille/index.xml" rel="self" type="application/rss+xml"/><item><title>v5.0.0 發行說明</title><link>https://braillekit.github.io/text-to-braille/release-notes/v5.0.0/</link><pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/release-notes/v5.0.0/</guid><description>&lt;h1 id="v500-發行說明"&gt;v5.0.0 發行說明&lt;a class="anchor" href="#v500-%e7%99%bc%e8%a1%8c%e8%aa%aa%e6%98%8e"&gt;#&lt;/a&gt;&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>易點雙視-文件中心</title><link>https://braillekit.github.io/text-to-braille/</link><description>Recent content on 易點雙視-文件中心</description><generator>Hugo</generator><language>zh-tw</language><atom:link href="https://braillekit.github.io/text-to-braille/index.xml" rel="self" type="application/rss+xml"/><item><title>v5.0.1 發行說明</title><link>https://braillekit.github.io/text-to-braille/release-notes/v5.0.1/</link><pubDate>Tue, 02 Dec 2025 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/release-notes/v5.0.1/</guid><description>&lt;h1 id="v501-發行說明"&gt;v5.0.1 發行說明&lt;a class="anchor" href="#v501-%e7%99%bc%e8%a1%8c%e8%aa%aa%e6%98%8e"&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;發布日期&lt;/strong&gt;：2025 年 12 月 2 日&lt;/p&gt;
+&lt;h2 id="-使用者介面"&gt;🖥️ 使用者介面&lt;a class="anchor" href="#-%e4%bd%bf%e7%94%a8%e8%80%85%e4%bb%8b%e9%9d%a2"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;即時預覽失敗時，原本不會顯示任何錯誤訊息，現在會顯示失敗原因，告知使用者哪個字元無法轉換成點字。&lt;/li&gt;
+&lt;li&gt;主視窗的「說明」選單裡增加了「使用手冊」，可開啟線上使用手冊網頁。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="-技術改進"&gt;🔧 技術改進&lt;a class="anchor" href="#-%e6%8a%80%e8%a1%93%e6%94%b9%e9%80%b2"&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;修正記憶體洩漏&lt;/strong&gt;：解決了在重複建立點字轉換器時可能發生的記憶體洩漏問題，提升了長時間執行的穩定性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;修正單元測試不穩定&lt;/strong&gt;：解決了 &lt;code&gt;ExternalBrailleConverterTests&lt;/code&gt; 在並行執行時因暫存檔名衝突而導致的測試失敗問題。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Txt2Brl 工具更新&lt;/strong&gt;：新增 &lt;code&gt;--result&lt;/code&gt; 與 &lt;code&gt;--error&lt;/code&gt; 命令列參數，允許指定結果與錯誤日誌的輸出路徑，改善了與主程式的整合性。&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>v5.0.0 發行說明</title><link>https://braillekit.github.io/text-to-braille/release-notes/v5.0.0/</link><pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate><guid>https://braillekit.github.io/text-to-braille/release-notes/v5.0.0/</guid><description>&lt;h1 id="v500-發行說明"&gt;v5.0.0 發行說明&lt;a class="anchor" href="#v500-%e7%99%bc%e8%a1%8c%e8%aa%aa%e6%98%8e"&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;發布日期&lt;/strong&gt;：2025 年 12 月 1 日&lt;/p&gt;
 &lt;h2 id="-主要新功能"&gt;🎉 主要新功能&lt;a class="anchor" href="#-%e4%b8%bb%e8%a6%81%e6%96%b0%e5%8a%9f%e8%83%bd"&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;h3 id="即時點字預覽"&gt;即時點字預覽&lt;a class="anchor" href="#%e5%8d%b3%e6%99%82%e9%bb%9e%e5%ad%97%e9%a0%90%e8%a6%bd"&gt;#&lt;/a&gt;&lt;/h3&gt;
