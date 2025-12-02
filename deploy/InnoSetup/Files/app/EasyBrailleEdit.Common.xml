@@ -1,0 +1,1052 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EasyBrailleEdit.Common</name>
+    </assembly>
+    <members>
+        <member name="T:EasyBrailleEdit.Common.AppGlobals">
+            <summary>
+            提供應用程式全域會用到的變數、常數和公用函式。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.AppGlobals.Config">
+            <summary>
+            取得應用程式組態設定。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.AppGlobals.AppPath">
+            <summary>
+            應用程式執行路徑
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.AppGlobals.TempPath">
+            <summary>
+            暫存目錄路徑
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.AppGlobals.CalcTotalPages(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            計算總頁數
+            </summary>
+            <param name="totalLines">總列數。</param>
+            <param name="linesPerPage">每頁可印幾列。</param>
+            <param name="printPageFoot">是否印頁尾。</param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.AppGlobals.CalcCurrentPage(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            計算指定的列號位於第幾頁。注意：第一頁是傳回 0。
+            </summary>
+            <param name="lineNumer">列號，從 0 開始。</param>
+            <param name="linesPerPage"></param>
+            <param name="printPageFoot"></param>
+            <returns>頁號，0-based。</returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.AppGlobals.GetTempPath">
+            <summary>
+            取得暫存目錄路徑
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Config.AppConfig">
+            <summary>
+            此類別提供了應用程式組態檔的載入與儲存。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Config.AppConfig.IniFileName">
+            <summary>
+            組態檔名稱。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Config.AppConfig.IniFileNameDefault">
+            <summary>
+            預設組態檔名稱。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Config.AppConfig.GetInstance">
+            <summary>
+            取得 AppConfig 的唯一實體。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.AppConfig.General">
+            <summary>
+            一般設定區段。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.AppConfig.Braille">
+            <summary>
+            點字設定區段。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.AppConfig.BrailleEditor">
+            <summary>
+            點字編輯器設定區段。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.AppConfig.Printing">
+            <summary>
+            列印設定區段。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Config.AppConfig.#ctor">
+            <summary>
+            建構函式。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Config.AppConfig.Load">
+            <summary>
+            載入組態檔。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Config.AppConfig.Save">
+            <summary>
+            儲存組態檔。
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Config.Sections.BrailleEditorSection">
+            <summary>
+            區段 [BrailleEditor]
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Config.Sections.BrailleEditorSection.Name">
+            <summary>
+            區段名稱。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleEditorSection.ShowUndoWindow">
+            <summary>
+            取得或設定是否顯示復原視窗。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleEditorSection.MaxUndoLevel">
+            <summary>
+            取得或設定最大復原層數。
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Config.Sections.BrailleSection">
+            <summary>
+            區段 [Braille]
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Config.Sections.BrailleSection.Name">
+            <summary>
+            The section name.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleSection.CellsPerLine">
+            <summary>
+            Gets or sets the number of cells per line.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleSection.LinesPerPage">
+            <summary>
+            Gets or sets the number of lines per page.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleSection.AutoIndentNumberedLine">
+            <summary>
+            以 '#' 開頭的編號項目是否要在折行時自動內縮一方。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleSection.ErrorProneWords">
+            <summary>
+            容易判斷錯誤的破音字，這些中文字在雙視編輯視窗中會以紅色顯示，以提醒使用者注意。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleSection.UseUpperPositionForOrgPageNumber">
+            <summary>
+            原書頁碼的數字都使用上位點，且不加數符。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleSection.NoSpaceAfterTheseCharacters">
+            <summary>
+            這些字元的右邊一律不加空方。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleSection.NoSpaceBeforeTheseCharacters">
+            <summary>
+            這些字元的左邊一律不加空方。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleSection.UseUpperPositionForNumbers">
+            <summary>
+            數字一律使用上位點。v4.2.1 (2023-9-1) 之後開始支援此選項。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleSection.UseInProcessConversion">
+            <summary>
+            是否使用內建轉換（預設 true）
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleSection.AutoPreviewDelay">
+            <summary>
+            即時預覽的自動更新延遲時間（毫秒），預設 1500ms。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleSection.EnableInstantPreview">
+            <summary>
+            是否預設啟用即時預覽（預設 true）。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.BrailleSection.PreviewContextLines">
+            <summary>
+            即時預覽時，要顯示游標所在位置前後幾行的內容（預設 3 行）。
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Config.Sections.GeneralSection">
+            <summary>
+            General configuration section.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Config.Sections.GeneralSection.Name">
+            <summary>
+            The section name.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.GeneralSection.AutoUpdate">
+            <summary>
+            Gets or sets a value indicating whether to enable auto-update.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.GeneralSection.AutoUpdateFilesUrl">
+            <summary>
+            Gets or sets the URL for auto-update files.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.GeneralSection.PhraseFiles">
+            <summary>
+            詞庫檔。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.GeneralSection.AutoReplacedText">
+            <summary>
+            轉點字之前，先依此屬性的內容來自動替換文字。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.GeneralSection.UseFullWidthIme">
+            <summary>
+            是否使用全形輸入法（預設 false）。
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Config.Sections.PrintingSection">
+            <summary>
+            區段 [Printing]
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Config.Sections.PrintingSection.Name">
+            <summary>
+            The section name.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.BraillePrinterName">
+            <summary>
+            Gets or sets the braille printer name.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.BraillePrinterPort">
+            <summary>
+            Gets or sets the braille printer port.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.DefaultTextPrinter">
+            <summary>
+            Gets or sets the default text printer.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintBrailleSendPageBreakAtEndOfDoc">
+            <summary>
+            Gets or sets a value indicating whether to send page break at end of document.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintBrailleToBrailler">
+            <summary>
+            Gets or sets a value indicating whether to print braille to brailler.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintBrailleToFile">
+            <summary>
+            Gets or sets a value indicating whether to print braille to file.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintBrailleToFileName">
+            <summary>
+            Gets or sets the filename for braille output.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintPageFoot">
+            <summary>
+            Gets or sets a value indicating whether to print page footer.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.BrailleCellWidth">
+            <summary>
+            Gets or sets the braille cell width.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintTextPaperName">
+            <summary>
+            Gets or sets the paper name for text printing.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintTextPaperSourceName">
+            <summary>
+            Gets or sets the paper source name for text printing.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintTextFontName">
+            <summary>
+            Gets or sets the font name for text printing.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintTextFontSize">
+            <summary>
+            Gets or sets the font size for text printing.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintTextLineHeight">
+            <summary>
+            Gets or sets the line height for text printing.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintTextMarginLeft">
+            <summary>
+            Gets or sets the left margin for text printing.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintTextMarginTop">
+            <summary>
+            Gets or sets the top margin for text printing.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintTextMarginRight">
+            <summary>
+            Gets or sets the right margin for text printing.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintTextMarginBottom">
+            <summary>
+            Gets or sets the bottom margin for text printing.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintTextMarginLeft2">
+            <summary>
+            Gets or sets the left margin for even page text printing.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintTextMarginTop2">
+            <summary>
+            Gets or sets the top margin for even page text printing.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintTextMarginRight2">
+            <summary>
+            Gets or sets the right margin for even page text printing.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Config.Sections.PrintingSection.PrintTextMarginBottom2">
+            <summary>
+            Gets or sets the bottom margin for even page text printing.
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Constant">
+            <summary>
+            Provides application-wide constants.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.AppName">
+            <summary>
+            Gets the application name.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.ProductVersionName">
+            <summary>
+            Gets the product version name.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.ProjectUrl">
+            <summary>
+            Gets the project URL.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.FacebookPageUrl">
+            <summary>
+            Gets the Facebook page URL.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultAutoUpdateRootUrl">
+            <summary>
+            Gets the default auto-update root URL.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultAutoUpdateFilesUrl">
+            <summary>
+            Gets the default auto-update files URL.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultAutoUpdateFileListName">
+            <summary>
+            Gets the default auto-update file list name.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.ChangeLogFileName">
+            <summary>
+            Gets the change log file name.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultCellsPerLine">
+            <summary>
+            預設一行最大方數
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultLinesPerPage">
+            <summary>
+            Gets the default number of lines per page.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultBrailleWidth">
+            <summary>
+            預設一方點字的寬度。此參數會用來計算每個明眼字的字寬（會影響字距）
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultMaxUndoLevel">
+            <summary>
+            雙視編輯器的預設最大可復原操作數量
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Constant.Files">
+            <summary>
+            提供與檔案相關的常數。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.Files.JsonBrailleFileExt">
+            <summary>
+            預設的點字檔副檔名 (v1為 .btx；v2 為 .brlj)
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.Files.YamlBrailleFileExt">
+            <summary>
+            雙視檔案 YAML 格式
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.Files.PrintableBrailleFileExt">
+            <summary>
+            p 代表 print
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.Files.CvtInputTempFileName">
+            <summary>
+            輸入的明眼字檔
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.Files.CvtInputPhraseListFileName">
+            <summary>
+            輸入的詞庫設定檔
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.Files.CvtOutputTempFileName">
+            <summary>
+            輸出的點字檔
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.Files.CvtErrorCharFileName">
+            <summary>
+            儲存轉換失敗的字元資訊
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.Files.CvtResultFileName">
+            <summary>
+            儲存成功或失敗的旗號以及錯誤訊息
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.Files.MainFileNameFilter">
+            <summary>
+            主要的「開啟檔案」對話方塊中使用的檔案過濾器字串。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.Files.SaveAsFileNameFilter">
+            <summary>
+            「另存新檔」對話方塊中使用的檔案過濾器字串。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.Files.SavePrintableBrailleFileNameFilter">
+            <summary>
+            「儲存可列印點字檔」對話方塊中使用的檔案過濾器字串。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultPrintTextMarginLeft">
+            <summary>
+            預設奇數頁明眼字列印左邊界。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultPrintTextMarginTop">
+            <summary>
+            預設奇數頁明眼字列印上邊界。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultPrintTextMarginRight">
+            <summary>
+            預設奇數頁明眼字列印右邊界。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultPrintTextMarginBottom">
+            <summary>
+            預設奇數頁明眼字列印下邊界。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultPrintTextMarginLeft2">
+            <summary>
+            預設偶數頁明眼字列印左邊界。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultPrintTextMarginTop2">
+            <summary>
+            預設偶數頁明眼字列印上邊界。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultPrintTextMarginRight2">
+            <summary>
+            預設偶數頁明眼字列印右邊界。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultPrintTextMarginBottom2">
+            <summary>
+            預設偶數頁明眼字列印下邊界。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultPrintTextFontName">
+            <summary>
+            預設明眼字字型名稱。
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultPrintTextFontSize">
+            <summary>
+            預設明眼字字型大小
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultPrintTextLineHeight">
+            <summary>
+            明眼字列高（文字高度+列距）
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultPrintTextLineSpace">
+            <summary>
+            預設明眼字列距
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultNoSpaceAfterTheseCharacters">
+            <summary>
+            Gets the default characters that should not have a space after them.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Constant.DefaultNoSpaceBeforeTheseCharacters">
+            <summary>
+            Gets the default characters that should not have a space before them.
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Utilities.Http.HttpDownloader">
+            <summary>
+            Provides utility methods for downloading files via HTTP.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.HttpDownloader.DownloadFileAsync(System.String,System.String,System.IProgress{EasyBrailleEdit.Common.Utilities.Http.DownloadProgress},System.Threading.CancellationToken)">
+            <summary>
+            Downloads a file from the specified URL to the destination path.
+            </summary>
+            <param name="url">The URL to download from.</param>
+            <param name="destinationPath">The destination file path.</param>
+            <param name="progress">Optional progress reporter.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Utilities.Http.DownloadProgress">
+            <summary>
+            Represents the progress of a download operation.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.DownloadProgress.TotalBytes">
+            <summary>
+            Gets or sets the total bytes to download.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.DownloadProgress.BytesRead">
+            <summary>
+            Gets or sets the bytes read so far.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.DownloadProgress.ProgressPercentage">
+            <summary>
+            Gets the progress percentage.
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater">
+            <summary>
+            提供基於 HTTP 協定的應用程式自動更新功能，支援檔案下載失敗時的回復（rollback）機制。
+            若其中有一個檔案下載失敗，就會整批 rollback（把先前下載的檔案刪除）。
+            </summary>
+            <remarks>
+            <para>改寫自 Eduardo Oliveira 的 AutoUpdate.vb，並增加下載進度的事件。</para>
+            
+            <para><strong>公開屬性：</strong></para>
+            <list type="bullet">
+            <item><description><see cref="P:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.ClientPath"/> - 代表用戶端應用程式的所在路徑。例如 "C:\EasyBrailleEdit"。</description></item>
+            <item><description><see cref="P:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.ServerUri"/> - 遠端伺服器上面，存放新版本檔案的 HTTP 路徑。例如: "http://hostname.com/files/ebe/"。</description></item>
+            <item><description><see cref="P:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.ChangeLogFileName"/> - 版本變更說明文件的檔案名稱。例如 "ChangeLog.txt"。</description></item>
+            </list>
+            
+            <para><strong>方法：</strong></para>
+            <list type="bullet">
+            <item><description><see cref="M:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.GetUpdateListAsync(System.String)"/> - 取得可更新的檔案清單。此函式不僅會從伺服器端取得更新清單及剖析其內容，還會檢查本地端的檔案是否需要更新或刪除。</description></item>
+            <item><description><see cref="M:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.HasUpdates"/> - 傳回 True/False，代表伺服器端是否有新版本。</description></item>
+            <item><description><see cref="M:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.UpdateAsync"/> - 下載並更新。</description></item>
+            </list>
+            
+            <para><strong>與進度有關的事件：</strong></para>
+            <list type="bullet">
+            <item><description><see cref="E:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.FileUpdating"/> - 檔案開始更新時觸發。</description></item>
+            <item><description><see cref="E:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.FileUpdated"/> - 檔案更新完成時觸發。</description></item>
+            <item><description><see cref="E:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.DownloadProgressChanged"/> - 下載進度變更時觸發。</description></item>
+            </list>
+            
+            <para>Written by Huan-Lin Tsai.</para>
+            </remarks>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater"/> class.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the HttpUpdater and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.CleanUp">
+            <summary>
+            清理上次執行更新時所留下的暫存檔。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.GetUpdateListAsync(System.String)">
+            <summary>
+            取得更新清單。此函式不僅會從伺服器端取得更新清單及剖析其內容，
+            還會檢查本地端的檔案是否需要更新或刪除。處理的結果是儲存在
+            m_UpdateItems 屬性中。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.HasUpdates">
+            <summary>
+            Determines whether there are updates available.
+            </summary>
+            <returns>True if updates are available; otherwise, false.</returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.UpdateAsync">
+            <summary>
+            執行線上更新。
+            </summary>
+            <returns>已更新的檔案數量（包含刪除的檔案）。/// </returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.OnFileUpdating(EasyBrailleEdit.Common.Utilities.Http.HttpUpdaterFileEventArgs)">
+            <summary>
+            Raises the FileUpdating event.
+            </summary>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.OnFileUpdated(EasyBrailleEdit.Common.Utilities.Http.HttpUpdaterFileEventArgs)">
+            <summary>
+            Raises the FileUpdated event.
+            </summary>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.ClientPath">
+            <summary>
+            Gets or sets the client application path.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.ServerUri">
+            <summary>
+            Gets or sets the server URI where update files are located.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.ChangeLogFileName">
+            <summary>
+            Gets or sets the change log file name.
+            </summary>
+        </member>
+        <member name="E:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.FileUpdating">
+            <summary>
+            Occurs when a file is about to be updated.
+            </summary>
+        </member>
+        <member name="E:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.FileUpdated">
+            <summary>
+            Occurs when a file has been updated.
+            </summary>
+        </member>
+        <member name="E:EasyBrailleEdit.Common.Utilities.Http.HttpUpdater.DownloadProgressChanged">
+            <summary>
+            Occurs when download progress changes.
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Utilities.Http.HttpUpdaterFileEventArgs">
+            <summary>
+            Event arguments for HTTP updater file events.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.HttpUpdaterFileEventArgs.FileName">
+            <summary>
+            Gets the file name.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.HttpUpdaterFileEventArgs.Number">
+            <summary>
+            Gets the file number in the update sequence.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.HttpUpdaterFileEventArgs.Total">
+            <summary>
+            Gets the total number of files to be updated.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.HttpUpdaterFileEventArgs.#ctor(System.String,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyBrailleEdit.Common.Utilities.Http.HttpUpdaterFileEventArgs"/> class.
+            </summary>
+            <param name="filename">The name of the file.</param>
+            <param name="number">The file number.</param>
+            <param name="total">The total number of files.</param>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Utilities.Http.IHttpUpdater">
+            <summary>
+            定義 HTTP 更新器的介面。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.IHttpUpdater.CleanUp">
+            <summary>
+            清理上次執行更新時所留下的暫存檔。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.IHttpUpdater.GetUpdateListAsync(System.String)">
+            <summary>
+            取得更新清單。此函式不僅會從伺服器端取得更新清單及剖析其內容，
+            還會檢查本地端的檔案是否需要更新或刪除。處理的結果是儲存在
+            m_UpdateItems 屬性中。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.IHttpUpdater.HasUpdates">
+            <summary>
+            檢查伺服器上是否有可用的更新。
+            </summary>
+            <returns>如果有更新，則為 true；否則為 false。</returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.IHttpUpdater.UpdateAsync">
+            <summary>
+            執行線上更新。
+            </summary>
+            <returns>已更新的檔案數量（包含刪除的檔案）。/// </returns>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.IHttpUpdater.ClientPath">
+            <summary>
+            取得或設定用戶端應用程式的本機路徑。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.IHttpUpdater.ServerUri">
+            <summary>
+            取得或設定遠端更新伺服器的 URI。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.IHttpUpdater.ChangeLogFileName">
+            <summary>
+            取得或設定變更日誌檔案的名稱。
+            </summary>
+        </member>
+        <member name="E:EasyBrailleEdit.Common.Utilities.Http.IHttpUpdater.FileUpdating">
+            <summary>
+            當檔案開始更新時觸發。
+            </summary>
+        </member>
+        <member name="E:EasyBrailleEdit.Common.Utilities.Http.IHttpUpdater.FileUpdated">
+            <summary>
+            當檔案更新完成時觸發。
+            </summary>
+        </member>
+        <member name="E:EasyBrailleEdit.Common.Utilities.Http.IHttpUpdater.DownloadProgressChanged">
+            <summary>
+            當檔案下載進度變更時觸發。
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Utilities.Http.UpdateAction">
+            <summary>
+            Specifies the action to perform during an update.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Utilities.Http.UpdateAction.None">
+            <summary>No action.</summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Utilities.Http.UpdateAction.Overwrite">
+            <summary>Overwrite the file.</summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Utilities.Http.UpdateAction.Delete">
+            <summary>Delete the file.</summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Utilities.Http.UpdateItem">
+            <summary>
+            更新項目。
+            </summary>
+            <summary>
+            Represents an item to be updated.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.UpdateItem.FileName">
+            <summary>
+            Gets or sets the file name.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.UpdateItem.Operation">
+            <summary>
+            Gets or sets the update operation.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.UpdateItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyBrailleEdit.Common.Utilities.Http.UpdateItem"/> class.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.UpdateItem.#ctor(System.String,EasyBrailleEdit.Common.Utilities.Http.UpdateAction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyBrailleEdit.Common.Utilities.Http.UpdateItem"/> class with specified parameters.
+            </summary>
+            <param name="filename">The file name.</param>
+            <param name="updAction">The update action.</param>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.UpdateItem.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <param name="obj">The object to compare.</param>
+            <returns>True if equal; otherwise, false.</returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.UpdateItem.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>The hash code.</returns>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Utilities.Http.RollbackAction">
+            <summary>
+            Specifies the rollback action.
+            </summary>
+        </member>
+        <member name="F:EasyBrailleEdit.Common.Utilities.Http.RollbackAction.Rename">
+            <summary>Rename the file.</summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Utilities.Http.RollbackItem">
+            <summary>
+            自動更新的回覆項目。其內容記錄的不是當初執行的更新動作，
+            而是在復原時需要執行的補償動作。
+            </summary>
+            <summary>
+            Represents a rollback item for automatic updates.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.RollbackItem.Operation">
+            <summary>
+            Gets or sets the rollback operation.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.RollbackItem.SourceFileName">
+            <summary>
+            Gets or sets the source file name.
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Http.RollbackItem.TargetFileName">
+            <summary>
+            Gets or sets the target file name.
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Http.RollbackItem.#ctor(System.String,System.String,EasyBrailleEdit.Common.Utilities.Http.RollbackAction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyBrailleEdit.Common.Utilities.Http.RollbackItem"/> class.
+            </summary>
+            <param name="original">The original file name.</param>
+            <param name="renamed">The renamed file name.</param>
+            <param name="operation">The rollback operation.</param>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Utilities.JsonHelper">
+            <summary>
+            JSON 序列化/反序列化輔助類別。
+            注意：不可將 DataContractJsonSerializer 改為 System.Text.Json，否則會引發一連串的序列化／反序列化的問題。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.JsonHelper.Serialize``1(``0)">
+            <summary>
+            將物件序列化為 JSON 字串。
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.JsonHelper.Deserialize``1(System.String)">
+            <summary>
+            將 JSON 字串反序列化為物件。
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="jsonStr"></param>
+            <returns></returns>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Utilities.Windows.FileRunner">
+            <summary>
+            此類別可用來執行檔案。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.#ctor">
+            <summary>
+            初始化 FileRunner 類別的新執行個體。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.Dispose">
+            <summary>
+            釋放由 FileRunner 使用的所有資源。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.RunAsync(System.String,System.String)">
+            <summary>
+            以非同步方式執行指定的檔案。
+            </summary>
+            <param name="filename">要執行的檔案名稱。</param>
+            <param name="argument">傳遞給應用程式的命令列引數。</param>
+            <returns>表示非同步作業的 Task，其結果為處理序的結束代碼。</returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.Run(System.String,System.String)">
+            <summary>
+            執行檔案。
+            </summary>
+            <param name="filename">檔案名稱。</param>
+            <param name="argument">檔案執行時帶的參數，可傳空字串。</param>
+            <returns>若執行成功則傳回 true，否則傳回 false 並設定 ErrorMsg 屬性。</returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.KillProcess">
+            <summary>
+            強制終止執行的程式。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.Running">
+            <summary>
+            取得一個值，指出處理序是否仍在執行。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.WorkingDirectory">
+            <summary>
+            取得或設定要執行之處理序的工作目錄。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.UseShellExecute">
+            <summary>
+            取得或設定一個值，指出是否要使用作業系統 shell 來啟動處理序。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.ShowWindow">
+            <summary>
+            取得或設定是否顯示處理序的視窗。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.RedirectStandardOutput">
+            <summary>
+            取得或設定一個值，指出是否將應用程式的輸出寫入 StandardOutput。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.NeedWait">
+            <summary>
+            取得或設定是否等待應用程式執行結束。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.WaitTime">
+            <summary>
+            要等多久。若設為 TimeSpan.Zero，表示採用內定值（30分鐘）。超過此時間 process 將被強制終止。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.ErrorMsg">
+            <summary>
+            取得上次執行發生錯誤時的錯誤訊息。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.StdOutputMsg">
+            <summary>
+            取得從執行的應用程式所擷取到的標準輸出。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.WindowStyle">
+            <summary>
+            取得或設定啟動處理序時使用的視窗狀態。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.Verb">
+            <summary>
+            取得或設定用於啟動處理序的動詞，例如 "runas"。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.ErrorDialog">
+            <summary>
+            取得或設定一個值，指出處理序無法啟動時，是否要顯示錯誤對話方塊。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.ExitCode">
+            <summary>
+            取得處理序已結束執行的結束代碼。
+            </summary>
+        </member>
+        <member name="P:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.ExitTime">
+            <summary>
+            取得處理序結束執行的時間。
+            </summary>
+        </member>
+        <member name="E:EasyBrailleEdit.Common.Utilities.Windows.FileRunner.StdOutputReceived">
+            <summary>
+            當應用程式將資料寫入其重新導向的 StandardOutput 資料流時發生。
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Common.Utilities.Windows.SysInfo">
+            <summary>
+            系統資訊。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Windows.SysInfo.GetIPAddresses">
+            <summary>
+            傳回本機的所有 IP 位址。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Windows.SysInfo.GetIPAddress">
+            <summary>
+            傳回目前使用的 IP 位址。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Windows.SysInfo.GetDnsHostName">
+            <summary>
+            取得 DNS host name（跟 System.Environment.MachineName 相同作用?）。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Windows.SysInfo.GetDnsHostName(System.String)">
+            <summary>
+            從 IP address 反查 DNS 主機名稱。
+            </summary>
+            <param name="ipAddr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyBrailleEdit.Common.Utilities.Windows.SysInfo.IsNetworkConnected">
+            <summary>
+            檢查是否有連接網路的能力。
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

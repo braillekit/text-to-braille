@@ -1,0 +1,323 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using BrailleToolkit;
+using EasyBrailleEdit.DualEdit;
+using Huanlin.Windows.Forms;
+using SourceGrid;
+using SourceGrid.Selection;
+
+namespace EasyBrailleEdit
+{
+    public partial class DualEditTitleForm : Form, IBrailleGridForm
+    {
+        private BrailleDocument m_OrgBrDoc = null!;	// 標題列所屬的 BrailleDocument 物件
+        private BrailleDocument m_TmpBrDoc = null!; // 把所有標題列都丟到這個暫時的 BrailleDocument 物件
+
+        public List<BraillePageTitle> Titles { get; } = null!;
+
+        private BrailleGridController Controller { get; } = null!;
+
+
+        private DualEditTitleForm()
+        {
+            InitializeComponent();
+        }
+        
+        public DualEditTitleForm(BrailleDocument brDoc)
+            : this()
+        {
+            m_OrgBrDoc = brDoc;
+
+            if (brDoc.Processor == null) throw new ArgumentNullException(nameof(brDoc.Processor));
+            m_TmpBrDoc = new BrailleDocument(brDoc.Processor, brDoc.CellsPerLine);
+
+            Titles = new List<BraillePageTitle>();
+
+            // 複製所有標題列，並將標題列塞進暫存文件。
+            BraillePageTitle? newTitle = null;
+            bool emptyTitleFound = false;
+            foreach (BraillePageTitle t in brDoc.PageTitles)
+            {
+                if (t.TitleLine != null && t.TitleLine.CellCount > 0) // 避免塞進空的頁標題
+                {
+                    newTitle = t.Clone() as BraillePageTitle;
+                    if (newTitle != null && newTitle.TitleLine != null)
+                    {
+                        Titles.Add(newTitle);
+
+                        m_TmpBrDoc.Lines.Add(newTitle.TitleLine);       // 把標題 line 塞進暫存文件。
+                    }
+                }
+                else
+                {
+                    emptyTitleFound = true;
+                }
+            }
+
+            if (emptyTitleFound)
+            {
+                MsgBoxHelper.ShowWarning("發現空的頁標題！程式已自動移除此空標題，請記得儲存文件。");
+            }
+
+            Controller = new BrailleGridController(this, brGrid, m_TmpBrDoc, forPageTitle: true);
+        }
+
+        private int RemoveEmptyTitles()
+        {
+            int deletedCount = 0;
+            for (int i = Titles.Count - 1; i >= 0; i--)
+            {
+                var title = Titles[i];
+                if (title.TitleLine != null && title.TitleLine.CellCount < 1)
+                {
+                    Titles.RemoveAt(i);
+                    deletedCount++;
+                }
+            }
+            return deletedCount;
+        }
+
+        #region 屬性
+
+
+        string IBrailleGridForm.StatusText
+        {
+            get => String.Empty;
+            set
+            {
+                statMessage.Text = value;
+            }
+        }
+        int IBrailleGridForm.StatusProgress
+        {
+            get => 0;
+            set { }
+        }
+
+        string IBrailleGridForm.CurrentWordStatusText
+        {
+            get => String.Empty;
+            set
+            {
+                statusLabelCurrentWord.Text = value;
+            }
+        }
+
+        string IBrailleGridForm.CurrentLineStatusText
+        {
+            get => String.Empty;
+            set
+            {
+                statusLabelCurrentLine.Text = value;
+            }
+        }
+
+        string IBrailleGridForm.PageNumberText
+        {
+            get => String.Empty;
+            set { }
+        }
+
+        string IBrailleGridForm.CurrentPageTitleStatusText
+        {
+            get => String.Empty;
+            set { }
+        }
+
+        #endregion
+
+        private void DualEditTitleForm_Load(object sender, EventArgs e)
+        {
+            (this as IBrailleGridForm).StatusText = String.Empty;
+            (this as IBrailleGridForm).CurrentLineStatusText = String.Empty;
+            (this as IBrailleGridForm).CurrentWordStatusText = String.Empty;
+
+            Controller.InitializeGrid();
+
+            // 隱藏禁止使用的功能。
+            string[] disabledCommands =
+            {
+                DualEditCommand.Names.InsertLine,
+                DualEditCommand.Names.BreakLine,
+                DualEditCommand.Names.FormatParagraph,
+                DualEditCommand.Names.AddLine,
+                DualEditCommand.Names.InsertTable,
+                DualEditCommand.Names.SelectAll
+            };
+
+            foreach (string cmd in disabledCommands)
+            {
+                Controller.MenuController.HideMenuItem(cmd);
+            }
+
+            brGrid.Selection.FocusRowEntered += GridSelection_FocusRowEntered;
+            brGrid.Selection.CellGotFocus += GridSelection_CellGotFocus;
+            brGrid.MouseDoubleClick += Grid_MouseDoubleClick;
+
+            Controller.FillGrid();
+        }
+
+        private void Grid_MouseDoubleClick(object? sender, MouseEventArgs e)
+        {
+            var grid = sender as SourceGrid.Grid;
+            if (grid != null)
+            {
+                Controller.Grid_MouseDoubleClick(grid, e);
+            }
+        }
+
+        private void GridSelection_FocusRowEntered(object sender, RowEventArgs e)
+        {
+            var lineIdx = Controller.PositionMapper.GridRowToBrailleLineIndex(e.Row);
+            var brLine = m_TmpBrDoc.Lines[lineIdx];
+
+            string beginLineInfo = "[？] ";
+
+            if (brLine.Tag != null)
+            {
+                try
+                {
+                    int beginLineIdx = Convert.ToInt32(brLine.Tag);
+                    beginLineInfo = $"[{beginLineIdx + 1}] "; // 顯示的行號是從 1 開始。
+                }
+                catch { }
+            }
+
+            //var pageTitle = m_OrgBrDoc.FindTitle(brLine);
+            //if (pageTitle != null)
+            //{
+            //    beginLineInfo = $"[{pageTitle.BeginLineIndex + 1}] ";
+            //}
+
+            (this as IBrailleGridForm).CurrentLineStatusText = beginLineInfo + brLine.ToOriginalTextString();
+        }
+
+        private void GridSelection_CellGotFocus(SelectionBase sender, ChangeActivePositionEventArgs e)
+        {
+            Controller.GridSelection_CellGotFocus(e);
+        }
+
+        /// <summary>
+        /// Grid popup menu 點擊事件處裡常式。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void GridMenu_Click(object sender, SourceGrid.CellContextEventArgs e)
+        {
+/*
+            GridPopupMenuController menuCtrl = (GridPopupMenuController)sender;
+            SourceGrid.CellContext cell = e.CellContext;
+            SourceGrid.Grid grid = (SourceGrid.Grid)cell.Grid;
+            int row = cell.Position.Row;
+            int col = cell.Position.Column;
+
+            switch (menuCtrl.Command)
+            {
+                case DualEditCommand.Names.EditWord:
+                    EditController.EditWord(row, col);
+                    break;
+                case DualEditCommand.Names.InsertWord:
+                    EditController.InsertWord(row, col);
+                    break;
+                case DualEditCommand.Names.InsertText:
+//                    EditController.InsertText(row, col);
+                    break;
+                case DualEditCommand.Names.InsertBlank:  // 插入空方                        
+                    EditController.InsertBlankCell(row, col, 1);
+                    break;
+                case DualEditCommand.Names.AppendWord:  // 在列尾插入空方
+                    EditController.AppendWord(row, col);
+                    break;
+                case DualEditCommand.Names.DeleteWord:
+                    EditController.DeleteCell(row, col);
+                    break;
+                case DualEditCommand.Names.BackDeleteWord:
+                    EditController.BackspaceCell(row, col);
+                    break;
+            }
+*/
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
+
+        private void btnAbortEdit_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
+
+        private void DualEditTitleForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            int row = brGrid.Selection.ActivePosition.Row;
+            int col = brGrid.Selection.ActivePosition.Column;
+
+            if (row < 0 || col < 0)
+            {
+                return;
+            }
+
+            if (e.Modifiers == Keys.None)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.F4:
+                        Controller.EditWord(brGrid, row, col);
+                        e.Handled = true;
+                        break;
+                    case Keys.Back:     // 倒退刪除
+                        Controller.BackspaceCell(brGrid, row, col);
+                        e.Handled = true;
+                        break;
+                    case Keys.Left:
+                        Controller.GridSelectLeftWord(row, col);
+                        e.Handled = true;
+                        break;
+                }
+            }
+            else if (e.Modifiers == (Keys.Control | Keys.Shift))
+            {
+                if (e.KeyCode == Keys.V)
+                {
+                    Controller.PasteToEndOfLine(brGrid, row, col);
+                }
+            }
+            else if (e.Modifiers == Keys.Control)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.I:        // Ctrl+I: 新增點字。
+                        Controller.InsertWord(brGrid, row, col);
+                        e.Handled = true;
+                        break;
+                    case Keys.Insert:    // Ctrl+Ins: 新增一串文字。
+                        Controller.InsertText(brGrid, row, col);
+                        e.Handled = true;
+                        break;
+                    case Keys.Delete:   // Ctrl+Delete: 刪除一格點字。
+                        Controller.DeleteWord(brGrid, row, col);
+                        RemoveEmptyTitles();                        
+                        e.Handled = true;
+                        break;
+                    case Keys.E:        // Ctrl+E: 刪除一列。
+                        Controller.DeleteLine(brGrid, row, col, true);
+                        RemoveEmptyTitles();
+                        e.Handled = true;
+                        break;
+                    case Keys.C:
+                        Controller.CopyToClipboard(brGrid);
+                        break;
+                    case Keys.X:
+                        Controller.CutToClipboard(brGrid);
+                        break;
+                    case Keys.V:
+                        Controller.PasteFromClipboard(brGrid, row, col);
+                        break;
+                }
+            }
+        }
+    }
+}

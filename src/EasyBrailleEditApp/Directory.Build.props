@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <!-- 1. 設定一個所有專案通用的基礎 TargetFramework -->
+    <TargetFramework>net10.0</TargetFramework>
+
+    <!-- 3. 其他所有專案都可以共用的設定 -->
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Authors>Michael Tsai (蔡煥麟)</Authors>
+    <Company>BrailleKit</Company>
+    <Copyright>Copyright © 2025 Michael Tsai (蔡煥麟). All rights reserved.</Copyright>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+</Project>

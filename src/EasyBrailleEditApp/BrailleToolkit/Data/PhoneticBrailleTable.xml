@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 參考 http://en.wikipedia.org/wiki/Unicode_Phonetic_Symbols -->
+<Symbols>
+  <!-- 音標括號 -->
+  <symbol text="["   dots="25 25"     type="Misc" />
+  <symbol text="]"   dots="25 25"     type="Misc" />
+
+  <!-- 母音 -->
+  <symbol text=":"   dots="25"       type="Vowel" />
+  <symbol text="i"   dots="24"       type="Vowel" />
+  <symbol text="!"   dots="456 123"     type="Vowel" description="i 上下顛倒"/>
+  <symbol text="e"   dots="15"       type="Vowel" />
+  <symbol text="ɛ"   dots="345"       type="Vowel" />
+  <symbol text="æ"   dots="146"       type="Vowel" description="蝴蝶音"/>
+  <symbol text="a"   dots="1"       type="Vowel" />
+  <symbol text="ɑ"   dots="16"       type="Vowel" />
+  <symbol text="ɒ"   dots="235 16"     type="Vowel" />
+  <symbol text="ɪ"   dots="34"       type="Vowel" />
+  <symbol text="ɩ"   dots="34"       type="Vowel" />
+  <symbol text="ɐ"   dots="235 1"     type="Vowel" />
+  <symbol text="ɔ"   dots="126"       type="Vowel" />
+  <symbol text="o"   dots="135"       type="Vowel" />
+  <symbol text="ʉ"   dots="356 136"     type="Vowel" />
+  <symbol text="u"   dots="136"       type="Vowel" />
+  <symbol text="ʊ"   dots="12356"       type="Vowel" />
+  <symbol text="ʌ"   dots="346"       type="Vowel" />
+  <symbol text="ə"   dots="26"       type="Vowel" />
+  <symbol text="ɜ"   dots="235 345"     type="Vowel" />
+  <symbol text="ɝ"   dots="235 345 2 1235" type="Vowel" />
+  <symbol text="ɚ"   dots="26 2 1235"   type="Vowel" />
+  <symbol text="Y"   dots="235 13456"     type="Vowel" />
+  <symbol text="y"   dots="13456"       type="Vowel" />
+  <symbol text="ɶ"   dots="246"       type="Vowel" description="oe"/>
+
+  <!-- 子音 -->
+  <symbol text="p"  dots="1234" type="Consonant"  />
+  <symbol text="b"  dots="12" type="Consonant" />
+  <symbol text="t"  dots="2345" type="Consonant" />
+  <symbol text="d"  dots="145" type="Consonant" />
+  <symbol text="k"  dots="13" type="Consonant" />
+  <symbol text="g"  dots="1245" type="Consonant" />
+  <symbol text="q"  dots="12345" type="Consonant" />
+  <symbol text="G"  dots="35 1245" type="Consonant" />
+  <symbol text="m"  dots="134" type="Consonant" />
+  <symbol text="n"  dots="1345" type="Consonant" />
+  <symbol text="ŋ"  dots="1246" type="Consonant" />
+  <symbol text="ɳ"  dots="456 1345" type="Consonant" description="n 下方有一點" />
+  <symbol text="ɱ"  dots="456 134" type="Consonant" description="m 下方有一點" />
+  <symbol text="w"  dots="2456" type="Consonant" />
+  <symbol text="l"  dots="123" type="Consonant" />
+  <symbol text="f"  dots="124" type="Consonant" />
+  <symbol text="v"  dots="1236" type="Consonant" />
+  <symbol text="ɵ"  dots="1456" type="Consonant" />
+  <symbol text="ð"  dots="12456" type="Consonant" description="The"/>
+  <symbol text="s"  dots="234" type="Consonant" />
+  <symbol text="z"  dots="1356" type="Consonant" />
+  <symbol text="ɹ"  dots="3456" type="Consonant" />
+  <symbol text="ɥ"  dots="23456" type="Consonant" />
+  <symbol text="h"  dots="125" type="Consonant" />
+  <symbol text="ʃ"  dots="156" type="Consonant" />
+  <symbol text="ʒ"  dots="2346" type="Consonant" />
+  <symbol text="r"  dots="1235" type="Consonant" />
+  <symbol text="R"  dots="35 1235" type="Consonant" />
+  <symbol text="j"  dots="245" type="Consonant" />
+
+
+  <!-- 重音 -->
+  <symbol text="`"   dots="45" description="第一重音" />
+  <symbol text="'"   dots="45" description="第一重音" />
+  <symbol text=","   dots="4" description="第二重音" />
+</Symbols>

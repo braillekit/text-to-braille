@@ -1,0 +1,681 @@
+﻿using BrailleToolkit.Helpers;
+using EasyBrailleEdit.Common.Utilities;
+using Huanlin.Common.Helpers;
+using Serilog;
+using System.Runtime.Serialization;
+using System.Text;
+using YamlDotNet.Serialization;
+
+namespace BrailleToolkit
+{
+    /// <summary>
+    /// 代表一份點字文件。
+    /// 注意：編寫明眼字文件時，不要自行斷行，就按照應有的段落內容輸入；斷行的部分由程式來處理。
+    /// 因為程式是以一行為轉換的基本單位，句子裡面的引號必須成對，若自行斷行，
+    /// 可能會造成程式無法在一行裡面找對應的右引號。
+    /// </summary>
+    [Serializable]
+    [DataContract]
+    public sealed class BrailleDocument
+    {
+        [DataMember(Name = "Lines")]
+        private List<BrailleLine> m_Lines;
+
+        [DataMember(Name = "CellsPerLine")]
+        private int m_CellsPerLine = BrailleConst.DefaultCellsPerLine;
+        //private BrailleLine m_Title; // 文件標題
+
+        [OptionalField]
+        [DataMember(Name = "PageTitles")]
+        private List<BraillePageTitle> m_PageTitles;    // 所有的頁標題。
+
+        [NonSerialized]
+        private string? m_FileName;
+
+        [NonSerialized]
+        private BrailleProcessor? m_Processor;	// 點字轉換器。
+
+        /// <summary>
+        /// 起始頁碼
+        /// </summary>
+        [DataMember]
+        public int StartPageNumber { get; set; }
+
+        static BrailleDocument()
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        }
+
+        #region 建構函式
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BrailleDocument"/> class.
+        /// </summary>
+        public BrailleDocument()
+        {
+            m_Lines = new List<BrailleLine>();
+            m_PageTitles = new List<BraillePageTitle>();
+
+            StartPageNumber = 1;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BrailleDocument"/> class with a processor and cells per line.
+        /// </summary>
+        /// <param name="processor">The braille processor.</param>
+        /// <param name="cellsPerLine">Number of cells per line.</param>
+        public BrailleDocument(BrailleProcessor processor, int cellsPerLine = BrailleConst.DefaultCellsPerLine) : this()
+        {
+            m_Processor = processor;
+            m_CellsPerLine = cellsPerLine;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BrailleDocument"/> class with a filename, processor, and cells per line.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <param name="processor">The braille processor.</param>
+        /// <param name="cellsPerLine">Number of cells per line.</param>
+        public BrailleDocument(string filename, BrailleProcessor processor, int cellsPerLine)
+            : this()
+        {
+            m_FileName = filename;
+            m_Processor = processor;
+            m_CellsPerLine = cellsPerLine;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Creates a deep copy of this document.
+        /// </summary>
+        /// <returns>A new instance with copied content.</returns>
+        public BrailleDocument DeepCopy()
+        {
+            string jsonStr = JsonHelper.Serialize(this);
+            return JsonHelper.Deserialize<BrailleDocument>(jsonStr);
+        }
+
+        /// <summary>
+        /// 載入明眼字文件並轉換成點字。
+        /// </summary>
+        public void LoadAndConvert()
+        {
+            if (StrHelper.IsEmpty(m_FileName))
+                throw new Exception("檔案名稱尚未指定!");
+            if (m_Processor == null)
+                throw new Exception("在呼叫 BrailleDocument.Load 之前，請先指定 BrailleProcessor。");
+
+            Encoding enc = Encoding.UTF8;
+            if (!FileHelper.IsUTF8Encoded(m_FileName))
+            {
+                enc = Encoding.GetEncoding(950); // BIG-5
+            }
+            using (StreamReader sr = new StreamReader(m_FileName!, enc, true)) // Fixed CS8604
+            {
+                LoadAndConvert(sr);
+            }
+        }
+
+        /// <summary>
+        /// Converts the given text to braille.
+        /// </summary>
+        /// <param name="text">The text to convert.</param>
+        public void Convert(string text)
+        {
+            using (StringReader sr = new StringReader(text))
+            {
+                LoadAndConvert(sr);
+            }
+        }
+
+        /// <summary>
+        /// 載入明眼字文件並轉換成點字。
+        /// </summary>
+        /// <param name="filename">明眼字檔名。</param>
+        public void LoadAndConvert(string filename)
+        {
+            FileName = filename;
+            LoadAndConvert();
+        }
+
+        /// <summary>
+        /// Loads and converts text from a TextReader.
+        /// </summary>
+        /// <param name="reader">The text reader.</param>
+        public void LoadAndConvert(TextReader reader)
+        {
+            Log.Debug("BrailleDocument.LoadAndConvert() 開始執行。");
+
+            int lineNumber = 0;
+            string? line;
+
+            Clear();
+
+            if (m_Processor == null)
+                throw new Exception("在呼叫 BrailleDocument.Load 之前，請先指定 BrailleProcessor。");
+
+            m_Processor.InitializeForConversion();
+
+            while ((line = reader.ReadLine()) != null)
+            {
+                lineNumber++;
+                BrailleLine brLine = m_Processor.ConvertLine(line, lineNumber);
+                if (brLine != null && brLine.WordCount > 0)
+                {
+                    AddLine(brLine);
+                }
+            }
+
+            m_Processor.FormatDocument(this);   // 斷行
+
+            int titleCount = FetchPageTitles();      // 提取標題列
+
+            Log.Debug($"BrailleDocument.LoadAndConvert() 執行完畢。頁標題數量為 {titleCount}。");
+        }
+
+        /// <summary>
+        /// Adds a page title to the document.
+        /// </summary>
+        /// <param name="title">The page title to add.</param>
+        public void AddPageTitle(BraillePageTitle title)
+        {
+            PageTitles.Add(title);
+            SortPageTitles();
+        }
+
+        /// <summary>
+        /// Adds a page title at the specified line index.
+        /// </summary>
+        /// <param name="words">The words of the title.</param>
+        /// <param name="lineIdx">The line index.</param>
+        public void AddPageTitleAt(List<BrailleWord> words, int lineIdx)
+        {
+            if (lineIdx >= LineCount)
+            {
+                throw new InvalidOperationException($"加入標題列時指定的索引超出文件大小: {lineIdx}");
+            }
+            var title = new BraillePageTitle(words, lineIdx, Lines[lineIdx]);
+            PageTitles.Add(title);
+            SortPageTitles();
+        }
+
+        /// <summary>
+        /// Checks if the specified line index is the beginning of a page title.
+        /// </summary>
+        /// <param name="lineIdx">The line index to check.</param>
+        /// <returns>True if it is a page title beginning; otherwise, false.</returns>
+        public bool IsBeginLineOfPageTitle(int lineIdx)
+        {
+            if (lineIdx < 0 || lineIdx >= LineCount)
+                return false;
+            var brLine = Lines[lineIdx];
+
+            return PageTitles.FindIndex(p => ReferenceEquals(brLine, p.ContentStartLineRef)) >= 0;
+        }
+
+        /// <summary>
+        /// Finds a page title by its beginning line reference.
+        /// </summary>
+        /// <param name="brLine">The braille line reference.</param>
+        /// <returns>The page title if found; otherwise, null.</returns>
+        public BraillePageTitle? FindPageTitleByBeginLine(BrailleLine brLine)
+        {
+            return PageTitles.Find(p => ReferenceEquals(brLine, p.ContentStartLineRef));
+        }
+
+
+        private void SortPageTitles()
+        {
+            PageTitles.Sort();
+        }
+
+        /// <summary>
+        /// 從現存的雙視點字檔案載入（反序列化）成新的 BailleDocument 物件。
+        /// </summary>
+        /// <param name="filename">檔名</param>
+        /// <returns>新的 BailleDocument 物件</returns>
+        public static BrailleDocument LoadBrailleFile(string filename)
+        {
+            if (!File.Exists(filename))
+            {
+                throw new FileNotFoundException("檔案不存在: " + filename);
+            }
+
+            string ext = Path.GetExtension(filename);
+            if (ext != null && ext.Equals(".byml", StringComparison.OrdinalIgnoreCase))
+            {
+                var doc = BrailleDocumentYamlSerializer.LoadFromYamlFile(filename);
+                FixInvalidLines(doc);
+                return doc;
+            }
+
+            string jsonStr = File.ReadAllText(filename);
+            BrailleDocument brDoc = JsonHelper.Deserialize<BrailleDocument>(jsonStr);
+            FixInvalidLines(brDoc);
+            return brDoc;
+        }
+
+        /// <summary>
+        /// 修正雙視文件：把沒有點字的 lines 替換成一個空方。
+        /// </summary>
+        private static void FixInvalidLines(BrailleDocument doc)
+        {
+            for (int i = doc.Lines.Count - 1; i >= 0; i--)
+            {
+                if (doc.Lines[i].CellCount < 1)
+                {
+                    doc.Lines[i].Clear();
+                    doc.RemoveLine(i);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 儲存到檔案（序列化）。
+        /// </summary>
+        /// <param name="filename">檔名</param>
+        public void SaveBrailleFile(string filename)
+        {
+            UpdateTitlesLineIndex();
+
+            string ext = Path.GetExtension(filename);
+            if (ext != null && ext.Equals(".byml", StringComparison.OrdinalIgnoreCase))
+            {
+                BrailleDocumentYamlSerializer.SaveToYamlFile(this, filename);
+                return;
+            }
+
+            string jsonStr = JsonHelper.Serialize<BrailleDocument>(this);
+            File.WriteAllText(filename, jsonStr);
+        }
+
+        /// <summary>
+        /// Saves the document as a text file.
+        /// </summary>
+        /// <param name="filename">The filename to save to.</param>
+        public void SaveTextFile(string filename)
+        {
+            var context = new ContextTagManager();
+
+            using (var writer = new StreamWriter(filename, false, Encoding.UTF8))
+            {
+                for (int lineIdx = 0; lineIdx < Lines.Count; lineIdx++)
+                {
+                    var pageTitle = FindPageTitle(lineIdx);
+                    if (pageTitle != null)
+                    {
+                        writer.WriteLine(pageTitle.ToOriginalTextString());
+                    }
+                    writer.WriteLine(Lines[lineIdx].ToOriginalTextString());
+                }
+            }
+        }
+
+        /// <summary>
+        /// Exports the document to an HTML file asynchronously.
+        /// </summary>
+        /// <param name="outputFileName">The output filename.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        public async Task ExportToHtmlFileAsync(string outputFileName)
+        {
+            await BrailleDocumentHelper.ExportToHtmlFileAsync(this, outputFileName);
+        }
+
+        /// <summary>
+        /// Gets all text content from the document.
+        /// </summary>
+        /// <returns>The complete text as a string.</returns>
+        public string GetAllText()
+        {
+            var result = new StringBuilder();
+            var context = new ContextTagManager();
+            for (int lineIdx = 0; lineIdx < Lines.Count; lineIdx++)
+            {
+                var pageTitle = FindPageTitle(lineIdx);
+                if (pageTitle != null)
+                {
+                    result.AppendLine(pageTitle.ToOriginalTextString());
+                }
+                result.AppendLine(Lines[lineIdx].ToTextString());
+            }
+            return result.ToString();
+        }
+
+        private BraillePageTitle? FindPageTitle(int lineIdx)
+        {
+            foreach (var title in PageTitles)
+            {
+                if (title.ContentStartLineIndex == lineIdx)
+                    return title;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 加入一列。
+        /// </summary>
+        /// <param name="brLine"></param>
+        public void AddLine(BrailleLine brLine)
+        {
+            m_Lines.Add(brLine);
+        }
+
+        /// <summary>
+        /// 在指定的索引處插入多個點字行。
+        /// </summary>
+        /// <param name="index">應插入點字行的以零為起始的索引。</param>
+        /// <param name="lines">要插入的點字行集合。</param>
+        public void InsertLines(int index, IEnumerable<BrailleLine> lines)
+        {
+            m_Lines.InsertRange(index, lines);
+        }
+
+        /// <summary>
+        /// 移除指定的列。注意：只做移除列的動作，不可清除列的內容物件!!
+        /// </summary>
+        /// <param name="index"></param>
+        public void RemoveLine(int index)
+        {
+            BrailleLine brLine = m_Lines[index];
+            m_Lines.RemoveAt(index);
+        }
+
+        /// <summary>
+        /// 確保至少有一個字。
+        /// </summary>
+        public void EnsureAtLeastOneWord()
+        {
+            if (Lines.Count == 0)
+            {
+                var brLine = new BrailleLine();
+                brLine.Words.Add(BrailleWord.BlankWord);
+                AddLine(brLine);
+            }
+        }
+
+        /// <summary>
+        /// 從文件中移除所有的點字行和頁標題。
+        /// </summary>
+        public void Clear()
+        {
+            m_Lines.Clear();
+
+            if (m_PageTitles != null)
+            {
+                m_PageTitles.Clear();
+            }
+        }
+
+        /// <summary>
+        /// 將整個點字文件轉換為其字串表示形式。
+        /// </summary>
+        /// <returns>代表整個文件的字串。</returns>
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (BrailleLine brLine in m_Lines)
+            {
+                sb.Append(brLine.ToString());
+                sb.Append("\r\n");
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 從 Lines 集合中取出頁標題，並將標題列自文件中移除。
+        /// </summary>
+        public int FetchPageTitles()
+        {
+            var newPageTitles = new List<BraillePageTitle>();
+
+            BrailleLine brLine;
+            int lineIdx = 0;
+            while (lineIdx < m_Lines.Count)
+            {
+                brLine = m_Lines[lineIdx];
+                if (brLine.ContainsTitleTag())
+                {
+                    var titleLine = Lines[lineIdx];
+                    var beginLine = Lines[lineIdx + 1];
+                    var pageTitle = new BraillePageTitle(titleLine, lineIdx, beginLine);
+                    newPageTitles.Add(pageTitle);
+
+                    Lines.RemoveAt(lineIdx);
+                }
+                else
+                {
+                    lineIdx++;
+                }
+            }
+
+            if (newPageTitles.Count > 0)
+            {
+                m_PageTitles.AddRange(newPageTitles);
+            }
+            return newPageTitles.Count;
+        }
+
+        /// <summary>
+        /// 更新所有頁標題的起始列索引。
+        /// 使用時機：BrailleDocument 存檔前、列印前。
+        /// </summary>
+        public int UpdateTitlesLineIndex()
+        {
+            if (m_PageTitles == null)
+            {
+                return 0;
+            }
+
+            int changeCount = 0; // 用於計算實際變更的數量
+
+            for (int i = m_PageTitles.Count - 1; i >= 0; i--)
+            {
+                var title = m_PageTitles[i];
+
+                if (title.UpdateLineIndex(this)) // 嘗試更新，這會改變 title 內部的 ContentStartLineIndex
+                {
+                    changeCount++;
+                }
+                else
+                {
+                    // 更新失敗，代表此標題要被移除，也是變更
+                    m_PageTitles.RemoveAt(i);
+                    changeCount++;
+                }
+            }
+            return changeCount; // 返回實際的變更次數
+        }
+
+        /// <summary>
+        /// 根據每個頁標題的起始列索引更新其對應的 BrailleLine 物件。
+        /// 使用時機：BrailleDocument 從檔案載入完畢時。
+        /// </summary>
+        public void UpdateTitlesLineObject()
+        {
+            if (m_PageTitles == null)
+            {
+                return;
+            }
+
+            for (int i = m_PageTitles.Count - 1; i >= 0; i--)
+            {
+                if (!m_PageTitles[i].UpdateLineObject(this))
+                {
+                    m_PageTitles.RemoveAt(i);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 根據指定的列索引判斷該列所在位置的頁標題為何，並傳回頁標題的 BrailleLine 物件。
+        /// </summary>
+        /// <param name="lineIdx"></param>
+        /// <returns></returns>
+        public BrailleLine? GetPageTitle(int lineIdx)
+        {
+            if (m_PageTitles == null)
+            {
+                return null;
+            }
+
+            if (lineIdx < 0)        // 注意：不用比對上限!! 因為在列印時，傳入的 lineIdx 有可能大於等於總列數。
+                return null;
+
+            BraillePageTitle? title; // Changed to nullable
+
+            int i = m_PageTitles.Count - 1; // 必須從底下往上比較
+            while (i >= 0)
+            {
+                title = m_PageTitles[i];
+                if (lineIdx >= title!.ContentStartLineIndex)
+                {
+                    return title!.TitleLine;
+                }
+                i--;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 傳回所有頁標題的 BrailleLine 物件串列。
+        /// </summary>
+        /// <returns></returns>
+        public List<BrailleLine> GetPageTitleLines()
+        {
+            List<BrailleLine> lines = new List<BrailleLine>();
+            foreach (BraillePageTitle t in m_PageTitles)
+            {
+                if (t.TitleLine != null)
+                {
+                    lines.Add(t.TitleLine);
+                }                    
+            }
+            return lines;
+        }
+
+
+        #region 序列化事件
+
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context)
+        {
+            if (m_PageTitles == null)
+            {
+                m_PageTitles = new List<BraillePageTitle>();
+            }
+            UpdateTitlesLineObject();
+        }
+
+        #endregion
+
+        // TODO: Dispose pattern。確保所有不用的記憶體都獲得釋放。
+
+        #region 屬性
+
+        /// <summary>
+        /// 取得或設定 BrailleProcessor 物件參考。
+        /// </summary>
+        [YamlIgnore]
+        public BrailleProcessor? Processor
+        {
+            get { return m_Processor; }
+            set { m_Processor = value; }
+        }
+
+        /// <summary>
+        /// 取得或設定每列最大方數。
+        /// </summary>
+        public int CellsPerLine
+        {
+            get { return m_CellsPerLine; }
+            set { m_CellsPerLine = value; }
+        }
+
+        /// <summary>
+        /// 取得或設定檔名。
+        /// </summary>        
+        [YamlIgnore]
+        public string? FileName
+        {
+            get { return m_FileName; }
+            set { m_FileName = value; }
+        }
+
+        /// <summary>
+        /// 取得所有點字行。
+        /// </summary>
+        public List<BrailleLine> Lines
+        {
+            get { return m_Lines; }
+            private set { m_Lines = value; }
+        }
+
+        /// <summary>
+        /// 取得指定索引的點字行。
+        /// </summary>
+        /// <param name="index">索引。</param>
+        /// <returns>點字行。</returns>
+        public BrailleLine this[int index]
+        {
+            get { return m_Lines[index]; }
+        }
+
+        /// <summary>
+        /// 取得總列數。
+        /// </summary>
+        [YamlIgnore]
+        public int LineCount
+        {
+            get { return m_Lines.Count; }
+        }
+
+        /// <summary>
+        ///  取得可顯示在畫面上的列的總數。有的列是空的，例如某些 context tag 會單獨占據一列。
+        /// </summary>
+        /// <returns></returns>
+        public int GetVisibleLineCount()
+        {
+            int count = 0;
+            foreach (var line in Lines)
+            {
+                if (line.CellCount > 0)
+                    count++;
+            }
+            return count;
+        }
+
+        /// <summary>
+        /// 取得字數最長的 line。
+        /// </summary>
+        public BrailleLine? GetLongestLine() // Changed return type to nullable
+        {
+            BrailleLine? longestLine = null; // Fixed CS8600
+            int maxCount = -1;
+            int curCount;
+            foreach (BrailleLine brLine in m_Lines)
+            {
+                curCount = brLine.WordCount;
+                if (curCount > maxCount)
+                {
+                    longestLine = brLine;
+                    maxCount = brLine.WordCount;
+                }
+            }
+            return longestLine;
+        }
+
+        /// <summary>
+        /// 取得或設定頁標題串列。
+        /// </summary>
+        public List<BraillePageTitle> PageTitles
+        {
+            get { return m_PageTitles; }
+            set { m_PageTitles = value; }
+        }
+
+        #endregion
+
+    }
+}

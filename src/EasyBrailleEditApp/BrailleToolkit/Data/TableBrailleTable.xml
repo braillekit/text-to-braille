@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Symbols>
+
+  <!-- 表格符號 -->
+  <symbol text="┌"    dots="2356"     type="Table"  Description="左上角" />
+  <symbol text="└"    dots="1245"     type="Table"  Description="左下角" />  
+  <symbol text="┐"    dots="2356"     type="Table"  Description="右上角" />
+  <symbol text="┘"    dots="1245"     type="Table"  Description="右下角" />
+  <symbol text="─"    dots="25"     type="Table"  Description="中橫線" />
+  <symbol text="‾"    dots="2356"     type="Table"  Description="上橫線" />
+  <symbol text="ˍ"    dots="1245"     type="Table"  Description="下橫線" />
+  <symbol text="│"    dots="123"     type="Table"  Description="左直線" />
+  <symbol text="∣"    dots="456"     type="Table"  Description="右直線（注意跟左直線是不同字元）" />
+  <symbol text="├"    dots="1235"     type="Table"  Description="左中 T 字" />
+  <symbol text="┤"    dots="2456"     type="Table"  Description="右中 T 字" />
+  <symbol text="┴"    dots="1245"     type="Table"  Description="下 T" />
+  <symbol text="┬"    dots="2356"     type="Table"  Description="上 T" />
+  <symbol text="┼"    dots="2456"     type="Table"  Description="交叉線" />
+</Symbols>
