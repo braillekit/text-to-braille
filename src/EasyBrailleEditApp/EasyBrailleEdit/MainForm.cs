@@ -1152,8 +1152,28 @@ namespace EasyBrailleEdit
                     await CheckUpdateAsync();
                     break;
                 case "RevisionHistory":
-                    ShowRevisionHistory();
+                    OpenReleaseNotes();
                     break;
+                case "UserManual":
+                    OpenUserManual();
+                    break;
+            }
+        }
+
+        private void OpenUserManual()
+        {
+            try
+            {
+                var psi = new ProcessStartInfo
+                {
+                    FileName = "https://braillekit.github.io/text-to-braille/",
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MsgBoxHelper.ShowError("無法開啟使用者手冊網頁: " + ex.Message);
             }
         }
 
@@ -1171,18 +1191,20 @@ namespace EasyBrailleEdit
             //m_PreviewConversionForm.SetTextToConvert(m_TextArea.Text);
         }
 
-        private void ShowRevisionHistory()
+        private void OpenReleaseNotes()
         {
-            // 用記事本開啟 ChangeLog.
-            var changeLogFileName = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath)!, Constant.ChangeLogFileName);
-
-            if (File.Exists(changeLogFileName))
+            try
             {
-                Process.Start("NotePad.exe", changeLogFileName);
+                var psi = new ProcessStartInfo
+                {
+                    FileName = "https://braillekit.github.io/text-to-braille/release-notes/",
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
             }
-            else
+            catch (Exception ex)
             {
-                MsgBoxHelper.ShowError($"找不到檔案: {changeLogFileName}");
+                MsgBoxHelper.ShowError("無法開啟版本資訊網頁: " + ex.Message);
             }
         }
 
