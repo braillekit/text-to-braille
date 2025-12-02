@@ -9,7 +9,7 @@
             載入使用者自訂詞庫。
             </summary>
         </member>
-        <member name="M:Txt2Brl.BrailleConverter.ConvertFile(System.String,System.String,System.Int32,System.Boolean)">
+        <member name="M:Txt2Brl.BrailleConverter.ConvertFile(System.String,System.String,System.Int32,System.Boolean,System.String,System.String)">
             <summary>
             執行點字轉檔。
             </summary>

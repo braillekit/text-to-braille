@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "Txt2Brl/5.0.0": {
+      "Txt2Brl/5.0.1-alpha.0.28": {
         "dependencies": {
           "BrailleToolkit": "1.0.0",
           "CommandLineParser": "2.9.1",
@@ -181,7 +181,7 @@
         "runtime": {
           "BrailleToolkit.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.0.1.0"
           }
         }
       },
@@ -192,14 +192,14 @@
         "runtime": {
           "EasyBrailleEdit.Common.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.0.1.0"
           }
         }
       }
     }
   },
   "libraries": {
-    "Txt2Brl/5.0.0": {
+    "Txt2Brl/5.0.1-alpha.0.28": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -38,6 +38,13 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="M:EasyBrailleEdit.Controls.PreviewPanel.ShowError(System.String,System.Collections.Generic.List{BrailleToolkit.CharPosition})">
+            <summary>
+            顯示錯誤訊息
+            </summary>
+            <param name="errorMessage">錯誤訊息</param>
+            <param name="invalidChars">無法轉換的字元清單（選填）</param>
+        </member>
         <member name="P:EasyBrailleEdit.ConversionDialog.SelectedPhraseFileNames">
             <summary>
             傳回使用者勾選的詞庫檔名清單。
@@ -601,6 +608,16 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:EasyBrailleEdit.Forms.UpdateNotificationDialog">
+            <summary>
+            軟體更新通知對話窗。
+            </summary>
+        </member>
+        <member name="M:EasyBrailleEdit.Forms.UpdateNotificationDialog.LinkReleaseNotes_Click(System.Object,System.EventArgs)">
+            <summary>
+            處理版本發布說明連結的點擊事件。
             </summary>
         </member>
         <member name="F:EasyBrailleEdit.Forms.ViewTextForm.components">
