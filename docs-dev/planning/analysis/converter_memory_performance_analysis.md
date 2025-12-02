@@ -48,7 +48,7 @@
 #### 2.1 字串操作效率問題（優先級：高）
 
 ##### 問題 1: 字串反轉操作效率不佳
-**位置：** [`BrailleProcessor.cs:514`](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit/BrailleProcessor.cs#L514)
+**位置：** [`BrailleProcessor.cs:514`](../../../src/EasyBrailleEditApp/BrailleToolkit/BrailleProcessor.cs#L514)
 
 ```csharp
 line = StrHelper.Reverse(line);
@@ -76,8 +76,8 @@ for (int i = line.Length - 1; i >= 0; i--)
 
 ##### 問題 2: 重複的 StringBuilder 操作
 **位置：** 
-- [`EnglishWordConverter.cs:188-192`](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit/Converters/EnglishWordConverter.cs#L188-L192)
-- [`UrlConverter.cs:123-127`](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit/Converters/UrlConverter.cs#L123-L127)
+- [`EnglishWordConverter.cs:188-192`](../../../src/EasyBrailleEditApp/BrailleToolkit/Converters/EnglishWordConverter.cs#L188-L192)
+- [`UrlConverter.cs:123-127`](../../../src/EasyBrailleEditApp/BrailleToolkit/Converters/UrlConverter.cs#L123-L127)
 
 ```csharp
 StringBuilder sb = new StringBuilder();
@@ -144,9 +144,9 @@ List<BrailleWord> brWordList = new List<BrailleWord>();
 
 ##### 問題 4: Stack.ToArray() 額外記憶體配置
 **位置：** 
-- [`EnglishWordConverter.cs:82-83`](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit/Converters/EnglishWordConverter.cs#L82-L83)
-- [`UrlConverter.cs:61-62`](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit/Converters/UrlConverter.cs#L61-L62)
-- [`TwChineseCharConverter.cs:55-56`](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit/Converters/TwChineseCharConverter.cs#L55-L56)
+- [`EnglishWordConverter.cs:82-83`](../../../src/EasyBrailleEditApp/BrailleToolkit/Converters/EnglishWordConverter.cs#L82-L83)
+- [`UrlConverter.cs:61-62`](../../../src/EasyBrailleEditApp/BrailleToolkit/Converters/UrlConverter.cs#L61-L62)
+- [`TwChineseCharConverter.cs:55-56`](../../../src/EasyBrailleEditApp/BrailleToolkit/Converters/TwChineseCharConverter.cs#L55-L56)
 
 ```csharp
 char[] charBuf = charStack.ToArray();
@@ -195,7 +195,7 @@ public EnglishWordConverter(BrailleProcessor processor)
 #### 2.4 中文轉換器特定問題（優先級：中）
 
 ##### 問題 6: 智慧型詞彙分析可能的效能瓶頸
-**位置：** [`TwChineseCharConverter.cs:220-262`](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit/Converters/TwChineseCharConverter.cs#L220-L262)
+**位置：** [`TwChineseCharConverter.cs:220-262`](../../../src/EasyBrailleEditApp/BrailleToolkit/Converters/TwChineseCharConverter.cs#L220-L262)
 
 ```csharp
 private void FixPhoneticCodes(List<BrailleWord> brWordList, int startIdx, int endIdx)

@@ -64,7 +64,7 @@ Output\EasyBrailleEdit\Release\<.NET-target>\
 - 只保留 Windows 平台的 runtimes
 - 保留手動維護的文件（LICENSE.md、ReleaseNote.txt）
 
-> **詳細說明**：參閱 [release-packaging.md](file:///d:/Projects/BrailleKit/text-to-braille/docs-dev/technical/deployment/release-packaging.md)
+> **詳細說明**：參閱 [release-packaging.md](release-packaging.md)
 
 ### 步驟 5：製作安裝程式（選擇性）
 
@@ -170,9 +170,9 @@ A: 常見原因：
 
 ## 相關文件
 
-- [發布打包詳細說明](file:///d:/Projects/BrailleKit/text-to-braille/docs-dev/technical/deployment/release-packaging.md)
-- [自動更新機制說明](file:///d:/Projects/BrailleKit/text-to-braille/docs-dev/technical/development/auto-updater.md)
-- [Prepare-Release.ps1 使用說明](file:///d:/Projects/BrailleKit/text-to-braille/Setup/README.md)
+- [發布打包詳細說明](release-packaging.md)
+- [自動更新機制說明](../development/auto-updater.md)
+- [Prepare-Release.ps1 使用說明](../../../Setup/README.md)
 
 ## 版本歷史
 

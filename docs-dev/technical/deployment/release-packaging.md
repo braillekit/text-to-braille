@@ -119,7 +119,7 @@ Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\
 | `runtimes/linux-*/` | ❌ 應排除 | Linux 平台 |
 | `runtimes/android-*/` | ❌ 應排除 | Android 平台 |
 
-> **詳細說明**：參閱 [Setup/README.md](file:///d:/Projects/BrailleKit/text-to-braille/Setup/README.md)
+> **詳細說明**：參閱 [Setup/README.md](../../../Setup/README.md)
 
 ### 步驟 4：製作安裝程式
 
@@ -287,9 +287,9 @@ Setup/
 
 ## 參考資料
 
-- [部署流程完整說明](file:///d:/Projects/BrailleKit/text-to-braille/docs-dev/technical/deployment/deployment-procedure.md)
-- [Prepare-Release.ps1 使用說明](file:///d:/Projects/BrailleKit/text-to-braille/Setup/README.md)
-- [建置輸出合併說明](file:///d:/Projects/BrailleKit/text-to-braille/docs-dev/technical/development/build-output-merge.md)
+- [部署流程完整說明](deployment-procedure.md)
+- [Prepare-Release.ps1 使用說明](../../../Setup/README.md)
+- [建置輸出合併說明](../development/build-output-merge.md)
 - [Inno Setup 官方文件](https://jrsoftware.org/isinfo.php)
 
 ## 版本歷史

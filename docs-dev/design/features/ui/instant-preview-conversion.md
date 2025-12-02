@@ -469,10 +469,10 @@ catch (Exception ex)
 
 ### 原始碼
 
-- [PreviewPanel.cs](../../../Source/EasyBrailleEditApp/EasyBrailleEdit/Controls/PreviewPanel.cs) - 預覽面板控制項
-- [MainForm.cs](../../../Source/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs) - 主表單與觸發邏輯
-- [BrailleConversionResult.cs](../../../Source/EasyBrailleEditApp/EasyBrailleEdit/Services/BrailleConversionResult.cs) - 轉換結果資料結構
-- [BrailleProcessor.cs](../../../Source/EasyBrailleEditApp/BrailleToolkit/BrailleProcessor.cs) - 點字轉換核心
+- [PreviewPanel.cs](../../../src/EasyBrailleEditApp/EasyBrailleEdit/Controls/PreviewPanel.cs) - 預覽面板控制項
+- [MainForm.cs](../../../src/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs) - 主表單與觸發邏輯
+- [BrailleConversionResult.cs](../../../src/EasyBrailleEditApp/EasyBrailleEdit/Services/BrailleConversionResult.cs) - 轉換結果資料結構
+- [BrailleProcessor.cs](../../../src/EasyBrailleEditApp/BrailleToolkit/BrailleProcessor.cs) - 點字轉換核心
 
 ### 技術文件
 

@@ -3,7 +3,7 @@
     準備 EasyBrailleEdit 發布檔案，將建置輸出複製到 Inno Setup 安裝程式目錄。
 
 .DESCRIPTION
-    此腳本會從 Release 建置輸出目錄複製必要的檔案到 Setup/InnoSetup/Files/app 目錄，
+    此腳本會從 Release 建置輸出目錄複製必要的檔案到 deploy/InnoSetup/Files/app 目錄，
     以便後續使用 Inno Setup 製作安裝程式。
 
     主要功能：
@@ -19,7 +19,7 @@
     Prerequisite   : PowerShell 5.1 或更高版本
     
 .EXAMPLE
-    .\Setup\Prepare-Release.ps1
+    .\deploy\Prepare-Release.ps1
     執行此腳本以準備發布檔案
 #>
 
@@ -37,7 +37,7 @@ $scriptDir = $PSScriptRoot
 $projectRoot = Split-Path $scriptDir -Parent
 
 # 建置輸出目錄
-$sourceDir = Join-Path $projectRoot "Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0"
+$sourceDir = Join-Path $projectRoot "output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0"
 
 # Inno Setup 目標目錄
 $targetDir = Join-Path $scriptDir "InnoSetup\Files\app"

@@ -9,13 +9,15 @@
 ### 前置條件
 
 1. 已完成 Release 建置：
+
    ```powershell
-   dotnet build .\Source\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj -c Release
+   dotnet build .\src\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj -c Release
    ```
 
 2. 確認建置輸出存在於：
+
    ```
-   Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\
+   output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0\
    ```
 
 ### 執行腳本
@@ -23,20 +25,21 @@
 從專案根目錄執行：
 
 ```powershell
-.\Setup\Prepare-Release.ps1
+.\deploy\Prepare-Release.ps1
 ```
 
 若需查看詳細執行過程，可加上 `-Verbose` 參數：
 
 ```powershell
-.\Setup\Prepare-Release.ps1 -Verbose
+.\deploy\Prepare-Release.ps1 -Verbose
 ```
 
 ### 執行結果
 
 腳本會將檔案複製到：
-```
-Setup\InnoSetup\Files\app\
+
+```text
+deploy\InnoSetup\Files\app\
 ```
 
 ## 自動處理功能
@@ -54,6 +57,7 @@ Setup\InnoSetup\Files\app\
 ### 手動維護檔案保留
 
 腳本會保留以下手動維護的檔案（不會被刪除）：
+
 - `LICENSE.md`
 - `ReleaseNote.txt`
 
@@ -63,23 +67,25 @@ Setup\InnoSetup\Files\app\
 
 1. **更新版本號和文件**
    - 更新 `ChangeLog.md`
-   - 準備 `Setup/InnoSetup/Files/ReleaseNote.txt`（發行說明）
-   - 確認 `Setup/InnoSetup/Files/LICENSE.md` 為最新版本
+   - 準備 `deploy/InnoSetup/Files/ReleaseNote.txt`（發行說明）
+   - 確認 `deploy/InnoSetup/Files/LICENSE.md` 為最新版本
 
 2. **執行 Release 建置**
+
    ```powershell
-   dotnet build .\Source\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj -c Release
+   dotnet build .\src\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj -c Release
    ```
 
 3. **執行打包腳本**
+
    ```powershell
-   .\Setup\Prepare-Release.ps1
+   .\deploy\Prepare-Release.ps1
    ```
 
 4. **製作安裝程式**
-   - 使用 Inno Setup 開啟 `Setup\InnoSetup\Setup.iss`
+   - 使用 Inno Setup 開啟 `deploy\InnoSetup\Setup.iss`
    - 編譯安裝程式
-   - 產生的 `setup.exe` 會在 `Setup\InnoSetup\` 目錄
+   - 產生的 `setup.exe` 會在 `deploy\InnoSetup\` 目錄
 
 5. **測試安裝程式**
    - 在乾淨的測試環境安裝
@@ -95,21 +101,24 @@ Setup\InnoSetup\Files\app\
 ### 找不到建置輸出目錄
 
 **錯誤訊息**：
-```
-找不到建置輸出目錄: Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0
+
+```text
+找不到建置輸出目錄: output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0
 請先執行 Release 建置。
 ```
 
 **解決方法**：
 執行 Release 建置：
+
 ```powershell
-dotnet build .\Source\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj -c Release
+dotnet build .\src\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj -c Release
 ```
 
 ### 找不到必要檔案
 
 **錯誤訊息**：
-```
+
+```text
 找不到必要檔案: EasyBrailleEdit.exe
 請確認 Release 建置是否成功。
 ```
@@ -121,7 +130,7 @@ dotnet build .\Source\EasyBrailleEditApp\EasyBrailleEdit\EasyBrailleEdit.csproj 
 
 成功執行時會顯示：
 
-```
+```text
 ========================================
 EasyBrailleEdit 發布檔案準備工具
 ========================================
@@ -142,8 +151,8 @@ EasyBrailleEdit 發布檔案準備工具
 
 [完成摘要]
 
-來源目錄: D:\Projects\BrailleKit\text-to-braille\Output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0
-目標目錄: D:\Projects\BrailleKit\text-to-braille\Setup\InnoSetup\Files\app
+來源目錄: output\EasyBrailleEdit\Release\net10.0-windows10.0.17763.0
+目標目錄: deploy\InnoSetup\Files\app
 檔案總數: 105
 目錄總數: 26
 總大小: 43.21 MB

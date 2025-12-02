@@ -135,10 +135,10 @@ dotnet test --logger "console;verbosity=detailed"
 
 ## 相關檔案
 
-- [EasyBrailleEdit.Tests.csproj](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit.Tests/EasyBrailleEdit.Tests.csproj)
-- [ClipboardHelperTests.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit.Tests/DualEdit/ClipboardHelperTests.cs)
-- [AssemblyInfo.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/Properties/AssemblyInfo.cs)
-- [ClipboardHelper.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/DualEdit/ClipboardHelper.cs) (被測試的類別)
+- [EasyBrailleEdit.Tests.csproj](../../../src/EasyBrailleEditApp/EasyBrailleEdit.Tests/EasyBrailleEdit.Tests.csproj)
+- [ClipboardHelperTests.cs](../../../src/EasyBrailleEditApp/EasyBrailleEdit.Tests/DualEdit/ClipboardHelperTests.cs)
+- [AssemblyInfo.cs](../../../src/EasyBrailleEditApp/EasyBrailleEdit/Properties/AssemblyInfo.cs)
+- [ClipboardHelper.cs](../../../src/EasyBrailleEditApp/EasyBrailleEdit/DualEdit/ClipboardHelper.cs) (被測試的類別)
 
 ## 總結
 

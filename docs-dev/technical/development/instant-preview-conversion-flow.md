@@ -27,7 +27,7 @@
 - **延遲觸發**：使用者輸入文字後停止打字約 1.5 秒（可透過 `AutoPreviewDelay` 設定調整）
 - **立即觸發**：儲存檔案時
 
-程式碼位置：[MainForm.cs:213-223](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs#L213-L223)
+程式碼位置：[MainForm.cs:213-223](../../../src/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs#L213-L223)
 
 ```csharp
 private void TextArea_TextChanged(object? sender, EventArgs e)
@@ -51,7 +51,7 @@ private void TextArea_TextChanged(object? sender, EventArgs e)
 - 擷取前後 N 行（由 `PreviewContextLines` 設定控制，預設為 5 行）
 - 將這些行的文字組合成待轉換內容
 
-程式碼位置：[MainForm.cs:394-405](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs#L394-L405)
+程式碼位置：[MainForm.cs:394-405](../../../src/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs#L394-L405)
 
 ```csharp
 // 1. 計算範圍 (前後 N 行)
@@ -88,7 +88,7 @@ BrailleDocument.LoadAndConvert()
 
 #### 3.2 轉換服務
 
-程式碼位置：[InProcessBrailleConverter.cs:60-62](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/Services/InProcessBrailleConverter.cs#L60-L62)
+程式碼位置：[InProcessBrailleConverter.cs:60-62](../../../src/EasyBrailleEditApp/EasyBrailleEdit/Services/InProcessBrailleConverter.cs#L60-L62)
 
 ```csharp
 // 執行轉換
@@ -98,7 +98,7 @@ _doc.Convert(content);
 
 #### 3.3 文件轉換核心邏輯
 
-程式碼位置：[BrailleDocument.cs:146-175](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit/BrailleDocument.cs#L146-L175)
+程式碼位置：[BrailleDocument.cs:146-175](../../../src/EasyBrailleEditApp/BrailleToolkit/BrailleDocument.cs#L146-L175)
 
 ```csharp
 public void LoadAndConvert(TextReader reader)
@@ -140,7 +140,7 @@ public void LoadAndConvert(TextReader reader)
 
 #### 4.1 ConvertLine 的設計理念
 
-程式碼位置：[BrailleProcessor.cs:479-486](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit/BrailleProcessor.cs#L479-L486)
+程式碼位置：[BrailleProcessor.cs:479-486](../../../src/EasyBrailleEditApp/BrailleToolkit/BrailleProcessor.cs#L479-L486)
 
 ```csharp
 /// <summary>
@@ -162,7 +162,7 @@ public BrailleLine ConvertLine(string line, int lineNumber)
 
 #### 4.2 FormatDocument 執行斷行
 
-程式碼位置：[BrailleProcessor.cs:1131-1141](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit/BrailleProcessor.cs#L1131-L1141)
+程式碼位置：[BrailleProcessor.cs:1131-1141](../../../src/EasyBrailleEditApp/BrailleToolkit/BrailleProcessor.cs#L1131-L1141)
 
 ```csharp
 public void FormatDocument(BrailleDocument doc)
@@ -188,7 +188,7 @@ public void FormatDocument(BrailleDocument doc)
 
 轉換完成後，結果會傳遞給 `PreviewPanel` 元件顯示：
 
-程式碼位置：[MainForm.cs:415-418](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs#L415-L418)
+程式碼位置：[MainForm.cs:415-418](../../../src/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs#L415-L418)
 
 ```csharp
 // 3. 讀取結果
@@ -231,7 +231,7 @@ flowchart TD
 | `PreviewContextLines` | `5` | 游標前後擷取行數 | `[Braille]` 區段 |
 | `CellsPerLine` | `32` | 每行最大方數 | `[Braille]` 區段 |
 
-設定檔參考：[BrailleSection.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit.Common/Config/Sections/BrailleSection.cs)
+設定檔參考：[BrailleSection.cs](../../../src/EasyBrailleEditApp/EasyBrailleEdit.Common/Config/Sections/BrailleSection.cs)
 
 ## 效能考量
 
@@ -254,16 +254,16 @@ flowchart TD
 
 ### 核心檔案
 
-- [MainForm.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs) - 即時預覽觸發與控制邏輯
-- [PreviewPanel.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/Controls/PreviewPanel.cs) - 預覽面板 UI
-- [InProcessBrailleConverter.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/Services/InProcessBrailleConverter.cs) - 內建轉換服務
-- [BrailleDocument.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit/BrailleDocument.cs) - 點字文件模型與轉換邏輯
-- [BrailleProcessor.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit/BrailleProcessor.cs) - 點字處理器（含斷行排版）
+- [MainForm.cs](../../../src/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs) - 即時預覽觸發與控制邏輯
+- [PreviewPanel.cs](../../../src/EasyBrailleEditApp/EasyBrailleEdit/Controls/PreviewPanel.cs) - 預覽面板 UI
+- [InProcessBrailleConverter.cs](../../../src/EasyBrailleEditApp/EasyBrailleEdit/Services/InProcessBrailleConverter.cs) - 內建轉換服務
+- [BrailleDocument.cs](../../../src/EasyBrailleEditApp/BrailleToolkit/BrailleDocument.cs) - 點字文件模型與轉換邏輯
+- [BrailleProcessor.cs](../../../src/EasyBrailleEditApp/BrailleToolkit/BrailleProcessor.cs) - 點字處理器（含斷行排版）
 
 ### 設定檔案
 
-- [BrailleSection.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit.Common/Config/Sections/BrailleSection.cs) - 點字相關設定
-- [AppConfig.Default.ini](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit.Common/AppConfig.Default.ini) - 預設設定檔
+- [BrailleSection.cs](../../../src/EasyBrailleEditApp/EasyBrailleEdit.Common/Config/Sections/BrailleSection.cs) - 點字相關設定
+- [AppConfig.Default.ini](../../../src/EasyBrailleEditApp/EasyBrailleEdit.Common/AppConfig.Default.ini) - 預設設定檔
 
 ## 總結
 

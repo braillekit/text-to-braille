@@ -152,8 +152,8 @@ Clipboard.SetData(ClipboardObjectFormatForWords, s);
 
 ## 相關檔案
 
-- 📄 [`ClipboardHelper.cs`](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/DualEdit/ClipboardHelper.cs)
-- 📄 [`BrailleGridController_EditCommands.cs`](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/DualEdit/BrailleGridController_EditCommands.cs) (呼叫 ClipboardHelper 的地方)
+- 📄 [`ClipboardHelper.cs`](../../../src/EasyBrailleEditApp/EasyBrailleEdit/DualEdit/ClipboardHelper.cs)
+- 📄 [`BrailleGridController_EditCommands.cs`](../../../src/EasyBrailleEditApp/EasyBrailleEdit/DualEdit/BrailleGridController_EditCommands.cs) (呼叫 ClipboardHelper 的地方)
 
 ---
 

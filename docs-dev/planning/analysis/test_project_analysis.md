@@ -117,5 +117,5 @@
 
 ## 相關檔案
 
-- [BrailleToolkit.Tests.csproj](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit.Tests/BrailleToolkit.Tests.csproj)
-- [EasyBrailleEdit.Tests.csproj](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit.Tests/EasyBrailleEdit.Tests.csproj)
+- [BrailleToolkit.Tests.csproj](../../../src/EasyBrailleEditApp/BrailleToolkit.Tests/BrailleToolkit.Tests.csproj)
+- [EasyBrailleEdit.Tests.csproj](../../../src/EasyBrailleEditApp/EasyBrailleEdit.Tests/EasyBrailleEdit.Tests.csproj)

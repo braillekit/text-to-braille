@@ -14,13 +14,13 @@ Embed the "Instant Braille Preview" directly into the main application window in
 
 ### EasyBrailleEdit
 
-#### [NEW] [Controls/PreviewPanel.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/Controls/PreviewPanel.cs)
+#### [NEW] [Controls/PreviewPanel.cs](../../src/EasyBrailleEditApp/EasyBrailleEdit/Controls/PreviewPanel.cs)
 
 - Create a new `UserControl` named `PreviewPanel`.
 - Add a `WebBrowser` control docked to Fill.
 - Implement `UpdatePreview(List<BrailleLine> lines)` method (logic moved from `PreviewConversionForm`).
 
-#### [MODIFY] [MainForm.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs)
+#### [MODIFY] [MainForm.cs](../../src/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs)
 
 - **InitTextArea**:
   - Create `SplitContainer` (`m_SplitContainer`).
@@ -34,7 +34,7 @@ Embed the "Instant Braille Preview" directly into the main application window in
   - Call `m_PreviewPanel.UpdatePreview` instead of the form's method.
 - **Remove** references to `PreviewConversionForm`.
 
-#### [DELETE] [PreviewConversionForm.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/PreviewConversionForm.cs)
+#### [DELETE] [PreviewConversionForm.cs](../../src/EasyBrailleEditApp/EasyBrailleEdit/PreviewConversionForm.cs)
 
 - Remove the obsolete form.
 
