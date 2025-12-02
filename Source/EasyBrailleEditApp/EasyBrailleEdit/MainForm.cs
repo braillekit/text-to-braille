@@ -858,7 +858,8 @@ namespace EasyBrailleEdit
 
             if (updater.HasUpdates())
             {
-                if (MsgBoxHelper.ShowYesNo("「易點雙視」有新版本，是否立即更新？") == DialogResult.Yes)
+                using var updateDialog = new UpdateNotificationDialog();
+                if (updateDialog.ShowDialog(this) == DialogResult.Yes)
                 {
                     UpdateProgressForm updForm = new UpdateProgressForm();
                     updForm.Show();

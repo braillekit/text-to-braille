@@ -469,19 +469,19 @@ catch (Exception ex)
 
 ### 原始碼
 
-- [PreviewPanel.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/Controls/PreviewPanel.cs) - 預覽面板控制項
-- [MainForm.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs) - 主表單與觸發邏輯
-- [BrailleConversionResult.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/EasyBrailleEdit/Services/BrailleConversionResult.cs) - 轉換結果資料結構
-- [BrailleProcessor.cs](file:///d:/Projects/BrailleKit/text-to-braille/Source/EasyBrailleEditApp/BrailleToolkit/BrailleProcessor.cs) - 點字轉換核心
+- [PreviewPanel.cs](../../../Source/EasyBrailleEditApp/EasyBrailleEdit/Controls/PreviewPanel.cs) - 預覽面板控制項
+- [MainForm.cs](../../../Source/EasyBrailleEditApp/EasyBrailleEdit/MainForm.cs) - 主表單與觸發邏輯
+- [BrailleConversionResult.cs](../../../Source/EasyBrailleEditApp/EasyBrailleEdit/Services/BrailleConversionResult.cs) - 轉換結果資料結構
+- [BrailleProcessor.cs](../../../Source/EasyBrailleEditApp/BrailleToolkit/BrailleProcessor.cs) - 點字轉換核心
 
 ### 技術文件
 
-- [即時預覽轉換流程分析](file:///d:/Projects/BrailleKit/text-to-braille/docs-dev/technical/development/instant-preview-conversion-flow.md)
-- [雙模式架構設計](file:///d:/Projects/BrailleKit/text-to-braille/docs-dev/technical/development/dual-mode-architecture.md)
+- [即時預覽轉換流程分析](../../technical/development/instant-preview-conversion-flow.md)
+- [雙模式架構設計](../../technical/development/dual-mode-architecture.md)
 
 ### 使用者文件
 
-- [即時點字預覽使用說明](file:///d:/Projects/BrailleKit/text-to-braille/docs-user/content/features/instant-braille-preview/)
+- [即時點字預覽使用說明](../../../docs-user/content/features/instant-braille-preview/)
 
 ## 版本歷史
 
