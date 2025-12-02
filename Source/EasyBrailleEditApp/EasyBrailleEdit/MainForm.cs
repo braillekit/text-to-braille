@@ -400,7 +400,7 @@ namespace EasyBrailleEdit
                 StringBuilder sb = new StringBuilder();
                 for (int i = startLine; i <= endLine; i++)
                 {
-                    sb.Append(m_TextArea.Lines[i].Text); // .Text 屬性已經包含換行符號，故這裡不可用 AppendLine 方法!
+                    sb.Append(m_TextArea.Lines[i].Text); // .Text 屬性已經包含換行符號,故這裡不可用 AppendLine 方法!
                 }
                 string content = sb.ToString();
 
@@ -417,11 +417,27 @@ namespace EasyBrailleEdit
                     // 4. 更新預覽視窗
                     m_PreviewPanel.UpdatePreview(doc.Lines);
                 }
+                else if (result.HasError)
+                {
+                    // 顯示轉換錯誤訊息
+                    string errorMsg = result.ErrorMessage;
+                    if (string.IsNullOrEmpty(errorMsg) && result.InvalidChars.Count > 0)
+                    {
+                        errorMsg = "輸入的文字中包含無法轉換的字元。";
+                    }
+                    m_PreviewPanel.ShowError(errorMsg, result.InvalidChars);
+                }
+                else
+                {
+                    // 其他未預期的失敗狀況
+                    m_PreviewPanel.ShowError("轉換失敗，但未有明確的錯誤訊息。");
+                }
             }
             catch (Exception ex)
             {
                 Log.Error(ex, "UpdatePreviewAsync failed");
-                // 預覽失敗不應干擾使用者，只記錄 Log
+                // 顯示例外錯誤訊息給使用者
+                m_PreviewPanel.ShowError($"即時預覽發生錯誤：{ex.Message}");
             }
         }
 
