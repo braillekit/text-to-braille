@@ -17,15 +17,9 @@ namespace EasyBrailleEdit.Tests.Services
         private void EnsureTxt2BrlExists()
         {
             string targetPath = Path.Combine(Application.StartupPath, "txt2brl.exe");
-            if (File.Exists(targetPath)) return;
-
-            // Try to locate Txt2Brl.exe in the build output directory
-            // We are in src\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug\net10.0-windows10.0.17763.0
-            // We want to go to output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0\Txt2Brl.exe
             
-            // Go up 5 levels to root (src\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug\net10.0-windows10.0.17763.0 -> src\EasyBrailleEditApp\EasyBrailleEdit.Tests\bin\Debug -> ... -> src)
-            // Actually, let's just search for it or use a known relative path.
-            // Root is d:\Projects\BrailleKit\text-to-braille
+            // Always try to locate Txt2Brl.exe in the build output directory and copy it
+            // to ensure we are using the latest version.
             
             string rootDir = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\..\..\..\..\"));
             string sourcePath = Path.Combine(rootDir, @"output\EasyBrailleEdit\Debug\net10.0-windows10.0.17763.0\Txt2Brl.exe");
@@ -33,11 +27,6 @@ namespace EasyBrailleEdit.Tests.Services
             if (File.Exists(sourcePath))
             {
                 File.Copy(sourcePath, targetPath, true);
-                
-                // Also copy dependencies if needed (e.g. BrailleToolkit.dll, but it should be in test dir already)
-                // Txt2Brl might need other dlls.
-                // Let's copy everything from that folder just in case? No, that's messy.
-                // Txt2Brl depends on BrailleToolkit and EasyBrailleEdit.Common, which are already in test dir.
             }
         }
 
@@ -60,7 +49,7 @@ namespace EasyBrailleEdit.Tests.Services
             var result = await converter.ConvertAsync(content, cellsPerLine, phraseFiles);
 
             // Assert
-            Assert.True(result.Success);
+            Assert.True(result.Success, $"Conversion failed: {result.ErrorMessage}");
             Assert.NotNull(result.OutputFilePath);
             Assert.True(File.Exists(result.OutputFilePath));
             

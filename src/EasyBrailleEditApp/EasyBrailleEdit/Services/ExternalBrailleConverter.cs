@@ -23,26 +23,57 @@ namespace EasyBrailleEdit.Services
             string[] phraseFiles,
             IProgress<ConversionProgress>? progress = null)
         {
+            // 產生唯一識別碼以避免並行執行時的檔案衝突
+            string uniqueId = Guid.NewGuid().ToString("N");
+            
             // 準備輸入檔案
-            string inFileName = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtInputTempFileName);
-            string outFileName = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtOutputTempFileName);
-            string phraseListFile = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtInputPhraseListFileName);
+            string inFileName = Path.Combine(AppGlobals.TempPath, $"{Constant.Files.CvtInputTempFileName}_{uniqueId}.txt");
+            string outFileName = Path.Combine(AppGlobals.TempPath, $"{Constant.Files.CvtOutputTempFileName}_{uniqueId}.brl");
+            string phraseListFile = Path.Combine(AppGlobals.TempPath, $"{Constant.Files.CvtInputPhraseListFileName}_{uniqueId}.txt");
+            string resultFile = Path.Combine(AppGlobals.TempPath, $"{Constant.Files.CvtResultFileName}_{uniqueId}.txt");
+            string errorCharFile = Path.Combine(AppGlobals.TempPath, $"{Constant.Files.CvtErrorCharFileName}_{uniqueId}.txt");
             
-            await File.WriteAllTextAsync(inFileName, content, Encoding.UTF8);
-            await File.WriteAllLinesAsync(phraseListFile, phraseFiles, Encoding.UTF8);
-            
-            // 呼叫 Txt2Brl.exe
-            await InvokeTxt2BrlAsync(inFileName, outFileName, cellsPerLine);
-            
-            // 讀取結果
-            return ReadConversionResult(outFileName);
+            try 
+            {
+                await File.WriteAllTextAsync(inFileName, content, Encoding.UTF8);
+                await File.WriteAllLinesAsync(phraseListFile, phraseFiles, Encoding.UTF8);
+                
+                // 呼叫 Txt2Brl.exe
+                await InvokeTxt2BrlAsync(inFileName, outFileName, cellsPerLine, resultFile, errorCharFile);
+                
+                // 讀取結果
+                return ReadConversionResult(outFileName, resultFile, errorCharFile, _fileRunner.StdOutputMsg);
+            }
+            finally
+            {
+                // 清理暫存檔案
+                DeleteFileIfExists(inFileName);
+                // DeleteFileIfExists(outFileName); // Output file should be kept for caller
+                DeleteFileIfExists(phraseListFile);
+                DeleteFileIfExists(resultFile);
+                DeleteFileIfExists(errorCharFile);
+            }
         }
         
-        private async Task InvokeTxt2BrlAsync(string inFileName, string outFileName, int cellsPerLine)
+        private void DeleteFileIfExists(string fileName)
+        {
+            try
+            {
+                if (File.Exists(fileName)) File.Delete(fileName);
+            }
+            catch
+            {
+                // 忽略刪除失敗
+            }
+        }
+        
+        private async Task InvokeTxt2BrlAsync(string inFileName, string outFileName, int cellsPerLine, string resultFile, string errorCharFile)
         {
             StringBuilder arg = new StringBuilder();
             arg.Append($" -i \"{inFileName}\" -o \"{outFileName}\" ");
             arg.Append($"-c{cellsPerLine} ");
+            arg.Append($"--result \"{resultFile}\" ");
+            arg.Append($"--error \"{errorCharFile}\" ");
             
             _fileRunner.NeedWait = true;
             _fileRunner.ShowWindow = false;
@@ -54,11 +85,11 @@ namespace EasyBrailleEdit.Services
             
             if (exitCode != 0)
             {
-                throw new Exception($"轉點字過程發生錯誤 (Exit Code: {exitCode})!");
+                throw new Exception($"轉點字過程發生錯誤 (Exit Code: {exitCode})! Output: {_fileRunner.StdOutputMsg}");
             }
         }
         
-        private BrailleConversionResult ReadConversionResult(string outFileName)
+        private BrailleConversionResult ReadConversionResult(string outFileName, string resultFile, string errorCharFile, string stdOutput)
         {
             var result = new BrailleConversionResult
             {
@@ -66,9 +97,6 @@ namespace EasyBrailleEdit.Services
             };
             
             // 讀取錯誤資訊（從臨時檔案）
-            string resultFile = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtResultFileName);
-            string errorCharFile = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtErrorCharFileName);
-            
             if (File.Exists(resultFile))
             {
                 var lines = File.ReadAllLines(resultFile);
@@ -81,6 +109,12 @@ namespace EasyBrailleEdit.Services
                 {
                     result.Success = true;
                 }
+            }
+            else
+            {
+                // Result file missing, likely Txt2Brl failed to run properly
+                result.Success = false;
+                result.ErrorMessage = $"Result file not found. Txt2Brl output: {stdOutput}";
             }
             
             if (File.Exists(errorCharFile))

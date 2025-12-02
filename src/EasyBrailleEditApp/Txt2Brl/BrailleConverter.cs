@@ -85,9 +85,12 @@ namespace Txt2Brl
 			}
 		}
 
-        public void Convert(string inputText, string outputFile, int cellsPerLine, bool verboseMode)
+        public void Convert(string inputText, string outputFile, int cellsPerLine, bool verboseMode,
+            string? resultFile = null, string? errorFile = null)
         {
             m_OutFileName = outputFile;
+            m_CvtResultFileName = resultFile ?? Path.Combine(AppGlobals.TempPath, Constant.Files.CvtResultFileName);
+            m_CvtErrorCharFileName = errorFile ?? Path.Combine(AppGlobals.TempPath, Constant.Files.CvtErrorCharFileName);
 
             PrepareConversion();
 
@@ -123,9 +126,11 @@ namespace Txt2Brl
         /// <param name="cellsPerLine">每列最大方數。</param>
         /// <param name="verboseMode">冗長資訊模式。</param>
         public void ConvertFile(string inFileName, string outFileName, 
-			int cellsPerLine, bool verboseMode) 
+			int cellsPerLine, bool verboseMode, string? resultFile = null, string? errorFile = null) 
 		{
 			m_OutFileName = outFileName;
+            m_CvtResultFileName = resultFile ?? Path.Combine(AppGlobals.TempPath, Constant.Files.CvtResultFileName);
+            m_CvtErrorCharFileName = errorFile ?? Path.Combine(AppGlobals.TempPath, Constant.Files.CvtErrorCharFileName);
 
 			PrepareConversion();
 

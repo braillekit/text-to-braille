@@ -105,11 +105,13 @@ namespace Txt2Brl
             {
                 if (opts.Stdin)
                 {
-                    DoConvertString(inputText, opts.OutputFileName, opts.CellsPerLine, opts.Verbose);
+                    DoConvertString(inputText, opts.OutputFileName, opts.CellsPerLine, opts.Verbose, 
+                        opts.ResultFileName, opts.ErrorFileName);
                 }
                 else
                 {
-                    DoConvertFile(opts.InputFileName, opts.OutputFileName, opts.CellsPerLine, opts.Verbose);
+                    DoConvertFile(opts.InputFileName, opts.OutputFileName, opts.CellsPerLine, opts.Verbose,
+                        opts.ResultFileName, opts.ErrorFileName);
                 }
             }
             catch (Exception ex)
@@ -134,23 +136,25 @@ namespace Txt2Brl
             Console.WriteLine("    --stdin             : 讓你輸入欲轉換的文字。若同時使用了 -i 來指定輸入檔名，會優先採用此選項。\n");
             Console.WriteLine("    -cn, --cellsperline : 每列最大方數。\n");
             Console.WriteLine("    -v, --verbose       : 冗長訊息模式。\n");
+            Console.WriteLine("    --result            : 轉換結果檔案名稱 (0:成功, 1:失敗)。\n");
+            Console.WriteLine("    --error             : 錯誤字元列表檔案名稱。\n");
         }
 
 
         private static void DoConvertFile(string inputFile, string outputFile, 
-            int cellsPerLine, bool verboseMode)
+            int cellsPerLine, bool verboseMode, string? resultFile, string? errorFile)
         {
             BrailleConverter cvt = new BrailleConverter();
 
-            cvt.ConvertFile(inputFile, outputFile, cellsPerLine, verboseMode);
+            cvt.ConvertFile(inputFile, outputFile, cellsPerLine, verboseMode, resultFile, errorFile);
         }
 
         private static void DoConvertString(string inputText, string outputFile,
-            int cellsPerLine, bool verboseMode)
+            int cellsPerLine, bool verboseMode, string? resultFile, string? errorFile)
         {
             BrailleConverter cvt = new BrailleConverter();
 
-            cvt.Convert(inputText, outputFile, cellsPerLine, verboseMode);
+            cvt.Convert(inputText, outputFile, cellsPerLine, verboseMode, resultFile, errorFile);
         }
 
     }

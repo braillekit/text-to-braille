@@ -29,5 +29,11 @@ namespace Txt2Brl
         // Omitting long name, defaults to name of property, ie "--verbose"
         [Option('v', "verbose", Default = false, HelpText = "顯示詳細的處理過程。")]
         public bool Verbose { get; set; }
+
+        [Option("result", Required = false, HelpText = "轉換結果檔案名稱 (0:成功, 1:失敗)。")]
+        public string? ResultFileName { get; set; }
+
+        [Option("error", Required = false, HelpText = "錯誤字元列表檔案名稱。")]
+        public string? ErrorFileName { get; set; }
     }
 }
