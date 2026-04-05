@@ -169,7 +169,22 @@ namespace BrailleToolkit
 
         public BrailleWord ToBrailleWord()
         {
-            return Build().ToBrailleWord();
+            return BrailleWordBuilderCompatibility.CreateBrailleWord(
+                Text,
+                OriginalText,
+                Language,
+                _cells.AsSpan(),
+                PhoneticCode,
+                IsPolyphonic,
+                DontBreakLineHere,
+                ContextNames,
+                ContextTag,
+                IsContextTag,
+                IsConvertedFromTag,
+                NoDigitCell,
+                NoSpace,
+                NoCapitalRule,
+                IsEngPhonetic);
         }
     }
 
@@ -215,32 +230,69 @@ namespace BrailleToolkit
 
         public BrailleWord ToBrailleWord()
         {
-            var word = new BrailleWord(Text)
+            return BrailleWordBuilderCompatibility.CreateBrailleWord(
+                Text,
+                OriginalText,
+                Language,
+                Cells.Span,
+                PhoneticCode,
+                IsPolyphonic,
+                DontBreakLineHere,
+                ContextNames,
+                ContextTag,
+                IsContextTag,
+                IsConvertedFromTag,
+                NoDigitCell,
+                NoSpace,
+                NoCapitalRule,
+                IsEngPhonetic);
+        }
+    }
+
+    internal static class BrailleWordBuilderCompatibility
+    {
+        internal static BrailleWord CreateBrailleWord(
+            string text,
+            string originalText,
+            BrailleLanguage language,
+            ReadOnlySpan<BrailleCell> cells,
+            string? phoneticCode,
+            bool isPolyphonic,
+            bool dontBreakLineHere,
+            string contextNames,
+            IContextTag? contextTag,
+            bool isContextTag,
+            bool isConvertedFromTag,
+            bool noDigitCell,
+            bool noSpace,
+            bool noCapitalRule,
+            bool isEngPhonetic)
+        {
+            var word = new BrailleWord(text)
             {
-                OriginalText = OriginalText
+                OriginalText = originalText
             };
 
-            word.Language = Language;
-            word.DontBreakLineHere = DontBreakLineHere;
-            word.NoDigitCell = NoDigitCell;
-            word.NoSpace = NoSpace;
-            word.NoCapitalRule = NoCapitalRule;
-            word.IsEngPhonetic = IsEngPhonetic;
-            word.ContextNames = ContextNames;
-            word.IsContextTag = IsContextTag;
-            word.IsConvertedFromTag = IsConvertedFromTag;
-            word.ContextTag = ContextTag;
+            word.Language = language;
+            word.DontBreakLineHere = dontBreakLineHere;
+            word.NoDigitCell = noDigitCell;
+            word.NoSpace = noSpace;
+            word.NoCapitalRule = noCapitalRule;
+            word.IsEngPhonetic = isEngPhonetic;
+            word.ContextNames = contextNames;
+            word.IsContextTag = isContextTag;
+            word.IsConvertedFromTag = isConvertedFromTag;
+            word.ContextTag = contextTag;
 
-            if (PhoneticCode != null)
+            if (phoneticCode != null)
             {
-                word.PhoneticCode = PhoneticCode;
+                word.PhoneticCode = phoneticCode;
             }
-            word.IsPolyphonic = IsPolyphonic;
+            word.IsPolyphonic = isPolyphonic;
 
-            if (!IsContextTag)
+            if (!isContextTag)
             {
-                var items = new List<BrailleCell>(Cells.Length);
-                ReadOnlySpan<BrailleCell> cells = Cells.Span;
+                var items = new List<BrailleCell>(cells.Length);
                 for (int i = 0; i < cells.Length; i++)
                 {
                     items.Add(cells[i]);
