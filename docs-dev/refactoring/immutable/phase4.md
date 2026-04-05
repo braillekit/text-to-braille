@@ -58,6 +58,16 @@ Phase 4 目前：
 - 補測試：
   - result sequence 與既有 `BrailleLine` 在 hex / position / HTML rendering 上的等價驗證
 
+### `4c` 第四個切點
+
+- 新增 `IBrailleWordView`
+- `BrailleWord` 實作 `IBrailleWordView`
+- `IBrailleWordResult` 改成繼承 `IBrailleWordView`
+- `BrailleWordHelper` / `BrailleFontConverter` / `BrailleWordSequenceFormatter` 的 internal read-only 邏輯已收斂到同一個 `IBrailleWordView` contract
+- 這代表 `4c` 的 read-only downstream 邊界已從「BrailleWord/result 雙軌 overload」收斂成單一 word view
+- 補測試：
+  - mixed `BrailleWord + IBrailleWordResult` sequence 的 helper / formatter 等價驗證
+
 ### `4a`
 
 - [`BrailleCell.cs`](/src/EasyBrailleEditApp/BrailleToolkit/BrailleCell.cs) 從 sealed class 改成 `readonly record struct`

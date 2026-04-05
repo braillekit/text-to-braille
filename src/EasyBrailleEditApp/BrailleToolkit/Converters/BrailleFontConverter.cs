@@ -113,12 +113,22 @@ namespace BrailleToolkit.Converters
         /// <returns></returns>
         public static string ToString(BrailleWord brWord)
         {
-            return BrailleFontConverter.ToString(brWord.CellList);
+            return ToString((IBrailleWordView)brWord);
         }
 
-        internal static string ToString(IBrailleWordResult brWord)
+        internal static string ToString(IBrailleWordView brWord)
         {
-            return ToString(brWord.Cells.Span);
+            if (m_FontTable.Count < 1)
+            {
+                throw new Exception("尚未載入字型對應表!");
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < brWord.CellCount; i++)
+            {
+                sb.Append(ToChar(brWord.GetCell(i).ToString()));
+            }
+            return sb.ToString();
         }
 
         /// <summary>

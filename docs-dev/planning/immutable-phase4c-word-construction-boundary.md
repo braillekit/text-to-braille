@@ -86,3 +86,18 @@
 
 - HTML export 這條既有 read-only downstream，現在與 result renderer 共用同一組格式化邏輯
 - 下一步若要讓 formatter / exporter 其中一段直接吃 result，不必再先重做 line-level rendering 基礎
+
+## 後續進展：第四個切點
+
+第四個切點把 `BrailleWord` 與 immutable result 收斂到同一個唯讀 contract：
+
+- 新增 `IBrailleWordView`
+- `BrailleWord` 實作 `IBrailleWordView`
+- `IBrailleWordResult` 改成繼承 `IBrailleWordView`
+- `BrailleWordHelper` / `BrailleFontConverter` / `BrailleWordSequenceFormatter` 的 internal read-only API 全部改以 `IBrailleWordView` 為共同下游介面
+
+這一刀的意義是：
+
+- `4c` 的 read-only boundary 不再需要同時維護「BrailleWord 版」與「result 版」兩套邏輯
+- downstream 看見的是同一個 word view contract，而不是來源型別差異
+- 之後要收尾 `4c`，就可以把重點放在剩餘仍強依賴 mutable object identity 或直接 mutation 的 call site，而不是繼續擴散平行 overload

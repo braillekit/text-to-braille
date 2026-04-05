@@ -8,24 +8,9 @@ namespace BrailleToolkit
     /// <summary>
     /// 已 materialize 的點字詞唯讀介面。
     /// </summary>
-    internal interface IBrailleWordResult
+    internal interface IBrailleWordResult : IBrailleWordView
     {
-        string Text { get; }
-        string OriginalText { get; }
-        BrailleLanguage Language { get; }
-        int CellCount { get; }
         ReadOnlyMemory<BrailleCell> Cells { get; }
-        string? PhoneticCode { get; }
-        bool IsPolyphonic { get; }
-        bool DontBreakLineHere { get; }
-        string ContextNames { get; }
-        IContextTag? ContextTag { get; }
-        bool IsContextTag { get; }
-        bool IsConvertedFromTag { get; }
-        bool NoDigitCell { get; }
-        bool NoSpace { get; }
-        bool NoCapitalRule { get; }
-        bool IsEngPhonetic { get; }
 
         BrailleWord ToBrailleWord();
     }
@@ -283,6 +268,11 @@ namespace BrailleToolkit
         public int CellCount
         {
             get { return Cells.Length; }
+        }
+
+        public BrailleCell GetCell(int index)
+        {
+            return Cells.Span[index];
         }
 
         public BrailleWord ToBrailleWord()

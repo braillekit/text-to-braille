@@ -210,5 +210,33 @@ namespace BrailleToolkit.Tests
                 line.ToHtmlString("  ", "column", "braille", "text"),
                 BrailleWordSequenceFormatter.ToHtmlString(results, "  ", "column", "braille", "text"));
         }
+
+        [Fact]
+        public void ReadOnlyViewContract_ShouldSupportMixedBrailleWordAndResultSequences()
+        {
+            var directWord = new BrailleWord("A", "01");
+
+            var builder = new BrailleWordBuilder("B")
+            {
+                OriginalText = "原B"
+            };
+            builder.AppendHex("1203");
+
+            IReadOnlyList<IBrailleWordView> mixedWords =
+            [
+                directWord,
+                builder.Build()
+            ];
+            var expectedLine = new BrailleLine();
+            expectedLine.AddWord(directWord);
+            expectedLine.AddWord(builder.Build().ToBrailleWord());
+
+            Assert.Equal("AB", BrailleWordHelper.ToTextString(mixedWords));
+            Assert.Equal("A原B", BrailleWordHelper.ToOriginalTextString(mixedWords));
+            Assert.Equal("011203", BrailleWordSequenceFormatter.ToBrailleCellHexString(mixedWords));
+            Assert.Equal(
+                expectedLine.ToHtmlString("  ", "column", "braille", "text"),
+                BrailleWordSequenceFormatter.ToHtmlString(mixedWords, "  ", "column", "braille", "text"));
+        }
     }
 }

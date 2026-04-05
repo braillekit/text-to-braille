@@ -60,24 +60,15 @@ namespace BrailleToolkit.Helpers
         /// <returns></returns>
         public static string ToString(IReadOnlyList<BrailleWord> brWordList)
         {
-            var sb = new StringBuilder();
-            foreach (var brWord in brWordList)
-            {
-                AppendDebugString(sb, brWord.Text, brWord.PhoneticCode, brWord.CellList.ToString());
-            }
-            if (sb.Length > 0)
-            {
-                sb.Remove(sb.Length - 1, 1);
-            }
-            return sb.ToString();
+            return ToString((IReadOnlyList<IBrailleWordView>)brWordList);
         }
 
-        internal static string ToString(IReadOnlyList<IBrailleWordResult> brWordList)
+        internal static string ToString(IReadOnlyList<IBrailleWordView> brWordList)
         {
             var sb = new StringBuilder();
             foreach (var brWord in brWordList)
             {
-                AppendDebugString(sb, brWord.Text, brWord.PhoneticCode, BrailleCellListToHexString(brWord.Cells.Span));
+                AppendDebugString(sb, brWord.Text, brWord.PhoneticCode, BrailleCellListToHexString(brWord));
             }
             if (sb.Length > 0)
             {
@@ -93,15 +84,10 @@ namespace BrailleToolkit.Helpers
         /// <returns></returns>
         public static string ToTextString(IReadOnlyList<BrailleWord> brWordList)
         {
-            var sb = new StringBuilder();
-            foreach (var brWord in brWordList)
-            {
-                sb.Append(brWord.Text);
-            }
-            return sb.ToString();
+            return ToTextString((IReadOnlyList<IBrailleWordView>)brWordList);
         }
 
-        internal static string ToTextString(IReadOnlyList<IBrailleWordResult> brWordList)
+        internal static string ToTextString(IReadOnlyList<IBrailleWordView> brWordList)
         {
             var sb = new StringBuilder();
             foreach (var brWord in brWordList)
@@ -118,20 +104,15 @@ namespace BrailleToolkit.Helpers
         /// <returns></returns>
         public static string ToDotNumberString(IReadOnlyList<BrailleWord> brWordList)
         {
-            var sb = new StringBuilder();
-            foreach (var brWord in brWordList)
-            {
-                sb.Append(brWord.ToPositionNumberString(useParenthesis: true));
-            }
-            return sb.ToString();
+            return ToDotNumberString((IReadOnlyList<IBrailleWordView>)brWordList);
         }
 
-        internal static string ToDotNumberString(IReadOnlyList<IBrailleWordResult> brWordList)
+        internal static string ToDotNumberString(IReadOnlyList<IBrailleWordView> brWordList)
         {
             var sb = new StringBuilder();
             foreach (var brWord in brWordList)
             {
-                sb.Append(BrailleWordResultToDotNumberString(brWord));
+                sb.Append(BrailleWordViewToDotNumberString(brWord));
             }
             return sb.ToString();
         }
@@ -143,18 +124,10 @@ namespace BrailleToolkit.Helpers
         /// <returns></returns>
         public static string ToOriginalTextString(IReadOnlyList<BrailleWord> words)
         {
-            var sb = new StringBuilder();
-            int index = 0;
-            while (index < words.Count)
-            {
-                var brWord = words[index];
-                AppendOriginalText(sb, brWord.Text, brWord.OriginalText, brWord.IsContextTag, brWord.IsConvertedFromTag);
-                index++;
-            }
-            return sb.ToString();
+            return ToOriginalTextString((IReadOnlyList<IBrailleWordView>)words);
         }
 
-        internal static string ToOriginalTextString(IReadOnlyList<IBrailleWordResult> words)
+        internal static string ToOriginalTextString(IReadOnlyList<IBrailleWordView> words)
         {
             var sb = new StringBuilder();
             int index = 0;
@@ -174,15 +147,10 @@ namespace BrailleToolkit.Helpers
         /// <returns></returns>
         public static int GetCellCount(this IReadOnlyList<BrailleWord> brWordList)
         {
-            int count = 0;
-            foreach (var brWord in brWordList)
-            {
-                count += brWord.CellCount;
-            }
-            return count;
+            return GetCellCount((IReadOnlyList<IBrailleWordView>)brWordList);
         }
 
-        internal static int GetCellCount(this IReadOnlyList<IBrailleWordResult> brWordList)
+        internal static int GetCellCount(this IReadOnlyList<IBrailleWordView> brWordList)
         {
             int count = 0;
             foreach (var brWord in brWordList)
@@ -198,14 +166,10 @@ namespace BrailleToolkit.Helpers
         /// <returns></returns>
         public static bool ContainsTitleTag(IReadOnlyList<BrailleWord> brWordList)
         {
-            if (brWordList.Count > 0 && brWordList[0].Text.Equals(ContextTagNames.Title))
-            {
-                return true;
-            }
-            return false;
+            return ContainsTitleTag((IReadOnlyList<IBrailleWordView>)brWordList);
         }
 
-        internal static bool ContainsTitleTag(IReadOnlyList<IBrailleWordResult> brWordList)
+        internal static bool ContainsTitleTag(IReadOnlyList<IBrailleWordView> brWordList)
         {
             if (brWordList.Count > 0 && brWordList[0].Text.Equals(ContextTagNames.Title))
             {
@@ -235,17 +199,17 @@ namespace BrailleToolkit.Helpers
             return false;
         }
 
-        private static string BrailleCellListToHexString(ReadOnlySpan<BrailleCell> cells)
+        private static string BrailleCellListToHexString(IBrailleWordView brWord)
         {
             var sb = new StringBuilder();
-            for (int i = 0; i < cells.Length; i++)
+            for (int i = 0; i < brWord.CellCount; i++)
             {
-                sb.Append(cells[i].ToString());
+                sb.Append(brWord.GetCell(i).ToString());
             }
             return sb.ToString();
         }
 
-        private static string BrailleWordResultToDotNumberString(IBrailleWordResult brWord)
+        private static string BrailleWordViewToDotNumberString(IBrailleWordView brWord)
         {
             if (brWord.IsContextTag)
             {
@@ -254,14 +218,13 @@ namespace BrailleToolkit.Helpers
 
             var sb = new StringBuilder();
             sb.Append("(");
-            var cells = brWord.Cells.Span;
-            for (int i = 0; i < cells.Length; i++)
+            for (int i = 0; i < brWord.CellCount; i++)
             {
-                sb.Append(cells[i].ToPositionNumberString());
+                sb.Append(brWord.GetCell(i).ToPositionNumberString());
                 sb.Append(" ");
             }
 
-            if (cells.Length > 0)
+            if (brWord.CellCount > 0)
             {
                 sb.Length--;
             }

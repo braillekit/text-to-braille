@@ -34,7 +34,7 @@ namespace BrailleToolkit
     /// </summary>
     [Serializable]
     [DataContract]
-    public sealed class BrailleWord
+    public sealed class BrailleWord : IBrailleWordView
     {
         /// <summary>
         /// Gets a static instance of a blank braille word.
@@ -791,6 +791,11 @@ namespace BrailleToolkit
             if (String.IsNullOrEmpty(brCode))
                 return false;
             return true;
+        }
+
+        BrailleCell IBrailleWordView.GetCell(int index)
+        {
+            return CellList[index];
         }
 
         internal static BrailleWord FromResult(IBrailleWordResult result)

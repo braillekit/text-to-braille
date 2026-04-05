@@ -12,26 +12,17 @@ namespace BrailleToolkit.Helpers
     {
         public static string ToBrailleCellHexString(IReadOnlyList<BrailleWord> words)
         {
-            var sb = new StringBuilder();
-            foreach (var brWord in words)
-            {
-                foreach (var cell in brWord.Cells)
-                {
-                    sb.Append(cell.ToHexString());
-                }
-            }
-            return sb.ToString();
+            return ToBrailleCellHexString((IReadOnlyList<IBrailleWordView>)words);
         }
 
-        internal static string ToBrailleCellHexString(IReadOnlyList<IBrailleWordResult> words)
+        internal static string ToBrailleCellHexString(IReadOnlyList<IBrailleWordView> words)
         {
             var sb = new StringBuilder();
             foreach (var brWord in words)
             {
-                var cells = brWord.Cells.Span;
-                for (int i = 0; i < cells.Length; i++)
+                for (int i = 0; i < brWord.CellCount; i++)
                 {
-                    sb.Append(cells[i].ToHexString());
+                    sb.Append(brWord.GetCell(i).ToHexString());
                 }
             }
             return sb.ToString();
@@ -39,15 +30,10 @@ namespace BrailleToolkit.Helpers
 
         public static string ToPositionNumberString(IReadOnlyList<BrailleWord> words)
         {
-            var sb = new StringBuilder();
-            foreach (var brWord in words)
-            {
-                sb.Append(brWord.ToPositionNumberString(useParenthesis: true));
-            }
-            return sb.ToString();
+            return ToPositionNumberString((IReadOnlyList<IBrailleWordView>)words);
         }
 
-        internal static string ToPositionNumberString(IReadOnlyList<IBrailleWordResult> words)
+        internal static string ToPositionNumberString(IReadOnlyList<IBrailleWordView> words)
         {
             return BrailleWordHelper.ToDotNumberString(words);
         }
@@ -59,35 +45,11 @@ namespace BrailleToolkit.Helpers
             string cssClassBraille,
             string cssClassText)
         {
-            var sb = new StringBuilder();
-
-            sb.AppendLine($"{leadingSpaces}<tr>");
-
-            foreach (var brWord in words)
-            {
-                if (brWord.IsContextTag || brWord.CellCount < 1)
-                    continue;
-
-                string brFontText = BrailleFontConverter.ToString(brWord);
-
-                if (String.IsNullOrEmpty(brFontText))
-                {
-                    sb.AppendLine($"無法轉換成對應的點字字型: {brWord.Text}。");
-                    break;
-                }
-
-                sb.AppendLine($"{leadingSpaces}  <td colspan='{brFontText.Length}' class='{cssClassTd}'>");
-                sb.AppendLine($"{leadingSpaces}    <div class='{cssClassBraille}'>{brFontText}</div>");
-                sb.AppendLine($"{leadingSpaces}    <div class='{cssClassText}'>{brWord.Text}</div>");
-                sb.AppendLine($"{leadingSpaces}  </td>");
-            }
-
-            sb.AppendLine($"{leadingSpaces}</tr>");
-            return sb.ToString();
+            return ToHtmlString((IReadOnlyList<IBrailleWordView>)words, leadingSpaces, cssClassTd, cssClassBraille, cssClassText);
         }
 
         internal static string ToHtmlString(
-            IReadOnlyList<IBrailleWordResult> words,
+            IReadOnlyList<IBrailleWordView> words,
             string leadingSpaces,
             string cssClassTd,
             string cssClassBraille,
