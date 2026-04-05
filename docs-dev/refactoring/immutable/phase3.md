@@ -81,12 +81,58 @@ Phase 3 已完成：
 
 ## 效能測試
 
-- 目前先保存一份 post-change benchmark 量測結果：
+### Post-change snapshot
+
+- 保存一份 Phase 3 完成當下的 benchmark 快照：
   - [`2026-04-05-phase3-current.md`](./benchmark-result/2026-04-05-phase3-current.md)
-- 這份結果可當 Phase 3 完成時的量測快照，但不是 clean worktree A/B 基準。
-- 若要正式判定 Phase 3 是否造成 regression，下一步仍建議比照 Phase 2 方式，再做一次 baseline vs candidate 的 clean worktree A/B benchmark。
+- 這份結果主要用於追蹤與存檔，不單獨作正式回歸證據。
+
+### 正式 clean worktree A/B benchmark
+
+- 日期：2026-04-05
+- baseline commit：`dcf71ef2d0aba531b6d724628234bec7d08168e1`
+- candidate commit：`8251b2df5bc25d0b4bb67826e3745cbc64f59b2a`
+- 方法：於兩個乾淨 worktree 各自獨立建置與執行 benchmark
+- 詳細紀錄：
+  - [`2026-04-05-phase3-clean-worktree-ab.md`](./benchmark-result/2026-04-05-phase3-clean-worktree-ab.md)
+
+#### A/B 摘要
+
+| Method | Baseline Mean | Candidate Mean | Mean Δ | Baseline Alloc | Candidate Alloc | Alloc Δ |
+| ---- | ----: | ----: | ----: | ----: | ----: | ----: |
+| 中文單行轉換 | 166.00 us | 68.70 us | -58.61% | 72.84 KB | 6.01 KB | -91.75% |
+| 英文單行轉換 | 526.20 us | 514.98 us | -2.13% | 169.33 KB | 17.52 KB | -89.65% |
+| 中英混合單行轉換 | 956.00 us | 400.45 us | -58.11% | 374.57 KB | 29.92 KB | -92.01% |
+| 中文多行轉換 | 8,901.10 us | 3,420.40 us | -61.57% | 4,301.49 KB | 339.67 KB | -92.10% |
+| 英文多行轉換 | 4,333.30 us | 3,734.43 us | -13.82% | 1,041.13 KB | 108.91 KB | -89.54% |
+| 中英混合多行轉換 | 2,685.00 us | 2,088.58 us | -22.21% | 1,347.71 KB | 116.46 KB | -91.36% |
+| 長中文字串轉換 | 6,332.10 us | 3,530.79 us | -44.24% | 4,303.15 KB | 341.32 KB | -92.07% |
+
+#### 解讀
+
+- 這次 clean worktree A/B 沒有任何案例出現平均時間回歸。
+- `Allocated` 在所有案例都下降約 `89%` 到 `92%`，是非常一致的改善。
+- 改善最明顯的是中文與混合內容，符合 Phase 3 把 table lookup 從 `DataTable.Select(...)` 換成 frozen index 的預期。
+- BrailleToolkit.Benchmarks 專案本身在兩個 commit 間沒有變更，所以這次 A/B 是可比的。
+
+幾個跟執行速度有關的代表數字：
+
+- 中文單行：166.00 us -> 68.70 us，變化：-58.61%
+- 中文多行：8,901.10 us -> 3,420.40 us，-61.57%
+- 長中文字串：6,332.10 us -> 3,530.79 us，-44.24%
+- 英文單行：526.20 us -> 514.98 us，-2.13%
+- 英文多行：4,333.30 us -> 3,734.43 us，-13.82%
+
+總結：
+
+- 以目前結果來看，Phase 3 可以視為：
+  - 功能完成
+  - 未見效能回歸
+  - allocation 顯著下降
+  - 多數 benchmark 吞吐量提升，尤其是中文相關路徑
 
 ## 後續建議
 
 - 若 Phase 4 要繼續推 immutable model，這一層 data lookup 可以先視為穩定基礎。
 - 若後續需要更完整的 table metadata 查詢，再考慮是否要把 XML 其他屬性抽成更明確的 typed fields，而不是回退成 dictionary / DataTable 模式。
+- 後續若有再改動 benchmark 專案或測資，需重新建立新的 baseline，避免和本次 A/B 混用。
