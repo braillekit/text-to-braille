@@ -42,30 +42,24 @@ namespace BrailleToolkit
 
     /// <summary>
     /// 代表點字的一方 (Braille Cell Dimension)。
-    /// NOTE: 每一個 BrailleCell 物件是預先建立且共用的，因此 
-    ///       BrailleCell 的 Value 屬性絕對不可讓外界修改!!
     /// </summary>
     [Serializable]
     [DataContract]
-    public sealed class BrailleCell
+    public readonly record struct BrailleCell
     {
-        private static BrailleCell[] m_AllCells;
+        private static readonly BrailleCell[] s_AllCells = CreateAllCells();
 
-        // 點字值。六點是以從上到下，由左至右的順序分別對應到 byte 的
-        // 低位元至高位元。最高兩個位元沒有用到，固定為 0。
-        private byte m_Value;
-
-        static BrailleCell()
+        private static BrailleCell[] CreateAllCells()
         {
-            // 建立好 256 個 BraillCell 物件。
+            // 建立好 256 個 BrailleCell 值。
             // NOTE: 其實只用到前面 64 個，因為只有六點，用到的位元為 0..5，範圍是
-            //       00..3F。考慮到未來支援八點的點字，故使用 256。
-
-            m_AllCells = new BrailleCell[256];
-            for (int i = 0; i < m_AllCells.Length; i++)
+            //       00..3F。考慮到未來支援八點的點字，故仍保留 256 個入口以維持 API 相容性。
+            var allCells = new BrailleCell[256];
+            for (int i = 0; i < allCells.Length; i++)
             {
-                m_AllCells[i] = new BrailleCell((byte)i);
+                allCells[i] = new BrailleCell((byte)i);
             }
+            return allCells;
         }
 
         /// <summary>
@@ -75,7 +69,7 @@ namespace BrailleToolkit
         /// <returns>The BrailleCell instance.</returns>
         public static BrailleCell GetInstance(BrailleCellCode code)
         {
-            return m_AllCells[(int)code];
+            return s_AllCells[(int)code];
         }
 
         /// <summary>
@@ -85,9 +79,9 @@ namespace BrailleToolkit
         /// <returns>The BrailleCell instance.</returns>
         public static BrailleCell GetInstance(int index)
         {
-            if (index < 0 || index >= m_AllCells.Length)
+            if (index < 0 || index >= s_AllCells.Length)
                 throw new IndexOutOfRangeException("傳入 BrailleCell.GetInstance() 的索引超出範圍!");
-            return m_AllCells[index];
+            return s_AllCells[index];
         }
 
         /// <summary>
@@ -177,64 +171,20 @@ namespace BrailleToolkit
             return result.ToString();
         }
 
-        private BrailleCell(byte value)
-        {
-            m_Value = value;
-        }
-
         /// <summary>
-        /// 建構函式。
+        /// 初始化 BrailleCell 的新執行個體。
         /// </summary>
-        /// <param name="hexStr">十六進位的字串，不可加 '0x' 或 'H'。</param>
-        private BrailleCell(string hexStr)
+        /// <param name="value">點字方的位元組值。</param>
+        public BrailleCell(byte value)
         {
-            if (String.IsNullOrEmpty(hexStr) || hexStr.Length > 2)
-                throw new ArgumentException("參數錯誤: 不是有效的十六進位字串值!");
-            m_Value = StrHelper.HexStrToByte(hexStr);
-        }
-
-        /// <summary>
-        /// Gets the hash code for this braille cell.
-        /// </summary>
-        /// <returns>The hash code.</returns>
-        public override int GetHashCode()
-        {
-            return m_Value;
-        }
-
-        /// <summary>
-        /// Determines whether the specified object is equal to this braille cell.
-        /// </summary>
-        /// <param name="obj">The object to compare.</param>
-        /// <returns>True if equal; otherwise, false.</returns>
-        public override bool Equals(object? obj)
-        {
-            if (base.Equals(obj))
-                return true;
-
-            if (obj is not BrailleCell brCell)
-                return false;
-
-            if (m_Value != brCell.Value)
-                return false;
-            return true;
+            Value = value;
         }
 
         /// <summary>
         /// Gets or sets the value of this braille cell.
         /// </summary>
         [DataMember]
-        public byte Value
-        {
-            get
-            {
-                return m_Value;
-            }
-            private set
-            {
-                m_Value = value;
-            }
-        }
+        public byte Value { get; init; }
 
         /// <summary>
         /// Gets a blank braille cell.
@@ -274,7 +224,7 @@ namespace BrailleToolkit
         /// <returns>The hexadecimal string.</returns>
         public string ToHexString()
         {
-            return BrailleCellHelper.ByteToHexString(m_Value);
+            return BrailleCellHelper.ByteToHexString(Value);
         }
 
         /// <summary>
