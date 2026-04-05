@@ -104,6 +104,38 @@ Phase 4 目前：
   - 中英混合多行轉換：`+40.50%`
 - baseline 與 candidate 間 `BrailleToolkit.Benchmarks` 專案本身沒有變更；實際程式碼差異只有 [`BrailleCell.cs`](/d:/work/BrailleKit/text-to-braille/src/EasyBrailleEditApp/BrailleToolkit/BrailleCell.cs) 與測試 / 文件，因此這次 A/B 對 `4a` 具有直接參考價值。
 
+### `4b` 正式 clean worktree A/B benchmark
+
+- 日期：2026-04-05
+- baseline commit：`ea804795f6cf56bbe9a152ef272adab9130c51db`
+- candidate commit：`53a7c22123ae328165e529e5c582d56818a5104b`
+- 方法：於兩個乾淨 worktree 各自獨立建置與執行完整 conversion benchmark suite
+- 詳細紀錄：
+  - [`2026-04-05-phase4b-clean-worktree-ab.md`](./benchmark-result/2026-04-05-phase4b-clean-worktree-ab.md)
+
+#### A/B 摘要
+
+| Method | Baseline Mean | Candidate Mean | Mean Δ | Baseline Alloc | Candidate Alloc | Alloc Δ |
+| ---- | ----: | ----: | ----: | ----: | ----: | ----: |
+| 中文單行轉換 | 66.03 us | 46.10 us | -30.18% | 5.82 KB | 6.32 KB | +8.59% |
+| 英文單行轉換 | 578.35 us | 348.34 us | -39.77% | 16.09 KB | 23.87 KB | +48.35% |
+| 中英混合單行轉換 | 383.81 us | 293.50 us | -23.53% | 28.73 KB | 32.91 KB | +14.55% |
+| 中文多行轉換 | 3,336.77 us | 2,144.99 us | -35.72% | 327.83 KB | 360.96 KB | +10.11% |
+| 英文多行轉換 | 2,810.04 us | 2,124.65 us | -24.39% | 100.21 KB | 147.48 KB | +47.17% |
+| 中英混合多行轉換 | 1,374.60 us | 1,476.20 us | +7.39% | 111.28 KB | 132.43 KB | +19.01% |
+| 長中文字串轉換 | 2,149.56 us | 2,102.52 us | -2.19% | 329.30 KB | 362.43 KB | +10.06% |
+
+#### 解讀
+
+- `4b` candidate 在 7 個 benchmark 中有 6 個 `Mean` 變快，代表 builder / compatibility bridge 已有效扳回 `4a` 的大部分 throughput regression。
+- 改善最明顯的是英文單行 `-39.77%`、中文多行 `-35.72%`、中文單行 `-30.18%`。
+- 唯一明確回歸的是中英混合多行 `+7.39%`。
+- 但 `Allocated` 在 7 個 benchmark 全部上升，尤其英文單行 `+48.35%`、英文多行 `+47.17%`。
+- 目前可把 `4b` 理解成：
+  - CPU throughput 方向正確
+  - allocation 尚未收斂
+  - 下一階段應優先減少 builder 與既有 `BrailleWord` 相容層之間的 materialize / copy 成本
+
 ### 與 Phase 3 current snapshot 的對照
 
 注意：
