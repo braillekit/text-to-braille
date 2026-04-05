@@ -141,3 +141,20 @@
 
 - 這一刀沒有把整個 editor/document model 改成 immutable collection
 - 若某些流程主動用新物件取代舊 line/word，identity 仍會視為新邏輯實體；這是刻意保留的語意，而不是 compatibility bug
+
+## 後續進展：第七個切點
+
+第七個切點直接處理 editor commands 背後的 whole-object replace 熱點，也就是 `ReformatRow -> BrailleDocumentFormatter.FormatLine(...)`：
+
+- 既有 formatter 在斷行時，會移除原始 `BrailleLine`，再插入一組新的 formatted lines
+- 這會讓 editor command 雖然只是在做 reflow / line wrap，卻失去原本第一列的 line identity
+- 現在已改成：
+  - 保留原始第一列物件
+  - 以新的斷行結果覆寫其 words
+  - 只對後續新增的折行結果建立新的 `BrailleLine`
+
+這一刀的意義是：
+
+- `EditWord` / `InsertBrailleWords` / `DeleteWord` / `JoinToPreviousRow` 這些會觸發 `ReformatRow(...)` 的 editor command，不再因為 formatter 而整列換成新物件
+- page title begin-line anchor 若剛好指向被 reformat 的第一列，現在可直接延續既有 line identity
+- `4c` 的 editor/document 相容邊界，已從「word identity」進一步收斂到「formatter 主路徑保留 first-line identity」

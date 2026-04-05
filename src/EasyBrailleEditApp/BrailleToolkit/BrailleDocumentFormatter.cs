@@ -39,12 +39,20 @@ namespace BrailleToolkit
                 return 1;
             }
 
-            // 有斷行，先移除原始的 line，再加入新的斷行結果。
-            brLine.Clear();
-            brDoc.RemoveLine(lineIndex);
+            // 有斷行時保留原始第一列的執行期 identity，只在其後插入新增的列。
+            brLine.AssignWords(formattedLines[0].Words);
+            brLine.Tag = formattedLines[0].Tag;
 
-            // 加入斷行後的 lines
-            brDoc.InsertLines(lineIndex, formattedLines);
+            var appendedLines = new List<BrailleLine>();
+            for (int i = 1; i < formattedLines.Count; i++)
+            {
+                appendedLines.Add(formattedLines[i]);
+            }
+
+            if (appendedLines.Count > 0)
+            {
+                brDoc.InsertLines(lineIndex + 1, appendedLines);
+            }
 
             return formattedLines.Count;
         }

@@ -78,6 +78,24 @@ namespace BrailleToolkit
         }
 
         /// <summary>
+        /// 以指定的點字詞集合取代目前這一列的內容，但保留此列本身的執行期識別碼。
+        /// </summary>
+        /// <param name="words">新的點字詞集合。</param>
+        internal void AssignWords(IEnumerable<BrailleWord>? words)
+        {
+            m_Words.Clear();
+            if (words == null)
+            {
+                return;
+            }
+
+            foreach (var word in words)
+            {
+                m_Words.Add(word);
+            }
+        }
+
+        /// <summary>
         /// Checks if this line is empty.
         /// </summary>
         /// <returns>True if empty; otherwise, false.</returns>

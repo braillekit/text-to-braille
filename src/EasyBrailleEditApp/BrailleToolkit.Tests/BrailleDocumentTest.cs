@@ -98,6 +98,33 @@ namespace BrailleToolkit.Tests
         }
 
         [Fact]
+        public void FormatLine_ShouldPreserveFirstLineIdentityAndPageTitleAnchor()
+        {
+            var brDoc = new BrailleDocument();
+            brDoc.CellsPerLine = 10;
+
+            var line = new BrailleLine();
+            for (int i = 0; i < 12; i++)
+            {
+                line.AddWord(new BrailleWord("a", "01"));
+            }
+            brDoc.AddLine(line);
+            brDoc.AddPageTitleAt(new[] { new BrailleWord("標", "01") }, 0);
+
+            var originalIdentity = line.Identity;
+            var title = brDoc.PageTitles[0];
+
+            int formattedLineCount = BrailleDocumentFormatter.FormatLine(brDoc, 0, new ContextTagManager());
+
+            Assert.Equal(2, formattedLineCount);
+            Assert.Equal(2, brDoc.LineCount);
+            Assert.Equal(originalIdentity, brDoc.Lines[0].Identity);
+            Assert.Equal(originalIdentity, title.ContentStartLineIdentity);
+            Assert.True(brDoc.IsBeginLineOfPageTitle(0));
+            Assert.Same(title, brDoc.FindPageTitleByBeginLine(brDoc.Lines[0]));
+        }
+
+        [Fact]
         public void LoadBrailleDocument_ThakurPoem_ShouldDeserializeCorrectly()
         {
             string filename = Shared.TestDataPath + "poem.brx";

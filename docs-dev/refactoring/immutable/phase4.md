@@ -97,6 +97,19 @@ Phase 4 目前：
   - builder `ApplyTo(...)` 後保留 `BrailleWord.Identity`
   - page title 在文件插入列後仍可透過 line identity 重新定位 begin line
 
+### `4c` 第七個切點
+
+- `BrailleDocumentFormatter.FormatLine(BrailleDocument, ...)` 在斷行時不再移除原始第一列再整批插入新 line
+- 新語意改成：
+  - 保留原始第一列物件與其 line identity
+  - 將第一個 formatted line 的 words 回填到原始列
+  - 只為後續新增的折行結果建立新 `BrailleLine`
+- `BrailleLine` 新增內部 `AssignWords(...)`，用來支撐 formatter 這種 whole-object replace 相容邊界
+- 這代表 editor commands 最常走到的 `ReformatRow(...)` 主路徑，現在已不會因 formatter 斷行而切斷第一列的 identity
+- 補測試：
+  - formatter 斷行後保留第一列 `Identity`
+  - page title begin-line anchor 在 formatter 斷行後仍指向同一列
+
 ### `4a`
 
 - [`BrailleCell.cs`](/src/EasyBrailleEditApp/BrailleToolkit/BrailleCell.cs) 從 sealed class 改成 `readonly record struct`
