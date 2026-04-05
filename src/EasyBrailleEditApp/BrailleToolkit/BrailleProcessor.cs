@@ -980,11 +980,13 @@ namespace BrailleToolkit
                 brWord.NoDigitCell = true;
             }
             // 補上分子的點字符號
-            brWordListNumerator[0].Cells.Insert(0, BrailleCell.GetInstance(new int[] { 1, 4, 5, 6 }));
+            var numeratorBuilder = BrailleWordBuilder.FromBrailleWord(brWordListNumerator[0]);
+            numeratorBuilder.PrependCell(BrailleCell.GetInstance(new int[] { 1, 4, 5, 6 }));
             if (brWordListIntPart.Count > 0)
             {
-                brWordListNumerator[0].Cells.Insert(0, BrailleCell.GetInstance(new int[] { 4, 5, 6 }));
+                numeratorBuilder.PrependCell(BrailleCell.GetInstance(new int[] { 4, 5, 6 }));
             }
+            numeratorBuilder.ApplyTo(brWordListNumerator[0]);
 
             // 將分母部份轉換成點字串列。
             temp = StrHelper.Reverse(denumerator);

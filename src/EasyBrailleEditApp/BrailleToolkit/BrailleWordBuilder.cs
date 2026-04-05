@@ -310,14 +310,18 @@ namespace BrailleToolkit
 
     internal static class BrailleWordBuilderCompatibility
     {
-        private static List<BrailleCell> CreateCellItems(ReadOnlySpan<BrailleCell> cells)
+        private static void CopyCellsTo(List<BrailleCell> items, ReadOnlySpan<BrailleCell> cells)
         {
-            var items = new List<BrailleCell>(cells.Length);
+            items.Clear();
+            if (items.Capacity < cells.Length)
+            {
+                items.Capacity = cells.Length;
+            }
+
             for (int i = 0; i < cells.Length; i++)
             {
                 items.Add(cells[i]);
             }
-            return items;
         }
 
         internal static BrailleWord CreateBrailleWord(
@@ -397,7 +401,11 @@ namespace BrailleToolkit
 
             if (!isContextTag)
             {
-                word.CellList.Items = CreateCellItems(cells);
+                CopyCellsTo(word.CellList.Items, cells);
+            }
+            else
+            {
+                word.CellList.Clear();
             }
         }
     }

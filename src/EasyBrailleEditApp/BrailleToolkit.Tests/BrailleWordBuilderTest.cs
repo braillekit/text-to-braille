@@ -75,6 +75,7 @@ namespace BrailleToolkit.Tests
             };
             source.PhoneticCode = "ㄅ";
             source.IsPolyphonic = true;
+            var originalCells = source.Cells;
 
             var builder = BrailleWordBuilder.FromBrailleWord(source);
             builder.PrependCell(BrailleCell.Capital);
@@ -82,6 +83,7 @@ namespace BrailleToolkit.Tests
 
             builder.ApplyTo(source);
 
+            Assert.Same(originalCells, source.Cells);
             Assert.Equal("A", source.Text);
             Assert.Equal("A", source.OriginalText);
             Assert.Equal(BrailleLanguage.English, source.Language);
