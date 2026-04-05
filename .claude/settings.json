@@ -1,10 +1,11 @@
 {
   "permissions": {
+    "allow": [
+      "Bash(dotnet sln:*)",
+      "Bash(ls \"d:/work/BrailleKit/text-to-braille/src/EasyBrailleEditApp/BrailleToolkit/Data/\"*.cs)"
+    ],
     "additionalDirectories": [
       "d:\\work\\BrailleKit\\text-to-braille\\src\\EasyBrailleEditApp"
-    ],
-    "allow": [
-      "Bash(dotnet sln:*)"
     ]
   }
 }
