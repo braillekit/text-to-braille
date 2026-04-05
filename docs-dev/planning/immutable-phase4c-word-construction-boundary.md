@@ -73,3 +73,16 @@
 
 - 把 `IBrailleWordResult` 從「只能回轉舊 model 的過渡物件」推進成「可直接被部分 downstream 讀取的結果邊界」
 - 後續若要挑 formatter / exporter / preview 路徑延後 materialize，已經有可重用的 helper 基礎
+
+## 後續進展：第三個切點
+
+第三個切點把 line-level rendering 也往 result 邊界推進：
+
+- 新增 `BrailleWordSequenceFormatter`
+- 既有 `BrailleLine.ToBrailleCellHexString()` / `ToPositionNumberString()` / `ToHtmlString()` 已改成委派給 sequence formatter
+- sequence formatter 同時提供 `IReadOnlyList<BrailleWord>` 與 `IReadOnlyList<IBrailleWordResult>` 版本
+
+這表示：
+
+- HTML export 這條既有 read-only downstream，現在與 result renderer 共用同一組格式化邏輯
+- 下一步若要讓 formatter / exporter 其中一段直接吃 result，不必再先重做 line-level rendering 基礎

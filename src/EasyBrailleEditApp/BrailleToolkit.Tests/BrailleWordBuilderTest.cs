@@ -184,5 +184,31 @@ namespace BrailleToolkit.Tests
                 BrailleFontConverter.ToString(result.ToBrailleWord()),
                 BrailleFontConverter.ToString(result));
         }
+
+        [Fact]
+        public void SequenceFormatter_ShouldRenderMaterializedResultsLikeBrailleLine()
+        {
+            var line = new BrailleLine();
+            line.AddWord(new BrailleWord("A", "01"));
+            line.AddWord(new BrailleWord("B", "1203"));
+
+            var builder1 = new BrailleWordBuilder("A");
+            builder1.AppendHex("01");
+
+            var builder2 = new BrailleWordBuilder("B");
+            builder2.AppendHex("1203");
+
+            IReadOnlyList<IBrailleWordResult> results =
+            [
+                builder1.Build(),
+                builder2.Build()
+            ];
+
+            Assert.Equal(line.ToBrailleCellHexString(), BrailleWordSequenceFormatter.ToBrailleCellHexString(results));
+            Assert.Equal(line.ToPositionNumberString(), BrailleWordSequenceFormatter.ToPositionNumberString(results));
+            Assert.Equal(
+                line.ToHtmlString("  ", "column", "braille", "text"),
+                BrailleWordSequenceFormatter.ToHtmlString(results, "  ", "column", "braille", "text"));
+        }
     }
 }

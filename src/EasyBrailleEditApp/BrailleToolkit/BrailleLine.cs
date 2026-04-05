@@ -388,15 +388,7 @@ namespace BrailleToolkit
         /// <returns></returns>
         public string ToBrailleCellHexString()
         {
-            var sb = new StringBuilder();
-            foreach (var brWord in Words)
-            {
-                foreach (var cell in brWord.Cells)
-                {
-                    sb.Append(cell.ToHexString());
-                }                
-            }
-            return sb.ToString();
+            return BrailleWordSequenceFormatter.ToBrailleCellHexString(Words);
         }
 
         /// <summary>
@@ -405,12 +397,7 @@ namespace BrailleToolkit
         /// <returns></returns>
         public string ToPositionNumberString()
         {
-            var sb = new StringBuilder();
-            foreach (var brWord in Words)
-            {
-                sb.Append(brWord.ToPositionNumberString(useParenthesis: true));
-            }
-            return sb.ToString();
+            return BrailleWordSequenceFormatter.ToPositionNumberString(Words);
         }
 
         /// <summary>
@@ -423,31 +410,7 @@ namespace BrailleToolkit
         /// <returns>表示此點字行的 HTML 字串。</returns>
         public string ToHtmlString(string leadingSpaces, string cssClassTd, string cssClassBraille, string cssClassText)
         {
-            var sb = new StringBuilder();
-
-            sb.AppendLine($"{leadingSpaces}<tr>");
-
-            foreach (var brWord in Words)
-            {
-                if (brWord.IsContextTag || brWord.CellCount < 1)
-                    continue;
-
-                string brFontText = BrailleFontConverter.ToString(brWord);
-
-                if (String.IsNullOrEmpty(brFontText))
-                {
-                    sb.AppendLine($"無法轉換成對應的點字字型: {brWord.Text}。");
-                    break;
-                }
-
-                sb.AppendLine($"{leadingSpaces}  <td colspan='{brFontText.Length}' class='{cssClassTd}'>");
-                sb.AppendLine($"{leadingSpaces}    <div class='{cssClassBraille}'>{brFontText}</div>");
-                sb.AppendLine($"{leadingSpaces}    <div class='{cssClassText}'>{brWord.Text}</div>");
-                sb.AppendLine($"{leadingSpaces}  </td>");
-            }
-
-            sb.AppendLine($"{leadingSpaces}</tr>");
-            return sb.ToString();
+            return BrailleWordSequenceFormatter.ToHtmlString(Words, leadingSpaces, cssClassTd, cssClassBraille, cssClassText);
         }
 
         /// <summary>

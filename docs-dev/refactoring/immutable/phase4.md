@@ -44,6 +44,20 @@ Phase 4 目前：
   - materialized result list 的 helper 驗證
   - `BrailleFontConverter.ToString(result)` 與 `result.ToBrailleWord()` 等價驗證
 
+### `4c` 第三個切點
+
+- 新增 `BrailleWordSequenceFormatter`
+- `BrailleLine` 的下列 read-only formatting 已委派給 sequence formatter：
+  - `ToBrailleCellHexString()`
+  - `ToPositionNumberString()`
+  - `ToHtmlString(...)`
+- sequence formatter 同時提供：
+  - `IReadOnlyList<BrailleWord>` 版本
+  - `IReadOnlyList<IBrailleWordResult>` 版本
+- 這讓 HTML export / line rendering 這類 line-level downstream，與 result renderer 共用同一條格式化邏輯
+- 補測試：
+  - result sequence 與既有 `BrailleLine` 在 hex / position / HTML rendering 上的等價驗證
+
 ### `4a`
 
 - [`BrailleCell.cs`](/src/EasyBrailleEditApp/BrailleToolkit/BrailleCell.cs) 從 sealed class 改成 `readonly record struct`
