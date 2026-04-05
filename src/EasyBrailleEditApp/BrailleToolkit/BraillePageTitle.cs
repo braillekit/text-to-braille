@@ -43,7 +43,7 @@ namespace BrailleToolkit
         /// <param name="words">標題文字。</param>
         /// <param name="beginLineIdx">起始列索引。</param>
         /// <param name="beginLine">起始列物件。</param>
-        public BraillePageTitle(List<BrailleWord> words, int beginLineIdx, BrailleLine beginLine)
+        public BraillePageTitle(IReadOnlyList<BrailleWord> words, int beginLineIdx, BrailleLine beginLine)
         {
             SetTitleLine(words, beginLineIdx, beginLine);
         }
@@ -59,10 +59,10 @@ namespace BrailleToolkit
             SetTitleLine(titleLine, beginLineIdx, beginLine);
         }
 
-        private void SetTitleLine(List<BrailleWord> words, int beginLineIdx, BrailleLine beginLine)
+        private void SetTitleLine(IReadOnlyList<BrailleWord> words, int beginLineIdx, BrailleLine beginLine)
         {
             TitleLine = new BrailleLine();
-            TitleLine.Words.AddRange(words);
+            TitleLine.AddWords(words);
             TitleLine.Tag = beginLineIdx;
 
             ContentStartLineIndex = beginLineIdx;
@@ -112,7 +112,7 @@ namespace BrailleToolkit
             if (ContentStartLineRef == null)
                 return false;
 
-            int idx = brDoc.Lines.IndexOf(ContentStartLineRef);
+            int idx = brDoc.IndexOfLine(ContentStartLineRef);
             if (idx < 0)
             {
                 return false;

@@ -16,11 +16,18 @@ namespace BrailleToolkit
     [DataContract]
     public class BrailleLine : ICloneable
     {
+        [DataMember(Name = "Words")]
+        private List<BrailleWord> m_Words;
+
         /// <summary>
         /// 取得或設定組成此行的點字詞串列。
         /// </summary>
-        [DataMember]
-        public List<BrailleWord> Words { get; private set; }
+        [IgnoreDataMember]
+        public IReadOnlyList<BrailleWord> Words
+        {
+            get { return m_Words; }
+            private set { m_Words = CopyWords(value); }
+        }
 
         /// <summary>
         /// 加入 Tag 屬性的最初目的用來記住標題列在雙視文件中的 begin line index，但也可以作為其他用途。
@@ -34,7 +41,22 @@ namespace BrailleToolkit
         /// </summary>
         public BrailleLine()
         {
-            Words = new List<BrailleWord>();
+            m_Words = new List<BrailleWord>();
+        }
+
+        private static List<BrailleWord> CopyWords(IEnumerable<BrailleWord>? words)
+        {
+            var result = new List<BrailleWord>();
+            if (words == null)
+            {
+                return result;
+            }
+
+            foreach (var word in words)
+            {
+                result.Add(word);
+            }
+            return result;
         }
 
         /// <summary>
@@ -42,7 +64,7 @@ namespace BrailleToolkit
         /// </summary>
         public void Clear()
         {
-            Words.Clear();
+            m_Words.Clear();
         }
 
         /// <summary>
@@ -204,7 +226,7 @@ namespace BrailleToolkit
         /// <param name="index">要移除之項目的以零為起始的索引。</param>
         public void RemoveAt(int index)
         {
-            Words.RemoveAt(index);
+            m_Words.RemoveAt(index);
         }
 
         /// <summary>
@@ -218,7 +240,7 @@ namespace BrailleToolkit
             {
                 count = Words.Count - index;
             }
-            Words.RemoveRange(index, count);
+            m_Words.RemoveRange(index, count);
         }
 
         /// <summary>
@@ -230,7 +252,23 @@ namespace BrailleToolkit
             if (brLine == null || brLine.WordCount < 1)
                 return;
 
-            Words.AddRange(brLine.Words);
+            m_Words.AddRange(brLine.Words);
+        }
+
+        /// <summary>
+        /// 將點字詞附加至此點字行。
+        /// </summary>
+        public void AddWord(BrailleWord brWord)
+        {
+            m_Words.Add(brWord);
+        }
+
+        /// <summary>
+        /// 將多個點字詞附加至此點字行。
+        /// </summary>
+        public void AddWords(IEnumerable<BrailleWord> words)
+        {
+            m_Words.AddRange(words);
         }
 
         /// <summary>
@@ -240,7 +278,15 @@ namespace BrailleToolkit
         /// <param name="brWord">要插入的點字詞。</param>
         public void Insert(int index, BrailleWord brWord)
         {
-            Words.Insert(index, brWord);
+            m_Words.Insert(index, brWord);
+        }
+
+        /// <summary>
+        /// 將多個點字詞插入點字行的指定索引處。
+        /// </summary>
+        public void InsertWords(int index, IEnumerable<BrailleWord> words)
+        {
+            m_Words.InsertRange(index, words);
         }
 
         /// <summary>
@@ -253,7 +299,7 @@ namespace BrailleToolkit
             {
                 if (BrailleWord.IsBlank(Words[i]) || BrailleWord.IsEmpty(Words[i]))
                 {
-                    Words.RemoveAt(i);
+                    m_Words.RemoveAt(i);
                     continue;
                 }
                 break;
@@ -270,7 +316,7 @@ namespace BrailleToolkit
             {
                 if (BrailleWord.IsBlank(Words[i]) || BrailleWord.IsEmpty(Words[i]))
                 {
-                    Words.RemoveAt(i);
+                    m_Words.RemoveAt(i);
                     i--;
                     continue;
                 }
@@ -425,7 +471,7 @@ namespace BrailleToolkit
                 brWord = Words[i];
                 if (brWord.IsContextTag)
                 {
-                    Words.RemoveAt(i);
+                    m_Words.RemoveAt(i);
                 }
             }
         }
@@ -515,7 +561,7 @@ namespace BrailleToolkit
             while (index < Words.Count && count > 0)
             {
                 newWord = Words[index];
-                newLine.Words.Add(newWord);
+                newLine.AddWord(newWord);
 
                 index++;
                 count--;
@@ -547,7 +593,7 @@ namespace BrailleToolkit
             while (index < Words.Count && count > 0)
             {
                 newWord = Words[index].Copy();
-                newLine.Words.Add(newWord);
+                newLine.AddWord(newWord);
 
                 index++;
                 count--;
@@ -571,7 +617,7 @@ namespace BrailleToolkit
             foreach (BrailleWord brWord in Words)
             {
                 newWord = brWord.Copy();
-                newLine.Words.Add(newWord);
+                newLine.AddWord(newWord);
             }
             newLine.Tag = Tag;
             return newLine;

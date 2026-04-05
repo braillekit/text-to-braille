@@ -2,9 +2,7 @@
 using Huanlin.Common.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BrailleToolkit.Helpers
 {
@@ -33,7 +31,7 @@ namespace BrailleToolkit.Helpers
         /// </summary>
         /// <param name="brWordList"></param>
         /// <returns></returns>
-        public static string ToString(List<BrailleWord> brWordList)
+        public static string ToString(IReadOnlyList<BrailleWord> brWordList)
         {
             var sb = new StringBuilder();
             foreach (var brWord in brWordList)
@@ -56,7 +54,7 @@ namespace BrailleToolkit.Helpers
         /// </summary>
         /// <param name="brWordList"></param>
         /// <returns></returns>
-        public static string ToTextString(List<BrailleWord> brWordList)
+        public static string ToTextString(IReadOnlyList<BrailleWord> brWordList)
         {
             var sb = new StringBuilder();
             foreach (var brWord in brWordList)
@@ -71,7 +69,7 @@ namespace BrailleToolkit.Helpers
         /// </summary>
         /// <param name="brWordList"></param>
         /// <returns></returns>
-        public static string ToDotNumberString(List<BrailleWord> brWordList)
+        public static string ToDotNumberString(IReadOnlyList<BrailleWord> brWordList)
         {
             var sb = new StringBuilder();
             foreach (var brWord in brWordList)
@@ -86,7 +84,7 @@ namespace BrailleToolkit.Helpers
         /// </summary>
         /// <param name="words"></param>
         /// <returns></returns>
-        public static string ToOriginalTextString(List<BrailleWord> words)
+        public static string ToOriginalTextString(IReadOnlyList<BrailleWord> words)
         {
             var sb = new StringBuilder();
             int index = 0;
@@ -120,7 +118,7 @@ namespace BrailleToolkit.Helpers
         /// </summary>
         /// <param name="brWordList"></param>
         /// <returns></returns>
-        public static int GetCellCount(this List<BrailleWord> brWordList)
+        public static int GetCellCount(this IReadOnlyList<BrailleWord> brWordList)
         {
             int count = 0;
             foreach (var brWord in brWordList)
@@ -134,7 +132,7 @@ namespace BrailleToolkit.Helpers
         /// 是否包含標題情境標籤。
         /// </summary>
         /// <returns></returns>
-        public static bool ContainsTitleTag(List<BrailleWord> brWordList)
+        public static bool ContainsTitleTag(IReadOnlyList<BrailleWord> brWordList)
         {
             if (brWordList.Count > 0 && brWordList[0].Text.Equals(ContextTagNames.Title))
             {

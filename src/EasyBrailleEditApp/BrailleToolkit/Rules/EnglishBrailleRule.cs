@@ -186,7 +186,7 @@ namespace BrailleToolkit.Rules
                     if (firstSpaceIndex >= 0 && spaceCount > 1)
                     {
                         int cnt = spaceCount - 1;
-                        brLine.Words.RemoveRange(firstSpaceIndex, cnt);
+                        brLine.RemoveRange(firstSpaceIndex, cnt);
                         i = i - cnt;
                     }
                     firstSpaceIndex = -1;
@@ -199,7 +199,7 @@ namespace BrailleToolkit.Rules
             if (firstSpaceIndex >= 0 && spaceCount > 1)
             {
                 int cnt = spaceCount - 1;
-                brLine.Words.RemoveRange(firstSpaceIndex, cnt);
+                brLine.RemoveRange(firstSpaceIndex, cnt);
             }
         }
 

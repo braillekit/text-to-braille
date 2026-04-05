@@ -27,8 +27,8 @@ namespace BrailleToolkit.Tests
             var word2 = new BrailleWord("中文", "ㄓㄨㄥ ㄨㄣˊ", "AABB"); // Fake codes
             word2.IsPolyphonic = true;
 
-            line.Words.Add(word1);
-            line.Words.Add(word2);
+            line.AddWord(word1);
+            line.AddWord(word2);
             
             doc.AddLine(line);
 
@@ -68,7 +68,7 @@ namespace BrailleToolkit.Tests
             doc.CellsPerLine = 40;
             var line = new BrailleLine();
             var word = new BrailleWord("A", "01");
-            line.Words.Add(word);
+            line.AddWord(word);
             doc.AddLine(line);
 
             // Act

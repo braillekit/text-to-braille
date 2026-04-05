@@ -388,7 +388,7 @@ namespace EasyBrailleEdit
 
             if (form.ShowDialog() == DialogResult.OK)
             {
-                BrailleDoc.PageTitles.Clear();
+                BrailleDoc.ClearPageTitles();
 
                 // 複製所有標題列。
                 BraillePageTitle? newTitle = null; // Fixed CS8600
@@ -397,7 +397,7 @@ namespace EasyBrailleEdit
                     if (t.TitleLine != null && t.TitleLine.CellCount > 0)
                     {
                         newTitle = t.Clone() as BraillePageTitle;
-                        BrailleDoc.PageTitles.Add(newTitle!); // Fixed CS8600
+                        BrailleDoc.AddPageTitle(newTitle!); // Fixed CS8600
                     }
                 }
                 _controller.IsDirty = true;

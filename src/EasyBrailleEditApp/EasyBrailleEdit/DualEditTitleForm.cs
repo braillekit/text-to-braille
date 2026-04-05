@@ -46,7 +46,7 @@ namespace EasyBrailleEdit
                     {
                         Titles.Add(newTitle);
 
-                        m_TmpBrDoc.Lines.Add(newTitle.TitleLine);       // 把標題 line 塞進暫存文件。
+                        m_TmpBrDoc.AddLine(newTitle.TitleLine);       // 把標題 line 塞進暫存文件。
                     }
                 }
                 else

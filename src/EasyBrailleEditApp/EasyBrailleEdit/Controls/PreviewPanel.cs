@@ -37,7 +37,7 @@ namespace EasyBrailleEdit.Controls
             this.ResumeLayout(false);
         }
 
-        public void UpdatePreview(List<BrailleLine>? lines)
+        public void UpdatePreview(IReadOnlyList<BrailleLine>? lines)
         {
             if (lines == null || lines.Count == 0)
             {

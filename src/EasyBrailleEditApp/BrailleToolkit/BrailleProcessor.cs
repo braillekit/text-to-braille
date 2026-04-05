@@ -412,7 +412,7 @@ namespace BrailleToolkit
                 if (brWordList != null && brWordList.Count > 0)
                 {
                     // 成功轉換成點字，有 n 個字元會從串流中取出
-                    outputBrLine.Words.AddRange(brWordList);
+                    outputBrLine.AddWords(brWordList);
 
                     convertedText.Length = 0;
                     foreach (BrailleWord brWord in brWordList)
@@ -475,7 +475,7 @@ namespace BrailleToolkit
             // 若去掉換行字元之後變成空字串，則傳回只包含一個空方的列。
             if (String.IsNullOrEmpty(line))
             {
-                brLine.Words.Add(BrailleWord.NewBlank());
+                brLine.AddWord(BrailleWord.NewBlank());
                 return brLine;
             }
 
@@ -506,7 +506,7 @@ namespace BrailleToolkit
 
                     EnsureNoDigitSymbolAndSpace();
 
-                    brLine.Words.AddRange(brWordList);
+                    brLine.AddWords(brWordList);
 
                     // 通知事件
                     OnTextConverted(new TextConvertedEventArgs
@@ -544,7 +544,7 @@ namespace BrailleToolkit
                         if (brWordList != null && brWordList.Count > 0)
                         {
                             // 成功轉換成點字，有 n 個字元會從串流中取出
-                            brLine.Words.AddRange(brWordList);
+                            brLine.AddWords(brWordList);
                         }
                     }
                     catch (Exception ex)
@@ -801,7 +801,7 @@ namespace BrailleToolkit
                     if (ctag.PrefixBrailleWords.Count > 0)
                     {
                         index++;
-                        brLine.Words.InsertRange(index, ctag.PrefixBrailleWords);
+                        brLine.InsertWords(index, ctag.PrefixBrailleWords);
                         index += ctag.PrefixBrailleWords.Count;
 
                         if (ctag.RemoveTagOnConversion)
@@ -820,7 +820,7 @@ namespace BrailleToolkit
                             aWord.IsConvertedFromTag = true;
                         }
                         index++;
-                        brLine.Words.InsertRange(index, newBrLine.Words);
+                        brLine.InsertWords(index, newBrLine.Words);
                         index += newBrLine.WordCount;
 
                         if (ctag.RemoveTagOnConversion)
@@ -853,7 +853,7 @@ namespace BrailleToolkit
                     if (ctag.PostfixBrailleWords.Count > 0)
                     {
                         index++;
-                        brLine.Words.InsertRange(index, ctag.PostfixBrailleWords);
+                        brLine.InsertWords(index, ctag.PostfixBrailleWords);
                         index += ctag.PostfixBrailleWords.Count;
 
                         if (ctag.RemoveTagOnConversion)
@@ -871,7 +871,7 @@ namespace BrailleToolkit
                         {
                             aWord.IsConvertedFromTag = true;
                         }
-                        brLine.Words.InsertRange(index, newBrLine.Words);
+                        brLine.InsertWords(index, newBrLine.Words);
                         index += newBrLine.WordCount + 1;
 
                         if (ctag.RemoveTagOnConversion)

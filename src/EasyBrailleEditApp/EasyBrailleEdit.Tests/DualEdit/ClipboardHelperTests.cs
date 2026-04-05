@@ -106,10 +106,10 @@ namespace EasyBrailleEdit.Tests.DualEdit
         {
             // Arrange
             var line1 = new BrailleLine();
-            line1.Words.Add(new BrailleWord("第一行"));
+            line1.AddWord(new BrailleWord("第一行"));
             
             var line2 = new BrailleLine();
-            line2.Words.Add(new BrailleWord("第二行"));
+            line2.AddWord(new BrailleWord("第二行"));
 
             var originalLines = new List<BrailleLine> { line1, line2 };
 
@@ -129,8 +129,8 @@ namespace EasyBrailleEdit.Tests.DualEdit
         {
             // Arrange - 驗證多層級的資料結構都能正確序列化
             var line1 = new BrailleLine();
-            line1.Words.Add(new BrailleWord("點") { PhoneticCode = "ㄉㄧㄢˇ" });
-            line1.Words.Add(new BrailleWord("字") { PhoneticCode = "ㄗˋ" });
+            line1.AddWord(new BrailleWord("點") { PhoneticCode = "ㄉㄧㄢˇ" });
+            line1.AddWord(new BrailleWord("字") { PhoneticCode = "ㄗˋ" });
 
             var originalLines = new List<BrailleLine> { line1 };
 
@@ -181,7 +181,7 @@ namespace EasyBrailleEdit.Tests.DualEdit
         {
             // Arrange
             var line = new BrailleLine();
-            line.Words.Add(new BrailleWord("測試"));
+            line.AddWord(new BrailleWord("測試"));
             var lines = new List<BrailleLine> { line };
             ClipboardHelper.SetLines(lines);
 
@@ -217,7 +217,7 @@ namespace EasyBrailleEdit.Tests.DualEdit
         {
             // Arrange - 這個測試確保我們修正的問題不會再次發生
             var line = new BrailleLine();
-            line.Words.Add(new BrailleWord("測試") { PhoneticCode = "ㄘㄜˋㄕˋ" });
+            line.AddWord(new BrailleWord("測試") { PhoneticCode = "ㄘㄜˋㄕˋ" });
             var lines = new List<BrailleLine> { line };
 
             // Act & Assert - 不應該拋出 NotSupportedException

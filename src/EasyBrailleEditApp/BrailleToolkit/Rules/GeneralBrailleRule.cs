@@ -53,7 +53,7 @@ namespace BrailleToolkit.Rules
 
                 if (NeedSpace(lastBrWord, brWord))
                 {
-                    brLine.Words.Insert(wordIdx, BrailleWord.NewBlank());
+                    brLine.Insert(wordIdx, BrailleWord.NewBlank());
                     wordIdx++;
                 }
                 wordIdx++;
@@ -256,7 +256,7 @@ namespace BrailleToolkit.Rules
             int wordOffset = 0;
             if (index > 0 && !BrailleWord.IsBlank(brLine[index - 1]))
             {
-                brLine.Words.Insert(index, BrailleWord.NewBlank());
+                brLine.Insert(index, BrailleWord.NewBlank());
                 wordOffset = 1;
             }
             return wordOffset;
@@ -276,7 +276,7 @@ namespace BrailleToolkit.Rules
             {
                 if (!BrailleWord.IsBlank(brLine[index]) && !brLine[index].IsContextTag)
                 {
-                    brLine.Words.Insert(index, BrailleWord.NewBlank());
+                    brLine.Insert(index, BrailleWord.NewBlank());
                     wordOffset = 1;
                 }
             }

@@ -44,7 +44,7 @@ namespace BrailleToolkit
             brDoc.RemoveLine(lineIndex);
 
             // 加入斷行後的 lines
-            brDoc.Lines.InsertRange(lineIndex, formattedLines);
+            brDoc.InsertLines(lineIndex, formattedLines);
 
             return formattedLines.Count;
         }
@@ -136,7 +136,7 @@ namespace BrailleToolkit
                 newLine = brLine.ShallowCopy(wordIndex, breakIndex);   // 複製到新行。
                 if (needHyphen) // 是否要附加連字號?
                 {
-                    newLine.Words.Add(new BrailleWord("-", BrailleCellCode.Hyphen));
+                    newLine.AddWord(new BrailleWord("-", BrailleCellCode.Hyphen));
                 }
 
                 // 如果是折下來的新行，就自動補上需要縮排的格數。
