@@ -46,9 +46,7 @@ namespace BrailleToolkit.Converters
             string? brCode = BrailleTable.Find(text);
             if (!String.IsNullOrEmpty(brCode))
             {
-                var builder = new BrailleWordBuilder(text);
-                builder.AppendHex(brCode);
-                return builder.ToBrailleWord();
+                return new BrailleWord(text, brCode);
             }
             return null;
         }

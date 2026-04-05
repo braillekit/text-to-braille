@@ -64,13 +64,12 @@ namespace BrailleToolkit.Converters
                 // 控制字（語境字）
 
                 string text = isBeginTag ? ctag.TagName : ctag.EndTagName;
-                var builder = new BrailleWordBuilder(text)
+                var brWord = new BrailleWord(text)
                 {
                     ContextTag = ctag,
                     IsContextTag = true,
                     ContextNames = context.ContextNames
                 };
-                var brWord = builder.ToBrailleWord();
 
                 brWordList = new List<BrailleWord>();
                 brWordList.Add(brWord);
