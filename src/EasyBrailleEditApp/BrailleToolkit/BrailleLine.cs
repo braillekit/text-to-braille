@@ -16,7 +16,7 @@ namespace BrailleToolkit
     [DataContract]
     public class BrailleLine : ICloneable
     {
-        private readonly long m_Identity = BrailleObjectIdentityGenerator.NextLineIdentity();
+        private long m_Identity = BrailleObjectIdentityGenerator.NextLineIdentity();
 
         [DataMember(Name = "Words")]
         private List<BrailleWord> m_Words;
@@ -52,6 +52,20 @@ namespace BrailleToolkit
         public long Identity
         {
             get { return m_Identity; }
+        }
+
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context)
+        {
+            EnsureRuntimeIdentity();
+        }
+
+        private void EnsureRuntimeIdentity()
+        {
+            if (m_Identity <= 0)
+            {
+                m_Identity = BrailleObjectIdentityGenerator.NextLineIdentity();
+            }
         }
 
         private static List<BrailleWord> CopyWords(IEnumerable<BrailleWord>? words)

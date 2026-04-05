@@ -158,3 +158,21 @@
 - `EditWord` / `InsertBrailleWords` / `DeleteWord` / `JoinToPreviousRow` 這些會觸發 `ReformatRow(...)` 的 editor command，不再因為 formatter 而整列換成新物件
 - page title begin-line anchor 若剛好指向被 reformat 的第一列，現在可直接延續既有 line identity
 - `4c` 的 editor/document 相容邊界，已從「word identity」進一步收斂到「formatter 主路徑保留 first-line identity」
+
+## 後續進展：第八個切點
+
+第八個切點把 clipboard paste / line clone / memento / paragraph reshape 這一類
+「刻意建立新 logical line/word」的 command 收斂到同一個 runtime identity 規則：
+
+- `BrailleWord` / `BrailleLine` 經過 `DataContractJsonSerializer` 反序列化後，若尚未帶有有效的 runtime identity，會在 `OnDeserialized` 階段補發新的 identity
+- 這涵蓋了目前 editor 內主要的新物件來源：
+  - clipboard `SetWords` / `GetWords`
+  - clipboard `SetLines` / `GetLines`
+  - `BrailleDocument.DeepCopy()` 與 undo/redo memento
+  - copy/cut/paste 前的 line/word clone
+
+這一刀的意義是：
+
+- 「複製／貼上」與「重排／搬移」兩種 editor command 現在有一致且明確的 identity 語意
+- 對 clipboard / memento 這類序列化邊界而言，新 logical object 會穩定拿到新的 `BrailleWord.Identity` / `BrailleLine.Identity`
+- `BraillePageTitle` 在文件 JSON round-trip 之後，也會重新綁定到同一份文件中的 fresh line identity，而不是落到 `0` 或失效錨點

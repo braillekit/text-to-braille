@@ -3,6 +3,7 @@ using NChinese.Phonetic;
 using Xunit;
 using System.IO;
 using System.Text;
+using EasyBrailleEdit.Common.Utilities;
 
 namespace BrailleToolkit.Tests
 {
@@ -122,6 +123,45 @@ namespace BrailleToolkit.Tests
             Assert.Equal(originalIdentity, title.ContentStartLineIdentity);
             Assert.True(brDoc.IsBeginLineOfPageTitle(0));
             Assert.Same(title, brDoc.FindPageTitleByBeginLine(brDoc.Lines[0]));
+        }
+
+        [Fact]
+        public void DeepCopy_ShouldAssignFreshRuntimeIdentitiesToLinesAndWords()
+        {
+            var original = new BrailleDocument();
+            var line = new BrailleLine();
+            var word = new BrailleWord("A", "01");
+            line.AddWord(word);
+            original.AddLine(line);
+
+            var copied = original.DeepCopy();
+
+            Assert.Single(copied.Lines);
+            Assert.NotEqual(original.Lines[0].Identity, copied.Lines[0].Identity);
+            Assert.NotEqual(original.Lines[0].Words[0].Identity, copied.Lines[0].Words[0].Identity);
+            Assert.True(copied.Lines[0].Identity > 0);
+            Assert.True(copied.Lines[0].Words[0].Identity > 0);
+        }
+
+        [Fact]
+        public void JsonRoundTrip_ShouldKeepPageTitleAnchorConsistentWithFreshLineIdentity()
+        {
+            var original = new BrailleDocument();
+            original.CellsPerLine = 30;
+
+            var line = new BrailleLine();
+            line.AddWord(new BrailleWord("A", "01"));
+            original.AddLine(line);
+            original.AddPageTitleAt(new[] { new BrailleWord("標", "01") }, 0);
+
+            string json = JsonHelper.Serialize(original);
+            var copied = JsonHelper.Deserialize<BrailleDocument>(json);
+
+            Assert.Single(copied.PageTitles);
+            Assert.True(copied.Lines[0].Identity > 0);
+            Assert.Equal(copied.Lines[0].Identity, copied.PageTitles[0].ContentStartLineIdentity);
+            Assert.True(copied.IsBeginLineOfPageTitle(0));
+            Assert.Same(copied.PageTitles[0], copied.FindPageTitleByBeginLine(copied.Lines[0]));
         }
 
         [Fact]

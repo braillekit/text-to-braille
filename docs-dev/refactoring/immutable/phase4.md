@@ -110,6 +110,19 @@ Phase 4 目前：
   - formatter 斷行後保留第一列 `Identity`
   - page title begin-line anchor 在 formatter 斷行後仍指向同一列
 
+### `4c` 第八個切點
+
+- `BrailleWord` / `BrailleLine` 新增 `OnDeserialized` runtime identity 補發邏輯
+- `DataContractJsonSerializer` 反序列化後，若物件尚未帶有有效 `Identity`，會自動補發新的 runtime identity
+- 這讓下列 editor command 的新物件來源，都能一致取得 fresh logical identity：
+  - clipboard copy / cut / paste
+  - line clone / selected-word clone
+  - `BrailleDocument.DeepCopy()` 與 undo/redo memento
+  - paragraph reshape 過程中經過 JSON deep copy 的文件狀態
+- 補測試：
+  - `BrailleDocument.DeepCopy()` 後 line / word identity 應為 fresh identity
+  - document JSON round-trip 後 page title anchor 應與新文件內的 fresh line identity 保持一致
+
 ### `4a`
 
 - [`BrailleCell.cs`](/src/EasyBrailleEditApp/BrailleToolkit/BrailleCell.cs) 從 sealed class 改成 `readonly record struct`

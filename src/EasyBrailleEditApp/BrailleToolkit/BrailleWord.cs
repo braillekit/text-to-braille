@@ -41,7 +41,7 @@ namespace BrailleToolkit
         /// </summary>
         public static BrailleWord BlankWord { get; } = NewBlank();
 
-        private readonly long m_Identity = BrailleObjectIdentityGenerator.NextWordIdentity();
+        private long m_Identity = BrailleObjectIdentityGenerator.NextWordIdentity();
 
         private List<string>? m_PhoneticCodes;   // 所有注音組字字根（以支援破音字）。
         private int m_ActivePhoneticIndex;      // 目前使用的注音組字字根索引。
@@ -286,6 +286,20 @@ namespace BrailleToolkit
         public long Identity
         {
             get { return m_Identity; }
+        }
+
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context)
+        {
+            EnsureRuntimeIdentity();
+        }
+
+        private void EnsureRuntimeIdentity()
+        {
+            if (m_Identity <= 0)
+            {
+                m_Identity = BrailleObjectIdentityGenerator.NextWordIdentity();
+            }
         }
 
         /// <summary>
