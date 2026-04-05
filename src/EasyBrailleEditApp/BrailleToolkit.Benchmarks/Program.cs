@@ -1,4 +1,4 @@
 using BenchmarkDotNet.Running;
 using BrailleToolkit.Benchmarks;
 
-BenchmarkRunner.Run<BrailleConversionBenchmarks>();
+BenchmarkSwitcher.FromAssembly(typeof(BrailleConversionBenchmarks).Assembly).Run(args);

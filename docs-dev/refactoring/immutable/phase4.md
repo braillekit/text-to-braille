@@ -141,5 +141,8 @@ Phase 4 目前先完成 `4a`：
 - `4b` 建議先暫停，優先釐清 `BrailleCell` 改成 value type 後，為何會在轉換熱路徑上造成明顯 throughput regression。
 - 原因分析紀錄見 [`phase4-cause-analysis.md`](./phase4-cause-analysis.md)。
 - 若後續仍要推 immutable / value type 方向，建議先做更小範圍的 profiler / micro-benchmark，確認退步是否來自複製成本、JIT 行為、`List<BrailleCell>` 使用模式，或 record struct 產生的額外工作。
+- prototype 驗證紀錄見 [`2026-04-05-phase4-prototype-validation.md`](./benchmark-result/2026-04-05-phase4-prototype-validation.md)：
+  - 真實 pipeline A/B 顯示 plain `readonly struct` 不能穩定修復 regression
+  - synthetic storage benchmark 則顯示 builder / buffer 路線仍值得繼續驗證
 - `4b` 之後會碰到 `BrailleCellList` / `BrailleWord` / `BrailleLine` 的資料流與建構模式，風險會明顯高於 `4a`。
 - 若後續還要擴大 value type / immutable model 的範圍，應特別注意 reference identity 仍被使用的 `BrailleWord` / `BrailleLine` 路徑。

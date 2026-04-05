@@ -145,3 +145,9 @@ Phase 4a 將 [`BrailleCell.cs`](/d:/work/BrailleKit/text-to-braille/src/EasyBrai
 Phase 4a 的 regression 原因，最可能不是 `record struct` 語法糖本身，而是：
 
 - 在現有 mutable list-heavy 架構下，把 `BrailleCell` 從 flyweight reference object 改成 value type，導致大量 `List<BrailleCell>` 讀寫與搬移成本累積，最終壓過 allocation 改善。
+
+補充：
+
+- 後續 prototype 驗證見 [`2026-04-05-phase4-prototype-validation.md`](./benchmark-result/2026-04-05-phase4-prototype-validation.md)。
+- 其中真實 pipeline A/B 已進一步確認：把 `record struct` 改成 plain `readonly struct` 並不能穩定修復 regression。
+- synthetic storage benchmark 則顯示，若要延續 value type 方向，應優先驗證 cell storage / builder redesign，而不是只替換 `BrailleCell` 宣告形式。
