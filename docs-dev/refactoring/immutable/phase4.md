@@ -68,6 +68,19 @@ Phase 4 目前：
 - 補測試：
   - mixed `BrailleWord + IBrailleWordResult` sequence 的 helper / formatter 等價驗證
 
+### `4c` 第五個切點
+
+- serializer 熱點：
+  - `BrailleDocumentYamlSerializer` serialization 端改由 `IBrailleWordView` 讀取
+  - deserialization 端改由 `BrailleWord.CreateFromConstruction(...)` 回建
+- mutation 熱點：
+  - `BrailleProcessor.ConvertFraction(...)` 的分母尾端符號追加，已改走 `BrailleWordBuilder.FromBrailleWord(...)` / `ApplyTo(...)`
+  - 移除剩餘的手動 `lastBrWord.Cells.Add(...)`
+- 這代表 `4c` 已不只收斂 read-only downstream，也開始把 production mutation / serialization call site 拉回 construction boundary
+- 補測試：
+  - YAML round-trip 補 `OriginalText` / `ContextNames` / `IsConvertedFromTag` 驗證
+  - 既有 fraction 轉換測試持續通過
+
 ### `4a`
 
 - [`BrailleCell.cs`](/src/EasyBrailleEditApp/BrailleToolkit/BrailleCell.cs) 從 sealed class 改成 `readonly record struct`

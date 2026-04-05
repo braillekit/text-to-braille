@@ -101,3 +101,21 @@
 - `4c` 的 read-only boundary 不再需要同時維護「BrailleWord 版」與「result 版」兩套邏輯
 - downstream 看見的是同一個 word view contract，而不是來源型別差異
 - 之後要收尾 `4c`，就可以把重點放在剩餘仍強依賴 mutable object identity 或直接 mutation 的 call site，而不是繼續擴散平行 overload
+
+## 後續進展：第五個切點
+
+第五個切點直接清 production hotspots，而不是再補周邊基礎：
+
+- `BrailleDocumentYamlSerializer`
+  - serialization 端改由 `IBrailleWordView` 讀取
+  - deserialization 端改用 `BrailleWord.CreateFromConstruction(...)` 回建
+  - 不再維護另一套手工 `BrailleWord` 欄位填值邏輯
+- `BrailleProcessor.ConvertFraction(...)`
+  - 分母尾端符號追加已改用 `BrailleWordBuilder.FromBrailleWord(...)` + `ApplyTo(...)`
+  - 移除剩餘的手動 `lastBrWord.Cells.Add(...)` 熱點
+
+這一刀的意義是：
+
+- serializer 已正式接回 `4c` 的 construction boundary
+- fraction 路徑的 word mutation 已完全回到 builder / compatibility 邊界
+- `4c` 剩下的工作更集中在 reference identity 強依賴的編輯器／文件模型區，而不是 BrailleWord construction 本身

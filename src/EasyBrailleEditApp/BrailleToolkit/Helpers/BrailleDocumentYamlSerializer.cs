@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
@@ -170,7 +171,7 @@ namespace BrailleToolkit.Helpers
                 var yamlModel = new BrailleLineYamlModel();
                 foreach (var word in line.Words)
                 {
-                    yamlModel.Words.Add(BrailleWordYamlModel.FromBrailleWord(word));
+                    yamlModel.Words.Add(BrailleWordYamlModel.FromBrailleWordView(word));
                 }
                 return yamlModel;
             }
@@ -206,14 +207,14 @@ namespace BrailleToolkit.Helpers
 
             public bool IsConvertedFromTag { get; set; }
 
-            public static BrailleWordYamlModel FromBrailleWord(BrailleWord word)
+            public static BrailleWordYamlModel FromBrailleWordView(IBrailleWordView word)
             {
                 return new BrailleWordYamlModel
                 {
                     Text = word.Text,
                     OriginalText = word.OriginalText,
-                    CellList = CopyCellList(word.CellList),
-                    PhoneticCode = word.PhoneticCode,
+                    CellList = CreateCellListFromWordView(word),
+                    PhoneticCode = word.PhoneticCode ?? String.Empty,
                     IsPolyphonic = word.IsPolyphonic,
                     DontBreakLineHere = word.DontBreakLineHere,
                     ContextNames = word.ContextNames,
@@ -224,20 +225,23 @@ namespace BrailleToolkit.Helpers
 
             public BrailleWord ToBrailleWord()
             {
-                var word = new BrailleWord(Text)
-                {
-                    OriginalText = String.IsNullOrEmpty(OriginalText) ? Text : OriginalText,
-                    PhoneticCode = PhoneticCode ?? String.Empty,
-                    IsPolyphonic = IsPolyphonic,
-                    DontBreakLineHere = DontBreakLineHere,
-                    ContextNames = ContextNames ?? String.Empty,
-                    IsConvertedFromTag = IsConvertedFromTag
-                };
-
-                word.CellList.Assign(CopyCellList(CellList));
-                word.IsContextTag = IsContextTag;
-
-                return word;
+                var copiedCellList = CopyCellList(CellList);
+                return BrailleWord.CreateFromConstruction(
+                    Text,
+                    String.IsNullOrEmpty(OriginalText) ? Text : OriginalText,
+                    BrailleLanguage.Neutral,
+                    CollectionsMarshal.AsSpan(copiedCellList.Items),
+                    PhoneticCode ?? String.Empty,
+                    IsPolyphonic,
+                    DontBreakLineHere,
+                    ContextNames ?? String.Empty,
+                    contextTag: null,
+                    isContextTag: IsContextTag,
+                    isConvertedFromTag: IsConvertedFromTag,
+                    noDigitCell: false,
+                    noSpace: false,
+                    noCapitalRule: false,
+                    isEngPhonetic: false);
             }
         }
 
@@ -286,6 +290,16 @@ namespace BrailleToolkit.Helpers
                 items.Add(BrailleCell.GetInstance(cell.Value));
             }
             cellList.Items = items;
+            return cellList;
+        }
+
+        private static BrailleCellList CreateCellListFromWordView(IBrailleWordView word)
+        {
+            var cellList = new BrailleCellList();
+            for (int i = 0; i < word.CellCount; i++)
+            {
+                cellList.Add(BrailleCell.GetInstance(word.GetCell(i).Value));
+            }
             return cellList;
         }
     }

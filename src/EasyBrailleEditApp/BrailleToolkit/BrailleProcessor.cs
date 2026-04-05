@@ -1012,11 +1012,13 @@ namespace BrailleToolkit
 
             // 補上分母後面的點字符號
             BrailleWord lastBrWord = brWordListDenumerator[brWordListDenumerator.Count - 1];
+            var denominatorBuilder = BrailleWordBuilder.FromBrailleWord(lastBrWord);
             if (brWordListIntPart.Count > 0)
             {
-                lastBrWord.Cells.Add(BrailleCell.GetInstance(new int[] { 4, 5, 6 }));
+                denominatorBuilder.AppendCell(BrailleCell.GetInstance(new int[] { 4, 5, 6 }));
             }
-            lastBrWord.Cells.Add(BrailleCell.GetInstance(new int[] { 3, 4, 5, 6 }));
+            denominatorBuilder.AppendCell(BrailleCell.GetInstance(new int[] { 3, 4, 5, 6 }));
+            denominatorBuilder.ApplyTo(lastBrWord);
 
             // 結合整數部份、分子、分母至同一個串列。
             List<BrailleWord> brWordListFraction = new List<BrailleWord>();
