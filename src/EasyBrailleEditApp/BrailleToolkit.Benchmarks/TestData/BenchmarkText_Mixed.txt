@@ -1,0 +1,5 @@
+這是一段中英混合的文字，包含 English words 和中文。
+請將此段文字轉換成 Braille 點字。
+BrailleToolkit version 5.0 是一個點字轉換工具。
+電子郵件地址：test@example.com，網址：https://www.example.com
+數學算式：1 + 2 = 3，溫度：25°C。

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "additionalDirectories": [
+      "d:\\work\\BrailleKit\\text-to-braille\\src\\EasyBrailleEditApp"
+    ],
+    "allow": [
+      "Bash(dotnet sln:*)"
+    ]
+  }
+}
