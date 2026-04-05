@@ -96,7 +96,57 @@
    - `BrailleCellBuffer`
    - `CollectionsMarshal.AsSpan(...)` 或連續 buffer 掃描
 
+## 實驗 3：`BrailleWordBuilder` / `BrailleCellBuffer` 小型 prototype
+
+### 方法
+
+這組 benchmark 比前面的 storage-only synthetic prototype 更貼近目前專案資料流：
+
+- baseline 直接使用目前的 [`BrailleWord.cs`](/d:/work/BrailleKit/text-to-braille/src/EasyBrailleEditApp/BrailleToolkit/BrailleWord.cs) 與 [`BrailleLine.cs`](/d:/work/BrailleKit/text-to-braille/src/EasyBrailleEditApp/BrailleToolkit/BrailleLine.cs)
+- prototype 則在 [`BrailleWordBuilderPrototypeBenchmarks.cs`](/d:/work/BrailleKit/text-to-braille/src/EasyBrailleEditApp/BrailleToolkit.Benchmarks/BrailleWordBuilderPrototypeBenchmarks.cs) 實作：
+  - `PrototypeBrailleWordBuilder`
+  - `BrailleCellBuffer`
+  - immutable `PrototypeBrailleWord`
+- 操作型態包含：
+  - 建立 word
+  - append base cells
+  - prepend prefix cells
+  - line-level 彙整
+  - flattened cells 消費
+
+命令：
+
+- `dotnet run --project src/EasyBrailleEditApp/BrailleToolkit.Benchmarks/BrailleToolkit.Benchmarks.csproj -c Release -- --filter *BrailleWordBuilderPrototypeBenchmarks*`
+
+### 結果摘要
+
+| Method | Mean | Mean vs current | Allocated | Alloc vs current |
+| ---- | ----: | ----: | ----: | ----: |
+| current `BrailleWord` + `BrailleLine` | 2.859 ms | baseline | 7.82 MB | baseline |
+| `BrailleWordBuilder` + `BrailleCellBuffer` | 1.857 ms | -35.05% | 5.45 MB | -30.31% |
+| `BrailleWordBuilder` + `BrailleCellBuffer` + line buffer | 1.936 ms | -32.28% | 5.42 MB | -30.69% |
+
+### 解讀
+
+- 這是目前最有價值的 prototype 訊號。
+- 跟現況 `BrailleWord + List<BrailleCell>` 相比，`BrailleWordBuilder + BrailleCellBuffer`：
+  - 平均時間下降約 `35%`
+  - allocation 下降約 `30%`
+- line buffer 版本同樣明顯優於 baseline，但比 builder-only 慢約 `4.25%`。
+- 這代表：
+  - 真正肥大的成本，很可能就在 word construction / prepend / mutable cell storage
+  - line flatten 仍有優化空間，但暫時不像 word-level builder 那麼關鍵
+
+### 對後續 Phase 4 的意義
+
+- `4b` 若要繼續，不應再理解成「把 `BrailleCellList` 換成 immutable container」而已。
+- 更合理的方向是：
+  - 先做 `BrailleWordBuilder`
+  - 內部採用 `BrailleCellBuffer`
+  - 完成建構後再 materialize 成穩定結果物件
+- 換句話說，這輪 prototype 支持「builder/result 分離」值得往下做，而且優先級高於單純調整 `BrailleCell` 宣告形式。
+
 ## 暫定結論
 
 - `BrailleCell = record struct` 改成 plain struct：不足以解決 regression。
-- `cell storage / builder` 路線：有繼續做原型的價值。
+- `cell storage / builder` 路線：不只值得繼續原型，已經出現足以支持下一步設計探索的正面訊號。
