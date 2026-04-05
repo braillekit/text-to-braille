@@ -6,6 +6,7 @@ using System.Collections;
 using System.IO;
 using System.Globalization;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace BrailleToolkit.Converters
 {
@@ -115,6 +116,11 @@ namespace BrailleToolkit.Converters
             return BrailleFontConverter.ToString(brWord.CellList);
         }
 
+        internal static string ToString(IBrailleWordResult brWord)
+        {
+            return ToString(brWord.Cells.Span);
+        }
+
         /// <summary>
         /// 將 BrailleCellList 串列轉成對應的點字字型 ASCII 字串，以便顯示於螢幕上。
         /// 範例：
@@ -124,6 +130,11 @@ namespace BrailleToolkit.Converters
         /// <returns></returns>
         public static string ToString(BrailleCellList cellList)
         {
+            return ToString(CollectionsMarshal.AsSpan(cellList.Items));
+        }
+
+        private static string ToString(ReadOnlySpan<BrailleCell> cells)
+        {
             if (m_FontTable.Count < 1)
             {
                 throw new Exception("尚未載入字型對應表!");
@@ -131,9 +142,9 @@ namespace BrailleToolkit.Converters
 
             StringBuilder sb = new StringBuilder();
 
-            foreach (BrailleCell brCell in cellList.Items)
+            for (int i = 0; i < cells.Length; i++)
             {
-                sb.Append(ToChar(brCell.ToString()));
+                sb.Append(ToChar(cells[i].ToString()));
             }
             return sb.ToString();
         }

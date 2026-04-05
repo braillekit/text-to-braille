@@ -29,6 +29,21 @@ Phase 4 目前：
   - `dotnet test src/EasyBrailleEditApp/BrailleToolkit.Tests/BrailleToolkit.Tests.csproj`
   - `dotnet build src/EasyBrailleEditApp/BrailleToolkit.Benchmarks/BrailleToolkit.Benchmarks.csproj -c Release`
 
+### `4c` 第二個切點
+
+- `BrailleWordHelper` 新增 internal overload，可直接讀取 `IReadOnlyList<IBrailleWordResult>`：
+  - `ToString(...)`
+  - `ToTextString(...)`
+  - `ToDotNumberString(...)`
+  - `ToOriginalTextString(...)`
+  - `GetCellCount(...)`
+  - `ContainsTitleTag(...)`
+- `BrailleFontConverter` 新增 internal `ToString(IBrailleWordResult)`，讓 font rendering 不必先 materialize 回 `BrailleWord`
+- 這代表 helper / font rendering 這類 read-only downstream，已可直接消費 materialized result
+- 補測試：
+  - materialized result list 的 helper 驗證
+  - `BrailleFontConverter.ToString(result)` 與 `result.ToBrailleWord()` 等價驗證
+
 ### `4a`
 
 - [`BrailleCell.cs`](/src/EasyBrailleEditApp/BrailleToolkit/BrailleCell.cs) 從 sealed class 改成 `readonly record struct`

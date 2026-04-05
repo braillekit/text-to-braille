@@ -1,4 +1,6 @@
 using BrailleToolkit.Tags;
+using BrailleToolkit.Helpers;
+using BrailleToolkit.Converters;
 using Xunit;
 
 namespace BrailleToolkit.Tests
@@ -126,6 +128,61 @@ namespace BrailleToolkit.Tests
             Assert.True(target.NoCapitalRule);
             Assert.Single(target.Cells);
             Assert.Equal(BrailleCell.GetInstance("1B"), target.Cells[0]);
+        }
+
+        [Fact]
+        public void ReadOnlyHelpers_ShouldConsumeMaterializedResultsWithoutBrailleWordMaterialization()
+        {
+            var titleBuilder = new BrailleWordBuilder(ContextTagNames.Title)
+            {
+                OriginalText = ContextTagNames.Title,
+                IsContextTag = true
+            };
+
+            var wordBuilder = new BrailleWordBuilder("甲")
+            {
+                OriginalText = "原甲"
+            };
+            wordBuilder.AppendHex("01");
+            wordBuilder.AppendHex("02");
+
+            var derivedBuilder = new BrailleWordBuilder("顯示")
+            {
+                OriginalText = "<數學>",
+                IsConvertedFromTag = true
+            };
+            derivedBuilder.AppendHex("03");
+
+            IReadOnlyList<IBrailleWordResult> results =
+            [
+                titleBuilder.Build(),
+                wordBuilder.Build(),
+                derivedBuilder.Build()
+            ];
+            IReadOnlyList<IBrailleWordResult> wordOnlyResults =
+            [
+                wordBuilder.Build()
+            ];
+
+            Assert.True(BrailleWordHelper.ContainsTitleTag(results));
+            Assert.Equal($"{ContextTagNames.Title}甲顯示", BrailleWordHelper.ToTextString(results));
+            Assert.Equal($"{ContextTagNames.Title}原甲", BrailleWordHelper.ToOriginalTextString(results));
+            Assert.Equal("(1 2)", BrailleWordHelper.ToDotNumberString(wordOnlyResults));
+            Assert.Equal(3, results.GetCellCount());
+        }
+
+        [Fact]
+        public void BrailleFontConverter_ShouldRenderMaterializedResultWithoutBrailleWordMaterialization()
+        {
+            var builder = new BrailleWordBuilder("A");
+            builder.AppendHex("01");
+            builder.AppendHex("02");
+
+            IBrailleWordResult result = builder.Build();
+
+            Assert.Equal(
+                BrailleFontConverter.ToString(result.ToBrailleWord()),
+                BrailleFontConverter.ToString(result));
         }
     }
 }

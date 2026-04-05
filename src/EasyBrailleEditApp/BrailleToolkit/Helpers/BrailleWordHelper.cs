@@ -11,6 +11,33 @@ namespace BrailleToolkit.Helpers
     /// </summary>
     public static class BrailleWordHelper
     {
+        private static void AppendDebugString(StringBuilder sb, string text, string? phoneticCode, string brailleHex)
+        {
+            sb.Append("{");
+            sb.Append($"\"{text}\",");
+            sb.Append($"\"{phoneticCode ?? String.Empty}\",");
+            sb.Append($"\"{brailleHex}\"");
+            sb.Append("},");
+        }
+
+        private static void AppendOriginalText(StringBuilder sb, string text, string originalText, bool isContextTag, bool isConvertedFromTag)
+        {
+            if (isContextTag)
+            {
+                sb.Append(text);
+                return;
+            }
+
+            if (isConvertedFromTag)
+            {
+                return;
+            }
+
+            if (!String.IsNullOrEmpty(originalText))
+                sb.Append(originalText);
+            else
+                sb.Append(text);
+        }
 
         /// <summary>
         /// 判斷是否為中文標點符號。
@@ -35,12 +62,22 @@ namespace BrailleToolkit.Helpers
         {
             var sb = new StringBuilder();
             foreach (var brWord in brWordList)
-            {            
-                sb.Append("{");
-                sb.Append($"\"{brWord.Text}\",");
-                sb.Append($"\"{brWord.PhoneticCode}\",");
-                sb.Append($"\"{brWord.CellList.ToString()}\"");
-                sb.Append("},");
+            {
+                AppendDebugString(sb, brWord.Text, brWord.PhoneticCode, brWord.CellList.ToString());
+            }
+            if (sb.Length > 0)
+            {
+                sb.Remove(sb.Length - 1, 1);
+            }
+            return sb.ToString();
+        }
+
+        internal static string ToString(IReadOnlyList<IBrailleWordResult> brWordList)
+        {
+            var sb = new StringBuilder();
+            foreach (var brWord in brWordList)
+            {
+                AppendDebugString(sb, brWord.Text, brWord.PhoneticCode, BrailleCellListToHexString(brWord.Cells.Span));
             }
             if (sb.Length > 0)
             {
@@ -55,6 +92,16 @@ namespace BrailleToolkit.Helpers
         /// <param name="brWordList"></param>
         /// <returns></returns>
         public static string ToTextString(IReadOnlyList<BrailleWord> brWordList)
+        {
+            var sb = new StringBuilder();
+            foreach (var brWord in brWordList)
+            {
+                sb.Append(brWord.Text);
+            }
+            return sb.ToString();
+        }
+
+        internal static string ToTextString(IReadOnlyList<IBrailleWordResult> brWordList)
         {
             var sb = new StringBuilder();
             foreach (var brWord in brWordList)
@@ -79,6 +126,16 @@ namespace BrailleToolkit.Helpers
             return sb.ToString();
         }
 
+        internal static string ToDotNumberString(IReadOnlyList<IBrailleWordResult> brWordList)
+        {
+            var sb = new StringBuilder();
+            foreach (var brWord in brWordList)
+            {
+                sb.Append(BrailleWordResultToDotNumberString(brWord));
+            }
+            return sb.ToString();
+        }
+
         /// <summary>
         /// 注意：此函式其實無法完全呈現原始的明眼字，因為有些標籤是在轉成點字之後就被刪除了。
         /// </summary>
@@ -91,23 +148,20 @@ namespace BrailleToolkit.Helpers
             while (index < words.Count)
             {
                 var brWord = words[index];
-                if (brWord.IsContextTag)
-                {
-                    sb.Append(brWord.Text); // 輸出標籤名稱（可能為起始標籤或結束標籤）。
-                    index++;
-                    continue;
-                }
-                if (brWord.IsConvertedFromTag) // 只要是由 context tag 所衍生的文字都忽略。
-                {
-                    index++;
-                    continue;
-                }
+                AppendOriginalText(sb, brWord.Text, brWord.OriginalText, brWord.IsContextTag, brWord.IsConvertedFromTag);
+                index++;
+            }
+            return sb.ToString();
+        }
 
-                // 一般文字，或曾被替換過的文字。
-                if (!String.IsNullOrEmpty(brWord.OriginalText))
-                    sb.Append(brWord.OriginalText);
-                else
-                    sb.Append(brWord.Text);
+        internal static string ToOriginalTextString(IReadOnlyList<IBrailleWordResult> words)
+        {
+            var sb = new StringBuilder();
+            int index = 0;
+            while (index < words.Count)
+            {
+                var brWord = words[index];
+                AppendOriginalText(sb, brWord.Text, brWord.OriginalText, brWord.IsContextTag, brWord.IsConvertedFromTag);
                 index++;
             }
             return sb.ToString();
@@ -128,11 +182,30 @@ namespace BrailleToolkit.Helpers
             return count;
         }
 
+        internal static int GetCellCount(this IReadOnlyList<IBrailleWordResult> brWordList)
+        {
+            int count = 0;
+            foreach (var brWord in brWordList)
+            {
+                count += brWord.CellCount;
+            }
+            return count;
+        }
+
         /// <summary>
         /// 是否包含標題情境標籤。
         /// </summary>
         /// <returns></returns>
         public static bool ContainsTitleTag(IReadOnlyList<BrailleWord> brWordList)
+        {
+            if (brWordList.Count > 0 && brWordList[0].Text.Equals(ContextTagNames.Title))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        internal static bool ContainsTitleTag(IReadOnlyList<IBrailleWordResult> brWordList)
         {
             if (brWordList.Count > 0 && brWordList[0].Text.Equals(ContextTagNames.Title))
             {
@@ -160,6 +233,41 @@ namespace BrailleToolkit.Helpers
                 return true;
             }
             return false;
+        }
+
+        private static string BrailleCellListToHexString(ReadOnlySpan<BrailleCell> cells)
+        {
+            var sb = new StringBuilder();
+            for (int i = 0; i < cells.Length; i++)
+            {
+                sb.Append(cells[i].ToString());
+            }
+            return sb.ToString();
+        }
+
+        private static string BrailleWordResultToDotNumberString(IBrailleWordResult brWord)
+        {
+            if (brWord.IsContextTag)
+            {
+                return String.Empty;
+            }
+
+            var sb = new StringBuilder();
+            sb.Append("(");
+            var cells = brWord.Cells.Span;
+            for (int i = 0; i < cells.Length; i++)
+            {
+                sb.Append(cells[i].ToPositionNumberString());
+                sb.Append(" ");
+            }
+
+            if (cells.Length > 0)
+            {
+                sb.Length--;
+            }
+
+            sb.Append(")");
+            return sb.ToString();
         }
     }
 }
