@@ -145,5 +145,6 @@ Phase 4 目前先完成 `4a`：
   - 真實 pipeline A/B 顯示 plain `readonly struct` 不能穩定修復 regression
   - synthetic storage benchmark 顯示 builder / buffer 路線仍值得繼續驗證
   - `BrailleWordBuilder + BrailleCellBuffer` 小型 prototype 已額外量到約 `-35%` Mean、`-30%` allocation 的正面訊號
+- `4b` 設計草案見 [`docs-dev/planning/immutable-phase4b-word-builder-draft.md`](/d:/work/BrailleKit/text-to-braille/docs-dev/planning/immutable-phase4b-word-builder-draft.md)。
 - `4b` 之後會碰到 `BrailleCellList` / `BrailleWord` / `BrailleLine` 的資料流與建構模式，風險會明顯高於 `4a`。
 - 若後續還要擴大 value type / immutable model 的範圍，應特別注意 reference identity 仍被使用的 `BrailleWord` / `BrailleLine` 路徑。
