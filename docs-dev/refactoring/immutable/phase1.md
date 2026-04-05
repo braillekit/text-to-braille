@@ -16,7 +16,8 @@
 
 - 執行日期：2026-04-05
 - Benchmark 指令：`dotnet run --project src/EasyBrailleEditApp/BrailleToolkit.Benchmarks/BrailleToolkit.Benchmarks.csproj -c Release`
-- 詳細結果：[`2026-04-05-phase1.md`](./benchmark-result/2026-04-05-phase1.md)
+- 第一次量測紀錄：[`2026-04-05-phase1.md`](./benchmark-result/2026-04-05-phase1.md)
+- A/B 重跑結果：[`2026-04-05-phase1-ab-rerun.md`](./benchmark-result/2026-04-05-phase1-ab-rerun.md)
 
 ### 回歸驗證
 
@@ -27,7 +28,7 @@
   - `InProcessBrailleConverterTests.ConvertAsync_ProgressReporting_ShouldWork`
   - `MemoryLeakTests.RepeatedConverterCreation_ShouldNotLeakMemory`
 
-### Benchmark 摘要
+### 第一次量測摘要
 
 | Method | Baseline | Phase 1 | 變化 | Allocated |
 | ---- | ----: | ----: | ----: | ----: |
@@ -39,8 +40,25 @@
 | 中英混合多行轉換 | 2,154.94 μs | 3,577.0 μs | +65.99% | 1346.77 KB |
 | 長中文字串轉換 | 4,865.34 μs | 8,372.6 μs | +72.09% | 4303.18 KB |
 
-### 初步結論
+### A/B 重跑驗證
 
-- Phase 1 沒有帶來可觀察到的配置量下降；所有 benchmark 的配置量都與 baseline 幾乎相同。
-- 效能表現並非中性，中文相關情境與中英混合多行情境明顯變慢。
-- 初步判斷，Phase 1 雖然屬於低風險的不可變性整理，但目前不應視為效能優化成果；進入 Phase 2 之前應先針對這一批變更做 profiler 分析，確認 `FrozenDictionary`/`FrozenSet` 的實際收益與熱點成本。
+- 之後使用 clean worktree 重新比較 `pre-Phase 1` commit `7459cde` 與 `Phase 1` commit `e1f86b4`。
+- 重跑時兩邊都使用相同的 benchmark 專案、相同機器、相同 .NET SDK 與 BenchmarkDotNet 設定。
+- 重跑結果沒有重現第一次量測看到的巨大回歸，反而是 Phase 1 略快或近乎持平。
+
+| Method | Pre-Phase 1 | Phase 1 | 變化 | Allocated |
+| ---- | ----: | ----: | ----: | ----: |
+| 中文單行轉換 | 172.2 μs | 171.0 μs | -0.70% | 72.84 KB |
+| 英文單行轉換 | 785.7 μs | 782.3 μs | -0.43% | 169.33 KB |
+| 中英混合單行轉換 | 926.2 μs | 918.7 μs | -0.81% | 374.43 KB |
+| 中文多行轉換 | 9,972.1 μs | 9,727.5 μs | -2.45% | 4301.5 KB |
+| 英文多行轉換 | 4,763.8 μs | 4,698.9 μs | -1.36% | 1041.13 KB |
+| 中英混合多行轉換 | 4,082.3 μs | 3,979.7 μs | -2.51% | 1346.76 KB |
+| 長中文字串轉換 | 10,207.5 μs | 9,955.9 μs | -2.46% | 4303.14 KB |
+
+### 修正後結論
+
+- 目前應以 clean worktree 的 A/B 重跑結果為準；第一次量測的 baseline 很可能不是同條件可直接比較的數據。
+- 依照 A/B 重跑結果，Phase 1 沒有證據顯示 `FrozenDictionary` / `FrozenSet` 導致中文路徑明顯退步。
+- 所有案例的 managed allocation 幾乎不變，表示 Phase 1 的收益主要是不可變性與 API 安全性整理，而不是記憶體配置改善。
+- 若要繼續做效能優化，下一步應把焦點放在真正的熱路徑，例如中文轉換與注音查詢流程，而不是先假設 Frozen collection 是瓶頸。

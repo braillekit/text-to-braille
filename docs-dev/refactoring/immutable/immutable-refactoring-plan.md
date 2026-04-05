@@ -176,6 +176,28 @@
 
 ---
 
+## Benchmark Interpretation Notes
+
+1. **只比較同條件數據**: benchmark 的比較對象必須使用相同機器、相同 .NET SDK / Runtime、相同 BenchmarkDotNet 參數、相同測資，以及相同 benchmark 專案版本。
+
+2. **優先做 commit-to-commit A/B 比較**: 判斷某個 phase 是否造成回歸時，應優先比較「phase 前一個 commit」與「phase 完成 commit」，而不是直接拿較早期保存的歷史結果檔來對照。
+
+3. **使用 clean worktree 或乾淨工作樹**: A/B 比較時，兩邊都應在乾淨 worktree 中獨立建置與執行，避免目前工作目錄的未提交修改、文件調整或其他實驗性變更污染結果。
+
+4. **benchmark 專案變更後要重建 baseline**: 只要 `BrailleToolkit.Benchmarks` 專案本身、測資檔、BenchmarkDotNet job 設定，或會影響 benchmark 執行路徑的程式碼有改動，舊 baseline 就不能直接視為可比基準。
+
+5. **歷史結果保留，但不可直接當回歸證據**: 舊的 benchmark 檔案應保留做追溯，但若無法證明量測條件一致，必須明確標示為「歷史量測紀錄」，不能直接當成某個 phase 造成效能回歸的結論依據。
+
+6. **結果檔必須記錄 commit SHA**: 每次正式 benchmark 結果都應記錄對應 commit SHA，至少包含 baseline commit 與待比較 commit，避免日後只剩數字卻無法確認實際比較的是哪一版程式。
+
+7. **先看 allocation，再看 Mean 的變化方向**: 若 `Allocated` 幾乎不變，但 `Mean` 變化很大，應先懷疑量測條件、環境差異或 benchmark harness 差異，而不是立刻將原因歸咎於 immutable / frozen collection 變更。
+
+8. **遇到異常結果時必須重跑驗證**: 若某次量測結果與直覺或程式碼變更幅度不符，例如零風險整理卻出現 50% 以上退步，必須先做 clean worktree A/B 重跑，再進入 profiler 分析。
+
+9. **文件中的結論以最新可驗證 A/B 結果為準**: 若第一次量測與後續 clean worktree A/B 重跑結論不同，應保留第一次量測紀錄，但主文件與重構結論必須改以後者為準。
+
+---
+
 ## 每個 Phase 完成後的驗證步驟
 
 1. 執行所有單元測試（`dotnet test`），確認無回歸。
