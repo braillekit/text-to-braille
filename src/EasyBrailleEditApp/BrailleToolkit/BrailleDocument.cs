@@ -211,7 +211,7 @@ namespace BrailleToolkit
                 return false;
             var brLine = Lines[lineIdx];
 
-            return m_PageTitles.FindIndex(p => ReferenceEquals(brLine, p.ContentStartLineRef)) >= 0;
+            return m_PageTitles.FindIndex(p => brLine.Identity == p.ContentStartLineIdentity) >= 0;
         }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace BrailleToolkit
         /// <returns>The page title if found; otherwise, null.</returns>
         public BraillePageTitle? FindPageTitleByBeginLine(BrailleLine brLine)
         {
-            return m_PageTitles.Find(p => ReferenceEquals(brLine, p.ContentStartLineRef));
+            return m_PageTitles.Find(p => brLine.Identity == p.ContentStartLineIdentity);
         }
 
 
@@ -571,9 +571,16 @@ namespace BrailleToolkit
             return lines;
         }
 
-        internal int IndexOfLine(BrailleLine line)
+        internal int IndexOfLine(long lineIdentity)
         {
-            return m_Lines.IndexOf(line);
+            for (int i = 0; i < m_Lines.Count; i++)
+            {
+                if (m_Lines[i].Identity == lineIdentity)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
 

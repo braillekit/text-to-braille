@@ -147,7 +147,7 @@ namespace EasyBrailleEdit.DualEdit
                     throw new InvalidOperationException($"執行 WordIndexToGridColumn({lineIdx}, {wordIdx})時發現 Grid[{textRowIdx},{col}] 為空!");
                 }
                 var wordInCell = _grid[textRowIdx, col].Tag as BrailleWord;
-                if (ReferenceEquals(wordInCell, brWord))
+                if (wordInCell != null && wordInCell.Identity == brWord.Identity)
                 {
                     return col;
                 }

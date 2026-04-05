@@ -7,6 +7,7 @@ Phase 4 目前：
 - `4a` `BrailleCell` -> `readonly record struct`
 - `4b` 已收尾到可交棒狀態：word-level builder / compatibility 策略已落地並完成效能收斂
 - `4c` 已開始第一個實作切點：`BrailleWord` construction boundary 已整理成 model 內部入口
+- `4c` 已進入 editor/document identity 熱點清理：剩餘 `ReferenceEquals` 相依已收斂到顯式 word/line identity
 
 `4b` 的完成不代表 `BrailleWord` 已 fully immutable；它代表 `4c` 可以建立在目前這套 hybrid builder / compatibility 邊界上繼續推進。現在 `4c` 已先把 `BrailleWord` 的 construction/materialization 邊界往 model 內部收斂，但 `BrailleWord` 與 `4d` `BrailleLine` 的完整 immutable builder / result 分離仍未完成。
 
@@ -80,6 +81,21 @@ Phase 4 目前：
 - 補測試：
   - YAML round-trip 補 `OriginalText` / `ContextNames` / `IsConvertedFromTag` 驗證
   - 既有 fraction 轉換測試持續通過
+
+### `4c` 第六個切點
+
+- `BrailleWord` / `BrailleLine` 新增執行期 `Identity`
+- `BrailleLine.IndexOf(BrailleWord)` 改由 word identity 比對
+- `BraillePageTitle` 新增 `ContentStartLineIdentity`
+- `BrailleDocument` 下列查找／定位邏輯已改走 line identity：
+  - `IsBeginLineOfPageTitle(...)`
+  - `FindPageTitleByBeginLine(...)`
+  - `IndexOfLine(...)`
+- dual-edit editor 的 grid mapping / selection / edit command 幾個剩餘 `ReferenceEquals` 熱點已改用 identity
+- 這代表 `4c` 已開始把 editor/document compatibility 從 CLR reference equality 拉回顯式 model identity
+- 補測試：
+  - builder `ApplyTo(...)` 後保留 `BrailleWord.Identity`
+  - page title 在文件插入列後仍可透過 line identity 重新定位 begin line
 
 ### `4a`
 

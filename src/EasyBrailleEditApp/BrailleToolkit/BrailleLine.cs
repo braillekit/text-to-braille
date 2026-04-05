@@ -16,6 +16,8 @@ namespace BrailleToolkit
     [DataContract]
     public class BrailleLine : ICloneable
     {
+        private readonly long m_Identity = BrailleObjectIdentityGenerator.NextLineIdentity();
+
         [DataMember(Name = "Words")]
         private List<BrailleWord> m_Words;
 
@@ -42,6 +44,14 @@ namespace BrailleToolkit
         public BrailleLine()
         {
             m_Words = new List<BrailleWord>();
+        }
+
+        /// <summary>
+        /// 此物件的執行期識別碼，用來在文件編輯流程中追蹤同一列。
+        /// </summary>
+        public long Identity
+        {
+            get { return m_Identity; }
         }
 
         private static List<BrailleWord> CopyWords(IEnumerable<BrailleWord>? words)
@@ -446,10 +456,10 @@ namespace BrailleToolkit
         /// <returns>如果找到，則為其索引；否則為 -1。</returns>
         public int IndexOf(BrailleWord brWord)
         {
-            // 不能用 Words.IndexOf(brWord) 來尋找! 
+            // 不能用 Words.IndexOf(brWord) 來尋找!
             for (int i = 0; i < Words.Count; i++)
             {
-                if (ReferenceEquals(Words[i], brWord))
+                if (Words[i].Identity == brWord.Identity)
                 {
                     return i;
                 }

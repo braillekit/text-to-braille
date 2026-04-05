@@ -1441,7 +1441,7 @@ namespace EasyBrailleEdit.DualEdit
                     for (int col = range.Start.Column; col <= range.End.Column; col++)
                     {
                         var currWord = _positionMapper.GetBrailleWordFromGridCell(row, col);
-                        if (currWord == null || ReferenceEquals(currWord, lastWord))
+                        if (currWord == null || (lastWord != null && currWord.Identity == lastWord.Identity))
                             continue;
 
                         if (BrailleWordHelper.RemoveDigitSymbol(currWord))

@@ -58,6 +58,43 @@ namespace BrailleToolkit.Tests
             Assert.True(brDoc.LineCount == 5);
             Assert.True(brDoc.PageTitles[0].ContentStartLineIndex == 3);
             Assert.True(brDoc.PageTitles[0].ContentStartLineRef.ToString() == "3");
+            Assert.True(brDoc.IsBeginLineOfPageTitle(3));
+            Assert.Same(brDoc.PageTitles[0], brDoc.FindPageTitleByBeginLine(brDoc.Lines[3]));
+        }
+
+        [Fact]
+        public void UpdateTitlesLineIndex_ShouldTrackBeginLineByIdentityAfterInsert()
+        {
+            string text =
+                "0\n" +
+                "1\n" +
+                "2\n" +
+                "<標題>insert at 3</標題>\n" +
+                "3\n" +
+                "4\n";
+
+            var brDoc = new BrailleDocument(_processor);
+            using (var reader = new StringReader(text))
+            {
+                brDoc.LoadAndConvert(reader);
+            }
+
+            var title = brDoc.PageTitles[0];
+            var originalLine = brDoc.Lines[3];
+            var originalIdentity = originalLine.Identity;
+
+            var insertedLine = new BrailleLine();
+            insertedLine.AddWord(new BrailleWord("新", "01"));
+            brDoc.InsertLine(0, insertedLine);
+
+            int changeCount = brDoc.UpdateTitlesLineIndex();
+
+            Assert.Equal(1, changeCount);
+            Assert.Equal(4, title.ContentStartLineIndex);
+            Assert.Equal(originalIdentity, title.ContentStartLineIdentity);
+            Assert.Same(brDoc.Lines[4], title.ContentStartLineRef);
+            Assert.Same(title, brDoc.FindPageTitleByBeginLine(brDoc.Lines[4]));
+            Assert.True(brDoc.IsBeginLineOfPageTitle(4));
         }
 
         [Fact]

@@ -41,6 +41,8 @@ namespace BrailleToolkit
         /// </summary>
         public static BrailleWord BlankWord { get; } = NewBlank();
 
+        private readonly long m_Identity = BrailleObjectIdentityGenerator.NextWordIdentity();
+
         private List<string>? m_PhoneticCodes;   // 所有注音組字字根（以支援破音字）。
         private int m_ActivePhoneticIndex;      // 目前使用的注音組字字根索引。
 
@@ -276,6 +278,14 @@ namespace BrailleToolkit
             {
                 return CellList.Items;
             }
+        }
+
+        /// <summary>
+        /// 此物件的執行期識別碼，用來在編輯流程中追蹤邏輯上同一個點字詞。
+        /// </summary>
+        public long Identity
+        {
+            get { return m_Identity; }
         }
 
         /// <summary>

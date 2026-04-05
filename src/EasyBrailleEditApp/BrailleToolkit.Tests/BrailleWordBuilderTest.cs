@@ -238,5 +238,23 @@ namespace BrailleToolkit.Tests
                 expectedLine.ToHtmlString("  ", "column", "braille", "text"),
                 BrailleWordSequenceFormatter.ToHtmlString(mixedWords, "  ", "column", "braille", "text"));
         }
+
+        [Fact]
+        public void ApplyTo_ShouldPreserveWordIdentityForCompatibilityMutation()
+        {
+            var word = new BrailleWord("A", "01");
+            var originalIdentity = word.Identity;
+
+            var line = new BrailleLine();
+            line.AddWord(word);
+
+            var builder = BrailleWordBuilder.FromBrailleWord(word);
+            builder.AppendHex("02");
+            builder.ApplyTo(word);
+
+            Assert.Equal(originalIdentity, word.Identity);
+            Assert.Equal(0, line.IndexOf(word));
+            Assert.Equal(2, word.CellCount);
+        }
     }
 }

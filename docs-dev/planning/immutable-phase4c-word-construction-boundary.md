@@ -119,3 +119,25 @@
 - serializer 已正式接回 `4c` 的 construction boundary
 - fraction 路徑的 word mutation 已完全回到 builder / compatibility 邊界
 - `4c` 剩下的工作更集中在 reference identity 強依賴的編輯器／文件模型區，而不是 BrailleWord construction 本身
+
+## 後續進展：第六個切點
+
+第六個切點直接清理 editor / document 仍依賴 reference identity 的剩餘熱點：
+
+- `BrailleWord` 新增 `Identity`
+- `BrailleLine` 新增 `Identity`
+- `BrailleLine.IndexOf(BrailleWord)` 改由 `word.Identity` 比對，而不是 `ReferenceEquals`
+- `BraillePageTitle` 新增 `ContentStartLineIdentity`
+- `BrailleDocument.IsBeginLineOfPageTitle(...)` / `FindPageTitleByBeginLine(...)` / `IndexOfLine(...)` 改用 line identity 尋址
+- dual-edit UI 內與 grid word mapping 相關的幾個 `ReferenceEquals` call site 已改成 identity 比對
+
+這一刀的意義是：
+
+- `4c` 不再把 editor / document 的 compatibility 建立在 CLR reference equality 上
+- builder bridge 對既有 `BrailleWord` 做 in-place apply 時，呼叫端仍可穩定追蹤同一個邏輯 word
+- page title 錨點在文件插入／刪除列之後，已可透過 line identity 重新定位，不必依賴原始物件參考仍被沿用
+
+剩餘非目標：
+
+- 這一刀沒有把整個 editor/document model 改成 immutable collection
+- 若某些流程主動用新物件取代舊 line/word，identity 仍會視為新邏輯實體；這是刻意保留的語意，而不是 compatibility bug
