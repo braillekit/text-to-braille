@@ -6,14 +6,14 @@
     public interface IContextTag
     {
         /// <summary>
-        /// Gets or sets the text that can be converted to braille as a prefix.
+        /// Gets the text that can be converted to braille as a prefix during initialization.
         /// </summary>
-        string ConvertablePrefix { get; set; }
+        string ConvertablePrefix { get; init; }
 
         /// <summary>
-        /// Gets or sets the text that can be converted to braille as a postfix.
+        /// Gets the text that can be converted to braille as a postfix during initialization.
         /// </summary>
-        string ConvertablePostfix { get; set; }
+        string ConvertablePostfix { get; init; }
 
         /// <summary>
         /// Gets the list of braille words to be inserted as a prefix.

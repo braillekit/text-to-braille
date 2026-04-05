@@ -52,6 +52,9 @@ namespace BrailleToolkit
         [NonSerialized]
         private bool m_IsContextTag;
 
+        [NonSerialized]
+        private string m_OriginalText = string.Empty;
+
         //private bool m_QuotationResolved;	// 是否已經識別出左右引號（英文的單引號和雙引號都是同一個符號，但點字不同）
 
         /// <summary>
@@ -244,7 +247,11 @@ namespace BrailleToolkit
         /// 甚至將來可能利用此屬性將已經轉換好的點字文件還原成純文字。
         /// </summary>
         [DataMember]
-        public string OriginalText { get; private set; }
+        public string OriginalText
+        {
+            get { return m_OriginalText; }
+            init { m_OriginalText = value ?? String.Empty; }
+        }
 
         /// <summary>
         /// 取得此點字詞包含的點字方數。
@@ -465,7 +472,10 @@ namespace BrailleToolkit
         /// <returns></returns>
         public BrailleWord Copy()
         {
-            BrailleWord newBrWord = new BrailleWord(Text);
+            BrailleWord newBrWord = new BrailleWord(Text)
+            {
+                OriginalText = OriginalText
+            };
             newBrWord.Language = Language;
             newBrWord.DontBreakLineHere = DontBreakLineHere;
             newBrWord.NoDigitCell = NoDigitCell;
@@ -497,6 +507,7 @@ namespace BrailleToolkit
             }
 
             Text = brWord.Text;
+            m_OriginalText = brWord.OriginalText;
             Language = brWord.Language;
 
             CellList.Clear();

@@ -30,7 +30,7 @@ namespace BrailleToolkit.Tags
         /// <summary>
         /// Initializes a new instance of the <see cref="OrgPageNumberContextTag"/> class.
         /// </summary>
-        public OrgPageNumberContextTag() : base(ContextTagNames.OrgPageNumber)
+        public OrgPageNumberContextTag() : base(ContextTagNames.OrgPageNumber, singleLine: true)
         {
             BrailleWord? brWord = null; // Fixed CS8600
 
@@ -45,8 +45,6 @@ namespace BrailleToolkit.Tags
 
                 PrefixBrailleWords.Add(brWord);
             }
-
-            IsSingleLine = true;
         }
     }
 }

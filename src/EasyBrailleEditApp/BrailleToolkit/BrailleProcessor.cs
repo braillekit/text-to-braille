@@ -28,23 +28,17 @@ namespace BrailleToolkit
         /// <summary>
         /// Gets the original text of the line where the conversion failed.
         /// </summary>
-        public string OriginalText { get; private set; } = null!;
+        public string OriginalText { get; init; } = string.Empty;
 
         /// <summary>
         /// Gets the position and value of the invalid character.
         /// </summary>
-        public CharPosition InvalidChar { get; private set; }
+        public CharPosition InvalidChar { get; init; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to stop the conversion process.
         /// </summary>
         public bool Stop { get; set; }
-
-        internal void SetArgs(int lineNumber, int charIndex, string line, char ch)
-        {
-            InvalidChar = new CharPosition(ch, lineNumber, charIndex);
-            OriginalText = line;
-        }
     }
 
     /// <summary>
@@ -52,21 +46,15 @@ namespace BrailleToolkit
     /// </summary>
     public sealed class TextConvertedEventArgs : EventArgs
     {
-        internal void SetArgValues(int lineNum, string text)
-        {
-            Text = text;
-            LineNumber = lineNum;
-        }
-
         /// <summary>
         /// Gets the converted braille text.
         /// </summary>
-        public string Text { get; private set; } = null!;
+        public string Text { get; init; } = string.Empty;
 
         /// <summary>
         /// Gets the line number of the converted text.
         /// </summary>
-        public int LineNumber { get; private set; }
+        public int LineNumber { get; init; }
     }
 
     /// <summary>
@@ -417,9 +405,6 @@ namespace BrailleToolkit
             List<BrailleWord>? brWordList;
             StringBuilder convertedText = new StringBuilder();
 
-            ConversionFailedEventArgs cvtFailedArgs = new ConversionFailedEventArgs();
-            TextConvertedEventArgs textCvtArgs = new TextConvertedEventArgs();
-
             while (charStack.Count > 0)
             {
                 brWordList = ConvertWord(charStack);
@@ -434,8 +419,11 @@ namespace BrailleToolkit
                     {
                         convertedText.Append(brWord.Text);
                     }
-                    textCvtArgs.SetArgValues(0, convertedText.ToString());
-                    OnTextConverted(textCvtArgs);
+                    OnTextConverted(new TextConvertedEventArgs
+                    {
+                        LineNumber = 0,
+                        Text = convertedText.ToString()
+                    });
                 }
                 else
                 {
@@ -445,7 +433,11 @@ namespace BrailleToolkit
                     int charIndex = Text.Length - charStack.Count;
 
                     // 引發事件。
-                    cvtFailedArgs.SetArgs(0, charIndex, orgLine, ch);
+                    var cvtFailedArgs = new ConversionFailedEventArgs
+                    {
+                        InvalidChar = new CharPosition(ch, 0, charIndex),
+                        OriginalText = orgLine
+                    };
                     OnConvertionFailed(cvtFailedArgs);
                     if (cvtFailedArgs.Stop)
                     {
@@ -504,11 +496,6 @@ namespace BrailleToolkit
 
             char ch;
             List<BrailleWord>? brWordList;
-            StringBuilder text = new StringBuilder();
-
-            ConversionFailedEventArgs cvtFailedArgs = new ConversionFailedEventArgs();
-            TextConvertedEventArgs textCvtArgs = new TextConvertedEventArgs();
-
             while (charStack.Count > 0)
             {
                 brWordList = ConvertWord(charStack);
@@ -522,8 +509,11 @@ namespace BrailleToolkit
                     brLine.Words.AddRange(brWordList);
 
                     // 通知事件
-                    textCvtArgs.SetArgValues(lineNumber, BrailleWordHelper.ToTextString(brWordList));
-                    OnTextConverted(textCvtArgs);
+                    OnTextConverted(new TextConvertedEventArgs
+                    {
+                        LineNumber = lineNumber,
+                        Text = BrailleWordHelper.ToTextString(brWordList)
+                    });
                 }
                 else
                 {
@@ -533,7 +523,11 @@ namespace BrailleToolkit
                     int charIndex = line.Length - charStack.Count;
 
                     // 引發事件。
-                    cvtFailedArgs.SetArgs(lineNumber, charIndex, orgLine, ch);
+                    var cvtFailedArgs = new ConversionFailedEventArgs
+                    {
+                        InvalidChar = new CharPosition(ch, lineNumber, charIndex),
+                        OriginalText = orgLine
+                    };
                     OnConvertionFailed(cvtFailedArgs);
                     if (cvtFailedArgs.Stop)
                     {

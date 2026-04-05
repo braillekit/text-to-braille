@@ -14,12 +14,12 @@ namespace BrailleToolkit.Tags
         /// <summary>
         /// Gets or sets the text that can be converted to braille as a prefix.
         /// </summary>
-        public string ConvertablePrefix { get; set; }
+        public string ConvertablePrefix { get; init; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the text that can be converted to braille as a postfix.
         /// </summary>
-        public string ConvertablePostfix { get; set; }
+        public string ConvertablePostfix { get; init; } = string.Empty;
 
         /// <summary>
         /// Gets the list of braille words to be inserted as a prefix.
@@ -34,7 +34,7 @@ namespace BrailleToolkit.Tags
         /// <summary>
         /// Gets the name of the tag.
         /// </summary>
-        public string TagName { get; protected set; }
+        public string TagName { get; protected init; } = string.Empty;
 
         /// <summary>
         /// 傳回結束標籤名稱。
@@ -44,12 +44,12 @@ namespace BrailleToolkit.Tags
         /// <summary>
         /// Gets the lifetime of the context tag.
         /// </summary>
-        public ContextLifetime Lifetime { get; protected set; }
+        public ContextLifetime Lifetime { get; protected init; } = ContextLifetime.Persistent;
 
         /// <summary>
         /// 是否為單列標籤（整列只能有此標籤，不能包含其他標籤）
         /// </summary>
-        public bool IsSingleLine { get; protected set; }
+        public bool IsSingleLine { get; protected init; }
 
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace BrailleToolkit.Tags
         /// <summary>
         /// Gets a value indicating whether to remove the tag upon conversion.
         /// </summary>
-        public bool RemoveTagOnConversion { get; protected set; }
+        public bool RemoveTagOnConversion { get; protected init; }
 
         /// <summary>
         /// 重設此語境標籤。
@@ -107,9 +107,6 @@ namespace BrailleToolkit.Tags
         /// </summary>
         protected GenericContextTag()
         {
-            TagName = string.Empty;
-            ConvertablePrefix = string.Empty;
-            ConvertablePostfix = string.Empty;
         }
 
 
@@ -130,10 +127,6 @@ namespace BrailleToolkit.Tags
             IsSingleLine = singleLine;
             Count = 0;
             RemoveTagOnConversion = removeTagOnConversion;
-
-            ConvertablePrefix = String.Empty;
-            ConvertablePostfix = String.Empty;
         }
     }
 }
-
