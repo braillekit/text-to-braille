@@ -149,8 +149,12 @@ Phase 4 目前：
 - `4b` 設計草案見 [`docs-dev/planning/immutable-phase4b-word-builder-draft.md`](/d:/work/BrailleKit/text-to-braille/docs-dev/planning/immutable-phase4b-word-builder-draft.md)。
 - `4b` 目前已落地的相容橋接包括：
   - `BrailleWordBuilder.FromBrailleWord(...)` / `ApplyTo(...)`
-  - `EnglishWordConverter` 的 builder materialization 路徑
-  - `EnglishBrailleRule` / `GeneralBrailleRule` 的前插與數字修正路徑
-  - 最新 smoke benchmark：英文單行約 `516.1 us`、`25.85 KB`
+  - `EnglishWordConverter` / `UrlConverter` / `EnglishUebConverter` / `TwChineseCharConverter` / `ContextTagConverter` 的 builder materialization 路徑
+  - `EnglishBrailleRule` / `GeneralBrailleRule` / `BrailleProcessor` 分數前插 / `TableConverter` 單格替換路徑
+  - `ApplyTo(...)` 已改成重用既有 `BrailleWord.Cells` list instance，不再每次重建 `List<BrailleCell>`
+  - 最新 workspace snapshot benchmark：
+    - 中文單行約 `50.29 us`、`6.32 KB`
+    - 英文單行約 `363.10 us`、`23.87 KB`
+    - 中英混合單行約 `293.25 us`、`32.91 KB`
 - `4b` 之後會碰到 `BrailleCellList` / `BrailleWord` / `BrailleLine` 的資料流與建構模式，風險會明顯高於 `4a`。
 - 若後續還要擴大 value type / immutable model 的範圍，應特別注意 reference identity 仍被使用的 `BrailleWord` / `BrailleLine` 路徑。

@@ -76,7 +76,9 @@ namespace BrailleToolkit.Converters
                             name = text;
                         }
 
-                        var brailleWord = new BrailleWord(name, code);
+                        var builder = new BrailleWordBuilder(name);
+                        builder.AppendHex(code);
+                        var brailleWord = builder.ToBrailleWord();
 
                         switch (type)
                         {
@@ -135,13 +137,17 @@ namespace BrailleToolkit.Converters
                     {
                         if (remainingText.Length == key.Length || !char.IsLetter(remainingText[key.Length]))
                         {
-                            word = new BrailleWord(key, _wordSigns[key].ToHexSting());
+                            var builder = new BrailleWordBuilder(key);
+                            builder.AppendHex(_wordSigns[key].ToHexSting());
+                            word = builder.ToBrailleWord();
                             match = true;
                         }
                     }
                     else // For GroupSigns and ShortForms, allow partial word match
                     {
-                        word = new BrailleWord(key, _groupSigns.ContainsKey(key) ? _groupSigns[key].ToHexSting() : _shortForms[key].ToHexSting());
+                        var builder = new BrailleWordBuilder(key);
+                        builder.AppendHex(_groupSigns.ContainsKey(key) ? _groupSigns[key].ToHexSting() : _shortForms[key].ToHexSting());
+                        word = builder.ToBrailleWord();
                         match = true;
                     }
 
@@ -164,7 +170,9 @@ namespace BrailleToolkit.Converters
             {
                 Log.Debug("Matched Grade 1 letter: {Letter}", firstCharStr);
                 charStack.Pop(); // Consume the character
-                var word = new BrailleWord(firstCharStr, _letterSigns[firstCharStr].ToHexSting());
+                var builder = new BrailleWordBuilder(firstCharStr);
+                builder.AppendHex(_letterSigns[firstCharStr].ToHexSting());
+                var word = builder.ToBrailleWord();
                 return new List<BrailleWord> { word };
             }
 
