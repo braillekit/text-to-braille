@@ -188,5 +188,6 @@ Phase 4 目前：
     - 中文單行約 `50.29 us`、`6.32 KB`
     - 英文單行約 `363.10 us`、`23.87 KB`
     - 中英混合單行約 `293.25 us`、`32.91 KB`
+  - builder 與既有 `BrailleWord` 相容層的 allocation micro-benchmark 分析見 [`2026-04-05-phase4b-compat-allocation-analysis.md`](./benchmark-result/2026-04-05-phase4b-compat-allocation-analysis.md)
 - `4b` 之後會碰到 `BrailleCellList` / `BrailleWord` / `BrailleLine` 的資料流與建構模式，風險會明顯高於 `4a`。
 - 若後續還要擴大 value type / immutable model 的範圍，應特別注意 reference identity 仍被使用的 `BrailleWord` / `BrailleLine` 路徑。
