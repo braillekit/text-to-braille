@@ -1,9 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data;
-using System.Reflection;
-
 namespace BrailleToolkit.Data
 {
     /// <summary>
@@ -50,11 +45,8 @@ namespace BrailleToolkit.Data
 		{
 			CheckLoaded();
 
-			string filter = "type='Letter' and text='" + text.ToLower() + "'";
-			DataRow[] rows = m_Table.Select(filter);
-			if (rows.Length > 0)
-				return rows[0]["code"].ToString();
-			return null;
+            BrailleTableEntry? entry = FindEntry(text.ToLower(), "Letter");
+            return entry?.Code;
 		}
 	}
 }
