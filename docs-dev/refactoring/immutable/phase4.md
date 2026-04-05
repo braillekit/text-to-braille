@@ -5,9 +5,9 @@
 Phase 4 目前：
 
 - `4a` `BrailleCell` -> `readonly record struct`
-- `4b` 已開始進入第一個 production cut：`BrailleWordBuilder + BrailleCellBuffer` 骨架已落地，並先接到單一路徑的 `EnglishWordConverter` / 英文規則
+- `4b` 已收尾到可交棒狀態：word-level builder / compatibility 策略已落地並完成效能收斂
 
-`4b` `BrailleCellList`、`4c` `BrailleWord`、`4d` `BrailleLine` 的完整 immutable builder / result 分離尚未完成；目前仍是小步 prototype 與相容橋接階段。
+`4b` 的完成不代表 `BrailleWord` 已 fully immutable；它代表 `4c` 可以建立在目前這套 hybrid builder / compatibility 邊界上繼續推進。`4c` `BrailleWord` 與 `4d` `BrailleLine` 的完整 immutable builder / result 分離仍未開始。
 
 本階段以前一份 [`phase3.md`](./phase3.md) 為起點，先做最小可驗證的高風險 prototype。
 
@@ -179,6 +179,7 @@ Phase 4 目前：
   - synthetic storage benchmark 顯示 builder / buffer 路線仍值得繼續驗證
   - `BrailleWordBuilder + BrailleCellBuffer` 小型 prototype 已額外量到約 `-35%` Mean、`-30%` allocation 的正面訊號
 - `4b` 設計草案見 [`docs-dev/planning/immutable-phase4b-word-builder-draft.md`](/d:/work/BrailleKit/text-to-braille/docs-dev/planning/immutable-phase4b-word-builder-draft.md)。
+- `4b` 收尾 / 交棒摘要見 [`docs-dev/planning/immutable-phase4b-handoff.md`](/d:/work/BrailleKit/text-to-braille/docs-dev/planning/immutable-phase4b-handoff.md)。
 - converter 新 word materialization 收斂紀錄見 [`2026-04-05-phase4b-converter-materialization-reduction.md`](./benchmark-result/2026-04-05-phase4b-converter-materialization-reduction.md)：
   - append-only converter 路徑已改回直接 `new BrailleWord(...)`
   - 最新 workspace snapshot benchmark：
@@ -189,7 +190,8 @@ Phase 4 目前：
     - baseline：`53a7c22`
     - candidate：`322bc351`
     - allocation 在 7 個 benchmark 全部下降
-    - throughput 在 7 個 benchmark 中有 6 個改善，只有中英混合單行 `+14.07%`
+    - throughput 在 7 個 benchmark 中有 6 個改善
+    - 後續 focused clean rerun 顯示中英混合單行也由 `417.8 us` 降到 `374.3 us`，因此原先 `+14.07%` 不視為 blocking regression
 - `4b` 目前已落地的相容橋接包括：
   - `BrailleWordBuilder.FromBrailleWord(...)` / `ApplyTo(...)`
   - 既有 word mutation / prepend / replace 的 builder 路徑
@@ -198,3 +200,11 @@ Phase 4 目前：
   - builder 與既有 `BrailleWord` 相容層的 allocation micro-benchmark 分析見 [`2026-04-05-phase4b-compat-allocation-analysis.md`](./benchmark-result/2026-04-05-phase4b-compat-allocation-analysis.md)
 - `4b` 之後會碰到 `BrailleCellList` / `BrailleWord` / `BrailleLine` 的資料流與建構模式，風險會明顯高於 `4a`。
 - 若後續還要擴大 value type / immutable model 的範圍，應特別注意 reference identity 仍被使用的 `BrailleWord` / `BrailleLine` 路徑。
+
+## 4b 收尾結論
+
+- `4b` 已完成目前定義下的交付範圍，可以作為 `4c` 的起點。
+- 已驗證可保留的規則是：
+  - builder 保留在 prepend / replace / mutation 橋接
+  - append-only new word 優先直接 materialize 成既有 `BrailleWord`
+- 若接著推 `4c`，建議不要重開 `4b` 的方向討論，而是直接以 `BrailleWord` construction boundary 為下一個切點。

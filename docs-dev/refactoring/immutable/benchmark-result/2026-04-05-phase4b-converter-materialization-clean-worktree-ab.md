@@ -64,3 +64,15 @@ candidate 主要包含：
 - 保留 builder 給既有 `BrailleWord` mutation / prepend / replace 的橋接路徑
 - converter 層 append-only new word 盡量直接 materialize
 - 下一步若還要繼續壓 allocation，應優先看 mixed single-line 的退步來源，以及 remaining builder bridge 是否仍有不必要的中間配置
+
+## 補充驗證：mixed single-line focused rerun
+
+在完整 suite 的這次 A/B 中，`中英混合單行轉換` 出現 `+14.07%`。
+
+但後續針對這一條 benchmark 單獨做 clean focused rerun，結果如下：
+
+| Method | Baseline Mean | Candidate Mean | Mean Δ | Baseline Alloc | Candidate Alloc | Alloc Δ |
+| ---- | ----: | ----: | ----: | ----: | ----: | ----: |
+| 中英混合單行轉換 | 417.8 us | 374.3 us | -10.41% | 32.91 KB | 28.47 KB | -13.49% |
+
+因此，原本完整 suite 裡的 `+14.07%` 比較像量測交互影響或波動，而不是穩定 regression；這個疑點不再構成 `4b` 的 blocking issue。
