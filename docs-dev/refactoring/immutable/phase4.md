@@ -185,6 +185,11 @@ Phase 4 目前：
     - 中文單行約 `45.17 us`、`5.82 KB`
     - 英文單行約 `332.52 us`、`16.12 KB`
     - 中英混合單行約 `294.37 us`、`28.47 KB`
+  - 對應的正式 clean worktree A/B 見 [`2026-04-05-phase4b-converter-materialization-clean-worktree-ab.md`](./benchmark-result/2026-04-05-phase4b-converter-materialization-clean-worktree-ab.md)：
+    - baseline：`53a7c22`
+    - candidate：`322bc351`
+    - allocation 在 7 個 benchmark 全部下降
+    - throughput 在 7 個 benchmark 中有 6 個改善，只有中英混合單行 `+14.07%`
 - `4b` 目前已落地的相容橋接包括：
   - `BrailleWordBuilder.FromBrailleWord(...)` / `ApplyTo(...)`
   - 既有 word mutation / prepend / replace 的 builder 路徑
