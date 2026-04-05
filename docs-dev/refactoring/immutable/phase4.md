@@ -71,6 +71,38 @@ Phase 4 目前先完成 `4a`：
 - 詳細紀錄：
   - [`2026-04-05-phase4a-current.md`](./benchmark-result/2026-04-05-phase4a-current.md)
 
+### 正式 clean worktree A/B benchmark
+
+- 日期：2026-04-05
+- baseline commit：`e3027e28556eb57570b85f34b739028fb38ab55e`
+- candidate commit：`ea804795f6cf56bbe9a152ef272adab9130c51db`
+- 方法：於兩個乾淨 worktree 各自獨立建置與執行 benchmark
+- 詳細紀錄：
+  - [`2026-04-05-phase4a-clean-worktree-ab.md`](./benchmark-result/2026-04-05-phase4a-clean-worktree-ab.md)
+
+#### A/B 摘要
+
+| Method | Baseline Mean | Candidate Mean | Mean Δ | Baseline Alloc | Candidate Alloc | Alloc Δ |
+| ---- | ----: | ----: | ----: | ----: | ----: | ----: |
+| 中文單行轉換 | 50.24 us | 68.02 us | +35.39% | 6.01 KB | 5.82 KB | -3.16% |
+| 英文單行轉換 | 465.56 us | 518.92 us | +11.46% | 17.52 KB | 16.09 KB | -8.16% |
+| 中英混合單行轉換 | 285.31 us | 440.92 us | +54.55% | 29.92 KB | 28.73 KB | -3.98% |
+| 中文多行轉換 | 2,425.17 us | 3,701.84 us | +52.64% | 339.66 KB | 327.83 KB | -3.48% |
+| 英文多行轉換 | 2,873.45 us | 3,258.94 us | +13.42% | 108.91 KB | 100.21 KB | -7.99% |
+| 中英混合多行轉換 | 1,644.28 us | 2,310.21 us | +40.50% | 116.45 KB | 111.28 KB | -4.44% |
+| 長中文字串轉換 | 2,151.15 us | 3,417.10 us | +58.85% | 341.32 KB | 329.30 KB | -3.52% |
+
+#### 解讀
+
+- 這次 clean worktree A/B 顯示 `4a` 在七個 benchmark 案例都出現平均時間回歸。
+- allocation 同時在七個案例全部下降，下降幅度約 `3%` 到 `8%`。
+- 回歸幅度最大的路徑是：
+  - 長中文字串轉換：`+58.85%`
+  - 中英混合單行轉換：`+54.55%`
+  - 中文多行轉換：`+52.64%`
+  - 中英混合多行轉換：`+40.50%`
+- baseline 與 candidate 間 `BrailleToolkit.Benchmarks` 專案本身沒有變更；實際程式碼差異只有 [`BrailleCell.cs`](/d:/work/BrailleKit/text-to-braille/src/EasyBrailleEditApp/BrailleToolkit/BrailleCell.cs) 與測試 / 文件，因此這次 A/B 對 `4a` 具有直接參考價值。
+
 ### 與 Phase 3 current snapshot 的對照
 
 注意：
@@ -78,6 +110,7 @@ Phase 4 目前先完成 `4a`：
 - 這裡比較的是 [`2026-04-05-phase3-current.md`](./benchmark-result/2026-04-05-phase3-current.md) 與本次 `phase4a-current`。
 - 兩者都是同機器、同 benchmark 專案、同命令的 workspace snapshot。
 - 這不是 clean worktree A/B benchmark，所以只適合做趨勢觀察，不適合單獨下正式 regression 結論。
+- 這份 snapshot 的方向與後續 clean worktree A/B 不一致，因此正式結論應以 A/B 為準。
 
 | Method | Phase 3 Mean | Phase 4a Mean | Mean Δ | Phase 3 Alloc | Phase 4a Alloc | Alloc Δ |
 | ---- | ----: | ----: | ----: | ----: | ----: | ----: |
@@ -100,11 +133,13 @@ Phase 4 目前先完成 `4a`：
 
 - 功能完成
 - 序列化與既有 API 相容性仍在
-- 未觀察到明顯效能回歸
-- allocation 有小幅改善
+- allocation 小幅改善
+- 但 clean worktree A/B 已確認有明顯執行時間回歸，暫時不適合直接把這個方向擴大到 `4b`
 
 ## 後續建議
 
-- 若要進入 `4b`，建議先做真正的 clean worktree A/B benchmark，讓 `BrailleCell` value type 化的影響有正式基準。
+- `4b` 建議先暫停，優先釐清 `BrailleCell` 改成 value type 後，為何會在轉換熱路徑上造成明顯 throughput regression。
+- 原因分析紀錄見 [`phase4-cause-analysis.md`](./phase4-cause-analysis.md)。
+- 若後續仍要推 immutable / value type 方向，建議先做更小範圍的 profiler / micro-benchmark，確認退步是否來自複製成本、JIT 行為、`List<BrailleCell>` 使用模式，或 record struct 產生的額外工作。
 - `4b` 之後會碰到 `BrailleCellList` / `BrailleWord` / `BrailleLine` 的資料流與建構模式，風險會明顯高於 `4a`。
 - 若後續還要擴大 value type / immutable model 的範圍，應特別注意 reference identity 仍被使用的 `BrailleWord` / `BrailleLine` 路徑。
