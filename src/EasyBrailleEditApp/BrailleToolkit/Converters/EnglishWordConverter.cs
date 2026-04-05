@@ -47,7 +47,7 @@ namespace BrailleToolkit.Converters
             char ch;
 			string currentWord;
 			bool isExtracted;	// 目前處理的字元是否已從堆疊中移出。
-            BrailleWord? brWord;
+            BrailleWordBuilder? brWordBuilder;
             List<BrailleWord>? brWordList = null;
 
             const string LeftForMathConverter = "*.:()（）,，";
@@ -127,30 +127,32 @@ namespace BrailleToolkit.Converters
                         break;
                 }
 
-                brWord = InternalConvert(currentWord, context);
-                if (brWord == null)
+                brWordBuilder = InternalConvert(currentWord, context);
+                if (brWordBuilder == null)
                      break;
 
-                brWord.ContextNames = context.ContextNames;
+                brWordBuilder.ContextNames = context.ContextNames;
 
                 if (!isExtracted)
                 {
                     charStack.Pop();
                 }
                  
-                brWord.Language = BrailleLanguage.English;
+                brWordBuilder.Language = BrailleLanguage.English;
 
                 if (context.IsActive(ContextTagNames.Coordinate))   // 若處於座標情境標籤內
                 {
                     // 不加數字點位。
-                    brWord.NoDigitCell = true;
+                    brWordBuilder.NoDigitCell = true;
                 }
 				else if (":".Equals(currentWord) && context.IsActive(ContextTagNames.Time))	// 處理時間的冒號。
 				{
 					// 在冒號的點字前面加上 456 點。
 					BrailleCell cell = BrailleCell.GetInstance(new int[] { 4, 5, 6 });
-					brWord.Cells.Insert(0, cell);	
+					brWordBuilder.PrependCell(cell);	
 				}
+
+                BrailleWord brWord = brWordBuilder.ToBrailleWord();
 
                 if (brWordList == null)
                 {
@@ -217,12 +219,12 @@ namespace BrailleToolkit.Converters
         /// <param name="text">一個英數字或英文標點符號。</param>
         /// <param name="context">情境標籤管理員。</param>
         /// <returns>若指定的字串是中文字且轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
-        private BrailleWord? InternalConvert(string text, ContextTagManager context)
+        private BrailleWordBuilder? InternalConvert(string text, ContextTagManager context)
 		{
 			if (String.IsNullOrEmpty(text))
 				return null;
 
-			var brWord = new BrailleWord(text);
+			var brWord = new BrailleWordBuilder(text);
 
 			string? brCode = null; // brCode can be null from m_Table.FindLetter
 
@@ -231,7 +233,7 @@ namespace BrailleToolkit.Converters
 			{
 				brCode = m_Table.Find(text);
                 if (brCode == null) return null; // Defensive check
-				brWord.AddCells(brCode);
+				brWord.AppendHex(brCode);
 				return brWord;
 			}
 
@@ -244,7 +246,7 @@ namespace BrailleToolkit.Converters
 					brCode = m_Table.FindLetter(text);
 					if (!String.IsNullOrEmpty(brCode))
 					{
-						brWord.AddCells(brCode);
+						brWord.AppendHex(brCode);
 						return brWord;
 						// 註：大寫記號和連續大寫記號在完成一行之後才處理。
 					}
@@ -267,7 +269,7 @@ namespace BrailleToolkit.Converters
 					brCode = m_Table.FindDigit(text, useUpperPositionDots);	
 					if (!String.IsNullOrEmpty(brCode))
 					{
-						brWord.AddCells(brCode);
+						brWord.AppendHex(brCode);
 						return brWord;
 					}
 					throw new Exception("找不到對應的點字: " + text);
@@ -286,14 +288,14 @@ namespace BrailleToolkit.Converters
             // 小數點在 <選項>ㄅ.</選項> 裡面要特別處理
             if (text == "." && context.IsActive(ContextTagNames.Choice))
             {
-                brWord.AddCellsFromPositionNumbers("6");
+                brWord.AppendPositionNumbers("6");
                 return brWord;
             }
 
 			brCode = m_Table.Find(text);
 			if (!String.IsNullOrEmpty(brCode))
 			{
-				brWord.AddCells(brCode);
+				brWord.AppendHex(brCode);
 				return brWord;
 			}
 
