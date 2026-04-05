@@ -65,7 +65,7 @@ public class BrailleWordCompatibilityBenchmarks
     [Benchmark(Description = "Compat: CreateBrailleWord(span)")]
     public int CompatibilityCreateBrailleWord()
     {
-        BrailleWord word = BrailleWordBuilderCompatibility.CreateBrailleWord(
+        BrailleWord word = BrailleWord.CreateFromConstruction(
             GetText(),
             GetOriginalText(),
             GetLanguage(),
@@ -119,8 +119,7 @@ public class BrailleWordCompatibilityBenchmarks
     public int CompatibilityApplyToExistingWord()
     {
         BrailleWord word = _compatTarget;
-        BrailleWordBuilderCompatibility.ApplyToBrailleWord(
-            word,
+        word.ApplyConstruction(
             GetText(),
             GetOriginalText(),
             GetLanguage(),

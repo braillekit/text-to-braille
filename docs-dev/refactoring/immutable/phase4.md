@@ -6,12 +6,28 @@ Phase 4 目前：
 
 - `4a` `BrailleCell` -> `readonly record struct`
 - `4b` 已收尾到可交棒狀態：word-level builder / compatibility 策略已落地並完成效能收斂
+- `4c` 已開始第一個實作切點：`BrailleWord` construction boundary 已整理成 model 內部入口
 
-`4b` 的完成不代表 `BrailleWord` 已 fully immutable；它代表 `4c` 可以建立在目前這套 hybrid builder / compatibility 邊界上繼續推進。`4c` `BrailleWord` 與 `4d` `BrailleLine` 的完整 immutable builder / result 分離仍未開始。
+`4b` 的完成不代表 `BrailleWord` 已 fully immutable；它代表 `4c` 可以建立在目前這套 hybrid builder / compatibility 邊界上繼續推進。現在 `4c` 已先把 `BrailleWord` 的 construction/materialization 邊界往 model 內部收斂，但 `BrailleWord` 與 `4d` `BrailleLine` 的完整 immutable builder / result 分離仍未完成。
 
 本階段以前一份 [`phase3.md`](./phase3.md) 為起點，先做最小可驗證的高風險 prototype。
 
 ## 這一批的重點
+
+### `4c` 第一個切點
+
+- 規劃文件見 [`docs-dev/planning/immutable-phase4c-word-construction-boundary.md`](/d:/work/BrailleKit/text-to-braille/docs-dev/planning/immutable-phase4c-word-construction-boundary.md)
+- `BrailleWordBuilder` / `BrailleWordMaterialized` 不再透過外掛 compatibility helper materialize 舊 model
+- `BrailleWord` 新增 internal construction boundary：
+  - `CreateFromConstruction(...)`
+  - `ApplyConstruction(...)`
+  - `FromResult(IBrailleWordResult)`
+  - `ApplyResult(IBrailleWordResult)`
+- `BrailleWord.Copy()` / `Copy(BrailleWord)` 改走同一條 construction path，避免維護第二套欄位搬運邏輯
+- `BrailleCellList` 新增 `Assign(ReadOnlySpan<BrailleCell>)`，讓 span-based materialization 可以直接落到既有 cell storage
+- 驗證：
+  - `dotnet test src/EasyBrailleEditApp/BrailleToolkit.Tests/BrailleToolkit.Tests.csproj`
+  - `dotnet build src/EasyBrailleEditApp/BrailleToolkit.Benchmarks/BrailleToolkit.Benchmarks.csproj -c Release`
 
 ### `4a`
 

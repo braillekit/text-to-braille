@@ -99,5 +99,33 @@ namespace BrailleToolkit.Tests
             Assert.Equal(BrailleCell.Capital, source.Cells[0]);
             Assert.Equal(BrailleCell.GetInstance("02"), source.Cells[1]);
         }
+
+        [Fact]
+        public void BuildResult_ShouldApplyToExistingBrailleWordViaConstructionBoundary()
+        {
+            var builder = new BrailleWordBuilder("B")
+            {
+                OriginalText = "<原文>B",
+                Language = BrailleLanguage.English,
+                ContextNames = "數學",
+                NoCapitalRule = true
+            };
+            builder.AppendHex("1B");
+
+            IBrailleWordResult result = builder.Build();
+            var target = new BrailleWord("X", "01");
+            var originalCells = target.Cells;
+
+            target.ApplyResult(result);
+
+            Assert.Same(originalCells, target.Cells);
+            Assert.Equal("B", target.Text);
+            Assert.Equal("<原文>B", target.OriginalText);
+            Assert.Equal(BrailleLanguage.English, target.Language);
+            Assert.Equal("數學", target.ContextNames);
+            Assert.True(target.NoCapitalRule);
+            Assert.Single(target.Cells);
+            Assert.Equal(BrailleCell.GetInstance("1B"), target.Cells[0]);
+        }
     }
 }
