@@ -135,12 +135,7 @@ namespace EasyBrailleEdit.Services
                 var parts = line.Split(' ');
                 if (parts.Length == 3)
                 {
-                    invalidChars.Add(new CharPosition
-                    {
-                        LineNumber = int.Parse(parts[0]),
-                        CharIndex = int.Parse(parts[1]),
-                        CharValue = parts[2][0]
-                    });
+                    invalidChars.Add(new CharPosition(parts[2][0], int.Parse(parts[0]), int.Parse(parts[1])));
                 }
             }
             

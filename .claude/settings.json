@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(dotnet sln:*)",
-      "Bash(ls \"d:/work/BrailleKit/text-to-braille/src/EasyBrailleEditApp/BrailleToolkit/Data/\"*.cs)"
+      "Bash(ls \"d:/work/BrailleKit/text-to-braille/src/EasyBrailleEditApp/BrailleToolkit/Data/\"*.cs)",
+      "Bash(dotnet test:*)"
     ],
     "additionalDirectories": [
       "d:\\work\\BrailleKit\\text-to-braille\\src\\EasyBrailleEditApp"

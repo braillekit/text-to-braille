@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,23 +18,7 @@ namespace BrailleToolkit
     /// <summary>
     /// 代表一個字元及其在文件中的位置。
     /// </summary>
-    public struct CharPosition
-    {
-        /// <summary>
-        /// 字元
-        /// </summary>
-        public char CharValue { get; set; }
-        
-        /// <summary>
-        /// 第幾列
-        /// </summary>
-        public int LineNumber { get; set; }
-        
-        /// <summary>
-        /// 第幾個字元
-        /// </summary>
-        public int CharIndex { get; set; }
-    }
+    public readonly record struct CharPosition(char CharValue, int LineNumber, int CharIndex);
 
     /// <summary>
     /// 為轉換失敗事件提供資料。
@@ -57,12 +42,7 @@ namespace BrailleToolkit
 
         internal void SetArgs(int lineNumber, int charIndex, string line, char ch)
         {
-            InvalidChar = new CharPosition
-            {
-                LineNumber = lineNumber,
-                CharIndex = charIndex,
-                CharValue = ch
-            };
+            InvalidChar = new CharPosition(ch, lineNumber, charIndex);
             OriginalText = line;
         }
     }
@@ -112,7 +92,7 @@ namespace BrailleToolkit
         private event EventHandler<ConversionFailedEventArgs>? _conversionFailedEvent;
         private event EventHandler<TextConvertedEventArgs>? _textConvertedEvent;
 
-        private Dictionary<string, string> _autoReplacedText;
+        private readonly FrozenDictionary<string, string> _autoReplacedText;
 
         #region 建構函式
 
@@ -148,7 +128,7 @@ namespace BrailleToolkit
 
             // 轉點字之前，預先替換的文字
             var replacedText = AppGlobals.Config.General.AutoReplacedText.EnsureNotEncloseWith("{", "}");
-            _autoReplacedText = StrHelper.SplitToDictionary(replacedText, ' ', '=');
+            _autoReplacedText = StrHelper.SplitToDictionary(replacedText, ' ', '=').ToFrozenDictionary();
         }
 
 
