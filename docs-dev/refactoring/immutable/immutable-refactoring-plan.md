@@ -180,4 +180,4 @@
 
 1. 執行所有單元測試（`dotnet test`），確認無回歸。
 2. 執行 benchmark（`dotnet run --project BrailleToolkit.Benchmarks -c Release`），比較效能數據。
-3. 將 benchmark 結果保存至 `BrailleToolkit.Benchmarks/results/`，以日期和 phase 命名。
+3. 將 benchmark 結果保存至 `docs-dev/refactoring/immutable/benchmark-result/`，以日期和 phase 命名。
