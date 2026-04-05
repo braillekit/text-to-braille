@@ -173,15 +173,13 @@ namespace EasyBrailleEdit
             var brLine = m_TmpBrDoc.Lines[lineIdx];
 
             string beginLineInfo = "[？] ";
-
-            if (brLine.Tag != null)
+            if (lineIdx >= 0 && lineIdx < Titles.Count)
             {
-                try
+                var title = Titles[lineIdx];
+                if (title.TryResolveContentStartLineIndex(m_OrgBrDoc, out int beginLineIdx))
                 {
-                    int beginLineIdx = Convert.ToInt32(brLine.Tag);
                     beginLineInfo = $"[{beginLineIdx + 1}] "; // 顯示的行號是從 1 開始。
                 }
-                catch { }
             }
 
             //var pageTitle = m_OrgBrDoc.FindTitle(brLine);

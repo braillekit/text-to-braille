@@ -145,6 +145,40 @@ namespace BrailleToolkit
         }
 
         /// <summary>
+        /// 依據目前的 anchor 狀態解析標題後第一行內容在文件中的索引。
+        /// 優先使用 ContentStartLineIdentity 對應到目前文件中的列；若找不到，再退回既有索引。
+        /// </summary>
+        /// <param name="brDoc">文件物件。</param>
+        /// <param name="lineIndex">解析出的列索引。</param>
+        /// <returns>若能解析到有效列索引則為 true，否則為 false。</returns>
+        public bool TryResolveContentStartLineIndex(BrailleDocument brDoc, out int lineIndex)
+        {
+            if (brDoc == null)
+            {
+                throw new ArgumentNullException(nameof(brDoc));
+            }
+
+            if (ContentStartLineIdentity > 0)
+            {
+                int idx = brDoc.IndexOfLine(ContentStartLineIdentity);
+                if (idx >= 0)
+                {
+                    lineIndex = idx;
+                    return true;
+                }
+            }
+
+            if (m_ContentStartLineIndex >= 0 && m_ContentStartLineIndex < brDoc.LineCount)
+            {
+                lineIndex = m_ContentStartLineIndex;
+                return true;
+            }
+
+            lineIndex = -1;
+            return false;
+        }
+
+        /// <summary>
         /// 取得或設定標題列物件。
         /// </summary>
         public BrailleLine? TitleLine

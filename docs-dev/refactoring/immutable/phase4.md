@@ -123,6 +123,25 @@ Phase 4 目前：
   - `BrailleDocument.DeepCopy()` 後 line / word identity 應為 fresh identity
   - document JSON round-trip 後 page title anchor 應與新文件內的 fresh line identity 保持一致
 
+### `4c` 第九個切點
+
+- page-title editor state：
+  - `DualEditTitleForm` 顯示 begin-line 資訊時，不再依賴 `TitleLine.Tag` 暫存的 line index
+  - `BraillePageTitle` 新增 `TryResolveContentStartLineIndex(...)`，優先由 `ContentStartLineIdentity` 對應回目前文件中的列，再 fallback 到既有 index
+- undo/redo grid state：
+  - `BrailleEditMemento` 建立時會先 deep copy document，再以 snapshot document 內的 fresh line/word identity 建立 `BrailleGridState`
+  - `BrailleGridState` 不再只保存 raw `ActivePosition` / `RangeRegion`
+  - 新增 model-bound bookmark：
+    - `BrailleGridCellBookmark`
+    - `BrailleGridRangeBookmark`
+  - bookmark 會保存 line/word identity、row offset，以及 span 內 column offset，restore 時再映射回目前 grid
+- `BrailleGridPositionMapper` 新增 merged-cell aware 的 `TryGetBrailleWordAtGridPosition(...)`
+  - 會正確回推 span cell 的真正 start column，避免把 merged span 內部欄位誤當成 word start
+- `ApplyMemento(...)` 改為直接套用 memento 內保存的 snapshot document，避免再次 deep copy 打散 bookmark 對應的 identity
+- 補測試：
+  - page title 在插入列但尚未更新 stored index 前，仍可由 identity resolve 出正確 begin line
+  - grid cell bookmark 可在 document snapshot 間正確 round-trip active cell 與 selection endpoint
+
 ### `4a`
 
 - [`BrailleCell.cs`](/src/EasyBrailleEditApp/BrailleToolkit/BrailleCell.cs) 從 sealed class 改成 `readonly record struct`

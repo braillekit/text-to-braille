@@ -99,6 +99,34 @@ namespace BrailleToolkit.Tests
         }
 
         [Fact]
+        public void PageTitle_ShouldResolveBeginLineIndexByIdentityBeforeStoredIndexIsUpdated()
+        {
+            string text =
+                "0\n" +
+                "1\n" +
+                "2\n" +
+                "<標題>insert at 3</標題>\n" +
+                "3\n" +
+                "4\n";
+
+            var brDoc = new BrailleDocument(_processor);
+            using (var reader = new StringReader(text))
+            {
+                brDoc.LoadAndConvert(reader);
+            }
+
+            var title = brDoc.PageTitles[0];
+
+            var insertedLine = new BrailleLine();
+            insertedLine.AddWord(new BrailleWord("新", "01"));
+            brDoc.InsertLine(0, insertedLine);
+
+            Assert.Equal(3, title.ContentStartLineIndex);
+            Assert.True(title.TryResolveContentStartLineIndex(brDoc, out int resolvedIndex));
+            Assert.Equal(4, resolvedIndex);
+        }
+
+        [Fact]
         public void FormatLine_ShouldPreserveFirstLineIdentityAndPageTitleAnchor()
         {
             var brDoc = new BrailleDocument();

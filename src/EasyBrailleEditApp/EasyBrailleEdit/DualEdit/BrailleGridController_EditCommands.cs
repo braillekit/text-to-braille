@@ -25,20 +25,16 @@ namespace EasyBrailleEdit.DualEdit
         /// <returns></returns>
         private BrailleEditMemento CreateMemento(string? operation = null)
         {
-            return new BrailleEditMemento(operation, BrailleDoc, IsDirty, new BrailleGridState(_grid));
+            return new BrailleEditMemento(operation, BrailleDoc, IsDirty, _grid, PositionMapper);
         }
 
         private void ApplyMemento(BrailleEditMemento? memento)
         {
             if (memento != null)
             {
-                BrailleDoc = memento.BrailleDoc.DeepCopy();
+                BrailleDoc = memento.BrailleDoc;
                 IsDirty = memento.IsDirty;
-                GridFocusCell(memento.GridState.ActivePosition, true);
-                foreach (var range in memento.GridState.SelectionRegion)
-                {
-                    _grid.Selection.SelectRange(range, true);
-                }
+                memento.GridState.Restore(_grid, PositionMapper);
             }
         }
 

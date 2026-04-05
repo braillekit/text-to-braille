@@ -77,6 +77,54 @@ namespace EasyBrailleEdit.DualEdit
             return _grid[row, col].Tag as BrailleWord;
         }
 
+        public bool TryGetBrailleWordAtGridPosition(int row, int col, out BrailleWord? brWord, out int wordStartCol)
+        {
+            brWord = null;
+            wordStartCol = -1;
+
+            if (row < _grid.FixedRows || row >= _grid.RowsCount || col < _grid.FixedColumns || col >= _grid.ColumnsCount)
+            {
+                return false;
+            }
+
+            row = GetBrailleRowIndex(row);
+            int originalCol = col;
+            var currentCell = _grid[row, col];
+            if (currentCell != null)
+            {
+                brWord = currentCell.Tag as BrailleWord;
+                if (brWord != null)
+                {
+                    wordStartCol = col;
+                    while (wordStartCol > _grid.FixedColumns && ReferenceEquals(_grid[row, wordStartCol - 1], currentCell))
+                    {
+                        wordStartCol--;
+                    }
+                    return true;
+                }
+            }
+
+            while (col >= _grid.FixedColumns)
+            {
+                var cell = _grid[row, col];
+                if (cell != null)
+                {
+                    brWord = cell.Tag as BrailleWord;
+                    if (brWord != null)
+                    {
+                        int span = Math.Max(1, cell.ColumnSpan);
+                        if (originalCol < col + span)
+                        {
+                            wordStartCol = col;
+                            return true;
+                        }
+                    }
+                }
+                col--;
+            }
+            return false;
+        }
+
         /// <summary>
         /// 根據 grid 儲存格位置來計算它對應的點字列的哪一個字，即 BrailleLine 的 Words 集合索引。
         /// </summary>
@@ -126,6 +174,43 @@ namespace EasyBrailleEdit.DualEdit
         public int LineIndexToGridTextRow(int lineIdx)
         {
             return (lineIdx * 3) + _grid.FixedRows + 1;
+        }
+
+        public bool TryGetLineIndex(long lineIdentity, out int lineIdx)
+        {
+            for (int i = 0; i < _doc.Lines.Count; i++)
+            {
+                if (_doc.Lines[i].Identity == lineIdentity)
+                {
+                    lineIdx = i;
+                    return true;
+                }
+            }
+
+            lineIdx = -1;
+            return false;
+        }
+
+        public bool TryGetWordIndex(long lineIdentity, long wordIdentity, out int lineIdx, out int wordIdx)
+        {
+            if (!TryGetLineIndex(lineIdentity, out lineIdx))
+            {
+                wordIdx = -1;
+                return false;
+            }
+
+            var line = _doc.Lines[lineIdx];
+            for (int i = 0; i < line.Words.Count; i++)
+            {
+                if (line.Words[i].Identity == wordIdentity)
+                {
+                    wordIdx = i;
+                    return true;
+                }
+            }
+
+            wordIdx = -1;
+            return false;
         }
 
         /// <summary>
