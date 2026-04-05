@@ -253,6 +253,11 @@ namespace BrailleToolkit
             init { m_OriginalText = value ?? String.Empty; }
         }
 
+        internal void SetOriginalText(string? text)
+        {
+            m_OriginalText = text ?? String.Empty;
+        }
+
         /// <summary>
         /// 取得此點字詞包含的點字方數。
         /// </summary>

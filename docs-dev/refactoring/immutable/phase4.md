@@ -2,11 +2,12 @@
 
 ## 狀態
 
-Phase 4 目前先完成 `4a`：
+Phase 4 目前：
 
 - `4a` `BrailleCell` -> `readonly record struct`
+- `4b` 已開始進入第一個 production cut：`BrailleWordBuilder + BrailleCellBuffer` 骨架已落地，並先接到單一路徑的 `EnglishWordConverter` / 英文規則
 
-`4b` `BrailleCellList`、`4c` `BrailleWord`、`4d` `BrailleLine` 的 immutable builder / result 分離尚未開始，本文件只記錄 `4a`。
+`4b` `BrailleCellList`、`4c` `BrailleWord`、`4d` `BrailleLine` 的完整 immutable builder / result 分離尚未完成；目前仍是小步 prototype 與相容橋接階段。
 
 本階段以前一份 [`phase3.md`](./phase3.md) 為起點，先做最小可驗證的高風險 prototype。
 
@@ -146,5 +147,10 @@ Phase 4 目前先完成 `4a`：
   - synthetic storage benchmark 顯示 builder / buffer 路線仍值得繼續驗證
   - `BrailleWordBuilder + BrailleCellBuffer` 小型 prototype 已額外量到約 `-35%` Mean、`-30%` allocation 的正面訊號
 - `4b` 設計草案見 [`docs-dev/planning/immutable-phase4b-word-builder-draft.md`](/d:/work/BrailleKit/text-to-braille/docs-dev/planning/immutable-phase4b-word-builder-draft.md)。
+- `4b` 目前已落地的相容橋接包括：
+  - `BrailleWordBuilder.FromBrailleWord(...)` / `ApplyTo(...)`
+  - `EnglishWordConverter` 的 builder materialization 路徑
+  - `EnglishBrailleRule` / `GeneralBrailleRule` 的前插與數字修正路徑
+  - 最新 smoke benchmark：英文單行約 `516.1 us`、`25.85 KB`
 - `4b` 之後會碰到 `BrailleCellList` / `BrailleWord` / `BrailleLine` 的資料流與建構模式，風險會明顯高於 `4a`。
 - 若後續還要擴大 value type / immutable model 的範圍，應特別注意 reference identity 仍被使用的 `BrailleWord` / `BrailleLine` 路徑。

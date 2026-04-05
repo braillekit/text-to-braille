@@ -26,6 +26,25 @@ namespace BrailleToolkit
             get { return _count; }
         }
 
+        public BrailleCell this[int index]
+        {
+            get
+            {
+                if ((uint)index >= (uint)_count)
+                    throw new ArgumentOutOfRangeException(nameof(index));
+
+                return _items![_start + index];
+            }
+            set
+            {
+                if ((uint)index >= (uint)_count)
+                    throw new ArgumentOutOfRangeException(nameof(index));
+
+                EnsureInitialized();
+                _items![_start + index] = value;
+            }
+        }
+
         public void Clear()
         {
             EnsureInitialized();

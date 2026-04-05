@@ -390,7 +390,9 @@ namespace BrailleToolkit.Rules
                 // 如果已經有加上數字記號就不再重複加。
                 if (!firstDigitWord.Cells[0].Equals(digitCell))
                 {
-                    firstDigitWord.Cells.Insert(0, digitCell);
+                    var builder = BrailleWordBuilder.FromBrailleWord(firstDigitWord);
+                    builder.PrependCell(digitCell);
+                    builder.ApplyTo(firstDigitWord);
                 }
             }
         }

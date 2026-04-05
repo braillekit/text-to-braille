@@ -59,5 +59,43 @@ namespace BrailleToolkit.Tests
             Assert.True(word.IsContextTag);
             Assert.Equal(0, word.CellCount);
         }
+
+        [Fact]
+        public void FromBrailleWord_ApplyTo_ShouldMutateExistingWordAndPreserveMetadata()
+        {
+            var source = new BrailleWord("A", "01")
+            {
+                Language = BrailleLanguage.English,
+                DontBreakLineHere = true,
+                ContextNames = "時間",
+                NoDigitCell = true,
+                NoSpace = true,
+                NoCapitalRule = true,
+                IsEngPhonetic = true
+            };
+            source.PhoneticCode = "ㄅ";
+            source.IsPolyphonic = true;
+
+            var builder = BrailleWordBuilder.FromBrailleWord(source);
+            builder.PrependCell(BrailleCell.Capital);
+            builder.ReplaceCell(1, BrailleCell.GetInstance("02"));
+
+            builder.ApplyTo(source);
+
+            Assert.Equal("A", source.Text);
+            Assert.Equal("A", source.OriginalText);
+            Assert.Equal(BrailleLanguage.English, source.Language);
+            Assert.Equal("ㄅ", source.PhoneticCode);
+            Assert.True(source.IsPolyphonic);
+            Assert.True(source.DontBreakLineHere);
+            Assert.Equal("時間", source.ContextNames);
+            Assert.True(source.NoDigitCell);
+            Assert.True(source.NoSpace);
+            Assert.True(source.NoCapitalRule);
+            Assert.True(source.IsEngPhonetic);
+            Assert.Equal(2, source.CellCount);
+            Assert.Equal(BrailleCell.Capital, source.Cells[0]);
+            Assert.Equal(BrailleCell.GetInstance("02"), source.Cells[1]);
+        }
     }
 }
