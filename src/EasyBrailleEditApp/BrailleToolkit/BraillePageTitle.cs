@@ -67,9 +67,10 @@ namespace BrailleToolkit
 
         private void SetTitleLine(IReadOnlyList<BrailleWord> words, int beginLineIdx, BrailleLine beginLine)
         {
-            TitleLine = new BrailleLine();
-            TitleLine.AddWords(words);
-            TitleLine.Tag = beginLineIdx;
+            var builder = new BrailleLineBuilder();
+            builder.AddWords(words);
+            builder.Tag = beginLineIdx;
+            TitleLine = builder.ToBrailleLine();
 
             ContentStartLineIndex = beginLineIdx;
             ContentStartLineRef = beginLine;

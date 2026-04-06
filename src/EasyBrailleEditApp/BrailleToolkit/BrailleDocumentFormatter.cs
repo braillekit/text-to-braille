@@ -127,7 +127,6 @@ namespace BrailleToolkit
             }
 
             List<BrailleLine> lines = new List<BrailleLine>();
-            BrailleLine? newLine = null;
             int wordIndex = 0;
             int breakIndex = 0;
             bool needHyphen = false;
@@ -141,10 +140,17 @@ namespace BrailleToolkit
             {
                 breakIndex = FindBreakPoint(brLine, maxCellsInLine, out needHyphen);
 
-                newLine = brLine.ShallowCopy(wordIndex, breakIndex);   // 複製到新行。
+                // 用 builder 建構新行。
+                var lineBuilder = new BrailleLineBuilder();
+                for (int i = wordIndex; i < wordIndex + breakIndex && i < brLine.WordCount; i++)
+                {
+                    lineBuilder.AddWord(brLine[i]);
+                }
+                lineBuilder.Tag = brLine.Tag;
+
                 if (needHyphen) // 是否要附加連字號?
                 {
-                    newLine.AddWord(new BrailleWord("-", BrailleCellCode.Hyphen));
+                    lineBuilder.AddWord(new BrailleWord("-", BrailleCellCode.Hyphen));
                 }
 
                 // 如果是折下來的新行，就自動補上需要縮排的格數。
@@ -152,10 +158,11 @@ namespace BrailleToolkit
                 {
                     for (int i = 0; i < indents; i++)
                     {
-                        newLine.Insert(0, BrailleWord.NewBlank());
+                        lineBuilder.Insert(0, BrailleWord.NewBlank());
                     }
                 }
 
+                BrailleLine newLine = lineBuilder.ToBrailleLine();
                 brLine.RemoveRange(0, breakIndex);              // 從原始串列中刪除掉已經複製到新行的點字。
                 wordIndex = 0;
                 lines.Add(newLine);

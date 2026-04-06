@@ -6,10 +6,10 @@ Phase 4 目前：
 
 - `4a` `BrailleCell` -> `readonly record struct`
 - `4b` 已收尾到可交棒狀態：word-level builder / compatibility 策略已落地並完成效能收斂
-- `4c` 已開始第一個實作切點：`BrailleWord` construction boundary 已整理成 model 內部入口
-- `4c` 已進入 editor/document identity 熱點清理：剩餘 `ReferenceEquals` 相依已收斂到顯式 word/line identity
+- `4c` 已結案：`BrailleWord` construction boundary、`IBrailleWordView` read-only contract、runtime identity、editor state bookmark 均已落地
+- `4d` 已完成：`BrailleLine` read-only view contract (`IBrailleLineView`) 與 construction boundary (`BrailleLineBuilder`) 已建立，主要建構點已遷移
 
-`4b` 的完成不代表 `BrailleWord` 已 fully immutable；它代表 `4c` 可以建立在目前這套 hybrid builder / compatibility 邊界上繼續推進。現在 `4c` 已先把 `BrailleWord` 的 construction/materialization 邊界往 model 內部收斂，但 `BrailleWord` 與 `4d` `BrailleLine` 的完整 immutable builder / result 分離仍未完成。
+`4d` 的完成代表 line-level 的 builder / result / view 三層架構已與 word-level 對齊。`BrailleLine` 本身仍為 mutable class，但所有「新建 line」的主要路徑已改走 `BrailleLineBuilder`。剩餘的 editor commands、braille rules 等既有 mutation 路徑尚未遷移，留給後續階段處理。
 
 本階段以前一份 [`phase3.md`](./phase3.md) 為起點，先做最小可驗證的高風險 prototype。
 
@@ -141,6 +141,103 @@ Phase 4 目前：
 - 補測試：
   - page title 在插入列但尚未更新 stored index 前，仍可由 identity resolve 出正確 begin line
   - grid cell bookmark 可在 document snapshot 間正確 round-trip active cell 與 selection endpoint
+
+### `4d` 第一個切點
+
+- 新增 `IBrailleLineView` 唯讀介面
+- `BrailleLine` 實作 `IBrailleLineView`
+- 介面只暴露資料屬性：`Identity`、`Words`、`WordCount`、`CellCount`、`Tag`、`this[int]`
+- query 方法（`IsEmpty`、`IsBeginOfParagraph`、`CalcBreakPoint` 等）不放在介面上，而是提取到 `BrailleLineHelper` 靜態方法
+
+### `4d` 第二個切點
+
+- 新增 `BrailleLineHelper`（`BrailleToolkit/Helpers/BrailleLineHelper.cs`）
+- 將 `BrailleLine` 的下列 query 方法提取為 `internal static` 方法，接受 `IBrailleLineView`：
+  - `IsEmpty` / `IsEmptyOrWhiteSpace`
+  - `IsBeginOfParagraph`
+  - `CalcBreakPoint`
+  - `GetFirstVisibleWordIndex` / `GetFirstVisibleWord`
+  - `GetBrailleCells`
+- `BrailleLine` 保留既有 instance 方法，但委派給 helper
+- 這讓後續 `BrailleLineMaterialized` 可共用同一套邏輯，不必在兩個類別各自實作
+
+### `4d` 第三個切點
+
+- 新增 `IBrailleLineResult : IBrailleLineView`，提供 `ToBrailleLine()` 方法
+- 新增 `BrailleLineMaterialized`：不可變的點字列快照
+  - 以 `BrailleWord[]` 儲存 words，init-only `Tag`
+  - `Identity` 為 `0`（materialized result 不帶 identity，由 `ToBrailleLine` 產生新的）
+  - `ToBrailleLine()` 委派給 `BrailleLine.FromResult(...)`
+- 補測試：
+  - materialized result 的 words / tag / cell count 驗證
+  - `ToBrailleLine()` 產生 fresh identity
+
+### `4d` 第四個切點
+
+- 新增 `BrailleLineBuilder`
+- 提供與 `BrailleLine` 相同的 mutation API：
+  - `AddWord` / `AddWords` / `Insert` / `InsertWords`
+  - `RemoveAt` / `RemoveRange` / `Clear`
+  - `TrimStart` / `TrimEnd` / `Trim` / `RemoveContextTags`
+- 建構入口：`BrailleLineBuilder()` / `FromBrailleLine(BrailleLine)`
+- 讀取：`Words` / `WordCount` / `this[int]` / `Tag`
+- materialize：`Build()` → `IBrailleLineResult`、`ToBrailleLine()`、`ApplyTo(BrailleLine)`
+- `ApplyTo(...)` 透過 `BrailleLine.ApplyResult(...)` 保留目標列的 identity
+- 補測試：
+  - builder lifecycle（add → build → verify）
+  - `FromBrailleLine` round-trip
+  - `ApplyTo` 保留 target identity
+
+### `4d` 第五個切點
+
+- `BrailleLine` 新增 construction entry points：
+  - `internal static BrailleLine FromResult(IBrailleLineResult)` — 建立新列，取得新 identity
+  - `internal void ApplyResult(IBrailleLineResult)` — 套用結果到既有列，保留 identity（委派給 `AssignWords` + 設定 `Tag`）
+- 補測試：
+  - `FromResult` 產生 fresh identity
+  - `ApplyResult` 保留 target identity（關鍵：formatter reflow identity 保留）
+
+### `4d` 第六個切點
+
+- `BrailleProcessor` 的 line construction 遷移至 `BrailleLineBuilder`：
+  - `SimpleConvertText(...)` 改用 builder 累積 words，最後 `ToBrailleLine()`
+  - `ConvertLine(...)` 改用 builder 累積 words，在進入 rule 處理前 `ToBrailleLine()` materialize
+  - 後續 `ConvertContextTags(brLine)` 與各 rule 方法仍直接操作 `BrailleLine`
+- 這代表 processor 的「建構階段」與「規則修改階段」已有明確的 materialization 邊界
+- 既有 `BrailleProcessorTest` / `BrailleProcessorTest_Format` 全數通過
+
+### `4d` 第七個切點
+
+- `BrailleDocumentFormatter.BreakLine(...)` 斷行時，新行建構改用 `BrailleLineBuilder`：
+  - 不再使用 `ShallowCopy` + `AddWord` + `Insert` 的三步組合
+  - 改為 builder `AddWord` → 附加連字號 → 補縮排 → `ToBrailleLine()`
+  - 來源列的 destructive `RemoveRange` 保持不變（既有 mutation 邊界）
+- `FormatLine` 的 `AssignWords` + `Tag` 指派維持不動（已是 4c 建立的 identity 保留路徑）
+- 既有 formatter 測試全數通過
+
+### `4d` 第八個切點
+
+- 剩餘 construction site 遷移：
+  - `BrailleDocumentYamlSerializer` deserialization：`new BrailleLine()` + `AddWord` 迴圈改為 builder
+  - `BraillePageTitle.SetTitleLine(...)` 改用 builder 建構 title line
+  - `BrailleLine.ShallowCopy(...)` / `DeepCopy(...)` / `Clone()` 改用 builder 內部實作
+- YAML round-trip / page title / deep copy 測試全數通過
+
+### `4d` 已達成的整體狀態
+
+- `IBrailleLineView` 唯讀介面已建立，`BrailleLine` 實作
+- `IBrailleLineResult` / `BrailleLineMaterialized` 不可變快照已建立
+- `BrailleLineBuilder` 已提供完整的 line mutation API + materialization 路徑
+- `BrailleLineHelper` 已提取共用 query 邏輯
+- 主要 construction site 已遷移：`BrailleProcessor`、`BrailleDocumentFormatter`（新行建構）、`BrailleDocumentYamlSerializer`、`BraillePageTitle`、`BrailleLine` copy 方法
+
+### `4d` 明確不在範圍內
+
+- **editor commands**（`BrailleGridController_EditCommands`）：19+ 個 mutation site，強耦合 grid state
+- **braille rules**（`ChineseBrailleRule`、`GeneralBrailleRule`、`EnglishBrailleRule`）：同時被 construction 與 reflow 兩條路徑呼叫
+- **`BrailleDocumentHelper`** 的 cleanup mutators
+- **將 `BrailleLine` 本身改為 immutable**：目前僅建立 builder 邊界，class 仍為 mutable
+- **將 `Words` 從 `IReadOnlyList<BrailleWord>` 改成 `IReadOnlyList<IBrailleWordView>`**：會影響 ~38 個檔案
 
 ### `4a`
 

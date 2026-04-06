@@ -14,7 +14,7 @@ namespace BrailleToolkit
     /// </summary>
     [Serializable]
     [DataContract]
-    public class BrailleLine : ICloneable
+    public class BrailleLine : ICloneable, IBrailleLineView
     {
         private long m_Identity = BrailleObjectIdentityGenerator.NextLineIdentity();
 
@@ -110,12 +110,32 @@ namespace BrailleToolkit
         }
 
         /// <summary>
+        /// 從 IBrailleLineResult 建立新的 BrailleLine，會取得新的執行期 Identity。
+        /// </summary>
+        internal static BrailleLine FromResult(IBrailleLineResult result)
+        {
+            var line = new BrailleLine();
+            line.AssignWords(result.Words);
+            line.Tag = result.Tag;
+            return line;
+        }
+
+        /// <summary>
+        /// 將 IBrailleLineResult 的內容套用到此列，保留此列本身的執行期 Identity。
+        /// </summary>
+        internal void ApplyResult(IBrailleLineResult result)
+        {
+            AssignWords(result.Words);
+            Tag = result.Tag;
+        }
+
+        /// <summary>
         /// Checks if this line is empty.
         /// </summary>
         /// <returns>True if empty; otherwise, false.</returns>
         public bool IsEmpty()
         {
-            return WordCount < 1;
+            return BrailleLineHelper.IsEmpty(this);
         }
 
         /// <summary>
@@ -124,15 +144,7 @@ namespace BrailleToolkit
         /// <returns>True if empty or whitespace; otherwise, false.</returns>
         public bool IsEmptyOrWhiteSpace()
         {
-            foreach (var word in Words)
-            {
-                if (!BrailleWord.IsBlank(word) && !BrailleWord.IsEmpty(word))
-                {
-                    return false;
-                }
-
-            }
-            return true;
+            return BrailleLineHelper.IsEmptyOrWhiteSpace(this);
         }
 
         /// <summary>
@@ -141,14 +153,7 @@ namespace BrailleToolkit
         /// <returns>True if it is a paragraph beginning; otherwise, false.</returns>
         public bool IsBeginOfParagraph()
         {
-            if (WordCount >= 2)
-            {
-                if (Words[0].IsWhiteSpace && Words[1].IsWhiteSpace)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return BrailleLineHelper.IsBeginOfParagraph(this);
         }
 
         /// <summary>
@@ -194,12 +199,7 @@ namespace BrailleToolkit
         /// <returns></returns>
         public List<BrailleCell> GetBrailleCells()
         {
-            var list = new List<BrailleCell>();
-            foreach (var brWord in Words)
-            {
-                list.AddRange(brWord.Cells);
-            }
-            return list;
+            return BrailleLineHelper.GetBrailleCells(this);
         }
 
         /// <summary>
@@ -211,23 +211,7 @@ namespace BrailleToolkit
         /// 傳回值就是 29。若不需要斷行，則傳回整行的字數。</returns>
         public int CalcBreakPoint(int cellsPerLine)
         {
-            if (cellsPerLine < 4)
-            {
-                throw new ArgumentException("cellsPerLine 參數值不可小於 4。");
-            }
-
-            int cellCnt = 0;
-            int index = 0;
-            while (index < Words.Count)
-            {
-                cellCnt += Words[index].Cells.Count;
-                if (cellCnt > cellsPerLine)
-                {
-                    break;
-                }
-                index++;
-            }
-            return index;
+            return BrailleLineHelper.CalcBreakPoint(this, cellsPerLine);
         }
 
         /// <summary>
@@ -236,14 +220,7 @@ namespace BrailleToolkit
         /// <returns>如果找到，則為第一個可見點字詞的索引；否則為 -1。</returns>
         public int GetFirstVisibleWordIndex()
         {
-            for (int i = 0; i < Words.Count; i++)
-            {
-                if (Words[i].CellCount > 0)
-                {
-                    return i;
-                }
-            }
-            return -1;
+            return BrailleLineHelper.GetFirstVisibleWordIndex(this);
         }
 
         /// <summary>
@@ -252,14 +229,7 @@ namespace BrailleToolkit
         /// <returns>如果找到，則為第一個可見的 BrailleWord 物件；否則為 null。</returns>
         public BrailleWord? GetFirstVisibleWord()
         {
-            for (int i = 0; i < Words.Count; i++)
-            {
-                if (Words[i].CellCount > 0)
-                {
-                    return Words[i];
-                }
-            }
-            return null;
+            return BrailleLineHelper.GetFirstVisibleWord(this);
         }
 
         /// <summary>
@@ -561,19 +531,15 @@ namespace BrailleToolkit
         /// <returns>新的點字串列。</returns>
         public BrailleLine ShallowCopy(int index, int count)
         {
-            BrailleLine newLine = new BrailleLine();
-            BrailleWord? newWord = null;
+            var builder = new BrailleLineBuilder();
             while (index < Words.Count && count > 0)
             {
-                newWord = Words[index];
-                newLine.AddWord(newWord);
-
+                builder.AddWord(Words[index]);
                 index++;
                 count--;
-
             }
-            newLine.Tag = Tag;
-            return newLine;
+            builder.Tag = Tag;
+            return builder.ToBrailleLine();
         }
 
         /// <summary>
@@ -593,18 +559,15 @@ namespace BrailleToolkit
         /// <returns>指定範圍的深層複本。</returns>
         public BrailleLine DeepCopy(int index, int count)
         {
-            BrailleLine newLine = new BrailleLine();
-            BrailleWord? newWord = null;
+            var builder = new BrailleLineBuilder();
             while (index < Words.Count && count > 0)
             {
-                newWord = Words[index].Copy();
-                newLine.AddWord(newWord);
-
+                builder.AddWord(Words[index].Copy());
                 index++;
                 count--;
             }
-            newLine.Tag = Tag;
-            return newLine;
+            builder.Tag = Tag;
+            return builder.ToBrailleLine();
         }
 
 
@@ -616,16 +579,7 @@ namespace BrailleToolkit
         /// <returns></returns>
         public object Clone()
         {
-            BrailleLine newLine = new BrailleLine();
-            BrailleWord? newWord = null;
-
-            foreach (BrailleWord brWord in Words)
-            {
-                newWord = brWord.Copy();
-                newLine.AddWord(newWord);
-            }
-            newLine.Tag = Tag;
-            return newLine;
+            return DeepCopy();
         }
 
         #endregion

@@ -178,12 +178,12 @@ namespace BrailleToolkit.Helpers
 
             public BrailleLine ToBrailleLine()
             {
-                var line = new BrailleLine();
+                var builder = new BrailleLineBuilder();
                 foreach (var word in Words)
                 {
-                    line.AddWord(word.ToBrailleWord());
+                    builder.AddWord(word.ToBrailleWord());
                 }
-                return line;
+                return builder.ToBrailleLine();
             }
         }
 

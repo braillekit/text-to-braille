@@ -390,7 +390,7 @@ namespace BrailleToolkit
         /// <returns>轉換後的點字行。</returns>
         public BrailleLine SimpleConvertText(string Text)
         {
-            var outputBrLine = new BrailleLine();
+            var builder = new BrailleLineBuilder();
 
             string orgLine = Text;	// 保存原始的字串。
 
@@ -412,7 +412,7 @@ namespace BrailleToolkit
                 if (brWordList != null && brWordList.Count > 0)
                 {
                     // 成功轉換成點字，有 n 個字元會從串流中取出
-                    outputBrLine.AddWords(brWordList);
+                    builder.AddWords(brWordList);
 
                     convertedText.Length = 0;
                     foreach (BrailleWord brWord in brWordList)
@@ -445,7 +445,7 @@ namespace BrailleToolkit
                     }
                 }
             }
-            return outputBrLine;
+            return builder.ToBrailleLine();
         }
 
         /// <summary>
@@ -458,10 +458,10 @@ namespace BrailleToolkit
         /// <returns>點字串列。若則傳回 null，表示該列不需要轉成點字。</returns>
         public BrailleLine ConvertLine(string line, int lineNumber)
         {
-            BrailleLine brLine = new BrailleLine();
+            var builder = new BrailleLineBuilder();
 
             if (line == null)
-                return brLine;
+                return builder.ToBrailleLine();
 
             string orgLine = line;	// 保存原始的字串。
 
@@ -475,8 +475,8 @@ namespace BrailleToolkit
             // 若去掉換行字元之後變成空字串，則傳回只包含一個空方的列。
             if (String.IsNullOrEmpty(line))
             {
-                brLine.AddWord(BrailleWord.NewBlank());
-                return brLine;
+                builder.AddWord(BrailleWord.NewBlank());
+                return builder.ToBrailleLine();
             }
 
             // 替換組態檔中指定的字串
@@ -485,7 +485,7 @@ namespace BrailleToolkit
             // 預先處理特殊標籤的字元替換。
             line = ReplaceSimpleTagsWithConvertableText(line);
             if (line == null)
-                return brLine;
+                return builder.ToBrailleLine();
 
             // 直接從原字串倒序建立 Stack，避免 Reverse 操作建立臨時字串。
             Stack<char> charStack = new Stack<char>(line.Length);
@@ -506,7 +506,7 @@ namespace BrailleToolkit
 
                     EnsureNoDigitSymbolAndSpace();
 
-                    brLine.AddWords(brWordList);
+                    builder.AddWords(brWordList);
 
                     // 通知事件
                     OnTextConverted(new TextConvertedEventArgs
@@ -544,7 +544,7 @@ namespace BrailleToolkit
                         if (brWordList != null && brWordList.Count > 0)
                         {
                             // 成功轉換成點字，有 n 個字元會從串流中取出
-                            brLine.AddWords(brWordList);
+                            builder.AddWords(brWordList);
                         }
                     }
                     catch (Exception ex)
@@ -555,6 +555,9 @@ namespace BrailleToolkit
                     }
                 }
             }
+
+            // 建構階段完成，materialize 為 BrailleLine 以供後續規則直接修改。
+            BrailleLine brLine = builder.ToBrailleLine();
 
             /* 到此階段，一列文字已經被初步轉換成一個包含點字物件串列的 BrailleLine。
              * 有些可轉換的 context tags 會保留到此階段才處理（可能是刪除或者轉換成特定文字與點字）
