@@ -107,7 +107,7 @@
 ### Phase 1: 零風險快速改善（無破壞性變更）
 
 | # | 變更項目 | 風險 |
-|---|---------|------|
+| -- | ------ | ---- |
 | 1a | `BrailleGlobals.ChinesePunctuations` → 加上 `readonly` | 低 |
 | 1b | `ContextTagNames.Collection` → `FrozenSet<string>` | 低 |
 | 1c | `SimpleTag.Tags` → `FrozenDictionary<string, string>` | 低 |
@@ -119,7 +119,7 @@
 ### Phase 2: Model 類型收緊（init-only、IReadOnly 公開介面）
 
 | # | 變更項目 | 風險 |
-|---|---------|------|
+| -- | ------ | ---- |
 | 2a | `BrailleWord.OriginalText` setter → `init` | 低 |
 | 2b | `BrailleDocument.Lines` → 公開 `IReadOnlyList<BrailleLine>` | 低 |
 | 2c | `BrailleDocument.PageTitles` → 公開 `IReadOnlyList<BraillePageTitle>` | 低 |
@@ -131,7 +131,7 @@
 ### Phase 3: Data Table 不可變化（高效能影響）
 
 | # | 變更項目 | 風險 |
-|---|---------|------|
+| -- | ------ | ---- |
 | 3a | 定義 `readonly record struct BrailleTableEntry(...)` | 低 |
 | 3b | `XmlBrailleTable` 內部以 `FrozenDictionary` 取代 `DataTable` | 中等 |
 | 3c | 更新所有子類別的查詢方法 | 中等 |
@@ -140,7 +140,7 @@
 ### Phase 4: 深度 Model 不可變化（遠期，最高風險）
 
 | # | 變更項目 | 風險 |
-|---|---------|------|
+| -- | ------ | ---- |
 | 4a | `BrailleCell` → `readonly record struct` | 中等 |
 | 4b | `BrailleCellList` → `ImmutableArray<BrailleCell>` builder pattern | 高 |
 | 4c | `BrailleWord` → 分離為 mutable builder + immutable result | 高 |

@@ -427,6 +427,76 @@ Phase 4 目前：
 - `4b` 之後會碰到 `BrailleCellList` / `BrailleWord` / `BrailleLine` 的資料流與建構模式，風險會明顯高於 `4a`。
 - 若後續還要擴大 value type / immutable model 的範圍，應特別注意 reference identity 仍被使用的 `BrailleWord` / `BrailleLine` 路徑。
 
+### branch 起點 vs `4d` 完成點 clean worktree benchmark
+
+- 日期：2026-04-06
+- baseline commit：`ba9bc71d6b33b00dbe04de957c5acc2dc07e576d`
+- candidate commit：`279355533346a66352230062c89e30a5637cacf1`
+- 方法：於兩個乾淨 detached worktree 各自獨立建置與執行完整 conversion benchmark suite
+- 詳細紀錄：
+  - [`2026-04-06-branch-start-vs-phase4d-clean-worktree-ab.md`](./benchmark-result/2026-04-06-branch-start-vs-phase4d-clean-worktree-ab.md)
+
+注意：
+
+- branch 起點尚未建立 `BrailleToolkit.Benchmarks` 專案，因此 baseline worktree 額外補入目前 branch 使用的 benchmark harness（project / program / conversion benchmark / test data）。
+- 補入的 harness 不修改 baseline production code，只是為了讓 branch 起點與 `4d` 完成點可用同一組 benchmark 入口比較。
+- 這份比較反映的是整個 `immutable-design` branch 從起點累積到 `4d` 的總體效果，不是 `4d` 單獨增量。
+
+#### A/B 摘要
+
+| Method | Baseline Mean | Candidate Mean | Mean Δ | Baseline Alloc | Candidate Alloc | Alloc Δ |
+| ---- | ----: | ----: | ----: | ----: | ----: | ----: |
+| 中文單行轉換 | 148.40 us | 61.30 us | -58.69% | 72.84 KB | 6.03 KB | -91.72% |
+| 英文單行轉換 | 680.40 us | 484.69 us | -28.76% | 169.33 KB | 18.25 KB | -89.22% |
+| 中英混合單行轉換 | 828.70 us | 374.29 us | -54.83% | 374.43 KB | 30.17 KB | -91.94% |
+| 中文多行轉換 | 8,614.60 us | 3,053.40 us | -64.56% | 4,301.49 KB | 339.05 KB | -92.12% |
+| 英文多行轉換 | 4,782.20 us | 3,443.42 us | -28.00% | 1,041.13 KB | 115.28 KB | -88.93% |
+| 中英混合多行轉換 | 3,580.20 us | 1,830.19 us | -48.88% | 1,346.76 KB | 116.83 KB | -91.33% |
+| 長中文字串轉換 | 8,368.70 us | 2,916.53 us | -65.15% | 4,303.15 KB | 337.60 KB | -92.15% |
+
+#### 解讀
+
+- 若把 branch 起點視為 baseline，則到 `4d` 為止的累積結果在 7 個 benchmark 上全部變快，且 allocation 全部明顯下降。
+- throughput 改善最大的路徑是長中文字串、中文多行、中文單行；allocation 則在所有案例都下降約 `89%` 到 `92%`。
+- 這代表 Phase 3 + Phase 4 `4a` ~ `4d` 的整體方向，最終沒有留下 branch-level regression。
+
+### `4c` 結束點 vs `4d` 完成點 clean worktree benchmark
+
+- 日期：2026-04-06
+- baseline commit：`b344b74`
+- candidate commit：`279355533346a66352230062c89e30a5637cacf1`
+- 方法：於兩個乾淨 detached worktree 各自獨立建置與執行完整 conversion benchmark suite
+- 詳細紀錄：
+  - [`2026-04-06-phase4c-vs-phase4d-clean-worktree-ab.md`](./benchmark-result/2026-04-06-phase4c-vs-phase4d-clean-worktree-ab.md)
+
+注意：
+
+- `BrailleToolkit.Benchmarks` 專案在兩個 commit 間沒有變更，因此這次結果可以視為 `4d` production code 的直接效應。
+- candidate 的長中文字串案例誤差較大，該路徑的改善幅度應保守解讀。
+
+#### A/B 摘要
+
+| Method | Baseline Mean | Candidate Mean | Mean Δ | Baseline Alloc | Candidate Alloc | Alloc Δ |
+| ---- | ----: | ----: | ----: | ----: | ----: | ----: |
+| 中文單行轉換 | 62.98 us | 63.80 us | +1.30% | 5.86 KB | 6.09 KB | +3.92% |
+| 英文單行轉換 | 563.42 us | 483.66 us | -14.16% | 16.60 KB | 18.25 KB | +9.94% |
+| 中英混合單行轉換 | 415.30 us | 368.15 us | -11.35% | 28.74 KB | 30.16 KB | +4.94% |
+| 中文多行轉換 | 3,064.60 us | 3,034.14 us | -0.99% | 329.98 KB | 339.05 KB | +2.75% |
+| 英文多行轉換 | 3,451.26 us | 2,978.34 us | -13.70% | 103.30 KB | 115.28 KB | +11.60% |
+| 中英混合多行轉換 | 2,107.84 us | 1,827.09 us | -13.32% | 110.74 KB | 116.83 KB | +5.50% |
+| 長中文字串轉換 | 2,873.13 us | 2,507.18 us | -12.74% | 331.45 KB | 337.60 KB | +1.86% |
+
+#### 解讀
+
+- 若只看 `4d` 本身，7 個 benchmark 中有 6 個 `Mean` 改善。
+- 改善最明顯的是英文與混合內容：
+  - 英文單行：`-14.16%`
+  - 英文多行：`-13.70%`
+  - 中英混合多行：`-13.32%`
+  - 中英混合單行：`-11.35%`
+- 中文多行幾乎持平，中文單行則有 `+1.30%` 的小幅回歸，較接近量測波動等級。
+- allocation 在 7 個 benchmark 全部小幅上升，但幅度明顯小於 `4b` 初期尚未收斂時的 allocation 回升。
+
 ## 4b 收尾結論
 
 - `4b` 已完成目前定義下的交付範圍，可以作為 `4c` 的起點。
