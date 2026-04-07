@@ -19,9 +19,31 @@
 - 序列化：JSON 改透過 backing field 維持 `DataContract` 相容；YAML 改用 DTO model round-trip。
 - 驗證：新增 `BrailleToolkit.Benchmarks` 專案、benchmark 測資與多份 A/B 結果文件；補強 builder、identity、YAML、table lookup、event args 等測試。
 
+## 知識來源索引
+
+以下標註皆指向 [`immutable-design.md`](./immutable-design.md) 中與本分支變更相對應的解說段落。標註為「對照」者，表示該段落提供設計原則或風險說明，但本分支實作不一定完全採用文件範例中的做法。
+
+| 編號 | 來源段落 | 對應觀念 |
+| ---- | ---- | ---- |
+| K1 | [4.1 為什麼需要不可變設計？](./immutable-design.md#L13) / [不可變設計的好處](./immutable-design.md#L38) | 降低隱藏副作用、提升可預測性與共享安全性。 |
+| K2 | [4.2 struct vs. class：選擇正確的型別](./immutable-design.md#L52) / [實值型別 vs. 參考型別](./immutable-design.md#L58) | `struct` / `class` 的 value semantics 與 reference semantics 差異。 |
+| K3 | [何時使用 struct？](./immutable-design.md#L98) / [何時使用 class？](./immutable-design.md#L134) | 小型 immutable value object 適合 struct；較大或需 reference semantics 的型別適合 class。 |
+| K4 | [常見錯誤：可變的 struct](./immutable-design.md#L143) / [readonly struct](./immutable-design.md#L199) | 避免 mutable struct；用 `readonly struct` 表達並強制 immutable struct。 |
+| K5 | [防禦性複製：隱藏的效能陷阱](./immutable-design.md#L246) / [效能影響](./immutable-design.md#L406) | value type / readonly context 可能帶來 defensive copy，需 benchmark 驗證。 |
+| K6 | [Record 的值相等性](./immutable-design.md#L660) | record 由編譯器產生 value equality。 |
+| K7 | [record class vs. record struct](./immutable-design.md#L703) / [何時使用 record struct？](./immutable-design.md#L779) | `readonly record struct` 適合小型 immutable value object / lookup key。 |
+| K8 | [init 存取子：建立後不可變](./immutable-design.md#L827) / [Init 存取子語法](./immutable-design.md#L833) | 屬性只能在初始化時設定，兼顧 object initializer 與不可變性。 |
+| K9 | [with 運算式：非破壞性修改](./immutable-design.md#L902) | 不修改原物件，而是建立修改後的新版本。 |
+| K10 | [不可變的領域模型](./immutable-design.md#L1156) | 用 immutable model 降低副作用、支援歷史追蹤與 undo/redo 類場景。 |
+| K11 | [相等性比較](./immutable-design.md#L1231) / [參考相等 vs. 值相等](./immutable-design.md#L1235) | 不可變 value object 通常應以內容值比較，而非參考位址。 |
+| K12 | [不可變集合](./immutable-design.md#L1367) / [可變集合的問題](./immutable-design.md#L1373) | `IReadOnlyList<T>` 只是唯讀 facade，不等於真正 immutable collection。 |
+| K13 | [不可變集合的效能考量](./immutable-design.md#L1416) | 大量建構時使用 builder，最後再轉成 immutable snapshot，可降低中介物件成本。 |
+
 ## 主要型別變更
 
 ### `BrailleCell`
+
+知識來源：K2、K3、K4、K5、K6、K7、K11。
 
 - `BrailleCell` 從 `sealed class` 改成 `readonly record struct`。
 - `Value` 改為 `[DataMember] public byte Value { get; init; }`。
@@ -30,6 +52,8 @@
 - 新語意：`default(BrailleCell)` 等同空方 `Value = 0x00`；equality 改由 record struct value equality 處理。
 
 ### `BrailleTableEntry` / `XmlBrailleTable`
+
+知識來源：K6、K7、K12、K13。其中 `FrozenDictionary` 不是 `immutable-design.md` 的範例型別，但此變更和 K12 / K13 的「建立後穩定查詢」與「建構完成後凍結」原則對應。
 
 - 新增 `readonly record struct BrailleTableEntry(...)` 表示 XML `<symbol>` 的單一 immutable entry。
 - `XmlBrailleTable` 不再使用 `DataTable`，改用 `XDocument` 解析 XML，載入時直接把 `dots` / `dots2` 轉換為 `Code` / `Code2`。
@@ -41,6 +65,8 @@
 - concrete table (`EnglishBrailleTable`、`EnglishUebBrailleTable`、`TwChineseBrailleTable`、`UrlBrailleTable`) 改走 typed lookup，不再組 `DataTable.Select(...)` filter 字串。
 
 ### `BrailleWord`
+
+知識來源：K1、K3、K8、K10、K11、K12。注意：`BrailleWord` 仍保留 mutable class，是依 K3 的 class 適用情境與現有 reference semantics 需求做出的折衷。
 
 - `BrailleWord` 仍是 `sealed class`，但新增 `IBrailleWordView` 唯讀檢視介面。
 - 新增 runtime `Identity`，由 `BrailleObjectIdentityGenerator.NextWordIdentity()` 產生；反序列化後若缺 identity 會補發。
@@ -54,6 +80,8 @@
 
 ### `BrailleWordBuilder` / `IBrailleWordResult`
 
+知識來源：K9、K10、K12、K13。builder / materialized result 的分層對應 K13 的 builder 模式，但此分支使用專案內部型別，不是直接改用 `System.Collections.Immutable`。
+
 - 新增 `BrailleWordBuilder` 作為 word-level mutable builder。
 - 新增 `IBrailleWordResult : IBrailleWordView` 與 `BrailleWordMaterialized`，代表 builder 完成後的唯讀結果。
 - builder 支援 cell mutation：`AppendCell`、`AppendCells`、`AppendHex`、`AppendPositionNumbers`、`PrependCell`、`ReplaceCell`、`ClearCells`。
@@ -62,6 +90,8 @@
 - `BrailleCellList.Assign(ReadOnlySpan<BrailleCell>)` 新增為 span-based materialization helper。
 
 ### `BrailleLine`
+
+知識來源：K3、K10、K11、K12、K13。注意：`Words` 改成 `IReadOnlyList<T>` 只符合「公開唯讀 facade」的中間步驟；K12 也提醒這不等於真正 immutable collection。
 
 - `BrailleLine` 仍是 mutable class，但新增 `IBrailleLineView` 唯讀檢視介面。
 - `Words` 從公開 `List<BrailleWord>` 改成 `IReadOnlyList<BrailleWord>`，內部由 `[DataMember(Name = "Words")] private List<BrailleWord> m_Words` 儲存。
@@ -72,12 +102,16 @@
 
 ### `BrailleLineBuilder` / `IBrailleLineResult`
 
+知識來源：K9、K10、K12、K13。此處的 builder / materialized result 也是「建構階段可變、完成後提供 snapshot」的實作。
+
 - 新增 `IBrailleLineResult : IBrailleLineView` 與 `BrailleLineMaterialized`，代表 line builder 完成後的 immutable snapshot。
 - 新增 `BrailleLineBuilder`，支援與 `BrailleLine` 類似的 mutation API：`AddWord`、`AddWords`、`Insert`、`InsertWords`、`RemoveAt`、`RemoveRange`、`TrimStart`、`TrimEnd`、`Trim`、`RemoveContextTags`。
 - materialization API：`Build()`、`ToBrailleLine()`、`ApplyTo(BrailleLine)`。
 - `BrailleProcessor` 的 initial conversion 階段與 `BrailleDocumentFormatter.BreakLine(...)` 的新行建構改走 builder；後續 rule / editor mutation 仍落在 materialized `BrailleLine`。
 
 ### `BrailleDocument` / `BraillePageTitle`
+
+知識來源：K1、K3、K10、K11、K12。runtime identity 是針對此專案仍保留 mutable class / editor reference workflow 的相容設計，對應 K11 的「參考相等 vs. 值相等」問題意識。
 
 - `BrailleDocument.Lines` 與 `BrailleDocument.PageTitles` 對外改成 `IReadOnlyList<T>`，內部仍由 `m_Lines` / `m_PageTitles` 管理。
 - 新增 document mutation API：`InsertLine`、`InsertLines`、`RemoveLine`、`ClearPageTitles`、`IndexOfLine(long lineIdentity)`。
@@ -87,12 +121,16 @@
 
 ### context tag 與 static lookup
 
+知識來源：K1、K8、K12。static lookup 改成 frozen collection 對應「建立後不修改、可安全共享」的原則；tag 組態屬性改 `init` 對應 K8。
+
 - `ContextTagNames.Collection`：`HashSet<string>` -> `readonly FrozenSet<string>`。
 - `SimpleTag.Tags`：`Dictionary<string, string>` -> `readonly FrozenDictionary<string, string>`。
 - `GenericContextTag` / `IContextTag` 的組態屬性改為 `init` / `protected init`，衍生 tag 改由 base constructor 傳入 `lifeTime`、`removeTagOnConversion`、`singleLine` 等組態。
 - `ContextTagManager.Tags` 對外改為 `IReadOnlyDictionary<string, IContextTag>`。
 
 ## 序列化與相容性
+
+知識來源：K8、K10、K12。DTO 與 construction boundary 是為了保留既有序列化格式，同時避免公開 mutable collection。
 
 - JSON / DataContract：
   - `BrailleLine.Words` 改由 backing field `m_Words` 以 `[DataMember(Name = "Words")]` 序列化。
@@ -106,6 +144,8 @@
   - undo/redo memento 不再只保存 grid raw position，改保存 line/word identity bookmark。
 
 ## converter / rule / UI 邊界調整
+
+知識來源：K1、K9、K10、K11、K13。converter/rule/UI 調整主要是把建構期 mutation 收斂到 builder / construction boundary，並把 editor 狀態從 reference equality 轉成 explicit identity。
 
 - converter 類別把 append-only 建構路徑改回直接 `new BrailleWord(text, code)`，避免不必要的 builder materialization。
 - 必須修改既有 word cell 的地方改走 `BrailleWordBuilder.FromBrailleWord(...).ApplyTo(...)`，例如分數符號、英文大寫符號、數字符號、表格線符號等。
@@ -163,6 +203,8 @@
 
 ### benchmark 專案
 
+本節知識來源：K5、K13。benchmark 專案用來驗證 value type / builder / immutable boundary 的效能假設與風險。
+
 | 檔案 | 變更摘要 |
 | ---- | ---- |
 | `src/EasyBrailleEditApp/BrailleToolkit.Benchmarks/BrailleToolkit.Benchmarks.csproj` | 新增 BenchmarkDotNet 專案。 |
@@ -176,6 +218,8 @@
 | `src/EasyBrailleEditApp/BrailleToolkit.Benchmarks/TestData/BenchmarkText_Mixed.txt` | 新增中英混合 benchmark 測資。 |
 
 ### BrailleToolkit core model
+
+本節知識來源：K1、K2、K3、K4、K5、K6、K7、K8、K9、K10、K11、K12、K13。核心 model 是本分支主要落點，涵蓋 value type、record struct、init、read-only facade、builder 與 identity 相容層。
 
 | 檔案 | 變更摘要 |
 | ---- | ---- |
@@ -199,6 +243,8 @@
 
 ### BrailleToolkit data table
 
+本節知識來源：K6、K7、K12、K13。`BrailleTableEntry` 對應 record struct / value equality；table lookup 對應建立後穩定查詢與 builder/freeze 原則。
+
 | 檔案 | 變更摘要 |
 | ---- | ---- |
 | `src/EasyBrailleEditApp/BrailleToolkit/Data/BrailleTableEntry.cs` | 新增 immutable table entry `readonly record struct`。 |
@@ -210,6 +256,8 @@
 
 ### BrailleToolkit helpers
 
+本節知識來源：K8、K10、K12、K13。helper 層主要支援 read-only view、DTO round-trip 與 builder/result 共同格式化。
+
 | 檔案 | 變更摘要 |
 | ---- | ---- |
 | `src/EasyBrailleEditApp/BrailleToolkit/Helpers/BrailleDocumentYamlSerializer.cs` | YAML serialize / deserialize 改用 DTO model；deserialization 走 builder / construction boundary。 |
@@ -218,6 +266,8 @@
 | `src/EasyBrailleEditApp/BrailleToolkit/Helpers/BrailleWordSequenceFormatter.cs` | 新增 word sequence formatter，支援 hex、position number、HTML rendering。 |
 
 ### BrailleToolkit converters
+
+本節知識來源：K1、K9、K13。converter 調整對應「建構階段可變、完成後 materialize」與避免不必要 materialization 的效能考量。
 
 | 檔案 | 變更摘要 |
 | ---- | ---- |
@@ -232,6 +282,8 @@
 
 ### BrailleToolkit rules
 
+本節知識來源：K9、K13。rule 層仍是 mutation boundary，但改由明確 API 或 builder 進行局部非破壞式更新。
+
 | 檔案 | 變更摘要 |
 | ---- | ---- |
 | `src/EasyBrailleEditApp/BrailleToolkit/Rules/ChineseBrailleRule.cs` | `brLine.Words.Insert/RemoveRange` 改用 `BrailleLine` 明確 mutation API。 |
@@ -239,6 +291,8 @@
 | `src/EasyBrailleEditApp/BrailleToolkit/Rules/GeneralBrailleRule.cs` | space insertion 與 digit cell prepend 改用 `BrailleLine` API / `BrailleWordBuilder`。 |
 
 ### BrailleToolkit tags
+
+本節知識來源：K1、K8、K12。tag 組態改 init-only；static collection 改為建立後不修改的 lookup。
 
 | 檔案 | 變更摘要 |
 | ---- | ---- |
@@ -252,6 +306,8 @@
 | `src/EasyBrailleEditApp/BrailleToolkit/Tags/TableSingleLineContextTag.cs` | transient / remove-on-conversion / single-line 組態改由 base constructor 設定。 |
 
 ### EasyBrailleEdit app
+
+本節知識來源：K10、K11、K12。app/editor 變更主要是配合 read-only collection 與 explicit identity，支援 undo/redo 與 grid selection 還原。
 
 | 檔案 | 變更摘要 |
 | ---- | ---- |
@@ -274,6 +330,8 @@
 
 ### BrailleToolkit tests
 
+本節知識來源：K5。測試補強用來驗證 immutable / identity / serialization / builder 變更沒有破壞既有語意；benchmark 則覆蓋效能風險。
+
 | 檔案 | 變更摘要 |
 | ---- | ---- |
 | `src/EasyBrailleEditApp/BrailleToolkit.Tests/BrailleCellTest.cs` | 新增 value equality、default blank、JSON round-trip 測試。 |
@@ -287,6 +345,8 @@
 | `src/EasyBrailleEditApp/BrailleToolkit.Tests/YamlSerializationTests.cs` | 調整測試建構方式並補 `OriginalText` / `ContextNames` / `IsConvertedFromTag` round-trip 驗證。 |
 
 ### EasyBrailleEdit tests
+
+本節知識來源：K10、K11。測試補強主要驗證 editor 狀態可透過 model identity 還原，而不是依賴 reference equality。
 
 | 檔案 | 變更摘要 |
 | ---- | ---- |
