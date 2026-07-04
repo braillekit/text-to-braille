@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
-using System.Data;
-using System.Reflection;
 
 namespace BrailleToolkit.Data
 {
@@ -48,11 +45,8 @@ namespace BrailleToolkit.Data
         {
             CheckLoaded();
 
-            string filter = "type='Phonetic' and text='" + text + "'";
-            DataRow[] rows = m_Table.Select(filter);
-            if (rows.Length > 0)
-                return rows[0]["code"].ToString();
-            return null;
+            BrailleTableEntry? entry = FindEntry(text, "Phonetic");
+            return entry?.Code;
         }
 
         /// <summary>
@@ -64,11 +58,8 @@ namespace BrailleToolkit.Data
         {
             CheckLoaded();
 
-            string filter = "type='Phonetic' and joined=true and text='" + text + "'";
-            DataRow[] rows = m_Table.Select(filter);
-            if (rows.Length > 0)
-                return rows[0]["code"].ToString();
-            return null;
+            BrailleTableEntry? entry = FindEntry(text, "Phonetic", static x => x.Joined);
+            return entry?.Code;
         }
 
         /// <summary>
@@ -80,11 +71,8 @@ namespace BrailleToolkit.Data
         {
             CheckLoaded();
 
-            string filter = "type='Phonetic' and mono=true and text='" + text + "'";
-            DataRow[] rows = m_Table.Select(filter);
-            if (rows.Length > 0)
-                return rows[0]["code"].ToString();
-            return null;
+            BrailleTableEntry? entry = FindEntry(text, "Phonetic", static x => x.Mono);
+            return entry?.Code;
         }
 
         /// <summary>
@@ -96,11 +84,8 @@ namespace BrailleToolkit.Data
         {
             CheckLoaded();
 
-            string filter = "type='Tone' and text='" + text + "'";
-            DataRow[] rows = m_Table.Select(filter);
-            if (rows.Length > 0)
-                return rows[0]["code"].ToString();
-            return null;
+            BrailleTableEntry? entry = FindEntry(text, "Tone");
+            return entry?.Code;
         }
 
         /// <summary>
@@ -112,16 +97,8 @@ namespace BrailleToolkit.Data
         {
             CheckLoaded();
 
-            // 修正單引號：在 SQL 查詢條件中的單引號必須連續兩個
-            if ("'".Equals(text))
-            {
-                text = "''";
-            }
-            string filter = "type='Punctuation' and text='" + text + "'";
-            DataRow[] rows = m_Table.Select(filter);
-            if (rows.Length > 0)
-                return rows[0]["code"].ToString();
-            return null;
+            BrailleTableEntry? entry = FindEntry(text, "Punctuation");
+            return entry?.Code;
         }
 
         /// <summary>
@@ -132,12 +109,11 @@ namespace BrailleToolkit.Data
         {
             CheckLoaded();
 
-            string filter = "type='Punctuation'";
-            DataRow[] rows = m_Table.Select(filter);
             var sb = new StringBuilder();
-            foreach (var row in rows)
+            IReadOnlyList<BrailleTableEntry> entries = FindEntriesByType("Punctuation");
+            for (int i = 0; i < entries.Count; i++)
             {
-                sb.Append(row["text"]).ToString();
+                sb.Append(entries[i].Text);
             }
             return sb.ToString();
         }

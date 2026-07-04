@@ -25,20 +25,16 @@ namespace EasyBrailleEdit.DualEdit
         /// <returns></returns>
         private BrailleEditMemento CreateMemento(string? operation = null)
         {
-            return new BrailleEditMemento(operation, BrailleDoc, IsDirty, new BrailleGridState(_grid));
+            return new BrailleEditMemento(operation, BrailleDoc, IsDirty, _grid, PositionMapper);
         }
 
         private void ApplyMemento(BrailleEditMemento? memento)
         {
             if (memento != null)
             {
-                BrailleDoc = memento.BrailleDoc.DeepCopy();
+                BrailleDoc = memento.BrailleDoc;
                 IsDirty = memento.IsDirty;
-                GridFocusCell(memento.GridState.ActivePosition, true);
-                foreach (var range in memento.GridState.SelectionRegion)
-                {
-                    _grid.Selection.SelectRange(range, true);
-                }
+                memento.GridState.Restore(_grid, PositionMapper);
             }
         }
 
@@ -188,7 +184,7 @@ namespace EasyBrailleEdit.DualEdit
                 var memento = CreateMemento($"插入字詞：{form.BrailleWord.Text}");
 
                 // 在第 wordIdx 個字之前插入新點字。
-                brLine.Words.Insert(wordIdx, form.BrailleWord);
+                brLine.Insert(wordIdx, form.BrailleWord);
                 IsDirty = true;
 
                 // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
@@ -221,7 +217,7 @@ namespace EasyBrailleEdit.DualEdit
         }
 
 
-        private void InsertBrailleLines(List<BrailleLine> brLines, SourceGrid.Grid grid, int row, int col, string operation)
+        private void InsertBrailleLines(IReadOnlyList<BrailleLine> brLines, SourceGrid.Grid grid, int row, int col, string operation)
         {
             row = _positionMapper.GetBrailleRowIndex(row);
             int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
@@ -237,7 +233,7 @@ namespace EasyBrailleEdit.DualEdit
             int curRow = row;
             for (int i = 0; i < brLines.Count; i++)
             {
-                BrailleDoc.Lines.Insert(lineIdx, brLines[i]);
+                BrailleDoc.InsertLine(lineIdx, brLines[i]);
 
                 // Update UI
                 GridInsertRowAt(curRow);
@@ -258,7 +254,7 @@ namespace EasyBrailleEdit.DualEdit
             grid.Selection.SelectRange(range, true);
         }
 
-        private void InsertBrailleWords(List<BrailleWord> wordList, SourceGrid.Grid grid, int row, int col, string? operation = null)
+        private void InsertBrailleWords(IReadOnlyList<BrailleWord> wordList, SourceGrid.Grid grid, int row, int col, string? operation = null)
         {
             row = _positionMapper.GetBrailleRowIndex(row); // 確保列索引是點字所在的列。
             int wordIdx = _positionMapper.CellPositionToWordIndex(row, col);
@@ -292,7 +288,7 @@ namespace EasyBrailleEdit.DualEdit
             }
 
             // 在第 wordIdx 個字之前插入新點字。
-            brLine.Words.InsertRange(wordIdx, wordList);
+            brLine.InsertWords(wordIdx, wordList);
             IsDirty = true;
 
             // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
@@ -316,7 +312,7 @@ namespace EasyBrailleEdit.DualEdit
             }
         }
 
-        private void AppendBrailleWords(List<BrailleWord> wordList, SourceGrid.Grid grid, int row, string? operation = null)
+        private void AppendBrailleWords(IReadOnlyList<BrailleWord> wordList, SourceGrid.Grid grid, int row, string? operation = null)
         {
             var activePos = grid.Selection.ActivePosition;
 
@@ -338,7 +334,7 @@ namespace EasyBrailleEdit.DualEdit
             var memento = CreateMemento(operation);
 
             // 在第 wordIdx 個字之前插入新點字。
-            brLine.Words.AddRange(wordList);
+            brLine.AddWords(wordList);
             IsDirty = true;
 
             // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
@@ -371,7 +367,7 @@ namespace EasyBrailleEdit.DualEdit
                 var memento = CreateMemento($"在行尾附加字詞：{form.BrailleWord.Text}");
 
                 // 在第 wordIdx 個字之前插入新點字。
-                brLine.Words.Add(form.BrailleWord);
+                brLine.AddWord(form.BrailleWord);
                 IsDirty = true;
 
                 // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
@@ -406,7 +402,7 @@ namespace EasyBrailleEdit.DualEdit
             BrailleLine brLine = BrailleDoc.Lines[lineIdx];
             while (count > 0)
             {
-                brLine.Words.Insert(wordIdx, BrailleWord.NewBlank());
+                brLine.Insert(wordIdx, BrailleWord.NewBlank());
                 count--;
             }
             IsDirty = true;
@@ -434,11 +430,11 @@ namespace EasyBrailleEdit.DualEdit
 
             // 建立一列新的點字列，其中預設包含一個空方。
             var brLine = new BrailleLine();
-            brLine.Words.Add(BrailleWord.NewBlank());
+            brLine.AddWord(BrailleWord.NewBlank());
 
             row = _positionMapper.GetBrailleRowIndex(row);
             int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row);
-            BrailleDoc.Lines.Insert(lineIdx, brLine);
+            BrailleDoc.InsertLine(lineIdx, brLine);
             IsDirty = true;
 
             // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
@@ -467,10 +463,10 @@ namespace EasyBrailleEdit.DualEdit
 
             // 建立一列新的點字列，其中預設包含一個空方。
             var brLine = new BrailleLine();
-            brLine.Words.Add(BrailleWord.NewBlank());
+            brLine.AddWord(BrailleWord.NewBlank());
 
             int lineIdx = _positionMapper.GridRowToBrailleLineIndex(row) + 1;
-            BrailleDoc.Lines.Insert(lineIdx, brLine);
+            BrailleDoc.InsertLine(lineIdx, brLine);
             IsDirty = true;
 
             // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
@@ -541,7 +537,7 @@ namespace EasyBrailleEdit.DualEdit
                 // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
                 var memento = CreateMemento($"刪除字詞：'{wordToDelete.Text}'");
 
-                brLine.Words.RemoveAt(wordIdx);
+                brLine.RemoveAt(wordIdx);
                 IsDirty = true;
 
                 if (brLine.CellCount == 0)    // 如果整列都刪光了
@@ -550,7 +546,7 @@ namespace EasyBrailleEdit.DualEdit
                     {
                         brLine.Clear(); // 確保所有 context tags 也都清除掉。
                                         // 整份文件全刪光時，自動增加一個空方。                    
-                        brLine.Words.Add(BrailleWord.NewBlank());
+                        brLine.AddWord(BrailleWord.NewBlank());
                         UpdateCell(row, col, brLine.Words[0]);
                         GridFocusCell(row, col);
                     }
@@ -643,7 +639,7 @@ namespace EasyBrailleEdit.DualEdit
                 // 取得目前要刪除的字的第一個 cell 的 column index。此操作必須在刪字之前做。
                 col = _positionMapper.WordIndexToGridColumn(lineIdx, wordIdx);
 
-                brLine.Words.RemoveAt(wordIdx);
+                brLine.RemoveAt(wordIdx);
 
                 deletedWordCount++;
                 IsDirty = true;
@@ -653,7 +649,7 @@ namespace EasyBrailleEdit.DualEdit
                     if (BrailleDoc.LineCount == 1)
                     {
                         brLine.Clear(); // 確保所有 context tags 也都清除掉。                         
-                        brLine.Words.Add(BrailleWord.NewBlank()); // 整份文件全刪光時，自動增加一個空方。
+                        brLine.AddWord(BrailleWord.NewBlank()); // 整份文件全刪光時，自動增加一個空方。
                         UpdateCell(row, col, brLine.Words[0]);
                     }
                     else
@@ -873,7 +869,7 @@ namespace EasyBrailleEdit.DualEdit
             BrailleLine? brLine = BrailleDoc.Lines[lineIdx];
             brLine.Clear();
             brLine = null;
-            BrailleDoc.Lines.RemoveAt(lineIdx);
+            BrailleDoc.RemoveLine(lineIdx);
 
             IsDirty = true;
 
@@ -941,7 +937,7 @@ namespace EasyBrailleEdit.DualEdit
             var memento = CreateMemento("斷行");
 
             BrailleLine newLine = brLine.ShallowCopy(wordIdx, 255);	// 複製到新行。
-            BrailleDoc.Lines.Insert(lineIdx + 1, newLine);
+            BrailleDoc.InsertLine(lineIdx + 1, newLine);
             brLine.RemoveRange(wordIdx, 255);	// 從原始串列中刪除掉已經複製到新行的點字。
             IsDirty = true;
 
@@ -991,7 +987,7 @@ namespace EasyBrailleEdit.DualEdit
             BrailleLine brLine = BrailleDoc.Lines[lineIdx];
             brLine.Clear();
             // brLine = null;
-            BrailleDoc.Lines.RemoveAt(lineIdx);
+            BrailleDoc.RemoveLine(lineIdx);
             IsDirty = true;
 
             // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
@@ -1020,7 +1016,7 @@ namespace EasyBrailleEdit.DualEdit
             var brLine = BrailleDoc.Lines[lineIdx];
             brLine.Clear();
             // brLine = null;
-            BrailleDoc.Lines.RemoveAt(lineIdx);
+            BrailleDoc.RemoveLine(lineIdx);
             IsDirty = true;
 
             // 一旦有修改文件內容，就要將原先的狀態存入 undo buffer。
@@ -1060,7 +1056,7 @@ namespace EasyBrailleEdit.DualEdit
             {
                 var brLine = BrailleDoc.Lines[lineIdx];
                 brLine.Clear();
-                BrailleDoc.Lines.RemoveAt(lineIdx);
+                BrailleDoc.RemoveLine(lineIdx);
                 IsDirty = true;
             }
 
@@ -1218,7 +1214,7 @@ namespace EasyBrailleEdit.DualEdit
                     if (brLine[i].IsContextTag)
                         continue;
                     var newWord = brLine[i].Copy();
-                    newBrLine.Words.Add(newWord);
+                    newBrLine.AddWord(newWord);
                 }
                 result.Add(newBrLine);
             }
@@ -1403,7 +1399,7 @@ namespace EasyBrailleEdit.DualEdit
             // 修改文件內容之前，先保存狀態，以便稍後存入 undo buffer。
             var memento = CreateMemento("插入表格");
 
-            BrailleDoc.Lines.InsertRange(lineIdx, brTableLines);
+            BrailleDoc.InsertLines(lineIdx, brTableLines);
 
             // 修改文件內容之後，將原先的狀態存入 undo buffer。
             UndoRedo.SaveMementoForUndo(memento);
@@ -1441,7 +1437,7 @@ namespace EasyBrailleEdit.DualEdit
                     for (int col = range.Start.Column; col <= range.End.Column; col++)
                     {
                         var currWord = _positionMapper.GetBrailleWordFromGridCell(row, col);
-                        if (currWord == null || ReferenceEquals(currWord, lastWord))
+                        if (currWord == null || (lastWord != null && currWord.Identity == lastWord.Identity))
                             continue;
 
                         if (BrailleWordHelper.RemoveDigitSymbol(currWord))

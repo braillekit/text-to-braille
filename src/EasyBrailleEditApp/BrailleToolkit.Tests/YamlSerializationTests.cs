@@ -20,15 +20,20 @@ namespace BrailleToolkit.Tests
             // Add a line with words
             var line = new BrailleLine();
             
-            var word1 = new BrailleWord("Test");
+            var word1 = new BrailleWord("Test")
+            {
+                OriginalText = "<orig>Test"
+            };
             word1.AddCells("12"); // random hex
             word1.Language = BrailleLanguage.English; // Note: Language is NOT serialized in JSON/YAML currently per DataMember check, but checking logic anyway
+            word1.ContextNames = "分析";
+            word1.IsConvertedFromTag = true;
             
             var word2 = new BrailleWord("中文", "ㄓㄨㄥ ㄨㄣˊ", "AABB"); // Fake codes
             word2.IsPolyphonic = true;
 
-            line.Words.Add(word1);
-            line.Words.Add(word2);
+            line.AddWord(word1);
+            line.AddWord(word2);
             
             doc.AddLine(line);
 
@@ -50,8 +55,11 @@ namespace BrailleToolkit.Tests
             
             var dWord1 = dLine.Words[0];
             Assert.Equal(word1.Text, dWord1.Text);
+            Assert.Equal(word1.OriginalText, dWord1.OriginalText);
             Assert.Equal(word1.CellCount, dWord1.CellCount);
             Assert.Equal(word1.Cells[0].Value, dWord1.Cells[0].Value);
+            Assert.Equal(word1.ContextNames, dWord1.ContextNames);
+            Assert.Equal(word1.IsConvertedFromTag, dWord1.IsConvertedFromTag);
             
             var dWord2 = dLine.Words[1];
             Assert.Equal(word2.Text, dWord2.Text);
@@ -68,7 +76,7 @@ namespace BrailleToolkit.Tests
             doc.CellsPerLine = 40;
             var line = new BrailleLine();
             var word = new BrailleWord("A", "01");
-            line.Words.Add(word);
+            line.AddWord(word);
             doc.AddLine(line);
 
             // Act

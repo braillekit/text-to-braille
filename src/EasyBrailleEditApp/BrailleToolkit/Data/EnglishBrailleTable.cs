@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data;
-using System.Reflection;
-
 namespace BrailleToolkit.Data
 {
     /// <summary>
@@ -47,11 +42,8 @@ namespace BrailleToolkit.Data
 		{
 			CheckLoaded();
 
-			string filter = "type='Letter' and text='" + text.ToUpper() + "'";
-			DataRow[] rows = m_Table.Select(filter);
-			if (rows.Length > 0)
-				return rows[0]["code"].ToString();
-			return null;
+            BrailleTableEntry? entry = FindEntry(text.ToUpper(), "Letter");
+            return entry?.Code;
 		}
 
 		/// <summary>
@@ -64,15 +56,15 @@ namespace BrailleToolkit.Data
 		{
 			CheckLoaded();
 
-			string filter = "type='Digit' and text='" + text + "'";
-			DataRow[] rows = m_Table.Select(filter);
-			if (rows.Length > 0)
-			{
-				if (upper)	// 上位點?
-					return rows[0]["code"].ToString();
-				return rows[0]["code2"].ToString();
-			}
-			return null;
+            BrailleTableEntry? entry = FindEntry(text, "Digit");
+            if (entry == null)
+            {
+                return null;
+            }
+
+			if (upper)	// 上位點?
+				return entry.Value.Code;
+			return entry.Value.Code2;
 		}
 	}
 }

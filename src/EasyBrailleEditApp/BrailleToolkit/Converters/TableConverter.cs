@@ -85,12 +85,16 @@ namespace BrailleToolkit.Converters
 					if (barType == BarType.Top)
 					{
 						cellCode = m_Table["‾"];
-						brWord.Cells[0] = BrailleCell.GetInstance(cellCode);
+                        var builder = BrailleWordBuilder.FromBrailleWord(brWord);
+                        builder.ReplaceCell(0, BrailleCell.GetInstance(cellCode));
+                        builder.ApplyTo(brWord);
 					}
 					else if (barType == BarType.Bottom)
 					{
 						cellCode = m_Table["ˍ"];
-						brWord.Cells[0] = BrailleCell.GetInstance(cellCode);
+                        var builder = BrailleWordBuilder.FromBrailleWord(brWord);
+                        builder.ReplaceCell(0, BrailleCell.GetInstance(cellCode));
+                        builder.ApplyTo(brWord);
 					}				
 				}
 

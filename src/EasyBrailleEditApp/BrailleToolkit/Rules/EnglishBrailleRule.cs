@@ -98,11 +98,18 @@ namespace BrailleToolkit.Rules
             }
 
             int neededCapCnt = count - capCnt;
+            if (neededCapCnt < 1)
+            {
+                return;
+            }
+
+            var builder = BrailleWordBuilder.FromBrailleWord(brWord);
             while (neededCapCnt > 0)
             {
-                brWord.Cells.Insert(0, BrailleCell.Capital);
+                builder.PrependCell(BrailleCell.Capital);
                 neededCapCnt--;
             }
+            builder.ApplyTo(brWord);
         }
 
         /// <summary>
@@ -133,18 +140,23 @@ namespace BrailleToolkit.Rules
 				{
 					if (isNumberMode)
 					{
-						// 把編號的數字改成上位點。
+                        // 把編號的數字改成上位點。
 						brCode = brTable.FindDigit(brWord.Text, true);
                         if (brCode != null)
                         {
+                            var builder = BrailleWordBuilder.FromBrailleWord(brWord);
+                            BrailleCell digitCell = BrailleCell.GetInstance(brCode);
+
                             if (brWord.Cells.Count > 1) // 第 0 個 cell 可能是數字記號。
                             {
-                                brWord.Cells[1] = BrailleCell.GetInstance(brCode);
+                                builder.ReplaceCell(1, digitCell);
                             }
                             else
                             {
-                                brWord.Cells[0] = BrailleCell.GetInstance(brCode);
+                                builder.ReplaceCell(0, digitCell);
                             }
+
+                            builder.ApplyTo(brWord);
                         }
 					}
 				}
@@ -186,7 +198,7 @@ namespace BrailleToolkit.Rules
                     if (firstSpaceIndex >= 0 && spaceCount > 1)
                     {
                         int cnt = spaceCount - 1;
-                        brLine.Words.RemoveRange(firstSpaceIndex, cnt);
+                        brLine.RemoveRange(firstSpaceIndex, cnt);
                         i = i - cnt;
                     }
                     firstSpaceIndex = -1;
@@ -199,7 +211,7 @@ namespace BrailleToolkit.Rules
             if (firstSpaceIndex >= 0 && spaceCount > 1)
             {
                 int cnt = spaceCount - 1;
-                brLine.Words.RemoveRange(firstSpaceIndex, cnt);
+                brLine.RemoveRange(firstSpaceIndex, cnt);
             }
         }
 

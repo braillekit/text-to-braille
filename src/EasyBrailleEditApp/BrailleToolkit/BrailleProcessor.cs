@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,23 +18,7 @@ namespace BrailleToolkit
     /// <summary>
     /// 代表一個字元及其在文件中的位置。
     /// </summary>
-    public struct CharPosition
-    {
-        /// <summary>
-        /// 字元
-        /// </summary>
-        public char CharValue { get; set; }
-        
-        /// <summary>
-        /// 第幾列
-        /// </summary>
-        public int LineNumber { get; set; }
-        
-        /// <summary>
-        /// 第幾個字元
-        /// </summary>
-        public int CharIndex { get; set; }
-    }
+    public readonly record struct CharPosition(char CharValue, int LineNumber, int CharIndex);
 
     /// <summary>
     /// 為轉換失敗事件提供資料。
@@ -43,28 +28,17 @@ namespace BrailleToolkit
         /// <summary>
         /// Gets the original text of the line where the conversion failed.
         /// </summary>
-        public string OriginalText { get; private set; } = null!;
+        public string OriginalText { get; init; } = string.Empty;
 
         /// <summary>
         /// Gets the position and value of the invalid character.
         /// </summary>
-        public CharPosition InvalidChar { get; private set; }
+        public CharPosition InvalidChar { get; init; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to stop the conversion process.
         /// </summary>
         public bool Stop { get; set; }
-
-        internal void SetArgs(int lineNumber, int charIndex, string line, char ch)
-        {
-            InvalidChar = new CharPosition
-            {
-                LineNumber = lineNumber,
-                CharIndex = charIndex,
-                CharValue = ch
-            };
-            OriginalText = line;
-        }
     }
 
     /// <summary>
@@ -72,21 +46,15 @@ namespace BrailleToolkit
     /// </summary>
     public sealed class TextConvertedEventArgs : EventArgs
     {
-        internal void SetArgValues(int lineNum, string text)
-        {
-            Text = text;
-            LineNumber = lineNum;
-        }
-
         /// <summary>
         /// Gets the converted braille text.
         /// </summary>
-        public string Text { get; private set; } = null!;
+        public string Text { get; init; } = string.Empty;
 
         /// <summary>
         /// Gets the line number of the converted text.
         /// </summary>
-        public int LineNumber { get; private set; }
+        public int LineNumber { get; init; }
     }
 
     /// <summary>
@@ -112,7 +80,7 @@ namespace BrailleToolkit
         private event EventHandler<ConversionFailedEventArgs>? _conversionFailedEvent;
         private event EventHandler<TextConvertedEventArgs>? _textConvertedEvent;
 
-        private Dictionary<string, string> _autoReplacedText;
+        private readonly FrozenDictionary<string, string> _autoReplacedText;
 
         #region 建構函式
 
@@ -148,7 +116,7 @@ namespace BrailleToolkit
 
             // 轉點字之前，預先替換的文字
             var replacedText = AppGlobals.Config.General.AutoReplacedText.EnsureNotEncloseWith("{", "}");
-            _autoReplacedText = StrHelper.SplitToDictionary(replacedText, ' ', '=');
+            _autoReplacedText = StrHelper.SplitToDictionary(replacedText, ' ', '=').ToFrozenDictionary();
         }
 
 
@@ -422,7 +390,7 @@ namespace BrailleToolkit
         /// <returns>轉換後的點字行。</returns>
         public BrailleLine SimpleConvertText(string Text)
         {
-            var outputBrLine = new BrailleLine();
+            var builder = new BrailleLineBuilder();
 
             string orgLine = Text;	// 保存原始的字串。
 
@@ -437,9 +405,6 @@ namespace BrailleToolkit
             List<BrailleWord>? brWordList;
             StringBuilder convertedText = new StringBuilder();
 
-            ConversionFailedEventArgs cvtFailedArgs = new ConversionFailedEventArgs();
-            TextConvertedEventArgs textCvtArgs = new TextConvertedEventArgs();
-
             while (charStack.Count > 0)
             {
                 brWordList = ConvertWord(charStack);
@@ -447,15 +412,18 @@ namespace BrailleToolkit
                 if (brWordList != null && brWordList.Count > 0)
                 {
                     // 成功轉換成點字，有 n 個字元會從串流中取出
-                    outputBrLine.Words.AddRange(brWordList);
+                    builder.AddWords(brWordList);
 
                     convertedText.Length = 0;
                     foreach (BrailleWord brWord in brWordList)
                     {
                         convertedText.Append(brWord.Text);
                     }
-                    textCvtArgs.SetArgValues(0, convertedText.ToString());
-                    OnTextConverted(textCvtArgs);
+                    OnTextConverted(new TextConvertedEventArgs
+                    {
+                        LineNumber = 0,
+                        Text = convertedText.ToString()
+                    });
                 }
                 else
                 {
@@ -465,7 +433,11 @@ namespace BrailleToolkit
                     int charIndex = Text.Length - charStack.Count;
 
                     // 引發事件。
-                    cvtFailedArgs.SetArgs(0, charIndex, orgLine, ch);
+                    var cvtFailedArgs = new ConversionFailedEventArgs
+                    {
+                        InvalidChar = new CharPosition(ch, 0, charIndex),
+                        OriginalText = orgLine
+                    };
                     OnConvertionFailed(cvtFailedArgs);
                     if (cvtFailedArgs.Stop)
                     {
@@ -473,7 +445,7 @@ namespace BrailleToolkit
                     }
                 }
             }
-            return outputBrLine;
+            return builder.ToBrailleLine();
         }
 
         /// <summary>
@@ -486,10 +458,10 @@ namespace BrailleToolkit
         /// <returns>點字串列。若則傳回 null，表示該列不需要轉成點字。</returns>
         public BrailleLine ConvertLine(string line, int lineNumber)
         {
-            BrailleLine brLine = new BrailleLine();
+            var builder = new BrailleLineBuilder();
 
             if (line == null)
-                return brLine;
+                return builder.ToBrailleLine();
 
             string orgLine = line;	// 保存原始的字串。
 
@@ -503,8 +475,8 @@ namespace BrailleToolkit
             // 若去掉換行字元之後變成空字串，則傳回只包含一個空方的列。
             if (String.IsNullOrEmpty(line))
             {
-                brLine.Words.Add(BrailleWord.NewBlank());
-                return brLine;
+                builder.AddWord(BrailleWord.NewBlank());
+                return builder.ToBrailleLine();
             }
 
             // 替換組態檔中指定的字串
@@ -513,7 +485,7 @@ namespace BrailleToolkit
             // 預先處理特殊標籤的字元替換。
             line = ReplaceSimpleTagsWithConvertableText(line);
             if (line == null)
-                return brLine;
+                return builder.ToBrailleLine();
 
             // 直接從原字串倒序建立 Stack，避免 Reverse 操作建立臨時字串。
             Stack<char> charStack = new Stack<char>(line.Length);
@@ -524,11 +496,6 @@ namespace BrailleToolkit
 
             char ch;
             List<BrailleWord>? brWordList;
-            StringBuilder text = new StringBuilder();
-
-            ConversionFailedEventArgs cvtFailedArgs = new ConversionFailedEventArgs();
-            TextConvertedEventArgs textCvtArgs = new TextConvertedEventArgs();
-
             while (charStack.Count > 0)
             {
                 brWordList = ConvertWord(charStack);
@@ -539,11 +506,14 @@ namespace BrailleToolkit
 
                     EnsureNoDigitSymbolAndSpace();
 
-                    brLine.Words.AddRange(brWordList);
+                    builder.AddWords(brWordList);
 
                     // 通知事件
-                    textCvtArgs.SetArgValues(lineNumber, BrailleWordHelper.ToTextString(brWordList));
-                    OnTextConverted(textCvtArgs);
+                    OnTextConverted(new TextConvertedEventArgs
+                    {
+                        LineNumber = lineNumber,
+                        Text = BrailleWordHelper.ToTextString(brWordList)
+                    });
                 }
                 else
                 {
@@ -553,7 +523,11 @@ namespace BrailleToolkit
                     int charIndex = line.Length - charStack.Count;
 
                     // 引發事件。
-                    cvtFailedArgs.SetArgs(lineNumber, charIndex, orgLine, ch);
+                    var cvtFailedArgs = new ConversionFailedEventArgs
+                    {
+                        InvalidChar = new CharPosition(ch, lineNumber, charIndex),
+                        OriginalText = orgLine
+                    };
                     OnConvertionFailed(cvtFailedArgs);
                     if (cvtFailedArgs.Stop)
                     {
@@ -570,7 +544,7 @@ namespace BrailleToolkit
                         if (brWordList != null && brWordList.Count > 0)
                         {
                             // 成功轉換成點字，有 n 個字元會從串流中取出
-                            brLine.Words.AddRange(brWordList);
+                            builder.AddWords(brWordList);
                         }
                     }
                     catch (Exception ex)
@@ -581,6 +555,9 @@ namespace BrailleToolkit
                     }
                 }
             }
+
+            // 建構階段完成，materialize 為 BrailleLine 以供後續規則直接修改。
+            BrailleLine brLine = builder.ToBrailleLine();
 
             /* 到此階段，一列文字已經被初步轉換成一個包含點字物件串列的 BrailleLine。
              * 有些可轉換的 context tags 會保留到此階段才處理（可能是刪除或者轉換成特定文字與點字）
@@ -827,7 +804,7 @@ namespace BrailleToolkit
                     if (ctag.PrefixBrailleWords.Count > 0)
                     {
                         index++;
-                        brLine.Words.InsertRange(index, ctag.PrefixBrailleWords);
+                        brLine.InsertWords(index, ctag.PrefixBrailleWords);
                         index += ctag.PrefixBrailleWords.Count;
 
                         if (ctag.RemoveTagOnConversion)
@@ -846,7 +823,7 @@ namespace BrailleToolkit
                             aWord.IsConvertedFromTag = true;
                         }
                         index++;
-                        brLine.Words.InsertRange(index, newBrLine.Words);
+                        brLine.InsertWords(index, newBrLine.Words);
                         index += newBrLine.WordCount;
 
                         if (ctag.RemoveTagOnConversion)
@@ -879,7 +856,7 @@ namespace BrailleToolkit
                     if (ctag.PostfixBrailleWords.Count > 0)
                     {
                         index++;
-                        brLine.Words.InsertRange(index, ctag.PostfixBrailleWords);
+                        brLine.InsertWords(index, ctag.PostfixBrailleWords);
                         index += ctag.PostfixBrailleWords.Count;
 
                         if (ctag.RemoveTagOnConversion)
@@ -897,7 +874,7 @@ namespace BrailleToolkit
                         {
                             aWord.IsConvertedFromTag = true;
                         }
-                        brLine.Words.InsertRange(index, newBrLine.Words);
+                        brLine.InsertWords(index, newBrLine.Words);
                         index += newBrLine.WordCount + 1;
 
                         if (ctag.RemoveTagOnConversion)
@@ -1006,11 +983,13 @@ namespace BrailleToolkit
                 brWord.NoDigitCell = true;
             }
             // 補上分子的點字符號
-            brWordListNumerator[0].Cells.Insert(0, BrailleCell.GetInstance(new int[] { 1, 4, 5, 6 }));
+            var numeratorBuilder = BrailleWordBuilder.FromBrailleWord(brWordListNumerator[0]);
+            numeratorBuilder.PrependCell(BrailleCell.GetInstance(new int[] { 1, 4, 5, 6 }));
             if (brWordListIntPart.Count > 0)
             {
-                brWordListNumerator[0].Cells.Insert(0, BrailleCell.GetInstance(new int[] { 4, 5, 6 }));
+                numeratorBuilder.PrependCell(BrailleCell.GetInstance(new int[] { 4, 5, 6 }));
             }
+            numeratorBuilder.ApplyTo(brWordListNumerator[0]);
 
             // 將分母部份轉換成點字串列。
             temp = StrHelper.Reverse(denumerator);
@@ -1036,11 +1015,13 @@ namespace BrailleToolkit
 
             // 補上分母後面的點字符號
             BrailleWord lastBrWord = brWordListDenumerator[brWordListDenumerator.Count - 1];
+            var denominatorBuilder = BrailleWordBuilder.FromBrailleWord(lastBrWord);
             if (brWordListIntPart.Count > 0)
             {
-                lastBrWord.Cells.Add(BrailleCell.GetInstance(new int[] { 4, 5, 6 }));
+                denominatorBuilder.AppendCell(BrailleCell.GetInstance(new int[] { 4, 5, 6 }));
             }
-            lastBrWord.Cells.Add(BrailleCell.GetInstance(new int[] { 3, 4, 5, 6 }));
+            denominatorBuilder.AppendCell(BrailleCell.GetInstance(new int[] { 3, 4, 5, 6 }));
+            denominatorBuilder.ApplyTo(lastBrWord);
 
             // 結合整數部份、分子、分母至同一個串列。
             List<BrailleWord> brWordListFraction = new List<BrailleWord>();

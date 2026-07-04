@@ -776,7 +776,7 @@ namespace EasyBrailleEdit.DualEdit
             while (col >= 0)
             {
                 var leftWord = PositionMapper.GetBrailleWordFromGridCell(row, col);
-                if (!ReferenceEquals(currentWord, leftWord))
+                if (leftWord == null || currentWord.Identity != leftWord.Identity)
                 {
                     GridFocusCell(row, col);
                     return;

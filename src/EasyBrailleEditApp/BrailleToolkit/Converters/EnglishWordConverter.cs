@@ -149,7 +149,7 @@ namespace BrailleToolkit.Converters
 				{
 					// 在冒號的點字前面加上 456 點。
 					BrailleCell cell = BrailleCell.GetInstance(new int[] { 4, 5, 6 });
-					brWord.Cells.Insert(0, cell);	
+					brWord.CellList.Insert(0, cell);	
 				}
 
                 if (brWordList == null)
@@ -222,8 +222,6 @@ namespace BrailleToolkit.Converters
 			if (String.IsNullOrEmpty(text))
 				return null;
 
-			var brWord = new BrailleWord(text);
-
 			string? brCode = null; // brCode can be null from m_Table.FindLetter
 
 			// 如果是刪節號
@@ -231,8 +229,7 @@ namespace BrailleToolkit.Converters
 			{
 				brCode = m_Table.Find(text);
                 if (brCode == null) return null; // Defensive check
-				brWord.AddCells(brCode);
-				return brWord;
+				return new BrailleWord(text, brCode);
 			}
 
 			// 處理英文字母和數字。
@@ -244,8 +241,7 @@ namespace BrailleToolkit.Converters
 					brCode = m_Table.FindLetter(text);
 					if (!String.IsNullOrEmpty(brCode))
 					{
-						brWord.AddCells(brCode);
-						return brWord;
+						return new BrailleWord(text, brCode);
 						// 註：大寫記號和連續大寫記號在完成一行之後才處理。
 					}
 					throw new Exception("找不到對應的點字: " + text);
@@ -267,8 +263,7 @@ namespace BrailleToolkit.Converters
 					brCode = m_Table.FindDigit(text, useUpperPositionDots);	
 					if (!String.IsNullOrEmpty(brCode))
 					{
-						brWord.AddCells(brCode);
-						return brWord;
+						return new BrailleWord(text, brCode);
 					}
 					throw new Exception("找不到對應的點字: " + text);
 				}
@@ -279,6 +274,7 @@ namespace BrailleToolkit.Converters
 			{
                 // # 沒有對應的點字碼，只是用它來代表編號數字的開始，
                 // 以便後續處理編號用（將編號數字轉成上位點）。
+                var brWord = new BrailleWord(text);
                 brWord.IsContextTag = true;
 				return brWord;
 			}
@@ -286,6 +282,7 @@ namespace BrailleToolkit.Converters
             // 小數點在 <選項>ㄅ.</選項> 裡面要特別處理
             if (text == "." && context.IsActive(ContextTagNames.Choice))
             {
+                var brWord = new BrailleWord(text);
                 brWord.AddCellsFromPositionNumbers("6");
                 return brWord;
             }
@@ -293,11 +290,9 @@ namespace BrailleToolkit.Converters
 			brCode = m_Table.Find(text);
 			if (!String.IsNullOrEmpty(brCode))
 			{
-				brWord.AddCells(brCode);
-				return brWord;
+				return new BrailleWord(text, brCode);
 			}
 
-			brWord = null;
 			return null;
 		}
     }

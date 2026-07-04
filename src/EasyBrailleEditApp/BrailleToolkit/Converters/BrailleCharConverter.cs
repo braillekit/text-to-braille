@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
@@ -13,16 +14,15 @@ namespace BrailleToolkit.Converters
     /// </summary>
     public sealed class BrailleCharConverter
     {
-        private static Dictionary<string, string> m_CharTable;
+        private static FrozenDictionary<string, string> m_CharTable;
 
         private BrailleCharConverter()
-        {            
+        {
         }
 
         static BrailleCharConverter()
         {
-            m_CharTable = new Dictionary<string, string>();
-            LoadFromResource();
+            m_CharTable = LoadFromResource();
         }
 
         /// <summary>
@@ -38,14 +38,14 @@ namespace BrailleToolkit.Converters
             }
             using (StreamReader sr = new StreamReader(filename))
             {
-                LoadFromStreamReader(sr);
+                m_CharTable = LoadFromStreamReader(sr);
             }
         }
 
         /// <summary>
         /// 從組件的資源中載入。
         /// </summary>
-        public static void LoadFromResource()
+        public static FrozenDictionary<string, string> LoadFromResource()
         {
             Assembly asmb = Assembly.GetExecutingAssembly();
             string resourceName = "BrailleToolkit.Data.BrailleFontTbl.txt";
@@ -56,13 +56,14 @@ namespace BrailleToolkit.Converters
             {
                 using (StreamReader sr = new StreamReader(stream))
                 {
-                    LoadFromStreamReader(sr);
+                    return LoadFromStreamReader(sr);
                 }
             }
         }
 
-        private static void LoadFromStreamReader(StreamReader sr)
+        private static FrozenDictionary<string, string> LoadFromStreamReader(StreamReader sr)
         {
+            var dict = new Dictionary<string, string>();
             string? s;
             string[] values;
             while (true)
@@ -76,9 +77,10 @@ namespace BrailleToolkit.Converters
                 if (s[0] == ';')    // 忽略註解.
                     continue;
                 values = s.Split('=');
-                m_CharTable.Add(values[0], values[1]);
+                dict.Add(values[0], values[1]);
             }
             sr.Close();
+            return dict.ToFrozenDictionary();
         }
 
         /// <summary>

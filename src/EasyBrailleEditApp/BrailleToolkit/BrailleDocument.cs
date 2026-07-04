@@ -180,7 +180,7 @@ namespace BrailleToolkit
         /// <param name="title">The page title to add.</param>
         public void AddPageTitle(BraillePageTitle title)
         {
-            PageTitles.Add(title);
+            m_PageTitles.Add(title);
             SortPageTitles();
         }
 
@@ -189,14 +189,14 @@ namespace BrailleToolkit
         /// </summary>
         /// <param name="words">The words of the title.</param>
         /// <param name="lineIdx">The line index.</param>
-        public void AddPageTitleAt(List<BrailleWord> words, int lineIdx)
+        public void AddPageTitleAt(IReadOnlyList<BrailleWord> words, int lineIdx)
         {
             if (lineIdx >= LineCount)
             {
                 throw new InvalidOperationException($"加入標題列時指定的索引超出文件大小: {lineIdx}");
             }
             var title = new BraillePageTitle(words, lineIdx, Lines[lineIdx]);
-            PageTitles.Add(title);
+            m_PageTitles.Add(title);
             SortPageTitles();
         }
 
@@ -211,7 +211,7 @@ namespace BrailleToolkit
                 return false;
             var brLine = Lines[lineIdx];
 
-            return PageTitles.FindIndex(p => ReferenceEquals(brLine, p.ContentStartLineRef)) >= 0;
+            return m_PageTitles.FindIndex(p => brLine.Identity == p.ContentStartLineIdentity) >= 0;
         }
 
         /// <summary>
@@ -221,13 +221,13 @@ namespace BrailleToolkit
         /// <returns>The page title if found; otherwise, null.</returns>
         public BraillePageTitle? FindPageTitleByBeginLine(BrailleLine brLine)
         {
-            return PageTitles.Find(p => ReferenceEquals(brLine, p.ContentStartLineRef));
+            return m_PageTitles.Find(p => brLine.Identity == p.ContentStartLineIdentity);
         }
 
 
         private void SortPageTitles()
         {
-            PageTitles.Sort();
+            m_PageTitles.Sort();
         }
 
         /// <summary>
@@ -362,6 +362,14 @@ namespace BrailleToolkit
         }
 
         /// <summary>
+        /// 在指定的索引處插入單一點字行。
+        /// </summary>
+        public void InsertLine(int index, BrailleLine line)
+        {
+            m_Lines.Insert(index, line);
+        }
+
+        /// <summary>
         /// 在指定的索引處插入多個點字行。
         /// </summary>
         /// <param name="index">應插入點字行的以零為起始的索引。</param>
@@ -389,9 +397,17 @@ namespace BrailleToolkit
             if (Lines.Count == 0)
             {
                 var brLine = new BrailleLine();
-                brLine.Words.Add(BrailleWord.BlankWord);
+                brLine.AddWord(BrailleWord.BlankWord);
                 AddLine(brLine);
             }
+        }
+
+        /// <summary>
+        /// 清除所有頁標題。
+        /// </summary>
+        public void ClearPageTitles()
+        {
+            m_PageTitles.Clear();
         }
 
         /// <summary>
@@ -442,7 +458,7 @@ namespace BrailleToolkit
                     var pageTitle = new BraillePageTitle(titleLine, lineIdx, beginLine);
                     newPageTitles.Add(pageTitle);
 
-                    Lines.RemoveAt(lineIdx);
+                    RemoveLine(lineIdx);
                 }
                 else
                 {
@@ -555,6 +571,18 @@ namespace BrailleToolkit
             return lines;
         }
 
+        internal int IndexOfLine(long lineIdentity)
+        {
+            for (int i = 0; i < m_Lines.Count; i++)
+            {
+                if (m_Lines[i].Identity == lineIdentity)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
 
         #region 序列化事件
 
@@ -606,10 +634,11 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得所有點字行。
         /// </summary>
-        public List<BrailleLine> Lines
+        [IgnoreDataMember]
+        public IReadOnlyList<BrailleLine> Lines
         {
             get { return m_Lines; }
-            private set { m_Lines = value; }
+            private set { m_Lines = CopyLines(value); }
         }
 
         /// <summary>
@@ -669,10 +698,41 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得或設定頁標題串列。
         /// </summary>
-        public List<BraillePageTitle> PageTitles
+        [IgnoreDataMember]
+        public IReadOnlyList<BraillePageTitle> PageTitles
         {
             get { return m_PageTitles; }
-            set { m_PageTitles = value; }
+            private set { m_PageTitles = CopyPageTitles(value); }
+        }
+
+        private static List<BrailleLine> CopyLines(IEnumerable<BrailleLine>? lines)
+        {
+            var result = new List<BrailleLine>();
+            if (lines == null)
+            {
+                return result;
+            }
+
+            foreach (var line in lines)
+            {
+                result.Add(line);
+            }
+            return result;
+        }
+
+        private static List<BraillePageTitle> CopyPageTitles(IEnumerable<BraillePageTitle>? titles)
+        {
+            var result = new List<BraillePageTitle>();
+            if (titles == null)
+            {
+                return result;
+            }
+
+            foreach (var title in titles)
+            {
+                result.Add(title);
+            }
+            return result;
         }
 
         #endregion
