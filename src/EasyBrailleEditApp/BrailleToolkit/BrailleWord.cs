@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Text;
 using BrailleToolkit.Tags;
@@ -33,12 +34,14 @@ namespace BrailleToolkit
     /// </summary>
     [Serializable]
     [DataContract]
-    public sealed class BrailleWord
+    public sealed class BrailleWord : IBrailleWordView
     {
         /// <summary>
         /// Gets a static instance of a blank braille word.
         /// </summary>
         public static BrailleWord BlankWord { get; } = NewBlank();
+
+        private long m_Identity = BrailleObjectIdentityGenerator.NextWordIdentity();
 
         private List<string>? m_PhoneticCodes;   // 所有注音組字字根（以支援破音字）。
         private int m_ActivePhoneticIndex;      // 目前使用的注音組字字根索引。
@@ -51,6 +54,9 @@ namespace BrailleToolkit
 
         [NonSerialized]
         private bool m_IsContextTag;
+
+        [NonSerialized]
+        private string m_OriginalText = string.Empty;
 
         //private bool m_QuotationResolved;	// 是否已經識別出左右引號（英文的單引號和雙引號都是同一個符號，但點字不同）
 
@@ -244,7 +250,16 @@ namespace BrailleToolkit
         /// 甚至將來可能利用此屬性將已經轉換好的點字文件還原成純文字。
         /// </summary>
         [DataMember]
-        public string OriginalText { get; private set; }
+        public string OriginalText
+        {
+            get { return m_OriginalText; }
+            init { m_OriginalText = value ?? String.Empty; }
+        }
+
+        internal void SetOriginalText(string? text)
+        {
+            m_OriginalText = text ?? String.Empty;
+        }
 
         /// <summary>
         /// 取得此點字詞包含的點字方數。
@@ -262,6 +277,28 @@ namespace BrailleToolkit
             get
             {
                 return CellList.Items;
+            }
+        }
+
+        /// <summary>
+        /// 此物件的執行期識別碼，用來在編輯流程中追蹤邏輯上同一個點字詞。
+        /// </summary>
+        public long Identity
+        {
+            get { return m_Identity; }
+        }
+
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context)
+        {
+            EnsureRuntimeIdentity();
+        }
+
+        private void EnsureRuntimeIdentity()
+        {
+            if (m_Identity <= 0)
+            {
+                m_Identity = BrailleObjectIdentityGenerator.NextWordIdentity();
             }
         }
 
@@ -465,24 +502,22 @@ namespace BrailleToolkit
         /// <returns></returns>
         public BrailleWord Copy()
         {
-            BrailleWord newBrWord = new BrailleWord(Text);
-            newBrWord.Language = Language;
-            newBrWord.DontBreakLineHere = DontBreakLineHere;
-            newBrWord.NoDigitCell = NoDigitCell;
-            newBrWord.NoSpace = NoSpace;
-            newBrWord.PhoneticCode = PhoneticCode;
-            newBrWord.IsPolyphonic = IsPolyphonic;
-            newBrWord.IsContextTag = IsContextTag;
-            newBrWord.IsConvertedFromTag = IsConvertedFromTag;
-            newBrWord.ContextTag = ContextTag;
-            newBrWord.ContextNames = ContextNames;
-
-            foreach (BrailleCell brCell in CellList.Items)
-            {
-                newBrWord.Cells.Add(brCell);
-            }
-
-            return newBrWord;
+            return CreateFromConstruction(
+                Text,
+                OriginalText,
+                Language,
+                CollectionsMarshal.AsSpan(CellList.Items),
+                PhoneticCode,
+                IsPolyphonic,
+                DontBreakLineHere,
+                ContextNames,
+                ContextTag,
+                IsContextTag,
+                IsConvertedFromTag,
+                NoDigitCell,
+                NoSpace,
+                NoCapitalRule,
+                IsEngPhonetic);
         }
 
         /// <summary>
@@ -496,21 +531,22 @@ namespace BrailleToolkit
                 throw new ArgumentNullException("參數 brWord 不可為 null!");
             }
 
-            Text = brWord.Text;
-            Language = brWord.Language;
-
-            CellList.Clear();
-            foreach (BrailleCell brCell in brWord.CellList.Items)
-            {
-                CellList.Add(brCell);
-            }
-
-            PhoneticCode = brWord.PhoneticCode;
-            IsPolyphonic = brWord.IsPolyphonic;
-            IsContextTag = brWord.IsContextTag;
-            IsConvertedFromTag = brWord.IsConvertedFromTag;
-            ContextTag = brWord.ContextTag;
-            ContextNames = brWord.ContextNames;
+            ApplyConstruction(
+                brWord.Text,
+                brWord.OriginalText,
+                brWord.Language,
+                CollectionsMarshal.AsSpan(brWord.CellList.Items),
+                brWord.PhoneticCode,
+                brWord.IsPolyphonic,
+                brWord.DontBreakLineHere,
+                brWord.ContextNames,
+                brWord.ContextTag,
+                brWord.IsContextTag,
+                brWord.IsConvertedFromTag,
+                brWord.NoDigitCell,
+                brWord.NoSpace,
+                brWord.NoCapitalRule,
+                brWord.IsEngPhonetic);
 /*
             // 複製所有注音字根與點字串列, for 向下相容.
             if (brWord.PhoneticCodes != null)
@@ -779,6 +815,139 @@ namespace BrailleToolkit
             if (String.IsNullOrEmpty(brCode))
                 return false;
             return true;
+        }
+
+        BrailleCell IBrailleWordView.GetCell(int index)
+        {
+            return CellList[index];
+        }
+
+        internal static BrailleWord FromResult(IBrailleWordResult result)
+        {
+            if (result == null)
+                throw new ArgumentNullException(nameof(result));
+
+            return CreateFromConstruction(
+                result.Text,
+                result.OriginalText,
+                result.Language,
+                result.Cells.Span,
+                result.PhoneticCode,
+                result.IsPolyphonic,
+                result.DontBreakLineHere,
+                result.ContextNames,
+                result.ContextTag,
+                result.IsContextTag,
+                result.IsConvertedFromTag,
+                result.NoDigitCell,
+                result.NoSpace,
+                result.NoCapitalRule,
+                result.IsEngPhonetic);
+        }
+
+        internal void ApplyResult(IBrailleWordResult result)
+        {
+            if (result == null)
+                throw new ArgumentNullException(nameof(result));
+
+            ApplyConstruction(
+                result.Text,
+                result.OriginalText,
+                result.Language,
+                result.Cells.Span,
+                result.PhoneticCode,
+                result.IsPolyphonic,
+                result.DontBreakLineHere,
+                result.ContextNames,
+                result.ContextTag,
+                result.IsContextTag,
+                result.IsConvertedFromTag,
+                result.NoDigitCell,
+                result.NoSpace,
+                result.NoCapitalRule,
+                result.IsEngPhonetic);
+        }
+
+        internal static BrailleWord CreateFromConstruction(
+            string text,
+            string originalText,
+            BrailleLanguage language,
+            ReadOnlySpan<BrailleCell> cells,
+            string? phoneticCode,
+            bool isPolyphonic,
+            bool dontBreakLineHere,
+            string contextNames,
+            IContextTag? contextTag,
+            bool isContextTag,
+            bool isConvertedFromTag,
+            bool noDigitCell,
+            bool noSpace,
+            bool noCapitalRule,
+            bool isEngPhonetic)
+        {
+            var word = new BrailleWord(text)
+            {
+                OriginalText = originalText
+            };
+
+            word.ApplyConstruction(
+                text,
+                originalText,
+                language,
+                cells,
+                phoneticCode,
+                isPolyphonic,
+                dontBreakLineHere,
+                contextNames,
+                contextTag,
+                isContextTag,
+                isConvertedFromTag,
+                noDigitCell,
+                noSpace,
+                noCapitalRule,
+                isEngPhonetic);
+            return word;
+        }
+
+        internal void ApplyConstruction(
+            string text,
+            string originalText,
+            BrailleLanguage language,
+            ReadOnlySpan<BrailleCell> cells,
+            string? phoneticCode,
+            bool isPolyphonic,
+            bool dontBreakLineHere,
+            string contextNames,
+            IContextTag? contextTag,
+            bool isContextTag,
+            bool isConvertedFromTag,
+            bool noDigitCell,
+            bool noSpace,
+            bool noCapitalRule,
+            bool isEngPhonetic)
+        {
+            Text = text;
+            SetOriginalText(originalText);
+            Language = language;
+            DontBreakLineHere = dontBreakLineHere;
+            NoDigitCell = noDigitCell;
+            NoSpace = noSpace;
+            NoCapitalRule = noCapitalRule;
+            IsEngPhonetic = isEngPhonetic;
+            ContextNames = contextNames;
+            IsConvertedFromTag = isConvertedFromTag;
+            PhoneticCode = phoneticCode ?? String.Empty;
+            IsPolyphonic = isPolyphonic;
+            IsContextTag = isContextTag;
+            ContextTag = contextTag;
+
+            if (isContextTag)
+            {
+                CellList.Clear();
+                return;
+            }
+
+            CellList.Assign(cells);
         }
     }
 }

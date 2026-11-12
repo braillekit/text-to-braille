@@ -11,12 +11,13 @@ namespace BrailleToolkit.Tags
     {
         const string TopLine = "▔";
 
-        public TableTopLineContextTag() : base(ContextTagNames.TableTopLine2)
+        public TableTopLineContextTag()
+            : base(
+                ContextTagNames.TableTopLine2,
+                lifeTime: ContextLifetime.Transient,
+                removeTagOnConversion: true,
+                singleLine: true)
         {
-            RemoveTagOnConversion = true;
-            Lifetime = ContextLifetime.Transient;
-            IsSingleLine = true;
-
             var cell0 = BrailleCell.GetInstanceFromPositionNumberString("2356");
             var cell1 = BrailleCell.GetInstanceFromPositionNumberString("1245");
 
@@ -40,8 +41,6 @@ namespace BrailleToolkit.Tags
 
                 PrefixBrailleWords.Add(brWord);
             }
-
-            IsSingleLine = true;
         }
     }
 }

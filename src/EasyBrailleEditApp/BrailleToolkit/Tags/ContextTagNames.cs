@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,7 +67,7 @@ namespace BrailleToolkit.Tags
         /// <summary>
         /// Gets the collection of all context tag names.
         /// </summary>
-        public static HashSet<string> Collection =
+        public static readonly FrozenSet<string> Collection =
             new HashSet<string>()
             {
                 Title,
@@ -86,7 +87,7 @@ namespace BrailleToolkit.Tags
                 SpecificName,
                 BookName,
                 BrailleTranslatorNote,
-                OrgPageNumber,          // 原書頁碼
+                OrgPageNumber,          // 原���頁碼
                 Choice,
                 UpperPosition,
                 Url,
@@ -94,7 +95,7 @@ namespace BrailleToolkit.Tags
                 QuotationMark2,
                 SeparatorLine,
                 NoDigitSymbol
-            };
+            }.ToFrozenSet();
 
 
         /// <summary>

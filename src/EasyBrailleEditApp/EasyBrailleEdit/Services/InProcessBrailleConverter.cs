@@ -75,9 +75,10 @@ namespace EasyBrailleEdit.Services
                 _doc.Convert(content);
                 
                 // 儲存到臨時檔案
+                string uniqueId = Guid.NewGuid().ToString("N");
                 string outFileName = Path.Combine(
-                    AppGlobals.TempPath, 
-                    Constant.Files.CvtOutputTempFileName);
+                    AppGlobals.TempPath,
+                    $"{Constant.Files.CvtOutputTempFileName}_{uniqueId}.brl");
                     
                 if (!_processor.HasError)
                 {

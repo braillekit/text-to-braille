@@ -2,9 +2,7 @@ using BrailleToolkit;
 using Xunit;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EasyBrailleEdit.Common.Utilities;
 
 namespace BrailleToolkit.Tests
 {
@@ -65,6 +63,39 @@ namespace BrailleToolkit.Tests
         {
             var brCell = BrailleCell.GetInstance(brailleValue);
             Assert.Equal(expectedDots, brCell.ToPositionNumberArray());
+        }
+
+        [Fact]
+        public void Should_UseValueEquality()
+        {
+            var left = BrailleCell.GetInstance(0x25);
+            var right = new BrailleCell(0x25);
+
+            Assert.Equal(left, right);
+            Assert.True(left == right);
+            Assert.Equal(left.GetHashCode(), right.GetHashCode());
+        }
+
+        [Fact]
+        public void Should_TreatDefaultValueAsBlank()
+        {
+            BrailleCell cell = default;
+
+            Assert.Equal(BrailleCell.Blank, cell);
+            Assert.Equal((byte)0x00, cell.Value);
+            Assert.Equal("00", cell.ToString());
+        }
+
+        [Fact]
+        public void Should_RoundTripThroughDataContractJsonSerializer()
+        {
+            var original = BrailleCell.GetInstance("3A");
+
+            string json = JsonHelper.Serialize(original);
+            var deserialized = JsonHelper.Deserialize<BrailleCell>(json);
+
+            Assert.Contains("\"Value\":58", json);
+            Assert.Equal(original, deserialized);
         }
     }
 }

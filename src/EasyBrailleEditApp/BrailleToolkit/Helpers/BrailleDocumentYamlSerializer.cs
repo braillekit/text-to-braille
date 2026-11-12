@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
@@ -25,7 +27,7 @@ namespace BrailleToolkit.Helpers
             return new DeserializerBuilder()
                 .WithNamingConvention(PascalCaseNamingConvention.Instance)
                 .WithTypeConverter(new BrailleCellYamlTypeConverter())
-                .IgnoreUnmatchedProperties() // To be safe with potential version mismatches or extra fields
+                .IgnoreUnmatchedProperties()
                 .Build();
         }
 
@@ -37,7 +39,8 @@ namespace BrailleToolkit.Helpers
         public static string Serialize(BrailleDocument doc)
         {
             var serializer = CreateSerializer();
-            return serializer.Serialize(doc);
+            var yamlModel = BrailleDocumentYamlModel.FromBrailleDocument(doc);
+            return serializer.Serialize(yamlModel);
         }
 
         /// <summary>
@@ -48,7 +51,8 @@ namespace BrailleToolkit.Helpers
         public static void Serialize(BrailleDocument doc, TextWriter writer)
         {
             var serializer = CreateSerializer();
-            serializer.Serialize(writer, doc);
+            var yamlModel = BrailleDocumentYamlModel.FromBrailleDocument(doc);
+            serializer.Serialize(writer, yamlModel);
         }
 
         /// <summary>
@@ -59,7 +63,8 @@ namespace BrailleToolkit.Helpers
         public static BrailleDocument Deserialize(string yaml)
         {
             var deserializer = CreateDeserializer();
-            return deserializer.Deserialize<BrailleDocument>(yaml);
+            var yamlModel = deserializer.Deserialize<BrailleDocumentYamlModel>(yaml);
+            return yamlModel.ToBrailleDocument();
         }
 
         /// <summary>
@@ -70,7 +75,8 @@ namespace BrailleToolkit.Helpers
         public static BrailleDocument Deserialize(TextReader reader)
         {
             var deserializer = CreateDeserializer();
-            return deserializer.Deserialize<BrailleDocument>(reader);
+            var yamlModel = deserializer.Deserialize<BrailleDocumentYamlModel>(reader);
+            return yamlModel.ToBrailleDocument();
         }
 
         /// <summary>
@@ -97,6 +103,204 @@ namespace BrailleToolkit.Helpers
             {
                 return Deserialize(reader);
             }
+        }
+
+        private sealed class BrailleDocumentYamlModel
+        {
+            public int StartPageNumber { get; set; }
+
+            public int CellsPerLine { get; set; }
+
+            public List<BrailleLineYamlModel> Lines { get; set; } = new List<BrailleLineYamlModel>();
+
+            public List<BraillePageTitleYamlModel> PageTitles { get; set; } = new List<BraillePageTitleYamlModel>();
+
+            public static BrailleDocumentYamlModel FromBrailleDocument(BrailleDocument doc)
+            {
+                var yamlModel = new BrailleDocumentYamlModel
+                {
+                    StartPageNumber = doc.StartPageNumber,
+                    CellsPerLine = doc.CellsPerLine
+                };
+
+                foreach (var line in doc.Lines)
+                {
+                    yamlModel.Lines.Add(BrailleLineYamlModel.FromBrailleLine(line));
+                }
+
+                foreach (var title in doc.PageTitles)
+                {
+                    yamlModel.PageTitles.Add(BraillePageTitleYamlModel.FromBraillePageTitle(title));
+                }
+
+                return yamlModel;
+            }
+
+            public BrailleDocument ToBrailleDocument()
+            {
+                var doc = new BrailleDocument
+                {
+                    StartPageNumber = StartPageNumber,
+                    CellsPerLine = CellsPerLine
+                };
+
+                foreach (var line in Lines)
+                {
+                    doc.AddLine(line.ToBrailleLine());
+                }
+
+                foreach (var title in PageTitles)
+                {
+                    var pageTitle = title.ToBraillePageTitle(doc);
+                    if (pageTitle != null)
+                    {
+                        doc.AddPageTitle(pageTitle);
+                    }
+                }
+
+                return doc;
+            }
+        }
+
+        private sealed class BrailleLineYamlModel
+        {
+            public List<BrailleWordYamlModel> Words { get; set; } = new List<BrailleWordYamlModel>();
+
+            public static BrailleLineYamlModel FromBrailleLine(BrailleLine line)
+            {
+                var yamlModel = new BrailleLineYamlModel();
+                foreach (var word in line.Words)
+                {
+                    yamlModel.Words.Add(BrailleWordYamlModel.FromBrailleWordView(word));
+                }
+                return yamlModel;
+            }
+
+            public BrailleLine ToBrailleLine()
+            {
+                var builder = new BrailleLineBuilder();
+                foreach (var word in Words)
+                {
+                    builder.AddWord(word.ToBrailleWord());
+                }
+                return builder.ToBrailleLine();
+            }
+        }
+
+        private sealed class BrailleWordYamlModel
+        {
+            public string Text { get; set; } = string.Empty;
+
+            public string OriginalText { get; set; } = string.Empty;
+
+            public BrailleCellList CellList { get; set; } = new BrailleCellList();
+
+            public string PhoneticCode { get; set; } = string.Empty;
+
+            public bool IsPolyphonic { get; set; }
+
+            public bool DontBreakLineHere { get; set; }
+
+            public string ContextNames { get; set; } = string.Empty;
+
+            public bool IsContextTag { get; set; }
+
+            public bool IsConvertedFromTag { get; set; }
+
+            public static BrailleWordYamlModel FromBrailleWordView(IBrailleWordView word)
+            {
+                return new BrailleWordYamlModel
+                {
+                    Text = word.Text,
+                    OriginalText = word.OriginalText,
+                    CellList = CreateCellListFromWordView(word),
+                    PhoneticCode = word.PhoneticCode ?? String.Empty,
+                    IsPolyphonic = word.IsPolyphonic,
+                    DontBreakLineHere = word.DontBreakLineHere,
+                    ContextNames = word.ContextNames,
+                    IsContextTag = word.IsContextTag,
+                    IsConvertedFromTag = word.IsConvertedFromTag
+                };
+            }
+
+            public BrailleWord ToBrailleWord()
+            {
+                var copiedCellList = CopyCellList(CellList);
+                return BrailleWord.CreateFromConstruction(
+                    Text,
+                    String.IsNullOrEmpty(OriginalText) ? Text : OriginalText,
+                    BrailleLanguage.Neutral,
+                    CollectionsMarshal.AsSpan(copiedCellList.Items),
+                    PhoneticCode ?? String.Empty,
+                    IsPolyphonic,
+                    DontBreakLineHere,
+                    ContextNames ?? String.Empty,
+                    contextTag: null,
+                    isContextTag: IsContextTag,
+                    isConvertedFromTag: IsConvertedFromTag,
+                    noDigitCell: false,
+                    noSpace: false,
+                    noCapitalRule: false,
+                    isEngPhonetic: false);
+            }
+        }
+
+        private sealed class BraillePageTitleYamlModel
+        {
+            public BrailleLineYamlModel? TitleLine { get; set; }
+
+            public int BeginLineIndex { get; set; } = -1;
+
+            public static BraillePageTitleYamlModel FromBraillePageTitle(BraillePageTitle title)
+            {
+                return new BraillePageTitleYamlModel
+                {
+                    TitleLine = title.TitleLine == null ? null : BrailleLineYamlModel.FromBrailleLine(title.TitleLine),
+                    BeginLineIndex = title.ContentStartLineIndex
+                };
+            }
+
+            public BraillePageTitle? ToBraillePageTitle(BrailleDocument doc)
+            {
+                if (TitleLine == null)
+                {
+                    return null;
+                }
+
+                if (BeginLineIndex < 0 || BeginLineIndex >= doc.LineCount)
+                {
+                    return null;
+                }
+
+                return new BraillePageTitle(TitleLine.ToBrailleLine(), BeginLineIndex, doc.Lines[BeginLineIndex]);
+            }
+        }
+
+        private static BrailleCellList CopyCellList(BrailleCellList? source)
+        {
+            var cellList = new BrailleCellList();
+            if (source == null || source.Items == null)
+            {
+                return cellList;
+            }
+
+            var items = new List<BrailleCell>();
+            foreach (var cell in source.Items)
+            {
+                items.Add(BrailleCell.GetInstance(cell.Value));
+            }
+            cellList.Items = items;
+            return cellList;
+        }
+
+        private static BrailleCellList CreateCellListFromWordView(IBrailleWordView word)
+        {
+            var cellList = new BrailleCellList();
+            for (int i = 0; i < word.CellCount; i++)
+            {
+                cellList.Add(BrailleCell.GetInstance(word.GetCell(i).Value));
+            }
+            return cellList;
         }
     }
 }

@@ -12,12 +12,13 @@ namespace BrailleToolkit.Tags
         const string TopLine = "▔";
         const string BottomLine = "▁";
 
-        public TableSingleLineContextTag(string tagName) : base(tagName)
+        public TableSingleLineContextTag(string tagName)
+            : base(
+                tagName,
+                lifeTime: ContextLifetime.Transient,
+                removeTagOnConversion: true,
+                singleLine: true)
         {
-            RemoveTagOnConversion = true;
-            Lifetime = ContextLifetime.Transient;
-            IsSingleLine = true;
-
             string text = TopLine;
             var cell = BrailleCell.GetInstanceFromPositionNumberString("2356");
             if (tagName.IndexOf("下") >= 0)

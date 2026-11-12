@@ -13,6 +13,6 @@ namespace BrailleToolkit
         /// <summary>
         /// 中文標點符號集合。
         /// </summary>
-        public static string ChinesePunctuations = TwChineseBrailleTable.GetInstance().GetAllPunctuations();
+        public static readonly string ChinesePunctuations = TwChineseBrailleTable.GetInstance().GetAllPunctuations();
     }
 }

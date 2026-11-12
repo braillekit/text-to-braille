@@ -18,10 +18,10 @@ namespace BrailleToolkit.Converters
         private const string UebTableFileName = "BrailleToolkit.Data.EnglishUebBrailleTable.xml";
 
         // Dictionaries to hold different types of braille symbols
-        private readonly Dictionary<string, BrailleWord> _wordSigns = new Dictionary<string, BrailleWord>();
-        private readonly Dictionary<string, BrailleWord> _groupSigns = new Dictionary<string, BrailleWord>();
-        private readonly Dictionary<string, BrailleWord> _shortForms = new Dictionary<string, BrailleWord>();
-        private readonly Dictionary<string, BrailleWord> _letterSigns = new Dictionary<string, BrailleWord>();
+        private readonly Dictionary<string, string> _wordSigns = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _groupSigns = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _shortForms = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _letterSigns = new Dictionary<string, string>();
 
         // A combined list, sorted by length descending, for greedy matching
         private readonly List<string> _sortedKeys;
@@ -76,21 +76,19 @@ namespace BrailleToolkit.Converters
                             name = text;
                         }
 
-                        var brailleWord = new BrailleWord(name, code);
-
                         switch (type)
                         {
                             case "Letter":
-                                _letterSigns[text] = brailleWord;
+                                _letterSigns[text] = code;
                                 break;
                             case "WordSign":
-                                _wordSigns[text] = brailleWord;
+                                _wordSigns[text] = code;
                                 break;
                             case "GroupSign":
-                                _groupSigns[text] = brailleWord;
+                                _groupSigns[text] = code;
                                 break;
                             case "ShortForm":
-                                _shortForms[name] = brailleWord;
+                                _shortForms[name] = code;
                                 break;
                         }
                     }
@@ -135,13 +133,13 @@ namespace BrailleToolkit.Converters
                     {
                         if (remainingText.Length == key.Length || !char.IsLetter(remainingText[key.Length]))
                         {
-                            word = new BrailleWord(key, _wordSigns[key].ToHexSting());
+                            word = new BrailleWord(key, _wordSigns[key]);
                             match = true;
                         }
                     }
                     else // For GroupSigns and ShortForms, allow partial word match
                     {
-                        word = new BrailleWord(key, _groupSigns.ContainsKey(key) ? _groupSigns[key].ToHexSting() : _shortForms[key].ToHexSting());
+                        word = new BrailleWord(key, _groupSigns.ContainsKey(key) ? _groupSigns[key] : _shortForms[key]);
                         match = true;
                     }
 
@@ -164,7 +162,7 @@ namespace BrailleToolkit.Converters
             {
                 Log.Debug("Matched Grade 1 letter: {Letter}", firstCharStr);
                 charStack.Pop(); // Consume the character
-                var word = new BrailleWord(firstCharStr, _letterSigns[firstCharStr].ToHexSting());
+                var word = new BrailleWord(firstCharStr, _letterSigns[firstCharStr]);
                 return new List<BrailleWord> { word };
             }
 

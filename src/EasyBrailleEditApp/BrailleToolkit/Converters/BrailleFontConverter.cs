@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
 using System.IO;
 using System.Globalization;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace BrailleToolkit.Converters
 {
@@ -13,16 +15,15 @@ namespace BrailleToolkit.Converters
     /// </summary>
     public sealed class BrailleFontConverter
     {
-        private static Hashtable m_FontTable;
+        private static FrozenDictionary<string, string> m_FontTable;
 
         private BrailleFontConverter()
-        {            
+        {
         }
 
         static BrailleFontConverter()
         {
-            m_FontTable = new Hashtable();
-            BrailleFontConverter.LoadFromResource();
+            m_FontTable = LoadFromResource();
         }
 
         /// <summary>
@@ -38,17 +39,17 @@ namespace BrailleToolkit.Converters
             }
             using (StreamReader sr = new StreamReader(filename))
             {
-                LoadFromStreamReader(sr);
+                m_FontTable = LoadFromStreamReader(sr);
             }
         }
 
         /// <summary>
         /// 從組件的資源中載入。
         /// </summary>
-        public static void LoadFromResource()
+        public static FrozenDictionary<string, string> LoadFromResource()
         {
             const string resourceName = "BrailleToolkit.Data.BrailleFontTbl.txt";
-            Assembly asmb = Assembly.GetExecutingAssembly();            
+            Assembly asmb = Assembly.GetExecutingAssembly();
             Stream? stream = asmb.GetManifestResourceStream(resourceName);
             if (stream == null)
                 throw new Exception("找不到資源: " + resourceName);
@@ -57,13 +58,14 @@ namespace BrailleToolkit.Converters
             {
                 using (StreamReader sr = new StreamReader(stream!))
                 {
-                    LoadFromStreamReader(sr);
+                    return LoadFromStreamReader(sr);
                 }
             }
         }
 
-        private static void LoadFromStreamReader(StreamReader sr)
+        private static FrozenDictionary<string, string> LoadFromStreamReader(StreamReader sr)
         {
+            var dict = new Dictionary<string, string>();
             string? s;
             string[] values;
             while (true)
@@ -77,9 +79,10 @@ namespace BrailleToolkit.Converters
                 if (s[0] == ';')    // 忽略註解.
                     continue;
                 values = s.Split('=');
-                m_FontTable.Add(values[0], values[1]);
+                dict.Add(values[0], values[1]);
             }
             sr.Close();
+            return dict.ToFrozenDictionary();
         }
 
         /// <summary>
@@ -110,7 +113,22 @@ namespace BrailleToolkit.Converters
         /// <returns></returns>
         public static string ToString(BrailleWord brWord)
         {
-            return BrailleFontConverter.ToString(brWord.CellList);
+            return ToString((IBrailleWordView)brWord);
+        }
+
+        internal static string ToString(IBrailleWordView brWord)
+        {
+            if (m_FontTable.Count < 1)
+            {
+                throw new Exception("尚未載入字型對應表!");
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < brWord.CellCount; i++)
+            {
+                sb.Append(ToChar(brWord.GetCell(i).ToString()));
+            }
+            return sb.ToString();
         }
 
         /// <summary>
@@ -122,6 +140,11 @@ namespace BrailleToolkit.Converters
         /// <returns></returns>
         public static string ToString(BrailleCellList cellList)
         {
+            return ToString(CollectionsMarshal.AsSpan(cellList.Items));
+        }
+
+        private static string ToString(ReadOnlySpan<BrailleCell> cells)
+        {
             if (m_FontTable.Count < 1)
             {
                 throw new Exception("尚未載入字型對應表!");
@@ -129,9 +152,9 @@ namespace BrailleToolkit.Converters
 
             StringBuilder sb = new StringBuilder();
 
-            foreach (BrailleCell brCell in cellList.Items)
+            for (int i = 0; i < cells.Length; i++)
             {
-                sb.Append(ToChar(brCell.ToString()));
+                sb.Append(ToChar(cells[i].ToString()));
             }
             return sb.ToString();
         }
@@ -157,11 +180,11 @@ namespace BrailleToolkit.Converters
         /// </summary>
         /// <param name="brCode">點字碼，兩位數16進位字串，例如：4E。</param>
         /// <returns>點字字型碼，兩位數16進位字串。</returns>
-        public static string? ToFontCode(string brCode) // Changed return type to nullable
+        public static string? ToFontCode(string brCode)
         {
-            if (m_FontTable.Contains(brCode))
+            if (m_FontTable.TryGetValue(brCode, out var value))
             {
-                return m_FontTable[brCode]?.ToString(); // Fixed CS8602
+                return value;
             }
             return null;
         }
@@ -171,14 +194,12 @@ namespace BrailleToolkit.Converters
         /// </summary>
         /// <param name="fontCode">點字碼，兩位數16進位字串，例如：3F。</param>
         /// <returns>點字碼，兩位數16進位字串。</returns>
-        public static string? ToBrailleCode(string fontCode) // Changed return type to nullable
+        public static string? ToBrailleCode(string fontCode)
         {
-            foreach (DictionaryEntry de in m_FontTable)
+            foreach (var item in m_FontTable)
             {
-                if (de.Value == null)
-                    continue;
-                if (de.Value.Equals(fontCode))
-                    return de.Key?.ToString(); // Fixed CS8602
+                if (item.Value.Equals(fontCode))
+                    return item.Key;
             }
             return null;
         }

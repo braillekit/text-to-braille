@@ -56,6 +56,24 @@ namespace BrailleToolkit
         }
 
         /// <summary>
+        /// 複製指定的點字內容。
+        /// </summary>
+        /// <param name="cells">來源點字內容。</param>
+        public void Assign(ReadOnlySpan<BrailleCell> cells)
+        {
+            m_Cells.Clear();
+            if (m_Cells.Capacity < cells.Length)
+            {
+                m_Cells.Capacity = cells.Length;
+            }
+
+            for (int i = 0; i < cells.Length; i++)
+            {
+                m_Cells.Add(cells[i]);
+            }
+        }
+
+        /// <summary>
         /// 加入一個點字。
         /// </summary>
         /// <param name="cell"></param>

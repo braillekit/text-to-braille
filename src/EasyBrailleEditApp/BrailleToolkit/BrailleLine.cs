@@ -14,13 +14,22 @@ namespace BrailleToolkit
     /// </summary>
     [Serializable]
     [DataContract]
-    public class BrailleLine : ICloneable
+    public class BrailleLine : ICloneable, IBrailleLineView
     {
+        private long m_Identity = BrailleObjectIdentityGenerator.NextLineIdentity();
+
+        [DataMember(Name = "Words")]
+        private List<BrailleWord> m_Words;
+
         /// <summary>
         /// 取得或設定組成此行的點字詞串列。
         /// </summary>
-        [DataMember]
-        public List<BrailleWord> Words { get; private set; }
+        [IgnoreDataMember]
+        public IReadOnlyList<BrailleWord> Words
+        {
+            get { return m_Words; }
+            private set { m_Words = CopyWords(value); }
+        }
 
         /// <summary>
         /// 加入 Tag 屬性的最初目的用來記住標題列在雙視文件中的 begin line index，但也可以作為其他用途。
@@ -34,7 +43,44 @@ namespace BrailleToolkit
         /// </summary>
         public BrailleLine()
         {
-            Words = new List<BrailleWord>();
+            m_Words = new List<BrailleWord>();
+        }
+
+        /// <summary>
+        /// 此物件的執行期識別碼，用來在文件編輯流程中追蹤同一列。
+        /// </summary>
+        public long Identity
+        {
+            get { return m_Identity; }
+        }
+
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context)
+        {
+            EnsureRuntimeIdentity();
+        }
+
+        private void EnsureRuntimeIdentity()
+        {
+            if (m_Identity <= 0)
+            {
+                m_Identity = BrailleObjectIdentityGenerator.NextLineIdentity();
+            }
+        }
+
+        private static List<BrailleWord> CopyWords(IEnumerable<BrailleWord>? words)
+        {
+            var result = new List<BrailleWord>();
+            if (words == null)
+            {
+                return result;
+            }
+
+            foreach (var word in words)
+            {
+                result.Add(word);
+            }
+            return result;
         }
 
         /// <summary>
@@ -42,7 +88,45 @@ namespace BrailleToolkit
         /// </summary>
         public void Clear()
         {
-            Words.Clear();
+            m_Words.Clear();
+        }
+
+        /// <summary>
+        /// 以指定的點字詞集合取代目前這一列的內容，但保留此列本身的執行期識別碼。
+        /// </summary>
+        /// <param name="words">新的點字詞集合。</param>
+        internal void AssignWords(IEnumerable<BrailleWord>? words)
+        {
+            m_Words.Clear();
+            if (words == null)
+            {
+                return;
+            }
+
+            foreach (var word in words)
+            {
+                m_Words.Add(word);
+            }
+        }
+
+        /// <summary>
+        /// 從 IBrailleLineResult 建立新的 BrailleLine，會取得新的執行期 Identity。
+        /// </summary>
+        internal static BrailleLine FromResult(IBrailleLineResult result)
+        {
+            var line = new BrailleLine();
+            line.AssignWords(result.Words);
+            line.Tag = result.Tag;
+            return line;
+        }
+
+        /// <summary>
+        /// 將 IBrailleLineResult 的內容套用到此列，保留此列本身的執行期 Identity。
+        /// </summary>
+        internal void ApplyResult(IBrailleLineResult result)
+        {
+            AssignWords(result.Words);
+            Tag = result.Tag;
         }
 
         /// <summary>
@@ -51,7 +135,7 @@ namespace BrailleToolkit
         /// <returns>True if empty; otherwise, false.</returns>
         public bool IsEmpty()
         {
-            return WordCount < 1;
+            return BrailleLineHelper.IsEmpty(this);
         }
 
         /// <summary>
@@ -60,15 +144,7 @@ namespace BrailleToolkit
         /// <returns>True if empty or whitespace; otherwise, false.</returns>
         public bool IsEmptyOrWhiteSpace()
         {
-            foreach (var word in Words)
-            {
-                if (!BrailleWord.IsBlank(word) && !BrailleWord.IsEmpty(word))
-                {
-                    return false;
-                }
-
-            }
-            return true;
+            return BrailleLineHelper.IsEmptyOrWhiteSpace(this);
         }
 
         /// <summary>
@@ -77,14 +153,7 @@ namespace BrailleToolkit
         /// <returns>True if it is a paragraph beginning; otherwise, false.</returns>
         public bool IsBeginOfParagraph()
         {
-            if (WordCount >= 2)
-            {
-                if (Words[0].IsWhiteSpace && Words[1].IsWhiteSpace)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return BrailleLineHelper.IsBeginOfParagraph(this);
         }
 
         /// <summary>
@@ -130,12 +199,7 @@ namespace BrailleToolkit
         /// <returns></returns>
         public List<BrailleCell> GetBrailleCells()
         {
-            var list = new List<BrailleCell>();
-            foreach (var brWord in Words)
-            {
-                list.AddRange(brWord.Cells);
-            }
-            return list;
+            return BrailleLineHelper.GetBrailleCells(this);
         }
 
         /// <summary>
@@ -147,23 +211,7 @@ namespace BrailleToolkit
         /// 傳回值就是 29。若不需要斷行，則傳回整行的字數。</returns>
         public int CalcBreakPoint(int cellsPerLine)
         {
-            if (cellsPerLine < 4)
-            {
-                throw new ArgumentException("cellsPerLine 參數值不可小於 4。");
-            }
-
-            int cellCnt = 0;
-            int index = 0;
-            while (index < Words.Count)
-            {
-                cellCnt += Words[index].Cells.Count;
-                if (cellCnt > cellsPerLine)
-                {
-                    break;
-                }
-                index++;
-            }
-            return index;
+            return BrailleLineHelper.CalcBreakPoint(this, cellsPerLine);
         }
 
         /// <summary>
@@ -172,14 +220,7 @@ namespace BrailleToolkit
         /// <returns>如果找到，則為第一個可見點字詞的索引；否則為 -1。</returns>
         public int GetFirstVisibleWordIndex()
         {
-            for (int i = 0; i < Words.Count; i++)
-            {
-                if (Words[i].CellCount > 0)
-                {
-                    return i;
-                }
-            }
-            return -1;
+            return BrailleLineHelper.GetFirstVisibleWordIndex(this);
         }
 
         /// <summary>
@@ -188,14 +229,7 @@ namespace BrailleToolkit
         /// <returns>如果找到，則為第一個可見的 BrailleWord 物件；否則為 null。</returns>
         public BrailleWord? GetFirstVisibleWord()
         {
-            for (int i = 0; i < Words.Count; i++)
-            {
-                if (Words[i].CellCount > 0)
-                {
-                    return Words[i];
-                }
-            }
-            return null;
+            return BrailleLineHelper.GetFirstVisibleWord(this);
         }
 
         /// <summary>
@@ -204,7 +238,7 @@ namespace BrailleToolkit
         /// <param name="index">要移除之項目的以零為起始的索引。</param>
         public void RemoveAt(int index)
         {
-            Words.RemoveAt(index);
+            m_Words.RemoveAt(index);
         }
 
         /// <summary>
@@ -218,7 +252,7 @@ namespace BrailleToolkit
             {
                 count = Words.Count - index;
             }
-            Words.RemoveRange(index, count);
+            m_Words.RemoveRange(index, count);
         }
 
         /// <summary>
@@ -230,7 +264,23 @@ namespace BrailleToolkit
             if (brLine == null || brLine.WordCount < 1)
                 return;
 
-            Words.AddRange(brLine.Words);
+            m_Words.AddRange(brLine.Words);
+        }
+
+        /// <summary>
+        /// 將點字詞附加至此點字行。
+        /// </summary>
+        public void AddWord(BrailleWord brWord)
+        {
+            m_Words.Add(brWord);
+        }
+
+        /// <summary>
+        /// 將多個點字詞附加至此點字行。
+        /// </summary>
+        public void AddWords(IEnumerable<BrailleWord> words)
+        {
+            m_Words.AddRange(words);
         }
 
         /// <summary>
@@ -240,7 +290,15 @@ namespace BrailleToolkit
         /// <param name="brWord">要插入的點字詞。</param>
         public void Insert(int index, BrailleWord brWord)
         {
-            Words.Insert(index, brWord);
+            m_Words.Insert(index, brWord);
+        }
+
+        /// <summary>
+        /// 將多個點字詞插入點字行的指定索引處。
+        /// </summary>
+        public void InsertWords(int index, IEnumerable<BrailleWord> words)
+        {
+            m_Words.InsertRange(index, words);
         }
 
         /// <summary>
@@ -253,7 +311,7 @@ namespace BrailleToolkit
             {
                 if (BrailleWord.IsBlank(Words[i]) || BrailleWord.IsEmpty(Words[i]))
                 {
-                    Words.RemoveAt(i);
+                    m_Words.RemoveAt(i);
                     continue;
                 }
                 break;
@@ -270,7 +328,7 @@ namespace BrailleToolkit
             {
                 if (BrailleWord.IsBlank(Words[i]) || BrailleWord.IsEmpty(Words[i]))
                 {
-                    Words.RemoveAt(i);
+                    m_Words.RemoveAt(i);
                     i--;
                     continue;
                 }
@@ -342,15 +400,7 @@ namespace BrailleToolkit
         /// <returns></returns>
         public string ToBrailleCellHexString()
         {
-            var sb = new StringBuilder();
-            foreach (var brWord in Words)
-            {
-                foreach (var cell in brWord.Cells)
-                {
-                    sb.Append(cell.ToHexString());
-                }                
-            }
-            return sb.ToString();
+            return BrailleWordSequenceFormatter.ToBrailleCellHexString(Words);
         }
 
         /// <summary>
@@ -359,12 +409,7 @@ namespace BrailleToolkit
         /// <returns></returns>
         public string ToPositionNumberString()
         {
-            var sb = new StringBuilder();
-            foreach (var brWord in Words)
-            {
-                sb.Append(brWord.ToPositionNumberString(useParenthesis: true));
-            }
-            return sb.ToString();
+            return BrailleWordSequenceFormatter.ToPositionNumberString(Words);
         }
 
         /// <summary>
@@ -377,31 +422,7 @@ namespace BrailleToolkit
         /// <returns>表示此點字行的 HTML 字串。</returns>
         public string ToHtmlString(string leadingSpaces, string cssClassTd, string cssClassBraille, string cssClassText)
         {
-            var sb = new StringBuilder();
-
-            sb.AppendLine($"{leadingSpaces}<tr>");
-
-            foreach (var brWord in Words)
-            {
-                if (brWord.IsContextTag || brWord.CellCount < 1)
-                    continue;
-
-                string brFontText = BrailleFontConverter.ToString(brWord);
-
-                if (String.IsNullOrEmpty(brFontText))
-                {
-                    sb.AppendLine($"無法轉換成對應的點字字型: {brWord.Text}。");
-                    break;
-                }
-
-                sb.AppendLine($"{leadingSpaces}  <td colspan='{brFontText.Length}' class='{cssClassTd}'>");
-                sb.AppendLine($"{leadingSpaces}    <div class='{cssClassBraille}'>{brFontText}</div>");
-                sb.AppendLine($"{leadingSpaces}    <div class='{cssClassText}'>{brWord.Text}</div>");
-                sb.AppendLine($"{leadingSpaces}  </td>");
-            }
-
-            sb.AppendLine($"{leadingSpaces}</tr>");
-            return sb.ToString();
+            return BrailleWordSequenceFormatter.ToHtmlString(Words, leadingSpaces, cssClassTd, cssClassBraille, cssClassText);
         }
 
         /// <summary>
@@ -425,7 +446,7 @@ namespace BrailleToolkit
                 brWord = Words[i];
                 if (brWord.IsContextTag)
                 {
-                    Words.RemoveAt(i);
+                    m_Words.RemoveAt(i);
                 }
             }
         }
@@ -437,10 +458,10 @@ namespace BrailleToolkit
         /// <returns>如果找到，則為其索引；否則為 -1。</returns>
         public int IndexOf(BrailleWord brWord)
         {
-            // 不能用 Words.IndexOf(brWord) 來尋找! 
+            // 不能用 Words.IndexOf(brWord) 來尋找!
             for (int i = 0; i < Words.Count; i++)
             {
-                if (ReferenceEquals(Words[i], brWord))
+                if (Words[i].Identity == brWord.Identity)
                 {
                     return i;
                 }
@@ -510,19 +531,15 @@ namespace BrailleToolkit
         /// <returns>新的點字串列。</returns>
         public BrailleLine ShallowCopy(int index, int count)
         {
-            BrailleLine newLine = new BrailleLine();
-            BrailleWord? newWord = null;
+            var builder = new BrailleLineBuilder();
             while (index < Words.Count && count > 0)
             {
-                newWord = Words[index];
-                newLine.Words.Add(newWord);
-
+                builder.AddWord(Words[index]);
                 index++;
                 count--;
-
             }
-            newLine.Tag = Tag;
-            return newLine;
+            builder.Tag = Tag;
+            return builder.ToBrailleLine();
         }
 
         /// <summary>
@@ -542,18 +559,15 @@ namespace BrailleToolkit
         /// <returns>指定範圍的深層複本。</returns>
         public BrailleLine DeepCopy(int index, int count)
         {
-            BrailleLine newLine = new BrailleLine();
-            BrailleWord? newWord = null;
+            var builder = new BrailleLineBuilder();
             while (index < Words.Count && count > 0)
             {
-                newWord = Words[index].Copy();
-                newLine.Words.Add(newWord);
-
+                builder.AddWord(Words[index].Copy());
                 index++;
                 count--;
             }
-            newLine.Tag = Tag;
-            return newLine;
+            builder.Tag = Tag;
+            return builder.ToBrailleLine();
         }
 
 
@@ -565,16 +579,7 @@ namespace BrailleToolkit
         /// <returns></returns>
         public object Clone()
         {
-            BrailleLine newLine = new BrailleLine();
-            BrailleWord? newWord = null;
-
-            foreach (BrailleWord brWord in Words)
-            {
-                newWord = brWord.Copy();
-                newLine.Words.Add(newWord);
-            }
-            newLine.Tag = Tag;
-            return newLine;
+            return DeepCopy();
         }
 
         #endregion

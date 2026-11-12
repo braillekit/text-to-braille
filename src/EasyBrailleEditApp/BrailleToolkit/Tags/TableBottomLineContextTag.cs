@@ -11,12 +11,13 @@ namespace BrailleToolkit.Tags
     {
         const string BottomLine = "▁";
 
-        public TableBottomLineContextTag() : base(ContextTagNames.TableBottomLine2)
+        public TableBottomLineContextTag()
+            : base(
+                ContextTagNames.TableBottomLine2,
+                lifeTime: ContextLifetime.Transient,
+                removeTagOnConversion: true,
+                singleLine: true)
         {
-            RemoveTagOnConversion = true;
-            Lifetime = ContextLifetime.Transient;
-            IsSingleLine = true;
-
             var cell0 = BrailleCell.GetInstanceFromPositionNumberString("1245");
             var cell1 = BrailleCell.GetInstanceFromPositionNumberString("2356");
 

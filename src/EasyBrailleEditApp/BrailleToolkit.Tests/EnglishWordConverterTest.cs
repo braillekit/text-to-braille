@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
+using BrailleToolkit.Tags;
 using Xunit;
 
 namespace BrailleToolkit.Tests
@@ -78,6 +79,36 @@ namespace BrailleToolkit.Tests
             actual = converter.Convert(charStack, context);
             Assert.Equal(expected, actual);
             charStack.Clear();            
+        }
+
+        [Fact]
+        public void ColonInTimeContext_ShouldPrepend456Cell()
+        {
+            var processor = BrailleProcessor.CreateInstance();
+            var converter = new EnglishWordConverter(processor);
+
+            string text = ":";
+            var plainContext = new ContextTagManager();
+            var timeContext = new ContextTagManager();
+            timeContext.Parse(ContextTagNames.Time, out bool _);
+
+            List<BrailleWord>? plainWords = converter.Convert(new Stack<char>(text), plainContext);
+            List<BrailleWord>? timeWords = converter.Convert(new Stack<char>(text), timeContext);
+
+            Assert.NotNull(plainWords);
+            Assert.NotNull(timeWords);
+            Assert.Single(plainWords!);
+            Assert.Single(timeWords!);
+
+            BrailleWord plainWord = plainWords[0];
+            BrailleWord timeWord = timeWords[0];
+
+            Assert.Equal(plainWord.CellCount + 1, timeWord.CellCount);
+            Assert.Equal(BrailleCell.GetInstance(new int[] { 4, 5, 6 }), timeWord.Cells[0]);
+            for (int i = 0; i < plainWord.CellCount; i++)
+            {
+                Assert.Equal(plainWord.Cells[i], timeWord.Cells[i + 1]);
+            }
         }
     }
 }

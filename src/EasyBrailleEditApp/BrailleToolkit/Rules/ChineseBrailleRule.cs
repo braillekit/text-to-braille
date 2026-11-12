@@ -247,7 +247,7 @@ namespace BrailleToolkit.Rules
                 var brWord = brLine[index - 1];
                 if (!BrailleWord.IsBlank(brWord) && !brWord.NoSpace)
                 {
-                    brLine.Words.Insert(index, BrailleWord.NewBlank());
+                    brLine.Insert(index, BrailleWord.NewBlank());
                     wordOffset = 1;
                 }
             }
@@ -270,7 +270,7 @@ namespace BrailleToolkit.Rules
             var brWord = brLine[index];
             if (!BrailleWord.IsBlank(brWord) && !brWord.NoSpace)
             {
-                brLine.Words.Insert(index, BrailleWord.NewBlank());
+                brLine.Insert(index, BrailleWord.NewBlank());
                 wordOffset = 1;
             }
             return wordOffset;
@@ -301,7 +301,7 @@ namespace BrailleToolkit.Rules
                 if (OpeningSymbols.IndexOf(brWord.Text) >= 0 ||
                     !BrailleWordHelper.IsChinesePunctuation(brWord))
                 {
-                    brLine.Words.Insert(index, BrailleWord.NewBlank());
+                    brLine.Insert(index, BrailleWord.NewBlank());
                     wordOffset = 1;
                 }
             }
@@ -345,7 +345,7 @@ namespace BrailleToolkit.Rules
             {
                 if (exceptedWords.IndexOf(brWord.Text) < 0)
                 {
-                    brLine.Words.Insert(index, BrailleWord.NewBlank());
+                    brLine.Insert(index, BrailleWord.NewBlank());
                     wordOffset = 1;
                 }
             }
@@ -369,7 +369,7 @@ namespace BrailleToolkit.Rules
                 // 若下一個點字是我，則加一空方。
                 if (brLine[index].Text == "我")
                 {
-                    brLine.Words.Insert(index, BrailleWord.NewBlank());
+                    brLine.Insert(index, BrailleWord.NewBlank());
                     wordOffset = 1;	// 跳過空方
                 }
             }
@@ -403,7 +403,7 @@ namespace BrailleToolkit.Rules
                     if (firstSpaceIndex >= 0 && spaceCount > 1)
                     {
                         int cnt = spaceCount - 1;
-                        brLine.Words.RemoveRange(firstSpaceIndex, cnt);
+                        brLine.RemoveRange(firstSpaceIndex, cnt);
                         i = i - cnt;
                     }
                     firstSpaceIndex = -1;
@@ -416,7 +416,7 @@ namespace BrailleToolkit.Rules
             if (firstSpaceIndex >= 0 && spaceCount > 1)
             {
                 int cnt = spaceCount - 1;
-                brLine.Words.RemoveRange(firstSpaceIndex, cnt);
+                brLine.RemoveRange(firstSpaceIndex, cnt);
             }
         }
 

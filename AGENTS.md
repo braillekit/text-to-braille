@@ -1,4 +1,4 @@
-﻿# AI Agent Context: EasyBrailleEditApp
+﻿# AGENTS.md
 
 此檔案提供 AI Agent 理解和操作此專案所需的背景資訊。
 
@@ -123,9 +123,9 @@
 
 ### 備註
 
-- **多方點字**: 如果是多方點字，`dots` 屬性值是以一個空白字元分隔的多個數字組成。例如，`dots="135 246"` 代表兩個點字方，第一個方有點位 1、3、5，第二個方有點位 2、4、6。這些數字會被轉換成對應的十六進位碼。  
+- **多方點字**: 如果是多方點字，`dots` 屬性值是以一個空白字元分隔的多個數字組成。例如，`dots="135 246"` 代表兩個點字方，第一個方有點位 1、3、5，第二個方有點位 2、4、6。這些數字會被轉換成對應的十六進位碼。
 - **`dots` 屬性**: 程式載入 XML 檔案時，`XmlBrailleTable` 類別會呼叫 `BrailleCellHelper.PositionNumbersToHexString` 方法將 `dots` 屬性的值轉換成對應的 `code` 十六進位碼。
-- **空方 (Blank Cell)**: 在 `TwChineseBrailleTable.xml` 中，全形空白符號 `　` 的 `dots` 屬性值為一個空白字元 `" "`，而其 `code` 屬性值為 `"00"`。這代表一個沒有任何點的空方。這在處理上需要特別注意，以確保空格能被正確地轉換與呈現。  
+- **空方 (Blank Cell)**: 在 `TwChineseBrailleTable.xml` 中，全形空白符號 `　` 的 `dots` 屬性值為一個空白字元 `" "`，而其 `code` 屬性值為 `"00"`。這代表一個沒有任何點的空方。這在處理上需要特別注意，以確保空格能被正確地轉換與呈現。
 
 ## 即時點字預覽 (Instant Braille Preview)
 
@@ -236,7 +236,7 @@
 
 6. **流程整合：** `BrailleProcessor` 收到這些 `BrailleWord` 成品後，將它們按順序加入到正在處理的 `BrailleLine`（點字行）中。接著，它會繼續處理下一個字詞，直到整行轉換完畢。
 
-7. **關於 `BrailleCellHelper`：** 它的主要工作更靠前。當 `EnglishBrailleTable` 從 XML 檔案載入時，如果 XML 中使用的是 `dots="2456"` 這種格式，`BrailleCellHelper.PositionNumbersToHexString` 就會被呼叫，將其轉換為 `code="3A"`，供後續流程高效使用  
+7. **關於 `BrailleCellHelper`：** 它的主要工作更靠前。當 `EnglishBrailleTable` 從 XML 檔案載入時，如果 XML 中使用的是 `dots="2456"` 這種格式，`BrailleCellHelper.PositionNumbersToHexString` 就會被呼叫，將其轉換為 `code="3A"`，供後續流程高效使用
 
 ## 重構指示
 

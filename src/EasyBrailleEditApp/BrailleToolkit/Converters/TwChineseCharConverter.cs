@@ -268,32 +268,31 @@ namespace BrailleToolkit.Converters
         /// <returns>若指定的字串是中文字且轉換成功，則傳回轉換之後的點字物件，否則傳回 null。</returns>
         private BrailleWord? InternalConvert(string text)
         {
-            BrailleWord? brWord = new BrailleWord(text);
-
             string? brCode;
 
             if (text.Length == 1)
             {
                 char ch = text[0];
-                                
+
                 // 如果輸入的明眼字是注音符號，就直接傳回注音的點字碼。
                 if (Zhuyin.IsBopomofo(ch))
                 {
-                    // 注意: 不要指定 brWord.PhoneticCode，因為注音符號本身只是個中文符號，
+                    // 注意: 不要指定 builder.PhoneticCode，因為注音符號本身只是個中文符號，
                     //       它並不是中文字，沒有合法的注音組字字根，因此不可指定注音碼。
                     brCode = _brailleTable.GetPhoneticCode(text);
-                    brWord.AddCells(brCode);
-                    return brWord;
+                    if (String.IsNullOrEmpty(brCode))
+                        return null;
+                    return new BrailleWord(text, brCode);
                 }
                 // 如果輸入的明眼字是注音符號的音調記號，就直接傳回對應的點字碼。
                 if (Zhuyin.IsTone(ch))
                 {
-                    // 注意: 不要指定 brWord.PhoneticCode，因為音調記號本身只是個中文符號，
+                    // 注意: 不要指定 builder.PhoneticCode，因為音調記號本身只是個中文符號，
                     //       它並不是中文字，沒有合法的注音組字字根，因此不可指定注音碼。
                     brCode = _brailleTable.GetPhoneticToneCode(text);
-                    brWord.AddCells(brCode);
-
-                    return brWord;
+                    if (String.IsNullOrEmpty(brCode))
+                        return null;
+                    return new BrailleWord(text, brCode);
                 }
             }
 
@@ -326,17 +325,18 @@ namespace BrailleToolkit.Converters
 
                 if (!String.IsNullOrEmpty(phcode))
                 {
-                    // 設定多音字旗號屬性.
-                    brWord.IsPolyphonic = ZhuyinQueryHelper.IsPolyphonic(text);
-
                     // TODO: 以下「將注音字根轉換成點字碼」的處理應可省略，因為 FixPhoneticCodes 會重新修正所有中文字的點字碼。
 
                     // 將注音字根轉換成點字碼
                     BrailleCellList? cellList = CreatePhoneticCellList(phcode);
                     if (cellList != null)
                     {
+                        var brWord = new BrailleWord(text)
+                        {
+                            IsPolyphonic = ZhuyinQueryHelper.IsPolyphonic(text),
+                            PhoneticCode = phcode
+                        };
                         brWord.CellList.Assign(cellList);
-                        brWord.PhoneticCode = phcode;
                         return brWord;
                     }
                 }
@@ -348,20 +348,16 @@ namespace BrailleToolkit.Converters
             string? puncBrCode = _brailleTable.GetPunctuationCode(text);
             if (!String.IsNullOrEmpty(puncBrCode))
             {
-                brWord.AddCells(puncBrCode);
-                return brWord;
+                return new BrailleWord(text, puncBrCode);
             }
 
             // 其它符號
             brCode = _brailleTable.Find(text);
             if (!String.IsNullOrEmpty(brCode))
             {
-                brWord.AddCells(brCode);
-                return brWord;
+                return new BrailleWord(text, brCode);
             }
 
-            brWord.Clear();
-            brWord = null;
             return null;
         }
 

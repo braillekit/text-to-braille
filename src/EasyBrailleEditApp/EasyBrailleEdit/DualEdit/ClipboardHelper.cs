@@ -9,9 +9,15 @@ namespace EasyBrailleEdit.DualEdit
         static string ClipboardObjectFormatForWords = typeof(BrailleWord).FullName + "_List";
         static string ClipboardObjectFormatForLines = typeof(BrailleLine).FullName + "_List";
 
-        public static void SetWords(List<BrailleWord> brWords)
+        public static void SetWords(IReadOnlyList<BrailleWord> brWords)
         {
-            var s = JsonHelper.Serialize(brWords);
+            var words = new List<BrailleWord>();
+            foreach (var brWord in brWords)
+            {
+                words.Add(brWord);
+            }
+
+            var s = JsonHelper.Serialize(words);
 
             Clipboard.Clear();
             Clipboard.SetData(ClipboardObjectFormatForWords, s);
@@ -21,9 +27,15 @@ namespace EasyBrailleEdit.DualEdit
         }
 
 
-        public static void SetLines(List<BrailleLine> brLines)
+        public static void SetLines(IReadOnlyList<BrailleLine> brLines)
         {
-            var s = JsonHelper.Serialize(brLines);
+            var lines = new List<BrailleLine>();
+            foreach (var brLine in brLines)
+            {
+                lines.Add(brLine);
+            }
+
+            var s = JsonHelper.Serialize(lines);
 
             Clipboard.Clear();
             Clipboard.SetData(ClipboardObjectFormatForLines, s);
