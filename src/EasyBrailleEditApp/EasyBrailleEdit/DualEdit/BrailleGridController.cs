@@ -5,6 +5,7 @@ using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -106,7 +107,7 @@ namespace EasyBrailleEdit.DualEdit
             set
             {
                 // 如果是暫存的輸出檔名，則視為尚未存檔。
-                if (value.IndexOf(Constant.Files.CvtOutputTempFileName, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                if (IsConversionOutputFile(value))
                 {
                     _isDirty = true;
                 }
@@ -433,15 +434,28 @@ namespace EasyBrailleEdit.DualEdit
         /// <returns></returns>
         private bool IsNoName()
         {
-            if (String.IsNullOrEmpty(_fileName))
-                return true;
+            return String.IsNullOrEmpty(_fileName) || IsConversionOutputFile(_fileName);
+        }
 
-            string fname = StrHelper.ExtractFileName(_fileName);
-            if (fname.Equals(Constant.Files.CvtOutputTempFileName, StringComparison.CurrentCultureIgnoreCase))
-            {
-                return true;
-            }
-            return false;
+        internal static bool IsConversionOutputFile(string filename)
+        {
+            string name = Path.GetFileName(filename);
+            string legacyName = Constant.Files.CvtOutputTempFileName;
+            string prefix = legacyName + "_";
+            const string extension = ".brl";
+
+            bool isLegacyName = name.Equals(legacyName, StringComparison.OrdinalIgnoreCase);
+            bool isUniqueName = name.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
+                && name.EndsWith(extension, StringComparison.OrdinalIgnoreCase)
+                && name.Length == prefix.Length + 32 + extension.Length
+                && Guid.TryParseExact(name.AsSpan(prefix.Length, 32), "N", out _);
+
+            if (!isLegacyName && !isUniqueName)
+                return false;
+
+            string? directory = Path.GetDirectoryName(Path.GetFullPath(filename));
+            string tempDirectory = Path.TrimEndingDirectorySeparator(Path.GetFullPath(AppGlobals.TempPath));
+            return String.Equals(directory, tempDirectory, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
